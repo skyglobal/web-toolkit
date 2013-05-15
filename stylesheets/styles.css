@@ -16,8 +16,56 @@ h2 {
 	font-size: 2em;
 }
 
-.skycom-button {
-	background-color: #0072c5;
+
+.btn,
+.btn input{
+  border-radius: 5px;
+  line-height: 1.7em;
+  height: 1.75em;
+  padding:0 20px;
+  display: inline-block;
+  font-size: 1em;
+  font-family: SkyTextRegular, helvetica;
+  cursor: pointer;
+  position:relative;
+  box-sizing: border-box;
+}
+.btn.btn-input{
+  padding: 0;
+}
+.btn input{
+  width: 100%;
+  height: 100%;
+  background: none;
+  -webkit-appearance: none;
+  border: 0;
+}
+.btn:before{
+  content:"";
+  background: linear-gradient(to bottom,rgba(255,255,255,0.4) 0,rgba(255,255,255,0.05) 100%);
+  position: absolute;
+  top: 0;
+  left: 1.5%;
+  width: 97%;
+  height: 14px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.btn:hover{
+  text-decoration: none;
+}
+.btn:hover:before{
+  display:none;
+}
+
+/* button themes */
+.primary-cta,
+.primary-cta input{
+  color: #fff;
+}
+.primary-cta{
+  border: solid 1px #0073c5;
+  background: #0073c5;
 }
 
 
@@ -30,14 +78,14 @@ h2 {
   margin: 20px 0;
   border-bottom: solid 1px #d7d5d5;
 }
-.tabs li  {
+.tab  {
   font-size: 1.25em;
   float:left;
   margin-right:0.5%;
   width: 14.5%;
   position: relative;
 }
-.tabs li a{  
+.tab a{  
   display: block;
   border: solid 1px #d7d5d5;
   border-bottom:0;
@@ -50,11 +98,11 @@ h2 {
   transition: background-color .3s;
   position:relative;
 }
-.tabs .selected a{
+.tab.selected a{
   text-decoration: none;
   cursor: default;
 }
-.tabs .selected a:before {
+.tab.selected a:before {
 content:"";
 }
 .tabpanel {
@@ -76,14 +124,14 @@ content:"";
 }
 
 /* tabs theme */
-.tabs .selected a {
+.tab.selected a {
 	margin-bottom: -1px;
   background: #0073c5;
   border: solid 1px #0073c5;
   color: #fff;
 }
 
-.tabs .selected a:before{
+.tab.selected a:before{
   background: linear-gradient(to bottom,rgba(255,255,255,0.4) 0,rgba(255,255,255,0.05) 100%);
   position: absolute;
   top: 0;
@@ -96,10 +144,10 @@ content:"";
 
 
 /* modular configs*/
-.tabs .selected.withNipple:after {
+.tab.selected.withNipple:after {
   content: "";position:absolute;top:100%;left:50%;margin-left:-10px;width:0;height:0;border:10px solid transparent;z-index:1
 }
-.tabs .selected.withNipple:after {
+.tab.selected.withNipple:after {
   border-top-color: #0073c5;
 }
 
