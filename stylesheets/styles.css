@@ -19,3 +19,87 @@ h2 {
 .skycom-button {
 	background-color: #0072c5;
 }
+
+
+
+
+/* tabs layout */
+
+.tabs {
+  font-family: SkyTextRegular,Helvetica,Arial;
+  margin: 20px 0;
+  border-bottom: solid 1px #d7d5d5;
+}
+.tabs li  {
+  font-size: 1.25em;
+  float:left;
+  margin-right:0.5%;
+  width: 14.5%;
+  position: relative;
+}
+.tabs li a{  
+  display: block;
+  border: solid 1px #d7d5d5;
+  border-bottom:0;
+  background: #eee;
+  text-align: center;
+  padding:0 10px;
+  line-height:40px;
+  height:40px;
+  border-radius:5px 5px 0 0;
+  transition: background-color .3s;
+  position:relative;
+}
+.tabs .selected a{
+  text-decoration: none;
+  cursor: default;
+}
+.tabs .selected a:before {
+content:"";
+}
+.tabpanel {
+  display: none
+}
+.tabpanel.selected {
+  display: block
+}
+@media screen and (max-width: 767px) { 
+    .tabcontents {
+      width: 1140px;
+      overflow-y: hidden;
+    }
+    .tabpanel {
+      width:100%;
+      overflow-x: scroll;
+      -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* tabs theme */
+.tabs .selected a {
+	margin-bottom: -1px;
+  background: #0073c5;
+  border: solid 1px #0073c5;
+  color: #fff;
+}
+
+.tabs .selected a:before{
+  background: linear-gradient(to bottom,rgba(255,255,255,0.4) 0,rgba(255,255,255,0.05) 100%);
+  position: absolute;
+  top: 0;
+  left: 1.5%;
+  width: 97%;
+  height: 14px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+
+/* modular configs*/
+.tabs .selected.withNipple:after {
+  content: "";position:absolute;top:100%;left:50%;margin-left:-10px;width:0;height:0;border:10px solid transparent;z-index:1
+}
+.tabs .selected.withNipple:after {
+  border-top-color: #0073c5;
+}
+
