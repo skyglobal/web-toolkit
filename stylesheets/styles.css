@@ -1,3 +1,7 @@
+body {
+	font-family: helvetica, arial, sans-serif;	
+}
+
 h1, h2, h3, h4, h5, h6 {
 	font-family: SkyTextRegular;
 	font-weight: normal;
@@ -5,6 +9,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
 	font-size: 3em;
+	color: red;
 }
 
 h2 {
