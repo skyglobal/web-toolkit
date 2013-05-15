@@ -6,8 +6,36 @@ title: Sky Bootstrap
 
 
 <h2>Buttons</h2>
-
 <a href="#" class="skycom-button">
     <span class="pretty"></span>
     <span class="text">button</span>
 </a>
+
+<h2>Tabs</h2>
+<section class="module clearfix" data-function="tabs" id="feeds">
+    <h2 class="at">This is a screenreader header for tabs</h2>
+    <ul class="tabs clearfix" role="tablist">
+        <li id="first-tab" aria-controls="first" aria-label="first" role="tab" class="skycom_internal selected"><a href="#first" class="skycom_ellipsis">First</a></ls>
+        <li id="second-tab" aria-controls="second" aria-label="second" role="tab" class="skycom_internal" ><a href="#second" class="skycom_ellipsis">Second</a></li>
+    </ul>
+    <div id="first" class="tabpanel selected" aria-labeledby="first-tab" role="tabpanel">
+        <section class="tabcontents clearfix">
+            <h2 class="at">Screen reader header for First tab contents</h2>
+            <div class="skycom_12">
+                <p>Hello from the first tab contents</p>
+                <img src="http://nicenicejpg.com/500/300/"/>
+            </div>
+        </section>
+    </div>
+    <div id="second" class="tabpanel" aria-labeledby="second-tab" role="tabpanel">
+        
+        <section class="tabcontents clearfix">
+
+            <h2 class="at">Screen reader header for Second tab contents</h2>
+            <div class="skycom_12">
+                <p>Hello from the second tab contents</p>
+            </div>
+                        
+        </section>
+    </div>
+</section>
