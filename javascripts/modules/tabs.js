@@ -17,7 +17,7 @@ bootstrap['tabs'] = (function(hash) {
 
     function bindEvents() {
         if (vars.rememberState){
-            hash.change(getHashList(), changeTab);
+            hash.register(getHashList(), changeTab);
         } else {
             $el.tabs.on('click', function(e){
                 e.preventDefault();
