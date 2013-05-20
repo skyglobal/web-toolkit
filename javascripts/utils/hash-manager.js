@@ -21,7 +21,28 @@ bootstrap['hash-manager'] = (function() {
         evt.callback(location.hash);
     }
 
-    function change(hashList, callback){
+
+    function remove(scroll) {
+        var loc = window.location;
+        if ("pushState" in history) {
+            history.pushState("", document.title, loc.pathname + loc.search);
+        } else {
+            loc.hash = "";
+            if (!scroll){
+                scroll = {
+                    top: document.body.scrollTop,
+                    left: document.body.scrollLeft
+                };
+            }
+            window.scrollTo(scroll.left, scroll.top);
+        }
+    }
+
+    function change(newHash){
+        location.hash = newHash;
+    }
+
+    function register(hashList, callback){
         var globalHashList = vars.globalHashList;
         $(hashList).each(function(){
             var hash = (this.indexOf('#') === 0) ? this : '#' + this;
@@ -34,17 +55,14 @@ bootstrap['hash-manager'] = (function() {
                 callback: callback
             };
         });
-        return {
-            with: ''
-        };
     }
 
     bindEvents();
 
     return {
-
+        register: register,
         change: change,
+        remove: remove,
         onHashChange: onHashChange
-
-    }
+    };
 }());
