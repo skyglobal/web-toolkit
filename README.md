@@ -1,4 +1,4 @@
-bskyb-commerce.github.io
+Sky Global Web Toolkit
 ========================
 
 Look and feel for sky.com
