@@ -1,55 +1,72 @@
 /* tabs layout */
 
 .tabs {
-  font-family: SkyTextRegular,Helvetica,Arial;
+  font-family: $font-family;
   margin: 20px 0;
   border-bottom: solid 1px #d7d5d5;
 }
+
 .tab  {
   font-size: 1.25em;
-  float:left;
-  margin-right:4px;
+  float: left;
+  margin-right: 4px;
   position: relative;
   border: solid 1px #d7d5d5;
   background: #eee;
-  border-radius:5px 5px 0 0;
-  border-bottom:0;
-}
-.tab:before {
-  content: "";
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.9)), color-stop(100%, rgba(255, 255, 255, 0.5)));
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.5) 100%);
-  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.5) 100%);
-  background: -o-linear-gradient(top, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.5) 100%);
-  background: linear-gradient(top, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.5) 100%);
-  position: absolute;
-  top: 0;
-  left: 1.5%;
-  width: 97%;
-  height: 14px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px
+  border-radius: 5px 5px 0 0;
+  border-bottom: 0;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 1.5%;
+    width: 97%;
+    height: 14px;
+    background: rgba(255, 255, 255, 0.7);
+    @include background(linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5)));
+    @include border-radius(0 0 20px 20px);
+    @include transition(opacity .25s);
+  }
+
+  &:hover,
+  &:focus {
+    &:before {
+      opacity: 0;
+    }
+  }
 }
 
-.tab:hover:before {
-  background: none;
-}
-.tab a{  
+.tab a {  
+    position: relative;
     color: #333;
     display: block;
     text-align: center;
-    padding:0 20px;
-    line-height:32px;
-    height:32px;
-    transition: background-color .3s;
-    position:relative;
+    padding: 0 20px;
+    line-height: 32px;
+    height: 32px;
+    @include transition(background-color .25s);
 }
 
 .tabpanel {
-  display: none
+  display: none;
+
+  &.selected {
+    display: block;
+  }
+
+  @media screen and (max-width: $mobile-width) {
+    width: 100%;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
 }
-.tabpanel.selected {
-  display: block
+
+.tabcontents {
+  @media screen and (max-width: $mobile-width) {
+    width: 1140px;
+    overflow-y: hidden;
+  }
 }
 
 /* tabs theme */
@@ -57,39 +74,28 @@
   margin-bottom: -1px;
   background: #0073c5;
   border: solid 1px #0073c5;
-}
-.tab.selected a{
+
+  &:before {
+    background: rgba(255, 255, 255, 0.25);
+    @include background(linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.05)));
+  }
+
+  &.with-nipple:after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -10px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    z-index: 1;
+    border-top-color: #0073c5;
+  }
+
+  a {
     text-decoration: none;
     cursor: default;
     color: #fff;
-}
-
-.tab.selected:before {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0.05)));
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 100%);
-  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 100%);
-  background: -o-linear-gradient(top, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 100%);
-  background: linear-gradient(top, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.05) 100%)
-}
-
-
-/* modular configs*/
-.tab.selected.withNipple:after {
-  content: "";position:absolute;top:100%;left:50%;margin-left:-10px;width:0;height:0;border:10px solid transparent;z-index:1
-}
-.tab.selected.withNipple:after {
-  border-top-color: #0073c5;
-}
-
-
-@media screen and (max-width: 767px) { 
-    .tabcontents {
-      width: 1140px;
-      overflow-y: hidden;
-    }
-    .tabpanel {
-      width:100%;
-      overflow-x: scroll;
-      -webkit-overflow-scrolling: touch;
-    }
+  }
 }
