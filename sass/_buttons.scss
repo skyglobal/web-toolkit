@@ -1,0 +1,40 @@
+.btn {
+  position: relative;
+  font: 1em/1.7em $font-family;
+  height: 1.75em;
+  padding: 0 20px;
+  cursor: pointer;
+  @include border-radius(5px);
+  @include box-sizing(border-box);
+  @include inline-block;
+
+  &:before {
+    content:"";
+    position: absolute;
+    top: 0;
+    left: 1.5%;
+    width: 97%;
+    height: 14px;
+    @include background(linear-gradient(top, rgba(255,255,255,0.4), rgba(255,255,255,0.05)));
+    @include border-radius(0 0 20px 20px);
+  }
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+
+    &:before {
+      display: none;
+    }
+  }
+}
+
+/* button themes */
+.primary-cta,
+.primary-cta input{
+  color: #fff;
+}
+.primary-cta{
+  border: solid 1px #0073c5;
+  background: #0073c5;
+}
