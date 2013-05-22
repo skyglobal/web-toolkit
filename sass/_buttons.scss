@@ -1,22 +1,27 @@
 .btn {
   position: relative;
-  font: 1em/1.7em $font-family;
-  height: 1.75em;
+  z-index: 1;
+  font: 16px/28px $font-family;
+  height: 28px;
   padding: 0 20px;
   cursor: pointer;
   @include border-radius(5px);
   @include box-sizing(border-box);
-  @include inline-block;
+  @include inline-block();
+  vertical-align: text-bottom;
 
   &:before {
     content:"";
     position: absolute;
+    z-index: -1;
     top: 0;
     left: 1.5%;
     width: 97%;
     height: 14px;
+    background-color: rgba(255, 255, 255, 0.25);
     @include background(linear-gradient(top, rgba(255,255,255,0.4), rgba(255,255,255,0.05)));
     @include border-radius(0 0 20px 20px);
+    @include transition(opacity .25s);
   }
 
   &:hover,
@@ -24,7 +29,7 @@
     text-decoration: none;
 
     &:before {
-      display: none;
+      opacity: 0;
     }
   }
 }
