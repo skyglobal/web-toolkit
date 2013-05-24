@@ -98,9 +98,9 @@ title: Sky Web Toolkit
       if (classes.indexOf('big') !== -1) {
         var escapedHTML = codeExampleElement.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;");
         escapedHTML = escapedHTML.replace(/\\n/g, '<br />')
-        codeExampleElement.innerHTML += "<pre><code class='example-code'>" + escapedHTML + "</code></pre>";
+        codeExampleElement.innerHTML += "<pre><code data-language='html' class='example-code'>" + escapedHTML + "</code></pre>";
       } else {
-        codeExampleElement.innerHTML += "<code class='example-code'>" + codeExampleElement.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;") + "</code>";
+        codeExampleElement.innerHTML += "<code data-language='html' class='example-code'>" + codeExampleElement.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;") + "</code>";
       }
     }
   }
