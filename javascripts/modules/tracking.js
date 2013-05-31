@@ -14,12 +14,19 @@
             mpaccount: "bskybhp,bskybmpprod"
         }
     link tracking arrangement (all elements are pipe-delimited):
-        module-name i.e. carousel or weather
-        pod-name i.e. slide1, controls or monday
-        sub-content-other(s) i.e. a sub menu area or related-links. delimited by : if more than one
-        editorial-theme i.e. 'sky-atlantic' to group similar pods together that may be spread out during the page or day
-        context : to be used when clicking the text does not make it clear what is being actioned
-        text clicked
+        'module-name' i.e. carousel or weather
+        'pod-name' i.e. slide1, controls or monday
+        'sub-content-other(s)' i.e. a sub menu area or related-links. delimited by : if more than one
+        'editorial-theme' i.e. 'sky-atlantic' to group similar pods together that may be spread out during the page or day
+        'context' : to be used when clicking the text does not make it clear what is being actioned
+        text clicked : the label given, alt attribute, text inside the tag or the name attribute
+
+    todo:
+     - tracking should be function (no .init) that destroys itself and returns an object
+     - if 'getTrackingProperties' function fills in 2 fields or less. add the current url into the string.
+     - expose bind function which takes selector and event / map
+     - expose customTracking function which takes data object
+     - trigger tracking event with data and customTracking func when config turned on
 */
 if (!window.bootstrap) bootstrap = {};
 bootstrap['tracking'] = (function(omniture){
@@ -42,9 +49,10 @@ bootstrap['tracking'] = (function(omniture){
         omniture.pageView ( config, "true" );
     }
 
-    function bindEvents(container){
-        var $container = (container) ? $(container) : $('body');
-        $container.find('input[type=submit], button, a, *[data-track]').on('click', track);
+    function bindEvents(selector, evnt){
+        selector = selector || 'input[type=submit], button, a, *[data-track]';
+        evnt = evnt || 'click';
+        $('body').find(selector).on(evnt, track);
     }
 
     function logTracking(type, prop, val){
@@ -66,16 +74,16 @@ bootstrap['tracking'] = (function(omniture){
         omniture.s[omniture.vmap[prop][0]] = map;
         omniture.s[omniture.vmap[prop][1]] = val;
         omniture.s.linkTrackVars += ',' + omniture.vmap[prop];
-        logTracking('prop',prop, val)
+        logTracking('prop',prop, val);
     }
 
     function track(e){
         logTracking('start','tracking event', e);
-        var refDomain = (document.referrer),
-            url = (document.location.href).split('?')[0],
+        var refDomain = document.referrer,
+            url = document.location.href.split('?')[0],
             $el = $(e.currentTarget),
-            context = $el.attr('data-tracking-context') || getText($('#' + $el.attr('data-tracking-context-id'))),
-            events = omniture.eventMap['linkClick'];
+            events = omniture.eventMap['linkClick'],
+            context;
 
         omniture.s.linkTrackVars = 'events'
         addTrackVars('siteName', vars.siteName);
@@ -85,6 +93,7 @@ bootstrap['tracking'] = (function(omniture){
         addTrackVars('samId', '');
 
         if ($el.attr('data-tracking-search')){
+            context = $el.attr('data-tracking-context') || getText($('#' + $el.attr('data-tracking-context-id')));
             addTrackVars('searchType', $el.attr('data-tracking-search'));
             addTrackVars('searchTerms', context);
             events += ',' + omniture.eventMap['search'];
@@ -148,7 +157,8 @@ bootstrap['tracking'] = (function(omniture){
     return {
         init: init,
         verify: verify,
-        resetPageConfig: resetPageConfig
+        resetPageConfig: resetPageConfig,
+        bind: bindEvents
     };
 
 }(bootstrap['omniture']));
