@@ -163,6 +163,7 @@ bootstrap['tracking'] = (function(omniture){
 
 }(bootstrap['omniture']));
 
+
 //do this after each bootstrap function temporarily
 window.bootstrap['tracking'] = bootstrap['tracking'];
 if (typeof window.define === "function" && window.define.amd) {
