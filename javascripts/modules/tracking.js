@@ -60,7 +60,7 @@ bootstrap['tracking'] = (function(omniture){
         if (type=='start'){
             val.preventDefault();
             console.group(prop);
-            $('#' + vars.verifyOutputId).html();
+            $('#' + vars.verifyOutputId).html('');
         } else if (type=='end'){
             console.groupEnd();
         } else {
