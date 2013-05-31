@@ -8,19 +8,21 @@ bootstrap['hash-manager'] = (function() {
 
     var vars = {
         globalHashList: {},
-        hasLoaded: false
+        hasLoaded: false,
+        windowLoaded: false
     };
 
     function bindEvents() {
         $(window).on('hashchange load', onHashChange);
+        vars.windowLoaded = true;
     }
 
     function onHashChange(e) {
         var evt = vars.globalHashList[location.hash];
         if (!evt) { return; }
+
         evt.callback(location.hash);
     }
-
 
     function remove(scroll) {
         var loc = window.location;
@@ -50,11 +52,15 @@ bootstrap['hash-manager'] = (function() {
                 var err = 'hashManager: hash (' + hash + ') already exists';
                 throw new Error(err);
             }
-
             globalHashList[hash] = {
                 callback: callback
             };
+
+            if(vars.windowLoaded && hash==location.hash){
+                callback(hash);
+            }
         });
+
     }
 
     bindEvents();
