@@ -1009,12 +1009,14 @@ function s_giqf(){var w=window,q=w.s_giq,i,t,s;if(q)for(i=0;i<q.length;i++){t=q[
 
 
 
-if (!window.skytoolkit) skytoolkit = {};
-window.skytoolkit['omniture'] = sky.tracking;
+if (typeof skytoolkit==='undefined') skytoolkit={};
 if (typeof window.define === "function" && window.define.amd) {
-    window.define("omniture", [], function() {
-        return window.skytoolkit['omniture'];
+    window.define("utils/omniture", [], function() {
+        skytoolkit['omniture'] = sky.tracking;
+        return skytoolkit['omniture'];
     });
+} else {
+    window.skytoolkit['omniture'] = sky.tracking;
 };
 
 
