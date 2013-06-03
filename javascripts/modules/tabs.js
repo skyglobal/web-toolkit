@@ -4,7 +4,7 @@
  Works based registering the tabs 'hash' with the changeTab function.
  no onclick events needed.
 **/
-bootstrap['tabs'] = (function(hash) {
+skytoolkit['tabs'] = (function(hash) {
 
     var $el = {
         tabContainer: $('section[data-function=tabs]'),
@@ -47,4 +47,11 @@ bootstrap['tabs'] = (function(hash) {
         changeTab: changeTab
     };
 
-}(bootstrap['hash-manager']));
+}(skytoolkit['hash-manager']));
+
+
+if (typeof window.define === "function" && window.define.amd) {
+    window.define('tabs', [], function() {
+        return window.skytoolkit['tabs'];
+    });
+};
