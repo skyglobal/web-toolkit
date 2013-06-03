@@ -28,8 +28,8 @@
      - expose customTracking function which takes data object
      - trigger tracking event with data and customTracking func when config turned on
 */
-if (!window.bootstrap) bootstrap = {};
-bootstrap['tracking'] = (function(omniture){
+if (!window.skytoolkit) bootstrap = {};
+skytoolkit['tracking'] = (function(omniture){
 
     var vars = {
         verifying: false,
@@ -161,12 +161,10 @@ bootstrap['tracking'] = (function(omniture){
         bind: bindEvents
     };
 
-}(bootstrap['omniture']));
+}(skytoolkit['omniture']));
 
-//do this after each bootstrap function temporarily
-window.bootstrap['tracking'] = bootstrap['tracking'];
 if (typeof window.define === "function" && window.define.amd) {
     window.define("tracking", [], function() {
-        return window.bootstrap['tracking'];
+        return window.skytoolkit['tracking'];
     });
 }
