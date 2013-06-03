@@ -5,7 +5,15 @@ define('wiki', [
 
     function(tabs, tracking) {
 
-
+        tracking({
+            site: "skytoolkit",
+            section: "wiki",
+            headline: "",
+            contentType: "home",
+            contentId: "",
+            account: "",
+            mpaccount: ""
+        });
 
     }
 );

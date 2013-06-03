@@ -22,9 +22,7 @@
         text clicked : the label given, alt attribute, text inside the tag or the name attribute
 
     todo:
-     - tracking should be function (no .init) that destroys itself and returns an object
      - if 'getTrackingProperties' function fills in 2 fields or less. add the current url into the string.
-     - expose bind function which takes selector and event / map
      - expose customTracking function which takes data object
      - trigger tracking event with data and customTracking func when config turned on
 */
@@ -36,11 +34,6 @@ skytoolkit['tracking'] = function(omniture){
         verifyOutputId: 'bootstrap-tracking-verify',
         siteName: safeString($('#skycom-nav li.selected a').text())
     };
-
-    function init(pageConfig){
-        setPageConfig(pageConfig);
-        bindEvents(pageConfig.container);
-    }
 
     function setPageConfig(config){
         omniture.pageView ( config, "false" );
@@ -85,7 +78,7 @@ skytoolkit['tracking'] = function(omniture){
             events = omniture.eventMap['linkClick'],
             context;
 
-        omniture.s.linkTrackVars = 'events'
+        omniture.s.linkTrackVars = 'events';
         addTrackVars('siteName', vars.siteName);
         addTrackVars('linkDetails', getTrackingProperties($el));
         addTrackVars('refDomain', refDomain);
@@ -154,12 +147,15 @@ skytoolkit['tracking'] = function(omniture){
         return str.trim().replace(/ /g,'-').replace(/[&,\+,:]/g,'').toLowerCase();
     }
 
-    return {
-        init: init,
-        verify: verify,
-        resetPageConfig: resetPageConfig,
-        bind: bindEvents
-    };
+    return function(config){
+        setPageConfig(config);
+        bindEvents();
+        skytoolkit['tracking'] = {
+            verify: verify,
+            resetPageConfig: resetPageConfig,
+            bind: bindEvents
+        };
+    }
 
 };
 
