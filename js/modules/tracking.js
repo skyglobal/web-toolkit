@@ -28,8 +28,8 @@
      - expose customTracking function which takes data object
      - trigger tracking event with data and customTracking func when config turned on
 */
-if (!window.skytoolkit) bootstrap = {};
-skytoolkit['tracking'] = (function(omniture){
+if (typeof skytoolkit==='undefined') skytoolkit={};
+skytoolkit['tracking'] = function(omniture){
 
     var vars = {
         verifying: false,
@@ -161,10 +161,13 @@ skytoolkit['tracking'] = (function(omniture){
         bind: bindEvents
     };
 
-}(skytoolkit['omniture']));
+};
 
 if (typeof window.define === "function" && window.define.amd) {
-    window.define("tracking", [], function() {
-        return window.skytoolkit['tracking'];
+    window.define("modules/tracking", ['utils/omniture'], function(omniture) {
+        skytoolkit['tracking'] = skytoolkit['tracking'](omniture);
+        return skytoolkit['tracking'];
     });
+} else {
+    window.skytoolkit['tracking'] = skytoolkit['tracking'](skytoolkit['omniture']);
 }
