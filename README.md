@@ -18,8 +18,10 @@ You can include the Ruby gem in your project.
 
 Just include this line in your gemfile:
   
-
-  gem 'sky_web_toolkit', git: 'https://github.com/skyglobal/web-toolkit.git'
+  Totes amaze! It is now on rubygems!
+  
+  gem 'sky_web_toolkit'
+  
   
   
   if you are using rails then you will need to include:
