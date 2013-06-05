@@ -30,3 +30,35 @@ Just include this line in your gemfile:
   
   Then you just need to include this in your scss somewhere:
   @import "sky_web_toolkit";
+  
+### If you are using Sinatra...
+
+Include the gem in your gemfile, you will need compass as well if you don't already have it
+
+  gem 'compass'
+  gem 'sky_web_toolkit', git: 'https://github.com/skyglobal/web-toolkit.git'
+
+Perform a bundle exec to get the get the toolkit
+
+  bundle exec comapss watch
+
+create config.rb for compass with the locations of your css, sass, JavaScript and image asset files.  This file should require sky_web_toolkit
+
+  require 'sky_web_toolkit'
+
+  http_path = "/"
+  
+  css_dir = "lib/assets/stylesheets"
+  
+  sass_dir = "lib/assets/stylesheets"
+  
+  images_dir = "lib/public/images"
+  
+  javascripts_dir = "lib/assets/javascripts"
+  
+  output_style = :compressed
+
+Create a scss file and import sky_web_tookit as above
+
+  @import "sky_web_toolkit"
+
