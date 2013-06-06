@@ -55,7 +55,7 @@ title: Sky Web Toolkit
   data-remember-state="true".
 </p>
 
-<section class="example big">
+<section class="clearfix example big">
   <section class="module clearfix" data-function="tabs" data-remember-state="true">
     <h2 class="at">This is a screenreader header for tabs</h2>
     <ul class="tabs clearfix" role="tablist">
@@ -90,30 +90,49 @@ title: Sky Web Toolkit
 
 <h2>Tracking</h2>
 <section>
-<p>Adds tracking to the <code>anchors, buttons, submits</code> and anything with <code>[data-track]</code> attibute.</p>
-<p>Automatic tracking will be initialised once <code>skytoolkit['tracking'](config)</code> has been executed.</p>
-<p>config options are:<code>
-{
-site: "sky/portal/skycom",
-section: "home/BETA/NON_SKY",
-headline: "",
-contentType: "home",
-contentId: "",
-account: "bskybhp,bskybnetworkglobal",
-mpaccount: "bskybhp,bskybmpprod"
-}</code></p>
-link tracking arrangement (all elements are pipe-delimited):
-'module-name' i.e. carousel or weather
-'pod-name' i.e. slide1, controls or monday
-'sub-content-other(s)' i.e. a sub menu area or related-links. delimited by : if more than one
-'editorial-theme' i.e. 'sky-atlantic' to group similar pods together that may be spread out during the page or day
-'context' : to be used when clicking the text does not make it clear what is being actioned
-text clicked : the label given, alt attribute, text inside the tag or the name attribute
+    <p>Adds tracking to the <code>anchors, buttons, submits</code> and anything with <code>[data-track]</code> attibute.</p>
+    <p>Automatic tracking will be initialised once <code>skytoolkit['tracking'](config)</code> has been executed.</p>
+    <p>config options are:
+        <code class="block">
+    {
+        site: "",
+        section: "",
+        headline: "",
+        contentType: "",
+        contentId: "",
+        account: "",
+        mpaccount: ""
+    }</code>
+    </p>
 
-todo:
-- if 'getTrackingProperties' function fills in 2 fields or less. add the current url into the string.
-- expose customTracking function which takes data object
-- trigger tracking event with data and customTracking func when config turned on
+    <h3>Getting more detail from your tracking</h3>
+    <p>
+        Page are commonly split up in the following areas, Modules, Pods and other.
+        You may want to track Editorial-Themes or the Context along with clicked text.
+    </p>
+    <p>
+        With regards to a piece of content being tracked, the following data attributes are optional:
+    </p>
+    <dl>
+        <dt><code>data-tracking-module</code></dt>
+        <dd>A top-level container. normally a distinct horizontal band on the page. i.e. the 'hero', 'carousel' or 'weather' </dd>
+        <dd>Add to a parent of the clicked link. i.e. data-tracking-module=carousel</dd>
+        <dt><code>data-tracking-pod</code></dt>
+        <dd>A mid-level container. Commonly a vertical band within the module or a segment of content. i.e. a search segment, slide 2 or tab name</dd>
+        <dd>Add to a parent of the clicked link. i.e. data-tracking-pod=slide2</dd>
+        <dt><code>data-tracking-other</code></dt>
+        <dd>Low level container.  Useful for multi-level navigation.</dd>
+        <dd>Add to a parent of the clicked link. i.e. data-tracking-other=nav-level-3-text</dd>
+        <dt><code>data-tracking-theme</code></dt>
+        <dd>Used to group items that may change over the days or related links that may be across modules.</dd>
+        <dd>Add to a parent of the clicked link or the clicked link itself. i.e. data-tracking-theme=friends-and-family</dd>
+        <dt><code>data-tracking-context</code></dt>
+        <dd>When multiple links have the same text you may need to put this in context of its parent. i.e. 'remote record' may need the context of what is being recorded</dd>
+        <dd>Add to the clicked link. i.e. data-tracking-context=bond-11. Or point to another tag i.e. data-tracking-context-id=slide-2-title</dd>
+        <dt>Text</dt>
+        <dd>This is text clicked</dd>
+        <dd>In order of priority may be: data-tracking-label, alt, value, the tags text, or lastly the 'name' attribute.</dd>
+    </dl>
 </section>
 
 <script>
