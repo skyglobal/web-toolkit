@@ -1,32 +1,5 @@
-/*
-    purpose:
-    to add automatic tracking the anchors page.
-    elements with 'data-tracking' will also be tracked.
-    to init the tracking bootstrap['tracking'].init(config) is needed.
-    config options are:
-        {
-            site: "sky/portal/skycom",
-            section: "home/BETA/NON_SKY",
-            headline: "",
-            contentType: "home",
-            contentId: "",
-            account: "bskybhp,bskybnetworkglobal",
-            mpaccount: "bskybhp,bskybmpprod"
-        }
-    link tracking arrangement (all elements are pipe-delimited):
-        'module-name' i.e. carousel or weather
-        'pod-name' i.e. slide1, controls or monday
-        'sub-content-other(s)' i.e. a sub menu area or related-links. delimited by : if more than one
-        'editorial-theme' i.e. 'sky-atlantic' to group similar pods together that may be spread out during the page or day
-        'context' : to be used when clicking the text does not make it clear what is being actioned
-        text clicked : the label given, alt attribute, text inside the tag or the name attribute
-
-    todo:
-     - if 'getTrackingProperties' function fills in 2 fields or less. add the current url into the string.
-     - expose customTracking function which takes data object
-     - trigger tracking event with data and customTracking func when config turned on
-*/
 if (typeof skytoolkit==='undefined') skytoolkit={};
+
 skytoolkit['tracking'] = function(omniture){
 
     var vars = {
