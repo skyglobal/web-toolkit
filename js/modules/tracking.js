@@ -5,7 +5,7 @@ skytoolkit['tracking'] = function(omniture){
     var vars = {
         verifying: false,
         verifyOutputId: 'bootstrap-tracking-verify',
-        siteName: safeString($('#skycom-nav li.selected a').text())
+        siteName: safeString($('#skycom-nav li.selected > a').text())
     };
 
     function setPageConfig(config){
