@@ -5,13 +5,18 @@ skytoolkit['tracking'] = function(omniture){
     var vars = {
         verifying: false,
         verifyOutputId: 'bootstrap-tracking-verify',
-        siteName: safeString($('#skycom-nav li.selected > a').text())
+        siteName: safeString($('#skycom-nav li.selected > a').text()),
+        events:[],
+        loadEvents:[],
+        variables:{}
     };
 
     function setPageConfig(config){
+        //addCustomPageTrackingEvents();
         omniture.pageView ( config, "false" );
     }
     function resetPageConfig(config){
+        addCustomPageTrackingEvents();
         omniture.pageView ( config, "true" );
     }
 
@@ -35,41 +40,83 @@ skytoolkit['tracking'] = function(omniture){
         }
     }
 
-    function addTrackVars(prop, val){
-        var map = 'D=' + omniture.vmap[prop][1].replace('eVar','v').replace('prop','c');
-        omniture.s[omniture.vmap[prop][0]] = map;
-        omniture.s[omniture.vmap[prop][1]] = val;
+    function addCustomTrackingEvents($el){
+      var customEvent = $el.attr('data-tracking-custom-event');
+      if (!customEvent) return;
+      var event;
+      for (event in vars.events){
+        addTrackingEvents(vars.events[event]);
+      }
+    }
+
+    function addCustomPageTrackingEvents(){
+      var i;
+      for (i in vars.loadEvents){
+        addTrackingEvents(vars.loadEvents[i]); 
+      }
+    }
+
+    function addCustomTrackingVars($el){
+      var customVariable = $el.attr('data-tracking-custom-variable');
+      var value = getText($(vars.variables[customVariable]));
+      if (!customVariable) return;
+      addTrackingVars(customVariable,value);
+    }
+
+    function addTrackingEvents(prop){
+        if (omniture.s.events.length>0) omniture.s.events += ',';
+        omniture.s.events += omniture.eventMap[prop];
+        omniture.s.linkTrackEvents = omniture.s.events;
+        logTracking('events', prop);
+    }
+
+    function addTrackingVars(prop, val){
+        if(val){
+          if (omniture.vmap[prop].length==1){
+            omniture.s[omniture.vmap[prop][0]] = val;
+          } else {
+            var map = 'D=' + omniture.vmap[prop][1].replace('eVar','v').replace('prop','c');
+            omniture.s[omniture.vmap[prop][0]] = map;
+            omniture.s[omniture.vmap[prop][1]] = val;
+          }
+        }
         omniture.s.linkTrackVars += ',' + omniture.vmap[prop];
         logTracking('prop',prop, val);
     }
 
     function track(e){
+        resetOmniture();
         logTracking('start','tracking event', e);
         var refDomain = document.referrer,
             url = document.location.href.split('?')[0],
             $el = $(e.currentTarget),
-            events = omniture.eventMap['linkClick'],
             context;
 
-        omniture.s.linkTrackVars = 'events';
-        addTrackVars('siteName', vars.siteName);
-        addTrackVars('linkDetails', getTrackingProperties($el));
-        addTrackVars('refDomain', refDomain);
-        addTrackVars('url', url);
-        addTrackVars('samId', '');
+        addTrackingEvents('linkClick');
+        addTrackingVars('events')
+        addTrackingVars('siteName', vars.siteName);
+        addTrackingVars('linkDetails', getTrackingProperties($el));
+        addTrackingVars('refDomain', refDomain);
+        addTrackingVars('url', url);
+
+        addCustomTrackingVars($el);
+        addCustomTrackingEvents($el);
 
         if ($el.attr('data-tracking-search')){
             context = $el.attr('data-tracking-context') || getText($('#' + $el.attr('data-tracking-context-id')));
-            addTrackVars('searchType', $el.attr('data-tracking-search'));
-            addTrackVars('searchTerms', context);
-            events += ',' + omniture.eventMap['search'];
+            addTrackingVars('searchType', $el.attr('data-tracking-search'));
+            addTrackingVars('searchTerms', context);
+            addTrackingEvents('search');
         }
-
-        logTracking('prop','events', events);
-        omniture.s.linkTrackEvents = omniture.s.events = events;
 
         logTracking('end');
         omniture.s.trackLink(this,'o','Link Click');
+    }
+
+    function resetOmniture(){
+      omniture.s.linkTrackVars = '';
+      omniture.s.events = '';
+      omniture.s.linkTrackEvents = '';
     }
 
     function verify(on){
@@ -120,7 +167,41 @@ skytoolkit['tracking'] = function(omniture){
         return str.trim().replace(/ /g,'-').replace(/[&,\+,:]/g,'').toLowerCase();
     }
 
+    function addCustomEvents(events) {
+      if (!events) return;
+        var i=0,len=events.length, event;
+        for(i;i<len;i++){
+          event=events[i];
+          for (name in event) { 
+            objEvent = event[name]
+            omniture.eventMap[name] = 'event' + objEvent.event;
+            vars.events.push(name);
+            if (objEvent.onPageLoad) { 
+              vars.loadEvents.push(name); 
+            }
+          } 
+        }
+    }
+
+    function addCustomVariables(customVars) {
+      if (!customVars) return;
+        var i=0,len=customVars.length, 
+            value, evar;
+        for(i;i<len;i++){
+          value = [];
+          for (name in customVars[i]) { 
+            evar = customVars[i][name] 
+            if (evar.var) value.push('eVar' + evar.var);
+            if (evar.prop) value.push('prop' + evar.prop);
+            omniture.vmap[name] = value;
+            vars.variables[name] = evar.valueSelector;
+          }
+        }
+    }
+
     return function(config){
+        addCustomEvents(config.customEvents);
+        addCustomVariables(config.customVariables);
         setPageConfig(config);
         bindEvents();
         skytoolkit['tracking'] = {
