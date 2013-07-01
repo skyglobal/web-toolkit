@@ -19,7 +19,9 @@ end
 desc 'Deploys a new version to the CDN'
 task :deploy_new_version do
 
-  doc_files = ['stylesheets/styles.css']
+
+  files_to_upload = ['stylesheets/sky_web_toolkit.css']
+  files_to_upload = files_to_upload + Dir.glob("js/**/*.*")
 
   if version_already_exists?
     puts "Version #{latest_version_number} already exists. Exiting."
@@ -28,7 +30,7 @@ task :deploy_new_version do
 
   doc_resources = []
   puts 'Uploading doc files'
-  doc_files.each do |file|
+  files_to_upload.each do |file|
     doc_resources << bucket.objects["v#{latest_version_number}/#{file}"].write(File.open(file).read) 
   end
 
