@@ -72,7 +72,7 @@ title: Sky Web Toolkit
         <h2 class="at">Screen reader header for First tab contents</h2>
         <div class="skycom_12">
           <p>Hello from the first tab contents</p>
-          img src="http://nicenicejpg.com/500/300/"/>
+          <img src="http://nicenicejpg.com/500/300/"/>
         </div>
       </section>
     </div>
@@ -98,9 +98,9 @@ title: Sky Web Toolkit
       if (classes.indexOf('big') !== -1) {
         var escapedHTML = codeExampleElement.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;");
         escapedHTML = escapedHTML.replace(/\\n/g, '<br />')
-        codeExampleElement.innerHTML += "<pre><code class='example-code'>" + escapedHTML + "</code></pre>";
+        codeExampleElement.innerHTML += "<pre><code class='example-code' data-language='css'>" + escapedHTML + "</code></pre>";
       } else {
-        codeExampleElement.innerHTML += "<code class='example-code'>" + codeExampleElement.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;") + "</code>";
+        codeExampleElement.innerHTML += "<code class='example-code' data-language='css'>" + codeExampleElement.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;") + "</code>";
       }
     }
   }
