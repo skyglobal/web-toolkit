@@ -1,0 +1,42 @@
+require 'aws-sdk'
+
+def s3
+  $s3 ||= AWS::S3.new(access_key_id: ENV["S3_ACCESS_KEY_ID"] , secret_access_key: ENV["S3_ACCESS_KEY"], region: 'eu-west-1')
+end
+
+def bucket
+  $bucket ||=  s3.buckets['prod-sky-web-toolkit']
+end
+
+def latest_version_number
+  $latest_version_number ||= File.open('versionfile').read.strip
+end
+
+def version_already_exists?
+  bucket.objects.any?{|obj|obj.key.include? latest_version_number}
+end
+
+desc 'Deploys a new version to the CDN'
+task :deploy_new_version do
+
+  doc_files = ['stylesheets/style.css']
+
+  if version_already_exists?
+    puts "Version #{latest_version_number} already exists. Exiting."
+    next
+  end
+
+  doc_resources = []
+  puts 'Uploading doc files'
+  doc_files.each do |file|
+    doc_resources << bucket.objects["v#{latest_version_number}/#{file}"].write(File.open(file).read) 
+  end
+
+  online_resources = [tracking_resource,omniture_resource]
+
+  puts 'Giving public read access'
+  (online_resources + doc_resources).each{|resource|resource.acl = :public_read}
+
+  puts "Deployed following resources:"
+  (online_resources + doc_resources).each{|resource|puts resource.public_url.to_s}
+end
