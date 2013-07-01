@@ -19,7 +19,7 @@ end
 desc 'Deploys a new version to the CDN'
 task :deploy_new_version do
 
-  doc_files = ['stylesheets/style.css']
+  doc_files = ['stylesheets/styles.css']
 
   if version_already_exists?
     puts "Version #{latest_version_number} already exists. Exiting."
@@ -32,11 +32,9 @@ task :deploy_new_version do
     doc_resources << bucket.objects["v#{latest_version_number}/#{file}"].write(File.open(file).read) 
   end
 
-  online_resources = [tracking_resource,omniture_resource]
-
   puts 'Giving public read access'
-  (online_resources + doc_resources).each{|resource|resource.acl = :public_read}
+  (doc_resources).each{|resource|resource.acl = :public_read}
 
   puts "Deployed following resources:"
-  (online_resources + doc_resources).each{|resource|puts resource.public_url.to_s}
+  (doc_resources).each{|resource|puts resource.public_url.to_s}
 end
