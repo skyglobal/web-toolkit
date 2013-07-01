@@ -21,7 +21,7 @@ task :deploy_new_version do
 
 
   files_to_upload = ['stylesheets/sky_web_toolkit.css']
-  files_to_upload = files_to_upload + Dir.glob("js/**/*.*")
+  files_to_upload = files_to_upload + Dir.glob("js/utils/**/*.*") + Dir.glob("js/modules/**/*.*")
 
   if version_already_exists?
     puts "Version #{latest_version_number} already exists. Exiting."
