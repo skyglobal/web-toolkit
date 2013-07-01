@@ -1,0 +1,44 @@
+<form accept-charset="UTF-8" action="" class="well sky-form" id="new_email" method="post">
+
+  <div class="required-indicator">
+    Required fields <span>*</span>
+  </div>
+
+  <div class="row">
+    <label for="title">Title <span>*</span></label>
+    <select id="title" name="title"><option value="">Please select...</option>
+      <option value="Mr">Mr</option>
+      <option value="Mrs">Mrs</option>
+      <option value="Ms">Ms</option>
+      <option value="Sir">Sir</option>
+      <option value="Dr">Dr</option>
+      <option value="Prof.">Prof.</option></select>
+    <div class="error"></div>
+  </div>
+
+  <div class="row">
+    <label for="first_name">First name <span>*</span></label>
+    <input id="first_name" name="first_name" size="30" type="text">
+    <div class="error"></div>
+  </div>
+  <div class="row">
+    <div class="field_with_errors">
+      <label for="second_name">Second name <span>*</span></label>
+      <input id="second_name" name="second_name" size="30" type="text">
+      <div class="error">This is an error</div>
+    </div>
+  </div>
+  <div class="row no-height">
+    <label for="email_message">Message <span>*</span></label>
+    <textarea cols="40" id="email_message" name="email[message]" rows="7"></textarea>
+    <div class="error"></div>
+  </div>
+
+  <div class="row buttons">
+    <a class="cancel btn in-page-cta" href="#" >
+      Cancel
+    </a>
+    <button class="text btn primary-cta" name="button" type="submit">Submit</button>
+  </div>
+
+</form>
