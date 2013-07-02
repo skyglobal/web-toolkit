@@ -34,11 +34,40 @@
     <div class="error"></div>
   </div>
 
+
+  <div class="row">
+      <label>Select a payment type</label>
+      <div class="radiocheck">
+        <label>
+          <input type="radio" name="payment_type" value="direct_debit"></input>
+          Direct debit
+        </label> 
+        <label>
+          <input type="radio" name="payment_type" value="credit_card"></input>
+          Credit card
+        </label>
+      </div>
+  </div>
+
+
+  <div class="row">
+      <label>Confirm terms and conditions</label>
+      <div class="radiocheck">
+        <label>
+          <input type="checkbox" name="confirm_terms" value="true"></input>
+          I confirm
+        </label>
+      </div>
+  </div>
+
+
   <div class="row buttons">
     <a class="cancel btn in-page-cta" href="#" >
       Cancel
     </a>
     <button class="text btn primary-cta" name="button" type="submit">Submit</button>
   </div>
+
+
 
 </form>
