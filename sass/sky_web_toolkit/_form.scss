@@ -45,6 +45,17 @@
 
     @media screen and (min-width: 768px){
       height: 60px;
+      .radiocheck{
+        display: inline-block;
+        padding-top: 1%;
+        width: 50%;
+        label{
+          text-align: left;
+          line-height: 24px;
+        }
+      }
+
+
       label{
         width: 42%;
         float: left;
