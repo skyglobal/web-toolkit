@@ -1,5 +1,7 @@
+
 body {
-	font: 16px/1.5em $font-family;
+	font: 16px/1em $font-family;
+  color: #333333;
 }
 
 h1, 
@@ -11,12 +13,32 @@ h6 {
 	font-weight: normal;
 }
 
-h1 {
-	font-size: 3em;
-	color: #333;
+h1, .page-title-bigger {
+	font-size: 3.25em;
 }
 
-h2 {
-	font-size: 2em;
-	color: #666;
+.page-title-smaller {
+  font-size: 2.375em; 
+}
+
+h2, .section-title {
+	font-size: 1.875em;
+}
+
+h3, .module-title {
+  font-size: 1.375em;
+}
+
+.intro-copy{
+  font-size: 1.25em;
+}
+
+.supportive-copy{
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.75em;
+}
+
+.legal-copy{
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.688em;
 }
