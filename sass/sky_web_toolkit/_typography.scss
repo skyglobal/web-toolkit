@@ -11,6 +11,7 @@ h4,
 h5, 
 h6 {
 	font-weight: normal;
+  line-height: 1em;
 }
 
 h1, .page-title-bigger {
@@ -29,6 +30,22 @@ h3, .module-title {
   font-size: 1.375em;
 }
 
+a {
+  color: #0070a5 !important;
+}
+
+p {
+  color: #333;
+}
+
+.secondary {
+  color: #666;
+}
+
+.error {
+  color: #D21717;
+}
+
 .intro-copy{
   font-size: 1.25em;
 }
@@ -42,3 +59,10 @@ h3, .module-title {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 0.688em;
 }
+
+.instructional-copy {
+  font-family: Luna,SkyTextRegular;
+  font-size: 1.875em;
+  line-height: 3em;
+}
+

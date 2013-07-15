@@ -14,10 +14,38 @@ h1.massive{
 }
 
 article.example{
-  margin: 10px 0;
+	margin: 10px 0;
+	clear: both;
+	overflow: hidden;
+	padding: 2px 0;
 }
 
-.example{
-  h1, h2, h3, h4{
-  }
+.typography {
+	h1, h2, h3, h4, p {
+		float: left;
+		margin: 0 0 5px 0;
+	}
+}
+
+.example-code { 
+	float: right;
+	display: block;
+}
+
+.big .example-code {
+	float: none;
+}
+
+pre { 
+	font-size: 0.8em; 
+}
+
+span.highlight {
+	background-color: #fdf6e3;
+	border-radius: 3px;
+	padding: 5px;
+}
+
+article.colours div{
+	clear: both;
 }
