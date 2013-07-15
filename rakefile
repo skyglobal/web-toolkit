@@ -1,4 +1,5 @@
 require 'aws-sdk'
+require 'cgi'
 
 def s3
   $s3 ||= AWS::S3.new(access_key_id: ENV["S3_ACCESS_KEY_ID"] , secret_access_key: ENV["S3_ACCESS_KEY"], region: 'eu-west-1')
@@ -16,12 +17,27 @@ def version_already_exists?
   bucket.objects.any?{|obj|obj.key.include? latest_version_number}
 end
 
+
+def files_to_upload
+  files = ['stylesheets/sky_web_toolkit.css']
+  files = files + Dir.glob("js/utils/**/*.*") + Dir.glob("js/modules/**/*.*")
+end
+
+task :html_example do
+  html = ""
+  files_to_upload.each do |file|
+    html << CGI::escapeHTML(%{<script type="text/javascript" src="//web-toolkit.global.sky.com/v#{latest_version_number}/#{file}"/>}) + '<br/>' if file.include? ".css"
+    html << CGI::escapeHTML(%{<link rel="stylesheet" href="//web-toolkit.global.sky.com/v#{latest_version_number}/#{file}"/>}) + '<br/>' if file.include? ".js"    
+  end
+  File.open('_includes/include.html', 'w') {|f| f.write(html) }
+
+end
+
 desc 'Deploys a new version to the CDN'
 task :deploy_new_version do
 
 
-  files_to_upload = ['stylesheets/sky_web_toolkit.css']
-  files_to_upload = files_to_upload + Dir.glob("js/utils/**/*.*") + Dir.glob("js/modules/**/*.*")
+
 
   if version_already_exists?
     puts "Version #{latest_version_number} already exists. Exiting."
