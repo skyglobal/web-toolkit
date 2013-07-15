@@ -26,8 +26,8 @@ end
 task :html_example do
   html = ""
   files_to_upload.each do |file|
-    html << CGI::escapeHTML(%{<script type="text/javascript" src="//web-toolkit.global.sky.com/v#{latest_version_number}/#{file}"/>}) + '<br/>' if file.include? ".css"
-    html << CGI::escapeHTML(%{<link rel="stylesheet" href="//web-toolkit.global.sky.com/v#{latest_version_number}/#{file}"/>}) + '<br/>' if file.include? ".js"    
+    html << CGI::escapeHTML(%{<script type="text/javascript" src="//web-toolkit.global.sky.com/v#{latest_version_number}/#{file}"/>}) + '<br/>' if file.include? ".js"
+    html << CGI::escapeHTML(%{<link rel="stylesheet" href="//web-toolkit.global.sky.com/v#{latest_version_number}/#{file}"/>}) + '<br/>' if file.include? ".css"    
   end
   File.open('_includes/include.html', 'w') {|f| f.write(html) }
 
