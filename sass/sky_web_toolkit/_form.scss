@@ -1,115 +1,209 @@
-.skycom-mobile .sky-form textarea{
-  width: 96%;
+.row {
+  margin: 0 0 24px 0;
+
+  &:last-child {
+    margin: 0;
+  }
 }
-.sky-form{
-  .required-indicator span, .row label span {
-    color: #c00; 
+
+.required:after {
+  content: "*";
+  color: $red;
+}
+
+form {
+  // background-color: yellow;
+}
+
+
+// this is the attempt to alter the styling of a select, very difficult :(
+// select {
+//   @include appearance(none);
+//   border: none;
+//   background-color: #fff;
+//   outline: none;
+//   font-size: 16px;
+//   padding: 0.4em 2em 0.4em 0.8em;
+
+//   &:after {
+//     content: "▼";
+//         position: absolute;
+//         top: 0;
+//         right: 0;
+//         bottom: 0;
+//         font-size: 60%;
+//         line-height: 30px;
+//         padding: 0 7px;
+//         background: #bbb;
+//         color: white;
+        
+//         pointer-events:none;
+        
+//         -webkit-border-radius: 0 6px 6px 0;
+//         -moz-border-radius: 0 6px 6px 0;
+//         border-radius: 0 6px 6px 0;
+//   }
+// }
+
+form > .row > label, legend {
+  @include box-sizing(border-box);
+  float: left;
+  text-align: right;
+  width: 24%;
+  padding-right: 20px;
+}
+
+input[type="text"] {
+  font-family: SkyTextRegular;
+  font-size: 20px;
+  max-width: 280px;
+  margin: 0;
+  border-radius: 5px;
+  padding: 5px 7px;
+  border: 1px solid #999;
+  outline: none;
+  border: 1px solid #999;
+
+  &:focus {
+    @include single-box-shadow(#0094ff, 0, 0, 2px, 0px, 0);
+    border: 1px solid #0094ff;
   }
+}
 
+.date-picker input[type="text"] {
+  background-color: red;
+}
 
-  .row {
-    margin-top: 10px;
-    font-size: 20px;
-    height: 80px;
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
 
-    label {
-      clear: both;
-      display: block;
-      margin-bottom: 4px;
-    }
-    input {
-      clear: both;
-      font-family: SkyTextRegular;
-      font-size: 16px;
-      max-width: 280px;
-      margin: 0;
-      border-radius: 5px;
-      padding: 10px 5px;
-
-    }
-    select, textarea{
-      border-radius: 5px;
-      padding: 5px;
-      font-family: SkyTextRegular,helvetica,arial;
-      font-size: 1em;
-    }
-
-    input, textarea{
-      border: 1px solid #c7c7c7;
-    }
-
-    textarea {
-      box-shadow: inset 0px 1px 1px 0px rgb(199, 199, 199);
-    }
-
-    select {
-      border-color: #c7c7c7;
-      max-width: 100%;
-      color: #3c3c3c;
-      font-size: 18px;
-    }
-
-
-
-    @media screen and (min-width: 768px){
-      height: 60px;
-      .radiocheck{
-        display: inline-block;
-        padding-top: 1%;
-        width: 50%;
-        label{
-          text-align: left;
-          line-height: 24px;
-        }
-      }
-
-
-      label{
-        width: 42%;
-        float: left;
-        text-align: right;
-        line-height: 40px;
-        margin-right: 12px;
-      }
-      textarea{
-        width: 45%;
-        min-width: 252px;
-      }
-      select {
-        width: 50%;
-        max-width: 264px;
-        height: 40px;
-      }
-      input{max-width: 255px;}
-      .error {margin-left: 44%;}
-      &.buttons{
-          margin-left: 44%;
-      }
-      .error {margin-top: 4px;}
-    }
-
-
-    @media screen and (max-width: 400px){
-      select, textarea, input {
-        max-width: 100%;
-        box-sizing: border-box;
-      }
-    }
-
-    &.no-height{
-      height:auto;
-      padding-bottom: 13px;
-    }
-
-  .field_with_errors {
-    input, textarea, select {
-      border: 1px solid #c00;
-      margin-bottom: 4px;
-    }
-    label { }
+.radiocheck {
+  float: left;
+  label {
+    display: inline-block;
+    margin-bottom: 5px;
   }
-  .error { font-size: 14px; line-height: 13px; }
+}
+
+
+
+
+
+// .skycom-mobile .sky-form textarea{
+//   width: 96%;
+// }
+// .sky-form{
+//   .required-indicator span, .row label span {
+//     color: #c00; 
+//   }
+
+
+//   .row {
+//     margin-top: 10px;
+//     font-size: 20px;
+//     height: 80px;
+
+//     label {
+//       clear: both;
+//       display: block;
+//       margin-bottom: 4px;
+//     }
+//     input {
+//       clear: both;
+//       font-family: SkyTextRegular;
+//       font-size: 16px;
+//       max-width: 280px;
+//       margin: 0;
+//       border-radius: 5px;
+//       padding: 10px 5px;
+
+//     }
+//     select, textarea{
+//       border-radius: 5px;
+//       padding: 5px;
+//       font-family: SkyTextRegular,helvetica,arial;
+//       font-size: 1em;
+//     }
+
+//     input, textarea{
+//       border: 1px solid #c7c7c7;
+//     }
+
+//     textarea {
+//       box-shadow: inset 0px 1px 1px 0px rgb(199, 199, 199);
+//     }
+
+//     select {
+//       border-color: #c7c7c7;
+//       max-width: 100%;
+//       color: #3c3c3c;
+//       font-size: 18px;
+//     }
+
+
+
+//     @media screen and (min-width: 768px){
+//       height: 60px;
+//       .radiocheck{
+//         display: inline-block;
+//         padding-top: 1%;
+//         width: 50%;
+//         label{
+//           text-align: left;
+//           line-height: 24px;
+//         }
+//       }
+
+
+//       label{
+//         width: 42%;
+//         float: left;
+//         text-align: right;
+//         line-height: 40px;
+//         margin-right: 12px;
+//       }
+//       textarea{
+//         width: 45%;
+//         min-width: 252px;
+//       }
+//       select {
+//         width: 50%;
+//         max-width: 264px;
+//         height: 40px;
+//       }
+//       input{max-width: 255px;}
+//       .error {margin-left: 44%;}
+//       &.buttons{
+//           margin-left: 44%;
+//       }
+//       .error {margin-top: 4px;}
+//     }
+
+
+//     @media screen and (max-width: 400px){
+//       select, textarea, input {
+//         max-width: 100%;
+//         box-sizing: border-box;
+//       }
+//     }
+
+//     &.no-height{
+//       height:auto;
+//       padding-bottom: 13px;
+//     }
+
+//   .field_with_errors {
+//     input, textarea, select {
+//       border: 1px solid #c00;
+//       margin-bottom: 4px;
+//     }
+//     label { }
+//   }
+//   .error { font-size: 14px; line-height: 13px; }
 
       
-  }
-}
+//   }
+// }
