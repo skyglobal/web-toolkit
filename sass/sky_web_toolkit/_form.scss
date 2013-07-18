@@ -33,12 +33,16 @@
       font-family: SkyTextRegular,helvetica,arial;
       font-size: 1em;
     }
+
     input, textarea{
-      box-shadow: inset 0px 1px 1px 0px rgb(199, 199, 199);
       border: 1px solid #c7c7c7;
     }
 
-    select{
+    textarea {
+      box-shadow: inset 0px 1px 1px 0px rgb(199, 199, 199);
+    }
+
+    select {
       border-color: #c7c7c7;
       max-width: 100%;
       color: #3c3c3c;

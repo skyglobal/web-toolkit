@@ -4,135 +4,92 @@ title: Sky Web Toolkit
 ---
 <h1 class="massive">Sky Web Toolkit</h1>
 
-
 <section class="section">
-<h2>Usage</h2>
+	<h2>Usage</h2>
+	<p>Include the following in your head tag (the hash manager and tabs js files are only required if you have tabs)</p>
 
-<p>
-Include the following in your head tag (the hash manager and tabs js files are only required if you have tabs)
-</p>
-
-<pre>
-<code>
-{% include include.html %}
-</code>
-</pre>
-
-
+	<pre>
+		<code>
+			{% include include.html %}
+		</code>
+	</pre>
 </section>
 
-<section class="section typography">
-<h2>Typography</h2>
-{% include typography.html %}
+<section class="typography m">
+	<a name="typography"></a>
+	<h2>Typography</h2>
+	{% include typography.html %}
 </section>
 
 
-<section class="section">
-<h2>Buttons</h2>
+<section class="section m">
+	<h2>Buttons</h2>
 
-<h3>Primary Action</h3>
-
-<article class="example">
-  <a href="#" class="btn primary-cta">Anchor Tag</a>
-</article>    
-
-<article class="example">
-  <button href="#" class="btn primary-cta" >Normal Button</button>
-</article>
-
-<article class="example">
-  <button type="submit" href="#" class="btn primary-cta" >Submit Button</button>
-</article>
-
-<h3>Sign Post</h3>
-
-<article class="example">
-  <a href="#" class="btn sign-post">Anchor Tag</a>
-</article>
-
-<article class="example">
-  <button href="#" class="btn sign-post" >Normal Button</button>
-</article>
-
-<article class="example">
-  <button type="submit" href="#" class="btn sign-post" >Submit Button</button>
-</article>
-
-<h3>In Page Action</h3>
-
-<article class="example">
-  <a href="#" class="btn in-page-cta">Anchor Tag</a>
-</article>
-
-<article class="example">
-  <button href="#" class="btn in-page-cta" >Normal Button</button>
-</article>
-
-<article class="example">
-  <button type="submit" href="#" class="btn in-page-cta" >Submit Button</button>
-</article>
+	{% include buttons.html %}
 </section>
+
 <section class="section">
-<h2>Tabs</h2>
-<h3>Hash State</h3>
-<p>
-  The tabs provide hash state so enabling deep linking, back button and maintaining state over a refresh by including the attribute
-  data-remember-state="true".
-</p>
+	<h2>Tabs</h2>
+	<h3>Hash State</h3>
+	<p>The tabs provide hash state so enabling deep linking, back button and maintaining state over a refresh by including the attribute
+	data-remember-state="true".</p>
 
 <section class="clearfix example big">
-  <section class="module clearfix" data-function="tabs" data-remember-state="true">
-    <h2 class="at">This is a screenreader header for tabs</h2>
-    <ul class="tabs clearfix" role="tablist">
-      <li id="first-tab" aria-controls="first" aria-label="first" role="tab" class="tab skycom_internal selected">
-        <a href="#first" class="skycom_ellipsis">First</a>
-      </li>
-      <li id="second-tab" aria-controls="second" aria-label="second" role="tab" class="tab skycom_internal" >
-        <a href="#second" class="skycom_ellipsis">Second</a>
-      </li>
-    </ul>
+	<section class="module clearfix" data-function="tabs" data-remember-state="true">
+		
+		<h2 class="at">This is a screenreader header for tabs</h2>
+		
+		<ul class="tabs clearfix" role="tablist">
+		  <li id="first-tab" aria-controls="first" aria-label="first" role="tab" class="tab skycom_internal selected">
+		    <a href="#first" class="skycom_ellipsis">First</a>
+		  </li>
+		  <li id="second-tab" aria-controls="second" aria-label="second" role="tab" class="tab skycom_internal" >
+		    <a href="#second" class="skycom_ellipsis">Second</a>
+		  </li>
+		</ul>
 
-    <div id="first" class="tabpanel selected" aria-labeledby="first-tab" role="tabpanel">
-      <section class="tabcontents clearfix">
-        <h2 class="at">Screen reader header for First tab contents</h2>
-        <div class="skycom_12">
-          <p>Hello from the first tab contents</p>
-          <img src="http://placehold.it/350x150"/>
-        </div>
-      </section>
-    </div>
+		<div id="first" class="tabpanel selected" aria-labeledby="first-tab" role="tabpanel">
+		  <section class="tabcontents clearfix">
+		    <h2 class="at">Screen reader header for First tab contents</h2>
+		    <div class="skycom_12">
+		      <p>Hello from the first tab contents</p>
+		      <img src="http://placehold.it/350x150"/>
+		    </div>
+		  </section>
+		</div>
 
-    <div id="second" class="tabpanel" aria-labeledby="second-tab" role="tabpanel">
-      <section class="tabcontents clearfix">
-        <h2 class="at">Screen reader header for Second tab contents</h2>
-        <div class="skycom_12">
-          <p>Hello from the second tab contents</p>
-        </div>
-      </section>
-    </div>
-  </section>
+		<div id="second" class="tabpanel" aria-labeledby="second-tab" role="tabpanel">
+		  <section class="tabcontents clearfix">
+		    <h2 class="at">Screen reader header for Second tab contents</h2>
+		    <div class="skycom_12">
+		      <p>Hello from the second tab contents</p>
+		    </div>
+		  </section>
+		</div>
+
+	</section>
 </section>
 
-</section>
 <section class="section">
-<h2>Forms</h2>
-{% include form.html %}
+	<h2>Forms</h2>
+	{% include form.html %}
 
-<script>
-  var codeBlocks = document.getElementsByClassName('example');
+	<script>
+		var codeBlocks = document.getElementsByClassName('example');
 
-  if (codeBlocks.length) {
-    for (var i=0; i < codeBlocks.length; i++) {
-      var codeExampleElement = codeBlocks[i];
-      var classes = codeExampleElement.className;
-      if (classes.indexOf('big') !== -1) {
-        var escapedHTML = codeExampleElement.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;");
-        escapedHTML = escapedHTML.replace(/\\n/g, '<br />')
-        codeExampleElement.innerHTML += "<pre><code class='example-code' data-language='css'>" + escapedHTML + "</code></pre>";
-      } else {
-        codeExampleElement.innerHTML += "<code class='example-code' data-language='css'>" + codeExampleElement.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;") + "</code>";
-      }
-    }
-  }
-</script>
+		if (codeBlocks.length) {
+			for (var i=0; i < codeBlocks.length; i++) {
+				var codeExampleElement = codeBlocks[i];
+				var classes = codeExampleElement.className;
+				if (classes.indexOf('big') !== -1) {
+					var escapedHTML = codeExampleElement.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+					
+					escapedHTML = escapedHTML.replace(/\\n/g, '<br />');
+					codeExampleElement.innerHTML += "<pre><code class='example-code' data-language='css'>" + escapedHTML + "</code></pre>";
+				} else {
+					codeExampleElement.innerHTML += "<code class='example-code' data-language='css'>" + codeExampleElement.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;") + "</code>";
+				}
+			}
+		}
+	</script>
 </section>
