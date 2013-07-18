@@ -53,6 +53,13 @@ form > .row > label, legend {
   padding-right: 20px;
 }
 
+.no-label {
+  margin-left: 24%;
+  label {
+    float: none !important;
+  }
+}
+
 input[type="text"] {
   font-family: SkyTextRegular;
   font-size: 20px;
