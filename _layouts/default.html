@@ -1,23 +1,38 @@
 <!doctype html>
 <html>
-  <head>
-    <script src="js/lib/jquery.2.0.0.min.js" ></script>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/demo/solarized-light.css">
-    <script type="text/javascript">                                                     
-        $.get('//assets.sky.com/resources/mobile-ready/12/', function(data) {             
-              $('head').append(data);                                                         
-        });                                                                               
-    </script>                                                                           
-    <script src="js/demo/rainbow-custom.min.js"></script>
-  </head>
-  <body>
-    <div class="skycom_container">
-      {{ content }}	
-    </div>
-    <!--<script src="js/utils/hash-manager.js" ></script>-->
-    <!--<script src="js/modules/tabs.js" ></script>-->
-  <script src="js/lib/require.js" data-main="js/wiki.js" ></script>
-  </body>
+	<head>
+		<script src="js/lib/jquery.2.0.0.min.js" ></script>
+		<link rel="stylesheet" href="stylesheets/styles.css">
+		<link rel="stylesheet" href="stylesheets/demo/solarized-light.css">
+		<script type="text/javascript">                                                     
+				$.get('//assets.sky.com/resources/mobile-ready/12/', function(data) {             
+							$('head').append(data);                                                         
+				});                                                                               
+		</script>                                                                           
+		<script src="js/demo/rainbow-custom.min.js"></script>
+	</head>
+	<body>
+
+
+		<div class="skycom_container">
+			<div class="quick-links left skycom_2">
+				<ul class="nav-pills">
+					<li><a href="#typography">Typography</a></li>
+					<li>Code</li>
+					<li>Tables</li>
+					<li>Forms</li>
+					<li>Buttons</li>
+					<!-- <li>Images</li> -->
+				</ul>
+			</div>
+			
+			<div class="skycom_10 content right">
+				{{ content }}	
+			</div>
+		</div>
+		<!--<script src="js/utils/hash-manager.js" ></script>-->
+		<!--<script src="js/modules/tabs.js" ></script>-->
+	<script src="js/lib/require.js" data-main="js/wiki.js" ></script>
+	</body>
 </html>
 
