@@ -1,4 +1,71 @@
-<p>To apply web toolkit styling to a form, use the <span class="highlight">sky-form</span> class on the form. The <span class="highlight">well</span> class creates the grey box around the form.</p>
+<form>
+
+	<div class="row">
+		<label for="title" class="required">Title</label>
+		<select id="title" name="title"><option value="">Please select...</option>
+			<option value="Mr">Mr</option>
+			<option value="Mrs">Mrs</option>
+			<option value="Ms">Ms</option>
+			<option value="Sir">Sir</option>
+			<option value="Dr">Dr</option>
+			<option value="Prof.">Prof.</option>
+		</select>
+		<div class="error"></div>
+	</div>
+
+	<div class="row">
+	    <label for="first_name">First name</label>
+	    <input id="first_name" type="text" placeholder="eg. Joe Bloggs"></input>
+	</div>
+
+	<div class="row">
+		<fieldset>
+			<legend>Select a payment type</legend>
+			<div class="radiocheck">
+				<input type="radio" name="payment_type" value="direct_debit" id="direct-debit" checked></input>
+				<label for="direct-debit">Direct debit</label>
+				<br>
+				<input type="radio" name="payment_type" value="credit_card" id="credit-card"></input>
+				<label for="credit-card">Credit card</label>
+			</div>
+
+		</fieldset>
+		<!-- <label>Select a payment type</label>
+		<div class="radiocheck">
+			<div>
+				<input type="radio" name="payment_type" value="direct_debit"></input><label>Direct debit</label>
+			</div> 
+			<div>
+				<input type="radio" name="payment_type" value="credit_card"></input><label>Credit card</label>
+			</div>
+		</div> -->
+	</div>
+
+	<div class="row">
+		<label>Date picker</label>
+		<div class="date-picker">
+			<input type="text" placeholder="dd"/>
+			<span class="divider">-</span>
+			<input type="text" placeholder="mm"/>
+			<span class="divider">-</span>
+			<input type="text" placeholder="yyyy"/>
+		</div>
+	</div>
+
+	<div class="row">
+		<input type="checkbox" name="confirm_terms" value="true" id="confirm-terms"></input>
+		<label for="confirm-terms">I agree to the <a href="#">Terms &amp; Conditions</a></label>
+	</div>
+
+	<div class="row">
+		<label class="required">Postcode</label>
+		<input type="text" placeholder="eg. TW8 1QW"/>
+		<button class="btn">Find address</button>
+	</div>
+
+</form>
+
+<!-- <p>To apply web toolkit styling to a form, use the <span class="highlight">sky-form</span> class on the form. The <span class="highlight">well</span> class creates the grey box around the form.</p>
 
 <p>A <i>label</i> and <i>input</i> together should go in a div element with a <span class="highlight">row</span> class</p>
 
@@ -12,21 +79,6 @@
 
 
 <form class="well sky-form">
-
-<article class="example big">
-	<div class="row">
-		<label for="title">Title <span>*</span></label>
-		<select id="title" name="title"><option value="">Please select...</option>
-			<option value="Mr">Mr</option>
-			<option value="Mrs">Mrs</option>
-			<option value="Ms">Ms</option>
-			<option value="Sir">Sir</option>
-			<option value="Dr">Dr</option>
-			<option value="Prof.">Prof.</option>
-		</select>
-		<div class="error"></div>
-	</div>
-</article>
 
 <article class="example big">
   <div class="row">
@@ -90,4 +142,4 @@
   </div>
 </article>
 
-</form>
+</form> -->

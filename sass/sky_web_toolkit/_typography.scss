@@ -3,6 +3,10 @@ body {
   color: #333333;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
 h1.large {
   font-size: 3.25em;
   line-height: 1.076em;
@@ -47,14 +51,7 @@ small {
 small.legal {
   font-size: 0.6875em;
   line-height: 1em; // might be wrong
-}
-
-a {
-  color: #0070a5 !important; // don't like having to override this - due to masthead
-}
-
-a:hover {
-  text-decoration: underline;
+  color: #666666;
 }
 
 blockquote {
@@ -63,8 +60,23 @@ blockquote {
 }
 
 .error {
-  color: #D21717;
+  color: $red;
 }
+
+.white {
+  color: #FFF !important;
+}
+
+.black {
+  color: #333 !important;
+}
+
+.medium {
+  font-family: SkyTextMedium, $font-family;
+}
+
+
+
 
 .skycom-mobile {
   h1 {

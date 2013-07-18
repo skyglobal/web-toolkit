@@ -6,7 +6,21 @@
   position: relative;
   z-index: 2;
   border: none;
+  background-color: #0073c5;
+  color: #ffffff;
 
+  &:before {
+    @include transition(opacity .25s);
+    @include border-radius(0 0 20px 20px);
+    @include background(linear-gradient(top, rgba(255,255,255,0.4), rgba(255,255,255, 0)));
+    content:"";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 1.5%;
+    width: 97%;
+    height: 10px;
+  }
 
   &:hover, &:focus {
     text-decoration: none;
@@ -16,34 +30,15 @@
     }
   }
 
-  &.blue {
-    background-color: #0073c5;
-    color: #ffffff;
-    &:before {
-      @include background(linear-gradient(top, rgba(255,255,255,0.4), rgba(255,255,255, 0)));
-    }
-  }
-
-  &.white {
+  &.secondary {
     // not done!;
     border: solid 1px #cfcfcf;
     background: #f4f4f4;
+    color: #333;
+
     &:before {
       @include background(linear-gradient(top, rgba(255,255,255,1), rgba(255,255,255, 0)));
     }
-  }
-
-  &.white:before, &.blue:before {
-    content:"";
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 1.5%;
-    width: 97%;
-    height: 10px;
-    // background-color: rgba(255, 255, 255, 0.25);
-    @include border-radius(0 0 20px 20px);
-    @include transition(opacity .25s);
   }
 }
 
