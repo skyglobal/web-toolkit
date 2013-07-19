@@ -4,11 +4,7 @@
 		<script src="js/lib/jquery.2.0.0.min.js" ></script>
 		<link rel="stylesheet" href="stylesheets/styles.css">
 		<link rel="stylesheet" href="stylesheets/demo/solarized-light.css">
-		<script type="text/javascript">                                                     
-				$.get('//assets.sky.com/resources/mobile-ready/12/', function(data) {             
-							$('head').append(data);                                                         
-				});                                                                               
-		</script>                                                                           
+		{% include skycom_resources.html %}
 		<script src="js/demo/rainbow-custom.min.js"></script>
 	</head>
 	<body>
