@@ -2,14 +2,16 @@
 
 	<div class="row">
 		<label for="title" class="required">Title</label>
-		<select id="title" name="title"><option value="">Please select...</option>
-			<option value="Mr">Mr</option>
-			<option value="Mrs">Mrs</option>
-			<option value="Ms">Ms</option>
-			<option value="Sir">Sir</option>
-			<option value="Dr">Dr</option>
-			<option value="Prof.">Prof.</option>
-		</select>
+		<div class="select">
+			<select id="title" name="title"><option value="">Please select...</option>
+				<option value="Mr">Mr</option>
+				<option value="Mrs">Mrs</option>
+				<option value="Ms">Ms</option>
+				<option value="Sir">Sir</option>
+				<option value="Dr">Dr</option>
+				<option value="Prof.">Prof.</option>
+			</select>
+		</div>
 		<div class="error"></div>
 	</div>
 
@@ -41,7 +43,7 @@
 		</div> -->
 	</div>
 
-	<div class="row">
+<!-- 	<div class="row">
 		<label>Date picker</label>
 		<div class="date-picker">
 			<input type="text" placeholder="dd"/>
@@ -50,17 +52,17 @@
 			<span class="divider">-</span>
 			<input type="text" placeholder="yyyy"/>
 		</div>
-	</div>
-
-	<div class="row no-label">
-		<input type="checkbox" name="confirm_terms" value="true" id="confirm-terms"></input>
-		<label for="confirm-terms">I agree to the <a href="#">Terms &amp; Conditions</a></label>
-	</div>
+	</div> -->
 
 	<div class="row">
 		<label class="required">Postcode</label>
 		<input type="text" placeholder="eg. TW8 1QW"/>
 		<button class="btn">Find address</button>
+	</div>
+
+	<div class="row no-label">
+		<input type="checkbox" name="confirm_terms" value="true" id="confirm-terms"></input>
+		<label for="confirm-terms">I agree to the <a href="#">Terms &amp; Conditions</a></label>
 	</div>
 
 </form>

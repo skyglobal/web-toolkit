@@ -59,6 +59,10 @@ blockquote {
   font-family: Helvetica;
 }
 
+b, strong {
+  font-family: SkyTextMedium, $font-family;
+}
+
 .error {
   color: $red;
 }

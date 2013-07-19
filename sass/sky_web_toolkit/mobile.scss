@@ -1,0 +1,28 @@
+.skycom-mobile {
+	.row > label {
+		float: none;
+		text-align: left;
+	}
+
+	legend {
+		width: 100%;
+		text-align: left;
+		margin-bottom: 10px;
+	}
+
+	input[type="text"] {
+		width: 100%;
+	}
+
+	.select {
+		display: block;
+	}
+
+	.btn { 
+		margin-top: 20px;
+	}
+
+	.no-label {
+		margin: 0;
+	}
+}

@@ -1,9 +1,5 @@
 .row {
   margin: 0 0 24px 0;
-
-  &:last-child {
-    margin: 0;
-  }
 }
 
 .required:after {
@@ -15,35 +11,49 @@ form {
   // background-color: yellow;
 }
 
+select, input[type="text"] {
+  @include box-sizing(border-box);
+  width: 221px;
+}
 
-// this is the attempt to alter the styling of a select, very difficult :(
-// select {
-//   @include appearance(none);
-//   border: none;
-//   background-color: #fff;
-//   outline: none;
-//   font-size: 16px;
-//   padding: 0.4em 2em 0.4em 0.8em;
+.select {
+  position: relative;
+  display: inline-block;
+  border: 1px solid #999;
+  border-radius: 5px;
 
-//   &:after {
-//     content: "▼";
-//         position: absolute;
-//         top: 0;
-//         right: 0;
-//         bottom: 0;
-//         font-size: 60%;
-//         line-height: 30px;
-//         padding: 0 7px;
-//         background: #bbb;
-//         color: white;
-        
-//         pointer-events:none;
-        
-//         -webkit-border-radius: 0 6px 6px 0;
-//         -moz-border-radius: 0 6px 6px 0;
-//         border-radius: 0 6px 6px 0;
-//   }
-// }
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: window;
+    
+    outline: none;
+    background: none;
+    border: none;
+    font-size: 16px;
+    padding: 0 10px;
+    line-height: 32px;
+  }
+
+  &:after {
+    content: ">";
+    @include transform(rotate(90deg));
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0 10px;
+    color: #0070a5;
+    font-size: 1em;
+    line-height: 2em;
+    background-color: red;
+    pointer-events: none;
+    border-radius: 5px 5px 0 0;
+  }
+}
+
+form > .row > label {
+  line-height: 32px;
+}
 
 form > .row > label, legend {
   @include box-sizing(border-box);
@@ -53,6 +63,7 @@ form > .row > label, legend {
   padding-right: 20px;
 }
 
+
 .no-label {
   margin-left: 24%;
   label {
@@ -60,16 +71,17 @@ form > .row > label, legend {
   }
 }
 
-input[type="text"] {
+input[type="text"] { 
+  @include box-sizing(border-box);
+  height: 2em;
   font-family: SkyTextRegular;
-  font-size: 20px;
-  max-width: 280px;
+  font-size: 16px;
+  width: 221px;
   margin: 0;
   border-radius: 5px;
-  padding: 5px 7px;
+  padding: 0 10px;
   border: 1px solid #999;
   outline: none;
-  border: 1px solid #999;
 
   &:focus {
     @include single-box-shadow(#0094ff, 0, 0, 2px, 0px, 0);
@@ -89,11 +101,14 @@ fieldset {
 
 .radiocheck {
   float: left;
+  
   label {
     display: inline-block;
     margin-bottom: 5px;
   }
+
 }
+
 
 
 
