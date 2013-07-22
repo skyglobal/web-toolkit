@@ -1,19 +1,27 @@
 define('wiki', [
     'modules/tabs',
-    'modules/tracking'
+    'modules/carousel'
+//    , 'modules/tracking'
 ],
 
-    function(tabs, tracking) {
+    function(tabs, carousel, tracking) {
 
-        tracking({
-            site: "skytoolkit",
-            section: "wiki",
-            headline: "",
-            contentType: "home",
-            contentId: "",
-            account: "",
-            mpaccount: ""
+
+        $('#hero').skycom_carousel({
+            carousel: {
+                autoplay: true
+            }
         });
+
+//        tracking({
+//            site: "skytoolkit",
+//            section: "wiki",
+//            headline: "",
+//            contentType: "home",
+//            contentId: "",
+//            account: "",
+//            mpaccount: ""
+//        });
 
     }
 );
