@@ -1,5 +1,5 @@
-a {
-  color: #0070a5 !important; // don't like having to override this - due to masthead
+body a {
+  color: #0070a5;
 
   &.chevron:before {
 	content: "> ";
