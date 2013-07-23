@@ -8,6 +8,10 @@
   border: none;
   background-color: #0073c5;
   color: #ffffff;
+  display: inline-block;
+  line-height: 2em;
+  box-sizing:border-box;
+  cursor: pointer;
 
   &:before {
     @include transition(opacity .25s);
@@ -40,6 +44,10 @@
       @include background(linear-gradient(top, rgba(255,255,255,1), rgba(255,255,255, 0)));
     }
   }
+}
+
+a.btn.secondary{
+  color: #333 !important;
 }
 
 // .btn {
