@@ -7,49 +7,18 @@
   color: $red;
 }
 
-form {
-  // background-color: yellow;
-}
-
 select, input[type="text"] {
   @include box-sizing(border-box);
   width: 221px;
 }
 
-.select {
-  position: relative;
-  display: inline-block;
-  border: 1px solid #999;
-  border-radius: 5px;
-
   select {
-    -webkit-appearance: none;
-    -moz-appearance: window;
-    
-    outline: none;
-    background: none;
-    border: none;
-    font-size: 16px;
-    padding: 0 10px;
-    line-height: 32px;
+    border: 1px solid #c7c7c7;
+    border-radius: 5px;
+    color: #3c3c3c;
+    height: 2em;
+    font: 16px/1em $font-family;
   }
-
-  &:after {
-    content: ">";
-    @include transform(rotate(90deg));
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    padding: 0 10px;
-    color: #0070a5;
-    font-size: 1em;
-    line-height: 2em;
-    background-color: red;
-    pointer-events: none;
-    border-radius: 5px 5px 0 0;
-  }
-}
 
 form > .row > label {
   line-height: 32px;
