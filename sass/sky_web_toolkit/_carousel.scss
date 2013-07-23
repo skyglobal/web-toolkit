@@ -1,6 +1,3 @@
-@import "compass/css3";
-@import "compass/typography";
-
 @function em($target, $context: 16) {
     @return ($target / $context) * 1em;
 }
@@ -173,7 +170,9 @@
     line-height: 2.5em;
     height: 2.5em; /* for IE7 where the above line-height: 2.5em doesn't work */
     //top: -2.5em; // also... if i removed this line, the indicators get shown in the right place with IE7... i think there are some CSS lines elsewhere that overrides this for other browsers *=
-    margin-bottom: -2.5em;
+
+    top:auto;
+    margin-bottom: 0;
     float:left;
     left: 50%;
 
@@ -307,6 +306,34 @@
       text-decoration: underline;
     }
   }
+
+  @media all and (max-width: 900px) {
+    .channel-logo{
+      margin-bottom: 4px;
+    }
+  }
+
+  @media all and (max-width: 767px) {
+    .poster{
+      min-height: 110px;
+    }
+  }
+
+  @media all and (max-width: 630px) {
+    h3 {
+      font-size: em(16);
+    }
+  }
+
+}
+
+.skycom-notouch .skycom-carousel a{
+  cursor: pointer;
+  &:hover {
+    h3, p {
+      text-decoration: underline;
+    }
+  }
 }
 
 .video-wrapper {
@@ -389,12 +416,6 @@
     h3{
       font-size: em(24);
     }
-  }
-  //@media all and (max-width: 768px) and (min-width: 600px)  {
-    .indicators{
-      margin-bottom: 0;
-      top:auto;
-    //}
   }
 
   @media all and (min-width: 768px) {
