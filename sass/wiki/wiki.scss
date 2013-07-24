@@ -10,19 +10,26 @@ small {
 	margin: 10px;
 }
 
-.quick-links {
-	position: fixed;
-	top: 0;
+body{
+  padding-top: 2em!important;
+
+  .quick-links {
+    z-index: 10;
+    height: 2em;
+    line-height: 2em;
+    position: fixed;
+    top: 0; left:0;
+    width:100%;
+    background-color: #e5e5e5;
+    ul{
+
+      li{
+        float: left;
+        margin: 0 20px 0 0;
+      }
+    }
+  }
 }
-
-.content {
-	margin-left: 14.03509% !important;
-}
-
-// a {
-// 	display: block;
-// }
-
 
 .smash-img {
 	background-image: url("../images/smash.jpg");
@@ -36,25 +43,6 @@ small {
 	margin-bottom: 10px;
 }
 
-.skycom-mobile {
-
-	.content {
-		margin-left: 0 !important;
-	}
-
-	.quick-links {
-		display: none;
-	}
-
-}
-
-
-ul.nav-pills{
-	background-color: #e5e5e5;
-	width: 100px;
-	padding: 10px;
-	margin-top: 10px;
-}
 
 
 
