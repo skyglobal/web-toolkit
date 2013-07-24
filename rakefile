@@ -55,4 +55,12 @@ task :deploy_new_version do
 
   puts "Deployed following resources:"
   (doc_resources).each{|resource|puts resource.public_url.to_s}
+
+  puts 'setting content type'
+  doc_resources.each do |resource|
+    resource.content_type = 'text/css' if resource.key.include?('.css')
+    resource.content_type = 'text/javascript' if resource.key.include?('.js')
+    resource.store
+  end
+
 end
