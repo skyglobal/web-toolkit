@@ -425,7 +425,6 @@
 
   @media all and (max-width: 768px) {
     .play {
-      bottom: 5px;
       position: relative;
     }
   }
@@ -517,10 +516,9 @@
 
 
 /* Hero ratio 3:1 */
-.skycom-carousel .hero-3-1 {
-  .poster,
-  .poster img{
-    min-height: 190px;
+.skycom-carousel.hero-3-1 {
+  .poster{
+    min-height: 240px;
   }
 
   .channel-logo {
@@ -532,12 +530,6 @@
   @media all and (max-width: 767px) {
     .poster{
       min-height: 110px;
-    }
-  }
-
-  @media all and (min-width: 768px) {
-    .poster{
-      min-height: 240px;
     }
   }
 }
