@@ -55,7 +55,7 @@ task :deploy_new_version do
         content_type = 'image/jpeg'
     end
     
-  S3Object.store(
+  s3.store(
     "v#{latest_version_number}/#{file}",
     open(file),
     'prod-sky-web-toolkit',
