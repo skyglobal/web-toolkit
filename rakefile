@@ -46,7 +46,7 @@ task :deploy_new_version do
   puts 'Uploading doc files'
   files_to_upload.each do |file|
 
-    case file.extname
+    case File.extname(file)
       when '.js' 
         content_type = 'text/javascript'
       when '.css'
