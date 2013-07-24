@@ -23,6 +23,18 @@ def files_to_upload
   files = files + Dir.glob("js/utils/**/*.*") + Dir.glob("js/modules/**/*.*")
 end
 
+def content_type(file)
+    case File.extname(file)
+      when '.js' 
+        content_type = 'text/javascript'
+      when '.css'
+        content_type = 'text/css'
+      else
+        content_type = 'image/jpeg'
+    end
+    content_type
+end
+
 task :html_example do
   html = ""
   files_to_upload.each do |file|
@@ -44,19 +56,12 @@ task :deploy_new_version do
     next
   end
 
-    case File.extname(file)
-      when '.js' 
-        content_type = 'text/javascript'
-      when '.css'
-        content_type = 'text/css'
-      else
-        content_type = 'image/jpeg'
-    end
+
 
   doc_resources = []
   puts 'Uploading doc files'
   files_to_upload.each do |file|
-    doc_resources << bucket.objects["v#{latest_version_number}/#{file}"].write(File.open(file).read, content_type: content_type, acl: :public_read ) 
+    doc_resources << bucket.objects["v#{latest_version_number}/#{file}"].write(File.open(file).read, content_type: content_type(file), acl: :public_read ) 
   end
 
 end
