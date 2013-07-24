@@ -47,20 +47,23 @@ task :deploy_new_version do
   doc_resources = []
   puts 'Uploading doc files'
   files_to_upload.each do |file|
-    doc_resources << bucket.objects["v#{latest_version_number}/#{file}"].write(File.open(file).read) 
+
+  if resource.key.include?('.js') 
+    content_type = 'text/javascript'
+  elsif resource.key.include?('.css')
+    content_type = 'text/css'
+  else
+    content_type = 'image/jpeg'
   end
+    
+  S3Object.store(
+    "v#{latest_version_number}/#{file}",
+    open(file),
+    'prod-sky-web-toolkit',
+    content_type: content_type,
+    access: :public_read
+  )
 
-  puts 'Giving public read access'
-  (doc_resources).each{|resource|resource.acl = :public_read}
-
-  puts "Deployed following resources:"
-  (doc_resources).each{|resource|puts resource.public_url.to_s}
-
-  puts 'setting content type'
-  doc_resources.each do |resource|
-    resource.content_type = 'text/css' if resource.key.include?('.css')
-    resource.content_type = 'text/javascript' if resource.key.include?('.js')
-    resource.store
   end
 
 end
