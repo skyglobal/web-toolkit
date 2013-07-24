@@ -10,19 +10,6 @@
   overflow: hidden;
   position:relative;
 
-  &.showing-tandcs{
-    .terms-action,
-    .content,
-    .actions,
-    .indicators{
-      display: none;
-    }
-    .terms-and-conditions{
-      @include opacity(1);
-      padding-top: 50px;
-      padding-bottom: 50px;
-    }
-  }
   &:hover .actions {
     .over {
       @include opacity(0.3);
@@ -77,6 +64,7 @@
       float: left;
     }
   }
+
   .dark-scheme {
     color: #fff;
     a {
@@ -89,6 +77,7 @@
       filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#b3000000', endColorstr='#00000000',GradientType=1);
     }
   }
+
   .light-scheme {
     color: #333;
     a {
@@ -101,6 +90,7 @@
       filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#b3ffffff', endColorstr='#00ffffff',GradientType=1);
     }
   }
+
   .shade{
     display: none;
     height: 100%;
@@ -110,14 +100,16 @@
     left: 0;
     z-index: 1;
   }
+
   .poster,
   .poster img{
     width:100%;
-    min-height: 190px;
     display: block;
     z-index: -1;
   }
+
   .actions {
+    z-index: 3;
     a{
       position: absolute;
       color: #333;
@@ -140,6 +132,7 @@
       height: 100%;
       top: 0;
       width: 50px;
+      z-index: 3;
       span {
         position: absolute;
         top: 50%;
@@ -168,13 +161,12 @@
   .indicators {
     position: relative;
     line-height: 2.5em;
-    height: 2.5em; /* for IE7 where the above line-height: 2.5em doesn't work */
-    //top: -2.5em; // also... if i removed this line, the indicators get shown in the right place with IE7... i think there are some CSS lines elsewhere that overrides this for other browsers *=
-
+    height: 2.5em;
     top:auto;
     margin-bottom: 0;
     float:left;
     left: 50%;
+    z-index: 3;
 
     .container{
       cursor: default;
@@ -206,9 +198,9 @@
   }
 
   h3 {
+    margin: 0 0 1px 0;
     font-size: em(36);
     line-height: em(40,36);
-    margin: 0 0 1px 0;
   }
 
   p {
@@ -216,77 +208,6 @@
     font-size: em(16);
     line-height: em(20,16);
     font-family: skytextmedium;
-  }
-
-  .terms-and-conditions {
-    @include single-transition(opacity, .2s, linear);
-    @include opacity(0);
-    height: 0;
-    padding: 0;
-    overflow: hidden;
-    cursor: default;
-    background: #000;
-    background: rgba(0,0,0,0.5);
-    z-index: 2;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    box-sizing: border-box;
-
-    .content{
-      display: block;
-      position: relative;
-      height: 100%;
-      padding-bottom: 68px;
-      box-sizing: border-box;
-    }
-    .t-and-c-overflow{
-      max-height: 100%;
-      overflow: auto;
-    }
-  }
-  .terms-action {
-    @include background-image(linear-gradient(rgba(0,0,0,0) 0%,rgba(0,0,0,0.5) 31%,rgba(0,0,0,0.6) 54%));
-    display:block;
-    width:100%;
-    text-align: right;
-    box-sizing: border-box;
-    cursor: default;
-    top: auto;
-    left: auto;
-    bottom: 0;
-    right: 0;
-    padding-bottom: 11px;
-    a{
-      color:#fff;
-    }
-  }
-  .video-overlay {
-    background:#000;
-    display:none;
-    height:100%;
-    width:100%;
-    left:0;
-    top:0;
-    position:absolute;
-    z-index: 2;
-  }
-
-  .actions,
-  .actions .previous,
-  .actions .next,
-  .indicators {
-    z-index: 3;
-  }
-
-  .channel-logo {
-    @include inline-block;
-    margin-bottom: 6px;
-    z-index: 0;
-    position: relative;
-    max-height: 34px;
-    max-width: 180px;
   }
 
   figure{
@@ -300,20 +221,58 @@
     max-width: 100%;
     box-sizing: border-box;
     z-index: 2;
-    @include transform(translateZ(0)); //to stop the text flashing on hover on safari
+    @include transform(translateZ(0)); /*to stop the text flashing on hover on safari*/
 
     a.hover {
       text-decoration: underline;
     }
   }
 
+  .channel-logo {
+    @include inline-block;
+    position: relative;
+    z-index: 0;
+    margin-bottom: 6px;
+  }
+
+  .video-overlay {
+    background:#000;
+    display:none;
+    height:100%;
+    width:100%;
+    left:0;
+    top:0;
+    position:absolute;
+    z-index: 2;
+  }
+
   @media all and (max-width: 900px) {
     .channel-logo{
       margin-bottom: 4px;
     }
+    h3{
+      font-size: em(24);
+    }
   }
 
-  @media all and (max-width: 767px) {
+  @media all and (max-width: 768px) {
+    .channel-logo{
+      max-height: 26px;
+      max-width: 140px;
+    }
+    .indicators{
+      background: none;
+      .active {
+        border-width: 0px;
+        width: 10px;
+        height: 10px;
+      }
+    }
+    .actions{
+      a{
+        color: #333;
+      }
+    }
     .poster{
       min-height: 110px;
     }
@@ -325,6 +284,75 @@
     }
   }
 
+
+  @media all and (max-width: 600px) {
+    h3 {
+      font-family: SkyTextMedium;
+    }
+    .shade{
+      display: none!important;
+    }
+    .content{
+      position: relative;
+    }
+    .skycom-carousel-container > *,
+    .skycom-carousel-container a,
+    .actions a{
+      color: #333!important;
+    }
+    .skycom_5{
+      width: 100%;
+    }
+    .skycom-ellipsis{
+      white-space: normal;
+    }
+    .actions{
+      width:100%;
+      a{
+        position: relative;
+        display: block;
+      }
+      .next,
+      .previous{
+        position: absolute;
+        height: 75px;
+        top:-37px;
+        margin-top:16%;
+        margin-top:16vw;
+      }
+      .previous{
+        float: left;
+      }
+      .next{
+        float: right;
+      }
+    }
+    .skycom-carousel-container > *{
+      margin-bottom:1.5em;
+    }
+    figcaption.content{
+      padding-bottom:0;
+    }
+    .indicators{
+      background: none;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      height:1.5em;
+      line-height:1.5em;
+      .container{
+        width:100%;
+      }
+      z-index: 1;
+    }
+  }
+  @media all and (max-width: 319px) {
+    .actions .next,
+    .actions .previous {
+      margin-top: 50px;
+    }
+  }
 }
 
 .skycom-notouch .skycom-carousel a{
@@ -394,141 +422,15 @@
   .posterFrame {
     background:#000;
   }
-}
 
-.cta-group > a,
-.cta-group > div {
-  @include inline-block;
-  margin:0 20px 20px 0;
-
-  .cta-icon{
-    margin-right: 10px;
-  }
-}
-
-.cta-group > div {
-  margin-right: 10px; //remote record widget is a little wider than the content so need less margin
-}
-
-.skycom-carousel{
-
-  @media all and (max-width: 900px) {
-    h3{
-      font-size: em(24);
-    }
-  }
-
-  @media all and (min-width: 768px) {
-    .terms-action{
-      padding-right: 130px;
-    }
-    .poster{
-      min-height: 240px;
-    }
-  }
   @media all and (max-width: 768px) {
-    .channel-logo{
-      max-height: 26px;
-      max-width: 140px;
-    }
-    .indicators{
-      background: none;
-      .active {
-        border-width: 0px;
-        width: 10px;
-        height: 10px;
-      }
-    }
-    .actions{
-      a{
-        color: #333;
-      }
-    }
-    .poster{
-      min-height: 110px;
-    }
-  }
-
-  @media all and (max-width: 600px) {
-    .figure{
-      position: relative;
-    }
-    h3 {
-      font-family: SkyTextMedium;
-    }
-    .shade{
-      display: none!important;
-    }
-    .content{
-      position: relative;
-    }
-    .skycom-carousel-container > *,
-    .skycom-carousel-container a,
-    .actions a{
-      color: #333!important;
-    }
-    .skycom_5{
-      width: 100%;
-    }
-    .skycom-ellipsis{
-      white-space: normal;
-    }
-    .terms-action{
-      background: none;
-    }
-    .actions{
-      width:100%;
-      a{
-        position: relative;
-        display: block;
-      }
-      .next,
-      .previous{
-        position: absolute;
-        height: 75px;
-        top:-37px;
-        margin-top:16%;
-        margin-top:16vw;
-      }
-      .previous{
-        float: left;
-      }
-      .next{
-        float: right;
-      }
-    }
-    .hero-tile{
-      margin-bottom:1.5em;
-    }
-    figcaption.content{
-      padding-bottom:0;
-    }
-    .indicators{
-      background: none;
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      text-align: center;
-      height:1.5em;
-      line-height:1.5em;
-      .container{
-        width:100%;
-      }
-      z-index: 1;
-    }
-  }
-}
-
-@media all and (max-width: 768px) {
-  .video-wrapper {
     .play {
       bottom: 5px;
       position: relative;
     }
   }
-}
-@media all and (max-width: 600px) {
-  .video-wrapper {
+
+  @media all and (max-width: 600px) {
     width: inherit;
     margin-top: 32%;
     margin-top: 32vw;
@@ -549,38 +451,24 @@
       }
     }
   }
-}
-@media all and (max-width: 319px) {
-  .video-wrapper {
-    margin-top: 100px;
+  @media all and (max-width: 319px) {
+      margin-top: 100px;
   }
+}
 
-  .skycom-carousel .actions {
-    .next,
-    .previous {
-      margin-top: 50px;
-    }
-  }
-}
+
 
 .skycom-notouch {
   .video-wrapper .play{
     left:50px;
   }
   @media all and (min-width: 600px) {
-    .skycom-carousel .terms-action{
-      padding-right: 50px;
-    }
     .skycom-carousel .content{
       padding-left:50px;
     }
   }
-  @media all and (min-width: 768px) {
-    .skycom-carousel .terms-action{
-      padding-right: 130px;
-    }
-  }
 }
+
 .skycom-touch {
   .video-wrapper .play{
     left:5px;
@@ -588,25 +476,22 @@
 }
 .lt-ie10{
   .skycom-carousel .shade {
-    width: 66%; //filter goes across whole tile, so stop it a little bit before
+    width: 66%; /* filter goes across whole slide, so stop it a little bit before */
   }
 }
 .lt-ie9{
-  .skycom-carousel .terms-action{
-    padding-right: 50px;
-  }
   .skycom-carousel .content{
-    padding-left:50px;
+      padding-left:50px;
   }
-  .skycom-carousel .video-wrapper .play{
-    display: block; float:right; padding-left:5px; line-height:3em;
+  .video-wrapper .play{
+      display: block; float:right; padding-left:5px; line-height:3em;
   }
 }
 .lt-ie8{
+  .video-wrapper .play span{
+    position:relative; top:-20px; padding: 15px; left:-5px;
+  }
   .skycom-carousel {
-    .video-wrapper .play span{
-      position:relative; top:-20px; padding: 15px; left:-5px;
-    }
     .actions .play,
     .actions .pause{
       bottom:12px;
@@ -621,6 +506,38 @@
           margin-top:12px;
         }
       }
+    }
+  }
+}
+
+
+
+
+
+
+
+/* Hero ratio 3:1 */
+.skycom-carousel .hero-3-1 {
+  .poster,
+  .poster img{
+    min-height: 190px;
+  }
+
+  .channel-logo {
+    max-height: 34px;
+    max-width: 180px;
+  }
+
+
+  @media all and (max-width: 767px) {
+    .poster{
+      min-height: 110px;
+    }
+  }
+
+  @media all and (min-width: 768px) {
+    .poster{
+      min-height: 240px;
     }
   }
 }
