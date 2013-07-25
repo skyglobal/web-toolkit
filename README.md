@@ -10,10 +10,10 @@ See the [reference page](http://skyglobal.github.io/web-toolkit/) for a descript
 
 ## Using the Toolkit
 ### CSS
-- "//web-toolkit.global.sky.com/[version-number]/stylesheets/sky_web_toolkit.css"
+"//web-toolkit.global.sky.com/version-number/stylesheets/sky_web_toolkit.css"
 
 ### JS
-- "//web-toolkit.global.sky.com/[version-number]/js/toolkit.js"
+"//web-toolkit.global.sky.com/version-number/js/toolkit.js"
 
 ## Wiki
 [You can contribute to the wiki!!!](https://github.com/bskyb-commerce/bskyb-commerce.github.io/wiki)
