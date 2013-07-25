@@ -10,10 +10,9 @@ See the [reference page](http://skyglobal.github.io/web-toolkit/) for a descript
 
 ## Using the Toolkit
 ### CSS
-Include the stylesheet in your head tag
 - "//web-toolkit.global.sky.com/<version-number>/stylesheets/sky_web_toolkit.css"
+
 ### JS
-Include javascript at the foot of your page
 - "//web-toolkit.global.sky.com/<version-number>/js/toolkit.js"
 
 ## Wiki
