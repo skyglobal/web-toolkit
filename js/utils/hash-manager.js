@@ -14,41 +14,44 @@ toolkit['hash-manager'] = function() {
     };
 
     function bindEvents() {
-        $(window).on('hashchange load', onHashChange);
+        $(window).on('hashchange', onHashChange);
+        var hashChangeSupport = 'onhashchange' in window;
+        if (!hashChangeSupport){ //IE7 support
+            vars.hash = document.location.hash;
+            setInterval(function(){
+                if (document.location.hash !== vars.hash){
+                    onHashChange(document.location.hash);
+                }
+            },200);
+        }
         vars.windowLoaded = true;
     }
 
-    function onHashChange(e) {
-        var evt = vars.globalHashList[location.hash];
+    function onHashChange(hash) {
+        hash = cleanHash((typeof hash === 'string') ? hash : location.hash);
+        var evt = vars.globalHashList[hash];
         if (!evt) { return; }
-
-        evt.callback(location.hash);
+        evt.callback(hash);
     }
 
-    function remove(scroll) {
+    function remove() {
         var loc = window.location;
         if ("pushState" in history) {
+            location.hash = '!';
             history.pushState("", document.title, loc.pathname + loc.search);
         } else {
-            loc.hash = "";
-            if (!scroll){
-                scroll = {
-                    top: document.body.scrollTop,
-                    left: document.body.scrollLeft
-                };
-            }
-            window.scrollTo(scroll.left, scroll.top);
+            location.hash = '!';
         }
     }
 
-    function change(newHash){
-        location.hash = newHash;
+    function change(hash){
+        location.hash = '!' + hash;
     }
 
     function register(hashList, callback){
         var globalHashList = vars.globalHashList;
-        $(hashList).each(function(){
-            var hash = (this.indexOf('#') === 0) ? this : '#' + this;
+        $(hashList).each(function(i, hash) {
+            hash = cleanHash(hash);
             if (globalHashList[hash]){
                 var err = 'hashManager: hash (' + hash + ') already exists';
                 throw new Error(err);
@@ -57,11 +60,14 @@ toolkit['hash-manager'] = function() {
                 callback: callback
             };
 
-            if(vars.windowLoaded && hash==location.hash){
+            if (vars.windowLoaded && hash === cleanHash(location.hash)) {
                 callback(hash);
             }
         });
+    }
 
+    function cleanHash(hash) {
+        return hash.replace(/[#!]/g, '');
     }
 
     bindEvents();
@@ -70,7 +76,8 @@ toolkit['hash-manager'] = function() {
         register: register,
         change: change,
         remove: remove,
-        onHashChange: onHashChange
+        onHashChange: onHashChange,
+        cleanHash: cleanHash
     };
 };
 
