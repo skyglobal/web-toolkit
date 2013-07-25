@@ -10,11 +10,11 @@ See the [reference page](http://skyglobal.github.io/web-toolkit/) for a descript
 
 ## Using the Toolkit
 ### CSS
-Include the relevant files in your head tag
-- <link rel="stylesheet" href="//web-toolkit.global.sky.com/<version-number>/stylesheets/sky_web_toolkit.css"/>
+Include the stylesheet in your head tag
+- "//web-toolkit.global.sky.com/<version-number>/stylesheets/sky_web_toolkit.css"
 ### JS
-Include this at the foot of your page
-- <script src="//web-toolkit.global.sky.com/<version-number>/js/toolkit.js"/>
+Include javascript at the foot of your page
+- "//web-toolkit.global.sky.com/<version-number>/js/toolkit.js"
 
 ## Wiki
 [You can contribute to the wiki!!!](https://github.com/bskyb-commerce/bskyb-commerce.github.io/wiki)
@@ -29,9 +29,7 @@ Include this at the foot of your page
 
 ### Setup
 1. Clone the repository from Github onto your local machine
-2. Create a gemset (not required)
-  - rvm --rvmrc --create default@<gemset name>
-3. Install npm
+2. Install npm
   - echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bashrc
   - . ~/.bashrc
   - mkdir /usr/local
