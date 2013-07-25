@@ -14,7 +14,7 @@ define('wiki', [
         });
 
 //        tracking({
-//            site: "skytoolkit",
+//            site: "toolkit",
 //            section: "wiki",
 //            headline: "",
 //            contentType: "home",

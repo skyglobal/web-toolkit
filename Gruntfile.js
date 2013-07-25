@@ -4,7 +4,7 @@ module.exports = function(grunt) {
         watch: {
             'toolkit': {
                 files: [ 'js/modules/*.js',
-                         'js/lib/*.js',
+                         'js/utils/*.js',
                          'sass/**/*.scss'
                 ],
                 tasks: ['compass','jshint','uglify']
@@ -51,7 +51,7 @@ module.exports = function(grunt) {
                 files: {
                     'js/toolkit.js': [
                         'js/modules/*.js',
-                        'lib/utils/*.js'
+                        'js/utils/*.js'
                     ]
                 }
             }

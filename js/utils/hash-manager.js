@@ -4,8 +4,8 @@
  this will execute the associated callback with that hash.
  no onclick events needed.
  **/
-if (typeof skytoolkit==='undefined') skytoolkit={};
-skytoolkit['hash-manager'] = function() {
+if (typeof toolkit==='undefined') toolkit={};
+toolkit['hash-manager'] = function() {
 
     var vars = {
         globalHashList: {},
@@ -74,12 +74,11 @@ skytoolkit['hash-manager'] = function() {
     };
 };
 
-
 if (typeof window.define === "function" && window.define.amd) {
     window.define('utils/hash-manager', [], function() {
-        skytoolkit['hash-manager'] = skytoolkit['hash-manager']();
-        return skytoolkit['hash-manager'];
+        toolkit['hash-manager'] = toolkit['hash-manager']();
+        return toolkit['hash-manager'];
     });
 } else {
-    skytoolkit['hash-manager'] = skytoolkit['hash-manager']();
+    toolkit['hash-manager'] = toolkit['hash-manager']();
 }
