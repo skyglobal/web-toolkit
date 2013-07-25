@@ -5,7 +5,7 @@
  no onclick events needed.
 **/
 if (typeof skytoolkit==='undefined') skytoolkit={};
-skytoolkit['tabs'] = function(hash) {
+skytoolkit.tabs = function(hash) {
 
     var $el = {
         tabContainer: $('section[data-function=tabs]'),
@@ -14,7 +14,7 @@ skytoolkit['tabs'] = function(hash) {
     };
     var vars = {
         rememberState : $el.tabContainer.attr('data-remember-state')==='true'
-    }
+    };
 
     function bindEvents() {
         if (vars.rememberState){
@@ -53,9 +53,9 @@ skytoolkit['tabs'] = function(hash) {
 
 if (typeof window.define === "function" && window.define.amd) {
     window.define('modules/tabs', ['utils/hash-manager'], function(hash) {
-        skytoolkit['tabs'] = skytoolkit['tabs'](hash);
-        return skytoolkit['tabs'];
+        skytoolkit.tabs = skytoolkit.tabs(hash);
+        return skytoolkit.tabs;
     });
 } else {
-    skytoolkit['tabs'] = skytoolkit['tabs'](skytoolkit['hash-manager']);
-};
+    skytoolkit.tabs = skytoolkit.tabs(skytoolkit.hash-manager);
+}

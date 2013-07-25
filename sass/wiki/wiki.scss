@@ -2,12 +2,18 @@ section.section {
 	border-top: 1px solid #000;
 }
 
-small {
+.block {
 	display: block;
 }
 
 .m {
 	margin: 10px;
+}
+
+.wiki-header {
+  small {
+    color: #999;
+  }
 }
 
 body{

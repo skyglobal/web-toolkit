@@ -10,7 +10,7 @@ def bucket
 end
 
 def latest_version_number
-  $latest_version_number ||= File.open('versionfile').read.strip
+  $latest_version_number ||= File.open('_config.yml').read.strip.gsub("version: ", "")
 end
 
 def version_already_exists?
@@ -35,16 +35,6 @@ def content_type(file)
     content_type
 end
 
-task :html_example do
-  html = ""
-  files_to_upload.each do |file|
-    html << CGI::escapeHTML(%{<script type="text/javascript" src="//web-toolkit.global.sky.com/v#{latest_version_number}/#{file}"/>}) + '<br/>' if file.include? ".js"
-    html << CGI::escapeHTML(%{<link rel="stylesheet" href="//web-toolkit.global.sky.com/v#{latest_version_number}/#{file}"/>}) + '<br/>' if file.include? ".css"    
-  end
-  File.open('_includes/include.html', 'w') {|f| f.write(html) }
-
-end
-
 desc 'Deploys a new version to the CDN'
 task :deploy_new_version do
 
@@ -61,7 +51,7 @@ task :deploy_new_version do
   doc_resources = []
   puts 'Uploading doc files'
   files_to_upload.each do |file|
-    doc_resources << bucket.objects["v#{latest_version_number}/#{file}"].write(File.open(file).read, content_type: content_type(file), acl: :public_read ) 
+    doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, content_type: content_type(file), acl: :public_read )
   end
 
 end
