@@ -176,13 +176,13 @@
     .container > * {
       @include border-radius(5px);
       @include inline-block;
-      background:#999;
+      background:#bbb;
       cursor:pointer;
       height:10px;
       width:10px;
       margin:5px;
       &:hover {
-        background: #fff;
+        background: #777;
       }
     }
     .active {
