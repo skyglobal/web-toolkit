@@ -82,4 +82,4 @@ if (typeof window.define === "function" && window.define.amd) {
     });
 } else {
     skytoolkit['hash-manager'] = skytoolkit['hash-manager']();
-};
+}

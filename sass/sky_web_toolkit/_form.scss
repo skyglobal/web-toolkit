@@ -53,7 +53,7 @@ input[type="text"] {
   outline: none;
 
   &:focus {
-    @include single-box-shadow(#0094ff, 0, 0, 2px, 0px, 0);
+    @include single-box-shadow(#0094ff, 0, 0, 2px, 0px);
     border: 1px solid #0094ff;
   }
 }
@@ -88,7 +88,7 @@ fieldset {
 // }
 // .sky-form{
 //   .required-indicator span, .row label span {
-//     color: #c00; 
+//     color: #c00;
 //   }
 
 
@@ -195,6 +195,5 @@ fieldset {
 //   }
 //   .error { font-size: 14px; line-height: 13px; }
 
-      
 //   }
 // }
