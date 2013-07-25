@@ -1,4 +1,4 @@
-Sky Global Web Toolkit
+Web Toolkit
 ========================
 
 Look and feel for sky.com
