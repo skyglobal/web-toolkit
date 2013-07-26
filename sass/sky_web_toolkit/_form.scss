@@ -8,7 +8,8 @@
     color: $red;
   }
 
-  select, input[type="text"] {
+  select,
+  input[type="text"] {
     @include box-sizing(border-box);
     width: 221px;
   }
@@ -21,11 +22,12 @@
     font: 16px/1em $font-family;
   }
 
-  form > .row > label {
+  .row > label {
     line-height: 32px;
   }
 
-  form > .row > label, legend {
+  .row > label,
+  legend {
     @include box-sizing(border-box);
     float: left;
     text-align: right;
@@ -79,9 +81,6 @@
 
   }
 }
-
-
-
 
 
 
