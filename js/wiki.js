@@ -11,5 +11,4 @@ if (typeof window.define === "function" && window.define.amd) {
         'toolkit'], function() {
         return wiki;
     })
-
 }

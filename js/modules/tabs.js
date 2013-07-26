@@ -37,7 +37,7 @@ toolkit.tabs = (function(hash) {
 
     function changeTab(controlId){
         $el.tabTargets.add($el.tabs).removeClass("selected");
-        $('#' + controlId + '-tab').add($(controlId))
+        $('#' + controlId + '-tab').add($("#" + controlId))
             .addClass('selected');
     }
 
