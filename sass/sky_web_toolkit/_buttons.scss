@@ -17,6 +17,8 @@
     @include transition(opacity .25s);
     @include border-radius(0 0 20px 20px);
     @include background(linear-gradient(top, rgba(255,255,255,0.4), rgba(255,255,255, 0)));
+    background: -ms-linear-gradient(top, rgba(255,255,255,0.4), rgba(255,255,255, 0));
+
     content:"";
     position: absolute;
     z-index: 1;
@@ -42,6 +44,7 @@
 
     &:before {
       @include background(linear-gradient(top, rgba(255,255,255,1), rgba(255,255,255, 0)));
+
     }
   }
 }

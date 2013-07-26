@@ -3,8 +3,7 @@ module.exports = function(grunt) {
     grunt.initConfig({
         watch: {
             'toolkit': {
-                files: [ 'js/modules/*.js',
-                         'js/utils/*.js',
+                files: [ 'js/**/*.js',
                          'sass/**/*.scss'
                 ],
                 tasks: ['compass','jshint','requirejs']

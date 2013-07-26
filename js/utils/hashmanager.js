@@ -81,7 +81,7 @@ toolkit.hashmanager = (function() {
     };
 }());
 
-if (typeof define === "function" && define.amd) {
+if (typeof window.define === "function" && window.define.amd) {
     define('utils/hashmanager', [], function() {
         return toolkit.hashmanager;
     });

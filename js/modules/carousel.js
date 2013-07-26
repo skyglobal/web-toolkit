@@ -1,4 +1,4 @@
-(function(window, $) {
+toolkit.carousel = (function(window, $) {
     'use strict';
 
     // get CSS3 capabilities
@@ -425,3 +425,9 @@
         });
     };
 }(window, jQuery));
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('modules/carousel', [], function() {
+        return toolkit.carousel;
+    });
+}
