@@ -5,7 +5,7 @@
  no onclick events needed.
 **/
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.tabs = function(hash) {
+toolkit.tabs = (function(hash) {
 
     var $el = {
         tabContainer: $('section[data-function=tabs]'),
@@ -37,7 +37,7 @@ toolkit.tabs = function(hash) {
 
     function changeTab(controlId){
         $el.tabTargets.add($el.tabs).removeClass("selected");
-        $(controlId + '-tab').add($(controlId))
+        $('#' + controlId + '-tab').add($(controlId))
             .addClass('selected');
     }
 
@@ -48,14 +48,11 @@ toolkit.tabs = function(hash) {
         changeTab: changeTab
     };
 
-};
+}(toolkit.hashmanager));
 
 
 if (typeof window.define === "function" && window.define.amd) {
-    window.define('modules/tabs', ['utils/hash-manager'], function(hash) {
-        toolkit.tabs = toolkit.tabs(hash);
+    define('modules/tabs', ['utils/hashmanager'], function() {
         return toolkit.tabs;
     });
-} else {
-    toolkit.tabs = toolkit.tabs(toolkit['hash-manager']);
 }

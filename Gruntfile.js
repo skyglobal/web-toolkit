@@ -7,11 +7,11 @@ module.exports = function(grunt) {
                          'js/utils/*.js',
                          'sass/**/*.scss'
                 ],
-                tasks: ['compass','jshint','uglify']
+                tasks: ['compass','jshint','requirejs']
             }
         },
         clean: {
-            toolkit: ['js/toolkit.*']
+            toolkit: ['scripts']
         },
         jshint: {
             toolkit: ['js/modules/*.js',
@@ -40,19 +40,21 @@ module.exports = function(grunt) {
                 }
             }
         },
-        uglify: {
+        requirejs:{
             toolkit: {
                 options: {
-                    sourceMap: 'js/toolkit.js.map',
-                    sourceMapRoot: '../',
-                    sourceMappingURL: 'toolkit.js.map',
-                    sourceMapPrefix: 1
-                },
-                files: {
-                    'js/toolkit.js': [
-                        'js/modules/*.js',
-                        'js/utils/*.js'
-                    ]
+                    optimize: grunt.option('beautify') ? "none" : "uglify2",
+                    preserveLicenseComments: false,
+                    baseUrl: "js",
+                    dir: "scripts",
+                    removeCombined: true,
+                    generateSourceMaps: true,
+                    modules:[{
+                        name: 'toolkit'
+                    },
+                    {
+                        name: 'wiki'
+                    }]
                 }
             }
         }
@@ -61,8 +63,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['clean', 'compass','jshint', 'uglify']);
+    grunt.registerTask('default', ['clean', 'compass','jshint', 'requirejs']);
     grunt.registerTask('hint', ['jshint']);
 };
