@@ -5,7 +5,7 @@
  no onclick events needed.
  **/
 if (typeof toolkit==='undefined') toolkit={};
-toolkit['hash-manager'] = function() {
+toolkit.hashmanager = (function() {
 
     var vars = {
         globalHashList: {},
@@ -79,13 +79,10 @@ toolkit['hash-manager'] = function() {
         onHashChange: onHashChange,
         cleanHash: cleanHash
     };
-};
+}());
 
-if (typeof window.define === "function" && window.define.amd) {
-    window.define('utils/hash-manager', [], function() {
-        toolkit['hash-manager'] = toolkit['hash-manager']();
-        return toolkit['hash-manager'];
+if (typeof define === "function" && define.amd) {
+    define('utils/hashmanager', [], function() {
+        return toolkit.hashmanager;
     });
-} else {
-    toolkit['hash-manager'] = toolkit['hash-manager']();
 }
