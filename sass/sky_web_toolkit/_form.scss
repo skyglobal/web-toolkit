@@ -1,16 +1,17 @@
-.row {
-  margin: 0 0 24px 0;
-}
+.sky-form{
+  .row {
+    margin: 0 0 24px 0;
+  }
 
-.required:after {
-  content: "*";
-  color: $red;
-}
+  .required:after {
+    content: "*";
+    color: $red;
+  }
 
-select, input[type="text"] {
-  @include box-sizing(border-box);
-  width: 221px;
-}
+  select, input[type="text"] {
+    @include box-sizing(border-box);
+    width: 221px;
+  }
 
   select {
     border: 1px solid #c7c7c7;
@@ -20,63 +21,65 @@ select, input[type="text"] {
     font: 16px/1em $font-family;
   }
 
-form > .row > label {
-  line-height: 32px;
-}
+  form > .row > label {
+    line-height: 32px;
+  }
 
-form > .row > label, legend {
-  @include box-sizing(border-box);
-  float: left;
-  text-align: right;
-  width: 24%;
-  padding-right: 20px;
-}
+  form > .row > label, legend {
+    @include box-sizing(border-box);
+    float: left;
+    text-align: right;
+    width: 24%;
+    padding-right: 20px;
+  }
 
 
-.no-label {
-  margin-left: 24%;
-  label {
-    float: none !important;
+  .no-label {
+    margin-left: 24%;
+    label {
+      float: none !important;
+    }
+  }
+
+  input[type="text"] {
+    @include box-sizing(border-box);
+    height: 2em;
+    font-family: SkyTextRegular;
+    font-size: 16px;
+    width: 221px;
+    margin: 0;
+    border-radius: 5px;
+    padding: 0 10px;
+    border: 1px solid #999;
+    outline: none;
+
+    &:focus {
+      @include single-box-shadow(#0094ff, 0, 0, 2px, 0px);
+      border: 1px solid #0094ff;
+    }
+  }
+
+  .date-picker input[type="text"] {
+    background-color: red;
+  }
+
+  fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .radiocheck {
+    float: left;
+
+    label {
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+
   }
 }
 
-input[type="text"] { 
-  @include box-sizing(border-box);
-  height: 2em;
-  font-family: SkyTextRegular;
-  font-size: 16px;
-  width: 221px;
-  margin: 0;
-  border-radius: 5px;
-  padding: 0 10px;
-  border: 1px solid #999;
-  outline: none;
-
-  &:focus {
-    @include single-box-shadow(#0094ff, 0, 0, 2px, 0px);
-    border: 1px solid #0094ff;
-  }
-}
-
-.date-picker input[type="text"] {
-  background-color: red;
-}
-
-fieldset {
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-
-.radiocheck {
-  float: left;
-  
-  label {
-    display: inline-block;
-    margin-bottom: 5px;
-  }
-
-}
 
 
 
