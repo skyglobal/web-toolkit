@@ -10,7 +10,8 @@ toolkit.hashmanager = (function() {
     var vars = {
         globalHashList: {},
         hasLoaded: false,
-        windowLoaded: false
+        windowLoaded: false,
+        lastExecutor: null
     };
 
     function bindEvents() {
@@ -28,10 +29,19 @@ toolkit.hashmanager = (function() {
     }
 
     function onHashChange(hash) {
+        var evt, fn;
         hash = cleanHash((typeof hash === 'string') ? hash : location.hash);
-        var evt = vars.globalHashList[hash];
-        if (!evt) { return; }
-        evt.callback(hash);
+        if (hash) {
+            evt = vars.globalHashList[hash];
+            fn = 'callback';
+            vars.lastExecutor = hash;
+        } else if (vars.lastExecutor) {
+            evt = vars.globalHashList[vars.lastExecutor];
+            fn = 'undo';
+        }
+        if (evt && typeof evt[fn] === 'function') {
+            evt[fn](hash);
+        }
     }
 
     function remove() {
@@ -48,7 +58,7 @@ toolkit.hashmanager = (function() {
         location.hash = '!' + hash;
     }
 
-    function register(hashList, callback){
+    function register(hashList, callback, undo){
         var globalHashList = vars.globalHashList;
         $(hashList).each(function(i, hash) {
             hash = cleanHash(hash);
@@ -57,11 +67,12 @@ toolkit.hashmanager = (function() {
                 throw new Error(err);
             }
             globalHashList[hash] = {
-                callback: callback
+                callback: callback,
+                undo: undo
             };
 
             if (vars.windowLoaded && hash === cleanHash(location.hash)) {
-                callback(hash);
+                onHashChange(hash);
             }
         });
     }
