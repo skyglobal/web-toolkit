@@ -1,22 +1,176 @@
 body {
-	font: 16px/1.5em $font-family;
+	font: 16px/1em $font-family;
+  color: #333333;
 }
 
-h1, 
-h2, 
-h3, 
-h4, 
-h5, 
-h6 {
-	font-weight: normal;
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
 }
 
-h1 {
-	font-size: 3em;
-	color: #333;
+h1.large {
+  font-size: 3.25em;
+  line-height: 1.076em;
+}
+
+h1 { 
+  font-size: 2.375em;
+  line-height: 1.053em;
 }
 
 h2 {
-	font-size: 2em;
-	color: #666;
+  font-size: 1.875em;
+  line-height: 1.067em
 }
+
+h3 {
+  font-size: 1.375em;
+  line-height: 1.091em;
+}
+
+p {
+  font-size: 1em;
+  line-height: 1.5em;
+}
+
+p.intro {
+  font-size: 1.25em;
+  line-height: 1.2em;
+}
+
+p.handwriting {
+  font-family: Luna,SkyTextRegular;
+  font-size: 1.875em;
+  line-height: 1.6em;
+}
+
+small {
+  font-size: 0.75em;
+  line-height: 1.33em;
+}
+
+small.legal {
+  font-size: 0.6875em;
+  line-height: 1em; // might be wrong
+  color: #666666;
+}
+
+blockquote {
+  margin: 10px;
+  font-family: Helvetica;
+}
+
+b, strong {
+  font-family: SkyTextMedium, $font-family;
+}
+
+.error {
+  color: $red;
+}
+
+.white {
+  color: #FFF !important;
+}
+
+.black {
+  color: #333 !important;
+}
+
+.medium {
+  font-family: SkyTextMedium, $font-family;
+}
+
+
+
+
+.skycom-mobile {
+  h1 {
+    font-size: 2em;
+    line-height: 1.25em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    line-height: 1.167em;
+  }
+
+  h3 {
+    font-size: 1.25em;
+    line-height: 1.2em;
+  }
+
+  p.intro {
+    font-size: 1.125em;
+    line-height: 1.333em;
+  }
+
+  p {
+    line-height: 1.25em;
+  }
+}
+
+// h1, h2, h3, h4, h5, h6 {
+//   margin: 0;
+// }
+
+// h1, 
+// h2, 
+// h3, 
+// h4, 
+// h5, 
+// h6 {
+// 	font-weight: normal;
+//   line-height: 1em;
+// }
+
+// h1, .page-title-bigger {
+// 	font-size: 3.25em;
+// }
+
+// .page-title-smaller {
+//   font-size: 2.375em; 
+// }
+
+// h2, .section-title {
+// 	font-size: 1.875em;
+// }
+
+// h3, .module-title {
+//   font-size: 1.375em;
+// }
+
+// a {
+//   color: #0070a5 !important;
+// }
+
+// p {
+//   color: #333;
+// }
+
+// .secondary {
+//   color: #666;
+// }
+
+// .error {
+//   color: #D21717;
+// }
+
+// .intro-copy{
+//   font-size: 1.25em;
+// }
+
+// .supportive-copy{
+//   font-family: Helvetica, Arial, sans-serif;
+//   font-size: 0.75em;
+// }
+
+// .legal-copy{
+//   font-family: Helvetica, Arial, sans-serif;
+//   font-size: 0.688em;
+// }
+
+// .instructional-copy {
+//   font-family: Luna,SkyTextRegular;
+//   font-size: 1.875em;
+//   line-height: 3em;
+// }
+

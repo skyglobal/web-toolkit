@@ -4,8 +4,8 @@
  Works based registering the tabs 'hash' with the changeTab function.
  no onclick events needed.
 **/
-if (typeof skytoolkit==='undefined') skytoolkit={};
-skytoolkit['tabs'] = function(hash) {
+if (typeof toolkit==='undefined') toolkit={};
+toolkit.tabs = (function(hash) {
 
     var $el = {
         tabContainer: $('section[data-function=tabs]'),
@@ -14,7 +14,7 @@ skytoolkit['tabs'] = function(hash) {
     };
     var vars = {
         rememberState : $el.tabContainer.attr('data-remember-state')==='true'
-    }
+    };
 
     function bindEvents() {
         if (vars.rememberState){
@@ -37,7 +37,7 @@ skytoolkit['tabs'] = function(hash) {
 
     function changeTab(controlId){
         $el.tabTargets.add($el.tabs).removeClass("selected");
-        $(controlId + '-tab').add($(controlId))
+        $('#' + controlId + '-tab').add($("#" + controlId))
             .addClass('selected');
     }
 
@@ -48,14 +48,11 @@ skytoolkit['tabs'] = function(hash) {
         changeTab: changeTab
     };
 
-};
+}(toolkit.hashmanager));
 
 
 if (typeof window.define === "function" && window.define.amd) {
-    window.define('modules/tabs', ['utils/hash-manager'], function(hash) {
-        skytoolkit['tabs'] = skytoolkit['tabs'](hash);
-        return skytoolkit['tabs'];
+    define('modules/tabs', ['utils/hashmanager'], function() {
+        return toolkit.tabs;
     });
-} else {
-    skytoolkit['tabs'] = skytoolkit['tabs'](skytoolkit['hash-manager']);
-};
+}

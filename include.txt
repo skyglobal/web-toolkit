@@ -1,0 +1,3 @@
+<script type="text/javascript" src="//web-toolkit.global.sky.com/v0.0.7/stylesheets/sky_web_toolkit.css"/>
+<link rel="stylesheet" href="//web-toolkit.global.sky.com/v0.0.7/js/utils/hashmanager.js"/>
+<link rel="stylesheet" href="//web-toolkit.global.sky.com/v0.0.7/js/modules/tabs.js"/>

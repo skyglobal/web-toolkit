@@ -2,109 +2,44 @@
 layout: default
 title: Sky Web Toolkit
 ---
-<h1>Sky Web Toolkit</h1>
+<h1 class="wiki-header">Sky Web Toolkit <small>v{{ site.version }}</small></h1>
 
-<h2>Buttons</h2>
-
-<h3>Primary Action</h3>
-
-<section class="example">
-  <a href="#" class="btn primary-cta">Anchor Tag</a>
-</section>    
-
-<section class="example">
-  <button href="#" class="btn primary-cta" >Normal Button</button>
+<section class="section typography m">
+	<a name="typography"></a>
+	<h2>Typography</h2>
+	{% include typography.html %}
 </section>
 
-<section class="example">
-  <button type="submit" href="#" class="btn primary-cta" >Submit Button</button>
+<section class="section m">
+  <a name="links"></a>
+  {% include links.html %}
 </section>
 
-<h3>Sign Post</h3>
 
-<section class="example">
-  <a href="#" class="btn sign-post">Anchor Tag</a>
+
+<section class="section">
+    <a name="tabs"></a>
+    <h2>Tabs</h2>
+    {% include tabs.html %}
+</section>
+<section class="section m">
+	<a name="buttons"></a>
+	<h2>Buttons</h2>
+
+	{% include buttons.html %}
+</section>
+<section class="section">
+	<a name="forms"></a>
+	<h2>Forms</h2>
+	
+	{% include form.html %}
 </section>
 
-<section class="example">
-  <button href="#" class="btn sign-post" >Normal Button</button>
+
+
+<section class="section m">
+	<a name="carousel"></a>
+	<h2>Carousel</h2>
+
+	{% include carousel.html %}
 </section>
-
-<section class="example">
-  <button type="submit" href="#" class="btn sign-post" >Submit Button</button>
-</section>
-
-<h3>In Page Action</h3>
-
-<section class="example">
-  <a href="#" class="btn in-page-cta">Anchor Tag</a>
-</section>
-
-<section class="example">
-  <button href="#" class="btn in-page-cta" >Normal Button</button>
-</section>
-
-<section class="example">
-  <button type="submit" href="#" class="btn in-page-cta" >Submit Button</button>
-</section>
-
-<h2>Tabs</h2>
-<h3>Hash State</h3>
-<p>
-  The tabs provide hash state so enabling deep linking, back button and maintaining state over a refresh by including the attribute
-  data-remember-state="true".
-</p>
-
-<section class="clearfix example big">
-  <section class="module clearfix" data-function="tabs" data-remember-state="true">
-    <h2 class="at">This is a screenreader header for tabs</h2>
-    <ul class="tabs clearfix" role="tablist">
-      <li id="first-tab" aria-controls="first" aria-label="first" role="tab" class="tab skycom_internal selected">
-        <a href="#first" class="skycom_ellipsis">First</a>
-      </li>
-      <li id="second-tab" aria-controls="second" aria-label="second" role="tab" class="tab skycom_internal" >
-        <a href="#second" class="skycom_ellipsis">Second</a>
-      </li>
-    </ul>
-
-    <div id="first" class="tabpanel selected" aria-labeledby="first-tab" role="tabpanel">
-      <section class="tabcontents clearfix">
-        <h2 class="at">Screen reader header for First tab contents</h2>
-        <div class="skycom_12">
-          <p>Hello from the first tab contents</p>
-          <img src="http://nicenicejpg.com/500/300/"/>
-        </div>
-      </section>
-    </div>
-
-    <div id="second" class="tabpanel" aria-labeledby="second-tab" role="tabpanel">
-      <section class="tabcontents clearfix">
-        <h2 class="at">Screen reader header for Second tab contents</h2>
-        <div class="skycom_12">
-          <p>Hello from the second tab contents</p>
-        </div>
-      </section>
-    </div>
-  </section>
-</section>
-
-<h2>Forms</h2>
-{% include form.html %}
-
-<script>
-  var codeBlocks = document.getElementsByClassName('example');
-
-  if (codeBlocks.length) {
-    for (var i=0; i < codeBlocks.length; i++) {
-      var codeExampleElement = codeBlocks[i];
-      var classes = codeExampleElement.className;
-      if (classes.indexOf('big') !== -1) {
-        var escapedHTML = codeExampleElement.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;");
-        escapedHTML = escapedHTML.replace(/\\n/g, '<br />')
-        codeExampleElement.innerHTML += "<pre><code class='example-code' data-language='css'>" + escapedHTML + "</code></pre>";
-      } else {
-        codeExampleElement.innerHTML += "<code class='example-code' data-language='css'>" + codeExampleElement.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;") + "</code>";
-      }
-    }
-  }
-</script>
