@@ -39,6 +39,13 @@ See the [reference page](http://skyglobal.github.io/web-toolkit/) for a descript
   - make install # ok, fine, this step probably takes more than 30 seconds...
   - curl https://npmjs.org/install.sh | sh
 
+### Testing
+You can run the Javascript Unit tests with the following:
+  - grunt test
+These tests can also be run individially by specifying a pattern:
+  - grunt test --pattern=Hash*
+(see [mocha](http://visionmedia.github.io/mocha/) and [chai](http://chaijs.com/‎) )
+
 ### Running
 
 1. In the root of the project, run the following:
