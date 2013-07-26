@@ -1,26 +1,96 @@
-<form accept-charset="UTF-8" action="" class="well sky-form" id="new_email" method="post">
+<form>
 
-  <div class="required-indicator">
-    Required fields <span>*</span>
-  </div>
+	<div class="row">
+		<label for="title" class="required">Title</label>
+		<div class="select">
+			<select id="title" name="title"><option value="">Please select</option>
+				<option value="Mr">Mr</option>
+				<option value="Mrs">Mrs</option>
+				<option value="Ms">Ms</option>
+				<option value="Sir">Sir</option>
+				<option value="Dr">Dr</option>
+				<option value="Prof.">Prof.</option>
+			</select>
+		</div>
+		<div class="error"></div>
+	</div>
 
-  <div class="row">
-    <label for="title">Title <span>*</span></label>
-    <select id="title" name="title"><option value="">Please select...</option>
-      <option value="Mr">Mr</option>
-      <option value="Mrs">Mrs</option>
-      <option value="Ms">Ms</option>
-      <option value="Sir">Sir</option>
-      <option value="Dr">Dr</option>
-      <option value="Prof.">Prof.</option></select>
-    <div class="error"></div>
-  </div>
+	<div class="row">
+	    <label for="first_name">First name</label>
+	    <input id="first_name" type="text" placeholder="eg. Joe Bloggs"></input>
+	</div>
 
+	<div class="row">
+		<fieldset>
+			<legend>Select a payment type</legend>
+			<div class="radiocheck">
+				<input type="radio" name="payment_type" value="direct_debit" id="direct-debit" checked></input>
+				<label for="direct-debit">Direct debit</label>
+				<br>
+				<input type="radio" name="payment_type" value="credit_card" id="credit-card"></input>
+				<label for="credit-card">Credit card</label>
+			</div>
+
+		</fieldset>
+		<!-- <label>Select a payment type</label>
+		<div class="radiocheck">
+			<div>
+				<input type="radio" name="payment_type" value="direct_debit"></input><label>Direct debit</label>
+			</div> 
+			<div>
+				<input type="radio" name="payment_type" value="credit_card"></input><label>Credit card</label>
+			</div>
+		</div> -->
+	</div>
+
+<!-- 	<div class="row">
+		<label>Date picker</label>
+		<div class="date-picker">
+			<input type="text" placeholder="dd"/>
+			<span class="divider">-</span>
+			<input type="text" placeholder="mm"/>
+			<span class="divider">-</span>
+			<input type="text" placeholder="yyyy"/>
+		</div>
+	</div> -->
+
+	<div class="row">
+		<label class="required">Postcode</label>
+		<input type="text" placeholder="eg. TW8 1QW"/>
+		<button class="btn">Find address</button>
+	</div>
+
+	<div class="row no-label">
+		<input type="checkbox" name="confirm_terms" value="true" id="confirm-terms"></input>
+		<label for="confirm-terms">I agree to the <a href="#">Terms &amp; Conditions</a></label>
+	</div>
+
+</form>
+
+<!-- <p>To apply web toolkit styling to a form, use the <span class="highlight">sky-form</span> class on the form. The <span class="highlight">well</span> class creates the grey box around the form.</p>
+
+<p>A <i>label</i> and <i>input</i> together should go in a div element with a <span class="highlight">row</span> class</p>
+
+<article class="example big">
+	<form class="well sky-form">
+		<div class="required-indicator">
+			Required fields <span>*</span>
+		</div>
+	</form>
+</article>
+
+
+<form class="well sky-form">
+
+<article class="example big">
   <div class="row">
     <label for="first_name">First name <span>*</span></label>
     <input id="first_name" name="first_name" size="30" type="text">
     <div class="error"></div>
   </div>
+</article>
+
+<article class="example big">
   <div class="row">
     <div class="field_with_errors">
       <label for="second_name">Second name <span>*</span></label>
@@ -28,46 +98,50 @@
       <div class="error">This is an error</div>
     </div>
   </div>
+</article>
+
+<article class="example big">
   <div class="row no-height">
     <label for="email_message">Message <span>*</span></label>
     <textarea cols="40" id="email_message" name="email[message]" rows="7"></textarea>
     <div class="error"></div>
   </div>
+</article>
 
 
-  <div class="row">
-      <label>Select a payment type</label>
-      <div class="radiocheck">
-        <label>
-          <input type="radio" name="payment_type" value="direct_debit"></input>
-          Direct debit
-        </label> 
-        <label>
-          <input type="radio" name="payment_type" value="credit_card"></input>
-          Credit card
-        </label>
-      </div>
-  </div>
+<article class="example big">
+	<div class="row">
+		<label>Select a payment type</label>
+		<div class="radiocheck">
+		<label>
+			<input type="radio" name="payment_type" value="direct_debit"></input>
+			Direct debit
+		</label> 
+		<label>
+			<input type="radio" name="payment_type" value="credit_card"></input>
+			Credit card
+			</label>
+		</div>
+	</div>
+</article>
 
+<article class="example big">
+	<div class="row">
+		<label>Confirm terms and conditions</label>
+			<div class="radiocheck">
+			<label>
+				<input type="checkbox" name="confirm_terms" value="true"></input>
+				I confirm
+			</label>
+		</div>
+	</div>
+</article>
 
-  <div class="row">
-      <label>Confirm terms and conditions</label>
-      <div class="radiocheck">
-        <label>
-          <input type="checkbox" name="confirm_terms" value="true"></input>
-          I confirm
-        </label>
-      </div>
-  </div>
-
-
+<article class="example big">
   <div class="row buttons">
-    <a class="cancel btn in-page-cta" href="#" >
-      Cancel
-    </a>
+    <a class="cancel btn in-page-cta" href="#">Cancel</a>
     <button class="text btn primary-cta" name="button" type="submit">Submit</button>
   </div>
+</article>
 
-
-
-</form>
+</form> -->

@@ -1,27 +1,38 @@
 <!doctype html>
 <html>
-  <head>
-    <script src="js/lib/jquery.2.0.0.min.js" ></script>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/demo/solarized-light.css">
-    <style type="text/css">
-      .example-code { float: right; }
-      pre { font-size: 0.8em; }
-    </style>
-    <script type="text/javascript">                                                     
-        $.get('//assets.sky.com/resources/mobile-ready/12/', function(data) {             
-              $('head').append(data);                                                         
-        });                                                                               
-    </script>                                                                           
-    <script src="js/demo/rainbow-custom.min.js"></script>
-  </head>
-  <body>
-    <div class="skycom_container">
-      {{ content }}	
-    </div>
-    <!--<script src="js/utils/hash-manager.js" ></script>-->
-    <!--<script src="js/modules/tabs.js" ></script>-->
-  <script src="js/lib/require.js" data-main="js/wiki.js" ></script>
-  </body>
+	<head>
+		<script src="js/lib/jquery.2.0.0.min.js" ></script>
+		<link rel="stylesheet" href="stylesheets/styles.css">
+		<link rel="stylesheet" href="stylesheets/demo/solarized-light.css">
+		{% include skycom_resources.html %}
+		<script src="js/demo/rainbow-custom.min.js"></script>
+	</head>
+	<body>
+
+
+		<div class="skycom_container">
+			<div class="quick-links">
+                <div class="skycom_container">
+                    <ul class="nav-pills alpha skycom_12">
+                        <li><a href="#usage">Usage</a></li>
+                        <li><a href="#typography">Typography</a></li>
+                        <li><a href="#links">Links</a></li>
+                        <li><a href="#buttons">Buttons</a></li>
+                        <li><a href="#forms">Forms</a></li>
+                        <li><a href="#carousel">Carousel</a></li>
+                    </ul>
+                </div>
+            </div>
+			
+			<div class="alpha skycom_12">
+				{{ content }}	
+			</div>
+		</div>
+
+        <script src="//integration.player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
+		<!--<script src="js/utils/hashmanager.js" ></script>-->
+		<!--<script src="js/modules/tabs.js" ></script>-->
+	<script src="scripts/wiki.js"></script>
+	</body>
 </html>
 

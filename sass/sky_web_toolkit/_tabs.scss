@@ -7,7 +7,7 @@
 }
 
 .tab  {
-  font-size: 1.25em;
+  // font-size: 1.25em;
   float: left;
   margin-right: 4px;
   position: relative;
@@ -25,6 +25,7 @@
     height: 14px;
     background: rgba(255, 255, 255, 0.7);
     @include background(linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5)));
+    background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5));
     @include border-radius(0 0 20px 20px);
     @include transition(opacity .25s);
   }
@@ -96,6 +97,6 @@
   a {
     text-decoration: none;
     cursor: default;
-    color: #fff;
+    color: #fff !important;
   }
 }

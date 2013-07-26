@@ -4,6 +4,11 @@
 
 a.btn {
 	*height: 26px;
+	color: #FFF !important;
+
+	&.sign-post {
+		color: #327295 !important;
+	}
 }
 
 button.btn {

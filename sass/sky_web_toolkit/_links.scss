@@ -1,0 +1,11 @@
+body a {
+  color: #0070a5;
+
+  &.chevron:before {
+	content: "> ";
+  }
+}
+
+a:hover {
+  text-decoration: underline;
+}

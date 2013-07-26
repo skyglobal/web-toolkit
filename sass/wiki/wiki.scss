@@ -1,3 +1,105 @@
-code.block{
-  white-space: pre;
+section.section {
+	border-top: 1px solid #000;
 }
+
+.block {
+	display: block;
+}
+
+.m {
+	margin: 10px;
+}
+
+.wiki-header {
+  small {
+    color: #999;
+  }
+}
+
+body{
+  padding-top: 2em!important;
+
+  .quick-links {
+    z-index: 10;
+    height: 2em;
+    line-height: 2em;
+    position: fixed;
+    top: 0; left:0;
+    width:100%;
+    background-color: #e5e5e5;
+    ul{
+
+      li{
+        float: left;
+        margin: 0 20px 0 0;
+      }
+    }
+  }
+}
+
+.smash-img {
+	background-image: url("../images/smash.jpg");
+	padding: 80px 50px;
+	margin-bottom: 10px;
+}
+
+.beckham-img {
+	background-image: url("../images/beckham.jpg");
+	padding: 80px 50px;
+	margin-bottom: 10px;
+}
+
+
+
+
+// code.block{
+//   white-space: pre;
+// }
+
+// .section {
+//   margin: 40px 0;
+//   border-top: 2px solid black;
+// }
+
+// h1.massive{
+//   font-size: 7em;
+//   line-height: 1em;
+//   margin: 40px 0;
+// }
+
+// article.example{
+// 	margin: 10px 0;
+// 	clear: both;
+// 	overflow: hidden;
+// 	padding: 2px 0;
+// }
+
+// .typography {
+// 	h1, h2, h3, h4, p {
+// 		float: left;
+// 		margin: 0 0 5px 0;
+// 	}
+// }
+
+// .example-code { 
+// 	float: right;
+// 	display: block;
+// }
+
+// .big .example-code {
+// 	float: none;
+// }
+
+// pre { 
+// 	font-size: 0.8em; 
+// }
+
+// span.highlight {
+// 	background-color: #fdf6e3;
+// 	border-radius: 3px;
+// 	padding: 5px;
+// }
+
+// article.colours div{
+// 	clear: both;
+// }
