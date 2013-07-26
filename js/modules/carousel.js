@@ -1,3 +1,4 @@
+if (typeof toolkit==='undefined') toolkit={};
 toolkit.carousel = (function(window, $) {
     'use strict';
 
