@@ -7,7 +7,11 @@ section.section {
 }
 
 .m {
-	margin: 10px;
+	margin: 10px 0;
+}
+a[name]:not([href]){
+  padding-top: 1em;
+  display: block;
 }
 
 .wiki-header {
