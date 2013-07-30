@@ -4,6 +4,7 @@ if (typeof window.define === "function" && window.define.amd) {
         'utils/hashmanager',
         'modules/tabs',
         'modules/carousel'], function(hashmanager, tabs, carousel){
+
         return {
             hashmanager: hashmanager,
             tabs: tabs,

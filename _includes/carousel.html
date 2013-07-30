@@ -1,6 +1,9 @@
 <p>
     The carousel is fully responsive and works on touch devices (non-microsoft*). The Carousel image ratio has been tested at 3:1.
 </p>
+<p>
+   The Carousel is also integrated with the video player, although this needs requireJS to work.
+</p>
 
 
 <section class="clearfix example big">
@@ -8,47 +11,43 @@
         <h2 class="at">Featured News, shows or Products from around Sky</h2>
         <div class="skycom-carousel-container clearfix">
 
-            <section
-                    class="clearfix skycom_12 alpha bg-shading light-scheme"
-                    data-tracking-other="Sky Sports HD1"
-                    data-tracking-pod="tile-1"
-                    >
-                <div class="clearfix "
-                     data-tracking-label="David Beckham And Sky Team Up"
-                     data-tracking-theme="tracking-theme"
-                        >
-                    <figure>
-                        <div class="shade"></div>
-                        <div class="poster">
-                            <img src="images/carousel/beckham.jpg" alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
-                        </div>
-                        <figcaption class="skycom_5 skycom_6-mobile alpha cushioned overlay content">
-                            <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb4002.png' alt='Sky Sports HD1'  class='channel-logo'/>
-                            <a href="#!beckham" class="clearfix">
-                                <h3 class="skycom-focus-el " id="title-beckham">David Beckham And Sky Team Up</h3>
-                                <p class="skycom-ellipsis">Global sports star David Beckham OBE is joining Sky as an ambassador.</p>
-                            </a>
-                        </figcaption>
-                    </figure>
-
-                    <div class="video-wrapper" id="video-clip-00cwoia5" data-video-id="clip-00cwoia5">
-                        <a href="#" class="close"><i class="icon-close"></i>
-                            <span class="at">Close</span>
-                        </a>
-                        <a href="#" class="play">
-                            <i class="icon-video-play"></i>
-                            <span>Play Trailer</span>
-                        </a>
-                        <div class="videocontrolcontainer">
-                            <video></video>
-                            <img class="posterFrame" />
-                        </div>
+            <div
+                class="clearfix skycom_12 alpha bg-shading light-scheme"
+                data-tracking-other="Sky Sports HD1"
+                data-tracking-pod="tile-1"
+                data-tracking-label="David Beckham And Sky Team Up"
+                data-tracking-theme="tracking-theme"
+                >
+                <figure>
+                    <div class="shade"></div>
+                    <div class="poster">
+                        <img src="images/carousel/beckham.jpg" alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
                     </div>
+                    <figcaption class="skycom_5 skycom_6-mobile alpha cushioned overlay content">
+                        <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb4002.png' alt='Sky Sports HD1'  class='channel-logo'/>
+                        <a href="#!beckham" class="clearfix">
+                            <h3 class="skycom-focus-el " id="title-beckham">David Beckham And Sky Team Up</h3>
+                            <p class="skycom-ellipsis">Global sports star David Beckham OBE is joining Sky as an ambassador.</p>
+                        </a>
+                    </figcaption>
+                </figure>
 
+                <div class="video-wrapper" id="video-clip-00cwoia5" data-video-id="clip-00cwoia5">
+                    <a href="#" class="close"><i class="icon-close"></i>
+                        <span class="at">Close</span>
+                    </a>
+                    <a href="#" class="play">
+                        <i class="icon-video-play"></i>
+                        <span>Play Trailer</span>
+                    </a>
+                    <div class="videocontrolcontainer">
+                        <video></video>
+                        <img class="posterFrame" />
+                    </div>
                 </div>
-            </section>
+            </div>
 
-            <section
+            <div
                     class="clearfix skycom_12 alpha  light-scheme"
                     data-tracking-other="Sky News"
                     data-tracking-pod="tile-2"
@@ -85,9 +84,9 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <section
+            <div
                     class="clearfix skycom_12 alpha bg-shading dark-scheme"
                     data-tracking-other="Sky Movies Premiere"
                     data-tracking-pod="tile-3"
@@ -110,7 +109,7 @@
                         </figcaption>
                     </figure>
                 </div>
-            </section>
+            </div>
 
         </div>
     </section>

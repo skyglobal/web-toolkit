@@ -7,8 +7,7 @@ wiki = (function() {
 }());
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('wiki', [
-        'toolkit'], function() {
+    define('wiki', ['toolkit'], function() {
         return wiki;
     })
 }

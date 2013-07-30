@@ -1,11 +1,24 @@
 <!doctype html>
 <html>
 	<head>
-		<script src="js/lib/jquery.2.0.0.min.js" ></script>
+        <!--[if lt IE 9]> <script src="/scripts/lib/jquery.1.10.2.min.js" ></script> <![endif]-->
+        <!--[if gte IE 9]><!--> <script src="/scripts/lib/jquery.2.0.0.min.js" ></script> <!--<![endif]-->
 		<link rel="stylesheet" href="stylesheets/styles.css">
 		<link rel="stylesheet" href="stylesheets/demo/solarized-light.css">
 		{% include skycom_resources.html %}
 		<script src="js/demo/rainbow-custom.min.js"></script>
+
+        <!--[if lt IE 10]><script type="text/javascript">
+            document.createElement('header');
+            document.createElement('section');
+            document.createElement('footer');
+            document.createElement('article');
+            document.createElement('aside');
+            document.createElement('hgroup');
+            document.createElement('nav');
+            document.createElement('figure');
+            document.createElement('figcaption');
+        </script><![endif]-->
 	</head>
 	<body>
 
@@ -32,7 +45,8 @@
         <script src="//integration.player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
 		<!--<script src="js/utils/hashmanager.js" ></script>-->
 		<!--<script src="js/modules/tabs.js" ></script>-->
-	<script src="scripts/wiki.js"></script>
+	    <!--<script src="scripts/wiki.js"></script>-->
+	    <script src="scripts/lib/require.js" data-main='scripts/wiki'></script>
 	</body>
 </html>
 
