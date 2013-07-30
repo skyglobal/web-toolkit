@@ -381,17 +381,19 @@ toolkit.carousel = (function(window, $) {
             var carousel = new Carousel($this, options.carousel);
 
             markup.indicators($this, {
-                count: carousel.slideCount,
-                onclick: function(index) {
-                    carousel.goto(index);
-                }
-            }).actions($this, {
-                count: carousel.slideCount,
-                actions: options.carousel.actions,
-                onclick: function(action) {
-                    carousel[action]();
-                }
-            }).video($this);
+                    count: carousel.slideCount,
+                    onclick: function(index) {
+                        carousel.goto(index);
+                    }
+                })
+                .actions($this, {
+                    count: carousel.slideCount,
+                    actions: options.carousel.actions,
+                    onclick: function(action) {
+                        carousel[action]();
+                    }
+                })
+                .video($this);
 
             $this.on('click', '.video-wrapper .play', function(e) {
                 var video = new Video($(this).closest('.video-wrapper'), carousel, options.video);
@@ -420,7 +422,6 @@ toolkit.carousel = (function(window, $) {
                 carousel.$viewport.toggleClass('showing-tandcs');
             });
 
-            // must specify interval to override default onPlayDelay interval
             carousel[options.carousel.autoplay === true ? 'play' : 'pause'](false, options.carousel.interval);
             $this.trigger('change');
         });

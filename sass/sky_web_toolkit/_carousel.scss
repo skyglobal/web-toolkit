@@ -426,6 +426,7 @@
   @media all and (max-width: 768px) {
     .play {
       position: relative;
+      float:left;
     }
   }
 
@@ -461,9 +462,13 @@
   .video-wrapper .play{
     left:50px;
   }
-  @media all and (min-width: 600px) {
+  .skycom-carousel .content{
+    padding-left:50px;
+  }
+
+  @media all and (max-width: 600px) {
     .skycom-carousel .content{
-      padding-left:50px;
+      padding-left:3.15789%;
     }
   }
 }
