@@ -51,8 +51,9 @@ These tests can also be run individially by specifying a pattern:
 1. In the root of the project, run the following:
   - bundle
   - jekyll serve --watch
-2. In another terminal run 'grunt watch'
-3. You should be able to see the documentation site in your browser on http://localhost:4000
+2. In another terminal run:
+  - grunt watch #(add '--beautify=true' to help when debugging)
+3. Browse to http://localhost:4000
 
 ### Deployment
 In order to release a new version of the library, the version number in _config.yml must be
