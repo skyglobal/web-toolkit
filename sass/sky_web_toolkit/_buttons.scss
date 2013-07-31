@@ -10,16 +10,16 @@
   color: #ffffff;
   display: inline-block;
   line-height: 2em;
-  box-sizing:border-box;
+  box-sizing: border-box;
   cursor: pointer;
 
   &:before {
     @include transition(opacity .25s);
     @include border-radius(0 0 20px 20px);
-    @include background(linear-gradient(top, rgba(255,255,255,0.4), rgba(255,255,255, 0)));
-    background: -ms-linear-gradient(top, rgba(255,255,255,0.4), rgba(255,255,255, 0));
+    @include background(linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)));
+    background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
 
-    content:"";
+    content: "";
     position: absolute;
     z-index: 1;
     top: 0;
@@ -29,7 +29,7 @@
   }
 
   &:hover, &:focus {
-    text-decoration: none;
+    //text-decoration: none; //Not present in buttons, but useful to have underline in anchors in accordance with global designs
 
     &:before {
       opacity: 0;
@@ -41,15 +41,26 @@
     border: solid 1px #cfcfcf;
     background: #f4f4f4;
     color: #333;
+    line-height: 31px; //Text wasn't vertically aligned with old em line-height
 
     &:before {
-      @include background(linear-gradient(top, rgba(255,255,255,1), rgba(255,255,255, 0)));
-
+      @include background(linear-gradient(top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)));
     }
+  }
+
+  &.btn-small {
+    height: 24px;
+    line-height: 23px;
+    padding: 0 10px;
+  }
+
+  &.btn-large {
+    height: 46px;
+    line-height: 45px;
   }
 }
 
-a.btn.secondary{
+a.btn.secondary {
   color: #333 !important;
 }
 
