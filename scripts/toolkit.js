@@ -365,10 +365,10 @@ toolkit.carousel = (function(window, $) {
         this.wrapper.attr('id', 'video-' + options.player.videoId);
         this.videocontrolcontainer = carousel.$viewport.find('.videocontrolcontainer');
         this.player = carousel.$viewport.find('video');
-        this.player.sky_html5player(options.player);
         this.videocontrolcontainer.find('img').on('error', function() {
             this.src = options.placeHolderImage;
         });
+        this.options = options.player;
         this.bindEvents();
     }
 
@@ -395,7 +395,7 @@ toolkit.carousel = (function(window, $) {
             this.showCanvas(function() {
                 carouselControls.hide();
                 $self.carousel.unbindTouchEvents();
-                sky.html5player.play($self.wrapper);
+                $self.player.sky_html5player($self.options); //autoplay sweetness
             });
         },
         stop: function() {
@@ -471,7 +471,7 @@ toolkit.carousel = (function(window, $) {
             video: {
                 player: {
                     token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-                    autoplay: false,
+                    autoplay: true,
                     videoId: null,
                     freewheel: false //disable ads
                 },
