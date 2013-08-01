@@ -52,7 +52,7 @@ These tests can also be run individially by specifying a pattern:
   - bundle
   - jekyll serve --watch
 2. In another terminal run:
-  - grunt watch #(add '--beautify=true' to help when debugging)
+  - grunt watch #(add '--beautify' to help when debugging)
 3. Browse to http://localhost:4000
 
 ### Deployment
