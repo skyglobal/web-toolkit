@@ -472,7 +472,8 @@ toolkit.carousel = (function(window, $) {
                 player: {
                     token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
                     autoplay: false,
-                    videoId: null
+                    videoId: null,
+                    freewheel: false //disable ads
                 },
                 placeHolderImage: '//static.video.sky.com/posterframes/skychasky.jpg',
             }
@@ -553,6 +554,9 @@ toolkit.carousel = (function(window, $) {
 
             $this.on('click', '.play-video', function(e) {
                 options.video.player.videoId = $(this).attr('data-video-id');
+                if (options.carousel.videoAds){
+                    options.video.player.freewheel = true;
+                }
                 var video = new Video(carousel, options.video);
                 video.play();
                 return false;
@@ -607,7 +611,8 @@ if (typeof window.define === "function" && window.define.amd) {
 wiki = (function() {
     $('#hero').skycom_carousel({
         carousel: {
-            autoplay: true
+            autoplay: true,
+            videoAds: false
         }
     });
 }());
