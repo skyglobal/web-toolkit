@@ -80,3 +80,4 @@ Upon commiting and pushing your code to Github, the CI server will run through
 the functional tests and - if there are no errors - a new version of the library
 will be deployed to the CDN using the version number specified in the
 _config.yml file.
+
