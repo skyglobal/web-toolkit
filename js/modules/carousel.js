@@ -207,7 +207,9 @@ toolkit.carousel = (function(window, $) {
         this.wrapper.attr('id', 'video-' + options.player.videoId);
         this.videocontrolcontainer = carousel.$viewport.find('.videocontrolcontainer');
         this.player = carousel.$viewport.find('video');
+        this.videocontrolcontainer.show();
         this.player.sky_html5player(options.player);
+        this.videocontrolcontainer.hide();
         this.videocontrolcontainer.find('img').on('error', function() {
             this.src = options.placeHolderImage;
         });
@@ -237,7 +239,6 @@ toolkit.carousel = (function(window, $) {
             this.showCanvas(function() {
                 carouselControls.hide();
                 $self.carousel.unbindTouchEvents();
-                $self.videocontrolcontainer.show();
                 $self.videocontrolcontainer.fadeIn();
                 sky.html5player.play($self.wrapper);
             });
@@ -297,7 +298,6 @@ toolkit.carousel = (function(window, $) {
             });
         }
     };
-
 
     // jquerify
     $.fn.skycom_carousel = function(params) {
