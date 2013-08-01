@@ -402,9 +402,6 @@
   video {
     background:#000;
   }
-  .videocontrolcontainer {
-    display: none;
-  }
   &:hover .close.active {
     @include opacity(1);
   }
@@ -428,7 +425,7 @@
   }
 
   .posterFrame {
-    background:#000;
+    display:none;
   }
 
   @media all and (max-width: 768px) {
