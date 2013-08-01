@@ -237,6 +237,7 @@ toolkit.carousel = (function(window, $) {
             this.showCanvas(function() {
                 carouselControls.hide();
                 $self.carousel.unbindTouchEvents();
+                $self.videocontrolcontainer.show();
                 $self.videocontrolcontainer.fadeIn();
                 sky.html5player.play($self.wrapper);
             });
