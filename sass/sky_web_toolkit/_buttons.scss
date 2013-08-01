@@ -1,3 +1,4 @@
+a.btn,
 .btn {
   @include border-radius(5px);
   font: 16px/1em $font-family;
@@ -7,19 +8,19 @@
   z-index: 2;
   border: none;
   background-color: #0073c5;
-  color: #ffffff;
+  color: #fff;
   display: inline-block;
   line-height: 2em;
-  box-sizing:border-box;
+  box-sizing: border-box;
   cursor: pointer;
 
   &:before {
     @include transition(opacity .25s);
     @include border-radius(0 0 20px 20px);
-    @include background(linear-gradient(top, rgba(255,255,255,0.4), rgba(255,255,255, 0)));
-    background: -ms-linear-gradient(top, rgba(255,255,255,0.4), rgba(255,255,255, 0));
+    @include background(linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)));
+    background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
 
-    content:"";
+    content: "";
     position: absolute;
     z-index: 1;
     top: 0;
@@ -30,7 +31,6 @@
 
   &:hover, &:focus {
     text-decoration: none;
-
     &:before {
       opacity: 0;
     }
@@ -41,75 +41,21 @@
     border: solid 1px #cfcfcf;
     background: #f4f4f4;
     color: #333;
+    line-height: 31px; //Text wasn't vertically aligned with old em line-height
 
     &:before {
-      @include background(linear-gradient(top, rgba(255,255,255,1), rgba(255,255,255, 0)));
-
+      @include background(linear-gradient(top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)));
     }
   }
+
+  &.btn-small {
+    height: 24px;
+    line-height: 23px;
+    padding: 0 10px;
+  }
+
+  &.btn-large {
+    height: 46px;
+    line-height: 45px;
+  }
 }
-
-a.btn.secondary{
-  color: #333 !important;
-}
-
-// .btn {
-//   position: relative;
-//   z-index: 1;
-//   font: 16px/28px $font-family;
-//   height: 32px;
-//   padding: 0 20px;
-//   cursor: pointer;
-//   @include border-radius(5px);
-//   @include box-sizing(border-box);
-//   @include inline-block();
-//   vertical-align: text-bottom;
-
-//   &:before {
-//     content:"";
-//     position: absolute;
-//     z-index: -1;
-//     top: 0;
-//     left: 1.5%;
-//     width: 97%;
-//     height: 10px;
-//     background-color: rgba(255, 255, 255, 0.25);
-//     @include background(linear-gradient(top, rgba(255,255,255,0.4), rgba(255,255,255,0.05)));
-//     @include border-radius(0 0 20px 20px);
-//     @include transition(opacity .25s);
-//   }
-
-//   &:hover,
-//   &:focus {
-//     text-decoration: none;
-
-//     &:before {
-//       opacity: 0;
-//     }
-//   }
-
-//   /* button themes */
-//   &.primary-cta {
-//     color: #fff;
-//     border: solid 1px #0073c5;
-//     background: #0073c5;
-//   }
-
-//   &.sign-post {
-//     color: #327295;
-//     border: 1px solid #dfdfdf;
-//     background: #eaeaea;
-
-//     &:before {
-//       background-color: rgba(255, 255, 255, 0.7);
-//       @include background(linear-gradient(top, rgba(255,255,255,0.9), rgba(255,255,255,0.5)));
-//     }
-//   }
-
-//   &.in-page-cta {
-//     color: #f9f9f9;
-//     border: solid 1px #cfcfcf;
-//     background: #666;
-//   }
-// }
-
