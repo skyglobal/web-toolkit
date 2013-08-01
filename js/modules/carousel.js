@@ -237,7 +237,7 @@ toolkit.carousel = (function(window, $) {
             this.showCanvas(function() {
                 carouselControls.hide();
                 $self.carousel.unbindTouchEvents();
-                $self.player.sky_html5player($self.options); //autoplay sweetness
+                $self.player.sky_html5player($self.options);// initialise after fading for ie7
             });
         },
         stop: function() {
@@ -250,7 +250,6 @@ toolkit.carousel = (function(window, $) {
                 $self.videocontrolcontainer.html($self.originalHtml);
             });
         },
-
         showCanvas: function(callback) {
             var height,
                 $carousel = this.carousel.$viewport,
@@ -299,7 +298,6 @@ toolkit.carousel = (function(window, $) {
     $.fn.skycom_carousel = function(params) {
         var options = $.extend(true, {
             carousel: {
-
                 actions: [
                     { id: 'previous', label: 'Previous' },
                     { id: 'next', label: 'Next' },
@@ -324,7 +322,6 @@ toolkit.carousel = (function(window, $) {
         // generating default markup
         var markup = {
             actions: function($element, options){
-
                 var html = '', action, label, i, extraClass,
                     actions = options.actions,
                     onclick = options.onclick;
