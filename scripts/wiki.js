@@ -365,9 +365,7 @@ toolkit.carousel = (function(window, $) {
         this.wrapper.attr('id', 'video-' + options.player.videoId);
         this.videocontrolcontainer = carousel.$viewport.find('.videocontrolcontainer');
         this.player = carousel.$viewport.find('video');
-        this.videocontrolcontainer.show(); //ie8 needs this to be shown
         this.player.sky_html5player(options.player);
-        this.videocontrolcontainer.hide();
         this.videocontrolcontainer.find('img').on('error', function() {
             this.src = options.placeHolderImage;
         });
@@ -397,7 +395,6 @@ toolkit.carousel = (function(window, $) {
             this.showCanvas(function() {
                 carouselControls.hide();
                 $self.carousel.unbindTouchEvents();
-                $self.videocontrolcontainer.fadeIn();
                 sky.html5player.play($self.wrapper);
             });
         },
@@ -405,14 +402,13 @@ toolkit.carousel = (function(window, $) {
             var $self = this,
                 carouselControls = this.carousel.$viewport.find('.actions, .indicators');
             sky.html5player.close(this.wrapper);
-
             this.hideCanvas( function(){
                 $self.carousel.bindTouchEvents();
-                $self.videocontrolcontainer.hide().remove();
                 carouselControls.show();
-                $('<div></div>').addClass('videocontrolcontainer').html($self.originalHtml).appendTo($self.wrapper);
+                $self.videocontrolcontainer.html($self.originalHtml);
             });
         },
+
         showCanvas: function(callback) {
             var height,
                 $carousel = this.carousel.$viewport,
@@ -423,12 +419,12 @@ toolkit.carousel = (function(window, $) {
                 speed= 500;
             this.originalHeight = $carousel.height();
             $wrapper.addClass('playing-video');
-            $wrapper.fadeIn(function() {
+            $overlay.fadeIn(function() {
                 $play.fadeOut();
                 height = Math.round(($carousel.width() / 16) * 9);
                 $carousel.animate({ height: height }, speed, function() {
                     callback();
-                    $overlay.show();
+                    $wrapper.show();
                     $overlay.fadeOut(speed, function() {
                         $close.addClass('active');
                     });
