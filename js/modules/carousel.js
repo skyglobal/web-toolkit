@@ -298,6 +298,7 @@ toolkit.carousel = (function(window, $) {
         }
     };
 
+
     // jquerify
     $.fn.skycom_carousel = function(params) {
         var options = $.extend(true, {
