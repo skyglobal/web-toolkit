@@ -207,7 +207,7 @@ toolkit.carousel = (function(window, $) {
         this.wrapper.attr('id', 'video-' + options.player.videoId);
         this.videocontrolcontainer = carousel.$viewport.find('.videocontrolcontainer');
         this.player = carousel.$viewport.find('video');
-        this.videocontrolcontainer.show();
+        this.videocontrolcontainer.show(); //ie8 needs this to be shown
         this.player.sky_html5player(options.player);
         this.videocontrolcontainer.hide();
         this.videocontrolcontainer.find('img').on('error', function() {
