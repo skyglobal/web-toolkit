@@ -1,7 +1,8 @@
 wiki = (function() {
     $('#hero').skycom_carousel({
         carousel: {
-            autoplay: true
+            autoplay: true,
+            videoAds: false
         }
     });
 }());
