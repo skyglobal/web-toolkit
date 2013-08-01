@@ -359,15 +359,13 @@ toolkit.carousel = (function(window, $) {
         }
     };
 
-    function Video($wrapper, carousel, options) {
+    function Video(carousel, options) {
         this.carousel = carousel;
-        this.wrapper = $wrapper;
-        this.videoId = this.wrapper.data('video-id');
-        this.player = this.wrapper.find('video');
-        this.player.sky_html5player($.extend(true, {
-            videoId: this.videoId
-        }, options.player));
-        this.videocontrolcontainer = this.wrapper.find('.videocontrolcontainer');
+        this.wrapper = carousel.$viewport.find('.video-wrapper');
+        this.wrapper.attr('id', 'video-' + options.player.videoId);
+        this.videocontrolcontainer = carousel.$viewport.find('.videocontrolcontainer');
+        this.player = carousel.$viewport.find('video');
+        this.player.sky_html5player(options.player);
         this.videocontrolcontainer.find('img').on('error', function() {
             this.src = options.placeHolderImage;
         });
@@ -397,7 +395,7 @@ toolkit.carousel = (function(window, $) {
             this.showCanvas(function() {
                 carouselControls.hide();
                 $self.carousel.unbindTouchEvents();
-                $self.videocontrolcontainer.add($self.player).show();
+                $self.videocontrolcontainer.fadeIn();
                 sky.html5player.play($self.wrapper);
             });
         },
@@ -418,16 +416,17 @@ toolkit.carousel = (function(window, $) {
                 $carousel = this.carousel.$viewport,
                 $overlay = $carousel.find('.video-overlay'),
                 $wrapper = $carousel.find('.video-wrapper'),
-                $play = $carousel.find('.video-wrapper .play'),
+                $play = $carousel.find('.play-video'),
                 $close = $carousel.find('.video-wrapper .close'),
                 speed= 500;
             this.originalHeight = $carousel.height();
             $wrapper.addClass('playing-video');
-            $overlay.fadeIn(function() {
+            $wrapper.fadeIn(function() {
                 $play.fadeOut();
                 height = Math.round(($carousel.width() / 16) * 9);
                 $carousel.animate({ height: height }, speed, function() {
                     callback();
+                    $overlay.show();
                     $overlay.fadeOut(speed, function() {
                         $close.addClass('active');
                     });
@@ -438,7 +437,7 @@ toolkit.carousel = (function(window, $) {
             var $carousel = this.carousel.$viewport,
                 $overlay = $carousel.find('.video-overlay'),
                 $wrapper = $carousel.find('.video-wrapper'),
-                $play = $carousel.find('.video-wrapper .play'),
+                $play = $carousel.find('.play-video'),
                 $close = $carousel.find('.video-wrapper .close'),
                 speed = 500,
                 originalHeight = this.originalHeight;
@@ -448,7 +447,8 @@ toolkit.carousel = (function(window, $) {
                     $('.skycom-carousel').css({ height: 'auto' });
                     callback();
                     $play.fadeIn();
-                    $overlay.fadeOut();
+                    $overlay.hide();
+                    $wrapper.fadeOut();
                     $wrapper.removeClass('playing-video');
                 });
             });
@@ -473,10 +473,10 @@ toolkit.carousel = (function(window, $) {
             video: {
                 player: {
                     token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-                    autoplay: false
+                    autoplay: false,
+                    videoId: null
                 },
                 placeHolderImage: '//static.video.sky.com/posterframes/skychasky.jpg',
-                autoplay: !globalskycom.browserSupport.isMobile()
             }
         }, params);
 
@@ -553,8 +553,9 @@ toolkit.carousel = (function(window, $) {
                 })
                 .video($this);
 
-            $this.on('click', '.video-wrapper .play', function(e) {
-                var video = new Video($(this).closest('.video-wrapper'), carousel, options.video);
+            $this.on('click', '.play-video', function(e) {
+                options.video.player.videoId = $(this).attr('data-video-id');
+                var video = new Video(carousel, options.video);
                 video.play();
                 return false;
             }).on('change',function(e, index) {
