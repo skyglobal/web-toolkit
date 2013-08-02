@@ -32,7 +32,8 @@ if (typeof window.define === "function" && window.define.amd) {
                 subtitle = container.find('> h3').text(),
                 html = $this.data('html'),
                 genericNotes = container.parent().find('> .developer-notes').html(),
-                notes = container.find('.developer-notes').html();
+                notes = container.find('.developer-notes').html(),
+                dependencies = container.parent().find('> .dependencies').html();
 
             if (vars.lastLog == html) { return; }
             vars.lastLog = html;
@@ -41,6 +42,13 @@ if (typeof window.define === "function" && window.define.amd) {
             if (genericNotes && genericNotes.trim().length) {
                 console.log.apply(console,colourCode(genericNotes.trim()));
             }
+
+            if (dependencies && dependencies.trim().length){
+                console.groupCollapsed('Dependencies');
+                console.log(dependencies);
+                console.groupEnd();
+            }
+
             if (notes && notes.trim().length){
                 console.groupCollapsed('\'' + subtitle + '\' Notes');
                     console.log.apply(console,colourCode(notes.trim()));
