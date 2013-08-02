@@ -10,7 +10,6 @@ toolkit.carousel = (function(window, $) {
         var s = document.body.style;
         return s.transform !== undefined || s.WebkitTransform !== undefined || s.MozTransform !== undefined || s.OTransform !== undefined;
     }());
-    var clickEvent = 'ontouchend' in document.documentElement ? 'touchend' : 'click';
 
     function Carousel(element, options) {
         this.options = options;
@@ -226,7 +225,7 @@ toolkit.carousel = (function(window, $) {
                     return false;
                 },
                 $wrapper = this.wrapper;
-            $wrapper.on('click', hijackLink).find('.close').one(clickEvent, stop);
+            $wrapper.on('click', hijackLink).find('.close').one('click', stop);
             this.player.on('ended webkitendfullscreen', stop);
         },
         play: function() {
