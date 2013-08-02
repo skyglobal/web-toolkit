@@ -1,4 +1,13 @@
 .sky-form{
+  &.well {
+    margin: 0 10px;
+    padding: 20px 20px 1px;
+    background-color: #f7f7f7;
+    margin-bottom: 1em;
+    border-radius: 5px;
+    box-shadow: 0 0 3px #bababa;
+  }
+
   .row {
     margin: 0 0 24px 0;
   }
