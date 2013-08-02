@@ -1,22 +1,21 @@
 <h2>Carousel</h2>
+<p class="design-notes">
+    The carousel is fully responsive, has a video player and works on touch devices (not microsoft).
+</p>
+
 <div class="dependencies">
     <!--<script src="scripts/lib/require.js" ></script>-->
     <link rel="stylesheet" href="//integration.player.sky.com/css/styles.min.css" />
     <script src="//integration.player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
 </div>
-<p class="design-notes">
-The carousel is fully responsive, has a video player and works on touch devices (not microsoft).
-</p>
-<p class="developer-notes">
-The video player needs requireJS to work.
+<div class="init">
     <code>$('#hero').skycom_carousel({
         carousel: {
             autoplay: true,
             videoAds: true
         }
     });</code>
-</p>
-
+</div>
 
 <div class="example">
     <h3>3:1 Carousel</h3>
@@ -44,7 +43,7 @@ The video player needs requireJS to work.
                             <img src="images/carousel/beckham.jpg" alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
                         </div>
                         <figcaption class="skycom_5 skycom_6-mobile alpha cushioned overlay content">
-                            <!--<img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb4002.png' alt='Sky Sports HD1'  class='channel-logo'/>-->
+                            <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb4002.png' alt='Sky Sports HD1'  class='channel-logo'/>
                             <a href="#!beckham" class="clearfix">
                                 <h3 class="skycom-focus-el " id="title-beckham">David Beckham And Sky Team Up</h3>
                                 <p class="skycom-ellipsis">Global sports star David Beckham OBE is joining Sky as an ambassador.</p>
@@ -103,7 +102,7 @@ The video player needs requireJS to work.
                                 <img src="images/carousel/avengers.jpg" alt="Heroes">
                             </div>
                             <figcaption class="skycom_5 skycom_6-mobile alpha cushioned overlay content">
-                                <!--<img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb1409.png' alt='Sky Movies Premiere'  class='channel-logo'/>-->
+                                <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb1409.png' alt='Sky Movies Premiere'  class='channel-logo'/>
                                 <a href="#!avengers1" class="clearfix">
                                     <h3 class="skycom-focus-el " id="title-avengers1">Watch The Avengers now in 9 hours</h3>
                                     <p class="skycom-ellipsis">Watch Tonight</p>
