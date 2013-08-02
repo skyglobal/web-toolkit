@@ -104,13 +104,13 @@
 
     <!--TEST-->
     <script>
+
     require(['modules/carousel', '../test/jsUnit/setup'],function(){
 
-        describe.skip('Carousel module', function() {
+        describe('Carousel module', function() {
 
-//            TODO: This is causing timeout in PhantomJS, to be fixed and remove the 'skip' above
-//            $('#hero').skycom_carousel({carousel: {autoplay:false, onPlayDelay: 0, interval: 0}});
-//            $('#empty-hero').skycom_carousel({autoplay:false});
+            $('#hero').skycom_carousel({carousel: {autoplay:false, onPlayDelay: 0, interval: 0}});
+            $('#empty-hero').skycom_carousel({autoplay:false});
 
             it('Creates the controls', function() {
                 expect($('.skycom-carousel').children('.indicators').find('.container span').length).to.equal(3);
