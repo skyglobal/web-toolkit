@@ -33,19 +33,27 @@ if (typeof window.define === "function" && window.define.amd) {
                 html = $this.data('html'),
                 genericNotes = container.parent().find('> .developer-notes').html(),
                 notes = container.find('.developer-notes').html(),
-                dependencies = container.parent().find('> .dependencies').html();
+                dependencies = container.parent().find('> .dependencies').html(),
+                init = container.parent().find('> .init').html();
 
             if (vars.lastLog == html) { return; }
             vars.lastLog = html;
 
             console.group(title);
+
             if (genericNotes && genericNotes.trim().length) {
                 console.log.apply(console,colourCode(genericNotes.trim()));
             }
 
             if (dependencies && dependencies.trim().length){
                 console.groupCollapsed('Dependencies');
-                console.log(dependencies);
+                    console.log(dependencies);
+                console.groupEnd();
+            }
+
+            if (init && init.trim().length){
+                console.groupCollapsed('Initialisation');
+                console.log.apply(console,colourCode(init.trim()));
                 console.groupEnd();
             }
 
