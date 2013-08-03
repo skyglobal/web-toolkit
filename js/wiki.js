@@ -1,18 +1,43 @@
 if (typeof window.define === "function" && window.define.amd) {
     define('wiki', ['toolkit'], function() {
 
-        var vars = {
-            lastLog: null
-        };
-
         function bindEvents(){
-            $('.example .demo').each(function(){
-                var $this = $(this),
-                    selector = $this.attr('data-selector'),
-                    $examples = $this.find('> ' + selector);
-                $examples.each(function(){
-                    $(this).data('html',this.outerHTML);
-                }).on('mouseenter', showCodePreview)
+            $('.section').each(function(){
+                var $section = $(this),
+                    notes = $section.find('> .developer-notes').html(),
+                    dependencies = $section.find('> .dependencies').html(),
+                    init = $section.find('> .init').html();
+
+                console.groupCollapsed($section.find('> h2').text());
+
+                log(notes)
+                log(dependencies,'Dependencies');
+                log(init,'Initialisation');
+
+                $section.find('.example .demo').each(function(){
+                    var $this = $(this),
+                        selector = $this.attr('data-selector'),
+                        $examples = $this.find('> ' + selector),
+                        container = $this.closest('.example'),
+                        notes = container.find('> .developer-notes').html(),
+                        subtitle = container.find('> h3').text();
+
+                    if (subtitle){
+                        console.groupCollapsed('\'' + subtitle + '\'');
+                    }
+
+                    log(notes);
+
+                    $examples.each(function(){
+                        log(this.outerHTML, '\'' + this.tagName + '\' html');
+                    });
+
+                    if (subtitle){
+                        console.groupEnd();
+                    }
+                });
+
+                console.groupEnd();
             });
 
             $('#hero').skycom_carousel({
@@ -24,48 +49,12 @@ if (typeof window.define === "function" && window.define.amd) {
 
         }
 
-        function showCodePreview(){
-            if (!console){ return; }
-            var $this = $(this),
-                container = $this.closest('.example'),
-                title = container.parent().find('> h2').text(),
-                subtitle = container.find('> h3').text(),
-                html = $this.data('html'),
-                genericNotes = container.parent().find('> .developer-notes').html(),
-                notes = container.find('.developer-notes').html(),
-                dependencies = container.parent().find('> .dependencies').html(),
-                init = container.parent().find('> .init').html();
-
-            if (vars.lastLog == html) { return; }
-            vars.lastLog = html;
-
-            console.group(title);
-
-            if (genericNotes && genericNotes.trim().length) {
-                console.log.apply(console,colourCode(genericNotes.trim()));
+        function log(text, group){
+            if (text && text.trim().length){
+                if (group) console.groupCollapsed(group);
+                console.log.apply(console,colourCode(text.trim()));
+                if (group) console.groupEnd();
             }
-
-            if (dependencies && dependencies.trim().length){
-                console.groupCollapsed('Dependencies');
-                    console.log(dependencies);
-                console.groupEnd();
-            }
-
-            if (init && init.trim().length){
-                console.groupCollapsed('Initialisation');
-                console.log.apply(console,colourCode(init.trim()));
-                console.groupEnd();
-            }
-
-            if (notes && notes.trim().length){
-                console.groupCollapsed('\'' + subtitle + '\' Notes');
-                    console.log.apply(console,colourCode(notes.trim()));
-                console.groupEnd();
-            }
-                console.groupCollapsed('\'' + this.tagName + '\' html');
-                    console.log(html);
-                console.groupEnd();
-            console.groupEnd();
         }
 
         function colourCode(str){
