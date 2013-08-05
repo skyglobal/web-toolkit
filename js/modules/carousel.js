@@ -304,6 +304,7 @@ toolkit.carousel = (function(window, $) {
                     { id: 'pause', label: 'Pause Carousel' }
                 ],
                 autoplay: true,
+                startSlideIndex: 0,
                 onPlayDelay: 500,
                 interval: 6000
             },
@@ -314,7 +315,7 @@ toolkit.carousel = (function(window, $) {
                     videoId: null,
                     freewheel: false //disable ads
                 },
-                placeHolderImage: '//static.video.sky.com/posterframes/skychasky.jpg',
+                placeHolderImage: '//static.video.sky.com/posterframes/skychasky.jpg'
             }
         }, params);
 
@@ -422,6 +423,7 @@ toolkit.carousel = (function(window, $) {
             });
 
             carousel[options.carousel.autoplay === true ? 'play' : 'pause'](false, options.carousel.interval);
+            carousel.goto(options.carousel.startSlideIndex, false);
             $this.trigger('change');
         });
     };
