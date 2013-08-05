@@ -211,6 +211,7 @@
   }
 
   figure{
+    position: relative;
     margin: 0;
     * {
       cursor: pointer;
@@ -266,6 +267,12 @@
   }
 
   @media all and (max-width: 768px) {
+    .play-video {
+      padding-right: 0;
+      span {
+        display:none;
+      }
+    }
     .channel-logo{
       max-height: 26px;
       max-width: 140px;
@@ -293,7 +300,6 @@
       font-size: em(16);
     }
   }
-
 
   @media all and (max-width: 600px) {
     h3 {
@@ -374,7 +380,6 @@
   }
 }
 
-
 .video-overlay {
   background:#000;
   display:none;
@@ -428,13 +433,6 @@
     display:none;
   }
 
-  @media all and (max-width: 768px) {
-    .play {
-      position: relative;
-      float:left;
-    }
-  }
-
   @media all and (max-width: 600px) {
     width: inherit;
     margin-top: 32%;
@@ -460,8 +458,6 @@
       margin-top: 100px;
   }
 }
-
-
 
 .skycom-notouch {
   .play-video{
@@ -521,10 +517,6 @@
     }
   }
 }
-
-
-
-
 
 /* Hero ratio 3:1 */
 .skycom-carousel.hero-3-1 {
