@@ -1,3 +1,7 @@
+test:
+  override:
+    - grunt test
+
 deployment:
   production:
     branch: master
