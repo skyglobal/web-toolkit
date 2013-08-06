@@ -39,14 +39,10 @@ desc 'Deploys a new version to the CDN'
 task :deploy_new_version do
 
 
-
-
   if version_already_exists?
     puts "Version #{latest_version_number} already exists. Exiting."
     next
   end
-
-
 
   doc_resources = []
   puts 'Uploading doc files'
