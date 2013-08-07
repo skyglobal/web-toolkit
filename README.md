@@ -9,11 +9,9 @@ See the [reference page](http://skyglobal.github.io/web-toolkit/) for a descript
 
 
 ## Using the Toolkit
-### CSS
-"//web-toolkit.global.sky.com/version-number/stylesheets/sky_web_toolkit.css"
-
-### JS
-"//web-toolkit.global.sky.com/version-number/scripts/toolkit.js"
+//web-toolkit.global.sky.com/version-number/stylesheets/toolkit.css
+//web-toolkit.global.sky.com/version-number/scripts/toolkit.js
+//web-toolkit.global.sky.com/version-number/images/icons.png
 
 ## Wiki
 [You can contribute to the wiki!!!](https://github.com/bskyb-commerce/bskyb-commerce.github.io/wiki)
