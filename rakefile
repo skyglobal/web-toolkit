@@ -19,7 +19,7 @@ end
 
 
 def files_to_upload
-  files = ['stylesheets/sky_web_toolkit.css', 'scripts/toolkit.js', 'scripts/toolkit.js.map']
+  files = ['stylesheets/sky_web_toolkit.css', 'images/icons.png', 'scripts/toolkit.js', 'scripts/toolkit.js.map']
   files = files + Dir.glob("scripts/utils/**/*.*") + Dir.glob("scripts/modules/**/*.*")
 end
 
@@ -29,6 +29,8 @@ def content_type(file)
         content_type = 'text/javascript'
       when '.css'
         content_type = 'text/css'
+      when '.png'
+        content_type = 'image/png'
       else
         content_type = 'image/jpeg'
     end
