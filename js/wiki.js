@@ -1,9 +1,17 @@
 if (typeof window.define === "function" && window.define.amd) {
     define('wiki', ['toolkit'], function() {
 
-        function bindEvents(){
-            console.group($($('h1').get(0)).text());
+        function initModuleDemos(){
+            $('#hero').skycom_carousel({
+                carousel: {
+                    autoplay: true,
+                    videoAds: false
+                }
+            });
+        }
 
+        function logPage(){
+            console.group($($('h1').get(0)).text());
             $('.section').each(function(){
                 var $section = $(this),
                     notes = $section.find('> .developer-notes').html(),
@@ -12,45 +20,39 @@ if (typeof window.define === "function" && window.define.amd) {
 
                 if ($section.find('> h2').text()) console.groupCollapsed($section.find('> h2').text());
 
-                log(notes)
+                log(notes);
                 log(dependencies,'Dependencies');
                 log(init,'Initialisation');
 
-                $section.find('.example .demo').each(function(){
-                    var $this = $(this),
-                        selector = $this.attr('data-selector'),
-                        $examples = $this.find('> ' + selector),
-                        container = $this.closest('.example'),
-                        notes = container.find('> .developer-notes').html(),
-                        subtitle = container.find('> h3').text();
-
-                    if (subtitle){
-                        console.groupCollapsed('\'' + subtitle + '\'');
-                    }
-
-                    log(notes);
-
-                    $examples.each(function(){
-                        log(this.outerHTML, '\'' + this.tagName + '\' html');
-                    });
-
-                    if (subtitle){
-                        console.groupEnd();
-                    }
-                });
+                $section.find('.example .demo').each(logDemoCode);
 
                 if ($section.find('> h2').text()) console.groupEnd();
             });
-
             console.groupEnd();
+        }
 
-            $('#hero').skycom_carousel({
-                carousel: {
-                    autoplay: true,
-                    videoAds: false
-                }
+
+        function logDemoCode(){
+            var $this = $(this),
+                selector = $this.attr('data-selector'),
+                $examples = $this.find('> ' + selector),
+                container = $this.closest('.example'),
+                notes = container.find('> .developer-notes').html(),
+                subtitle = container.find('> h3').text();
+
+            if (subtitle){
+                console.groupCollapsed('\'' + subtitle + '\'');
+            }
+
+            log(notes);
+
+            $examples.each(function(){
+                log(this.outerHTML, '\'' + this.tagName + '\' html');
             });
 
+            if (subtitle){
+                console.groupEnd();
+            }
         }
 
         function log(text, group){
@@ -74,7 +76,8 @@ if (typeof window.define === "function" && window.define.amd) {
             return returnArr;
         }
 
-        bindEvents();
+        logPage();
+        initModuleDemos();
 
     });
 }
