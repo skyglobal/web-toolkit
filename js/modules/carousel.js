@@ -375,8 +375,8 @@ toolkit.carousel = (function(window, $) {
         return this.each(function() {
             var $this = $(this);
             var carousel = new Carousel($this, options.carousel);
-
-            markup.indicators($this, {
+            var createMarkup = function(carousel) {
+                markup.indicators($this, {
                     count: carousel.slideCount,
                     onclick: function(index) {
                         carousel.goto(index);
@@ -390,6 +390,9 @@ toolkit.carousel = (function(window, $) {
                     }
                 })
                 .video($this);
+            };
+
+            createMarkup(carousel);
 
             $this.on('click', '.play-video', function(e) {
                 options.video.player.videoId = $(this).attr('data-video-id');
@@ -412,6 +415,22 @@ toolkit.carousel = (function(window, $) {
                 carousel.pause();
             }).on('play',function() {
                 carousel.play();
+            }).on('refresh',function(e, index) {
+                carousel.$slides = carousel.$slideContainer.find('>');
+                carousel.slideCount = carousel.$slides.length;
+                $this.find('.indicators').remove();
+                $this.find('.actions').remove();
+                $this.find('.video-overlay').remove();
+
+                createMarkup(carousel);
+
+                index = parseInt(index, 10);
+                if (isNaN(index) || index < 0) {
+                    index = 0;
+                } else if (index > (carousel.slideCount - 1)){
+                    index = carousel.slideCount - 1;
+                }
+                carousel.goto(index);
             }).on('keyup',function(e){
                 switch(e.keyCode){
                     case 9: carousel.pause(); break; //tab
