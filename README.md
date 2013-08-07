@@ -40,8 +40,10 @@ See the [reference page](http://skyglobal.github.io/web-toolkit/) for a descript
 ### Testing
 You can run the Javascript Unit tests with the following:
   - grunt test
+
 These tests can also be run individially by specifying a pattern:
   - grunt test --pattern=Hash*
+
 (see [mocha](http://visionmedia.github.io/mocha/) and [chai](http://chaijs.com/‎) )
 
 ### Running
