@@ -15,9 +15,16 @@ a[name]:not([href]){
 }
 
 .wiki-header {
+  margin-bottom:0;
   small {
     color: #999;
   }
+}
+.wiki-intro{
+  margin-top: 0;
+  color: #999;
+  &:before{    content: "{ ";    display: inline;    color: #666; font-weight:bold;  }
+  &:after{    content: " }";    display: inline;    color: #666; font-weight:bold;  }
 }
 
 body{
