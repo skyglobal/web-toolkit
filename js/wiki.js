@@ -2,13 +2,15 @@ if (typeof window.define === "function" && window.define.amd) {
     define('wiki', ['toolkit'], function() {
 
         function bindEvents(){
+            console.group($($('h1').get(0)).text());
+
             $('.section').each(function(){
                 var $section = $(this),
                     notes = $section.find('> .developer-notes').html(),
                     dependencies = $section.find('> .dependencies').html(),
                     init = $section.find('> .init').html();
 
-                console.groupCollapsed($section.find('> h2').text());
+                if ($section.find('> h2').text()) console.groupCollapsed($section.find('> h2').text());
 
                 log(notes)
                 log(dependencies,'Dependencies');
@@ -37,8 +39,10 @@ if (typeof window.define === "function" && window.define.amd) {
                     }
                 });
 
-                console.groupEnd();
+                if ($section.find('> h2').text()) console.groupEnd();
             });
+
+            console.groupEnd();
 
             $('#hero').skycom_carousel({
                 carousel: {
