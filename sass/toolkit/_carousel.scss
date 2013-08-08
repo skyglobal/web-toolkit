@@ -99,11 +99,18 @@
     bottom: 0;
     left: 0;
     z-index: 1;
+    opacity:0;
+    @include transition(opacity 5s);
+
+    .window-loaded & {
+      opacity: 1;
+    }
   }
 
   .poster,
   .poster img{
     width:100%;
+    max-height: 100%;
     display: block;
     z-index: -1;
   }
@@ -521,7 +528,12 @@
 /* Hero ratio 3:1 */
 .skycom-carousel.hero-3-1 {
   .poster{
-    min-height: 240px;
+    min-height: 380px;
+    max-height: 380px;
+    @media all and (max-width: 1212px) {
+      min-height: 31vw;
+      max-height: 32vw;
+    }
   }
 
   .channel-logo {
