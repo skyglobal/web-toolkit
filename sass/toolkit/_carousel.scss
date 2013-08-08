@@ -4,9 +4,7 @@
 
 .skycom-carousel {
   @include transform(translate3d(0, 0, 0));
-  @include transform-style(preserve-3d);
   @include backface-visibility(hidden);
-
   overflow: hidden;
   position:relative;
 
