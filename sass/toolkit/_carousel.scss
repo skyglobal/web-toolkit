@@ -37,7 +37,6 @@
 
   .skycom-carousel-container {
     @include transform(translate3d(0, 0, 0));
-    @include transform-style(preserve-3d);
     @include backface-visibility(hidden);
     position: relative;
     height:100%;
