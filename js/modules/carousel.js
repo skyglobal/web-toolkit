@@ -430,7 +430,11 @@ toolkit.carousel = (function(window, $) {
                 } else if (index > (carousel.slideCount - 1)){
                     index = carousel.slideCount - 1;
                 }
-                carousel.goto(index);
+                if (index > carousel.currentIndex) {
+                    carousel.moveSlide({index: index, start:0, end:-50});
+                } else {
+                    carousel.moveSlide({index: index, start:-50, end: 0});
+                }
             }).on('keyup',function(e){
                 switch(e.keyCode){
                     case 9: carousel.pause(); break; //tab
