@@ -1,8 +1,12 @@
   .sky-well {
-    margin: 0 10px;
-    padding: 20px 20px 1px;
+    padding: 20px;
     background-color: #f7f7f7;
-    margin-bottom: 1em;
+    margin: 1em 0;
     border-radius: 5px;
     box-shadow: 0 0 3px #bababa;
   }
+
+  .sky-form.sky-well{
+  	padding-bottom: 1px;
+  }
+
