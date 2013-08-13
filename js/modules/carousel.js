@@ -236,7 +236,9 @@ toolkit.carousel = (function(window, $) {
             this.showCanvas(function() {
                 carouselControls.hide();
                 $self.carousel.unbindTouchEvents();
-                $self.player.sky_html5player($self.options);// initialise after fading for ie7
+                $self.player.sky_html5player($self.options); //todo: move to main video function
+                setTimeout(function(){sky.html5player.play();},1333); //todo: call without setTimeout. S3 breaks as does flash ie8
+//                todo: do both todo's when video team add flash queueing + fixed S3
             });
         },
         stop: function() {
@@ -310,7 +312,7 @@ toolkit.carousel = (function(window, $) {
             },
             video: {
                 token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-                autoplay: true,
+                autoplay: false,
                 videoId: null,
                 freewheel: false, //disable ads
                 placeHolderImage: '//static.video.sky.com/posterframes/skychasky.jpg'

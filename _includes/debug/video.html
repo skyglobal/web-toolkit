@@ -16,7 +16,6 @@
 
 
 <div id=container style="width:400px;height:400px;">
-
     <div class="videocontrolcontainer">
         <video></video>
         <img class="posterFrame"/>
@@ -35,6 +34,7 @@
 </a>
 <script>
     $('.play-video-3').on('click', function() {
+        videoOptions.autoplay = true;
         $('video').sky_html5player(videoOptions);
     });
     $('.close-3').on('click', function(){
@@ -53,6 +53,7 @@
 </a>
 <script>
     $('.play-video-1').on('click', function() {
+        videoOptions.autoplay = true;
         $('video').sky_html5player(videoOptions);
     });
     $('.close-1').on('click', function(){
@@ -73,6 +74,7 @@
 </a>
 <script>
     $('.play-video-2').on('click', function() {
+        videoOptions.autoplay = true;
         $('video').sky_html5player(videoOptions);
     });
     $('.close-2').on('click', function(){
@@ -81,5 +83,89 @@
             $('.videocontrolcontainer').html('<video></video><img class="posterFrame"/>');
         });
     });
+</script>
+<hr />
+
+<h2>Initialise then 'play' bug</h2>
+<p>Click Play - nothing happens (With autoplay:false then calling play() manually). </p>
+<a href="#!" class="play-video-3" data-video-id="clip-00cwoia5">PLAY ME! </a><br/>
+<a href="#!" class="close-3">
+    <span class="at">Close</span>
+</a>
+<script>
+    $('.play-video-3').on('click', function() {
+        videoOptions.autoplay = false;
+        $('video').sky_html5player(videoOptions);
+        //do some funky stuff here...
+        sky.html5player.play();
+    });
+    $('.close-3').on('click', function(){
+        sky.html5player.close($('#container'));
+    });
+</script>
+<hr />
+
+<h2>S3 Start Video bug</h2>
+<p>S3 is buggy with <code>autoplay:true</code></p>
+<p>Click Play - nothing happens (With autoplay:true). Is flakey and seems to depend on race-condition</p>
+<p>We currently fix this with a workaround in our code (below) but would obviously like not to do this (with a setTimeout)</p>
+<a href="#!" class="play-video-4" data-video-id="clip-00cwoia5">PLAY ME! </a><br/>
+<a href="#!" class="close-4">
+    <span class="at">Close</span>
+</a>
+<script>
+    $('.play-video-4').on('click', function() {
+        videoOptions.autoplay = true;
+        $('video').sky_html5player(videoOptions);
+    });
+    $('.close-4').on('click', function(){
+        sky.html5player.close($('#container'));
+    });
+</script>
+<hr />
+
+
+<h2>Queuing bug</h2>
+<p>Click Play - js .setPlay error (With autoplay:false change height then .play()). </p>
+<a href="#!" class="play-video-5" data-video-id="clip-00cwoia5">PLAY ME! </a><br/>
+<a href="#!" class="close-5">
+    <span class="at">Close</span>
+</a>
+<script>
+    $('.play-video-5').on('click', function() {
+        videoOptions.autoplay = false;
+        $('video').sky_html5player(videoOptions);
+        $('#container').animate({ height: 200 }, 500, function(){
+            sky.html5player.play();
+        });
+    });
+    $('.close-5').on('click', function(){
+        sky.html5player.close($('#container'));
+    });
+</script>
+<hr />
+
+<h2>S3 and IE8 Queueing work around</h2>
+<p>
+    <code>
+        videoOptions.autoplay = false;
+        $('video').player.sky_html5player(videoOptions);
+        setTimeout(function(){sky.html5player.play();},1333); </code>
+</p>
+<a href="#!" class="play-video-6" data-video-id="clip-00cwoia5">PLAY ME! </a><br/>
+<a href="#!" class="close-6">
+    <span class="at">Close</span>
+</a>
+<script>
+    $('.play-video-6').on('click', function() {
+        videoOptions.autoplay = false;
+        $('video').sky_html5player(videoOptions);
+        $('#container').animate({ height: 200 }, 500, function(){
+            setTimeout(function(){sky.html5player.play();},1333);
+        });
+    });
+    $('.close-6').on('click', function(){
+        sky.html5player.close($('#container'));
+    })
 </script>
 <hr />
