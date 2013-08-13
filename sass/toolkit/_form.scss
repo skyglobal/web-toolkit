@@ -10,7 +10,10 @@
   }
 
   select,
-  input[type="text"] {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"] {
     @include box-sizing(border-box);
     width: 221px;
   }
@@ -44,7 +47,10 @@
     }
   }
 
-  input[type="text"] {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"] {
     @include box-sizing(border-box);
     height: 2em;
     font-family: SkyTextRegular;
