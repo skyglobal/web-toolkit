@@ -15,17 +15,19 @@
 </script>
 
 
-<div id=container style="width:400px;height:400px;">
+<div id=container style="width:360px;height:200px;">
     <div class="videocontrolcontainer">
         <video></video>
         <img class="posterFrame"/>
     </div>
 </div>
+You can see on the desktop, the controls seem a bit big;
 
 <hr />
 
 <h2>IE8 Close Video bug</h2>
 <p>Click Play, click close - then the video will start playing again after closing.</p>
+<p>This also demonstrates the need to click twice on mobile devices (e.g. iPhone)</p>
 <p>We currently fix this with a workaround in our code: <code>$self.videocontrolcontainer.html($self.originalHtml);</code> after executing <code>close()</code>.
     but this cause another bug (below) with IE9 when the video gets resized...</p>
 <a href="#!" class="play-video-0" data-video-id="clip-00cwoia5">PLAY ME! </a><br/>
@@ -59,7 +61,7 @@
     $('.close-1').on('click', function(){
         sky.html5player.close($('#container'));
         $('.videocontrolcontainer').html('<video></video><img class="posterFrame"/>');
-        $('#container').css('height', '200px');    })
+        $('#container').css('height', '400px');    })
 </script>
 <hr />
 
@@ -79,7 +81,7 @@
     });
     $('.close-2').on('click', function(){
         sky.html5player.close($('#container'));
-        $('#container').animate({ height: 200 }, 500, function(){
+        $('#container').animate({ height: 400 }, 500, function(){
             $('.videocontrolcontainer').html('<video></video><img class="posterFrame"/>');
         });
     });
@@ -135,7 +137,7 @@
     $('.play-video-5').on('click', function() {
         videoOptions.autoplay = false;
         $('video').sky_html5player(videoOptions);
-        $('#container').animate({ height: 200 }, 500, function(){
+        $('#container').animate({ height: 400 }, 500, function(){
             sky.html5player.play();
         });
     });
@@ -160,7 +162,7 @@
     $('.play-video-6').on('click', function() {
         videoOptions.autoplay = false;
         $('video').sky_html5player(videoOptions);
-        $('#container').animate({ height: 200 }, 500, function(){
+        $('#container').animate({ height: 400 }, 500, function(){
             setTimeout(function(){sky.html5player.play();},1333);
         });
     });
