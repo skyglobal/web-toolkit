@@ -203,13 +203,13 @@ toolkit.carousel = (function(window, $) {
     function Video(carousel, options) {
         this.carousel = carousel;
         this.wrapper = carousel.$viewport.find('.video-wrapper');
-        this.wrapper.attr('id', 'video-' + options.player.videoId);
+        this.wrapper.attr('id', 'video-' + options.videoId);
         this.videocontrolcontainer = carousel.$viewport.find('.videocontrolcontainer');
         this.player = carousel.$viewport.find('video');
         this.videocontrolcontainer.find('img').on('error', function() {
             this.src = options.placeHolderImage;
         });
-        this.options = options.player;
+        this.options = options;
         this.bindEvents();
     }
 
@@ -243,10 +243,10 @@ toolkit.carousel = (function(window, $) {
             var $self = this,
                 carouselControls = this.carousel.$viewport.find('.actions, .indicators');
             sky.html5player.close(this.wrapper);
+            $self.videocontrolcontainer.html($self.originalHtml); //todo: remove once video team fix 'ie 8 repeat play' bug
             this.hideCanvas( function(){
                 $self.carousel.bindTouchEvents();
                 carouselControls.show();
-                $self.videocontrolcontainer.html($self.originalHtml);
             });
         },
         showCanvas: function(callback) {
@@ -309,12 +309,10 @@ toolkit.carousel = (function(window, $) {
                 interval: 6000
             },
             video: {
-                player: {
-                    token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-                    autoplay: true,
-                    videoId: null,
-                    freewheel: false //disable ads
-                },
+                token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
+                autoplay: true,
+                videoId: null,
+                freewheel: false, //disable ads
                 placeHolderImage: '//static.video.sky.com/posterframes/skychasky.jpg'
             }
         }, params);
@@ -395,9 +393,9 @@ toolkit.carousel = (function(window, $) {
             createMarkup(carousel);
 
             $this.on('click', '.play-video', function(e) {
-                options.video.player.videoId = $(this).attr('data-video-id');
+                options.video.videoId = $(this).attr('data-video-id');
                 if (options.carousel.videoAds){
-                    options.video.player.freewheel = true;
+                    options.video.freewheel = true;
                 }
                 var video = new Video(carousel, options.video);
                 video.play();

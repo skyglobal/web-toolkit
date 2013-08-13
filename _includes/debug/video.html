@@ -1,0 +1,85 @@
+
+<!--[if lt IE 9]> <script src="scripts/lib/jquery.1.10.2.min.js" ></script> <![endif]-->
+<!--[if gte IE 9]><!--> <script src="scripts/lib/jquery.2.0.0.min.js" ></script> <!--<![endif]-->
+<script src="scripts/lib/require.js" ></script>
+<link rel="stylesheet" href="//integration.player.sky.com/css/styles.min.css" />
+<script src="//integration.player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
+<script>
+    window.videoOptions =  {
+        token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
+        autoplay: true,
+        videoId: 'clip-00cwoia5',
+        freewheel: false, //disable ads
+        placeHolderImage: '//static.video.sky.com/posterframes/skychasky.jpg'
+    };
+</script>
+
+
+<div id=container style="width:400px;height:400px;">
+
+    <div class="videocontrolcontainer">
+        <video></video>
+        <img class="posterFrame"/>
+    </div>
+</div>
+
+<hr />
+
+<h2>IE8 Close Video bug</h2>
+<p>Click Play, click close - then the video will start playing again after closing.</p>
+<p>We currently fix this with a workaround in our code: <code>$self.videocontrolcontainer.html($self.originalHtml);</code> after executing <code>close()</code>.
+    but this cause another bug (below) with IE9 when the video gets resized...</p>
+<a href="#!" class="play-video-3" data-video-id="clip-00cwoia5">PLAY ME! </a><br/>
+<a href="#!" class="close-3">
+    <span class="at">Close</span>
+</a>
+<script>
+    $('.play-video-3').on('click', function() {
+        $('video').sky_html5player(videoOptions);
+    });
+    $('.close-3').on('click', function(){
+        sky.html5player.close($('#container'));
+    })
+</script>
+<hr />
+
+<h2>Workaround 1 (almost.. breaks ie9)</h2>
+<p>Click Play, click close - will see a javascript error in the console</p>
+<p>If we were to reset the videocontrolcontainer then resize, we then get a problem with IE9.</p>
+<p>This is what we have been doing, as it errors, but doesn't stop the user from using the video or carousel</p>
+<a href="#!" class="play-video-1" data-video-id="clip-00cwoia5">PLAY ME! </a><br/>
+<a href="#!" class="close-1">
+    <span class="at">Close</span>
+</a>
+<script>
+    $('.play-video-1').on('click', function() {
+        $('video').sky_html5player(videoOptions);
+    });
+    $('.close-1').on('click', function(){
+        sky.html5player.close($('#container'));
+        $('.videocontrolcontainer').html('<video></video><img class="posterFrame"/>');
+        $('#container').css('height', '200px');    })
+</script>
+<hr />
+
+
+
+<h2>Workaround 2 (almost.. breaks ie8)</h2>
+<p>Click Play, click close - will see a javascript error in the console</p>
+<p>If we reset the videocontrolcontainer after the resize has finished, we then get a problem with IE8...</p>
+<a href="#!" class="play-video-2" data-video-id="clip-00cwoia5">PLAY ME! </a><br/>
+<a href="#!" class="close-2">
+    <span class="at">Close</span>
+</a>
+<script>
+    $('.play-video-2').on('click', function() {
+        $('video').sky_html5player(videoOptions);
+    });
+    $('.close-2').on('click', function(){
+        sky.html5player.close($('#container'));
+        $('#container').animate({ height: 200 }, 500, function(){
+            $('.videocontrolcontainer').html('<video></video><img class="posterFrame"/>');
+        });
+    });
+</script>
+<hr />

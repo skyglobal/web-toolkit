@@ -11,6 +11,10 @@ if (typeof window.define === "function" && window.define.amd) {
         }
 
         function logPage(){
+            if (!console.group){
+                console.log('Please use a real browser for developer notes');
+                return;
+            }
             console.group($($('h1').get(0)).text());
             $('.section').each(function(){
                 var $section = $(this),
@@ -76,7 +80,10 @@ if (typeof window.define === "function" && window.define.amd) {
             return returnArr;
         }
 
-        logPage();
+        if (console){
+            logPage();
+        }
+
         initModuleDemos();
 
     });
