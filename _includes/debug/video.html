@@ -28,16 +28,16 @@
 <p>Click Play, click close - then the video will start playing again after closing.</p>
 <p>We currently fix this with a workaround in our code: <code>$self.videocontrolcontainer.html($self.originalHtml);</code> after executing <code>close()</code>.
     but this cause another bug (below) with IE9 when the video gets resized...</p>
-<a href="#!" class="play-video-3" data-video-id="clip-00cwoia5">PLAY ME! </a><br/>
-<a href="#!" class="close-3">
+<a href="#!" class="play-video-0" data-video-id="clip-00cwoia5">PLAY ME! </a><br/>
+<a href="#!" class="close-0">
     <span class="at">Close</span>
 </a>
 <script>
-    $('.play-video-3').on('click', function() {
+    $('.play-video-0').on('click', function() {
         videoOptions.autoplay = true;
         $('video').sky_html5player(videoOptions);
     });
-    $('.close-3').on('click', function(){
+    $('.close-0').on('click', function(){
         sky.html5player.close($('#container'));
     })
 </script>
