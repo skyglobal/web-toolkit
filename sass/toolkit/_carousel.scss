@@ -81,7 +81,7 @@
     }
     &.bg-shading .shade {
       display: block;
-      background-image: -ms-linear-gradient(right, rgba(255,255,255,0) 60%, rgba(255,255,255,0) 80%, rgba(255,255,255,0) 100%);
+      background-image: -ms-linear-gradient(right, rgba(255,255,255,0) 60%, rgba(255,255,255,0.6) 80%, rgba(255,255,255,0.7) 100%);
       @include background-image(linear-gradient(right, rgba(255,255,255,0) 60%, rgba(255,255,255,0.6) 80%, rgba(255,255,255,0.7) 100%));
       filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#b3ffffff', endColorstr='#00ffffff',GradientType=1);
     }
