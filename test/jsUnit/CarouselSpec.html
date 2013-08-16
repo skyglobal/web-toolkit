@@ -14,6 +14,30 @@
 
     <!--FIXTURE HTML FOR TESTS-->
     <div id="spec-markup">
+
+        <section class="module clearfix skycom-empty-carousel" data-function="carousel" data-tracking-module="hero" id="empty-hero">
+            <h2 class="at">Featured News, shows or Products from around Sky</h2>
+            <div class="skycom-carousel-container" >
+
+                <section class="clearfix skycom_12 alpha tile hero-tile bg-shading dark-scheme" data-tracking-other="Sky Movies Premiere" data-tracking-pod="tile-1" >
+                    <a class="slug clearfix skycom-internal" href="#avengers2" data-tracking-context="show-back" data-tracking-label="Watch The Avengers Now in 8 hours" data-tracking-theme="tracking-theme" >
+                        <div class="shade "></div>
+                        <figure>
+                            <div data-picture="" data-alt="Heroes" class="poster rounded">
+                                <img alt="Heroes" src="/hp/image/h1/desktopFront">
+                            </div>
+                            <figcaption class="skycom_5 skycom_6-mobile alpha cushioned overlay content">
+                                <img src="http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb1409.png" alt="Sky Movies Premiere" class="channel-logo">
+                                <h3 class="skycom-focus-el " id="empty-avengers2">Watch The Avengers Now in 8 hours</h3>
+                                <p class="skycom-ellipsis">Watch Tonight</p>
+                            </figcaption>
+                        </figure>
+                    </a>
+                </section>
+
+            </div>
+        </section>
+
         <section class="module clearfix skycom-carousel" data-function="carousel" data-tracking-module="hero" id="hero">
             <h2 class="at">Featured News, shows or Products from around Sky</h2>
             <div class="skycom-carousel-container clearfix " >
@@ -69,28 +93,6 @@
         </section>
     </div>
 
-    <section class="module clearfix skycom-empty-carousel" data-function="carousel" data-tracking-module="hero" id="empty-hero">
-        <h2 class="at">Featured News, shows or Products from around Sky</h2>
-            <div class="skycom-carousel-wrapper " >
-
-                <section class="clearfix skycom_12 alpha tile hero-tile bg-shading dark-scheme" data-tracking-other="Sky Movies Premiere" data-tracking-pod="tile-1" >
-                    <a class="slug clearfix skycom-internal" href="#avengers2" data-tracking-context="show-back" data-tracking-label="Watch The Avengers Now in 8 hours" data-tracking-theme="tracking-theme" >
-                        <div class="shade "></div>
-                        <figure>
-                            <div data-picture="" data-alt="Heroes" class="poster rounded">
-                                <img alt="Heroes" src="/hp/image/h1/desktopFront">
-                            </div>
-                            <figcaption class="skycom_5 skycom_6-mobile alpha cushioned overlay content">
-                                <img src="http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb1409.png" alt="Sky Movies Premiere" class="channel-logo">
-                                <h3 class="skycom-focus-el " id="empty-avengers2">Watch The Avengers Now in 8 hours</h3>
-                                <p class="skycom-ellipsis">Watch Tonight</p>
-                            </figcaption>
-                        </figure>
-                    </a>
-                </section>
-
-            </div>
-    </section>
     </div>
     <script>
         globalskycom = {
@@ -110,7 +112,7 @@
         describe('Carousel module', function() {
 
             $('#hero').skycom_carousel({carousel: {autoplay:false, onPlayDelay: 0, interval: 0}});
-            $('#empty-hero').skycom_carousel({autoplay:false});
+            $('#empty-hero').skycom_carousel({carousel: {autoplay:true, onPlayDelay: 0, interval: 100}});
 
             it('Creates the controls', function() {
                 expect($('.skycom-carousel').children('.indicators').find('.container span').length).to.equal(3);
@@ -120,12 +122,17 @@
                 expect($('.skycom-carousel').children('.actions').find('a.pause').length).to.equal(1);
             });
 
-            it('Doesnt create controls if there is only one slide', function() {
+            it('Doesnt create controls if there is only one slide', function(done) {
                 expect($('.skycom-empty-carousel').children('.indicators').length).to.equal(0);
                 expect($('.skycom-empty-carousel').children('.actions').find('a.previous').length).to.equal(0);
                 expect($('.skycom-empty-carousel').children('.actions').find('a.next').length).to.equal(0);
                 expect($('.skycom-empty-carousel').children('.actions').find('a.play').length).to.equal(0);
                 expect($('.skycom-empty-carousel').children('.actions').find('a.pause').length).to.equal(0);
+                setTimeout(function() {
+                    expect($('.skycom-empty-carousel .skycom-carousel-container.animate').length).to.equal(0);
+                    expect($('.skycom-empty-carousel .skycom-carousel-container')[0].style.cssText).to.equal("");
+                    done();
+                }, 110)
             });
 
             it('play and pause triggers work', function(){

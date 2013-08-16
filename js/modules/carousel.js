@@ -103,6 +103,7 @@ toolkit.carousel = (function(window, $) {
         play: function(callback, delay) {
             var self = this,
                 interval = this.options.interval;
+
             self.timerId = setTimeout(function() { //timeout for small delay after pressing pay button
                 self.next(false);
                 self.timerId = setTimeout(function loop() {  //timeout interval between slides
@@ -440,10 +441,11 @@ toolkit.carousel = (function(window, $) {
             }).find('.toggle-terms').on('click', function(e) {
                 carousel.$viewport.toggleClass('showing-tandcs');
             });
-
-            carousel[options.carousel.autoplay === true ? 'play' : 'pause'](false, options.carousel.interval);
-            carousel.goto(options.carousel.startSlideIndex, false);
-            $this.trigger('change');
+            if(carousel.slideCount > 1) {
+                carousel[options.carousel.autoplay === true ? 'play' : 'pause'](false, options.carousel.interval);
+                carousel.goto(options.carousel.startSlideIndex, false);
+                $this.trigger('change');
+            }
         });
     };
 }(window, jQuery));
