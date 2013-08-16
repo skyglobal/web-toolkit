@@ -11,17 +11,19 @@ toolkit.hashmanager = (function() {
         globalHashList: {},
         hasLoaded: false,
         windowLoaded: false,
-        lastExecutor: null
+        lastExecutor: null,
+        hash: null
     };
 
     function bindEvents() {
         $(window).on('hashchange', onHashChange);
-        var hashChangeSupport = 'onhashchange' in window;
+        var doc_mode = document.documentMode,
+        hashChangeSupport = 'onhashchange' in window && ( doc_mode === undefined || doc_mode > 7 );
         if (!hashChangeSupport){ //IE7 support
             vars.hash = document.location.hash;
             setInterval(function(){
                 if (document.location.hash !== vars.hash){
-                    onHashChange(document.location.hash);
+                    $(window).trigger( 'hashchange' );
                 }
             },200);
         }
