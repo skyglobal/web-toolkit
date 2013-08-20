@@ -266,11 +266,11 @@ toolkit.carousel = (function(window, $) {
                 $play.fadeOut();
                 height = Math.round(($carousel.width() / 16) * 9);
                 $carousel.animate({ height: height }, speed, function() {
-                    callback();
                     $wrapper.show();
                     $overlay.fadeOut(speed, function() {
                         $close.addClass('active');
                     });
+                    callback();
                 });
             });
         },
