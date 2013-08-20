@@ -396,13 +396,13 @@ toolkit.carousel = (function(window, $) {
             createMarkup(carousel);
 
             $this.on('click', '.play-video', function(e) {
+                e.preventDefault();
                 options.video.videoId = $(this).attr('data-video-id');
                 if (options.carousel.videoAds){
                     options.video.freewheel = true;
                 }
                 var video = new Video(carousel, options.video);
                 video.play();
-                return false;
             }).on('change',function(e, index) {
                 index = index || 0;
                 $this.find('.indicators .container > *').removeClass('active').eq(index).addClass('active');
