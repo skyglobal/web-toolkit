@@ -449,6 +449,8 @@ toolkit.carousel = (function(window, $) {
                 carousel[options.carousel.autoplay === true ? 'play' : 'pause'](false, options.carousel.interval);
                 carousel.goto(options.carousel.startSlideIndex, false);
                 $this.trigger('change');
+            } else {
+                carousel.unbindTouchEvents();
             }
         });
     };
