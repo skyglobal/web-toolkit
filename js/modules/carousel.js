@@ -245,6 +245,7 @@ toolkit.carousel = (function(window, $) {
         stop: function() {
             var $self = this,
                 carouselControls = this.carousel.$viewport.find('.actions, .indicators');
+            $(window).off('skycom.resizeend', $self.resizeCarousel);
             sky.html5player.close(this.wrapper);
             $self.videocontrolcontainer.html($self.originalHtml); //todo: remove once video team fix 'ie 8 repeat play' bug
             this.hideCanvas( function(){
@@ -259,13 +260,16 @@ toolkit.carousel = (function(window, $) {
                 $wrapper = $carousel.find('.video-wrapper'),
                 $play = $carousel.find('.play-video'),
                 $close = $carousel.find('.video-wrapper .close'),
-                speed= 500;
+                speed= 500,
+                $self = this;
+
             this.originalHeight = $carousel.height();
             $wrapper.addClass('playing-video');
             $overlay.fadeIn(function() {
                 $play.fadeOut();
-                height = Math.round(($carousel.width() / 16) * 9);
+                height = $self.calculateHeightForVideo();
                 $carousel.animate({ height: height }, speed, function() {
+                    $(window).on('skycom.resizeend', $.proxy($self.resizeCarousel, $self));
                     $wrapper.show();
                     $overlay.fadeOut(speed, function() {
                         $close.addClass('active');
@@ -273,6 +277,12 @@ toolkit.carousel = (function(window, $) {
                     callback();
                 });
             });
+        },
+        calculateHeightForVideo: function() {
+            return Math.round((this.carousel.$viewport.width() / 16) * 9);
+        },
+        resizeCarousel: function() {
+            this.carousel.$viewport.animate({ height: this.calculateHeightForVideo() }, 250);
         },
         hideCanvas: function(callback) {
             var $carousel = this.carousel.$viewport,
@@ -284,8 +294,8 @@ toolkit.carousel = (function(window, $) {
                 originalHeight = this.originalHeight;
             $overlay.fadeIn(speed, function() {
                 $close.removeClass('active');
-                $('.skycom-carousel').animate({ height: originalHeight }, speed, function(){
-                    $('.skycom-carousel').css({ height: 'auto' });
+                $carousel.animate({ height: originalHeight }, speed, function(){
+                    $carousel.css({ height: 'auto' });
                     callback();
                     $play.fadeIn();
                     $overlay.hide();
