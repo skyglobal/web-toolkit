@@ -218,7 +218,7 @@ toolkit.carousel = (function(window, $) {
         bindEvents: function(){
             var $self = this,
                 hijackLink = function() {
-                  return false;
+                    e.preventDefault();
                 },
                 stop = function(e){
                     $self.stop();
@@ -226,7 +226,7 @@ toolkit.carousel = (function(window, $) {
                     return false;
                 },
                 $wrapper = this.wrapper;
-            $wrapper.on('click', hijackLink).find('.close').one('click', stop);
+            $wrapper.on('click', hijackLink).find('.close').one('click touchstart', stop);
             this.player.on('ended webkitendfullscreen', stop);
         },
         play: function() {
