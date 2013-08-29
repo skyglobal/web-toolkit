@@ -222,7 +222,7 @@ toolkit.carousel = (function(window, $) {
         bindEvents: function(){
             var $self = this,
                 hijackLink = function() {
-                  return false;
+                    e.preventDefault();
                 },
                 stop = function(e){
                     $self.stop();
@@ -230,7 +230,7 @@ toolkit.carousel = (function(window, $) {
                     return false;
                 },
                 $wrapper = this.wrapper;
-            $wrapper.on('click', hijackLink).find('.close').one('click', stop);
+            $wrapper.on('click', hijackLink).find('.close').one('click touchstart', stop);
             this.player.on('ended webkitendfullscreen', stop);
         },
         play: function() {
@@ -249,6 +249,7 @@ toolkit.carousel = (function(window, $) {
         stop: function() {
             var $self = this,
                 carouselControls = this.carousel.$viewport.find('.actions, .indicators');
+            $(window).off('skycom.resizeend', $self.resizeCarousel);
             sky.html5player.close(this.wrapper);
             $self.videocontrolcontainer.html($self.originalHtml); //todo: remove once video team fix 'ie 8 repeat play' bug
             this.hideCanvas( function(){
@@ -263,13 +264,16 @@ toolkit.carousel = (function(window, $) {
                 $wrapper = $carousel.find('.video-wrapper'),
                 $play = $carousel.find('.play-video'),
                 $close = $carousel.find('.video-wrapper .close'),
-                speed= 500;
+                speed= 500,
+                $self = this;
+
             this.originalHeight = $carousel.height();
             $wrapper.addClass('playing-video');
             $overlay.fadeIn(function() {
                 $play.fadeOut();
-                height = Math.round(($carousel.width() / 16) * 9);
+                height = $self.calculateHeightForVideo();
                 $carousel.animate({ height: height }, speed, function() {
+                    $(window).on('skycom.resizeend', $.proxy($self.resizeCarousel, $self));
                     $wrapper.show();
                     $overlay.fadeOut(speed, function() {
                         $close.addClass('active');
@@ -277,6 +281,12 @@ toolkit.carousel = (function(window, $) {
                     callback();
                 });
             });
+        },
+        calculateHeightForVideo: function() {
+            return Math.round((this.carousel.$viewport.width() / 16) * 9);
+        },
+        resizeCarousel: function() {
+            this.carousel.$viewport.animate({ height: this.calculateHeightForVideo() }, 250);
         },
         hideCanvas: function(callback) {
             var $carousel = this.carousel.$viewport,
@@ -288,8 +298,8 @@ toolkit.carousel = (function(window, $) {
                 originalHeight = this.originalHeight;
             $overlay.fadeIn(speed, function() {
                 $close.removeClass('active');
-                $('.skycom-carousel').animate({ height: originalHeight }, speed, function(){
-                    $('.skycom-carousel').css({ height: 'auto' });
+                $carousel.animate({ height: originalHeight }, speed, function(){
+                    $carousel.css({ height: 'auto' });
                     callback();
                     $play.fadeIn();
                     $overlay.hide();
@@ -400,13 +410,13 @@ toolkit.carousel = (function(window, $) {
             createMarkup(carousel);
 
             $this.on('click', '.play-video', function(e) {
+                e.preventDefault();
                 options.video.videoId = $(this).attr('data-video-id');
                 if (options.carousel.videoAds){
                     options.video.freewheel = true;
                 }
                 var video = new Video(carousel, options.video);
                 video.play();
-                return false;
             }).on('change',function(e, index) {
                 index = index || 0;
                 $this.find('.indicators .container > *').removeClass('active').eq(index).addClass('active');
@@ -435,7 +445,11 @@ toolkit.carousel = (function(window, $) {
                 } else if (index > (carousel.slideCount - 1)){
                     index = carousel.slideCount - 1;
                 }
-                carousel.goto(index);
+                if (index > carousel.currentIndex) {
+                    carousel.moveSlide({index: index, start:0, end:-50});
+                } else {
+                    carousel.moveSlide({index: index, start:-50, end: 0});
+                }
             }).on('keyup',function(e){
                 switch(e.keyCode){
                     case 9: carousel.pause(); break; //tab
@@ -449,6 +463,8 @@ toolkit.carousel = (function(window, $) {
                 carousel[options.carousel.autoplay === true ? 'play' : 'pause'](false, options.carousel.interval);
                 carousel.goto(options.carousel.startSlideIndex, false);
                 $this.trigger('change');
+            } else {
+                carousel.unbindTouchEvents();
             }
         });
     };
