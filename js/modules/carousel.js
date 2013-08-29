@@ -221,7 +221,7 @@ toolkit.carousel = (function(window, $) {
     Video.prototype = {
         bindEvents: function(){
             var $self = this,
-                hijackLink = function() {
+                hijackLink = function(e) {
                     e.preventDefault();
                 },
                 stop = function(e){
