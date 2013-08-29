@@ -165,12 +165,16 @@ toolkit.carousel = (function(window, $) {
                     start: position,
                     end: -50
                 });
+                this.$viewport.find('.previous').trigger('toolkit.track');
+
             } else if (direction === 'right') {
                 this.moveSlide({
                     index: this.currentIndex - 1,
                     start: position,
                     end:0
                 });
+                this.$viewport.find('.next').trigger('toolkit.track');
+
             } else if (position !== 0) {
                 var start = (xDifference > 0) ? position + 50 : position,
                     index = this.currentIndex,
@@ -358,7 +362,7 @@ toolkit.carousel = (function(window, $) {
                     className = ' class="active"';
                 if (count <= 1) return this;
                 for (i = count; i--;) {
-                    html += '<span' + className + ' data-track data-tracking-label="indicator"></span>';
+                    html += '<span' + className + ' data-tracking data-tracking-label="indicator"></span>';
                     className = '';
                 }
                 $indicators = $(html + '</div></div>').on('click', 'span', function(e) {
