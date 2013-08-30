@@ -355,7 +355,8 @@ toolkit.carousel = (function(window, $) {
                     }
                     html += '</a>';
                 }
-                $element.find('.skycom-carousel-container').before('<div class="actions">' + html + '</div>').find('> .actions > *').each(function(index) {
+                $element.find('.skycom-carousel-container').before('<div class="actions">' + html + '</div>');
+                $element.find('> .actions > *').each(function(index) {
                     $(this).attr('data-action', actions[index].id).on('click', function(e) {
                         onclick(actions[index].id);
                         e.preventDefault();
