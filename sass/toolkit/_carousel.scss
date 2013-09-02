@@ -226,6 +226,7 @@
     box-sizing: border-box;
     z-index: 2;
     @include transform(translateZ(0)); /*to stop the text flashing on hover on safari*/
+    white-space: pre-line;
 
     a.hover {
       text-decoration: underline;
