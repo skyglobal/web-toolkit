@@ -388,6 +388,18 @@ toolkit.carousel = (function(window, $) {
             }
         };
 
+        var pressed = {};
+        $(document).on('keydown', function(e){
+            pressed[e.keyCode] = true;
+            if (pressed[17] && pressed[18]){ //VoiceOver Keys
+                $('[data-function=carousel]').trigger('pause');
+            }
+        }).on('keyup', function(e) {
+            pressed[e.keyCode] = false;
+        }).on('blur', function(e) {
+            pressed = {};
+        });
+
         return this.each(function() {
             var $this = $(this);
             var carousel = new Carousel($this, options.carousel);
