@@ -315,10 +315,10 @@ toolkit.carousel = (function(window, $) {
         var options = $.extend(true, {
             carousel: {
                 actions: [
-                    { id: 'previous', label: 'Previous' },
-                    { id: 'next', label: 'Next' },
                     { id: 'play', label: 'Play Carousel' },
-                    { id: 'pause', label: 'Pause Carousel' }
+                    { id: 'pause', label: 'Pause Carousel' },
+                    { id: 'previous', label: 'Previous' },
+                    { id: 'next', label: 'Next' }
                 ],
                 autoplay: true,
                 startSlideIndex: 0,
