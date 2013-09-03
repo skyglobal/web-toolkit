@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- site CSS -->
+  <link rel="stylesheet" href="../assets/css/normalize.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <!-- syntax highlighting CSS -->
+  <link rel="stylesheet" href="../assets/css/syntax.css">
+
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <!-- load local copies if you've no internet access-->
+  <script>window.jQuery || document.write(unescape('%3Cscript src="/assets/js/jquery.min.js"%3E%3C/script%3E'));
+  window.jQuery || document.write(unescape('%3Cscript src="/assets/js/jquery-ui.min.js"%3E%3C/script%3E'));
+  </script>
+  <script src="../assets/js/jquery.toc.min.js"></script>
+  <script src="../assets/js/app.js"></script>
+
+  <link href="../assets/images/favicon.ico" rel="shortcut icon">
+  <link href="../assets/images/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <title>VoiceOver OSX cheatsheet</title>
+  
+
+</head>
+
+<body>
+<div class="wrap" id="top" tabindex="-1">
+  <header role="banner">
+    <p><a href="../index.html"><img src="../assets/images/sky-logo.png" alt="Sky logo" class="logo1"></a></a> <a class="logo2" href="http://www.nomensa.com"><img src="../assets/images/nomensa-logo-lg.gif" alt="Nomensa logo"></a> <a id="skiplink" href="vo-osx-cheatsheet.html#main" class="hidden show-on">Skip to content</a></p>
+    <nav class="main-menu" aria-labelledby="main-menu" role="navigation">
+ <h2 id="main-menu" class="hidden">Main menu</h2>
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../guidelines/index.html">Guidelines</a></li>
+    <li><a href="../examples/index.html">Examples</a></li>
+  </ul>
+</nav>
+  </header>
+
+  <main class="" role="main" id="main" tabindex="-1">
+
+  <nav class="secondary-nav" aria-labelledby="secondary-nav" role="navigation">
+<h2 id="secondary-nav">Table of contents</h2>
+<div id="toc">
+</div>
+<a href="vo-osx-cheatsheet.html#top" id="toplink">^ Back to top</a>
+</nav>
+
+<h1>VoiceOver on OSX cheatsheet</h1>
+
+<h2>Installation (turning on)</h2>
+<p>VoiceOver is part of OSX, no installation required. To turn it on and off, press <kbd>cmd</kbd>-<kbd>F5</kbd>. </p>
+<p>If you are on a laptop with OSX Lion or older, you may need to press <kbd>fn</kbd>-<kbd>cmd</kbd>-<kbd>F5</kbd></p>
+<p>It <strong>works with Safari</strong>, support for other browsers is being worked on but I would stick with Safari.</p>
+
+<h2>Basics</h2>
+<p>The basic OSX keyboard short-cuts still work, VoiceOver uses a key-combination to add many more functions. These are called the <kbd>VO</kbd> keys.</p>
+<p><kbd>VO</kbd> keys are <kbd>cntl</kbd> (control) and <kbd>alt</kbd> (option). So pressing &quot;VO - F5&quot; means pressing <kbd>cntl</kbd>-<kbd>alt</kbd>-<kbd>F5</kbd>.</p>
+
+<dl>
+	<dt>Open VoiceOver utility</dt>
+	<dd><kbd>VO</kbd>-<kbd>F8</kbd></dd>
+	<dt>Stop speaking</dt>
+	<dd><kbd>control</kbd></dd>
+	<dt>Start/Quit</dt>
+	<dd><kbd>cmd</kbd>-<kbd>F5</kbd></dd>
+</dl>
+
+<h2 class="print-break">Navigation</h2>
+
+<p>VoiceOver has a concept of &quot;Interacting with&quot; items, including HTML documents. You can go into (interact with) pages, widgets, lists etc by pressing <kbd>VO</kbd>-<kbd>shift</kbd>-<kbd>down arrow</kbd>, and get out of them by pressing <kbd>VO</kbd>-<kbd>shift</kbd>-<kbd>up arrow</kbd>.</p>
+
+<dl>
+	<dt>Interact with an item</dt>
+	<dd><kbd>VO</kbd>-<kbd>shift</kbd>-<kbd>Down Arrow</kbd></dd>
+	<dt>Stop interacting with (exit) an item</dt>
+	<dd><kbd>VO</kbd>-<kbd>shift</kbd>-<kbd>Up Arrow</kbd></dd>
+	<dt>Perform default action on something (e.g. click)</dt>
+	<dd><kbd>VO</kbd>-<kbd>Space</kbd></dd>
+	<dt>Select a menu or list item</dt>
+	<dd><kbd>VO</kbd>-<kbd>Enter</kbd></dd>
+	<dt>Next</dt>
+	<dd><kbd>VO</kbd>-<kbd>right Arrow</kbd></dd>
+	<dt>Previous</dt>
+	<dd><kbd>VO</kbd>-<kbd>right Arrow</kbd></dd>
+	<dd>NB: You can also go up &amp; down, but left &amp; right are more likely to trace a normal path.</dd>
+	<dt>Go to top</dt>
+	<dd><kbd>VO</kbd>-<kbd>home</kbd> (on laptop: <kbd>VO</kbd>-<kbd>fn</kbd>-<kbd>left arrow</kbd>)</dd>
+	<dt>Read everything from here</dt>
+	<dd><kbd>VO</kbd>-<kbd>A</kbd></dd>
+</dl>
+
+<h2 class="print-break">Web rotor</h2>
+
+<p>The &quot;web rotor&quot; is used to list and move to page elements such as (ARIA) Landmarks, links, headings, form controls and web spots (within page bookmarks).</p>
+
+<dl>
+	<dt>Open web item rotor</dt>
+	<dd><kbd>VO</kbd>-<kbd>u</kbd></dd>
+	<dt>Move between items in menu:</dt>
+	<dd><kbd>VO</kbd> and left/right/up/down/enter.</dd>
+</dl>
+
+<h2>Search commands</h2>
+<p>Use for finding things in applications and web pages, add <kbd>shift</kbd> to reverse direction:</p>
+<ul>
+	<li><kbd>VO</kbd>-<kbd>f</kbd>: find (text search)</li>
+	<li><kbd>VO</kbd>-<kbd>cmd</kbd>-<kbd>x</kbd>: list</li>
+	<li><kbd>VO</kbd>-<kbd>cmd</kbd>-<kbd>t</kbd>: table</li>
+	<li><kbd>VO</kbd>-<kbd>cmd</kbd>-<kbd>l</kbd>: link</li>
+	<li><kbd>VO</kbd>-<kbd>cmd</kbd>-<kbd>h</kbd>: heading</li>
+	<li><kbd>VO</kbd>-<kbd>cmd</kbd>-<kbd>m</kbd>: heading of the same level</li>
+	<li><kbd>VO</kbd>-<kbd>cmd</kbd>-<kbd>p</kbd>: next plain text</li>
+	<li><kbd>VO</kbd>-<kbd>cmd</kbd>-<kbd>v</kbd>: visited link</li>
+	<li><kbd>VO</kbd>-<kbd>cmd</kbd>-<kbd>j</kbd>: next control</li>
+	<li><kbd>VO</kbd>-<kbd>cmd</kbd>-<kbd>g</kbd>: graphic</li>
+</ul>
+
+<h2>More information</h2>
+<p>For more, please see the <a href="http://www.apple.com/voiceover/info/guide/">full user guide</a> at http://www.apple.com/voiceover/info/guide/</p>
+
+
+
+
+  </main> 
+
+</div><!-- end .wrap -->
+
+<footer role="contentinfo">
+  <p>Created by <a href="http://www.nomensa.com">Nomensa</a> for BSkyB - <a href="mailto:bskyb@nomensa.com?subject=Accessibility%20Question%20-%20Sky">Questions</a></p>
+  <ul>
+    <li><a href="../glossary.html">Glossary</a></li>
+  </ul>
+
+</footer>
+
+</body>
+
+</html>

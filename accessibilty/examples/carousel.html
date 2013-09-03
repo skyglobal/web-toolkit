@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- site CSS -->
+  <link rel="stylesheet" href="../assets/css/normalize.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <!-- syntax highlighting CSS -->
+  <link rel="stylesheet" href="../assets/css/syntax.css">
+
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <!-- load local copies if you've no internet access-->
+  <script>window.jQuery || document.write(unescape('%3Cscript src="/assets/js/jquery.min.js"%3E%3C/script%3E'));
+  window.jQuery || document.write(unescape('%3Cscript src="/assets/js/jquery-ui.min.js"%3E%3C/script%3E'));
+  </script>
+  <script src="../assets/js/jquery.toc.min.js"></script>
+  <script src="../assets/js/app.js"></script>
+
+  <link href="../assets/images/favicon.ico" rel="shortcut icon">
+  <link href="../assets/images/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <title>Carousel example</title>
+  
+
+</head>
+
+<body>
+<div class="wrap" id="top" tabindex="-1">
+  <header role="banner">
+    <p><a href="../index.html"><img src="../assets/images/sky-logo.png" alt="Sky logo" class="logo1"></a></a> <a class="logo2" href="http://www.nomensa.com"><img src="../assets/images/nomensa-logo-lg.gif" alt="Nomensa logo"></a> <a id="skiplink" href="carousel.html#main" class="hidden show-on">Skip to content</a></p>
+    <nav class="main-menu" aria-labelledby="main-menu" role="navigation">
+ <h2 id="main-menu" class="hidden">Main menu</h2>
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../guidelines/index.html">Guidelines</a></li>
+    <li><a href="index.html">Examples</a></li>
+  </ul>
+</nav>
+  </header>
+
+  <main class="" role="main" id="main" tabindex="-1">
+
+  <nav class="secondary-nav" aria-labelledby="secondary-nav" role="navigation">
+<h2 id="secondary-nav">Table of contents</h2>
+<div id="toc">
+</div>
+<a href="carousel.html#top" id="toplink">^ Back to top</a>
+</nav>
+
+	<h1>Carousels</h1>
+	<p>Sky.com uses many (many!) carousels which often take different approaches to implementation, and therefore they have varying levels of accessibility.</p>
+
+	<figure>
+	    <img class="bordered" src="../assets/images/examples-carousel.png" alt="Screenshot of the Sky homepage with the menu showing for Sky products.">
+	    <figcaption>Keyboard access for the homepage carousel is ok, but screen readers users get a different experience.</figcaption>
+  	</figure>
+
+  	<p>The homepage carousel currently provides the best accessibility experience, so this page talks about how to make that approach fully accessible. The homepage carousel does not currently provide a good experience for screen reader users as they have to navigate through all the hidden content.</p>
+
+	<h2>Accessibility requirements</h2>
+
+	<p>The primary requirements for carousels with content are that:</p>
+
+	<ul>
+		<li>The controls are obvious, i.e. visible and clear about how they work.</li>
+		<li>Movement is either activated by the user, or can easily be paused by the user.<br>(<a href="../guidelines/design.html#controls-animation">Controls for animated content</a>)</li>
+		<li>Keyboard users (including screen readers):
+			<ul>
+				<li>Can tab to the carousel, starting with the controls.</li>
+				<li>Can tell which control has focus.</li>
+				<li>The carousel does not automatically move when in focus.</li>
+				<li>Tabbing (or moving through with a screen reader) does not get to hidden content.</li>
+			</ul>
+		</li>
+		<li>Screen reader users can tell that it is a dynamic element (e.g. with a hidden heading at the start of the carousel).</li>
+	</ul> 
+	<p>The homepage carousel fulfils most of these requirements apart from preventing access to hidden content for screen reader users.</p>
+
+	<h2>Methods</h2>
+	
+	<p>Currently a visual-keyboard user cannot tab to the hidden content, but screen reader users can. There are two possible ways to remove the hidden content for screen readers:</p>
+	<ol>
+		<li>Fully hide the hidden content, with <code>display: none;</code> or an equivalent.</li>
+		<li>Dynamically add/remove the content from the tab index, applying <code>tabindex="-1"</code> to hidden content, and <code>tabindex="0"</code> to the visible content.</li>
+	</ol>
+	<p>The second option may be easier for a carousel, as the non-visible content is actually in the background rather than hidden.</p>
+
+	<h2>Examples</h2>
+	<p>It was not possible in the time allotted for this toolkit to fully develop a working carousel, but one of the methods above should be straightforward to apply.</p>
+
+
+	<h2>Testing</h2>
+
+	<p>Similar to the requirements, in supported browsers and using a mouse, check that:</p>
+
+	<ul>
+	  <li>The controls are obvious, i.e. visible and clear about how they work.</li>
+	  <li>Movement is either activated by the user, or can easily be paused by the user.</li>
+	</ul>
+
+	<p>In supported browsers with a keyboard check that:</p>
+
+	<ul>
+	  <li>You can <kbd>tab</kbd> to the carousel, and get to the controls first.</li>
+	  <li>You can see (via outline or other visible change) which control / link is highlighted.</li>
+	  <li>The focus does not automatically change when in the carousel.</li>
+	  <li>You cannot <kbd>tab</kbd> to hidden content.</li>
+	</ul>
+
+	<p>Also, with common screen readers (JAWs, NVDA, VoiceOver/OSX &amp; VoiceOver/iOS) check that:</p>
+	<ul>
+	  <li>You can <kbd>tab</kbd> to the carousel, and get to the controls first.</li>
+	  <li>The focus does not automatically change when in the carousel.</li>
+	  <li>You cannot <kbd>tab</kbd> to hidden content.</li>
+	</ul>
+
+
+
+  </main> 
+
+</div><!-- end .wrap -->
+
+<footer role="contentinfo">
+  <p>Created by <a href="http://www.nomensa.com">Nomensa</a> for BSkyB - <a href="mailto:bskyb@nomensa.com?subject=Accessibility%20Question%20-%20Sky">Questions</a></p>
+  <ul>
+    <li><a href="../glossary.html">Glossary</a></li>
+  </ul>
+
+</footer>
+
+</body>
+
+</html>
