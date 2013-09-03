@@ -1,0 +1,74 @@
+.tabs {
+  margin: 1em 0 3em;
+}
+
+ul.listOfTabs {
+  float: left; 
+  list-style: none; 
+  margin: 0; 
+  padding: 0;
+}
+
+.listOfTabs li {
+  position: relative;
+  top: 2px;
+  float: left;
+  margin: 0 10px 0 0;
+  padding: 0;
+}
+
+.listOfTabs li a {
+  display:block;
+  margin: 0;
+  padding: 8px 0.5em 10px;
+  cursor: pointer;
+  background: #ddd;
+  background: -moz-linear-gradient(top,white 0,#e5e5e5 100%);
+  background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,white),color-stop(100%,#e5e5e5));
+  background: -webkit-linear-gradient(top,white 0,#e5e5e5 100%);
+  background: -ms-linear-gradient(top,white 0,#e5e5e5 100%);
+  background: linear-gradient(to bottom,white 0,#e5e5e5 100%);
+  text-decoration: none;
+  border: 1px #ddd solid;
+  border-width: 1px 1px 0;
+  outline: 0;
+}
+
+.listOfTabs li a:hover, .listOfTabs li a:focus, .listOfTabs li a:active {
+   text-decoration: underline;
+   border-color: #000;
+}
+.listOfTabs li.current {
+  z-index: 10;
+  top: 2px;
+  padding-top: 2px;
+}
+/* Currently selected tab */
+.listOfTabs li.current a {
+  font-weight: bold;
+  background: #fafafa;
+  color: #333;
+  border: 1px solid #999;
+  border-bottom: 1px white solid;
+}
+/* The active styles */
+.listOfTabs li.current a:hover, .listOfTabs li.current a:focus {
+  
+  
+}
+
+.tabPanel {
+  position: relative;  /*for z-index*/
+  display: block;
+  visibility: visible;
+  clear: left;
+  overflow: auto;
+  padding: 0 1em 1em;
+  border: 1px solid #999;
+  z-index: 5;
+  color: #333;
+  background-color: #fafafa;
+}
+.tabPanel:focus {outline: 1px dotted #999;}
+.tabPanel h2 {display: inline-block;}
+.tabPanel h2:focus {outline: 1px dotted #999;}

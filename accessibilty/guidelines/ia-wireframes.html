@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- site CSS -->
+  <link rel="stylesheet" href="../assets/css/normalize.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <!-- syntax highlighting CSS -->
+  <link rel="stylesheet" href="../assets/css/syntax.css">
+
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <!-- load local copies if you've no internet access-->
+  <script>window.jQuery || document.write(unescape('%3Cscript src="/assets/js/jquery.min.js"%3E%3C/script%3E'));
+  window.jQuery || document.write(unescape('%3Cscript src="/assets/js/jquery-ui.min.js"%3E%3C/script%3E'));
+  </script>
+  <script src="../assets/js/jquery.toc.min.js"></script>
+  <script src="../assets/js/app.js"></script>
+
+  <link href="../assets/images/favicon.ico" rel="shortcut icon">
+  <link href="../assets/images/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <title>IA accessibility guidelines</title>
+  
+
+</head>
+
+<body>
+<div class="wrap" id="top" tabindex="-1">
+  <header role="banner">
+    <p><a href="../index.html"><img src="../assets/images/sky-logo.png" alt="Sky logo" class="logo1"></a></a> <a class="logo2" href="http://www.nomensa.com"><img src="../assets/images/nomensa-logo-lg.gif" alt="Nomensa logo"></a> <a id="skiplink" href="ia-wireframes.html#main" class="hidden show-on">Skip to content</a></p>
+    <nav class="main-menu" aria-labelledby="main-menu" role="navigation">
+ <h2 id="main-menu" class="hidden">Main menu</h2>
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="index.html">Guidelines</a></li>
+    <li><a href="../examples/index.html">Examples</a></li>
+  </ul>
+</nav>
+  </header>
+
+  <main class="" role="main" id="main" tabindex="-1">
+
+  <nav class="secondary-nav" aria-labelledby="secondary-nav" role="navigation">
+<h2 id="secondary-nav">Table of contents</h2>
+<div id="toc">
+</div>
+<a href="ia-wireframes.html#top" id="toplink">^ Back to top</a>
+</nav>
+
+	<h1>Information Architecture (IA) and Wireframes - Guidelines</h1>
+	<p>Building accessibility into the information architecture and wireframes will give you a firm foundation for meeting the accessibility goals. This page explains how to make sure accessibility is an integral part of the website's navigation and page structure</p>
+	<p>The following WCAG 2.0 success criteria should be considered when developing the information architecture and wireframes for Sky's website.</p>
+	<h2 id="meaningful-order">Creating a meaningful reading order</h2>
+	<blockquote class="levelA">
+	<p>1.3.2 Meaningful Sequence: When the sequence in which content is presented affects its meaning, a correct reading sequence can be programmatically determined.</p>
+	</blockquote>
+	<p>The order in which content is presented in the wireframes will have impact on the order in which content is arranged when translated into code. The visual flow of a web page does not always need to reflect the underlying order of the code. Nonetheless both should follow a meaningful sequence for people accessing the site to ensure the content makes sense when read in different ways.</p>
+
+	<figure>
+		<img src="../assets/images/ia-wireframes_page-order.png" alt="Diagram showing the structure of a page and its possible order of content.">
+		<figcaption>Figure 1: Content within the HTML should follow a logical order, not necessarily the visual flow.</figcaption>
+	</figure>
+
+	<p>For people who use assistive technologies such as screen readers, the visual arrangement of elements on the screen is effectively meaningless.  Of greater importance to people who use screen readers is the order of the content within the HTML code. This is because people who use screen readers will typically read web based content in a procedural manner.  If the content is not organised in a meaningful sequence people who use assistive technologies such as screen readers are likely to find it difficult to interpret the content on the website.</p>
+	<p>Be sure to structure wireframes in a logical order with the sequence following a top-to-bottom, left-to-right order assuming the language of the page is read left-to-right. Consider the example wireframe below:</p>
+
+	<figure>
+		<img src="../assets/images/ia-wireframes-02.png" alt="A wireframe demonstrating the typical layout of a webpage.">
+		<figcaption>Figure 2: A typical layout of a webpage.</figcaption>
+	</figure>
+
+	<p>This represents a fairly common layout found on the Internet today.  When converted to HTML the content should appear in the following order: header, left sidebar, content, right sidebar and finally the footer. This can vary depending on the content in each area. For example, navigation in the left sidebar might come last in the source order, which will help to prioritise the content on the page.</p>
+	<h3>Further Reading</h3>
+	<ul>
+	<li>W3C: <a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/content-structure-separation-sequence.html">Understanding a meaningful reading order</a></li>
+	<li>W3C: <a href="http://www.w3.org/WAI/WCAG20/quickref/#qr-content-structure-separation-sequence">Guidelines and techniques for a meaningful reading order</a></li>
+	
+	</ul>
+	<h2>Use descriptive phrases for links</h2>
+	<blockquote class="levelA">
+	<p>2.4.4 Link Purpose (In Context): The purpose of each link can be determined from the link text alone, or from the link text together with its programmatically determined link context, except where the purpose of the link would be ambiguous to users in general.</p>
+	</blockquote>
+	<p>Making link phrases clear and concise helps people understand which page they will reach when following a link on the page.  Ensure that each link uses clear and simple language that accurately indicates the page the link leads to.</p>
+	<p>Writing meaningful link phrases is a key part of the process when developing the information architecture and wireframes for the website. The terminology used for link phrases in both the IA and wireframes should be considered at an early stage to avoid possible accessibility issues.</p>
+
+	<figure>
+		<img src="../assets/images/ia-wireframes-03.png" alt="Bad link text of &quot;Click here!&quot; and good link text of &quot;Learn more about Accessibility&quot;.">
+		<figcaption>Figure 3: Choosing meaningful link phrases is important.</figcaption>
+	</figure>
+
+	<p>All link phrases should be clear and accurately indicate where the link will lead. One way of thinking about link phrases is in terms of sign posts. If a sign post reads 'Bristol' and you followed the signs you would expect to reach 'Bristol' rather than 'Bournemouth'. Avoid using general terminology such as "read more" and "click here". </p>
+	<p>For more tips on writing clear link text please refer to the <a href="http://sky-toolkit.nomensa.com/assets/images/guidelines-content.html#link-text">content guidelines</a>.</p>
+	<h3>Further reading</h3>
+	<ul>
+	<li>W3C: <a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-refs.html">Understanding navigation mechanisms</a></li>
+	<li>W3C: <a href="http://www.w3.org/WAI/WCAG20/quickref/#qr-navigation-mechanisms-refs">Guidelines and techniques for navigation mechanisms</a></li>
+	</ul>
+	<h2>Finding content</h2>
+	<blockquote class="levelAA">
+	<p>2.4.5 Multiple Ways: More than one way is available to locate a Web page within a set of Web pages except where the Web Page is the result of, or a step in, a process.</p>
+	</blockquote>
+	<p>People find different navigation strategies effective for their individual requirements. For example, some people may find it easier to use a main menu rather than be overwhelmed with a sitemap. Other people may find a search form much quicker to use than a more conventional navigation method.</p>
+
+	<figure>
+		<img src="../assets/images/ia-wireframes-04.png" alt="A wireframe showing the top navigation and search input, illustrating different ways to find content.">
+		<figcaption>Figure 4: A search can be an easy and fast way for visitors to find content.</figcaption>
+	</figure>
+
+	<p>Providing different ways to navigate content will increase the likelihood that people will successfully find the information they require. To achieve this, a wireframe should look to include features such as:</p>
+	<ul>
+	<li>A sitemap;</li>
+	<li>Site search;</li>
+	<li>Site navigation;</li>
+	<li>Related web page links;</li>
+	<li>Table of contents.</li>
+	</ul>
+	<p>By providing a variety of ways to help people find information on the website you will ensure that visitors have a better chance of locating what they are looking for. Clear and consistent navigation areas will also help people understand their current location within the site hierarchy. </p>
+	<p>For websites that are likely to have a deeply nested page hierarchy it is also worthwhile considering providing a breadcrumb trail.</p>
+
+
+	<figure>
+		<img src="../assets/images/ia-wireframes-05.png" alt="A wireframe showing how a breadcrumb can be included to show the visitors current location withing the website.">
+		<figcaption>Figure 5: A breadcrumb is a great way for visitors to understand their current location on deeply nested pages.</figcaption>
+	</figure>
+
+	<p>A breadcrumb trail can be a useful way of helping people easily identify relationships between pages. The extra contextual information that this provides can be extremely useful for people with cognitive and learning disabilities.</p>
+	<h3>Further reading</h3>
+	<ul>
+	<li>Nomensa: <a href="http://www.nomensa.com/blog/2006/accessible-design-needs-good-foundations/">Accessible design needs good foundations</a></li>
+	<li>W3C: <a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-mult-loc.html">Understanding navigation mechanisms</a></li>
+	<li>W3C: <a href="http://www.w3.org/WAI/WCAG20/quickref/#qr-navigation-mechanisms-mult-loc">Guidelines and techniques for navigation mechanisms</a></li>
+	</ul>
+	<h2>Provide controls for forms</h2>
+	<blockquote class="levelA">
+	<p>3.2.2 On Input: Changing the setting of any user interface component does not automatically cause a change of context unless the user has been advised of the behaviour before using the component.</p>
+	</blockquote>
+	<p>Entering information into a form on a website should be a straightforward process. People should be able to enter their data into a form without unexpected events occurring. Whether filling in contact details or leaving a comment on a website the form used should have a control which allows you to submit information when you are ready.</p>
+	<p>Specifying the layout and functionality of a form is often done at the wireframe stage of a project. It is essential to ensure that all forms on the wireframes, regardless of the number of fields in the form have a submit button. Providing submit buttons allow people to submit data in their own time.</p>
+
+	<figure>
+		<img src="../assets/images/ia-wireframes-06.png" alt="An example form with multiple fields and a submit button.">
+		<figcaption>Figure 6: Always provide a submit button for forms.</figcaption>
+	</figure>
+
+	<p>Entering information into form fields which don't include submit buttons often has unpredictable results such as reloading the page or presenting new content without prior warning. For people unable to see the page or those who may not be able to react quickly enough these types of changes to the page can be extremely frustrating and disorientating.</p>
+	<h3>Further reading</h3>
+	<ul>
+	<li>W3C: <a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/consistent-behavior-unpredictable-change.html">Understanding why forms need controls</a></li>
+	</ul>
+	<h2 id="consistent-navigation">Provide consistent navigation</h2>
+	<blockquote class="levelAA">
+	<p>3.2.3 Consistent Navigation: Navigational mechanisms that are repeated on multiple Web pages within a set of Web pages occur in the same relative order each time they are repeated, unless a change is initiated by the user.</p>
+	</blockquote>
+	<p>When developing wireframes for a website it is important to ensure that navigation, layout and positioning of elements on the page are consistent. Consistent layout and navigation will help everyone find the information they require from the website, but will be most beneficial for people with cognitive impairments and those with partial or no sight.</p>
+
+	<figure>
+		<img src="../assets/images/ia-wireframes-07.png" alt="Two wireframes with consistent navigation and search feature location.">
+		<figcaption>Figure 7: Keep the location and functionality of navigational tools consistent across pages.</figcaption>
+	</figure>
+
+
+	<p>People with partial sight who use assistive technologies such as screen magnifiers often use visual clues and the spatial location of elements within a page as a means of quickly finding content.  Therefore, consistency is the key to helping them navigate around a web page efficiently.</p>
+	<p>Creating a consistent navigation and layout during the wireframe stage is crucial as it will often set the precedent for the rest of the project; if not addressed at this stage, it could be a complex issue to resolve later in the project.</p>
+	<h3>Further Reading</h3>
+	<ul>
+	<li>W3C: <a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/consistent-behavior-consistent-locations.html">Understanding the consistent navigation requirements</a></li>
+	<li>W3C: <a href="http://www.w3.org/WAI/WCAG20/quickref/#qr-consistent-behavior-consistent-locations">Techniques for providing consistent navigation</a></li>
+	</ul>
+	
+	<h2 id="functionality-labels">Provide consistent functionality and labels</h2>
+	<blockquote class="levelAA">
+	<p>3.2.4 Consistent Identification: Components that have the same functionality within a set of Web pages are identified consistently.</p>
+	</blockquote>
+	<p>Make sure people understand how to use features that appear repeatedly on web pages by identifying them consistently. This not only helps people to locate and use a particular feature but also predict how they will behave.</p>
+	<p>Repeated features can include things such as iconography, terminology, document referencing and controls such as search functionality.  These should be used in a consistent manner throughout the wireframes.</p>
+	<p>Ultimately, consistent labelling will help to ensure people, such as those using screen reading software, can search for components on a page by name.  This helps them identify repeated components, such as content and navigational links easily.  This is likely to lead to an improved and streamlined experience for both new and repeat visitors to the website</p>
+	<p>Consider a search form that appears within the header of every page.  The label for this form reads "Search" as does the value of the submit button for the form.  The text for the label and the submit button must be the same on all pages.  If the search form is also embedded into the content region of other pages such as a search results page, it should have the same label and submit button text as the other search form on the page.  This will help people to identify the purpose of the form control and understand how it is intended to function.</p>
+	<h3>Further reading</h3>
+	<ul>
+	<li>W3C: <a href="http://www.w3.org/WAI/WCAG20/quickref/#qr-consistent-behavior-consistent-functionality">Techniques for consistent functionality and labels</a></li>
+	<li>W3C: <a href="http://www.w3.org/TR/UNDERSTANDING-WCAG20/consistent-behavior-consistent-functionality.html">Understanding consistent functionality and labels</a></li>
+	</ul>
+	<h2>Final thoughts</h2>
+	<p>Consistency is the key to ensuring your information architecture and wireframes do not introduce accessibility issues. Spending time reviewing and analysing both the wireframes and information architecture before the next phase of a project can prove invaluable. Ironing out accessibility problems at this stage of development is much easier to achieve than further down the line.</p>
+	<p>If you feel that you don't have the necessary knowledge to spot potential accessibility issues with the information architecture and wireframes you may consider asking an external accessibility consultant to review them for you. When choosing this option, ensure you provide the accessibility consultant with as much background knowledge about your project as you can. The reasons behind why key decisions were taken can help them understand your goals and objectives allowing them to offer relevant advice to combat any accessibility issues which may arise.</p>
+	<p>Once you are satisfied with the information architecture and wireframes, the next stage of the project is to determine the look and feel by moving into the <a href="design.html">design</a> stage.</p>
+
+
+
+  </main> 
+
+</div><!-- end .wrap -->
+
+<footer role="contentinfo">
+  <p>Created by <a href="http://www.nomensa.com">Nomensa</a> for BSkyB - <a href="mailto:bskyb@nomensa.com?subject=Accessibility%20Question%20-%20Sky">Questions</a></p>
+  <ul>
+    <li><a href="../glossary.html">Glossary</a></li>
+  </ul>
+
+</footer>
+
+</body>
+
+</html>

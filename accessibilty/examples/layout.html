@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- site CSS -->
+  <link rel="stylesheet" href="../assets/css/normalize.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <!-- syntax highlighting CSS -->
+  <link rel="stylesheet" href="../assets/css/syntax.css">
+
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <!-- load local copies if you've no internet access-->
+  <script>window.jQuery || document.write(unescape('%3Cscript src="/assets/js/jquery.min.js"%3E%3C/script%3E'));
+  window.jQuery || document.write(unescape('%3Cscript src="/assets/js/jquery-ui.min.js"%3E%3C/script%3E'));
+  </script>
+  <script src="../assets/js/jquery.toc.min.js"></script>
+  <script src="../assets/js/app.js"></script>
+
+  <link href="../assets/images/favicon.ico" rel="shortcut icon">
+  <link href="../assets/images/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <title>Accessible layouts</title>
+  
+
+</head>
+
+<body>
+<div class="wrap" id="top" tabindex="-1">
+  <header role="banner">
+    <p><a href="../index.html"><img src="../assets/images/sky-logo.png" alt="Sky logo" class="logo1"></a></a> <a class="logo2" href="http://www.nomensa.com"><img src="../assets/images/nomensa-logo-lg.gif" alt="Nomensa logo"></a> <a id="skiplink" href="layout.html#main" class="hidden show-on">Skip to content</a></p>
+    <nav class="main-menu" aria-labelledby="main-menu" role="navigation">
+ <h2 id="main-menu" class="hidden">Main menu</h2>
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../guidelines/index.html">Guidelines</a></li>
+    <li><a href="index.html">Examples</a></li>
+  </ul>
+</nav>
+  </header>
+
+  <main class="" role="main" id="main" tabindex="-1">
+
+  <nav class="secondary-nav" aria-labelledby="secondary-nav" role="navigation">
+<h2 id="secondary-nav">Table of contents</h2>
+<div id="toc">
+</div>
+<a href="layout.html#top" id="toplink">^ Back to top</a>
+</nav>
+
+	<h1>Accessible Layouts</h1>
+	<p>This is a fairly gigantic area to cover, but Sky is taking a responsive design approach which helps to meet many of the accessibility requirements.</p>
+
+	<h2>Accessibility requirements</h2>
+	<p>The main requirements are that:</p>
+	<ul>
+		<li>The page can be zoomed / resized up to 200% without loosing content or functionality<br>
+			(<a href="../guidelines/html-css.html#text-resizing">Resizing</a>)</li>
+		<li>There is a meaningful order of elements, both visually and when tabbing through <br>(<a href="../guidelines/ia-wireframes.html#meaningful-order">Meaningful reading order</a>)</li>
+		<li>Navigation is consistent in placement and labelling <br>(<a href="../guidelines/ia-wireframes.html#consistent-navigation">Consistent Navigation</a> &amp; <a href="../guidelines/ia-wireframes.html#functionality-labels">Consistent labelling</a>)</li>
+		<li>Skip links are available to get past repeated navigation <br>
+			(<a href="../guidelines/html-css.html#skip-links">Skip links</a>)</li>
+	</ul>
+
+	<p>Additionally, it is useful to use ARIA landmarks to provide within-page navigation for screen readers.</p>
+
+	<h2>Methods</h2>
+	
+	<p>The main ways to meet the criteria are:</p>
+	<ul>
+		<li>Use responsive web design (percentage based layouts with media queries).</li>
+		<li>Create layouts in basic HTML first, and ensure that the linear order makes sense. Then style the page to match the intended design.</li>
+		<li>Check that the markup is appropriate</li>
+		<li>Put the navigation in the same place(s) as other pages.</li>
+		<li>Use one (perhaps two) skip links, and WAI-ARIA landmarks.</li>
+	</ul>
+
+	<h2>Examples</h2>
+	
+	<p>The following image shows one of the more complex pages (<a href="http://www.sky.com/quickbuy/build">Buy Sky</a>) overlaid with the appropriate underlying markup. Items in angle-brackets (e.g. <code>&lt;main&gt;</code>) are the HTML element, items without brackets (e.g. <code>banner</code>) are the ARIA role. Not all items are marked, just enough to provide examples.</p>
+
+	<figure>
+		<a href="../assets/images/resources-layout-markup.png"><img class="bordered" src="../assets/images/resources-layout-markup.png" alt="screenshot showing the Sky bundles page with outlines around many elements."></a>
+		<figcaption>The markup needed for an example page.</figcaption>
+	</figure>
+
+	<p>A useful list of the relevant HTML and ARIA markup is available in the <a href="../resources/structural-elements.html">Key structural elements</a> page.</p>
+
+	<h2>Testing</h2>
+
+	<p>In supported desktop browsers check that:</p>
+	<ul>
+		<li>At a small resolution (e.g. 1024 pixels wide) it is possible to zoom to 200% without horizontal scrolling or loss of content.<br>
+			<strong>NB:</strong> It is reasonable to use Internet Explorer and Firefox to test this aspect, until Safari and Chrome support zooming with media queries (see <a href="../guidelines/html-css.html#text-resizing">Resizing</a>).</li>
+		<li>Using the tab-key to progress through links results in an understandable order.</li>
+		<li>Using the tab-key to progress, one of the first links on the page is a &quot;Skip to content&quot; link.</li>
+	</ul>
+	<p>In supported mobile browsers check that zooming has not been disabled.</p>
+
+
+
+  </main> 
+
+</div><!-- end .wrap -->
+
+<footer role="contentinfo">
+  <p>Created by <a href="http://www.nomensa.com">Nomensa</a> for BSkyB - <a href="mailto:bskyb@nomensa.com?subject=Accessibility%20Question%20-%20Sky">Questions</a></p>
+  <ul>
+    <li><a href="../glossary.html">Glossary</a></li>
+  </ul>
+
+</footer>
+
+</body>
+
+</html>

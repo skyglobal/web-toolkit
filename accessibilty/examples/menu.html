@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- site CSS -->
+  <link rel="stylesheet" href="../assets/css/normalize.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <!-- syntax highlighting CSS -->
+  <link rel="stylesheet" href="../assets/css/syntax.css">
+
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <!-- load local copies if you've no internet access-->
+  <script>window.jQuery || document.write(unescape('%3Cscript src="/assets/js/jquery.min.js"%3E%3C/script%3E'));
+  window.jQuery || document.write(unescape('%3Cscript src="/assets/js/jquery-ui.min.js"%3E%3C/script%3E'));
+  </script>
+  <script src="../assets/js/jquery.toc.min.js"></script>
+  <script src="../assets/js/app.js"></script>
+
+  <link href="../assets/images/favicon.ico" rel="shortcut icon">
+  <link href="../assets/images/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <title>Menu example</title>
+  
+
+</head>
+
+<body>
+<div class="wrap" id="top" tabindex="-1">
+  <header role="banner">
+    <p><a href="../index.html"><img src="../assets/images/sky-logo.png" alt="Sky logo" class="logo1"></a></a> <a class="logo2" href="http://www.nomensa.com"><img src="../assets/images/nomensa-logo-lg.gif" alt="Nomensa logo"></a> <a id="skiplink" href="menu.html#main" class="hidden show-on">Skip to content</a></p>
+    <nav class="main-menu" aria-labelledby="main-menu" role="navigation">
+ <h2 id="main-menu" class="hidden">Main menu</h2>
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../guidelines/index.html">Guidelines</a></li>
+    <li><a href="index.html">Examples</a></li>
+  </ul>
+</nav>
+  </header>
+
+  <main class="" role="main" id="main" tabindex="-1">
+
+  <nav class="secondary-nav" aria-labelledby="secondary-nav" role="navigation">
+<h2 id="secondary-nav">Table of contents</h2>
+<div id="toc">
+</div>
+<a href="menu.html#top" id="toplink">^ Back to top</a>
+</nav>
+
+	<h1>Menu drop-downs</h1>
+	<p>The main menu drop-down on Sky does work from an accessibility point of view, primarily because it <em>does not</em> provide keyboard access to the sub-menus. This means that anyone using a keyboard (including with a screen reader) only gets to the top menu.</p>
+
+  <p>The main issue found when testing with people (April 2013) was that the menus often disappear when crossing corners or going off the edges of the drop-down.</p>
+
+  <figure>
+    <img class="bordered" src="../assets/images/examples-menu.png" alt="Screenshot of the Sky homepage with the menu showing for Sky products.">
+    <figcaption>Cutting a corner opens the wrong drop-down</figcaption>
+  </figure>
+
+  <p>In future it may also be desirable to make the sub-menus accessible to keyboard users, in which case arrow navigation and WAI-ARIA markup needs to be added.</p>
+
+
+	<h2>Accessibility requirements</h2>
+
+  <p>To make it accessible to the widest set of groups we recommend that:</p>
+
+  <ul>
+    <li>Mouse users can hover over the top-level items to activate the drop-downs (as it works now).</li>
+    <li>There is a short delay before the sub-menus disappear (similar to <a href="http://www.derbyshire.gov.uk/">Derbyshire's main menu</a>), so that you can cut-corners across top-level items and not loose the menu.</li>
+    <li>Keyboard-only users can <kbd>tab</kbd> through the top level items (as it works now), and press enter to select an item.</li>
+    <li>Keyboard-only users can use the <kbd>down-arrow</kbd> to open the sub-menus, and <kbd>tab</kbd> or <kbd>down-arrow</kbd> to progress through links in the sub-menu, and <kdb>shift-tab</kdb> or <kbd>up arrow</kbd> to go backwards.</li>
+    <li>Screen reader users should be informed of the drop-down menus by using WAI-ARIA markup.</li>
+  </ul>
+
+  <p>If the requirements above are meet, it may be desirable to provide a visual indication for visual keyboard users that there is a menu pop-up when they are focused on an item. E.g. a small down-arrow appears. However, this would need careful testing, at the moment it is not harmful to only use the top-level menu.</p>
+
+	<h2>Methods</h2>
+	<h3>1a. Traditional method - navigate all</h3>
+  <p>The traditional way of making drop-downs accessible was to enable keyboard users to tab through all the options. On Sky.com that would be a <em>lot</em> of options! This would not help the keyboard-user's experience.</p>
+
+  <h3>1b. Traditional method - no access to sub-menus</h3>
+  <p>This is the current method on Sky.com, where the sub-menus are ignored when using the keyboard. So long as the landing pages for each top-level menu item include those sub-links, it is not a problem.</p>
+
+  <h3>2. New WAI-ARIA method</h3>
+  <p>The WAI-ARIA specification defines the <a href="http://www.w3.org/WAI/PF/aria-practices/#menu">interaction model for menus</a>. This is aimed at creating Operating System style drop-down menus, and is not directly suitable for Sky.com. However, it is possible to create a hybrid which works in a similar way to the current Sky.com, and enables keyboard access (using the arrow keys) to sub-menus.</p>
+
+  <p>The WAI-ARIA markup that would be needed to enable this method is:</p>
+  <ul>
+  <li><code>role="menubar"</code> on the menu's root element, often a <code>&lt;ul&gt;</code>.</li>
+  <li><code>role="menu"</code> on the root element for each of the drop-down menus, often a nested <code>&lt;ul&gt;</code>.</li>
+  <li><code>role="menuitem"</code> on each actionable item in the menu system, including those on the menubar and those in drop-down menus and sub-menus, often applied to the <code>&lt;li&gt;s</code></li>
+  <li><code>aria-haspopup="true"</code> on any item that triggers the display of a drop-down menu. This is typically applied to all top-level menubar items, and to any menu items that have sub-menus.</li>
+  <li><code>aria-hidden="true"</code> on each drop-down menu's container element, e.g. the nested &lt;ul&gt;.  When JavaScript is used to make the menu visible, it should also change this attribute to <code>aria-hidden="false"</code>.</li>
+ </ul>
+
+ <p>NB: These attributes should be applied by JavaScript, just in case the script does not run then it won't give the appearance of functionality that is not there.</p>
+
+	<h2>Example</h2>
+	<p>It has not been possible to create and test a working menu in the time allowed for this toolkit, however, it should be reasonably straightforward to extend the current menu on Sky.com</p>
+
+  <p>The main steps would be to:</p>
+  <ol>
+    <li>Implement the delay-timer functionality (similar to the <a href="http://www.derbyshire.gov.uk/core/javascript/jquery.menus.js">menus script from Derbyshire</a>).</li>
+    <li>Apply the WAI-ARIA markup with JavaScript, and implement the <a href="http://www.w3.org/WAI/PF/aria-practices/#menu">keyboard navigation</a>, but allow people to tab through the top options.</li>
+    <li>If the menu tests well, consider applying a visual indicator that appears on focus to show that the drop-downs have drop-downs.</li>
+  </ol>
+
+  <p>It has to be said that the mouse aspects of the menu are more important than extending the keyboard access, the current menu is not harmful for keyboard users.</p>
+
+
+<h2>Testing</h2>
+
+<p>In supported browsers and using a mouse, check that:</p>
+
+<ul>
+  <li>Mousing over makes the drop-downs appear.</li>
+  <li>Mousing into the drop-down by cutting a corner does not change the drop-down.</li>
+  <li>Mousing away from the drop-down (and other menu options) and back in quickly maintains the drop-down.</li>
+</ul>
+
+<p>In supported browsers with a keyboard check that:</p>
+
+<ul>
+  <li>You can <kbd>tab</kbd> to each menu item and press enter to select it.</li>
+  <li>Tabbing to or past each top-level menu item does not automatically activate the drop-down.</li>
+  <li>You can see (via outline or other visible change) which menu item is highlighted.</li>
+  <li>With a top-level menu item selected, you can press the <kbd>down-arrow</kbd> to open the dropdown.</li>
+  <li>You can use the down &amp; up arrows to move between links in the drop-down.</li>
+  <li>Pressing up when on the top item in a sub-menu returns to the top-level menu and closes the sub-menu.</li>
+</ul>
+
+<p>Also, with common screen readers (JAWs, NVDA, VoiceOver/OSX &amp; VoiceOver/iOS) check that:</p>
+<ul>
+  <li>You can tab and arrow to each main menu item.</li>
+  <li>You can hear that it is a menu, and which main menu items have a drop-down.</li>
+  <li>You can select each main menu item, <em>or</em> open the sub-menu.</li> 
+  <li>You can move down the menu items.</li> 
+</ul>
+
+<h2>Further reading</h2>
+
+<ul>
+<li><a href="http://terrillthompson.com/blog/202">Accessible dropdown menus</a> discusses several WAI-ARIA implementations and includes examples.</li>
+<li>WAI-ARIA specification's <a href="http://www.w3.org/WAI/PF/aria-practices/#menu">interaction model for menus</a>.</li>
+</ul>
+
+
+
+  </main> 
+
+</div><!-- end .wrap -->
+
+<footer role="contentinfo">
+  <p>Created by <a href="http://www.nomensa.com">Nomensa</a> for BSkyB - <a href="mailto:bskyb@nomensa.com?subject=Accessibility%20Question%20-%20Sky">Questions</a></p>
+  <ul>
+    <li><a href="../glossary.html">Glossary</a></li>
+  </ul>
+
+</footer>
+
+</body>
+
+</html>

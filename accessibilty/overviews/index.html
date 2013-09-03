@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- site CSS -->
+  <link rel="stylesheet" href="../assets/css/normalize.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <!-- syntax highlighting CSS -->
+  <link rel="stylesheet" href="../assets/css/syntax.css">
+
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <!-- load local copies if you've no internet access-->
+  <script>window.jQuery || document.write(unescape('%3Cscript src="/assets/js/jquery.min.js"%3E%3C/script%3E'));
+  window.jQuery || document.write(unescape('%3Cscript src="/assets/js/jquery-ui.min.js"%3E%3C/script%3E'));
+  </script>
+  <script src="../assets/js/jquery.toc.min.js"></script>
+  <script src="../assets/js/app.js"></script>
+
+  <link href="../assets/images/favicon.ico" rel="shortcut icon">
+  <link href="../assets/images/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <title>Accessibility overview</title>
+  
+  <script src="../assets/js/jquery.player.min.js"></script>
+  <script src="../assets/js/swfobject.js"></script>
+    
+  <link rel="stylesheet" href="../assets/css/player-core.min.css"></script>
+  <link rel="stylesheet" href="../assets/css/player-theme.min.css"></script>
+
+</head>
+
+<body>
+<div class="wrap" id="top" tabindex="-1">
+  <header role="banner">
+    <p><a href="../index.html"><img src="../assets/images/sky-logo.png" alt="Sky logo" class="logo1"></a></a> <a class="logo2" href="http://www.nomensa.com"><img src="../assets/images/nomensa-logo-lg.gif" alt="Nomensa logo"></a> <a id="skiplink" href="index.html#main" class="hidden show-on">Skip to content</a></p>
+    <nav class="main-menu" aria-labelledby="main-menu" role="navigation">
+ <h2 id="main-menu" class="hidden">Main menu</h2>
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../guidelines/index.html">Guidelines</a></li>
+    <li><a href="../examples/index.html">Examples</a></li>
+  </ul>
+</nav>
+  </header>
+
+  <main class="" role="main" id="main" tabindex="-1">
+
+  <nav class="secondary-nav" aria-labelledby="secondary-nav" role="navigation">
+<h2 id="secondary-nav">Table of contents</h2>
+<div id="toc">
+</div>
+<a href="index.html#top" id="toplink">^ Back to top</a>
+</nav>
+
+	<h1>Accessibility overview</h1>
+
+	<h2>What is web accessibility?</h2>
+
+	<blockquote cite="http://www.w3.org/WAI/intro/accessibility.php">
+		<p>Web accessibility means that people with disabilities can perceive, understand, navigate, and interact with the Web, and that they can contribute to the Web.</p>
+	</blockquote>
+
+
+	<p>Knowing about web accessibility involves a combination of things, including how people use assistive technology, how different impairments affect the use of websites, and how web-standards enable a consistent approach across websites.</p>
+
+
+	<figure>
+		<img src="../assets/images/accessibility_venn.png" alt="a venn diagram showing that usability, web standards and assistive technology all go into understanding web acecssibility.">
+		<figcaption>Web Accessibility is a combination of factors</figcaption>
+	</figure>
+
+
+	<h2>Who does accessibility benefit?</h2>
+	<p>Accessibility is something that will be relevant to everyone at some point in their lives. Whereas some people have recognised disabilities that permanently affect the way they use technology, others may experience a temporary loss of ability at some stage. Age can also be a contributing factor, with people experiencing a drop in visual and hearing acuity in later life.</p>
+	<p>There are many reasons why someone might find the web a challenging environment. However, there are many things you can do to ensure that Sky's website delivers an inclusive experience for everyone.</p>
+
+
+	<h3>People with cognitive disabilities</h3>
+
+	<p><strong>Summary</strong>: The range of cognitive and learning disabilities is extraordinarily diverse. Conditions such as Dyslexia, Autism and Attention Deficit Disorder are all encompassed within this group.</p>
+
+	<figure><a href="http://www.cqc.org.uk/"><img class="bordered" src="../assets/images/easy-read-cqc.png" alt="The Care Quality Commission website."></a>
+		<figcaption>Imagery and text used to improve understandability.</figcaption>
+
+	</figure>
+	<p><strong>General advice</strong>: People with cognitive disabilities often benefit from being able to customise content. For example, changing colour schemes, line length or controlling animated content. Keep page layouts across the website consistent, and make sure that navigation mechanisms are clear.</p>
+
+
+	<h3>People with restricted mobility</h3>
+	<p><strong>Summary</strong>: People with restricted mobility often rely on devices other than a mouse to control their computer. Devices vary depending on the ability of each individual, but typically include keyboards, speech recognition, eye tracking, or head/mouth wands.</p>
+	<p><strong>General advice</strong>: Most non-mouse devices are supported by ensuring that all aspects of the website can be used with only a keyboard. Provide clear visual indicators for the current location of keyboard focus on the page, and use skip links to provide easy shortcuts for bypassing large chunks of content on the page.</p>
+
+	<figure>
+		<p><a href="http://www.youtube.com/watch?v=ENkjkIypXq4">Dealing with mobility impairement</a></p>
+		<figcaption>Video: Having a severe mobility impairment does not exempt you from household responsibilities</figcaption>
+	</figure>
+
+	<h3>Deaf and hearing impaired people</h3>
+	<figure class="right"><a href="http://youtu.be/KaOC9danxNo"><img src="../assets/images/captions-example.png" alt="Screenshot from a Youtube video of a Nasa space captain singing Space Oddity. Really."></a>
+		<figcaption>Youtube includes captions by default, use the player controls to turn them on.</figcaption>
+	</figure>
+	<p><strong>Summary</strong>: People who are born profoundly (completely) deaf may have British Sign Language (BSL) as their primary language. Others may lose some or all of their hearing at some point during their lives, and in some cases may benefit from wearing a hearing aid.</p>
+	<p><strong>General advice</strong>: Deaf or hearing impaired people will find audio content the biggest challenge. Provide transcripts and captions for the multimedia content, and use clear and simple language for the benefit of people who have BSL as their primary (and English as their secondary) language.</p>
+
+
+	<h3>Blind and partially sighted people</h3>
+	<p><strong>Summary</strong>: People who have little or no usable sight may use a screen reader to translate on-screen information into synthetic speech or electronic Braille. Partially sighted people may use screen magnification software to enlarge content by as much as x32 magnification. People with mild conditions such as colour blindness are also encompassed within this group.</p>
+	<p><strong>General advice</strong>: Blind and partially sighted people benefit from consistent page layouts and logical ordering of content. Ensure that text can be resized easily and consider offering a choice of alternative colour schemes.</p>
+
+	<figure>
+		<p><a href="http://www.youtube.com/watch?v=-VoCvUi4Mrg">Screen magnifier</a></p>
+		<figcaption>Video: Using a screen magnifier</figcaption>
+	</figure>
+
+	<figure>
+		<p><a href="http://www.youtube.com/watch?v=izrC4R7SsH4">Screen reader</a></p>
+		<figcaption>Video: Using a screen reader</figcaption>
+	</figure>
+
+
+	<h2>Why is accessibility important?</h2>
+	<h3>Accessibility is a legal responsibility</h3>
+	<p>In Great Britain accessibility is a legal requirement. The Equality Act (2010) in the UK, and Disability Discrimination Act (1995) in Northern Ireland, both require services to be accessible to people with disabilities. Statutory codes of practice from the Equality and Human Rights Commission (EHRC) confirm that websites are considered to be a service, regardless of whether a charge is made for accessing content or not.</p>
+
+	<h3>Accessibility is good for business</h3>
+	<p>At its heart, accessibility is about enabling more people to use the website. Sky's website drives revenue, promotes services, and spreads a message. Accessibility can increase audience by as much as 17%.</p>
+
+	<h3>Accessibility boosts search engine performance</h3>
+	<p>Accessible websites can be indexed more efficiently by search engines. Audio, video and graphical content can't be understood by a search engine, but content in text format can. Providing alternative text content (descriptions, transcripts and captions) is one of the cornerstones of good accessibility, and it also gives search engines much more to work with.</p>
+
+	<h3>Accessibility increases brand loyalty</h3>
+	<p>When someone finds a website easy to use and accessible, they'll often become a loyal visitor. More importantly, they'll often recommend the site to people they know. In marketing terms, personal recommendations are an extremely powerful tool, and accessibility can certainly contribute to that goal.</p>
+
+	<h2>How is web accessibility measured?</h2>
+	<p>The <a href="http://www.w3.org/TR/WCAG/">Web Content Accessibility Guidelines (WCAG) 2.0</a> are the globally recognised benchmark for building accessible websites and measuring web accessibility. Sky's website can achieve three different levels of accessibility under these guidelines:</p>
+	<ul>
+	<li>Level A, the most basic level;</li>
+	<li>Level AA, the intermediate level;</li>
+	<li>Level AAA, the highest level.</li>
+	</ul>
+
+	<p>There are various methods of testing a website for accessibility, although none of these methods are perfect.</p>
+
+	<figure>
+		<img src="../assets/images/access-testing-coverage.png" alt="Block diagram showing usability testing going horizontally all the way across but very thin, manual audit going 60% across and medium thckness, and automatid testing going 20% across but very thick.">
+		<figcaption>Usability testing with people who have disabilities can find a very wide range of issues (the horizontal axis), but cannot cover much of the site (vertical axis).</figcaption>
+	</figure>
+
+	<dl>
+		<dt>Usability testing with people who have disabilities.</dt>
+		<dd>Usability testing with people who have disabilities can find a great variety of issues, including many that affect the general population. However, you can only cover a few journeys in a test session, so covering all of a large site is impractical.</dd>
+		<dt>Usability testing (general population)</dt>
+		<dd>Being usable is essentially a pre-cursor to being accessible. Issues that affect everyone will affect people with disabilies, probably to a greater degree.</dd>
+		<dt>Manual audit</dt>
+		<dd>Assessing web pages against the <a href="http://www.w3.org/TR/WCAG/">WCAG guidelines</a> should highlight all accessibility related issues, however, it takes 1-3 hours per page to do properly, so a sample of pages should be selected for auditing. If the pages are representative, the results and recommendations can be applied across the whole site.</dd>
+		<dt>Automated testing</dt>
+		<dd>Testing with an automated program can cover a great deal of a website, but only for a small proportion of issues. For example, it can say that alternative text for an image is missing, but it cannot tell that a picture of a dog has an alt text &quot;cat&quot;.</dd>
+	</dl>
+
+	<p>Nomensa recommend using a combination of methods depending on the project, usually starting with a manual audit and including testing with people who have disabilities when possible.</p>
+
+	<p>Public sector organisations are required to meet Level AA, and this is a reasonable and realistic goal for most websites regardless of sector. Whereas Level A doesn't offer the all round experience needed by people with some disabilities, Level AAA introduces challenges that require additional planning (and possibly budget). <a href="../assets/Online_Accessibility_Policy_v1.0.docx">Sky's accessibility policy (Word document)</a> outlines Level AA as the target.</p>
+
+	<h2>Final thoughts</h2>
+	<p>Throughout these accessibility guidelines you'll find advice based on WCAG 2.0. Each section considers a key stage within the web development lifecycle or a particular choice of technology. No matter what you're working on, you'll be able to find the guidance you need to build accessibility into your project.</p>
+	<ul>
+		<li><a href="managing.html">Managing accessible projects</a></li>
+		<li><a href="procurement.html">Procuring accessible technology</a></li>
+		<li><a href="../guidelines/index.html">Guidelines</a></li>
+	</ul>
+
+
+
+  </main> 
+
+</div><!-- end .wrap -->
+
+<footer role="contentinfo">
+  <p>Created by <a href="http://www.nomensa.com">Nomensa</a> for BSkyB - <a href="mailto:bskyb@nomensa.com?subject=Accessibility%20Question%20-%20Sky">Questions</a></p>
+  <ul>
+    <li><a href="../glossary.html">Glossary</a></li>
+  </ul>
+
+</footer>
+
+</body>
+
+</html>

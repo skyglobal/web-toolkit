@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- site CSS -->
+  <link rel="stylesheet" href="../assets/css/normalize.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <!-- syntax highlighting CSS -->
+  <link rel="stylesheet" href="../assets/css/syntax.css">
+
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  <!-- load local copies if you've no internet access-->
+  <script>window.jQuery || document.write(unescape('%3Cscript src="/assets/js/jquery.min.js"%3E%3C/script%3E'));
+  window.jQuery || document.write(unescape('%3Cscript src="/assets/js/jquery-ui.min.js"%3E%3C/script%3E'));
+  </script>
+  <script src="../assets/js/jquery.toc.min.js"></script>
+  <script src="../assets/js/app.js"></script>
+
+  <link href="../assets/images/favicon.ico" rel="shortcut icon">
+  <link href="../assets/images/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <title>Design accessibility guidelines</title>
+  
+
+</head>
+
+<body>
+<div class="wrap" id="top" tabindex="-1">
+  <header role="banner">
+    <p><a href="../index.html"><img src="../assets/images/sky-logo.png" alt="Sky logo" class="logo1"></a></a> <a class="logo2" href="http://www.nomensa.com"><img src="../assets/images/nomensa-logo-lg.gif" alt="Nomensa logo"></a> <a id="skiplink" href="design.html#main" class="hidden show-on">Skip to content</a></p>
+    <nav class="main-menu" aria-labelledby="main-menu" role="navigation">
+ <h2 id="main-menu" class="hidden">Main menu</h2>
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="index.html">Guidelines</a></li>
+    <li><a href="../examples/index.html">Examples</a></li>
+  </ul>
+</nav>
+  </header>
+
+  <main class="" role="main" id="main" tabindex="-1">
+
+  <nav class="secondary-nav" aria-labelledby="secondary-nav" role="navigation">
+<h2 id="secondary-nav">Table of contents</h2>
+<div id="toc">
+</div>
+<a href="design.html#top" id="toplink">^ Back to top</a>
+</nav>
+
+<h1>Design - Guidelines</h1>
+
+<p>As you apply a visual design, many new factors start to influence accessibility. This page focuses on the aesthetics of the designs, and explains how to meet your accessibility goals in terms of colour and visual appearance.</p>
+<p>The following WCAG 2.0 success criteria should be considered when developing the designs for Sky's website.</p>
+
+<h2 id="sensory-characteristics">Don't rely on shape, size or visual location</h2>
+<blockquote class="levelA">
+	<p>1.3.3 Sensory Characteristics: Instructions provided for understanding and operating content do not rely solely on sensory characteristics of components such as shape, size, visual location, orientation, or sound.</p>
+</blockquote>
+<p>It is important to ensure that instructions do not depend on people being able to identify objects by shape, size or location. For example, blind and partially sighted people will struggle to find the "round" button, but should have no trouble in finding the button labelled "send" instead.</p>
+<p>Some people may also have trouble understanding information conveyed using graphical symbols. It is important to use visible text where possible along with graphical symbols to convey the meaning of content; particularly for lesser known symbols and iconography that might be specific to the visual designs.</p>
+
+<figure>
+	<img src="../assets/images/design-01.png" alt="A selection of icons taken out of context.">
+	<figcaption>Figure 1: Icons can be confusing when taken out of context.</figcaption>
+</figure>
+
+
+<p>These "mystery meat" symbols should therefore be supported with visible text in the designs. This text might appear next to the shape or appear on keyboard focus and mouse hover as a tooltip, allowing people to understand the meaning of the graphical symbols.</p>
+<p>In addition to this, elements within the page should not be identified simply by their visual location on the page.  Consider a web page with a left sidebar.  The side bar contains a login form.  Within the main content area there is a line of text that reads "sign in using the form to the left".  This is unlikely to cause any issues for sighted people.  However, a person using a screen reader will not be able to identify the 'left' portion of the page since screen reader software interacts with web pages in a procedural manner.  People using screen readers do not have any concept of 'left' and 'right' when listening to a web page. They are only aware of content 'above' and 'below'. In order to make this type of information accessible a textual hook needs to be provided as well.  If the login form were identified using a heading which read "login" the instructions could reference this element by means of a textual hook as well as visual location (e.g. "sign in using the 'login' form to the left").  This will make it easier for people who cannot see the page to identify the form without too much trouble.</p>
+
+<h3>Further reading</h3>
+<ul>
+<li>Nomensa: <a href="http://www.nomensa.com/blog/2010/designing-accessible-icons-part-1-of-2/">Designing accessible icons part 1</a></li>
+<li>Nomensa: <a href="http://www.nomensa.com/blog/2010/designing-accessible-icons-part-2-of-2/">Designing accessible icons part 2</a></li>
+<li>W3C: <a href="http://www.w3.org/WAI/WCAG20/quickref/#qr-content-structure-separation-understanding">Techniques for not relying on shape, size or visual location</a></li>
+
+</ul>
+
+
+<h2 id="colour-alone">Avoid the use of colour alone</h2>
+<blockquote class="levelA">
+<p>1.4.1 Use of Colour: Colour is not used as the only visual means of conveying information, indicating an action, prompting a response, or distinguishing a visual element.</p>
+</blockquote>
+
+<p>Colour or differences in colour should not be the only way content can be identified. This builds on top of success criterion 1.3.3, which deals with people's perception of shape, size and location as opposed to colour perception.</p>
+<p>Colour is often used to identify particular content such as links, but for someone with colour blindness it can be hard to identify these links when colour alone is used. Therefore additional visual cues should be used to highlight changes in the content on the designs. Text is the recommended way to provide the additional identification because it is accessible by everyone. There are several ways you can include a visual cue to distinguish between content. For example a link can be visually distinctive from surrounding text by:</p>
+<ul>
+<li>Providing an underline by default for links; or</li>
+<li>Using a contrast ratio of 3:1 with surrounding text and an underline when it receives focus.</li>
+</ul>
+<p>Including these visual indicators in the designs will help to ensure people are able to differentiate between different types of content on a website.</p>
+<p>In addition to this colour alone should not be used to identify regions or elements within a web page.  Consider a page with a large green button containing the text "Sign up" allowing visitors to sign up for a service.  Within the content area there is a line of text that reads "Click the large green button to register now".  Although most people would have no problems identifying the button, those with blindness or limited colour vision would not be able to identify it.  However, if the line of text within the content were changed to read "Click the large green 'Sign up' button to register now" people with visual impairments will be able to identify the button by its textual content without relying on the colour cue that had been provided.</p>
+
+<figure>
+	<img src="../assets/images/design-02-button.png" alt="A large green button with the text &quot;Sign Up&quot;. Text that reads &quot;Click the large green 'sign up' button to register now!&quot; is used to reference the button.">
+	<figcaption>Figure 2: Context, along with colour, is used to identify the content.</figcaption>
+</figure>
+
+
+<h3>Further reading</h3>
+<ul>
+<li>Nomensa: <a href="http://www.nomensa.com/blog/2007/designing-for-the-web/">Designing for the web</a></li>
+<li>W3C: <a href="http://www.w3.org/WAI/WCAG20/quickref/#qr-visual-audio-contrast-without-color">Techinques for the use of colour</a></li>
+
+</ul>
+
+
+<h2 id="colour-contrast">Using sufficient colour contrast</h2>
+<blockquote class="levelAA">
+	<p>1.4.3 Contrast (Minimum): The visual presentation of text and images of text has a contrast ratio of at least 4.5:1, except for the following large text, incidental, logotypes.</p>
+</blockquote>
+<p>The contrast between foreground and background colours on a website can play a big part in how easy the content is to read for people with partial sight. Using foreground and background colours that contrast well makes it much easier for people to read content more comfortably.</p>
+<p>The Web Content Accessibility Guidelines recommend that foreground and background colours have sufficient contrast, achieving a 4.5:1 ratio or higher. In reality it is not practical for all colours on a website to meet this ratio. Some exceptions to this recommendation are listed below:</p>
+<p><strong>Large Text:</strong> Large-scale text and images of large-scale text have a contrast ratio of at least 3:1. Large text is considered text that is at least 18pt in size or 14pt and bold;</p>
+<p><strong>Incidental:</strong> Text or images of text that are part of an inactive user interface component, that are pure decoration, that are not visible to anyone, or that are part of a picture that contains significant other visual content, have no contrast requirement.</p>
+<p><strong>Logotypes:</strong> Text that is part of a logo or brand name has no minimum contrast requirement.</p>
+<p>The contrast between foreground and background colour combinations can be tested during the design process using a number of tools, such as the <a href="http://www.paciellogroup.com/resources/contrast-analyser.html">Colour Contrast Analyser:</a></p>
+
+<figure>
+	<img src="../assets/images/design-03-cca.png" alt="The Colour Contrast Analyser is being used to check colour pairings on a design.">
+	<figcaption>Figure 3: Use the Colour Contrast Analyser to check contrast ratios.</figcaption>
+</figure>
+
+<p>Sky's brand palette generally provides enough colour combinations with sufficient contrast to meet the 4.5:1 ratio, this was not an issue during the audit of Sky.com (May 2013). There was a link-colour found that didn't quite have enough contrast at smaller text sizes:</p>
+
+<figure>
+	<img class="bordered" src="../assets/images/contrast-example.png" alt="Some of the links don't quite have enough contrast.">
+	<figcaption>Figure 4: Some of the blue links didn't quite have enough contrast.</figcaption>
+</figure>
+
+<p>We recommend updating this colour in the CSS, using something equal to or darker than <code>#0077dd</code> should be sufficient and looks very similiar.</p>
+
+<p>It is important that any updates to the brand colours are checked to ensure there are combinations with sufficient colour contrast.
+
+<h3>Further reading</h3>
+<ul>
+<li>Nomensa: <a href="http://www.nomensa.com/blog/2010/checking-colour-contrast/">Checking colour contrast</a></li>
+<li>W3C: <a href="http://www.w3.org/WAI/WCAG20/quickref/#qr-visual-audio-contrast-contrast">Techniques for colour contrast</a></li>
+
+</ul>
+
+<h2 id="text-in-image">Using text within an image</h2>
+<blockquote class="levelAA">
+<p>1.4.5 Images of Text: If the technologies being used can achieve the visual presentation, text is used to convey information rather than images of text, except for the following customizable, essential.</p>
+</blockquote>
+
+<p>It is important to give people the ability to adjust the presentation of text such as colour, font size, font family, background colour or line spacing to meet their reading requirements. With this in mind, the visual designs need to carefully consider what can be replicated using current HTML and CSS techniques. This will help to avoid the need to use images of text on the final website.</p>
+<p>If text within an image must be used, make sure the text within the image is at least 18pts in size and follows the recommendations in success criterion 1.4.3 Contrast (minimum). Using this font size and use colours with sufficient colour contrast will make ensure the text in the image is large enough for the majority of people to read.</p>
+<p>Logo branding is an exception to this rule, as the presentation of this information can often be critical to the brand and appearance.</p>
+
+<h3>Further reading</h3>
+<ul>
+<li>W3C: <a href="http://www.w3.org/WAI/WCAG20/quickref/#qr-visual-audio-contrast-text-presentation">Tecniques for visual contrast</a></li>
+</ul>
+
+
+<h2 id="controls-animation">Provide controls for animated content</h2>
+<blockquote class="levelA">
+<p>2.2.2 Pause, Stop, Hide: For moving, blinking, scrolling, or auto-updating information, all of the following are true: moving, blinking, scrolling, auto-updating.</p>
+</blockquote>
+
+<p>Moving, scrolling, blinking or automatically updating content can be very distracting for some people, preventing them from using the page. Other people such as those using screen reading software may not be able to access this type of content at all.</p>
+
+<aside><img class="right" src="../assets/images/design-04-carousel.png" alt="A pause/play button has been included on the moving content."></aside>
+
+<p>Movement on screen that is initiated automatically and not by the person browsing the page should be avoided where possible. Types of moving content may include scrolling news feeds, photo carousels, videos, animations and advertisements. People must be able to choose whether or not they want to view moving content. Never assume they will want to see this type of content play automatically.</p>
+
+<p>With this in mind, the visual designs need to consider how content that updates or plays can be paused or stopped and visualise this in the design. It will often result in the designs incorporating clearly labelled controls located near the blinking, scrolling or auto-updating content. These controls should enable people to play, pause or stop the content when they decide. If these controls are not considered at the visual design phase, it could become difficult to incorporate them in to the site at a later date.</p>
+
+<h3>Further reading</h3>
+<ul>
+	<li>W3C: <a href="http://www.w3.org/WAI/WCAG20/quickref/#qr-time-limits-pause">Techniques for time limits</a></li>
+</ul>
+
+
+<h2>Provide consistent navigation</h2>
+<blockquote class="levelAA">
+<p>3.2.3 Consistent Navigation: Navigation mechanisms that are repeated on multiple web pages within a set of web page occur in the same relative order each time they are repeated, unless a change is initiated by the user.</p>
+</blockquote>
+
+<p>Ensuring the location and presentation of navigational elements is consistent will benefit people who visually scan the design to locate content on a site. In particular, it will also help people using screen magnifiers that display a small portion of the screen at a time. These people use visual clues and the location of elements within a page as a means of quickly finding repeated content such as navigation.</p>
+<p>A design should maintain a level of consistency of common elements such as site links and navigation. This includes where it is positioned on the page as well as the styling used to indicate the current page and/or section. The exception to this might be the homepage, where it 
+is considered more acceptable to have a slightly different layout from other pages.</p>
+<h3>Further reading</h3>
+<ul>
+<li>W3C: <a href="http://www.w3.org/WAI/WCAG20/quickref/#qr-consistent-behavior-consistent-locations">Techniques for consistent navigation</a>.</li>
+</ul>
+
+
+<h2>Provide consistent content</h2>
+<blockquote class="levelAA">
+<p>3.2.4 Consistent Identification: Components that have the same functionality within a set of Web pages are identified consistently.</p>
+</blockquote>
+
+<p>Common features that are used on multiple pages should appear visually consistent from one page to another. This not only helps people to search for a particular feature but also predict how it will behave.</p>
+<p>It is critical that the visual designs take this into consideration when features are reused across multiple pages included in the designs. This will ultimately lead to a better experience for people using assistive technology as well as those with cognitive and learning disabilities.</p>
+<p>Consistent content will also help returning visitors to quickly find content they are looking for on the site. This should lead to a streamlined user experience as the visitor gets accustomed to the layout and components on the website.</p>
+
+<h3>Further reading</h3>
+<ul>
+<li>W3C: <a href="http://www.w3.org/WAI/WCAG20/quickref/#qr-consistent-behavior-consistent-functionality">Techniques for consistent functionality and labelling</a></li>
+</ul>
+
+
+<h2>Final thoughts</h2>
+<p>The visual design stage of a web development project is a crucial milestone in terms of accessibility. Many issues can inadvertently be introduced at this stage without realising so it is important to ensure your branding and style guidelines for your website take accessibility into account.</p>
+<p>Achieving sufficient contrast between colours is the most important aspect to get right at this stage. If the branding is updated and does not meet the requirements set out in the Web Content Accessibility Guidelines, think about providing alternative colour schemes for the site. Make sure that if you do go down this route that people are aware of the existence of the colour schemes and are able to change them easily (see <a href="http://accessibility.sky.com/">accessibility.sky.com</a> for an example).</p>
+
+
+
+  </main> 
+
+</div><!-- end .wrap -->
+
+<footer role="contentinfo">
+  <p>Created by <a href="http://www.nomensa.com">Nomensa</a> for BSkyB - <a href="mailto:bskyb@nomensa.com?subject=Accessibility%20Question%20-%20Sky">Questions</a></p>
+  <ul>
+    <li><a href="../glossary.html">Glossary</a></li>
+  </ul>
+
+</footer>
+
+</body>
+
+</html>
