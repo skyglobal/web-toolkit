@@ -165,7 +165,7 @@ toolkit.carousel = (function(window, $) {
                     start: position,
                     end: -50
                 });
-                this.$viewport.find('.previous').trigger('toolkit.track');
+                this.$viewport.find('.next').trigger('toolkit.track');
 
             } else if (direction === 'right') {
                 this.moveSlide({
@@ -173,7 +173,7 @@ toolkit.carousel = (function(window, $) {
                     start: position,
                     end:0
                 });
-                this.$viewport.find('.next').trigger('toolkit.track');
+                this.$viewport.find('.previous').trigger('toolkit.track');
 
             } else if (position !== 0) {
                 var start = (xDifference > 0) ? position + 50 : position,
