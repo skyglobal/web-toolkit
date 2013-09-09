@@ -47,15 +47,4 @@ a.btn,
       @include background(linear-gradient(top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)));
     }
   }
-
-  &.btn-small {
-    height: 24px;
-    line-height: 23px;
-    padding: 0 10px;
-  }
-
-  &.btn-large {
-    height: 46px;
-    line-height: 45px;
-  }
 }
