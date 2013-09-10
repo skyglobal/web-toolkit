@@ -25,7 +25,9 @@ end
 
 def content_type(file)
     case File.extname(file)
-      when '.js' 
+      when '.map'
+        content_type = 'text/javascript'
+      when '.js'
         content_type = 'text/javascript'
       when '.css'
         content_type = 'text/css'
