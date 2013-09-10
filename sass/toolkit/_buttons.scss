@@ -3,10 +3,11 @@ a.btn,
   @include border-radius(5px);
   font: 16px/1em $font-family;
   padding: 0 15px;
-  height: 32px;
+  height: 31px;
   position: relative;
   z-index: 2;
   border: none;
+  border-top: 1px solid #0073c5;
   background-color: #0073c5;
   color: #fff;
   display: inline-block;
@@ -24,8 +25,8 @@ a.btn,
     position: absolute;
     z-index: 1;
     top: 0;
-    left: 1.5%;
-    width: 97%;
+    left: 4%;
+    width: 93%;
     height: 10px;
   }
 

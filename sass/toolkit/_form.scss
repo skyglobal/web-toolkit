@@ -9,11 +9,7 @@
     color: $red;
   }
 
-  select,
-  input[type="text"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="url"] {
+  select {
     @include box-sizing(border-box);
     width: 221px;
   }
@@ -50,8 +46,10 @@
   input[type="text"],
   input[type="email"],
   input[type="tel"],
-  input[type="url"] {
+  input[type="url"],
+  textarea {
     @include box-sizing(border-box);
+    @include box-shadow(1px 1px 3px 0px rgba(0, 0, 0, 0.2) inset);
     height: 2em;
     font-family: SkyTextRegular;
     font-size: 16px;
@@ -61,11 +59,17 @@
     padding: 0 10px;
     border: 1px solid #999;
     outline: none;
+    margin-right: 20px;
 
     &:focus {
-      @include single-box-shadow(#0094ff, 0, 0, 2px, 0px);
+      // @include single-box-shadow(#0094ff, 0, 0, 2px, 0px);
       border: 1px solid #0094ff;
     }
+  }
+
+  textarea {
+    height: 5em;
+    padding: 5px 10px;
   }
 
   .date-picker input[type="text"] {
@@ -86,6 +90,17 @@
       margin-bottom: 5px;
     }
 
+  }
+}
+
+.skycom-mobile {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  textarea {
+    @include box-shadow(none);
+    margin-right: 0;
   }
 }
 
