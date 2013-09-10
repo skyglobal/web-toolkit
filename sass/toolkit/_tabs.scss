@@ -2,6 +2,7 @@
 
 .tabs {
   font-family: $font-family;
+  font-size: 1.25em;
   margin: 20px 0;
   border-bottom: solid 1px #d7d5d5;
 }
@@ -11,10 +12,12 @@
   float: left;
   margin-right: 4px;
   position: relative;
-  border: solid 1px #d7d5d5;
+  border: solid 1px #bbbbbb;
   background: #eee;
   border-radius: 5px 5px 0 0;
   border-bottom: 0;
+  position: relative;
+  bottom: -11px;
 
   &:before {
     content: "";
@@ -43,7 +46,7 @@
     color: #333;
     display: block;
     text-align: center;
-    padding: 0 20px;
+    padding: 0 40px;
     line-height: 32px;
     height: 32px;
     @include transition(background-color .25s);
@@ -64,7 +67,7 @@
 }
 
 .tabcontents {
-  @media screen and (max-width: $mobile-width) {
+  @media screen and (min-width: $mobile-width) {
     width: 1140px;
     overflow-y: hidden;
   }
@@ -73,8 +76,9 @@
 /* tabs theme */
 .tab.selected {
   margin-bottom: -1px;
-  background: #0073c5;
-  border: solid 1px #0073c5;
+  background-color: #fff;
+  bottom: 0;
+  font-size: 1.2em;
 
   &:before {
     background: rgba(255, 255, 255, 0.25);
@@ -97,6 +101,7 @@
   a {
     text-decoration: none;
     cursor: default;
-    color: #fff !important;
+    height: 44px;
+    line-height: 44px;
   }
 }
