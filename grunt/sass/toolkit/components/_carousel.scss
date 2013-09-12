@@ -615,17 +615,44 @@
   }
 }
 
+
+            
+/* Hero ratio 3:1 HOMEPAGE */
+.homepage {
+  .skycom-carousel.hero-3-1 {
+    .poster{
+      min-height: 380px;
+      max-height: 380px;
+      @media all and (max-width: 1212px) {
+        min-height: 31vw;
+        max-height: 32vw;
+      }
+    }
+
+    .channel-logo {
+      max-height: 34px;
+      max-width: 180px;
+    }
+
+
+    @media all and (max-width: 767px) {
+      .poster{
+        min-height: 110px;
+      }
+    }
+  }
+}
+      
+      
+
 /* Hero ratio 3:1 NON-HOMEPAGE */
 .skycom-carousel.hero-3-1 {
   .poster{
+    min-height: 308px;
+    max-height: 308px;
     @media all and (max-width: 1212px) {
       min-height: 100%;
       max-height: 100%;
     }
-  }
-
-  .channel-logo {
-    max-height: 34px;
-    max-width: 180px;
   }
 }
