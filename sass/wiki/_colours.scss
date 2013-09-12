@@ -1,0 +1,105 @@
+.colour-block{
+  box-sizing: border-box;
+  height: 100px;
+  color:white;
+  border-radius:5px;
+  margin-bottom:10px;
+  font-size:1.25em;
+
+  &.colour-sky-1{
+    background-color: $colour-sky-1;
+  }
+  &.colour-sky-atlantic{
+    background-color: $colour-sky-atlantic;
+  }
+  &.colour-sky-arts{
+    background-color: $colour-sky-arts;
+  }
+  &.colour-sky-living{
+    background-color: $colour-sky-atlantic;
+  }
+  &.colour-sky-movies{
+    background-color: $colour-sky-movies;
+  }
+
+  &.colour-v3-red{
+    background-color: $colour-v3-red;
+  }
+  &.colour-v3-pink{
+    background-color: $colour-v3-pink;
+  }
+  &.colour-v3-yellow{
+    background-color: $colour-v3-yellow;
+  }
+  &.colour-v3-green{
+    background-color: $colour-v3-green;
+  }
+  &.colour-v3-blue{
+    background-color: $colour-v3-blue;
+  }
+
+  &.colour-sports-fanatic{
+    background-color: $colour-sports-fanatic;
+  }
+  &.colour-bb-talk{
+    background-color: $colour-bb-talk;
+  }
+  &.colour-family-friendly{
+    background-color: $colour-family-friendly;
+  }
+  &.colour-complete{
+    background-color: $colour-complete;
+  }
+  &.colour-starter{
+    background-color: $colour-starter;
+  }
+  &.colour-movie-lover{
+    background-color: $colour-movie-lover;
+  }
+  &.colour-tv-only{
+    background-color: $colour-tv-only;
+  }
+
+  &.colour-primary{
+    background-color: $primary;
+  }
+  &.colour-secondary{
+    background-color: $secondary;
+  }
+  &.colour-inactive{
+    background-color: $inactive;
+  }
+  &.colour-error{
+    background-color: $error;
+  }
+  &.colour-link{
+    background-color: $link;
+  }
+  &.colour-primary-button{
+    background-color: $primary-button;
+  }
+  &.colour-success-button{
+    background-color: $success-button;
+  }
+  &.colour-secondary-button{
+    background-color: $secondary-button;
+    color: $primary;
+  }
+  &.colour-background-dark{
+    background-color: $background-dark;
+    color: $primary;
+  }
+  &.colour-background-light{
+    background-color: $background-light;
+    color: $primary;
+  }
+  &.colour-key-line{
+    background-color: $key-line;
+    color: $primary;
+  }
+}
+
+.hex{
+  text-align: center;
+  margin-bottom:10px;
+}

@@ -8,7 +8,7 @@ a.btn,
   z-index: 2;
   border: none;
   border-top: 1px solid #0073c5;
-  background-color: #0073c5;
+  background-color: $primary-button;
   color: #fff;
   display: inline-block;
   line-height: 2em;
@@ -40,7 +40,7 @@ a.btn,
   &.secondary {
     // not done!;
     border: solid 1px #cfcfcf;
-    background: #f4f4f4;
+    background: $secondary-button;
     color: #333;
     line-height: 31px; //Text wasn't vertically aligned with old em line-height
 

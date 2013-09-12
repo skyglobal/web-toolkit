@@ -1,6 +1,6 @@
 body {
   font: 16px/1em $font-family;
-  color: #333333;
+  color: $primary;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -51,7 +51,7 @@ small {
 small.legal {
   font-size: 0.6875em;
   line-height: 1em; // might be wrong
-  color: #666666;
+  color: $secondary;
 }
 
 blockquote {
@@ -64,7 +64,7 @@ b, strong {
 }
 
 .error {
-  color: $red;
+  color: $error;
 }
 
 .white {
@@ -72,14 +72,24 @@ b, strong {
 }
 
 .black {
-  color: #333 !important;
+  color: $primary !important;
 }
 
 .medium {
   font-family: SkyTextMedium, $font-family;
 }
 
+body a {
+  color: $link;
 
+  &.chevron:before {
+    content: "> ";
+  }
+}
+
+a:hover {
+  text-decoration: underline;
+}
 
 
 .skycom-mobile {
@@ -107,70 +117,3 @@ b, strong {
     line-height: 1.25em;
   }
 }
-
-// h1, h2, h3, h4, h5, h6 {
-//   margin: 0;
-// }
-
-// h1, 
-// h2, 
-// h3, 
-// h4, 
-// h5, 
-// h6 {
-// 	font-weight: normal;
-//   line-height: 1em;
-// }
-
-// h1, .page-title-bigger {
-// 	font-size: 3.25em;
-// }
-
-// .page-title-smaller {
-//   font-size: 2.375em; 
-// }
-
-// h2, .section-title {
-// 	font-size: 1.875em;
-// }
-
-// h3, .module-title {
-//   font-size: 1.375em;
-// }
-
-// a {
-//   color: #0070a5 !important;
-// }
-
-// p {
-//   color: #333;
-// }
-
-// .secondary {
-//   color: #666;
-// }
-
-// .error {
-//   color: #D21717;
-// }
-
-// .intro-copy{
-//   font-size: 1.25em;
-// }
-
-// .supportive-copy{
-//   font-family: Helvetica, Arial, sans-serif;
-//   font-size: 0.75em;
-// }
-
-// .legal-copy{
-//   font-family: Helvetica, Arial, sans-serif;
-//   font-size: 0.688em;
-// }
-
-// .instructional-copy {
-//   font-family: Luna,SkyTextRegular;
-//   font-size: 1.875em;
-//   line-height: 3em;
-// }
-

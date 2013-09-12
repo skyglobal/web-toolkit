@@ -6,7 +6,7 @@
 
   .required:after {
     content: "*";
-    color: $red;
+    color: $error;
   }
 
   select {
