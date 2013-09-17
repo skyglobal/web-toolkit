@@ -33,6 +33,8 @@ def content_type(file)
         content_type = 'text/css'
       when '.png'
         content_type = 'image/png'
+      when '.html'
+        content_type = 'text/html'
       else
         content_type = 'image/jpeg'
     end
@@ -51,7 +53,7 @@ task :deploy_new_version do
   doc_resources = []
   puts 'Uploading doc files'
   files_to_upload.each do |file|
-    doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, content_type: content_type(file), acl: :public_read )
+    doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
 
 end
