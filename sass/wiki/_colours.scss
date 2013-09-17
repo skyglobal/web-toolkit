@@ -30,9 +30,11 @@
   }
   &.colour-v3-yellow{
     background-color: $colour-v3-yellow;
+    color: $primary;
   }
   &.colour-v3-green{
     background-color: $colour-v3-green;
+    color: $primary;
   }
   &.colour-v3-blue{
     background-color: $colour-v3-blue;
@@ -49,6 +51,7 @@
   }
   &.colour-complete{
     background-color: $colour-complete;
+    color: $primary;
   }
   &.colour-starter{
     background-color: $colour-starter;
