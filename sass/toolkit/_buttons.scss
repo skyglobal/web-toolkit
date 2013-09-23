@@ -14,6 +14,7 @@ a.btn,
   line-height: 2em;
   box-sizing: border-box;
   cursor: pointer;
+  margin-right: 20px;
 
   &:before {
     @include transition(opacity .25s);
@@ -47,5 +48,9 @@ a.btn,
     &:before {
       @include background(linear-gradient(top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)));
     }
+  }
+
+  &:last-child {
+    margin-right: 0;
   }
 }
