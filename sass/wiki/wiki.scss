@@ -36,7 +36,7 @@ body{
 
   .quick-links {
     z-index: 10;
-    height: 2em;
+    min-height: 2em;
     line-height: 2em;
     position: fixed;
     top: 0; left:0;
