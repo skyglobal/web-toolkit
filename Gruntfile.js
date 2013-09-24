@@ -3,18 +3,19 @@ module.exports = function(grunt) {
     grunt.initConfig({
         watch: {
             'toolkit': {
-                files: [ 'js/**/*.js',
-                         'sass/**/*.scss'
+                files: [ 'grunt/js/**/*.js',
+                         'grunt/sass/**/*.scss'
                 ],
                 tasks: ['compass','jshint','requirejs']
             }
         },
         clean: {
-            toolkit: ['scripts']
+            toolkit: ['dist/images','dist/scripts','dist/stylesheets'],
+            fonts: ['dist/fonts']
         },
         jshint: {
-            toolkit: ['js/modules/*.js',
-                      'js/utils/*.js'],
+            toolkit: ['grunt/js/modules/*.js',
+                      'grunt/js/utils/*.js'],
             others: ['Gruntfile.js'],
             options: {
                 "globals": {
@@ -31,9 +32,10 @@ module.exports = function(grunt) {
         compass: {
             dist: {
                 options: {
-                    sassDir: 'sass/',
-                    cssDir: 'stylesheets/',
-                    outputStyle: 'compressed',
+                    sassDir: 'grunt/sass/',
+                    cssDir: 'dist/stylesheets/',
+                    raw: 'http_path = "../"; generated_images_path = "dist/images/"; sprite_load_path = "grunt/"',
+                    outputStyle: grunt.option('beautify') ? "expanded" : "compressed" ,
                     noLineComments: true,
                     trace: true
                 }
@@ -44,8 +46,8 @@ module.exports = function(grunt) {
                 options: {
                     optimize: grunt.option('beautify') ? "none" : "uglify2",
                     preserveLicenseComments: false,
-                    baseUrl: "js",
-                    dir: "scripts",
+                    baseUrl: "grunt/js",
+                    dir: "dist/scripts",
                     removeCombined: true,
                     generateSourceMaps: true,
                     modules:[{
@@ -68,6 +70,21 @@ module.exports = function(grunt) {
                     log: false // Set to true to see console.log() output on the terminal
                 }
             }
+        },
+        webfont: {
+            icons: {
+                src: 'grunt/fonts/*.svg',
+                dest: 'dist/fonts',
+                destCss: 'dist/fonts',
+                options: {
+                    font: 'skycons',
+                    template:'grunt/fonts/template/skycon-template.css',
+                    htmlDemoTemplate:'grunt/fonts/template/skycon-template.html',
+                    htmlDemo: true,
+                    destHtml: '_includes',
+                    hashes: false
+                }
+            }
         }
     });
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -77,8 +94,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-mocha');
+    grunt.loadNpmTasks('grunt-webfont'); //https://github.com/sapegin/grunt-webfont
 
-    grunt.registerTask('default', ['clean', 'compass','jshint', 'requirejs']);
+    grunt.registerTask('default', ['clean:toolkit', 'compass', 'jshint', 'requirejs']);
+    grunt.registerTask('fonts', ['clean:fonts', 'webfont']);
     grunt.registerTask('test', ['mocha']);
     grunt.registerTask('hint', ['jshint']);
 };

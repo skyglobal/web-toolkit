@@ -1,0 +1,45 @@
+<% fontBaseName="Skycons" %>
+<% classPrefix='skycon-'%>
+<% baseClass=''%>
+<style>
+    #skycons tr i {
+        line-height:32px;
+        cursor:pointer;
+    }
+    #skycons tr:hover {
+        color:#800;
+    }
+    #skycons tr:hover i {
+        color:#800;
+        font-size:32px;
+        overflow: visible;
+    }
+    #skycons td,
+    #skycons th{
+        text-align: left;
+    }
+    #skycons th.icon,
+    #skycons td.icon{
+        text-align: center;
+    }
+
+</style>
+<h2>Skycons</h2>
+<p class="developer-notes">
+    Dont forget <code>http://web-toolkit.global.sky.com/{{ site.version }}/fonts/skycons.css</code>
+    Ensure <code>aria-hidden</code> is used on your <code>skycon</code> tags.
+</p>
+<table id=skycons>
+    <thead>
+        <tr>
+            <th>Icon</th>
+            <th>CSS Class</th>
+            <th>How it looks</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% for (var glyphIdx = 0; glyphIdx < glyphs.length; glyphIdx++) { var glyph = glyphs[glyphIdx] %>
+    <tr ><td><%= glyph %></td><td><%= baseClass %> <%= classPrefix %><%= glyph %></td><td class="icon"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td></tr>
+    <% } %>
+    </tbody>
+</table>

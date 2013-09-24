@@ -19,8 +19,7 @@ end
 
 
 def files_to_upload
-  files = ['stylesheets/toolkit.css', 'images/icons.png', 'scripts/toolkit.js', 'scripts/toolkit.js.map']
-  files = files + Dir.glob("scripts/utils/**/*.*") + Dir.glob("scripts/modules/**/*.*")
+  files = ['stylesheets/toolkit.css', "fonts/*.*", "images/icons-*.png", "scripts/toolkit.js', 'scripts/toolkit.js.map']
 end
 
 def content_type(file)
@@ -51,6 +50,7 @@ task :deploy_new_version do
   end
 
   doc_resources = []
+  cd "dist"
   puts 'Uploading doc files'
   files_to_upload.each do |file|
     doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
