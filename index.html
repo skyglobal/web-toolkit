@@ -9,6 +9,22 @@ title: Sky Web Toolkit
 http://web-toolkit.global.sky.com/{{ site.version }}/scripts/toolkit.js
 http://web-toolkit.global.sky.com/{{ site.version }}/stylesheets/toolkit.css
 http://web-toolkit.global.sky.com/{{ site.version }}/fonts/skycons.css
+
+Please add the following classes to the <code>html</code> tag:
+    <code>lt-ie10</code>, <code>lt-ie9</code> and <code>lt-ie8</code>
+
+Please add the following into you <code>head</code> tag:
+        <!--[if lt IE 10]><script type="text/javascript">
+        document.createElement('header');
+        document.createElement('section');
+        document.createElement('footer');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('hgroup');
+        document.createElement('nav');
+        document.createElement('figure');
+        document.createElement('figcaption');
+    </script><![endif]-->
     </p>
 </div>
 
