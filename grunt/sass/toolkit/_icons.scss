@@ -1,0 +1,12 @@
+$icon-sprite-dimensions: true;
+$icon-sprite-spacing: 2px;
+
+@import 'icon/*.png';
+@include all-icon-sprites;
+
+i,
+[class^="icon-"],
+[class*=" icon-"] {
+  @include inline-block;
+  overflow: hidden;
+}

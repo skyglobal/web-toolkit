@@ -12,7 +12,8 @@
 	    "grunt-contrib-compass": "latest",
 	    "grunt-contrib-requirejs": "latest",
 	    "grunt-contrib-watch": "latest",
-	    "grunt-mocha": "latest"
+	    "grunt-mocha": "latest",
+	    "grunt-webfont": "latest"
     },
     "scripts": {
         "test": "grunt test"

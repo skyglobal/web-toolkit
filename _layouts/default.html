@@ -1,14 +1,12 @@
 <!doctype html>
 <html>
 	<head>
-        <!--[if lt IE 9]> <script src="scripts/lib/jquery.1.10.2.min.js" ></script> <![endif]-->
-        <!--[if gte IE 9]><!--> <script src="scripts/lib/jquery.2.0.0.min.js" ></script> <!--<![endif]-->
-		<link rel="stylesheet" href="stylesheets/styles.css">
-		<link rel="stylesheet" href="stylesheets/demo/solarized-light.css">
+        <!--[if lt IE 9]> <script src="dist/scripts/lib/jquery-1.10.2.js" ></script> <![endif]-->
+        <!--[if gte IE 9]><!--> <script src="dist/scripts/lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
+		<link rel="stylesheet" href="dist/stylesheets/wiki.css">
+		<link rel="stylesheet" href="dist/fonts/skycons.css">
 
 		{% include skycom_resources.html %}
-
-		<script src="js/demo/rainbow-custom.min.js"></script>
 
         <!--[if lt IE 10]><script type="text/javascript">
             document.createElement('header');
@@ -36,6 +34,7 @@
                         <li><a href="#spinner">Spinner</a></li>
                         <li><a href="#forms">Forms</a></li>
                         <li><a href="#carousel">Carousel</a></li>
+                        <li><a href="#skycons">Skycons</a></li>
                         <li><a href="#examples">Examples</a></li>
                     </ul>
                 </div>
@@ -45,7 +44,7 @@
 				{{ content }}	
 			</div>
 		</div>
-	    <script src="scripts/lib/require.js" data-main='scripts/wiki'></script>
+	    <script src="dist/scripts/lib/require.js" data-main='dist/scripts/wiki'></script>
         <div></div>
 	</body>
 </html>
