@@ -19,7 +19,7 @@ end
 
 
 def files_to_upload
-  files = ['stylesheets/toolkit.css', "fonts/*.*", "images/icons-*.png", "scripts/toolkit.js', 'scripts/toolkit.js.map']
+  files = ["stylesheets/toolkit.css", "fonts/*.*", "images/icons-*.png", "scripts/toolkit.js", "scripts/toolkit.js.map"]
 end
 
 def content_type(file)
