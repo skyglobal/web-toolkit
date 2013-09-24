@@ -1,0 +1,130 @@
+$contentWidth: 1140px;
+$gutter: 36px;
+$column: 62px;
+$textIndent: 20px;
+$restrictedWidth: 974px;
+$fullWidth: $contentWidth + 60px;
+$column_plus_gutter: $column + $gutter;
+$skycom_1: ($column_plus_gutter*1)- $gutter;
+$skycom_2: ($column_plus_gutter*2)- $gutter;
+$skycom_3: ($column_plus_gutter*3)- $gutter;
+$skycom_4: ($column_plus_gutter*4)- $gutter;
+$skycom_5: ($column_plus_gutter*5)- $gutter;
+$skycom_6: ($column_plus_gutter*6)- $gutter;
+$skycom_7: ($column_plus_gutter*7)- $gutter;
+$skycom_8: ($column_plus_gutter*8)- $gutter;
+$skycom_9: ($column_plus_gutter*9)- $gutter;
+$skycom_10: ($column_plus_gutter*10)- $gutter;
+$skycom_11: ($column_plus_gutter*11)- $gutter;
+$skycom_12: ($column_plus_gutter*12)- $gutter;
+
+.skycom_container {
+  width: ($contentWidth/$fullWidth)*100%;
+  max-width: $restrictedWidth;
+  margin: 0 auto;
+  clear: left;
+  overflow: visible;
+}
+
+
+.skycom_12, .skycom_11,
+.skycom_10, .skycom_9,
+.skycom_8,  .skycom_7,
+.skycom_6,  .skycom_5,
+.skycom_4,  .skycom_3,
+.skycom_2,  .skycom_1 {
+  float: left;  margin-left: ($gutter/$contentWidth)*100%;
+}
+
+.skycom_12:first-child,
+.skycom_11:first-child,
+.skycom_10:first-child,
+.skycom_9:first-child,
+.skycom_8:first-child,
+.skycom_7:first-child,
+.skycom_6:first-child,
+.skycom_5:first-child,
+.skycom_4:first-child,
+.skycom_3:first-child,
+.skycom_2:first-child,
+.skycom_1:first-child {
+  margin-left: 0;
+}
+
+
+.skycom_12 { width: ($skycom_12/$contentWidth)*100%; }
+.skycom_11 { width: ($skycom_11/$contentWidth)*100%; }
+.skycom_10 { width: ($skycom_10/$contentWidth)*100%; }
+.skycom_9 {  width: ($skycom_9/$contentWidth)*100%;  }
+.skycom_8 {  width: ($skycom_8/$contentWidth)*100%;  }
+.skycom_7 {  width: ($skycom_7/$contentWidth)*100%;  }
+.skycom_6 {  width: ($skycom_6/$contentWidth)*100%;  }
+.skycom_5 {  width: ($skycom_5/$contentWidth)*100%;  }
+.skycom_4 {  width: ($skycom_4/$contentWidth)*100%;  }
+.skycom_3 {  width: ($skycom_3/$contentWidth)*100%;  }
+.skycom_2 {  width: ($skycom_2/$contentWidth)*100%;  }
+.skycom_1 {  width: ($skycom_1/$contentWidth)*100%;  }
+
+.skycom_offset11.alpha,
+.skycom_offset11:first-child { margin-left: ($skycom_11)/$contentWidth*100%; }
+.skycom_offset10.alpha,
+.skycom_offset10:first-child { margin-left: ($skycom_10)/$contentWidth*100%; }
+.skycom_offset9.alpha,
+.skycom_offset9:first-child {  margin-left: ($skycom_9)/$contentWidth*100%;  }
+.skycom_offset8.alpha,
+.skycom_offset8:first-child {  margin-left: ($skycom_8)/$contentWidth*100%;  }
+.skycom_offset7.alpha,
+.skycom_offset7:first-child {  margin-left: ($skycom_7)/$contentWidth*100%;  }
+.skycom_offset6.alpha,
+.skycom_offset6:first-child {  margin-left: ($skycom_6)/$contentWidth*100%;  }
+.skycom_offset5.alpha,
+.skycom_offset5:first-child {  margin-left: ($skycom_5)/$contentWidth*100%;  }
+.skycom_offset4.alpha,
+.skycom_offset4:first-child {  margin-left: ($skycom_4)/$contentWidth*100%;  }
+.skycom_offset3.alpha,
+.skycom_offset3:first-child {  margin-left: ($skycom_3)/$contentWidth*100%;  }
+.skycom_offset2.alpha,
+.skycom_offset2:first-child {  margin-left: ($skycom_2)/$contentWidth*100%;  }
+.skycom_offset1.alpha,
+.skycom_offset1:first-child {  margin-left: ($skycom_1)/$contentWidth*100%;  }
+
+.skycom_offset11 { margin-left: ($skycom_11+$gutter)/$contentWidth*100%; }
+.skycom_offset10 { margin-left: ($skycom_10+$gutter)/$contentWidth*100%; }
+.skycom_offset9 {  margin-left: ($skycom_9+$gutter)/$contentWidth*100%;  }
+.skycom_offset8 {  margin-left: ($skycom_8+$gutter)/$contentWidth*100%;  }
+.skycom_offset7 {  margin-left: ($skycom_7+$gutter)/$contentWidth*100%;  }
+.skycom_offset6 {  margin-left: ($skycom_6+$gutter)/$contentWidth*100%;  }
+.skycom_offset5 {  margin-left: ($skycom_5+$gutter)/$contentWidth*100%;  }
+.skycom_offset4 {  margin-left: ($skycom_4+$gutter)/$contentWidth*100%;  }
+.skycom_offset3 {  margin-left: ($skycom_3+$gutter)/$contentWidth*100%;  }
+.skycom_offset2 {  margin-left: ($skycom_2+$gutter)/$contentWidth*100%;  }
+.skycom_offset1 {  margin-left: ($skycom_1+$gutter)/$contentWidth*100%;  }
+
+.skycom_12 .cushioned { padding:($textIndent/$skycom_12)*100%; }
+.skycom_11 .cushioned { padding:($textIndent/$skycom_11)*100%; }
+.skycom_10 .cushioned { padding:($textIndent/$skycom_10)*100%; }
+.skycom_9  .cushioned { padding:($textIndent/$skycom_9)*100%;  }
+.skycom_8  .cushioned { padding:($textIndent/$skycom_8)*100%;  }
+.skycom_7  .cushioned { padding:($textIndent/$skycom_7)*100%;  }
+.skycom_6  .cushioned { padding:($textIndent/$skycom_6)*100%;  }
+.skycom_5  .cushioned { padding:($textIndent/$skycom_5)*100%;  }
+.skycom_4  .cushioned { padding:($textIndent/$skycom_4)*100%;  }
+.skycom_3  .cushioned { padding:($textIndent/$skycom_3)*100%;  }
+.skycom_2  .cushioned { padding:($textIndent/$skycom_2)*100%;  }
+.skycom_1  .cushioned { padding:($textIndent/$skycom_1)*100%;  }
+
+.lt-ie9 body {
+  min-width: $restrictedWidth + $gutter + $gutter;
+  .skycom_12 { width: 100%; }
+  .skycom_11 { width: 91.4%; }
+  .skycom_10 { width: 82.8%; }
+  .skycom_9 {  width: 74.2%;  }
+  .skycom_8 {  width: 65.5%;  }
+  .skycom_7 {  width: 57%;  }
+  .skycom_6 {  width: 48.4%;  }
+  .skycom_5 {  width: 39.8%;  }
+  .skycom_4 {  width: 31.1%;  }
+  .skycom_3 {  width: 22.6%;  }
+  .skycom_2 {  width: 14%;  }
+  .skycom_1 {  width: 5.4%;  }
+}
