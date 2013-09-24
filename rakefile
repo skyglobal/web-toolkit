@@ -24,6 +24,14 @@ end
 
 def content_type(file)
     case File.extname(file)
+      when '.svg'
+        content_type = 'image/svg+xml'
+      when '.eot'
+        content_type = 'application/x-font-eot'
+      when '.ttf'
+        content_type = 'application/x-font-ttf'
+      when '.woff'
+        content_type = 'application/x-font-woff'
       when '.map'
         content_type = 'text/javascript'
       when '.js'
