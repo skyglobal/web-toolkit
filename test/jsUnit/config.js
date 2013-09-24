@@ -1,9 +1,9 @@
 requirejs.config({
-    baseUrl: '../../js/',
+    baseUrl: '../../grunt/js/',
     paths: {
-        mocha: '../test/jsUnit/vendor/mocha',
-        chai: '../test/jsUnit/vendor/chai',
-        smoax: '../test/jsUnit/vendor/smoax'
+        mocha: '../../test/jsUnit/vendor/mocha',
+        chai: '../../test/jsUnit/vendor/chai',
+        smoax: '../../test/jsUnit/vendor/smoax'
     },
     shim: {
         smoax: {
