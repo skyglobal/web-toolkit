@@ -16,7 +16,7 @@ if (typeof window.define === "function" && window.define.amd) {
                 return;
             }
             console.group($($('h1').get(0)).text());
-            $('.section').each(function(){
+            $('.wiki-section').each(function(){
                 var $section = $(this),
                     notes = $section.find('> .developer-notes').html(),
                     dependencies = $section.find('> .dependencies').html(),
@@ -28,13 +28,24 @@ if (typeof window.define === "function" && window.define.amd) {
                 log(dependencies,'Dependencies');
                 log(init,'Initialisation');
 
-                $section.find('.example .demo').each(logDemoCode);
+                $section.find('.sub-section').each(function(){
+                    var $subsection = $(this),
+                        notes = $subsection.find('> .developer-notes').html(),
+                        dependencies = $subsection.find('> .dependencies').html(),
+                        init = $subsection.find('> .init').html();
+                    if ($subsection.find('> h3').text()) console.groupCollapsed($subsection.find('> h3').text());
 
+                    log(notes);
+                    log(dependencies,'Dependencies');
+                    log(init,'Initialisation');
+                    $subsection.find('.example .demo').each(logDemoCode);
+
+                    if ($subsection.find('> h3').text()) console.groupEnd();
+                });
                 if ($section.find('> h2').text()) console.groupEnd();
             });
             console.groupEnd();
         }
-
 
         function logDemoCode(){
             var $this = $(this),
@@ -42,7 +53,7 @@ if (typeof window.define === "function" && window.define.amd) {
                 $examples = $this.find('> ' + selector),
                 container = $this.closest('.example'),
                 notes = container.find('> .developer-notes').html(),
-                subtitle = container.find('> h3').text();
+                subtitle = container.find('> h4').text();
 
             if (subtitle){
                 console.groupCollapsed('\'' + subtitle + '\'');

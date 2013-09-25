@@ -59,7 +59,7 @@
     display: block;
   }
 
-  @media screen and (max-width: $mobile-width) {
+  @media (max-width: $mobile-width) {
     width: 100%;
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
@@ -67,7 +67,7 @@
 }
 
 .tabcontents {
-  @media screen and (min-width: $mobile-width) {
+  @media (min-width: $mobile-width) {
     width: 1140px;
     overflow-y: hidden;
   }

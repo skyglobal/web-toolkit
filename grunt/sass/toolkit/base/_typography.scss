@@ -82,8 +82,11 @@ b, strong {
 body a {
   color: $link;
 
-  &.chevron:before {
-    content: "> ";
+  .skycon-chevron {
+    color: inherit;
+    font-size: 0.75em;
+    margin-right:6px;
+    line-height:1.35em;
   }
 }
 

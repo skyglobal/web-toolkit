@@ -3,82 +3,75 @@ layout: default
 title: Sky Web Toolkit
 ---
 <h1 class="wiki-header">Sky Web Toolkit <small>v{{ site.version }}</small></h1>
-<p class="wiki-intro">please look in the console for full developer notes</p>
 <div class="section">
     <p class="developer-notes">
 http://web-toolkit.global.sky.com/{{ site.version }}/scripts/toolkit.js
 http://web-toolkit.global.sky.com/{{ site.version }}/stylesheets/toolkit.css
 http://web-toolkit.global.sky.com/{{ site.version }}/fonts/skycons.css
-
-Please add the following classes to the <code>html</code> tag:
-    <code>lt-ie10</code>, <code>lt-ie9</code> and <code>lt-ie8</code>
-
-Please add the following into you <code>head</code> tag:
-        <!--[if lt IE 10]><script type="text/javascript">
-        document.createElement('header');
-        document.createElement('section');
-        document.createElement('footer');
-        document.createElement('article');
-        document.createElement('aside');
-        document.createElement('hgroup');
-        document.createElement('nav');
-        document.createElement('figure');
-        document.createElement('figcaption');
-    </script><![endif]-->
     </p>
 </div>
 
-<section class="section contributing m">
-    <a name="contributing"></a>
-    {% include contributing.html %}
+<section class="wiki-section">
+    <a name="using-me"></a>
+    <h2>Using the Toolkit</h2>
+    <div class="sub-section">
+        {% include using-the-toolkit/getting-started.html %}
+    </div>
+    <div class="sub-section">
+        {% include using-the-toolkit/contributing.html %}
+    </div>
+    <div class="sub-section">
+        {% include using-the-toolkit/accessibility.html %}
+    </div>
+    <div class="sub-section">
+        {% include using-the-toolkit/coding-practise.html %}
+    </div>
 </section>
 
-<section class="section accessibility m">
-    <a name="accessibility"></a>
-    {% include accessibility.html %}
+<section class="wiki-section">
+    <a name="my-base"></a>
+    <h2>Base Styles</h2>
+    <div class="sub-section">
+        {% include base-styles/buttons.html %}
+    </div>
+    <div class="sub-section">
+        {% include base-styles/colours.html %}
+    </div>
+    <div class="sub-section">
+        {% include base-styles/grid.html %}
+    </div>
+    <div class="sub-section">
+        {% include base-styles/skycons.html %}
+    </div>
+    <div class="sub-section">
+        {% include base-styles/spinner.html %}
+    </div>
+    <div class="sub-section">
+        {% include base-styles/typography.html %}
+    </div>
 </section>
 
-<section class="section m">
-    <a name="colours"></a>
-    {% include colours.html %}
+<section class="wiki-section">
+    <a name="you-make-me-complete"></a>
+    <h2>Components</h2>
+    <div class="sub-section">
+        {% include components/form.html %}
+    </div>
+    <div class="sub-section">
+        {% include components/tabs.html %}
+    </div>
+    <div class="sub-section">
+        {% include components/breadcrumbs.html %}
+    </div>
+    <div class="sub-section">
+        {% include components/carousel.html %}
+    </div>
 </section>
 
-<section class="section typography m">
-	<a name="typography"></a>
-	{% include typography.html %}
-</section>
-
-<section class="section">
-    <a name="tabs"></a>
-    {% include tabs.html %}
-</section>
-
-<section class="section m">
-  <a name="spinner"></a>
-  {% include spinner.html %}
-</section>
-
-<section class="section">
-	<a name="forms"></a>
-	{% include form.html %}
-</section>
-
-<section class="section m">
-    <a name="buttons"></a>
-    {% include buttons.html %}
-</section>
-
-<section class="section m">
-	<a name="carousel"></a>
-	{% include carousel.html %}
-</section>
-
-<section class="section m">
-	<a name="skycons"></a>
-    {% include skycons.html %}
-</section>
-
-<section class="section m">
-    <a name="examples"></a>
-    {% include examples.html %}
+<section class="wiki-section">
+	<a name="ta-dah"></a>
+    <h2>Examples</h2>
+    <div class="sub-section">
+	    {% include examples/error-page.html %}
+    </div>
 </section>

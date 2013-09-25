@@ -1,21 +1,17 @@
 @import "compass";
+
 @import "toolkit/configurations";
 @import "toolkit/variables";
+@import "toolkit/utility-classes";
 
-@import "toolkit/grid";
+@import "toolkit/base/grid";
+@import "toolkit/base/typography";
+@import "toolkit/base/icons";
+@import "toolkit/base/spinner";
+@import "toolkit/base/buttons";
+@import "toolkit/base/well";
 
-@import "toolkit/typography";
-@import "toolkit/icons";
-@import "toolkit/spinner";
-
-@import "toolkit/breadcrumb";
-@import "toolkit/buttons";
-@import "toolkit/tabs";
-@import "toolkit/form";
-@import "toolkit/carousel";
-@import "toolkit/well";
-
-@import "toolkit/mobile";
-
-/* Unfortunately */
-@import "toolkit/shame";
+@import "toolkit/components/breadcrumb";
+@import "toolkit/components/tabs";
+@import "toolkit/components/form";
+@import "toolkit/components/carousel";
