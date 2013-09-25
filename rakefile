@@ -19,7 +19,7 @@ end
 
 
 def files_to_upload
-  files = ["stylesheets/toolkit.css", "fonts/skycons.css", "fonts/skycons.eot", "fonts/skycons.svg", "fonts/skycons.ttf", "fonts/skycons.woff", "scripts/toolkit.js", "scripts/toolkit.js.map",  "images/icon-s7e2c8b581c.png"]
+  files = ["stylesheets/toolkit.css", "fonts/skycons.css", "fonts/skycons.eot", "fonts/skycons.svg", "fonts/skycons.ttf", "scripts/toolkit.js", "scripts/toolkit.js.map",  "images/icon-s7e2c8b581c.png"]
 end
 
 def content_type(file)
