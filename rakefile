@@ -31,7 +31,7 @@ def content_type(file)
       when '.ttf'
         content_type = 'font/ttf'
       when '.woff'
-        content_type = 'application/font-woff'
+        content_type = 'application/x-font-woff'
       when '.map'
         content_type = 'text/javascript'
       when '.js'
