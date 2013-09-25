@@ -28,9 +28,9 @@
   margin-left: 0;
 }
 
-@for $i from 1 through 12
-{  .skycom-#{$i} { width: ((($column_plus_gutter * $i)- $gutter)/$contentWidth)*100%; }
-  .skycom-#{$i} > .cushioned { padding:($textIndent/(($column_plus_gutter * $i)- $gutter))*100%; }
+@for $i from 1 through 12 {
+  .skycom-#{13-$i} .cushioned { padding:($textIndent/(($column_plus_gutter * (13-$i))- $gutter))*100%; }
+  .skycom-#{13-$i} { width: ((($column_plus_gutter * (13-$i))- $gutter)/$contentWidth)*100%; }
 }
 
 @for $i from 1 through 11
