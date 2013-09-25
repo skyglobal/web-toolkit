@@ -1,0 +1,135 @@
+.sky-form{
+
+  .row {
+    margin: 0 0 24px 0;
+  }
+
+  .required:after {
+    content: "*";
+    color: $error;
+  }
+
+  select {
+    @include box-sizing(border-box);
+    width: 221px;
+  }
+
+  select {
+    border: 1px solid #c7c7c7;
+    border-radius: 5px;
+    color: #3c3c3c;
+    height: 2em;
+    font: 16px/1em $font-family;
+  }
+
+  .row > label {
+    line-height: 32px;
+  }
+
+  .row > label,
+  legend {
+    @include box-sizing(border-box);
+    float: left;
+    text-align: right;
+    width: 24%;
+    padding-right: 20px;
+  }
+
+
+  .no-label {
+    margin-left: 24%;
+    label {
+      float: none !important;
+    }
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  textarea {
+    @include box-sizing(border-box);
+    @include box-shadow(1px 1px 3px 0px rgba(0, 0, 0, 0.06) inset);
+    height: 2em;
+    font-family: SkyTextRegular;
+    font-size: 16px;
+    width: 221px;
+    margin: 0;
+    border-radius: 5px;
+    padding: 0 10px;
+    border: 1px solid #dcdcdc;
+    outline: none;
+    margin-right: 20px;
+
+    &:focus {
+      border: 1px solid #0094ff;
+    }
+  }
+
+  textarea {
+    height: 5em;
+    padding: 5px 10px;
+  }
+
+  .date-picker input[type="text"] {
+    background-color: red;
+  }
+
+  fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .radiocheck {
+    float: left;
+
+    label {
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+
+  }
+}
+
+
+// MOBILE //
+//@media (min-width: $mobile-width) {
+//  .sky-form{
+//    input[type="text"],
+//    input[type="email"],
+//    input[type="tel"],
+//    input[type="url"],
+//    textarea {
+//      @include box-shadow(none);
+//      margin-right: 0;
+//    }
+//
+//    .row > label {
+//      float: none;
+//      text-align: left;
+//    }
+//
+//    legend {
+//      width: 100%;
+//      text-align: left;
+//      margin-bottom: 10px;
+//    }
+//
+//    input[type="text"] {
+//      max-width: 100%;
+//    }
+//
+//    .select {
+//      display: block;
+//    }
+//
+//    .btn {
+//      margin-top: 20px;
+//    }
+//
+//    .no-label {
+//      margin: 0;
+//    }
+//  }
+//}

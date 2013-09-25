@@ -1,0 +1,44 @@
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.internal-link{
+  outline: 0!important;
+  border: 0!important;
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: '\0020';
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  display:block;
+  _height:1px;
+  zoom: 1;
+}
+
+.speak{
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  padding:0 ;
+  border:0 ;
+  height: 1px ;
+  width: 1px ;
+  overflow: hidden;
+  display: block;
+}

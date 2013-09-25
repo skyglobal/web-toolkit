@@ -1,0 +1,57 @@
+.skycom-container {
+  width: ($contentWidth/$fullWidth)*100%;
+  max-width: $restrictedWidth;
+  margin: 0 auto;
+  clear: left;
+  overflow: visible;
+}
+
+.skycom-12, .skycom-11,
+.skycom-10, .skycom-9,
+.skycom-8,  .skycom-7,
+.skycom-6,  .skycom-5,
+.skycom-4,  .skycom-3,
+.skycom-2,  .skycom-1 {
+  float: left;  margin-left: ($gutter/$contentWidth)*100%;
+}
+.skycom-right {
+  float: right;
+}
+
+.alpha,
+.skycom-12:first-child, .skycom-11:first-child,
+.skycom-10:first-child, .skycom-9:first-child,
+.skycom-8:first-child, .skycom-7:first-child,
+.skycom-6:first-child, .skycom-5:first-child,
+.skycom-4:first-child, .skycom-3:first-child,
+.skycom-2:first-child, .skycom-1:first-child {
+  margin-left: 0;
+}
+
+@for $i from 1 through 12
+{  .skycom-#{$i} { width: ((($column_plus_gutter * $i)- $gutter)/$contentWidth)*100%; }
+  .skycom-#{$i} > .cushioned { padding:($textIndent/(($column_plus_gutter * $i)- $gutter))*100%; }
+}
+
+@for $i from 1 through 11
+{  .skycom-offset#{$i}.alpha,
+  .skycom-offset#{$i}:first-child { margin-left: ((($column_plus_gutter * $i)- $gutter)/$contentWidth)*100%; }
+  .skycom-offset#{$i} { margin-left: (($column_plus_gutter * $i)/$contentWidth)*100%; }
+}
+
+html.lt-ie9 body,
+body.lt-ie9 {
+  min-width: $restrictedWidth + $gutter + $gutter;
+  .skycom-12 { width: 100%; }
+  .skycom-11 { width: 91.4%; }
+  .skycom-10 { width: 82.8%; }
+  .skycom-9 {  width: 74.2%;  }
+  .skycom-8 {  width: 65.5%;  }
+  .skycom-7 {  width: 57%;  }
+  .skycom-6 {  width: 48.4%;  }
+  .skycom-5 {  width: 39.8%;  }
+  .skycom-4 {  width: 31.1%;  }
+  .skycom-3 {  width: 22.6%;  }
+  .skycom-2 {  width: 14%;  }
+  .skycom-1 {  width: 5.4%;  }
+}

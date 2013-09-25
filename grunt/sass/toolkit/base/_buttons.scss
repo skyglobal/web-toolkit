@@ -54,3 +54,15 @@ a.btn,
     margin-right: 0;
   }
 }
+
+.btn {
+  *margin-right: 5px;
+}
+
+a.btn {
+  *height: 26px;
+}
+
+button.btn {
+  *padding: 0;
+}

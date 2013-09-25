@@ -1,0 +1,96 @@
+body .skycom-container {
+  max-width:1140px;
+}
+
+.wiki-section {
+	border-top: 2px solid #333;
+    margin-bottom:25px;
+}
+.wiki-h3{
+  border-bottom: 1px solid $key-line;
+}
+
+.block {
+	display: block;
+}
+
+a[name]:not([href]){
+  padding-top: 1em;
+  display: block;
+}
+
+.wiki-header {
+  small {
+    color: #999;
+  }
+}
+
+.wiki-dl dt{
+  font-family:SkyTextMedium;
+}
+
+
+body{
+  padding-top: 2em!important;
+
+  .quick-links {
+    z-index: 10;
+    min-height: 2em;
+    line-height: 2em;
+    position: fixed;
+    top: 0; left:0;
+    width:100%;
+    background-color: $background-dark;
+    ul{
+      li{
+        float: left;
+        padding: 0 20px;
+        margin: 0;
+        background-color: $background-dark;
+        ul{
+          overflow:hidden;
+          transition:all 0.35s;
+          position:absolute;
+          opacity:0;
+          top:0;
+          margin-top:0em;
+          z-index:-1;
+        }
+        &:first-child{
+          margin-left:-20px;
+        }
+        &:hover {
+          background-color:$background-light;
+          ul{
+            opacity:1;
+            padding: 0 2em;
+            margin-top:2em;
+            margin-left: -2em;
+            background-color:$background-light;
+            li{
+              background-color:$background-light;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.smash-img {
+	background-image: url("../../wiki_images/smash.jpg");
+	padding: 80px 50px;
+	margin-bottom: 10px;
+}
+
+.beckham-img {
+	background-image: url("../../wiki_images/beckham.jpg");
+	padding: 80px 50px;
+	margin-bottom: 10px;
+}
+
+.init,
+.dependencies,
+.developer-notes{
+  display: none;
+}
