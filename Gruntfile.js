@@ -82,7 +82,8 @@ module.exports = function(grunt) {
                     htmlDemoTemplate:'grunt/fonts/template/skycon-template.html',
                     htmlDemo: true,
                     destHtml: '_includes/base-styles',
-                    hashes: false
+                    hashes: false,
+                    embed: true
                 }
             }
         }
