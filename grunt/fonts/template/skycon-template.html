@@ -30,8 +30,19 @@
     These icons can be any size and (single) colour.
 </p>
 <p class="developer-notes">
-    Dont forget <code>http://web-toolkit.global.sky.com/{{ site.version }}/fonts/skycons.css</code>
-    Ensure <code>aria-hidden</code> is used on your <code>skycon</code> tags.
+&bull; Dont forget <code>http://web-toolkit.global.sky.com/{{ site.version }}/fonts/skycons.css</code>
+&bull; Ensure <code>aria-hidden</code> is used on your <code>skycon</code> tags.
+To Create Fonts:
+&bull; Open svg in inkscape, press ctrl+a to select all.
+&bull; press ctrl+g to group the objects
+&bull; choose Path - simplify
+&bull; choose Path - union
+&bull; Save font and open new font in http://petercollingridge.appspot.com/svg-editor/
+&bull; Upload and then without optimisation select 'Remove whitespace' and 'Remove All' Namespaces
+&bull; Download new font into /grunt/fonts/ folder
+&bull; Run grunt fonts
+&bull; copy the icons JS from the skycons.css over the icons var in skycons.js
+&bull; Run grunt
 </p>
 <table id=wiki-skycons>
     <thead>
