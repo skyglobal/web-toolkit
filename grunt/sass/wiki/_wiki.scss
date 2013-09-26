@@ -29,66 +29,6 @@ a[name]:not([href]){
   font-family:SkyTextMedium;
 }
 
-
-body{
-  padding-top: 2em!important;
-
-  .quick-links {
-    z-index: 10;
-    min-height: 2em;
-    line-height: 2em;
-    position: fixed;
-    top: 0; left:0;
-    width:100%;
-    background-color: $background-dark;
-    ul{
-      li{
-        float: left;
-        padding: 0 20px;
-        margin: 0;
-        background-color: $background-dark;
-        ul{
-          overflow:hidden;
-          transition:all 0.35s;
-          position:absolute;
-          opacity:0;
-          top:0;
-          margin-top:0em;
-          z-index:-1;
-        }
-        &:first-child{
-          margin-left:-20px;
-        }
-        &:hover {
-          background-color:$background-light;
-          ul{
-            opacity:1;
-            padding: 0 2em;
-            margin-top:2em;
-            margin-left: -2em;
-            background-color:$background-light;
-            li{
-              background-color:$background-light;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-.smash-img {
-	background-image: url("../../wiki_images/smash.jpg");
-	padding: 80px 50px;
-	margin-bottom: 10px;
-}
-
-.beckham-img {
-	background-image: url("../../wiki_images/beckham.jpg");
-	padding: 80px 50px;
-	margin-bottom: 10px;
-}
-
 .init,
 .dependencies,
 .developer-notes{

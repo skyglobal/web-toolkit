@@ -9,4 +9,5 @@ i,
 [class*=" icon-"] {
   @include inline-block;
   overflow: hidden;
+  vertical-align: middle;
 }
