@@ -32,9 +32,9 @@ module.exports = function(grunt) {
         compass: {
             dist: {
                 options: {
+                    config: 'grunt/sass/config.rb',
                     sassDir: 'grunt/sass/',
                     cssDir: 'dist/stylesheets/',
-                    raw: 'http_path = "../"; generated_images_path = "dist/images/"; sprite_load_path = "grunt/"',
                     outputStyle: grunt.option('beautify') ? "expanded" : "compressed" ,
                     noLineComments: true,
                     trace: true

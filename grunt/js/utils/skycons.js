@@ -8,18 +8,21 @@ toolkit.skycons = (function() {
         'skycon-sky' : "&#xf100;",
         'skycon-twitter-reply' : "&#xf101;",
         'skycon-chevron' : "&#xf102;",
-        'skycon-warning' : "&#xf103;",
-        'skycon-twitter-bird' : "&#xf104;",
-        'skycon-carousel-play' : "&#xf105;",
-        'skycon-user-profile' : "&#xf106;",
-        'skycon-search' : "&#xf107;",
-        'skycon-twitter-retweet' : "&#xf108;",
-        'skycon-twitter-favourite' : "&#xf109;",
-        'skycon-carousel-pause' : "&#xf10a;",
-        'skycon-mail' : "&#xf10b;",
-        'skycon-twitter-follow' : "&#xf10c;",
-        'skycon-close' : "&#xf10d;",
-        'skycon-menu' : "&#xf10e;"
+        'skycon-remote-record' : "&#xf103;",
+        'skycon-warning' : "&#xf104;",
+        'skycon-twitter-bird' : "&#xf105;",
+        'skycon-carousel-play' : "&#xf106;",
+        'skycon-user-profile' : "&#xf107;",
+        'skycon-search' : "&#xf108;",
+        'skycon-twitter-retweet' : "&#xf109;",
+        'skycon-twitter-favourite' : "&#xf10a;",
+        'skycon-carousel-pause' : "&#xf10b;",
+        'skycon-never-miss' : "&#xf10c;",
+        'skycon-mail' : "&#xf10d;",
+        'skycon-sky-go' : "&#xf10e;",
+        'skycon-twitter-follow' : "&#xf10f;",
+        'skycon-close' : "&#xf110;",
+        'skycon-menu' : "&#xf111;"
     };
 
     function supportsPsuedo(){
