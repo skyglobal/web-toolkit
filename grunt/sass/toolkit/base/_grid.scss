@@ -34,9 +34,8 @@
 }
 
 @for $i from 1 through 11
-{  .skycom-offset#{$i}.alpha,
-  .skycom-offset#{$i}:first-child { margin-left: ((($column_plus_gutter * $i)- $gutter)/$contentWidth)*100%; }
-  .skycom-offset#{$i} { margin-left: (($column_plus_gutter * $i)/$contentWidth)*100%; }
+{  .skycom-offset#{$i} { margin-left: (($column_plus_gutter * $i)/$contentWidth)*100%!important; }
+   .skycom-offset#{$i}.alpha { margin-left: ((($column_plus_gutter * $i)- $gutter)/$contentWidth)*100%!important; }
 }
 
 html.lt-ie9 body,
