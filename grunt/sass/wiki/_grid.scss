@@ -1,28 +1,34 @@
 .grid-example-buffer{
-  height: 125px;
+  height: 225px;
 }
 .grid-example{
   position: absolute;
   left: 0;
   width: 100%;
 }
-#grid12{
+
+#grid12,
+#grid12-contents,
+#grid12-lightbox{
+  height: 200px;
+}
+#grid12,
+#grid12-lightbox{
   background: #EDF6FF;
   padding: 0 2.5%;
   width: 100%;
   max-width: 1212px;
   box-sizing: border-box;
-}
-
-#grid12 .skycom-1{
-  height: 100px;
-}
-#grid12 .cushioned,
-#grid12 .cushioned div{
-  background: #FFE1E1;
-  height: 100%;
-  box-sizing: border-box;
-}
-#grid12 .cushioned div{
-  background: #FFD5D6;
+  .skycom-1{
+    height: 100%;
+  }
+  .cushioned,
+  .cushioned div{
+    background: #FFE1E1;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .cushioned div{
+    background: #FFD5D6;
+  }
 }
