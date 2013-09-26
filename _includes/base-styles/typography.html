@@ -10,14 +10,14 @@
 
 <div class="example">
     <p class="developer-notes">
-
+        You can have the header tags styled automatically by adding '<code>toolkit-ready</code>' to you body or html.
     </p>
-    <div class="demo" data-selector="h1,h2,h3,p,small,blockquote,.smash-img .white,.beckham-img .black, a">
+    <div class="demo" data-selector="h1,h2,h3,p,small,strong,blockquote,.smash-img .white,.beckham-img .black, a">
 
-        <h1 class="large">Page Title (above carousel)</h1>
-        <h1>Page Title</h1>
-        <h2>Section Title</h2>
-        <h3>Module Title</h3>
+        <h1 class="page-title large">Page Title (above carousel)</h1>
+        <h1 class="page-title">Page Title</h1>
+        <h2 class="module-title">Module Title</h2>
+        <h3 class="pod-title">Pod Title</h3>
         <p class="hint-text">Instructional copy</p>
         <p class="intro">Intro Copy</p>
         <p>Body text</p>
@@ -26,23 +26,24 @@
         <p class="error">Error</p>
         <blockquote>Quotes</blockquote>
         <p class="medium">Add .medium to change font family to medium</p>
+        <strong>'Strong' tags go to medium automatically</strong>
 
-        <div class="m">
+        <div >
             <a href="#">In page action link</a>
         </div>
 
-        <div class="m">
-            <a href="#"><i class="skycon-chevron" aria-hidden=true></i>Link with a chevron</a>
+        <div >
+            <a href="#" class="chevron">Link with a chevron</a>
         </div>
 
         <div class="smash-img">
             <p class="white">Text on dark background is white</p>
-            <a class="white" href="#"><i class="skycon-chevron" aria-hidden=true></i>Links next to normal text need chevrons</a>
+            <a href="#" class="white chevron">Links next to normal text need chevrons</a>
         </div>
 
         <div class="beckham-img">
             <p class="black">Text on light background is black</p>
-            <a class="black" href="#"><i class="skycon-chevron" aria-hidden=true></i>Links next to normal text need chevrons</a>
+            <a href="#" class="black chevron">Links next to normal text need chevrons</a>
         </div>
     </div>
 </div>

@@ -11,7 +11,7 @@ font-style:normal;
 <% } %>
 <% if (baseStyles) { %>
 /* Bootstrap Overrides */
-
+a.chevron:before,
 [class^="skycon-"]:before,
 [class*=" skycon-"]:before<% if (ligatures) { %>,
 .ligature-icons<% } %> {
@@ -87,6 +87,7 @@ li[class*=" skycon-"].skycon-large:before {
 }
     }<% } %><% } %>
 <% if (iconsStyles && stylesheet !== 'less') { %>/* Icons */<% for (var glyphIdx = 0; glyphIdx < glyphs.length; glyphIdx++) { %>
+<% if (glyphs[glyphIdx]=='chevron') { %> a.chevron:before, <%} %>
 .skycon-<%= glyphs[glyphIdx] %>:before {        content:"<% if (ligatures) { %><%= glyphs[glyphIdx] %><% } else { %>\<%= (61696+glyphIdx).toString(16) %><% } %>";      }<% } %><% } %>
 
 [class^="skycon-"] {
