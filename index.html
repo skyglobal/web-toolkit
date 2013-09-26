@@ -32,22 +32,25 @@ http://web-toolkit.global.sky.com/{{ site.version }}/fonts/skycons.css
     <a name="my-base"></a>
     <h2>Base Styles</h2>
     <div class="sub-section">
-        {% include base-styles/buttons.html %}
+        {% include base-styles/grid.html %}
     </div>
     <div class="sub-section">
         {% include base-styles/colours.html %}
     </div>
     <div class="sub-section">
-        {% include base-styles/grid.html %}
+        {% include base-styles/typography.html %}
     </div>
     <div class="sub-section">
         {% include base-styles/skycons.html %}
     </div>
     <div class="sub-section">
-        {% include base-styles/spinner.html %}
+        {% include base-styles/icons.html %}
     </div>
     <div class="sub-section">
-        {% include base-styles/typography.html %}
+        {% include base-styles/buttons.html %}
+    </div>
+    <div class="sub-section">
+        {% include base-styles/spinner.html %}
     </div>
 </section>
 
@@ -55,13 +58,13 @@ http://web-toolkit.global.sky.com/{{ site.version }}/fonts/skycons.css
     <a name="you-make-me-complete"></a>
     <h2>Components</h2>
     <div class="sub-section">
+        {% include components/breadcrumbs.html %}
+    </div>
+    <div class="sub-section">
         {% include components/form.html %}
     </div>
     <div class="sub-section">
         {% include components/tabs.html %}
-    </div>
-    <div class="sub-section">
-        {% include components/breadcrumbs.html %}
     </div>
     <div class="sub-section">
         {% include components/carousel.html %}
