@@ -57,7 +57,7 @@ if (typeof window.define === "function" && window.define.amd) {
 
         function logDemoCode($this){
             var selector = $this.find('> .demo').attr('data-selector'),
-                $examples = $this.find('> .demo > ' + selector);
+                $examples = $this.find('> .demo > ' + selector).not('.developer-notes');
 
             $examples.each(function(){
                 log(this.outerHTML, '\'' + this.tagName + '\' html');
