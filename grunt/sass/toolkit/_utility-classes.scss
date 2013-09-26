@@ -42,3 +42,16 @@
   overflow: hidden;
   display: block;
 }
+
+@media (max-width: $mobile-width) {
+  body .sticky-mobile{
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 25;
+    background: #fff;
+  }
+}
