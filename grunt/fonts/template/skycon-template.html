@@ -23,38 +23,44 @@
         text-align: center;
     }
 
-</style><a name="skycons"></a>
+</style>
 
-<h3 class="wiki-h3">Skycons (retina ready)</h3>
-<p class="designer-notes">
-    These icons can be any size and (single) colour.
-</p>
-<p class="developer-notes">
-&bull; Dont forget <code>http://web-toolkit.global.sky.com/{{ site.version }}/fonts/skycons.css</code>
-&bull; Ensure <code>aria-hidden</code> is used on your <code>skycon</code> tags.
-To Create Fonts:
-&bull; Open svg in inkscape, press ctrl+a to select all.
-&bull; press ctrl+g to group the objects
-&bull; choose Path - simplify
-&bull; choose Path - union
-&bull; Save font and open new font in http://petercollingridge.appspot.com/svg-editor/
-&bull; Upload and then without optimisation select 'Remove whitespace' and 'Remove All' Namespaces
-&bull; Download new font into /grunt/fonts/ folder
-&bull; Run grunt fonts
-&bull; copy the icons JS from the skycons.css over the icons var in skycons.js
-&bull; Run grunt
-</p>
-<table id=wiki-skycons>
-    <thead>
-        <tr>
-            <th>Icon</th>
-            <th>CSS Class</th>
-            <th>How it looks</th>
-        </tr>
-    </thead>
-    <tbody>
-    <% for (var glyphIdx = 0; glyphIdx < glyphs.length; glyphIdx++) { var glyph = glyphs[glyphIdx] %>
-    <tr ><td><%= glyph %></td><td><%= baseClass %> <%= classPrefix %><%= glyph %></td><td class="icon"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td></tr>
-    <% } %>
-    </tbody>
-</table>
+<div class="example">
+    <h4>Skycons</h4>
+    <p class="designer-notes">
+        These icons will look good on Retina devices and can be any size or (single) colour.
+    </p>
+    <p class="developer-notes">
+    Dont forget <code>http://web-toolkit.global.sky.com/{{ site.version }}/fonts/skycons.css</code>
+    </p>
+    <p class="developer-notes">
+    Ensure <code>aria-hidden</code> is used on your <code>skycon</code> tags.
+    </p>
+    <p class="developer-notes">
+    To Create Fonts:
+    &bull; Open svg in inkscape, press ctrl+a to select all.
+    &bull; press ctrl+g to group the objects
+    &bull; choose Path - simplify
+    &bull; choose Path - union
+    &bull; Save font and open new font in http://petercollingridge.appspot.com/svg-editor/
+    &bull; Upload and then without optimisation select 'Remove whitespace' and 'Remove All' Namespaces
+    &bull; Download new font into /grunt/fonts/ folder
+    &bull; Run grunt fonts
+    &bull; copy the icons JS from the skycons.css over the icons var in skycons.js
+    &bull; Run grunt
+    </p>
+    <table id=wiki-skycons>
+        <thead>
+            <tr>
+                <th>Icon</th>
+                <th>CSS Class</th>
+                <th>How it looks</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% for (var glyphIdx = 0; glyphIdx < glyphs.length; glyphIdx++) { var glyph = glyphs[glyphIdx] %>
+        <tr ><td><%= glyph %></td><td><%= baseClass %> <%= classPrefix %><%= glyph %></td><td class="icon"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td></tr>
+        <% } %>
+        </tbody>
+    </table>
+</div>
