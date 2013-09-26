@@ -17,28 +17,23 @@ if (typeof window.define === "function" && window.define.amd) {
             }
             console.group($($('h1').get(0)).text());
             $('.wiki-section').each(function(){
-                var $section = $(this),
-                    notes = $section.find('> .developer-notes').html(),
-                    dependencies = $section.find('> .dependencies').html(),
-                    init = $section.find('> .init').html();
-
+                var $section = $(this);
                 if ($section.find('> h2').text()) console.groupCollapsed($section.find('> h2').text());
 
-                log(notes);
-                log(dependencies,'Dependencies');
-                log(init,'Initialisation');
+                logNotes($section);
 
                 $section.find('.sub-section').each(function(){
-                    var $subsection = $(this),
-                        notes = $subsection.find('> .developer-notes').html(),
-                        dependencies = $subsection.find('> .dependencies').html(),
-                        init = $subsection.find('> .init').html();
+                    var $subsection = $(this);
                     if ($subsection.find('> h3').text()) console.groupCollapsed($subsection.find('> h3').text());
 
-                    log(notes);
-                    log(dependencies,'Dependencies');
-                    log(init,'Initialisation');
-                    $subsection.find('.example .demo').each(logDemoCode);
+                    logNotes($subsection);
+
+                    $subsection.find('.example').each(function(){
+                        var $example = $(this);
+                        if ($example.find('> h4').text()) console.groupCollapsed($example.find('> h4').text());
+                        logNotes($example);
+                        if ($example.find('> h4').text()) console.groupEnd();
+                    });
 
                     if ($subsection.find('> h3').text()) console.groupEnd();
                 });
@@ -47,27 +42,27 @@ if (typeof window.define === "function" && window.define.amd) {
             console.groupEnd();
         }
 
-        function logDemoCode(){
-            var $this = $(this),
-                selector = $this.attr('data-selector'),
-                $examples = $this.find('> ' + selector),
-                container = $this.closest('.example'),
-                notes = container.find('> .developer-notes').html(),
-                subtitle = container.find('> h4').text();
+        function logNotes($section){
+            var notes = $section.find('> .developer-notes'),
+                dependencies = $section.find('> .dependencies').html(),
+                init = $section.find('> .init').html();
 
-            if (subtitle){
-                console.groupCollapsed('\'' + subtitle + '\'');
-            }
+            notes.each(function(){
+                log($(this).html());
+            });
+            log(dependencies,'Dependencies');
+            log(init,'Initialisation');
+            logDemoCode($section)
+        }
 
-            log(notes);
+        function logDemoCode($this){
+            var selector = $this.find('> .demo').attr('data-selector'),
+                $examples = $this.find('> .demo > ' + selector);
 
             $examples.each(function(){
                 log(this.outerHTML, '\'' + this.tagName + '\' html');
             });
 
-            if (subtitle){
-                console.groupEnd();
-            }
         }
 
         function log(text, group){
