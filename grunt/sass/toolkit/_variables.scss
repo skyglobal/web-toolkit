@@ -2,13 +2,14 @@ $mobile-width: 767px;
 $font-family: SkyTextRegular, Helvetica, Arial, sans-serif;
 
 //grid
-$contentWidth: 1140px;
-$restrictedWidth: 974px;
+$container-width-thin: 974px;
+$container-width: 1140px;
 $gutter: 36px;
 $column: 62px;
 $textIndent: 20px;
-$fullWidth: $contentWidth + 60px;
-$column_plus_gutter: $column + $gutter;
+$width-thin-plus-gutters: $container-width-thin + $gutter + $gutter;
+$width-plus-gutters: $container-width + $gutter + $gutter;
+$column-plus-gutter: $column + $gutter;
 
 // colours
 $link: #0070a5;

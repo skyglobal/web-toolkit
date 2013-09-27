@@ -1,9 +1,12 @@
 .skycom-container {
-  width: ($contentWidth/$fullWidth)*100%;
-  max-width: $restrictedWidth;
+  width: ($container-width/$width-plus-gutters)*100%;
+  max-width: $container-width-thin;
   margin: 0 auto;
   clear: left;
   overflow: visible;
+}
+.grid-1140 .skycom-container{
+  max-width: $container-width;
 }
 
 .skycom-12, .skycom-11,
@@ -12,7 +15,7 @@
 .skycom-6,  .skycom-5,
 .skycom-4,  .skycom-3,
 .skycom-2,  .skycom-1 {
-  float: left;  margin-left: ($gutter/$contentWidth)*100%;
+  float: left;  margin-left: ($gutter/$container-width)*100%;
 }
 .skycom-right {
   float: right;
@@ -29,18 +32,18 @@
 }
 
 @for $i from 1 through 12 { //must loop backwards i.e. 13-1
-  .skycom-#{13-$i} .cushioned { padding:($textIndent/(($column_plus_gutter * (13 - $i)) - $gutter))*100%; }
-  .skycom-#{13-$i} { width: ((($column_plus_gutter * (13 - $i)) - $gutter)/$contentWidth)*100%; }
+  .skycom-#{13-$i} .cushioned { padding:($textIndent/(($column-plus-gutter * (13 - $i)) - $gutter)) * 100%; }
+  .skycom-#{13-$i} { width: ((($column-plus-gutter * (13 - $i)) - $gutter)/$container-width) * 100%; }
 }
 
 @for $i from 1 through 11
-{  .skycom-offset#{$i},.skycom-offset#{$i}:first-child { margin-left: (($column_plus_gutter * $i)/$contentWidth)*100%; }
-   .skycom-offset#{$i}.alpha { margin-left: ((($column_plus_gutter * $i)- $gutter)/$contentWidth)*100%; }
+{  .skycom-offset#{$i},.skycom-offset#{$i}:first-child { margin-left: (($column-plus-gutter * $i)/$container-width) * 100%; }
+   .skycom-offset#{$i}.alpha { margin-left: ((($column-plus-gutter * $i) - $gutter)/$container-width) * 100%; }
 }
 
 html.lt-ie9 body,
 body.lt-ie9 {
-  min-width: $restrictedWidth + $gutter + $gutter;
+  min-width: $width-plus-gutters;
   .skycom-12 { width: 100%; }
   .skycom-11 { width: 91.4%; }
   .skycom-10 { width: 82.8%; }
@@ -103,15 +106,15 @@ body.lt-ie9 {
   .skycom-6-mobile,  .skycom-5-mobile,
   .skycom-4-mobile,  .skycom-3-mobile,
   .skycom-2-mobile,  .skycom-1-mobile {
-    float: left;  margin-left: ($gutter/$contentWidth)*100%;
+    float: left;  margin-left: ($gutter/$container-width)*100%;
   }
 
   @for $i from 1 through 12 {
-    .skycom-#{13-$i}-mobile { width: ((($column_plus_gutter * (13-$i))- $gutter)/$contentWidth)*100%; }
+    .skycom-#{13-$i}-mobile { width: ((($column-plus-gutter * (13 - $i)) - $gutter)/$container-width)*100%; }
   }
 
   @for $i from 1 through 12 {
-    .skycom-#{13-$i}-mobile .cushioned { padding:($textIndent/(($column_plus_gutter * (13-$i))- $gutter))*100%; }
+    .skycom-#{13-$i}-mobile .cushioned { padding:($textIndent/(($column-plus-gutter * (13 - $i)) - $gutter))*100%; }
 }
 
 

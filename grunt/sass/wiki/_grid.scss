@@ -1,19 +1,20 @@
 .grid-example{
-  width: 105%;
-  margin-left: -2.5%;
+  width: 106%;
+  margin-left: -3%;
 }
 
 #grid12,
+#grid12-1140,
 #grid12-contents,
 #grid12-lightbox{
   height: 200px;
 }
 #grid12,
+#grid12-1140,
 #grid12-lightbox{
   background: #EDF6FF;
-  padding: 0 2.5%;
-  width: 95%;
-  max-width: 1212px;
+  padding: 0 3%;
+  max-width: $container-width-thin;
   .skycom-1{
     height: 100%;
   }
@@ -26,6 +27,10 @@
   .cushioned div{
     background: #FFD5D6;
   }
+}
+#grid12-1140{
+  max-width: $width-plus-gutters;
+  width:94.35%;
 }
 
 @media (max-width:$mobile-width){
