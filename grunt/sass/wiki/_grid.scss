@@ -5,12 +5,14 @@
 
 #grid12,
 #grid12-1140,
+#grid12-tablet,
 #grid12-contents,
 #grid12-lightbox{
   height: 200px;
 }
 #grid12,
 #grid12-1140,
+#grid12-tablet,
 #grid12-lightbox{
   background: #EDF6FF;
   padding: 0 3%;
@@ -32,13 +34,16 @@
   max-width: $width-plus-gutters;
   width:94.35%;
 }
-
+#grid12-tablet{
+  max-width:696px; //768-gutters!
+}
 @media (max-width:$mobile-width){
   .grid-example{
     width: 102%;
   }
   #grid12,
   #grid12-1140,
+  #grid12-tablet,
   #grid12-contents,
   #grid12-lightbox{
     height: auto;
