@@ -18,7 +18,7 @@ toolkit.main = (function() {
 
 if (typeof window.define === "function" && window.define.amd) {
 //    explicitly call all js files here to ensure all files are available
-    define([
+    define('toolkit',[
         'utils/skycons',
         'utils/hashmanager',
         'modules/tabs',

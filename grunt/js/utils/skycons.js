@@ -29,8 +29,8 @@ toolkit.skycons = (function() {
         var head = document.getElementsByTagName('head')[0],
             style = document.createElement('style'),
             rules = [
-                '#skycon-test { visibility:hidden; position:absolute; } ',
-                '#skycon-test:before { content: "(-:"; }'
+                '#pseudo-test { visibility:hidden; position:absolute; } ',
+                '#pseudo-test:before { content: "(-:"; }'
             ],
             div = document.createElement('div'),
             hasBefore = false;
@@ -44,7 +44,7 @@ toolkit.skycons = (function() {
 
         head.appendChild(style);
 
-        div.id = "skycon-test";
+        div.id = "pseudo-test";
         document.body.appendChild(div);
         hasBefore = div.offsetWidth > 0;
 

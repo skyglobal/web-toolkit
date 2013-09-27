@@ -1,5 +1,5 @@
 if (typeof window.define === "function" && window.define.amd) {
-    define('wiki', ['toolkit'], function() {
+    define('wiki', ['toolkit'], function(toolkit) {
 
         function initModuleDemos(){
             $('#hero').skycom_carousel({
@@ -8,6 +8,7 @@ if (typeof window.define === "function" && window.define.amd) {
                     videoAds: false
                 }
             });
+            toolkit.skycons.init();
         }
 
         function logPage(){

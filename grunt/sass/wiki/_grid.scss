@@ -12,9 +12,8 @@
 #grid12-lightbox{
   background: #EDF6FF;
   padding: 0 2.5%;
-  width: 100%;
+  width: 95%;
   max-width: 1212px;
-  box-sizing: border-box;
   .skycom-1{
     height: 100%;
   }
@@ -26,5 +25,22 @@
   }
   .cushioned div{
     background: #FFD5D6;
+  }
+}
+
+@media (max-width:$mobile-width){
+  #grid12,
+  #grid12-contents,
+  #grid12-lightbox{
+    height: auto;
+  }
+}
+
+.lt-ie8{
+  #grid12,
+  #grid12-lightbox{
+    .cushioned{
+      height: 80%;
+    }
   }
 }

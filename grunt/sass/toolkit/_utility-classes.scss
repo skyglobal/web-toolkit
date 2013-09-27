@@ -43,6 +43,10 @@
   display: block;
 }
 
+.hidden{
+  display:none;
+}
+
 @media (max-width: $mobile-width) {
   body .sticky-mobile{
     position: -webkit-sticky;
