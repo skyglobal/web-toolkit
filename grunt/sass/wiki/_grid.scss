@@ -34,7 +34,11 @@
 }
 
 @media (max-width:$mobile-width){
+  .grid-example{
+    width: 102%;
+  }
   #grid12,
+  #grid12-1140,
   #grid12-contents,
   #grid12-lightbox{
     height: auto;
