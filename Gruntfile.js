@@ -1,5 +1,13 @@
 module.exports = function(grunt) {
 
+    var cli = grunt.cli;
+
+    cli.optlist.beautify = {
+        "short": "B",
+        info: "Set beautify on",
+        type: String
+    };
+
     grunt.initConfig({
         watch: {
             'toolkit': {
