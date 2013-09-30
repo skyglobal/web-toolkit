@@ -92,6 +92,16 @@
   }
 }
 
+//ie7
+.sky-form{
+  .radiocheck {
+    *margin-top:-1em;
+    *margin-left:24%;
+    *padding-left:20px;
+    *display: inline;
+  }
+}
+
 
 // MOBILE //
 //@media (min-width: $mobile-width) {
