@@ -19,7 +19,7 @@ module.exports = function(grunt) {
         },
         clean: {
             toolkit: ['dist/images','dist/scripts','dist/stylesheets'],
-            fonts: ['dist/fonts']
+            fonts: ['grunt/fonts/min','dist/fonts']
         },
         jshint: {
             toolkit: ['grunt/js/modules/*.js',
@@ -81,7 +81,7 @@ module.exports = function(grunt) {
         },
         webfont: {
             icons: {
-                src: 'grunt/fonts/*.svg',
+                src: 'grunt/fonts/min/*.svg',
                 dest: 'dist/fonts',
                 destCss: 'dist/fonts',
                 options: {
@@ -94,6 +94,24 @@ module.exports = function(grunt) {
                     embed: true
                 }
             }
+        },
+        svgmin: {                       // Task
+            options: {                  // Configuration that will be passed directly to SVGO
+                plugins: [{
+                    removeViewBox: false,
+                    removeUselessStrokeAndFill: true,
+                    removeEmptyAttrs: true
+                }]
+            },
+            dist: {                         // Target
+                files: [{                   // Dictionary of files
+                    expand: true,           // Enable dynamic expansion.
+                    cwd: 'grunt/fonts/orig/',    // Src matches are relative to this path.
+                    src: ['*.svg'],      // Actual pattern(s) to match.
+                    dest: 'grunt/fonts/min/', // Destination path prefix.
+                    ext: '.svg'         // Dest filepaths will have this extension.
+                }]
+            }
         }
     });
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -104,9 +122,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-webfont'); //https://github.com/sapegin/grunt-webfont
+    grunt.loadNpmTasks('grunt-svgmin');
 
     grunt.registerTask('default', ['clean:toolkit', 'compass', 'jshint', 'requirejs']);
-    grunt.registerTask('fonts', ['clean:fonts', 'webfont']);
+    grunt.registerTask('fonts', ['clean:fonts', 'svgmin', 'webfont']);
     grunt.registerTask('test', ['mocha']);
     grunt.registerTask('hint', ['jshint']);
 };

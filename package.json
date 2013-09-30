@@ -13,7 +13,8 @@
 	    "grunt-contrib-requirejs": "latest",
 	    "grunt-contrib-watch": "latest",
 	    "grunt-mocha": "latest",
-	    "grunt-webfont": "latest"
+	    "grunt-webfont": "latest",
+	    "grunt-svgmin": "latest"
     },
     "scripts": {
         "test": "grunt test"
