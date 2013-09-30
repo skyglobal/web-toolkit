@@ -14,7 +14,6 @@
     line-height: 1.2em;
     min-height: 32px;
     font-family: skytextregular, helvetica, arial;
-    width: 100%;
     @include box-sizing(border-box);
 
     li {
@@ -73,6 +72,16 @@
     }
     span{
       margin-top: 0;
+    }
+  }
+}
+
+.lt-ie9{
+  #skycom-breadcrumb ul{
+    line-height: 2.25em;
+    padding: 0 10px 0;
+    .skycon-chevron{
+      margin-top:8px;
     }
   }
 }
