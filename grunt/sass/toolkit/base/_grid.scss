@@ -41,7 +41,7 @@
    .skycom-offset#{$i}.alpha { margin-left: ((($column-plus-gutter * $i) - $gutter)/$container-width) * 100%; }
 }
 
-html.lt-ie9 body,
+.lt-ie9 body,
 body.lt-ie9 {
   min-width: $width-plus-gutters;
   .skycom-12 { width: 100%; }
