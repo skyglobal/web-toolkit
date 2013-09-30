@@ -28,6 +28,7 @@
 
   .row > label,
   legend {
+    color: #3c3c3c;
     @include box-sizing(border-box);
     float: left;
     text-align: right;
@@ -98,7 +99,6 @@
     *margin-top:-1em;
     *margin-left:24%;
     *padding-left:20px;
-    *display: inline;
   }
 }
 
