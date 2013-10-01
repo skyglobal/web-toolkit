@@ -5,6 +5,7 @@
   clear: left;
   overflow: visible;
 }
+.grid-1140 .skycom_container, //hack for masthead
 .grid-1140 .skycom-container{
   max-width: $container-width;
 }
@@ -19,6 +20,9 @@
 }
 .skycom-right {
   float: right;
+}
+.skycom-clear {
+  clear: both;
 }
 
 .alpha,
@@ -43,6 +47,7 @@
 
 .lt-ie9 body,
 body.lt-ie9 {
+  width: $width-plus-gutters;
   min-width: $width-plus-gutters;
   .skycom-12 { width: 100%; }
   .skycom-11 { width: 91.4%; }
@@ -118,7 +123,10 @@ body.lt-ie9 {
 }
 
 
-  body .skycom-container.skycom-bleed-mobile {
+  body .skycom-container-mobile {
+    width: ($container-width/$width-plus-gutters)*100%;
+  }
+  body .skycom-container.bleed-mobile {
     width: 100%;
   }
 }
