@@ -1,1 +1,5 @@
 version: 0.4.5
+destination: _site
+source: .
+exclude: [grunt, node_modules, test]
+port: 4000
