@@ -92,8 +92,8 @@ li[class*=" skycon-"].skycon-large:before {
     font-size: 16px;
     line-height: 1.125em;
 }
-.ie7-skycon{
-    font-style: normal;
+.lt-ie8{
+
 }
 
 /*

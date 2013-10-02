@@ -38,11 +38,21 @@ module.exports = function(grunt) {
             }
         },
         compass: {
-            dist: {
+            toolkit: {
                 options: {
                     config: 'grunt/sass/config.rb',
                     sassDir: 'grunt/sass/',
                     cssDir: 'dist/stylesheets/',
+                    outputStyle: grunt.option('beautify') ? "expanded" : "compressed" ,
+                    noLineComments: true,
+                    trace: true
+                }
+            },
+            fonts: {
+                options: {
+                    config: 'grunt/fonts/config.rb',
+                    sassDir: 'grunt/fonts/template/',
+                    cssDir: 'dist/fonts/',
                     outputStyle: grunt.option('beautify') ? "expanded" : "compressed" ,
                     noLineComments: true,
                     trace: true
@@ -103,7 +113,7 @@ module.exports = function(grunt) {
                     removeEmptyAttrs: true
                 }]
             },
-            dist: {                         // Target
+            fonts: {                         // Target
                 files: [{                   // Dictionary of files
                     expand: true,           // Enable dynamic expansion.
                     cwd: 'grunt/fonts/orig/',    // Src matches are relative to this path.
@@ -111,9 +121,28 @@ module.exports = function(grunt) {
                     dest: 'grunt/fonts/min/', // Destination path prefix.
                     ext: '.svg'         // Dest filepaths will have this extension.
                 }]
+            },
+            icons: {                         // Target
+                files: [{                   // Dictionary of files
+                    expand: true,           // Enable dynamic expansion.
+                    cwd: 'grunt/svgs/orig/',    // Src matches are relative to this path.
+                    src: ['*.svg'],      // Actual pattern(s) to match.
+                    dest: 'grunt/svgs/min/', // Destination path prefix.
+                    ext: '.svg'         // Dest filepaths will have this extension.
+                }]
+            }
+        },
+
+        grunticon: {
+            colourSVG: {
+                options: {
+                    src: "grunt/svgs/min",
+                    dest: "dist/svgs/"
+                }
             }
         }
     });
+
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -123,9 +152,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-webfont'); //https://github.com/sapegin/grunt-webfont
     grunt.loadNpmTasks('grunt-svgmin');
+    grunt.loadNpmTasks('grunt-grunticon');
 
-    grunt.registerTask('default', ['clean:toolkit', 'compass', 'jshint', 'requirejs']);
-    grunt.registerTask('fonts', ['clean:fonts', 'svgmin', 'webfont']);
+    grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
+    grunt.registerTask('fonts', ['clean:fonts', 'svgmin:fonts', 'webfont', 'compass:fonts']);
+    grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
     grunt.registerTask('test', ['mocha']);
     grunt.registerTask('hint', ['jshint']);
 };

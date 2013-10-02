@@ -14,7 +14,8 @@
 	    "grunt-contrib-watch": "latest",
 	    "grunt-mocha": "latest",
 	    "grunt-webfont": "latest",
-	    "grunt-svgmin": "latest"
+	    "grunt-svgmin": "latest",
+	    "grunt-grunticon": "latest"
     },
     "scripts": {
         "test": "grunt test"
