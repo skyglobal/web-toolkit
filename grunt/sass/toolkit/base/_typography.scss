@@ -52,11 +52,7 @@ small {
   line-height: 1.33em;
 }
 
-small.legal {
-  font-size: 0.6875em;
-  line-height: 1em;
-  color: $secondary;
-}
+
 
 blockquote {
   margin: 10px;
@@ -67,8 +63,22 @@ blockquote {
   color: $error;
 }
 
+.secondary{
+  color: $secondary;
+}
+
+.legal {
+  font-size: 0.6875em;
+  line-height: 1em;
+  color: $secondary;
+}
+
+.inactive{
+  color: $inactive;
+}
+
 .white {
-  color: #FFF !important;
+  color: $white !important;
 }
 
 .black {

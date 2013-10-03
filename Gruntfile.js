@@ -19,6 +19,7 @@ module.exports = function(grunt) {
         },
         clean: {
             toolkit: ['dist/images','dist/scripts','dist/stylesheets'],
+            css: ['dist/images','dist/stylesheets'],
             fonts: ['grunt/fonts/min','dist/fonts']
         },
         jshint: {
@@ -155,6 +156,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-grunticon');
 
     grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
+    grunt.registerTask('css', ['clean:css', 'compass:toolkit']);
     grunt.registerTask('fonts', ['clean:fonts', 'svgmin:fonts', 'webfont', 'compass:fonts']);
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
     grunt.registerTask('test', ['mocha']);
