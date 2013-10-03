@@ -89,18 +89,13 @@ li[class*=" skycon-"].skycon-large:before {
 .skycon-<%= glyphs[glyphIdx] %>:before {        content:"<% if (ligatures) { %><%= glyphs[glyphIdx] %><% } else { %>\<%= (61696+glyphIdx).toString(16) %><% } %>";      }<% } %><% } %>
 
 [class^="skycon-"] {
+    color: #666666;
     font-size: 16px;
     line-height: 1.125em;
 }
-.lt-ie8{
-
-}
-
 /*
 COPY THIS INTO grunt/js/utils/skycons.js
-
 var icons = {<% for (var glyphIdx = 0; glyphIdx < glyphs.length; glyphIdx++) { %>
     'skycon-<%= glyphs[glyphIdx] %>' : "&#x<% if (ligatures) { %><%= glyphs[glyphIdx] %><% } else { %><%= (61696+glyphIdx).toString(16) %><% } %>;",<% } %>
 };
-
 */

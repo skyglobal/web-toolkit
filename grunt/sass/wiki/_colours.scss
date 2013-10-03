@@ -16,7 +16,7 @@
     background-color: $colour-sky-arts;
   }
   &.colour-sky-living{
-    background-color: $colour-sky-atlantic;
+    background-color: $colour-sky-living;
   }
   &.colour-sky-movies{
     background-color: $colour-sky-movies;
@@ -40,54 +40,59 @@
     background-color: $colour-v3-blue;
   }
 
-  &.colour-sports-fanatic{
-    background-color: $colour-sports-fanatic;
+  &.colour-sports{
+    background-color: $colour-sports;
   }
-  &.colour-bb-talk{
-    background-color: $colour-bb-talk;
+  &.colour-original{
+    background-color: $colour-original;
   }
-  &.colour-family-friendly{
-    background-color: $colour-family-friendly;
+  &.colour-family{
+    background-color: $colour-family;
   }
   &.colour-complete{
     background-color: $colour-complete;
     color: $primary;
   }
-  &.colour-starter{
-    background-color: $colour-starter;
-  }
-  &.colour-movie-lover{
-    background-color: $colour-movie-lover;
-  }
-  &.colour-tv-only{
-    background-color: $colour-tv-only;
+  &.colour-movies{
+    background-color: $colour-movies;
   }
 
   &.colour-primary{
-    background-color: $primary;
+    color: $primary;
   }
   &.colour-secondary{
-    background-color: $secondary;
+    color: $secondary;
   }
   &.colour-inactive{
-    background-color: $inactive;
+    color: $inactive;
   }
   &.colour-error{
-    background-color: $error;
+    color: $error;
   }
   &.colour-link{
-    background-color: $link;
+    color: $link;
   }
+
   &.colour-primary-button{
     background-color: $primary-button;
-  }
-  &.colour-success-button{
-    background-color: $success-button;
   }
   &.colour-secondary-button{
     background-color: $secondary-button;
     color: $primary;
   }
+  &.colour-success-icon{
+    background-color: $success-icon;
+  }
+  &.colour-sky-go{
+    background-color: $colour-sky-go;
+  }
+  &.colour-remote-record{
+    background-color: $colour-remote-record;
+  }
+  &.colour-never-miss{
+    background-color: $colour-never-miss;
+  }
+
   &.colour-background-dark{
     background-color: $background-dark;
     color: $primary;

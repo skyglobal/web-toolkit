@@ -6,17 +6,17 @@
         line-height:32px;
         cursor:pointer;
     }
-    #wiki-skycons tr:hover {
-        color:#800;
-    }
     #wiki-skycons tr:hover i {
-        color:#800;
         font-size:32px;
         overflow: visible;
     }
     #wiki-skycons td,
     #wiki-skycons th{
         text-align: left;
+    }
+    #wiki-skycons th.demo-col{
+        text-align: center;
+        width: 140px;
     }
     #wiki-skycons th.icon,
     #wiki-skycons td.icon{
@@ -40,6 +40,12 @@
     Ensure <code>aria-hidden</code> is used on your <code>skycon</code> tags.
     </p>
     <p class="developer-notes">
+    To make the icon have a colour, add the class <code>colour</code> to the parent.
+    </p>
+    <p class="developer-notes">
+    To make the icon have a colour on hover, add the class <code>colour-hover</code> to the parent.
+    </p>
+    <p class="developer-notes">
     To Create Fonts:
     &bull; Open svg in inkscape, press ctrl+a to select all.
     &bull; press ctrl+g to group the objects
@@ -53,14 +59,15 @@
     <table id=wiki-skycons>
         <thead>
             <tr>
-                <th>Icon</th>
                 <th>CSS Class</th>
-                <th>How it looks</th>
+                <th class="demo-col">How it looks</th>
+                <th class="demo-col">with .colour</th>
+                <th class="demo-col">with .hover-colour</th>
             </tr>
         </thead>
         <tbody>
         <% for (var glyphIdx = 0; glyphIdx < glyphs.length; glyphIdx++) { var glyph = glyphs[glyphIdx] %>
-        <tr ><td><%= glyph %></td><td><%= baseClass %> <%= classPrefix %><%= glyph %></td><td class="icon"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td></tr>
+        <tr ><td><%= baseClass %> <%= classPrefix %><%= glyph %></td><td class="icon"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td><td class="icon colour"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td><td class="icon hover-colour"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td></tr>
         <% } %>
         </tbody>
     </table>

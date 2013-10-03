@@ -1,0 +1,26 @@
+body {
+  .hover-colour:hover,
+  .colour{
+    .skycon-sky-go{
+      color: $colour-sky-go;
+    }
+    .skycon-remote-record{
+      color: $colour-remote-record;
+    }
+    .skycon-never-miss{
+      color: $colour-never-miss;
+    }
+    .skycon-warning{
+      color: $error;
+    }
+    .skycon-google-plus{
+      color: $colour-google-plus;
+    }
+    .skycon-twitter{
+      color: $colour-twitter;
+    }
+    .skycon-facebook{
+      color: $colour-facebook;
+    }
+  }
+}
