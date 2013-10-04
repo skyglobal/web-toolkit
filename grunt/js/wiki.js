@@ -8,7 +8,7 @@ if (typeof window.define === "function" && window.define.amd) {
                     videoAds: false
                 }
             });
-            toolkit.skycons.init();
+            toolkit.init();
         }
 
         function logPage(){

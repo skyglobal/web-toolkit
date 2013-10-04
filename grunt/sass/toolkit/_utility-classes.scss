@@ -51,6 +51,44 @@
   background: #fff;
 }
 
+@mixin pointer($direction, $color, $size: 10px, $bordered: false) {
+  position: relative;
+
+  $middle-axis: top;
+  @if $direction == top or $direction == bottom {
+    $middle-axis: left;
+  }
+
+  $psuedo: before;
+  $offset: -$size;
+  $border-size: $size;
+  $z-index: 1;
+  @if $bordered {
+    $psuedo: after;
+    $offset: (-$size + 1px);
+    $border-size: ($size - 1px);
+    $z-index: 2;
+  }
+
+  &:#{$psuedo} {
+    content: "";
+    position: absolute;
+    #{opposite-position($direction)}: 100%;
+    #{$middle-axis}: 50%;
+    margin-#{$middle-axis}: $offset;
+    width: 0;
+    height: 0;
+    border: $border-size solid transparent;
+    border-#{opposite-position($direction)}-color: $color;
+    z-index: $z-index;
+  }
+}
+
+@mixin pointer-bordered($direction, $color, $border-color, $size: 10px) {
+  @include pointer($direction, $border-color, $size);
+  @include pointer($direction, $color, $size, true);
+}
+
 .internal-link{
   outline: 0!important;
   border: 0!important;
