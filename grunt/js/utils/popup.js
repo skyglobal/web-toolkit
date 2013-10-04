@@ -1,4 +1,5 @@
 define(function() {
+
     function open(args) {
         var url = args.url;
         var width = args.width || 400;
