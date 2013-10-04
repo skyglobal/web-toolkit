@@ -1,4 +1,4 @@
-version: 0.4.8
+version: 0.4.9
 destination: _site
 source: .
 exclude: [grunt, node_modules, test]
