@@ -21,13 +21,24 @@ if (typeof window.define === "function" && window.define.amd) {
     define('toolkit',[
         'utils/skycons',
         'utils/hashmanager',
+        'utils/popup',
         'modules/tabs',
-        'modules/carousel'], function(skycons, hashmanager, tabs, carousel){
+        'modules/share',
+        'modules/carousel'], function(skycons, hashmanager, popup, tabs, share, carousel){
+
+        function init() {
+            skycons.init();
+            share.init();
+            popup.init();
+        }
 
         return {
+            init: init,
             skycons: skycons,
             hashmanager: hashmanager,
+            popup: popup,
             tabs: tabs,
+            share: share,
             carousel: carousel
         };
     });

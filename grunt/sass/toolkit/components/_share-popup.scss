@@ -1,0 +1,123 @@
+.share-popup {
+  position: relative;
+  margin-top: 10px;
+  z-index: 2;
+
+  &.active {
+    & .skycon-share {
+      color: #0073c5;
+    }
+
+    & .share-word {
+      text-decoration: underline;
+    }
+  }
+  .summary {
+    text-decoration: none;
+    float: left;
+    cursor: pointer;
+    height: 1em;
+    line-height: 1em;
+    padding-right: 10px;
+
+    &.skycom-focus span {
+      color: #fff;
+    }
+
+    &:hover {
+      .skycon-share {
+        color: #0073c5;
+      }
+      .share-word {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  & .skycon-share {
+    position: relative;
+    padding-right: 2px;
+    top: -2px;
+  }
+
+  .share-count {
+    font-family: Helvetica, Arial;
+    padding: 2px 5px;
+    font-size: 0.75em;
+    bottom: 0.1em;
+    color: $link;
+  }
+
+  .popover {
+    @include pointer-bordered(top, #FFF, #CCC);
+    position: absolute;
+    display: none;
+    height: 40px;
+    top: 1.8em;
+    left: -7px;
+    width: 251px;
+    text-align: center;
+    padding-left: 3px;
+    background-color: #FFF;
+    border: 1px solid #dcdcdc;
+
+    &:before,
+    &:after {
+      left: 20px;
+    }
+    .share-count {
+      font-family: Helvetica, Arial;
+      font-size: 12px;
+      display: inline-block;
+      color: #666;
+    }
+
+    .email-link {
+      .skycon-mail {
+        line-height: 1.1em;
+      }
+      &.hover-colour:hover i {
+        color: #0073c5;
+      }
+    }
+
+
+    li {
+      .lt-ie8 & {
+        display: inline;
+      }
+
+      display: inline-block;
+      margin: 6px 15px 0 0;
+      padding-top: 3px;
+      a {
+        cursor: pointer;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+    }
+
+    @media all and (max-width: 767px) {
+      @include pointer-bordered(bottom, #FFF, #CCC);
+      position: absolute;
+      top: auto;
+      bottom: 1.8em;
+      left: 15px;
+
+      &:before,
+      &:after {
+        left: 20px;
+      }
+    }
+  }
+
+  &.active .popover {
+    display: block;
+    @include box-shadow(0px 3px 3px rgba(0, 0, 0, .15), 3px 0px 3px rgba(0, 0, 0, .15), -3px 0px 3px rgba(0, 0, 0, .15));
+    z-index: 1;
+    @media all and (max-width: 767px) {
+      @include box-shadow(0px -3px 3px rgba(0, 0, 0, .15), 3px 0px 3px rgba(0, 0, 0, .15), -3px 0px 3px rgba(0, 0, 0, .15));
+    }
+  }
+}
+
