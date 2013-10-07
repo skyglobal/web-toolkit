@@ -26,10 +26,19 @@ if (typeof window.define === "function" && window.define.amd) {
         'modules/share',
         'modules/carousel'], function(skycons, hashmanager, popup, tabs, share, carousel){
 
-        function init() {
-            skycons.init();
-            share.init();
-            popup.init();
+        function init(options) {
+            var module;
+            var modules = $.extend({
+                skycons : true,
+                share : true,
+                popup : true
+            }, options);
+
+            for (module in modules) {
+                if (modules[module] && this[module] && this[module].init) {
+                    this[module].init(modules[module])
+                }
+            }
         }
 
         return {

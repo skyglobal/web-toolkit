@@ -8,9 +8,7 @@ if (typeof window.define === "function" && window.define.amd) {
                     videoAds: false
                 }
             });
-            toolkit.init({
-                skycons: true
-            });
+            toolkit.init();
         }
 
         function logPage(){

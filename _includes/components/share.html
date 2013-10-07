@@ -8,7 +8,11 @@
         A share component to share external articles.
     </div>
     <div class="developer-notes">
-        Add attribute <code>data-pop-state="true"</code>
+        Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
+    </div>
+    <div class="init">
+        standard: <code>toolkit.init({share:true, popup: true});</code>
+with ie7 support: <code>toolkit.init({share:true, popup: true, skycons:true});</code>
     </div>
     <div class="demo" data-selector="*">
         <div class="share-popup clearfix">
@@ -18,17 +22,17 @@
                 <span class="share-count" aria-hidden="true">146</span>
             </a>
             <ul class="popover">
-                <li class="tweet-button clearfix">
-                    <a class='tweet-link hover-colour' data-popup="{'width': '550','height':'420','title':'twitter-share-dialog'}" data-tracking-context='Cyprus Bailout: Savings Shift Amid Russia Offer' href='https://twitter.com/intent/tweet?url=http%3A%2F%2Fnews.sky.com%2Fstory%2F1066004%2Fcyprus-bailout-savings-shift-amid-russia-offer&text=Cyprus Bailout: Savings Shift Amid Russia Offer' target='_blank'><i aria-hidden=true class='skycon-twitter'></i><span class='speak display-name'>Twitter</span></a><span class='share-count'>137</span>
+                <li class="tweet-button">
+                    <a class='tweet-link hover-colour' data-popup="{'width': '550','height':'420','title':'twitter-share-dialog'}"  href='https://twitter.com/intent/tweet?url=http%3A%2F%2Fnews.sky.com%2Fstory%2F1066004%2Fcyprus-bailout-savings-shift-amid-russia-offer&text=Cyprus Bailout: Savings Shift Amid Russia Offer' target='_blank'><i aria-hidden=true class='skycon-twitter'></i><span class='speak display-name'>Twitter</span></a><span class='share-count'>137</span>
                 </li>
-                <li class="facebook-button clearfix">
-                    <a class='fb-link hover-colour' data-popup="{'width': '626','height':'436','title':'facebook-share-dialog'}" data-tracking-context='Cyprus Bailout: Savings Shift Amid Russia Offer' href='https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fapps.facebook.com%2Fskynewsfb%2Farticle.php%3Fid%3D1066004'><i aria-hidden=true class='skycon-facebook'></i><span class='speak display-name'>Facebook</span></a><span class='share-count'>5</span>
+                <li class="facebook-button">
+                    <a class='fb-link hover-colour' data-popup="{'width': '626','height':'436','title':'facebook-share-dialog'}" href='https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fapps.facebook.com%2Fskynewsfb%2Farticle.php%3Fid%3D1066004'><i aria-hidden=true class='skycon-facebook'></i><span class='speak display-name'>Facebook</span></a><span class='share-count'>5</span>
                 </li>
-                <li class="gplus-button clearfix">
-                    <a class='gplus-link hover-colour' data-popup="{'width': '550','height':'420','title':'gplus-share-dialog'}" data-tracking-context='Cyprus Bailout: Savings Shift Amid Russia Offer' href='https://plus.google.com/share?url=http%3A%2F%2Fnews.sky.com%2Fstory%2F1066004%2Fcyprus-bailout-savings-shift-amid-russia-offer'><i aria-hidden=true class='skycon-google-plus'></i><span class='speak display-name'>Google+</span></a><span class='share-count'>4</span>
+                <li class="gplus-button">
+                    <a class='gplus-link hover-colour' data-popup="{'width': '550','height':'420','title':'gplus-share-dialog'}"  href='https://plus.google.com/share?url=http%3A%2F%2Fnews.sky.com%2Fstory%2F1066004%2Fcyprus-bailout-savings-shift-amid-russia-offer'><i aria-hidden=true class='skycon-google-plus'></i><span class='speak display-name'>Google+</span></a><span class='share-count'>4</span>
                 </li>
-                <li class="email-button clearfix">
-                    <a class='email-link hover-colour' data-tracking-context='Cyprus Bailout: Savings Shift Amid Russia Offer' href='mailto:?subject=Sharing - Cyprus Bailout: Savings Shift Amid Russia Offer&body=http%3A%2F%2Fnews.sky.com%2Fstory%2F1066004%2Fcyprus-bailout-savings-shift-amid-russia-offer'><i aria-hidden=true class='skycon-mail'></i><span class='speak display-name'>Mail</span></a>
+                <li class="email-button">
+                    <a class='email-link hover-colour' href='mailto:?subject=Sharing - Cyprus Bailout: Savings Shift Amid Russia Offer&body=http%3A%2F%2Fnews.sky.com%2Fstory%2F1066004%2Fcyprus-bailout-savings-shift-amid-russia-offer'><i aria-hidden=true class='skycon-mail'></i><span class='speak display-name'>Mail</span></a>
                 </li>
             </ul>
         </div>
@@ -41,23 +45,27 @@
         A share bar component
     </div>
     <div class="developer-notes">
-        Add attribute <code>data-pop-state="true"</code>
+        Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
+    </div>
+    <div class="init">
+        standard: <code>toolkit.init({popup: true});</code>
+        with ie7 support: <code>toolkit.init({popup: true, skycons:true});</code>
     </div>
     <div class="demo" data-selector="*">
-        <section id="share-this-page" class="module clearfix share-bar" data-tracking-module="share-this-page">
+        <section id="share-this-page" class="share-bar">
             <h3>Share this page</h3>
             <ul >
-                <li class="share-page-by-facebook clearfix">
-                    <a class='fb-link hover-colour' data-popup="{'width': '626','height':'436','title':'facebook-share-dialog'}" data-tracking-context='Sky.com Homepage' href='https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F10.65.94.145%3A8080%2Fhp%2F%3Fshared%3Dtrue'><i aria-hidden=true class='skycon-facebook'></i><span class='speak display-name'>Facebook</span></a>
+                <li class="share-page-by-facebook">
+                    <a class='fb-link hover-colour' data-popup="{'width': '626','height':'436','title':'facebook-share-dialog'}" href='https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F10.65.94.145%3A8080%2Fhp%2F%3Fshared%3Dtrue'><i aria-hidden=true class='skycon-facebook'></i><span class='speak display-name'>Facebook</span></a>
                 </li>
-                <li class="share-page-by-twitter clearfix">
-                    <a class='tweet-link hover-colour' data-popup="{'width': '550','height':'420','title':'twitter-share-dialog'}" data-tracking-context='Sky.com Homepage' href='https://twitter.com/intent/tweet?url=http%3A%2F%2F10.65.94.145%3A8080%2Fhp%2F%3Fshared%3Dtrue&text=Sky.com Homepage' target='_blank'><i aria-hidden=true class='skycon-twitter'></i><span class='speak display-name'>Twitter</span></a>
+                <li class="share-page-by-twitter">
+                    <a class='tweet-link hover-colour' data-popup="{'width': '550','height':'420','title':'twitter-share-dialog'}"  href='https://twitter.com/intent/tweet?url=http%3A%2F%2F10.65.94.145%3A8080%2Fhp%2F%3Fshared%3Dtrue&text=Sky.com Homepage' target='_blank'><i aria-hidden=true class='skycon-twitter'></i><span class='speak display-name'>Twitter</span></a>
                 </li>
-                <li class="share-page-by-gplus clearfix">
-                    <a class='gplus-link hover-colour' data-popup="{'width': '550','height':'420','title':'gplus-share-dialog'}" data-tracking-context='Sky.com Homepage' href='https://plus.google.com/share?url=http%3A%2F%2F10.65.94.145%3A8080%2Fhp%2F%3Fshared%3Dtrue'><i aria-hidden=true class='skycon-google-plus'></i><span class='speak display-name'>Google+</span></a>
+                <li class="share-page-by-gplus">
+                    <a class='gplus-link hover-colour' data-popup="{'width': '550','height':'420','title':'gplus-share-dialog'}"  href='https://plus.google.com/share?url=http%3A%2F%2F10.65.94.145%3A8080%2Fhp%2F%3Fshared%3Dtrue'><i aria-hidden=true class='skycon-google-plus'></i><span class='speak display-name'>Google+</span></a>
                 </li>
-                <li class="share-page-by-email clearfix">
-                    <a class='email-link hover-colour' data-tracking-context='Sky.com Homepage' href='mailto:?subject=Sharing - Sky.com Homepage&body=http%3A%2F%2F10.65.94.145%3A8080%2Fhp%2F%3Fshared%3Dtrue'><i aria-hidden=true class='skycon-mail'></i><span class='speak display-name'>Mail</span></a>
+                <li class="share-page-by-email">
+                    <a class='email-link hover-colour' href='mailto:?subject=Sharing - Sky.com Homepage&body=http%3A%2F%2Fwww.sky.com0%2Fhp%2F%3Fshared%3Dtrue'><i aria-hidden=true class='skycon-mail'></i><span class='speak display-name'>Mail</span></a>
                 </li>
             </ul>
         </section>
