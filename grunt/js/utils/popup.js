@@ -1,4 +1,6 @@
-define(function() {
+if (typeof toolkit==='undefined') toolkit={};
+
+toolkit.popup = (function() {
 
     function open(args) {
         var url = args.url;
@@ -22,4 +24,10 @@ define(function() {
         init: init,
         open: open
     };
-});
+})();
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('utils/popup', [], function() {
+        return toolkit.popup;
+    });
+}

@@ -15,6 +15,34 @@ toolkit.main = (function() {
 
 }());
 
+toolkit = (function(skycons, hashmanager, popup, tabs, share, carousel){
+
+    function init(options) {
+        var module;
+        var modules = $.extend({
+            skycons : true,
+            share : true,
+            popup : true
+        }, options);
+        console.log(this);
+        for (module in modules) {
+            if (modules[module] && this[module] && this[module].init) {
+                this[module].init(modules[module])
+            }
+        }
+    }
+
+    return {
+        init: init,
+        skycons: skycons,
+        hashmanager: hashmanager,
+        popup: popup,
+        tabs: tabs,
+        share: share,
+        carousel: carousel
+    };
+}(toolkit.skycons, toolkit.hashmanager, toolkit.popup, toolkit.tabs, toolkit.share, toolkit.carousel));
+
 
 if (typeof window.define === "function" && window.define.amd) {
 //    explicitly call all js files here to ensure all files are available
@@ -24,31 +52,7 @@ if (typeof window.define === "function" && window.define.amd) {
         'utils/popup',
         'modules/tabs',
         'modules/share',
-        'modules/carousel'], function(skycons, hashmanager, popup, tabs, share, carousel){
-
-        function init(options) {
-            var module;
-            var modules = $.extend({
-                skycons : true,
-                share : true,
-                popup : true
-            }, options);
-
-            for (module in modules) {
-                if (modules[module] && this[module] && this[module].init) {
-                    this[module].init(modules[module])
-                }
-            }
-        }
-
-        return {
-            init: init,
-            skycons: skycons,
-            hashmanager: hashmanager,
-            popup: popup,
-            tabs: tabs,
-            share: share,
-            carousel: carousel
-        };
-    });
+        'modules/carousel'], function() {
+            return toolkit
+        });
 }
