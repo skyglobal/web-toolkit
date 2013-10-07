@@ -55,6 +55,7 @@
     padding-left: 16px;
     background-color: #FFF;
     border: 1px solid #dcdcdc;
+    min-width: 235px;
 
     &:before,
     &:after {
@@ -65,6 +66,7 @@
       font-size: 12px;
       display: inline-block;
       color: #666;
+      width: 14px;
     }
     .skycon-mail {
       font-size: 14px;
