@@ -15,19 +15,52 @@ toolkit.main = (function() {
 
 }());
 
+toolkit.modules = (function(){
+
+        var init =function(options) {
+            var module;
+            var modulesToInitialize = $.extend({
+                skycons : true,
+                share : true,
+                popup : true
+            }, options);
+            for (module in modulesToInitialize) {
+                if (modulesToInitialize[module] && toolkit[module] && toolkit[module].init) {
+                    toolkit[module].init(modulesToInitialize[module])
+                }
+            }
+        }
+
+        return {
+            init: init
+        }
+    })();
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('modules', [], function() {
+        return toolkit.modules;
+    });
+}
 
 if (typeof window.define === "function" && window.define.amd) {
 //    explicitly call all js files here to ensure all files are available
     define('toolkit',[
         'utils/skycons',
         'utils/hashmanager',
+        'utils/popup',
+        'modules',
         'modules/tabs',
-        'modules/carousel'], function(skycons, hashmanager, tabs, carousel){
+        'modules/share',
+        'modules/carousel'], function(skycons, hashmanager, popup, modules, tabs, share, carousel){
+
 
         return {
+            modules: modules,
             skycons: skycons,
             hashmanager: hashmanager,
+            popup: popup,
             tabs: tabs,
+            share: share,
             carousel: carousel
         };
     });
