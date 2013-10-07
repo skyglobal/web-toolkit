@@ -1,5 +1,6 @@
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.main = (function() {
+
+toolkit = (function(skycons, hashmanager, popup, tabs, share, carousel){
 
     function bindEvents() {
         var addWindowLoadClass = function() { $(document.body).addClass('window-loaded');},
@@ -11,12 +12,6 @@ toolkit.main = (function() {
         });
     }
 
-    bindEvents();
-
-}());
-
-toolkit = (function(skycons, hashmanager, popup, tabs, share, carousel){
-
     function init(options) {
         var module;
         var modules = $.extend({
@@ -24,13 +19,15 @@ toolkit = (function(skycons, hashmanager, popup, tabs, share, carousel){
             share : true,
             popup : true
         }, options);
-        console.log(this);
+
         for (module in modules) {
             if (modules[module] && this[module] && this[module].init) {
                 this[module].init(modules[module])
             }
         }
     }
+
+    bindEvents();
 
     return {
         init: init,
