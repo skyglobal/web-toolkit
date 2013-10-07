@@ -5,6 +5,7 @@
 
   .share-word {
     color: #666;
+    margin-right: 8px;
   }
 
   &.active,
@@ -17,9 +18,7 @@
       text-decoration: underline;
     }
   }
-  &.active .share-word {
-    color: #0073c5;
-  }
+
   .summary {
     text-decoration: none;
     float: left;
@@ -67,6 +66,9 @@
       display: inline-block;
       color: #666;
     }
+    .skycon-mail {
+      font-size: 14px;
+    }
 
     li {
       .lt-ie8 & {
@@ -101,7 +103,7 @@
     @include box-shadow(2px 1px 3px rgba(0, 0, 0, 0.15));
     z-index: 1;
     @media all and (max-width: 767px) {
-      @include box-shadow(-2px 1px 3px rgba(0, 0, 0, 0.15));
+      @include box-shadow(-2px -1px 3px rgba(0, 0, 0, 0.15));
     }
   }
 }
@@ -122,6 +124,10 @@
     height: auto;
     width: auto;
     padding-left: 10px;
+    vertical-align: bottom;
+  }
+  .skycon-mail {
+    margin-top: 4px;
   }
   ul {
     display: inline;
@@ -166,9 +172,7 @@
   .skycon-twitter {
     font-size: 17px;
   }
-  .skycon-mail {
-    font-size: 14px;
-  }
+
   .email-link {
 
     &.hover-colour:hover i {
