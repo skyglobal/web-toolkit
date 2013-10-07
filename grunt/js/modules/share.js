@@ -25,6 +25,7 @@ define(function() {
         }
 
         function init() {
+            console.log('initing share');
             bindEvents();
         }
 
