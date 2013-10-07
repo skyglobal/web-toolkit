@@ -3,7 +3,12 @@
   margin-top: 10px;
   z-index: 2;
 
-  &.active {
+  .share-word {
+    color: #666;
+  }
+
+  &.active,
+  .summary:hover {
     & .skycon-share {
       color: #0073c5;
     }
@@ -11,6 +16,9 @@
     & .share-word {
       text-decoration: underline;
     }
+  }
+  &.active .share-word {
+    color: #0073c5;
   }
   .summary {
     text-decoration: none;
@@ -23,15 +31,6 @@
     &.skycom-focus span {
       color: #fff;
     }
-
-    &:hover {
-      .skycon-share {
-        color: #0073c5;
-      }
-      .share-word {
-        text-decoration: underline;
-      }
-    }
   }
 
   & .skycon-share {
@@ -42,7 +41,6 @@
 
   .share-count {
     font-family: Helvetica, Arial;
-    padding: 2px 5px;
     font-size: 0.75em;
     bottom: 0.1em;
     color: $link;
@@ -55,9 +53,7 @@
     height: 40px;
     top: 1.8em;
     left: -7px;
-    width: 251px;
-    text-align: center;
-    padding-left: 3px;
+    padding-left: 16px;
     background-color: #FFF;
     border: 1px solid #dcdcdc;
 
@@ -72,28 +68,17 @@
       color: #666;
     }
 
-    .email-link {
-      .skycon-mail {
-        line-height: 1.1em;
-      }
-      &.hover-colour:hover i {
-        color: #0073c5;
-      }
-    }
-
-
     li {
       .lt-ie8 & {
         display: inline;
       }
 
       display: inline-block;
-      margin: 6px 15px 0 0;
+      margin: 6px 16px 0 0;
       padding-top: 3px;
       a {
         cursor: pointer;
-        padding-left: 5px;
-        padding-right: 5px;
+        padding: 8px;
       }
     }
 
@@ -113,10 +98,10 @@
 
   &.active .popover {
     display: block;
-    @include box-shadow(0px 3px 3px rgba(0, 0, 0, .15), 3px 0px 3px rgba(0, 0, 0, .15), -3px 0px 3px rgba(0, 0, 0, .15));
+    @include box-shadow(2px 1px 3px rgba(0, 0, 0, 0.15));
     z-index: 1;
     @media all and (max-width: 767px) {
-      @include box-shadow(0px -3px 3px rgba(0, 0, 0, .15), 3px 0px 3px rgba(0, 0, 0, .15), -3px 0px 3px rgba(0, 0, 0, .15));
+      @include box-shadow(-2px 1px 3px rgba(0, 0, 0, 0.15));
     }
   }
 }
@@ -171,6 +156,23 @@
           display: none;
         }
       }
+    }
+  }
+}
+
+.share-bar, .share-popup {
+
+  .skycon-google-plus,
+  .skycon-twitter {
+    font-size: 17px;
+  }
+  .skycon-mail {
+    font-size: 14px;
+  }
+  .email-link {
+
+    &.hover-colour:hover i {
+      color: #0073c5;
     }
   }
 }
