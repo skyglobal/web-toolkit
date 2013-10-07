@@ -1,4 +1,5 @@
-define(function() {
+if (typeof toolkit==='undefined') toolkit={};
+toolkit.share = (function() {
 
         var $el = {
             document: $(document),
@@ -25,7 +26,6 @@ define(function() {
         }
 
         function init() {
-            console.log('initing share');
             bindEvents();
         }
 
@@ -34,4 +34,10 @@ define(function() {
             toggleSharePopover: toggleSharePopover
         };
     }
-);
+)();
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('modules/share', [], function() {
+        return toolkit.share;
+    });
+}
