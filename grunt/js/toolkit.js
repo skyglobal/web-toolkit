@@ -1,6 +1,5 @@
 if (typeof toolkit==='undefined') toolkit={};
-
-toolkit = (function(skycons, hashmanager, popup, tabs, share, carousel){
+toolkit.main = (function() {
 
     function bindEvents() {
         var addWindowLoadClass = function() { $(document.body).addClass('window-loaded');},
@@ -12,34 +11,36 @@ toolkit = (function(skycons, hashmanager, popup, tabs, share, carousel){
         });
     }
 
-    function init(options) {
-        var module;
-        var modules = $.extend({
-            skycons : true,
-            share : true,
-            popup : true
-        }, options);
-
-        for (module in modules) {
-            if (modules[module] && this[module] && this[module].init) {
-                this[module].init(modules[module])
-            }
-        }
-    }
-
     bindEvents();
 
-    return {
-        init: init,
-        skycons: skycons,
-        hashmanager: hashmanager,
-        popup: popup,
-        tabs: tabs,
-        share: share,
-        carousel: carousel
-    };
-}(toolkit.skycons, toolkit.hashmanager, toolkit.popup, toolkit.tabs, toolkit.share, toolkit.carousel));
+}());
 
+toolkit.modules = (function(){
+
+        var init =function(options) {
+            var module;
+            var modulesToInitialize = $.extend({
+                skycons : true,
+                share : true,
+                popup : true
+            }, options);
+            for (module in modulesToInitialize) {
+                if (modulesToInitialize[module] && toolkit[module] && toolkit[module].init) {
+                    toolkit[module].init(modulesToInitialize[module])
+                }
+            }
+        }
+
+        return {
+            init: init
+        }
+    })();
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('modules', [], function() {
+        return toolkit.modules;
+    });
+}
 
 if (typeof window.define === "function" && window.define.amd) {
 //    explicitly call all js files here to ensure all files are available
@@ -47,9 +48,20 @@ if (typeof window.define === "function" && window.define.amd) {
         'utils/skycons',
         'utils/hashmanager',
         'utils/popup',
+        'modules',
         'modules/tabs',
         'modules/share',
-        'modules/carousel'], function() {
-            return toolkit
-        });
+        'modules/carousel'], function(skycons, hashmanager, popup, modules, tabs, share, carousel){
+
+
+        return {
+            modules: modules,
+            skycons: skycons,
+            hashmanager: hashmanager,
+            popup: popup,
+            tabs: tabs,
+            share: share,
+            carousel: carousel
+        };
+    });
 }
