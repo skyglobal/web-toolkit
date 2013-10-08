@@ -3,5 +3,3 @@ deployment:
     branch: master
     commands:
       - rake deploy_new_version
-      - git checkout gh-pages
-      - git push origin master:gh-pages

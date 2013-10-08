@@ -88,6 +88,9 @@ li[class*=" skycon-"].skycon-large:before {
 <% if (iconsStyles && stylesheet !== 'less') { %>/* Icons */<% for (var glyphIdx = 0; glyphIdx < glyphs.length; glyphIdx++) { %>
 .skycon-<%= glyphs[glyphIdx] %>:before {        content:"<% if (ligatures) { %><%= glyphs[glyphIdx] %><% } else { %>\<%= (61696+glyphIdx).toString(16) %><% } %>";      }<% } %><% } %>
 
+/*todo: put ie7 code in here*/
+/*{*background: url();}*/
+
 [class^="skycon-"] {
     color: #666666;
     font-size: 16px;
