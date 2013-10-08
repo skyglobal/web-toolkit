@@ -11,12 +11,12 @@
         Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
     </div>
     <div class="init">
-        standard: <code>toolkit.modules.init({share:true, popup: true});</code>
-with ie7 support: <code>toolkit.modules.init({share:true, popup: true, skycons:true});</code>
+        standard: <code>toolkit.modules.init();</code>
+        explicit: <code>toolkit.modules.init({share:true, popup: true, skycons: true });</code>
     </div>
     <div class="demo" data-selector="*">
         <div class="share-popup clearfix">
-            <a class="summary" href="#!" data-tracking-context="Cyprus Bailout: Savings Shift Amid Russia Offer" aria-label="Shared 146 times. Click to show share options">
+            <a class="summary" href="#!" data-tracking-context="Shared article title" aria-label="Shared 146 times. Click to show share options">
                 <i class="skycon-share"></i>
                 <span class="share-word" aria-hidden="true">Share</span>
                 <span class="share-count" aria-hidden="true">146</span>

@@ -17,24 +17,24 @@ toolkit.main = (function() {
 
 toolkit.modules = (function(){
 
-        var init =function(options) {
-            var module;
-            var modulesToInitialize = $.extend({
-                skycons : true,
-                share : true,
-                popup : true
-            }, options);
-            for (module in modulesToInitialize) {
-                if (modulesToInitialize[module] && toolkit[module] && toolkit[module].init) {
-                    toolkit[module].init(modulesToInitialize[module])
-                }
+    var init =function(options) {
+        var module;
+        var modulesToInitialize = $.extend({
+            skycons : false,
+            share : false,
+            popup : false
+        }, options);
+        for (module in modulesToInitialize) {
+            if ((modulesToInitialize[module] || !options ) && toolkit[module] && toolkit[module].init) {
+                toolkit[module].init();
             }
         }
+    };
 
-        return {
-            init: init
-        }
-    })();
+    return {
+        init: init
+    };
+})();
 
 if (typeof window.define === "function" && window.define.amd) {
     define('modules', [], function() {
