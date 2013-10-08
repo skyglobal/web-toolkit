@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="../../dist/scripts/lib/jquery-2.0.3.js"></script>
+    <script src="vendor/mocha.js"></script>
+    <script src="vendor/require.js"></script>
+    <script src="config.js" ></script>
+
+</head>
+<body>
+<!--PLACEHOLDER FOR MOCHA TEST RESULTS-->
+<div id="mocha"></div>
+
+<!--FIXTURE HTML FOR TESTS-->
+<div id="spec-markup">
+    <a class='tweet-link hover-colour' data-popup="{'width': '550','height':'420','title':'twitter-share-dialog'}" data-tracking-context='Cyprus Bailout: Savings Shift Amid Russia Offer' href='https://twitter.com/intent/tweet?url=http%3A%2F%2Fnews.sky.com%2Fstory%2F1066004%2Fcyprus-bailout-savings-shift-amid-russia-offer&text=Cyprus Bailout: Savings Shift Amid Russia Offer' target='_blank'><i aria-hidden=true class='skycon-twitter'></i><span class='speak display-name'>Twitter</span></a><span class='share-count'>137</span>
+</div>
+
+</div>
+<!--TEST-->
+<script>
+
+    require(['utils/popup', '../../test/jsUnit/setup'],function(popup){
+
+        describe('Popup in new window', function() {
+            popup.init();
+
+
+            var args = {
+                url: "http://www.google.com",
+                width: 400,
+                height: 100,
+                top: 600,
+                left: 137,
+                title: 'test title'
+            }
+
+            it('clicking share link should open the popup', function() {
+                window.open = function(url, title, options) {
+                    return { url: url, title: title, options: options};
+                }
+
+                var windowOpened = popup.open(args);
+                expect(windowOpened.url).to.equal("http://www.google.com");
+                expect(windowOpened.title).to.equal("test title");
+                expect(windowOpened.options).to.equal("top=600,left=137,width=400,height=100");
+            });
+
+            it('clicking share link without arguments uses defaults', function() {
+                window.open = function(url, title, options) {
+                    return { url: url, title: title, options: options};
+                }
+
+                var windowOpened = popup.open({});
+                var expectedOptions = "top=" + (screen.height/2 -200 )+ ",left=" + (screen.width/2 -200)+",width=400,height=400"
+                expect(windowOpened.url).to.equal(undefined);
+                expect(windowOpened.title).to.equal("Sky");
+                expect(windowOpened.options).to.equal(expectedOptions);
+            });
+
+        });
+        mocha.run();
+    });
+</script>
+
+</body>
+</html>
