@@ -19,6 +19,7 @@ module.exports = function(grunt) {
         },
         clean: {
             toolkit: ['dist/images','dist/scripts','dist/stylesheets'],
+            js: ['dist/scripts'],
             css: ['dist/images','dist/stylesheets'],
             fonts: ['grunt/fonts/min','dist/fonts']
         },
@@ -44,16 +45,6 @@ module.exports = function(grunt) {
                     config: 'grunt/sass/config.rb',
                     sassDir: 'grunt/sass/',
                     cssDir: 'dist/stylesheets/',
-                    outputStyle: grunt.option('beautify') ? "expanded" : "compressed" ,
-                    noLineComments: true,
-                    trace: true
-                }
-            },
-            fonts: {
-                options: {
-                    config: 'grunt/fonts/config.rb',
-                    sassDir: 'grunt/fonts/template/',
-                    cssDir: 'dist/fonts/',
                     outputStyle: grunt.option('beautify') ? "expanded" : "compressed" ,
                     noLineComments: true,
                     trace: true
@@ -157,7 +148,8 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
     grunt.registerTask('css', ['clean:css', 'compass:toolkit']);
-    grunt.registerTask('fonts', ['clean:fonts', 'svgmin:fonts', 'webfont', 'compass:fonts']);
+    grunt.registerTask('js', ['clean:js', 'jshint', 'requirejs']);
+    grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
     grunt.registerTask('test', ['mocha']);
     grunt.registerTask('hint', ['jshint']);
