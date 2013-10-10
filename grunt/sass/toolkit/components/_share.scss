@@ -49,7 +49,7 @@
     @include pointer-bordered(top, #FFF, #CCC);
     position: absolute;
     display: none;
-    height: 40px;
+    height: 44px;
     top: 1.8em;
     left: -7px;
     padding-left: 16px;
@@ -68,18 +68,17 @@
       color: #666;
       width: 14px;
     }
-    .skycon-mail {
-      font-size: 14px;
+    .skycon-facebook {
+      font-size: 15px;
+      margin-top: -1px;
     }
-
     li {
       .lt-ie8 & {
         display: inline;
       }
-
       display: inline-block;
       margin: 6px 16px 0 0;
-      padding-top: 3px;
+      padding-top: 7px;
       a {
         cursor: pointer;
         padding: 8px;
@@ -113,8 +112,8 @@
 
 .share-bar {
   border-top: 1px solid #C0C0C0;
-  margin: 10px 0;
-  padding-top: 10px;
+  margin: 16px 0;
+  padding-top: 16px;
   h3 {
     display: inline;
   }
@@ -126,11 +125,8 @@
     height: auto;
     width: auto;
     padding-left: 10px;
-    vertical-align: bottom;
   }
-  .skycon-mail {
-    margin-top: 4px;
-  }
+
   ul {
     display: inline;
     margin-left: 30px;
@@ -169,10 +165,9 @@
 }
 
 .share-bar, .share-popup {
-
-  .skycon-google-plus,
-  .skycon-twitter {
-    font-size: 17px;
+  .skycon-mail {
+    font-size: 19px;
+    margin-top: -2px;
   }
 
   .email-link {
