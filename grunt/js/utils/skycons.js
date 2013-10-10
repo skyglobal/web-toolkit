@@ -33,32 +33,34 @@ toolkit.skycons = (function() {
 
 
     function supportsPsuedo(){
-        var head = document.getElementsByTagName('head')[0],
-            style = document.createElement('style'),
-            rules = [
-                '#pseudo-test { visibility:hidden; position:absolute; } ',
-                '#pseudo-test:before { content: "(-:"; }'
-            ],
-            div = document.createElement('div'),
-            hasBefore = false;
-        style.type = 'text/css';
+        var doc = document,
+            html = doc.documentElement,
+            body = doc.body,
+            supportsPseudo = false,
+            paraBefore = doc.createElement('p'),
+            styleBefore = doc.createElement('style'),
+            heightBefore,
+            selectorsBefore = '#testbefore:before { content: "before"; }';
 
-        if(style.styleSheet){
-            style.styleSheet.cssText = rules.join('');
+        styleBefore.type = 'text\/css';
+        paraBefore.id = 'testbefore';
+
+        if (styleBefore.styleSheet) {
+            styleBefore.styleSheet.cssText = selectorsBefore;
         } else {
-            style.appendChild(document.createTextNode(rules.join('')));
+            styleBefore.appendChild(doc.createTextNode(selectorsBefore));
         }
 
-        head.appendChild(style);
+        body.appendChild(styleBefore);
+        body.appendChild(paraBefore);
 
-        div.id = "pseudo-test";
-        document.body.appendChild(div);
-        hasBefore = div.offsetWidth > 0;
-
-        // Clean up
-        style.parentNode.removeChild(style);
-        div.parentNode.removeChild(div);
-        return hasBefore;
+        heightBefore = doc.getElementById('testbefore').offsetHeight;
+        if (heightBefore >= 1) {
+            supportsPseudo = true;
+        }
+        body.removeChild(styleBefore);
+        body.removeChild(paraBefore);
+        return supportsPseudo;
     }
 
     function addSkycon(el, c){
