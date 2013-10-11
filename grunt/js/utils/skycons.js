@@ -55,9 +55,11 @@ toolkit.skycons = (function() {
         body.appendChild(paraBefore);
 
         heightBefore = doc.getElementById('testbefore').offsetHeight;
+
         if (heightBefore >= 1) {
             supportsPseudo = true;
         }
+
         body.removeChild(styleBefore);
         body.removeChild(paraBefore);
         return supportsPseudo;
