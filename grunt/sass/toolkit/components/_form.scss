@@ -2,6 +2,7 @@
 
   .row {
     margin: 0 0 24px 0;
+    position: relative;
   }
 
   .required:after {
@@ -64,6 +65,99 @@
 
     &:focus {
       border: 1px solid #0094ff;
+    }
+  }
+  .datepicker {
+    #day, #month, #year {
+      width: 57px;
+      margin-right: 9px;
+    }
+    #year {
+      width: 83px;
+    }
+
+    .datepicker-container {
+      float: left;
+      position: relative;
+
+      &:after {
+        clear: both;
+      }
+    }
+
+  }
+
+  .calendar {
+    position: absolute;
+    display: none;
+    top: 28px;
+    left: 0;
+    z-index: 10;
+    // left: 346px;
+    // top: 7222.140625px;
+    background-color: #fff;
+    padding: 16px 9px 20px 9px;
+    width: 201px;
+    border: 1px solid #dcdcdc;
+    font-size: 20px;
+    color: #666;
+    text-align: center;
+
+    .monthyear {
+      margin-bottom: 16px;
+
+      span.monthleft, span.monthright {
+        color: #0073c5;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .monthleft {
+        float: left;
+      }
+      .monthright {
+        float: right;
+      }
+    }
+
+    .days {
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+      border-bottom: solid 1px #dcdcdc;
+      font-size: 16px;
+
+      span {
+        display: inline-block;
+        width: 28px;
+      }
+    }
+
+    .daycontainer {
+      font-family: "Helvetica", Arial, sans-serif;
+      font-size: 14px;
+      color: #333;
+      text-align: left;
+
+      span {
+        margin: 3px;
+        display: inline-block;
+        width: 18px;
+        text-align: center;
+        padding: 2px;
+        cursor: pointer;
+      }
+      span:hover {
+        background-color: #0073c5;
+        color: #fff;
+      }
+
+      .past {
+        color: #a5a5a5;
+      }
+
+      .selected {
+        font-weight: bold;
+        color: #0073c5;
+      }
     }
   }
 
