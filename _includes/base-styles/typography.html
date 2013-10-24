@@ -5,24 +5,45 @@
     When Sky fonts aren't available within the browser <code>Helvetica/Arial/Verdana</code> should be used.
 </p>
 <p class="developer-notes">
-
+    The Term '<code>Leading</code>' is the same as <code>line-height</code>.
 </p>
 
 <div class="example">
     <p class="developer-notes">
-        You can have the header tags styled automatically by adding '<code>toolkit-ready</code>' to you body or html.
+        All these headers work with or without the corresponding <code>xxx-title</code> classes. You can optionally add a <code>small</code> class too.
     </p>
     <div class="demo" data-selector="h1,h2,h3,p,small,strong,blockquote,.smash-img .white,.beckham-img .black, a">
 
-        <h1 class="page-title large">Page Title (above carousel)</h1>
-        <h1 class="page-title">Page Title</h1>
-        <h2 class="module-title">Module Title</h2>
-        <h3 class="pod-title">Pod Title</h3>
-        <p class="hint-text">Instructional copy</p>
-        <p class="intro">Intro Copy</p>
-        <p>Body text</p>
+        <h1 class="page-title">
+            Page Title (Sky Text Regular <span class="pink">52px</span>)
+            <br/><span class="leading">Leading 56px</span>
+        </h1>
+        <h2 class="section-title">Section Title (Sky Text Regular <span class="pink">44px</span>)
+            <br/><span class="leading">Leading 48px</span>
+        </h2>
+        <h2 class="section-title small">Small Section Title (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">36px</span>)
+            <br/><span class="leading">Leading 30px</span>
+        </h2>
+        <h3 class="pod-title">Pod Title (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">32px</span>)
+            <br/><span class="leading">Leading 36px</span>
+        </h3>
+        <h3 class="pod-title small">Small Pod Title (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">28px</span>)
+            <br/><span class="leading">Leading 32px</span>
+        </h3>
+        <p class="intro">Intro Copy (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">24px</span>)
+            <br/><span class="leading">Leading 28px</span>
+        </p>
+        <p class="intro small">Small Intro Copy (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">20px</span>)
+            <br/><span class="leading">Leading 24px</span>
+        </p>
+        <p>Body text (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">16px</span>)
+            <br/><span class="leading">Leading 20px</span>
+        </p>
         <small class="block">Supportive text</small>
         <small class="block legal">Legal copy</small>
+        <p class="instructions">Instructional copy (Luna <span class="pink">24px</span>)
+            <br/><span class="leading">Leading 40px</span>
+        </p>
         <p class="error">Error</p>
         <p class="secondary">Secondary</p>
         <p class="inactive">Inactive</p>
