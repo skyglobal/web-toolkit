@@ -176,7 +176,7 @@
       position: relative;
       margin-left:-50%;
     }
-    .container > * {
+    .container > span {
       @include border-radius(5px);
       @include inline-block;
       background:#bbb;
