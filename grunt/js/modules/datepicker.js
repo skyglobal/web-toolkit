@@ -46,7 +46,7 @@ toolkit.datepicker = (function () {
             if ($el.day.val() > daysInMonth(month, year)) {
                 $el.day.val(daysInMonth(month, year));
             }
-            if ($el.day.val() === '00') {
+            if ($el.day.val() === '00' || $el.day.val() === '0') {
                 $el.day.val('01');
             }
 
@@ -77,7 +77,7 @@ toolkit.datepicker = (function () {
             if ($el.month.val() > 12) {
                 $el.month.val('12');
             }
-            if ($el.month.val() === '00') {
+            if ($el.month.val() === '00' || $el.month.val() === '0') {
                 $el.month.val('01');
             }
 
