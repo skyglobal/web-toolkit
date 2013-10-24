@@ -45,8 +45,9 @@ toolkit.datepicker = (function () {
         $el.day.on('keyup', function() {
             if ($el.day.val() > daysInMonth(month, year)) {
                 $el.day.val(daysInMonth(month, year));
-            } else if ($el.day.val() === '00') {
-                    $el.day.val('01');
+            }
+            if ($el.day.val() === '00') {
+                $el.day.val('01');
             }
 
             if ($el.day.val().length === 2) {
