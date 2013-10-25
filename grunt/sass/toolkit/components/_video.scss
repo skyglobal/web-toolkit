@@ -1,0 +1,44 @@
+.play-video {
+  display: block;
+  white-space: nowrap;
+  padding: 5px 10px 0 5px;
+  border-radius: 25px;
+  z-index: 1;
+  @include transition(background .3s, box-shadow .3s);
+
+  &:hover,
+  &:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    @include box-shadow(0 0 5px rgba(0, 0, 0, 0.25));
+  }
+  span {
+    color: #333;
+  }
+  i {
+    margin: 0 5px 5px 0;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .play-video {
+    padding-right: 0;
+    span {
+      display:none;
+    }
+  }
+}
+
+.lt-ie9{
+  .play-video{
+    display: block; float:right; padding-left:5px; line-height:3em;
+    span {
+      padding: 15px 15px 15px 0;
+    }
+  }
+}
+
+.lt-ie8{
+  .play-video span{
+    position:relative; top:-20px; padding: 15px; left:-5px;
+  }
+}
