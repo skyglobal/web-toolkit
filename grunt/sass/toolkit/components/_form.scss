@@ -103,14 +103,29 @@
 }
 
 .skycom-mobile {
-  .sky-form .row {
-    margin: 0 0 16px 0;
 
-    & > label {
-      float: none;
-      display: block;
+  .sky-form {
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    textarea {
       width: 100%;
-      text-align: left;
+    }
+
+    .row {
+      margin: 0 0 16px 0;
+
+      & > label {
+        float: none;
+        display: block;
+        width: 100%;
+        text-align: left;
+      }
+    }
+
+    button {
+      margin: 16px 0 0 0;
     }
   }
 }
