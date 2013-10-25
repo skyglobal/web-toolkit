@@ -1,5 +1,5 @@
 body {
-  font: 16px/1em $font-family;
+  font: 16px/20px $font-family;
   color: $primary;
 }
 
@@ -7,50 +7,69 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
 }
 
-h1.large,
-.page-title.large {
-  font-size: 3.25em;
-  line-height: 1.076em;
-}
-
 h1,
 .page-title {
-  font-size: 2.375em;
-  line-height: 1.053em;
+  font-size: 52px;
+  line-height: 56px;
 }
 
 h2,
-.module-title {
-  font-size: 1.875em;
-  line-height: 1.067em
+.section-title {
+  font-size: 44px;
+  line-height: 48px;
+}
+
+h2.smaller,
+.section-title.smaller {
+  font-size: 36px;
+  line-height: 40px;
 }
 
 h3,
 .pod-title {
-  font-size: 1.375em;
-  line-height: 1.091em;
+  font-size: 32px;
+  line-height: 36px;
 }
-
-p {
-  font-size: 1em;
-  line-height: 1.5em;
+h3.smaller,
+.pod-title.smaller {
+  font-size: 28px;
+  line-height: 32px;
 }
 
 p.intro {
-  font-size: 1.25em;
-  line-height: 1.2em;
+  font-size: 24px;
+  line-height: 28px;
 }
 
-p.handwriting {
-  font-family: Luna,SkyTextRegular;
-  font-size: 1.875em;
-  line-height: 1.6em;
+p.intro.smaller {
+  font-size: 20px;
+  line-height: 24px;
 }
 
-small {
+p {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+small,
+small.supportive {
   font-size: 0.75em;
   line-height: 1.33em;
 }
+
+.legal {
+  font-size: 0.6875em;
+  line-height: 1em;
+  color: $secondary;
+}
+
+
+.instructions {
+  font-family: Luna,SkyTextRegular;
+  font-size: 24px;
+  line-height: 40px;
+}
+
 
 
 
@@ -67,11 +86,6 @@ blockquote {
   color: $secondary;
 }
 
-.legal {
-  font-size: 0.6875em;
-  line-height: 1em;
-  color: $secondary;
-}
 
 .inactive{
   color: $inactive;
@@ -109,31 +123,31 @@ a:hover {
 }
 
 
-@media (min-width: $mobile-width) {
-  h1,
-  .page-title {
-    font-size: 2em;
-    line-height: 1.25em;
-  }
-
-  h2,
-  .module-title {
-    font-size: 1.5em;
-    line-height: 1.167em;
-  }
-
-  h3,
-  .pod-title {
-    font-size: 1.25em;
-    line-height: 1.2em;
-  }
-
-  p.intro {
-    font-size: 1.125em;
-    line-height: 1.333em;
-  }
-
-  p {
-    line-height: 1.25em;
-  }
-}
+//@media (max-width: $mobile-width) {
+//  h1,
+//  .page-title {
+//    font-size: 2em;
+//    line-height: 1.25em;
+//  }
+//
+//  h2,
+//  .module-title {
+//    font-size: 1.5em;
+//    line-height: 1.167em;
+//  }
+//
+//  h3,
+//  .pod-title {
+//    font-size: 1.25em;
+//    line-height: 1.2em;
+//  }
+//
+//  p.intro {
+//    font-size: 1.125em;
+//    line-height: 1.333em;
+//  }
+//
+//  p {
+//    line-height: 1.25em;
+//  }
+//}

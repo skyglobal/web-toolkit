@@ -103,43 +103,14 @@
 }
 
 
-// MOBILE //
-//@media (min-width: $mobile-width) {
-//  .sky-form{
-//    input[type="text"],
-//    input[type="email"],
-//    input[type="tel"],
-//    input[type="url"],
-//    textarea {
-//      @include box-shadow(none);
-//      margin-right: 0;
-//    }
-//
-//    .row > label {
-//      float: none;
-//      text-align: left;
-//    }
-//
-//    legend {
-//      width: 100%;
-//      text-align: left;
-//      margin-bottom: 10px;
-//    }
-//
-//    input[type="text"] {
-//      max-width: 100%;
-//    }
-//
-//    .select {
-//      display: block;
-//    }
-//
-//    .btn {
-//      margin-top: 20px;
-//    }
-//
-//    .no-label {
-//      margin: 0;
-//    }
-//  }
-//}
+@media (max-width: $mobile-width) {
+  .sky-form .row {
+       margin: 0 0 16px 0;
+    & > label {
+           float: none;
+           display: block;
+           width: 100%;
+           text-align: left;
+         }
+  }
+}

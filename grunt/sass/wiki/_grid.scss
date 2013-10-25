@@ -6,6 +6,7 @@
 #grid12,
 #grid12-1140,
 #grid12-tablet,
+#grid12-actual,
 #grid12-contents,
 #grid12-lightbox{
   height: 200px;
@@ -30,6 +31,23 @@
     background: #FFD5D6;
   }
 }
+
+#grid12-actual{
+  background: #EDF6FF;
+  .skycom-1{
+    height: 100%;
+  }
+  .cushioned,
+  .cushioned div{
+    background: #FFE1E1;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .cushioned div{
+    background: #FFD5D6;
+  }
+}
+
 #grid12-1140{
   max-width: $width-plus-gutters;
   width:94.35%;
@@ -44,6 +62,7 @@
   #grid12,
   #grid12-1140,
   #grid12-tablet,
+  #grid12-actual,
   #grid12-contents,
   #grid12-lightbox{
     height: auto;
@@ -54,6 +73,7 @@
   #grid12,
   #grid12-1140,
   #grid12-tablet,
+  #grid12-actual,
   #grid12-contents,
   #grid12-lightbox{
     .cushioned{
