@@ -102,6 +102,18 @@
   }
 }
 
+.skycom-mobile {
+  .sky-form .row {
+    margin: 0 0 16px 0;
+
+    & > label {
+      float: none;
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+  }
+}
 
 // MOBILE //
 //@media (min-width: $mobile-width) {
