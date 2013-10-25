@@ -315,7 +315,7 @@ toolkit.carousel = (function(window, $) {
                     $this.find('.actions, .indicators').show();
                 };
 
-                var video = new toolkit.video.init(carousel.$viewport, options.video);
+                var video = new toolkit.video(carousel.$viewport, options.video);
                 carousel.pause();
                 $this.find('.actions, .indicators').hide();
                 video.play();
