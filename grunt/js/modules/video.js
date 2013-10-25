@@ -101,9 +101,7 @@ toolkit.video = (function (window, $) {
         }
     };
 
-    return {
-        init: Video
-    };
+    return Video;
 }(window, jQuery));
 
 if (typeof window.define === "function" && window.define.amd) {
