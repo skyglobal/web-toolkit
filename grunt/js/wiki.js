@@ -69,7 +69,7 @@ if (typeof window.define === "function" && window.define.amd) {
         function log(text, group){
             if (text && text.trim().length){
                 if (group) console.groupCollapsed(group);
-                console.log.apply(console,colourCode(text.trim()));
+                console.log.apply(console,colourCode(text.trim().replace(/&lt;/g,'<').replace(/&gt;/g,'>')));
                 if (group) console.groupEnd();
             }
         }

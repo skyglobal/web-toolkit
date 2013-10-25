@@ -53,3 +53,7 @@ $colour-facebook: #3b5998;
 $colour-sky-go: #44ad3a;
 $colour-remote-record: #ed1c24;
 $colour-never-miss: #0077ae;
+
+@function em($target, $context: 16) {
+    @return ($target / $context) * 1em;
+}
