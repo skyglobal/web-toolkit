@@ -6,6 +6,7 @@ utils/hashmanager.js
 utils/popup.js
 modules/tabs.js
 modules/share.js
+modules/video.js
 modules/carousel.js
 toolkit.js
 
@@ -16,6 +17,7 @@ utils/hashmanager.js
 utils/popup.js
 modules/tabs.js
 modules/share.js
+modules/video.js
 modules/carousel.js
 toolkit.js
 wiki.js
