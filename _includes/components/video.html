@@ -1,0 +1,79 @@
+<a name="video"></a>
+<h3 class="wiki-h3">Standalone Video</h3>
+
+<div class="dependencies">
+    <!-- for videos: <script src="js/lib/require.js" ></script>-->
+    <link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
+    <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
+</div>
+<div class="design-notes">
+    A wrapper for the Sky video player, in this example it's embedded onto an image. The video will expand the parent container to fit the 16/9 ratio of the video.
+</div>
+<div class="developer-notes">
+    Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
+</div>
+<div class="init">
+   Example: <code>  $(document).on('click','.play-video', function(e) {
+    e.preventDefault();
+    var videoOptionsObject = {
+        token:"<code>Your 36 long SkyVideo Token</code>",
+        autoplay: true,
+        videoId: $(this).attr('data-video-id'),
+        freewheel: false,
+        placeHolderImage: ''
+    },
+    video, videoContainer = $(this).parents('.video');
+    video = new toolkit.video(videoContainer, videoOptionsObject);
+    video.play();
+    });</code>
+
+explained:  When the document element of <code>.play-video</code>  has been clicked a function is called. Inside the callback
+we have the initialization of the video plugin. The video plugin accepts two parameters; <code>Video Container (Location of the video)</code> and
+<code>Video Options Object</code> as shown below.
+
+    <code>video = new toolkit.video(container, options);</code>
+</div>
+
+<div class="example">
+    <h4>Standalone Video Player</h4>
+
+    <div class="demo" data-selector="*">
+        <section class="video">
+            <div data-picture="" data-alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum" class="poster">
+                <img src="wiki_images/bling-ring.jpg" alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
+            <div class="video-wrapper">
+                <a href="#" class="close"><i class="icon-close"></i>
+                    <span class="speak">Close</span>
+                </a>
+                <div class="videocontrolcontainer">
+                    <video></video>
+                    <img class="posterFrame" alt="" />
+                </div>
+            </div>
+            <div class="video-overlay"></div>
+            <a href="#" class="play-video" data-video-id="clip-00cwoia5" data-tracking-context="David Beckham And Sky Team Up">
+                <i class="icon-video-play"></i>
+                <span class="speak">Play Trailer</span>
+            </a>
+        </section>
+    </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).on('click','.play-video', function(e) {
+        e.preventDefault();
+        var options = {
+                    token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
+                    autoplay: true,
+                    videoId: $(this).attr('data-video-id'),
+                    freewheel: false, //disable ads
+                    placeHolderImage: 'http://www.sky.com/hp/image/c983682f-a97a-4a8c-a2fa-e7194561fea8/desktopFront.jpg'
+                },
+                video, container = $(this).parents('.video');
+
+
+        video = new toolkit.video(container, options);
+        video.play();
+    });
+</script>
