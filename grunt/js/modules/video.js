@@ -2,6 +2,10 @@ if (typeof toolkit === 'undefined') toolkit = {};
 toolkit.video = (function (window, $) {
     'use strict';
 
+    var $el = {
+            playingVideo: $('.media')
+    };
+
     function Video(container, options) {
         this.container = container;
         this.wrapper = container.find('.video-wrapper');
@@ -27,6 +31,12 @@ toolkit.video = (function (window, $) {
                     return false;
                 },
                 $wrapper = this.wrapper;
+            $wrapper.on('keydown', function(e) {
+                if(e.keyCode === 17) {
+                    e.preventDefault();
+                    stop();
+                }
+            });
             $wrapper.on('click', hijackLink).find('.close').one('click touchstart', stop);
             this.player.on('ended webkitendfullscreen', stop);
         },
