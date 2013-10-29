@@ -33,30 +33,26 @@
     <h4>Sky Video Player Wrapper</h4>
 
     <div class="demo" data-selector="*">
-        <section class="video">
-            <div data-picture=""
-                 data-alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum"
-                 class="poster">
-                <img src="wiki_images/bling-ring.jpg"
-                     alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
-
-                <div class="video-wrapper">
-                    <a href="#" class="close"><i class="icon-close"></i>
-                        <span class="speak">Close</span>
-                    </a>
-
-                    <div class="videocontrolcontainer">
-                        <video></video>
-                        <img class="posterFrame" alt=""/>
-                    </div>
-                </div>
-                <div class="video-overlay"></div>
-                <a href="#" class="play-video" data-video-id="clip-00cwoia5"
-                   data-tracking-context="David Beckham And Sky Team Up">
-                    <i class="icon-video-play"></i>
-                    <span class="speak">Play Trailer</span>
+        <div class="video">
+            <img src="wiki_images/bling-ring.jpg"
+                 alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
+            <div class="video-wrapper">
+                <a href="#" class="close"><i class="icon-close"></i>
+                    <span class="speak">Close</span>
                 </a>
-        </section>
+
+                <div class="videocontrolcontainer">
+                    <video></video>
+                    <img class="posterFrame" alt=""/>
+                </div>
+            </div>
+            <div class="video-overlay"></div>
+            <a href="#" class="play-video" data-video-id="clip-00cwoia5"
+               data-tracking-context="David Beckham And Sky Team Up">
+                <i class="icon-video-play"></i>
+                <span class="speak">Play Trailer</span>
+            </a>
+        </div>
     </div>
 </div>
 
@@ -66,6 +62,7 @@
         var options = {
                     token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
                     autoplay:true,
+                    animationSpeed: 500,
                     videoId:$(this).attr('data-video-id'),
                     freewheel:false, //disable ads
                     placeHolderImage:'http://www.sky.com/hp/image/c983682f-a97a-4a8c-a2fa-e7194561fea8/desktopFront.jpg'
