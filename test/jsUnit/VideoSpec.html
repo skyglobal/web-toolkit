@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="../../dist/scripts/lib/jquery-2.0.3.js"></script>
+    <script src="vendor/mocha.js"></script>
+    <script src="vendor/require.js"></script>
+    <script src="config.js" ></script>
+    <link rel="stylesheet" href="http:////player.sky.com/css/styles.min.css" />
+    <script src="http://player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
+    <link rel="stylesheet" href="dist/stylesheets/wiki.css">
+</head>
+<body>
+    <!--PLACEHOLDER FOR MOCHA TEST RESULTS-->
+    <div id="mocha"></div>
+
+    <!--FIXTURE HTML FOR TESTS-->
+    <div id="spec-markup">
+
+        <section id="video-module">
+            <p>Watch the new Arrow Trailer:</p>
+            <div class="poster">
+            <div class="video" style="height: auto;">
+                    <a href="#" class="play-video" data-video-id="clip-00rlrcg4" style="display: block;">
+                        <i class="icon-video-play"></i>
+                    </a>
+
+                    <div class="video-wrapper" id="video-clip-00rlrcg4" style="display: none;">
+                        <a href="#" class="close"><i class="icon-close"></i>
+                            <span class="speak">Close</span>
+                        </a>
+                        <div class="videocontrolcontainer init mini" id="skyplayer-0" tabindex="0" style="height: 56.25px;"><video></video></div>
+                    </div>
+                    <div class="video-overlay" style="display: none;"></div>
+                </div>
+
+            </div>
+        </section>
+            </div>
+        </section>
+
+    <script type="text/javascript">
+        $(document).on('click','.play-video', function(e) {
+            e.preventDefault();
+            var options = {
+                        token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
+                        autoplay: true,
+                        videoId: $(this).attr('data-video-id'),
+                        freewheel: false, //disable ads
+                        placeHolderImage: 'http://www.sky.com/hp/image/c983682f-a97a-4a8c-a2fa-e7194561fea8/desktopFront.jpg'
+                    },
+                    video, container = $(this).parents('#video-module').find('.video');
+
+
+            video = new toolkit.video(container, options);
+            video.play();
+        });
+    </script>
+    </div>
+
+    </div>
+    <script>
+        globalskycom = {
+            browserSupport: {
+                isMobile: function() {
+                    return false;
+                }
+            }
+        };
+    </script>
+
+    <!--TEST-->
+    <script>
+
+    require(['modules/carousel', '../../test/jsUnit/setup'],function(){
+
+        describe('Carousel module', function() {
+
+            it('play trigger work', function(){
+                $('.poster').trigger('play');
+                expect($('.cta_pause').length).to.equal(0);
+
+
+            });
+
+            it('pause trigger work', function(){
+                $('.video-wrapper .cta_pause').click();
+                var paused = $('.paused .cta_play').length;
+
+                expect(paused).to.equal(1);
+                alert(paused);
+            });
+        });
+        mocha.run();
+    });
+    </script>
+
+</body>
+</html>
