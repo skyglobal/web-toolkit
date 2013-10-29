@@ -6,94 +6,137 @@
     <script src="vendor/mocha.js"></script>
     <script src="vendor/require.js"></script>
     <script src="config.js" ></script>
-    <link rel="stylesheet" href="http:////player.sky.com/css/styles.min.css" />
-    <script src="http://player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
-    <link rel="stylesheet" href="dist/stylesheets/wiki.css">
+    <link href="../../dist/stylesheets/toolkit.css" rel="stylesheet"/>
+
+
 </head>
-<body>
-    <!--PLACEHOLDER FOR MOCHA TEST RESULTS-->
-    <div id="mocha"></div>
+<body class='grid-1140'>
+<!--PLACEHOLDER FOR MOCHA TEST RESULTS-->
+<div id="mocha"></div>
 
-    <!--FIXTURE HTML FOR TESTS-->
-    <div id="spec-markup">
+<!--FIXTURE HTML FOR TESTS-->
+<div id="spec-markup">
+    <div class="skycom-container">
+        <div class="video">
+                <img src="../../wiki_images/bling-ring.jpg"
+                     alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
 
-        <section id="video-module">
-            <p>Watch the new Arrow Trailer:</p>
-            <div class="poster">
-            <div class="video" style="height: auto;">
-                    <a href="#" class="play-video" data-video-id="clip-00rlrcg4" style="display: block;">
-                        <i class="icon-video-play"></i>
+                <div class="video-wrapper">
+                    <a href="#" class="close"><i class="icon-close"></i>
+                        <span class="speak">Close</span>
                     </a>
 
-                    <div class="video-wrapper" id="video-clip-00rlrcg4" style="display: none;">
-                        <a href="#" class="close"><i class="icon-close"></i>
-                            <span class="speak">Close</span>
-                        </a>
-                        <div class="videocontrolcontainer init mini" id="skyplayer-0" tabindex="0" style="height: 56.25px;"><video></video></div>
+                    <div class="videocontrolcontainer">
+                        <video></video>
+                        <img class="posterFrame" alt=""/>
                     </div>
-                    <div class="video-overlay" style="display: none;"></div>
                 </div>
-
-            </div>
-        </section>
-            </div>
-        </section>
-
-    <script type="text/javascript">
-        $(document).on('click','.play-video', function(e) {
-            e.preventDefault();
-            var options = {
-                        token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-                        autoplay: true,
-                        videoId: $(this).attr('data-video-id'),
-                        freewheel: false, //disable ads
-                        placeHolderImage: 'http://www.sky.com/hp/image/c983682f-a97a-4a8c-a2fa-e7194561fea8/desktopFront.jpg'
-                    },
-                    video, container = $(this).parents('#video-module').find('.video');
-
-
-            video = new toolkit.video(container, options);
-            video.play();
-        });
-    </script>
+                <div class="video-overlay"></div>
+                <a href="#" class="play-video" data-video-id="clip-00cwoia5"
+                   data-tracking-context="David Beckham And Sky Team Up">
+                    <i class="icon-video-play"></i>
+                    <span class="speak">Play Trailer</span>
+                </a>
+        </div>
     </div>
+</div>
 
-    </div>
-    <script>
-        globalskycom = {
-            browserSupport: {
-                isMobile: function() {
-                    return false;
+<!--TEST-->
+<script>
+
+    require(['modules/video', '../../test/jsUnit/setup'],function(){
+        var options = {
+                    token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
+                    autoplay:true,
+                    animationSpeed: 0,
+                    videoId:$(this).attr('data-video-id'),
+                    freewheel:false, //disable ads
+                    placeHolderImage:'http://www.sky.com/hp/image/c983682f-a97a-4a8c-a2fa-e7194561fea8/desktopFront.jpg'
+                };
+        var video = new toolkit.video($('.video'), options);
+
+        describe('Video module', function() {
+
+            it('showCanvas will expand the video container', function(){
+                var ratio = $('.video').width() / $('.video').height();
+                var $container = $('.video'),
+                    $wrapper = $('.video .video-wrapper'),
+                    $close = $wrapper.find('.close'),
+                    callbackCalled = false;
+
+                video.showCanvas(function() {
+                    callbackCalled = true;
+                });
+                expect($wrapper.attr('class')).to.contain('playing-video');
+;
+                expect($wrapper.length).to.equal(1);
+                expect($close.attr('class')).to.contain("active");
+                expect(callbackCalled).to.be.true;
+
+            });
+
+            it('hideCanvas will collapse the container and hide the video', function(){
+                var $container = $('.video'),
+                        $wrapper = $('.video .video-wrapper'),
+                        $overlay = $('.video .video-overlay'),
+                        $close = $wrapper.find('.close'),
+                        callbackCalled = false, ratio;
+                video.showCanvas(function() {});
+                video.hideCanvas();
+                expect($close.attr('class')).to.not.include("active");
+                expect($overlay.attr('style')).to.contain("display: none;");
+                expect($wrapper.attr('class')).to.not.include("playing-video");
+            });
+
+            it('stop will stop the video', function(){
+                var $container = $('.video'),
+                        $wrapper = $('.video .video-wrapper'),
+                        $overlay = $('.video .video-overlay'),
+                        $close = $wrapper.find('.close'),
+                        callbackCalled = false, skyPlayCalled = false, ratio;
+                sky =  {
+                    html5player: {
+                        close: function(blah) {
+                            skyPlayCalled = true;
+                        }
+                    }
                 }
-            }
-        };
-    </script>
+                video.stop();
+                expect(skyPlayCalled).to.be.true;
 
-    <!--TEST-->
-    <script>
+                expect($wrapper.attr('style')).to.contain("display: none;");
+            });
 
-    require(['modules/carousel', '../../test/jsUnit/setup'],function(){
+            it('play will start the video', function(done){
+                var $container = $('.video'),
+                        $wrapper = $('.video .video-wrapper'),
+                        $overlay = $('.video .video-overlay'),
+                        $close = $wrapper.find('.close'),
+                        callbackCalled = false, skyPlayCalled = false;
+                sky =  {
+                    html5player: {
+                        play: function() {
+                            skyPlayCalled = true;
+                        }
+                    }
+                }
+                $.fn.sky_html5player = function(blah) {};
+                toolkit.video.prototype.showCanvas = function(callback) { callback(); callbackCalled = true}
+                video.play();
+                expect(callbackCalled).to.be.true;
+                setTimeout(function() {
+                    expect(skyPlayCalled).to.be.true;
+                    done();
+                },1334)
 
-        describe('Carousel module', function() {
-
-            it('play trigger work', function(){
-                $('.poster').trigger('play');
-                expect($('.cta_pause').length).to.equal(0);
 
 
             });
 
-            it('pause trigger work', function(){
-                $('.video-wrapper .cta_pause').click();
-                var paused = $('.paused .cta_play').length;
-
-                expect(paused).to.equal(1);
-                alert(paused);
-            });
         });
         mocha.run();
     });
-    </script>
+</script>
 
 </body>
 </html>

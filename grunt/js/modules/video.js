@@ -64,18 +64,17 @@ toolkit.video = (function (window, $) {
                 $wrapper = $container.find('.video-wrapper'),
                 $play = $container.find('.play-video'),
                 $close = $container.find('.video-wrapper .close'),
-                speed = 500,
+                animationSpeed = (this.options.animationSpeed === 0) ? 0 : this.options.animationSpeed || 500,
                 $self = this;
-
             this.originalHeight = $container.height();
             $wrapper.addClass('playing-video');
-            $overlay.fadeIn(function () {
-                $play.fadeOut();
+            $overlay.fadeIn(animationSpeed, function () {
+                $play.fadeOut(animationSpeed);
                 height = $self.calculateHeightForVideo();
-                $container.animate({ height:height }, speed, function () {
+                $container.animate({ height:height }, animationSpeed, function () {
                     $(window).on('skycom.resizeend', $.proxy($self.resizeContainer, $self));
                     $wrapper.show();
-                    $overlay.fadeOut(speed, function () {
+                    $overlay.fadeOut(animationSpeed, function () {
                         $close.addClass('active');
                     });
                     callback();
@@ -94,17 +93,18 @@ toolkit.video = (function (window, $) {
                 $wrapper = $container.find('.video-wrapper'),
                 $play = $container.find('.play-video'),
                 $close = $container.find('.video-wrapper .close'),
-                speed = 500,
+                animationSpeed = (this.options.animationSpeed === 0) ? 0 : this.options.animationSpeed || 500,
                 self = this,
                 originalHeight = this.originalHeight;
-            $overlay.fadeIn(speed, function () {
+
+            $overlay.fadeIn(animationSpeed, function () {
                 $close.removeClass('active');
-                $container.animate({ height:originalHeight }, speed, function () {
+                $container.animate({ height:originalHeight }, animationSpeed, function () {
                     $container.css({ height:'auto' });
                     if (self.options.closeCallback) self.options.closeCallback();
-                    $play.fadeIn();
+                    $play.fadeIn(animationSpeed);
                     $overlay.hide();
-                    $wrapper.fadeOut();
+                    $wrapper.fadeOut(animationSpeed);
                     $wrapper.removeClass('playing-video');
                 });
             });
