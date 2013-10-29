@@ -1,16 +1,16 @@
 <a name="video"></a>
-<h3 class="wiki-h3">Standalone Video</h3>
+<h3 class="wiki-h3">Video</h3>
 
 <div class="dependencies">
-    <!-- for videos: <script src="js/lib/require.js" ></script>-->
-    <link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
-    <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
+<!-- for videos: <script src="js/lib/require.js" ></script>-->
+<link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
+<script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
 </div>
 <div class="design-notes">
     A wrapper for the Sky video player, in this example it's embedded onto an image. The video will expand the parent container to fit the 16/9 ratio of the video.
 </div>
 <div class="developer-notes">
-    Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
+    Ensure that you include all the needed dependencies (htmlplayer.js and player css). Check the dependencies tab.
 </div>
 <div class="init">
    Example: <code>  $(document).on('click','.play-video', function(e) {
@@ -26,16 +26,10 @@
     video = new toolkit.video(videoContainer, videoOptionsObject);
     video.play();
     });</code>
-
-explained:  When the document element of <code>.play-video</code>  has been clicked a function is called. Inside the callback
-we have the initialization of the video plugin. The video plugin accepts two parameters; <code>Video Container (Location of the video)</code> and
-<code>Video Options Object</code> as shown below.
-
-    <code>video = new toolkit.video(container, options);</code>
 </div>
 
 <div class="example">
-    <h4>Standalone Video Player</h4>
+    <h4>Sky Video Player Wrapper</h4>
 
     <div class="demo" data-selector="*">
         <section class="video">
