@@ -43,18 +43,13 @@ toolkit.video = (function (window, $) {
         play:function () {
             var $self = this;
             this.showCanvas(function () {
-                $self.player.sky_html5player($self.options); //todo: move to main video function
-                setTimeout(function () {
-                    sky.html5player.play();
-                }, 1333); //todo: call without setTimeout. S3 breaks as does flash ie8
-//                todo: do both todo's when video team add flash queueing + fixed S3
+                $self.player.sky_html5player($self.options);
             });
         },
         stop:function () {
             var $self = this;
             $(window).off('skycom.resizeend', $self.resizeContainer);
             sky.html5player.close(this.wrapper);
-            $self.videocontrolcontainer.html($self.originalHtml); //todo: remove once video team fix 'ie 8 repeat play' bug
             this.hideCanvas();
         },
         showCanvas:function (callback) {
