@@ -222,7 +222,7 @@ toolkit.carousel = (function(window, $) {
             },
             video: {
                 token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-                autoplay: true,
+                autoplay: false,
                 videoId: null,
                 freewheel: false, //disable ads
                 placeHolderImage: '//static.video.sky.com/posterframes/skychasky.jpg'
