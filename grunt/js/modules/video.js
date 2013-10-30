@@ -43,7 +43,11 @@ toolkit.video = (function (window, $) {
         play:function () {
             var $self = this;
             this.showCanvas(function () {
-                $self.player.sky_html5player($self.options);
+                $self.player.sky_html5player($self.options); //todo: move to main video function
+                setTimeout(function () {
+                    sky.html5player.play();
+                }, 1333); //todo: call without setTimeout. S3 breaks as does flash ie8
+//                todo: do both todo's when video team add flash queueing + fixed S3
             });
         },
         stop:function () {
