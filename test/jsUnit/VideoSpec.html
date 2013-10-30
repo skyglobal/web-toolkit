@@ -112,16 +112,22 @@
                         $wrapper = $('.video .video-wrapper'),
                         $overlay = $('.video .video-overlay'),
                         $close = $wrapper.find('.close'),
-                        callbackCalled = false;
-
+                        callbackCalled = false, skyPlayCalled = false;
+                sky =  {
+                    html5player: {
+                        play: function() {
+                            skyPlayCalled = true;
+                        }
+                    }
+                }
                 $.fn.sky_html5player = function(blah) {};
-                toolkit.video.prototype.showCanvas = function(callback) { callback(); callbackCalled = true};
+                toolkit.video.prototype.showCanvas = function(callback) { callback(); callbackCalled = true}
                 video.play();
+                expect(callbackCalled).to.be.true;
                 setTimeout(function() {
-                    expect(callbackCalled).to.be.true;
+                    expect(skyPlayCalled).to.be.true;
                     done();
-                },510); //waiting for fades to complete
-
+                },1334)
             });
 
         });
