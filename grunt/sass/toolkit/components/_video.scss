@@ -1,6 +1,13 @@
 .video {
   position: relative;
   overflow: hidden;
+
+  .play-video {
+    padding: 5px 1px 0 5px;
+    bottom: 8px;
+    left: 21px;
+  }
+
   img {
     display: block;
   }
@@ -24,15 +31,6 @@
   }
   i {
     margin: 0 5px 5px 0;
-  }
-}
-
-@media all and (max-width: 768px) {
-  .play-video {
-    padding-right: 0;
-    span {
-      display:none;
-    }
   }
 }
 
