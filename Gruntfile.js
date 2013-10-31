@@ -147,6 +147,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-grunticon');
 
     grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
+    grunt.registerTask('spy', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'watch']);
     grunt.registerTask('css', ['clean:css', 'compass:toolkit']);
     grunt.registerTask('js', ['clean:js', 'jshint', 'requirejs']);
     grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);

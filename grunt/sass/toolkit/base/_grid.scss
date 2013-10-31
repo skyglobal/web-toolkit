@@ -89,6 +89,15 @@ body.lt-ie9 {
     padding:($gutter/(($column_plus_gutter * 12)- $gutter))*100%;
   }
 
+  .skycom-12-mobile, .skycom-11-mobile,
+  .skycom-10-mobile, .skycom-9-mobile,
+  .skycom-8-mobile,  .skycom-7-mobile,
+  .skycom-6-mobile,  .skycom-5-mobile,
+  .skycom-4-mobile,  .skycom-3-mobile,
+  .skycom-2-mobile,  .skycom-1-mobile {
+    float: left;  margin-left: ($gutter/$container-width)*100%;
+  }
+
   .alpha-mobile,
   [class*=skycom-offset],[class*=skycom-offset]:first-child,
   .skycom-12-mobile:first-child,.skycom-11-mobile:first-child,
@@ -99,15 +108,6 @@ body.lt-ie9 {
   .skycom-2-mobile:first-child,.skycom-1-mobile:first-child {
     margin-left: 0;
     clear:left;
-  }
-
-  .skycom-12-mobile, .skycom-11-mobile,
-  .skycom-10-mobile, .skycom-9-mobile,
-  .skycom-8-mobile,  .skycom-7-mobile,
-  .skycom-6-mobile,  .skycom-5-mobile,
-  .skycom-4-mobile,  .skycom-3-mobile,
-  .skycom-2-mobile,  .skycom-1-mobile {
-    float: left;  margin-left: ($gutter/$container-width)*100%;
   }
 
   @for $i from 1 through 12 {
