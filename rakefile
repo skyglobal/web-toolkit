@@ -65,7 +65,6 @@ task :deploy_new_version do
 
   #push new build to .io site
   system "git checkout gh-pages"
-  system "git pull"
   system "git push origin master:gh-pages"
   system "git checkout master"
 
