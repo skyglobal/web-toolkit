@@ -33,6 +33,7 @@
 .skycom-4:first-child, .skycom-3:first-child,
 .skycom-2:first-child, .skycom-1:first-child {
   margin-left: 0;
+  clear: left;
 }
 
 @for $i from 1 through 12 { //must loop backwards i.e. 13-1
