@@ -89,6 +89,7 @@ body.lt-ie9 {
     padding:($gutter/(($column_plus_gutter * 12)- $gutter))*100%;
   }
 
+  .alpha-mobile,
   [class*=skycom-offset],[class*=skycom-offset]:first-child,
   .skycom-12-mobile:first-child,.skycom-11-mobile:first-child,
   .skycom-10-mobile:first-child,.skycom-9-mobile:first-child,
@@ -97,6 +98,7 @@ body.lt-ie9 {
   .skycom-4-mobile:first-child,.skycom-3-mobile:first-child,
   .skycom-2-mobile:first-child,.skycom-1-mobile:first-child {
     margin-left: 0;
+    clear:left;
   }
 
   .skycom-12-mobile, .skycom-11-mobile,
