@@ -22,10 +22,12 @@
     font: 16px/1em $font-family;
   }
 
-  .row > label {
+  .row > label,
+  .row > .field_with_errors label {
     line-height: 32px;
   }
 
+  .row> .field_with_errors label,
   .row > label,
   legend {
     color: #3c3c3c;
@@ -89,7 +91,10 @@
       display: inline-block;
       margin-bottom: 5px;
     }
+  }
 
+  .error {
+    margin-left: 24%;
   }
 }
 
