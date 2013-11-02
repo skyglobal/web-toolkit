@@ -140,13 +140,18 @@ p.error {
 }
 
 
-
+.CodeMirror{
+  width: 48%;
+  float: left;
+  margin-right: 1%;
+}
 .has-toggle{
   position: relative;
   .toggler{
     position: absolute;
     left: -25px;
     cursor: pointer;
+    font-size: 0.5em;
     &:before{
       content: '[+]';
     }

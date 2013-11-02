@@ -17,13 +17,14 @@ define('utils/diff', ['lib/code-mirror'], function(CodeMirror) {
 
         dfd_old = $.ajax({
             crossDomain: true,
-            url:oldFile,
+            url:file,
             cache: false});
 
         $.when(dfd_latest,dfd_old).done(function(latest, old){
-            var $container = $('<div class="togglee" data-toggle="' + name + '">' + name + '</div>');
+            var $container = $('<div class="togglee" data-toggle="' + name + '"></div>');
 
-            $container.append( $('<textarea id="' + name + '" class="hidden latest"></textarea>').val(latest))
+            $container.append('<h4 class="skycom-6">Current:</h4><h4 class="skycom-6">' + $('#version').val() + '</h4>')
+                .append( $('<textarea id="' + name + '" class="hidden latest"></textarea>').val(latest))
                 .append($('<textarea id="old-' + name + '" class=hidden></textarea>').val(old));
 
             $('.sky-form')
