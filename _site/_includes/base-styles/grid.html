@@ -1,0 +1,324 @@
+<h3 class="wiki-h3">12 Column Grid</h3>
+<p class="developer-notes">
+    Note how classes now never have underscores '<code>_</code>' but only hyphens '<code>-</code>' instead.
+</p>
+<p class="developer-notes">
+    To get any of the following classses to work on <code>mobile</code> only, add <code>-mobile</code> to the end of the class name.
+</p>
+<p class="developer-notes">
+    The grid is wrapped with '<code>skycom-container</code>' which should be used to contain all your contents, or to contain modules individually .
+</p>
+<p class="developer-notes">
+    The container is made up of up 12 columns '<code>skycom-1</code>' through to '<code>skycom-12</code>'.  By default these float on the left.
+</p>
+<p class="developer-notes">
+    To float a column on the right, add the class '<code>right</code>'.
+</p>
+<p class="developer-notes">
+    If too many floats have caused you container to have zero height, add the class '<code>clearfix</code>'.
+</p>
+<p class="developer-notes">
+    For older browsers, the first column in a row should also have the class '<code>alpha</code>'.
+</p>
+<p class="developer-notes">
+    To 'stick' headers to the top of the page when scrolling, use the class '<code>sticky</code>'.
+</p>
+<p class="developer-notes">
+    When links don't go to a new page, i.e. changing tabs please, use the class '<code>internal-link</code>'.
+</p>
+<p class="developer-notes">
+    To make some text for screen readers only, use the class '<code>speak</code>'.
+</p>
+<p class="developer-notes">
+    To hide an element, use the class '<code>hidden</code>'.
+</p>
+<p class="developer-notes">
+    To show an element, use the class '<code>visible</code>'.
+</p>
+<p class="developer-notes">
+    When the text shouldn't touch the edges of the columns (i.e. when they have a distinct background colour) use '<code>cushioned</code>' class for padding.
+</p>
+
+<div class="example">
+    <h4>Grid (974)</h4>
+    <p class="developer-notes">
+        By default the grid is <code>974px</code> wide.
+    </p>
+    <div class="grid-example">
+        <div class="example skycom-container clearfix" id="grid12">
+            <div class="alpha skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="example">
+    <h4>Wide Grid (1140)</h4>
+    <p class="developer-notes">
+        Add class <code>grid-1140</code> to the parent of your containers i.e. to the <code>body</code>.
+    </p>
+    <div class="example clearfix" id="grid12-actual">
+        <div class="alpha skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="example">
+    <h4>lightbox Grid</h4>
+    <p class="developer-notes">
+        the '<code>skycom-offset1</code>' class is used to centre the lightbox.
+    </p>
+    <p class="developer-notes">
+        We also use another '<code>skycom-container</code>' to create a new 12 column grid.
+    </p>
+    <div class="grid-example">
+        <div class="example skycom-container clearfix" id="grid12-lightbox">
+            <div class="skycom-10 skycom-offset1 ">
+                <div class="example skycom-container clearfix" id="grid12-contents">
+                    <div class="alpha skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="example">
+    <h4>Grid on a Tablet (Portrait: 696)</h4>
+    <div class="grid-example">
+        <div class="example skycom-container clearfix" id="grid12-tablet">
+            <div class="alpha skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
