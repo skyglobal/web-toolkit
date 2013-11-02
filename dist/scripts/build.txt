@@ -11,6 +11,9 @@ toolkit.js
 
 wiki.js
 ----------------
+utils/developer-notes-logger.js
+lib/code-mirror.js
+utils/diff.js
 utils/skycons.js
 utils/hashmanager.js
 utils/popup.js
