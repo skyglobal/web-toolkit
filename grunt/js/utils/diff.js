@@ -20,7 +20,7 @@ define('utils/diff', ['lib/code-mirror'], function(CodeMirror) {
 
         $.ajax({
             crossDomain: true,
-            url:file,
+            url:oldFile,
             cache: false})
         .done(function(html){
                 var textarea = $('<textarea id="old-' + name + '" class=hidden></textarea>').val(html);
@@ -29,6 +29,11 @@ define('utils/diff', ['lib/code-mirror'], function(CodeMirror) {
     }
 
     function findFiles(e){
+        if (document.location.host !== "web-toolkit.global.sky.com" && document.location.host !== 'localhost'){
+            document.location = "http://web-toolkit.global.sky.com/" + $('.wiki-header small').text().replace('v','') + '_site/changes.html';
+            return;
+        }
+        e.preventDefault();
         $('a[data-file]').each(getFile);
         return false;
     }
