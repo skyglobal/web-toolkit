@@ -25,7 +25,7 @@ def assets_to_upload
 end
 
 def templates_to_upload
-  Dir.glob("_includes/**/*.*")
+  Dir.glob("_site/**/*.*")
 end
 
 def content_type(file)
