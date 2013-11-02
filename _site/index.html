@@ -1,0 +1,1455 @@
+<!doctype html>
+<!--[if IE 7]>         <html class="lt-ie10 lt-ie9 lt-ie8" > <![endif]-->
+<!--[if IE 8]>         <html class="lt-ie10 lt-ie9" > <![endif]-->
+<!--[if IE 9]>         <html class="lt-ie10" > <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
+	<head>
+        <!--[if lt IE 9]> <script src="dist/scripts/lib/jquery-1.10.2.js" ></script> <![endif]-->
+        <!--[if gte IE 9]><!--> <script src="dist/scripts/lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
+
+		<!--[if LT IE 9]>
+<link rel='stylesheet' href='//assets.sky.com/css/desktop-12grid.css' media='screen' />
+<![endif]-->
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<link rel='stylesheet' href='//assets.sky.com/css/responsive-12grid.css' class='skycom-responsive-css' media='screen and (min-width: 768px)' />
+<!--[mobilestart]-->
+<link rel='stylesheet' href='//assets.sky.com/css/mobile-12grid.css' class='skycom-mobile-css' media='screen and (max-width: 767px)' />
+<!--[mobileend]-->
+
+<link href='//assets.sky.com/images/favicon.png' rel='icon' type='image/png'>
+<link href='//assets.sky.com/fonts/sky_regular.ttf' rel='prefetch'>
+<link href='//assets.sky.com/fonts/sky_regular.svg' rel='prefetch'>
+<link href='//assets.sky.com/fonts/sky_medium.ttf' rel='prefetch'>
+<link href='//assets.sky.com/fonts/sky_medium.svg' rel='prefetch'>
+<link rel='stylesheet' href='//assets.sky.com/css/css-print.css' media='print' />
+<link rel='stylesheet' href='//assets.sky.com/css/app-fonts.css' />
+
+<!--[if IE 6]>
+<link rel='stylesheet' href='//assets.sky.com/css/app-ie6.css' />
+<![endif]-->
+<!--[if IE 7]>
+<link rel='stylesheet' href='//assets.sky.com/css/app-ie7.css' />
+<![endif]-->
+<!--[if LT IE 9]>
+<link rel='stylesheet' href='//assets.sky.com/css/app-ielt9.css' />
+<![endif]-->
+<!--[if IE 9]>
+<link rel='stylesheet' href='//assets.sky.com/css/app-ie9.css' />
+<![endif]-->
+<!--[if LT IE 10]>
+<link rel='stylesheet' href='//assets.sky.com/css/app-ielt10.css' />
+<![endif]-->
+<script id='skycom-view-type'></script>
+<script id='skycom-orientation'></script>
+<script>
+  var globalskycom = globalskycom || {};
+  globalskycom.serverHost = 'assets.sky.com';
+</script>
+<script src='//assets.sky.com/js/app.js'></script>
+<script>
+  $(function() {
+    var i, len,
+      messages = globalskycom.emergencyMessages;
+    if(messages) {
+      for(i = 0, len = messages.length; i < len; i++) {
+        new globalskycom.message(messages[i]);
+      }
+    }
+  });
+</script>
+
+        <link rel="stylesheet" href="dist/stylesheets/wiki.css">
+        <link rel="stylesheet" href="dist/fonts/skycons.css">
+
+        <!--[if lt IE 10]><script type="text/javascript">
+            document.createElement('header');
+            document.createElement('section');
+            document.createElement('footer');
+            document.createElement('article');
+            document.createElement('aside');
+            document.createElement('hgroup');
+            document.createElement('nav');
+            document.createElement('figure');
+            document.createElement('figcaption');
+        </script><![endif]-->
+
+	</head>
+	<body class="grid-1140">
+        <div class="quick-links  ">
+            <div class="skycom-container">
+                <ul class="alpha skycom-12 primary-menu">
+                    <li>
+                        <a href="#using-the-toolkit">Using the Toolkit</a>
+                        <ul class=secondary-menu>
+                            <li><a href="#getting-started" data-file="base-styles/getting-started">Getting Started</a></li>
+                            <li><a href="#contributing" data-file="base-styles/contributing">Contributing</a></li>
+                            <li><a href="#accessibility" data-file="base-styles/accessibility">Accessibility</a></li>
+                            <li><a href="#coding-practises" data-file="base-styles/coding-practises">Coding Practises</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#base-styles">Base Styles</a>
+                        <ul class=secondary-menu>
+                            <li><a href="#grid" data-file="base-styles/grid">Grid</a></li>
+                            <li><a href="#colours" data-file="base-styles/colours">Colours</a></li>
+                            <li><a href="#typography" data-file="base-styles/typography">Typography</a></li>
+                            <li><a href="#icons" data-file="base-styles/icons">Icons</a></li>
+                            <li><a href="#skycons" data-file="base-styles/skycons">Skycons</a></li>
+                            <li><a href="#buttons" data-file="base-styles/buttons">Buttons</a></li>
+                            <li><a href="#spinner" data-file="base-styles/spinner">Spinner</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#components">Components</a>
+                        <ul class=secondary-menu>
+                            <li><a href="#breadcrumbs" data-file="components/breadcrumbs">Breadcrumbs</a></li>
+                            <li><a href="#form" data-file="components/form">Form</a></li>
+                            <li><a href="#tabs" data-file="components/tabs">Tabs</a></li>
+                            <li><a href="#carousel" data-file="components/carousel">Carousel</a></li>
+                            <li><a href="#share" data-file="components/share">Share</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#examples">Examples</a>
+                        <ul class=secondary-menu>
+                            <li><a href="#error-page" data-file="examples/error-page">Error Page</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="skycom-container clearfix">
+			<div class="alpha skycom-12">
+				<h1 class="wiki-header">Sky Web Toolkit <small>v0.6.9</small></h1>
+
+<a name="using-the-toolkit"></a>
+<section class="wiki-section">
+    <h2>Using the Toolkit</h2>
+    <div class="sub-section">
+        <p class="developer-notes">
+&lt;script src='//web-toolkit.global.sky.com/0.6.9/scripts/toolkit.js'&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/0.6.9/stylesheets/toolkit.css"/&gt;
+&lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/0.6.9/fonts/skycons.css"/&gt;
+        </p>
+    </div>
+    <a name="getting-started"></a>
+    <div class="sub-section">
+        <h3 class="wiki-h3">Getting Started</h3>
+<p >
+    Please look in the console for full developer notes
+</p>
+<p>
+    Please take a look here for anything that is not documented below. <a href="http://storage.sky.com/other/GlobalGuides.pdf">Global Guidelines</a>
+</p>
+<div class="init">
+    Components that need javascript initialised can be initialized for everything, or individual modules can be turned off.
+    e.g.    everything: <code>toolkit.modules.init();</code>
+    e.g.    only Skycons <code>toolkit.modules.init({skycons: true});</code>
+</div>
+
+<p class="developer-notes">
+    Please add the following classes to the <code>html</code> tag:
+    <code>lt-ie10</code>, <code>lt-ie9</code> and <code>lt-ie8</code>
+</p>
+<p class="developer-notes">
+    Please add the following into you <code>head</code> tag:
+    <!--[if lt IE 10]><script type="text/javascript">
+    document.createElement('header');
+    document.createElement('section');
+    document.createElement('footer');
+    document.createElement('article');
+    document.createElement('aside');
+    document.createElement('hgroup');
+    document.createElement('nav');
+    document.createElement('figure');
+    document.createElement('figcaption');
+</script><![endif]-->
+</p>
+
+    </div>
+    <a name="contributing"></a>
+    <div class="sub-section">
+        <h3 class="wiki-h3">Contributing</h3>
+<p class="developer-notes">
+    The source code is available in a private repository on Github, along with instructions for building/running the project locally.
+https://github.com/skyglobal/web-toolkit/
+</p>
+<p class="developer-notes">
+    When adding comments to be seen by developers only you can use the following classes:
+    <code>developer-notes</code> for hints and tips
+    <code>dependencies</code> for external files required
+    <code>init</code> for javascript
+</p>
+<dl class="clearfix wiki-dl">
+    <dt>Feature Requests</dt>
+    <dd>Please check <a href="https://github.com/skyglobal/web-toolkit/issues">here</a> to see if there is already a similar request. If not, create a New
+       Issue and flag it as an '<code>enhancement</code>'</dd>
+    <dt>Bug Reporting</dt>
+    <dd>Please check <a href="https://github.com/skyglobal/web-toolkit/issues">here</a> to see if there is already a similar request. If not, create a New
+    Issue and flag it as a '<code>bug</code>'</dd>
+</dl>
+    </div>
+    <a name="accessibility"></a>
+    <div class="sub-section">
+        <h3 class="wiki-h3">Accessibility</h3>
+<p class="developer-notes">
+    For page text that is needed only for screen readers, add the class '<code>speak</code>'.
+</p>
+<p class="developer-notes">
+    Don't forget to add about half a day to each client-side card to give you time to use VoiceOVer on your page, check colour contrast and a tonne of other stuff!
+</p>
+<p >
+   Please go to the <a target="_accessibility" href="http://assets.nb.sky.com/accessibility/index.html">Nomensa Accessibility Page &hellip;</a>
+</p>
+
+    </div>
+    <a name="coding-practises"></a>
+    <div class="sub-section">
+        <h3 class="wiki-h3">Coding Practise</h3>
+<p >
+   As a general rule we try to follow the following practises:
+</p>
+<dl class="clearfix wiki-dl">
+    <dt>CSS</dt><dd>Use hyphens '<code>-</code>' within all class names, never camel-case or underscores.</dd>
+    <dt>JS</dt><dd>Where possible, use camel-case '<code>camelCase</code>' for function/variable names</dd>
+</dl>
+
+    </div>
+</section>
+
+<a name="base-styles"></a>
+<section class="wiki-section">
+    <h2>Base Styles</h2>
+    <a name="grid"></a>
+    <div class="sub-section">
+        <h3 class="wiki-h3">12 Column Grid</h3>
+<p class="developer-notes">
+    Note how classes now never have underscores '<code>_</code>' but only hyphens '<code>-</code>' instead.
+</p>
+<p class="developer-notes">
+    To get any of the following classses to work on <code>mobile</code> only, add <code>-mobile</code> to the end of the class name.
+</p>
+<p class="developer-notes">
+    The grid is wrapped with '<code>skycom-container</code>' which should be used to contain all your contents, or to contain modules individually .
+</p>
+<p class="developer-notes">
+    The container is made up of up 12 columns '<code>skycom-1</code>' through to '<code>skycom-12</code>'.  By default these float on the left.
+</p>
+<p class="developer-notes">
+    To float a column on the right, add the class '<code>right</code>'.
+</p>
+<p class="developer-notes">
+    If too many floats have caused you container to have zero height, add the class '<code>clearfix</code>'.
+</p>
+<p class="developer-notes">
+    For older browsers, the first column in a row should also have the class '<code>alpha</code>'.
+</p>
+<p class="developer-notes">
+    To 'stick' headers to the top of the page when scrolling, use the class '<code>sticky</code>'.
+</p>
+<p class="developer-notes">
+    When links don't go to a new page, i.e. changing tabs please, use the class '<code>internal-link</code>'.
+</p>
+<p class="developer-notes">
+    To make some text for screen readers only, use the class '<code>speak</code>'.
+</p>
+<p class="developer-notes">
+    To hide an element, use the class '<code>hidden</code>'.
+</p>
+<p class="developer-notes">
+    To show an element, use the class '<code>visible</code>'.
+</p>
+<p class="developer-notes">
+    When the text shouldn't touch the edges of the columns (i.e. when they have a distinct background colour) use '<code>cushioned</code>' class for padding.
+</p>
+
+<div class="example">
+    <h4>Grid (974)</h4>
+    <p class="developer-notes">
+        By default the grid is <code>974px</code> wide.
+    </p>
+    <div class="grid-example">
+        <div class="example skycom-container clearfix" id="grid12">
+            <div class="alpha skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="example">
+    <h4>Wide Grid (1140)</h4>
+    <p class="developer-notes">
+        Add class <code>grid-1140</code> to the parent of your containers i.e. to the <code>body</code>.
+    </p>
+    <div class="example clearfix" id="grid12-actual">
+        <div class="alpha skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+        <div class="skycom-1">
+            <div class="cushioned">
+                <div>&nbsp;</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="example">
+    <h4>lightbox Grid</h4>
+    <p class="developer-notes">
+        the '<code>skycom-offset1</code>' class is used to centre the lightbox.
+    </p>
+    <p class="developer-notes">
+        We also use another '<code>skycom-container</code>' to create a new 12 column grid.
+    </p>
+    <div class="grid-example">
+        <div class="example skycom-container clearfix" id="grid12-lightbox">
+            <div class="skycom-10 skycom-offset1 ">
+                <div class="example skycom-container clearfix" id="grid12-contents">
+                    <div class="alpha skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="skycom-1">
+                        <div class="cushioned">
+                            <div>&nbsp;</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="example">
+    <h4>Grid on a Tablet (Portrait: 696)</h4>
+    <div class="grid-example">
+        <div class="example skycom-container clearfix" id="grid12-tablet">
+            <div class="alpha skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <div class="skycom-1">
+                <div class="cushioned">
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+    <a name="colours" ></a>
+    <div class="sub-section">
+        <h3 class="wiki-h3">Colours</h3>
+<p class=design-notes>
+    These colours are for designer reference only. For accessibility reasons, please also note the colour of the text being used.
+</p>
+<p class=developer-notes>
+    Nothing to see here.. move along!  The classes used here are NOT part of the toolkit.
+</p>
+<h4>Typography</h4>
+<div class="m clearfix">
+    <div class="skycom-2 alpha ">
+        <div class="colour-block colour-primary cushioned">
+            Primary
+            <small>Main page text</small>
+        </div>
+        <div class="hex">#333333</div>
+    </div>
+    <div class="skycom-2 ">
+        <div class="colour-block colour-secondary cushioned">
+            Secondary
+            <small>Supporting text i.e. legal</small>
+        </div>
+        <div class="hex">#666666</div>
+    </div>
+    <div class="skycom-2 ">
+        <div class="colour-block colour-inactive cushioned">
+            Inactive
+        </div>
+        <div class="hex">#999999</div>
+    </div>
+    <div class="skycom-2 ">
+        <div class="colour-block colour-error cushioned">
+            Error
+            <small>i.e. Warnings or form errors</small>
+        </div>
+        <div class="hex">#D21717</div>
+    </div>
+    <div class="skycom-2 ">
+        <div class="colour-block colour-link cushioned">Links</div>
+        <div class="hex">#0070a5</div>
+    </div>
+</div>
+
+<h4>Buttons + Icons</h4>
+<div class="m clearfix">
+    <div class="skycom-2  alpha">
+        <div class="colour-block colour-primary-button cushioned">Primary
+            <small>Buttons or icons</small>
+        </div>
+        <div class="hex">#0073c5</div>
+    </div>
+    <div class="skycom-2  ">
+        <div class="colour-block colour-secondary-button cushioned">Secondary
+            <small>Buttons only</small></div>
+        <div class="hex">#eaeaea</div>
+    </div>
+    <div class="skycom-2  ">
+        <div class="colour-block colour-success-icon cushioned">Success
+            <small>Icons only</small></div>
+        <div class="hex">#167255</div>
+    </div>
+    <div class="skycom-2  ">
+        <div class="colour-block colour-sky-go cushioned">Sky Go
+            <small>Icons only</small></div>
+        <div class="hex">#44ad3a</div>
+    </div>
+    <div class="skycom-2  ">
+        <div class="colour-block colour-remote-record cushioned">Remote Record
+            <small>Icons only</small></div>
+        <div class="hex">#ed1c24</div>
+    </div>
+    <div class="skycom-2  ">
+        <div class="colour-block colour-never-miss cushioned">Never Miss
+            <small>Icons only</small></div>
+        <div class="hex">#0077ae</div>
+    </div>
+</div>
+
+<h4>Backgrounds + Key Line</h4>
+<div class="m clearfix">
+    <div class="skycom-2  alpha">
+        <div class="colour-block colour-background-dark cushioned">Dark Background</div>
+        <div class="hex">#eaeaea</div>
+    </div>
+    <div class="skycom-2  ">
+        <div class="colour-block colour-background-light cushioned">Light Background</div>
+        <div class="hex">#f4f4f4</div>
+    </div>
+    <div class="skycom-2 ">
+        <div class="colour-block colour-key-line cushioned">Key Line</div>
+        <div class="hex">#dcdcdc</div>
+    </div>
+</div>
+
+<h4>Channel Colours</h4>
+<div class="m clearfix">
+	<div class="skycom-2 alpha ">
+        <div class="colour-block colour-sky-1 cushioned">Sky 1</div>
+        <div class="hex">#0076be</div>
+    </div>
+	<div class="skycom-2  ">
+        <div class="colour-block colour-sky-atlantic cushioned">Sky Atlantic</div>
+        <div class="hex">#003663</div>
+    </div>
+	<div class="skycom-2  ">
+        <div class="colour-block colour-sky-arts cushioned">Sky Arts</div>
+        <div class="hex">#734993</div>
+    </div>
+	<div class="skycom-2  ">
+        <div class="colour-block colour-sky-living cushioned">Sky Living</div>
+        <div class="hex">#87a0af</div>
+    </div>
+	<div class="skycom-2  ">
+        <div class="colour-block colour-sky-movies cushioned">Sky Movies</div>
+        <div class="hex">#a51d4d</div>
+    </div>
+</div>
+
+<h4>V3 Brand Colours</h4>
+<div class="m clearfix">
+	<div class="skycom-2 alpha ">
+        <div class="colour-block colour-v3-red cushioned">Red</div>
+        <div class="hex">#ed1c24</div>
+    </div>
+	<div class="skycom-2  ">
+        <div class="colour-block colour-v3-pink cushioned">Pink</div>
+        <div class="hex">#ed0677</div>
+    </div>
+	<div class="skycom-2  ">
+        <div class="colour-block colour-v3-yellow cushioned">Yellow
+            <small>Use primary text colour</small>
+        </div>
+        <div class="hex">#fdb913</div>
+    </div>
+	<div class="skycom-2  ">
+        <div class="colour-block colour-v3-green cushioned">Green
+            <small>Use primary text colour</small></div>
+        <div class="hex">#a6ce39</div>
+    </div>
+	<div class="skycom-2  ">
+        <div class="colour-block colour-v3-blue cushioned">Blue
+            <small>Do not put text on top (it's not Accessible)</small></div>
+        <div class="hex">#00aeef</div>
+    </div>
+</div>
+
+<h4>Shop Colours</h4>
+<p>All text to be above 18px</p>
+<div class="m clearfix">
+	<div class="skycom-2 alpha ">
+        <div class="colour-block colour-original cushioned">Original</div>
+        <div class="hex">#d92231</div>
+    </div>
+	<div class="skycom-2  ">
+        <div class="colour-block colour-family cushioned">Family</div>
+        <div class="hex">#ff6000</div>
+    </div>
+	<div class="skycom-2  ">
+        <div class="colour-block colour-movies cushioned">Movies</div>
+        <div class="hex">#78184c</div>
+    </div>
+	<div class="skycom-2 ">
+        <div class="colour-block colour-sports cushioned">Sports</div>
+        <div class="hex">#00549a</div>
+    </div>
+	<div class="skycom-2 ">
+        <div class="colour-block colour-complete cushioned">Complete</div>
+        <div class="hex">#00549a</div>
+    </div>
+</div>
+    </div>
+    <a name="typography"></a>
+    <div class="sub-section">
+        <h3 class="wiki-h3">Typography</h3>
+
+<p class="design-notes">
+    When Sky Text fonts aren't available within the browser <code>Helvetica/Arial/Verdana</code> should be used.
+</p>
+
+<div class="example">
+    <p class="developer-notes">
+        All these headers work with or without the corresponding <code>xxx-title</code> classes. You can optionally add a <code>small</code> class too.
+    </p>
+    <div class="demo" data-selector="h1,h2,h3,p,small,strong,blockquote,.smash-img .white,.beckham-img .black, a">
+
+        <h1 class="page-title">
+            Page Title (Sky Text Regular <span class="pink">52px</span>)
+            <br/><span class="leading">Line-height 56px</span>
+        </h1>
+        <h2 class="section-title">Section Title (Sky Text Regular <span class="pink">44px</span>)
+            <br/><span class="leading">Line-height 48px</span>
+        </h2>
+        <h2 class="section-title smaller">Smaller Section Title (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">36px</span>)
+            <br/><span class="leading">Line-height 40px</span>
+        </h2>
+        <h3 class="pod-title">Pod Title (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">32px</span>)
+            <br/><span class="leading">Line-height 36px</span>
+        </h3>
+        <h3 class="pod-title smaller">Smaller Pod Title (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">28px</span>)
+            <br/><span class="leading">Line-height 32px</span>
+        </h3>
+        <p class="intro">Intro Copy (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">24px</span>)
+            <br/><span class="leading">Line-height 28px</span>
+        </p>
+        <p class="intro smaller">Smaller Intro Copy (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">20px</span>)
+            <br/><span class="leading">Line-height 24px</span>
+        </p>
+        <p>Body text (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">16px</span>)
+            <br/><span class="leading">Line-height 20px</span>
+        </p>
+        <small class="block">Supportive text</small>
+        <small class="block legal">Legal copy</small>
+        <p class="instructions">Instructional copy (Luna <span class="pink">24px</span>)
+            <br/><span class="leading">Line-height 40px</span>
+        </p>
+        <p class="error">Error</p>
+        <p class="secondary">Secondary</p>
+        <p class="inactive">Inactive</p>
+        <blockquote>Quotes</blockquote>
+        <p class="medium">Add .medium to change font family to medium</p>
+        <strong>'Strong' tags go to medium automatically</strong>
+
+        <div>
+            <a href="#">In page action link</a>
+        </div>
+
+        <div >
+            <a href="#" ><i class="skycon-chevron"></i>Link with a chevron</a>
+        </div>
+
+        <div class="smash-img">
+            <p class="white">Text on dark background is white</p>
+            <a href="#" class="white"><i class="skycon-chevron"></i>Links next to normal text need chevrons</a>
+        </div>
+
+        <div class="beckham-img">
+            <p class="black">Text on light background is black</p>
+            <a href="#" class="black"><i class="skycon-chevron"></i>Links next to normal text need chevrons</a>
+        </div>
+    </div>
+</div>
+    </div>
+    <a name="icons"></a>
+    <div class="sub-section">
+        <h3 class="wiki-h3">Icons</h3>
+<div class="example">
+    <h4>Sprite</h4>
+    <p class="designer-notes">
+        These are not likely to look good on Retina devices
+    </p>
+    <table id=wiki-skycons>
+        <thead>
+            <tr>
+                <th>Icon</th>
+                <th>CSS Class</th>
+                <th>How it looks</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr ><td>sprite</td><td> icon-sprite</td><td class="icon"><i class=" icon-sprite"></i></td></tr>
+
+        <tr ><td>carousel-next-over</td><td> icon-carousel-next-over</td><td class="icon"><i class=" icon-carousel-next-over"></i></td></tr>
+        <tr ><td>carousel-previous-over</td><td> icon-carousel-previous-over</td><td class="icon"><i class=" icon-carousel-previous-over"></i></td></tr>
+
+        <tr ><td>carousel-next</td><td> icon-carousel-next</td><td class="icon"><i class=" icon-carousel-next"></i></td></tr>
+        <tr ><td>carousel-previous</td><td> icon-carousel-previous</td><td class="icon"><i class=" icon-carousel-previous"></i></td></tr>
+
+        <tr ><td>carousel-play</td><td> icon-carousel-play</td><td class="icon"><i class=" icon-carousel-play"></i></td></tr>
+        <tr ><td>carousel-pause</td><td> icon-carousel-pause</td><td class="icon"><i class=" icon-carousel-pause"></i></td></tr>
+
+        <tr ><td>never-miss</td><td> icon-never-miss</td><td class="icon"><i class=" icon-never-miss"></i></td></tr>
+        <tr ><td>remote-record</td><td> icon-remote-record</td><td class="icon"><i class=" icon-remote-record"></i></td></tr>
+        <tr ><td>watch-now</td><td> icon-watch-now</td><td class="icon"><i class=" icon-watch-now"></i></td></tr>
+
+        <tr ><td>video-play</td><td> icon-video-play</td><td class="icon"><i class=" icon-video-play"></i></td></tr>
+        <tr ><td>close</td><td> icon-close</td><td class="icon"><i class=" icon-close"></i></td></tr>
+
+        <tr ><td>curved-arrow-bottom-left</td><td> icon-curved-arrow-bottom-left</td><td class="icon"><i class=" icon-curved-arrow-bottom-left"></i></td></tr>
+        <tr ><td>curved-arrow-down</td><td> icon-curved-arrow-down</td><td class="icon"><i class=" icon-curved-arrow-down"></i></td></tr>
+        <tr ><td>curved-arrow-right</td><td> icon-curved-arrow-right</td><td class="icon"><i class=" icon-curved-arrow-right"></i></td></tr>
+        <tr ><td>curved-arrow-top-right</td><td> icon-curved-arrow-top-right</td><td class="icon"><i class=" icon-curved-arrow-top-right"></i></td></tr>
+
+        </tbody>
+    </table>
+</div>
+        <a name="skycons" ></a>
+        
+
+
+<style>
+    #wiki-skycons tr i {
+        line-height:32px;
+        cursor:pointer;
+    }
+    #wiki-skycons tr:hover i {
+        font-size:32px;
+        overflow: visible;
+    }
+    #wiki-skycons td,
+    #wiki-skycons th{
+        text-align: left;
+    }
+    #wiki-skycons th.demo-col{
+        text-align: center;
+        width: 140px;
+    }
+    #wiki-skycons th.icon,
+    #wiki-skycons td.icon{
+        text-align: center;
+    }
+
+</style>
+
+<div class="example">
+    <h4>Skycons</h4>
+    <p class="designer-notes">
+        These icons will look good on Retina devices and can be any size or (single) colour.
+    </p>
+    <p class="developer-notes">
+        for ie7 support execute <code>toolkit.skycons.init();</code> after the page has loaded.
+    </p>
+    <p class="developer-notes">
+    Dont forget to include <code>http://web-toolkit.global.sky.com/0.6.9/fonts/skycons.css</code>
+    </p>
+    <p class="developer-notes">
+    Ensure <code>aria-hidden</code> is used on your <code>skycon</code> tags.
+    </p>
+    <p class="developer-notes">
+    To make the icon have a colour, add the class <code>colour</code> to the parent.
+    </p>
+    <p class="developer-notes">
+    To make the icon have a colour on hover, add the class <code>colour-hover</code> to the parent.
+    </p>
+    <p class="developer-notes">
+    To Create Fonts:
+    &bull; Open svg in inkscape, press ctrl+a to select all.
+    &bull; press ctrl+g to group the objects
+    &bull; choose Path - simplify
+    &bull; choose Path - union
+    &bull; save font into /grunt/fonts/ folder
+    &bull; Run `<code>grunt fonts</code>`
+    &bull; copy the icons JS from the skycons.css over the icons var in skycons.js
+    &bull; Run `<code>grunt</code>`
+    </p>
+    <table id=wiki-skycons>
+        <thead>
+            <tr>
+                <th>CSS Class</th>
+                <th class="demo-col">How it looks</th>
+                <th class="demo-col">with .colour</th>
+                <th class="demo-col">with .hover-colour</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+        <tr ><td> skycon-sky</td><td class="icon"><i class=" skycon-sky" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-sky" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-sky" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-twitter-reply</td><td class="icon"><i class=" skycon-twitter-reply" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-twitter-reply" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-reply" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-chevron</td><td class="icon"><i class=" skycon-chevron" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-chevron" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-chevron" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-facebook</td><td class="icon"><i class=" skycon-facebook" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-facebook" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-facebook" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-remote-record</td><td class="icon"><i class=" skycon-remote-record" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-remote-record" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-remote-record" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-warning</td><td class="icon"><i class=" skycon-warning" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-warning" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-warning" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-carousel-play</td><td class="icon"><i class=" skycon-carousel-play" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-carousel-play" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-carousel-play" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-user-profile</td><td class="icon"><i class=" skycon-user-profile" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-user-profile" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-user-profile" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-search</td><td class="icon"><i class=" skycon-search" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-search" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-search" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-twitter-retweet</td><td class="icon"><i class=" skycon-twitter-retweet" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-twitter-retweet" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-retweet" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-volume</td><td class="icon"><i class=" skycon-volume" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-volume" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-volume" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-twitter-favourite</td><td class="icon"><i class=" skycon-twitter-favourite" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-twitter-favourite" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-favourite" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-expand</td><td class="icon"><i class=" skycon-expand" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-expand" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-expand" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-carousel-pause</td><td class="icon"><i class=" skycon-carousel-pause" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-carousel-pause" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-carousel-pause" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-share</td><td class="icon"><i class=" skycon-share" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-share" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-share" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-never-miss</td><td class="icon"><i class=" skycon-never-miss" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-never-miss" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-never-miss" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-mail</td><td class="icon"><i class=" skycon-mail" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-mail" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-mail" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-sky-go</td><td class="icon"><i class=" skycon-sky-go" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-sky-go" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-sky-go" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-twitter-follow</td><td class="icon"><i class=" skycon-twitter-follow" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-twitter-follow" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-follow" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-minify</td><td class="icon"><i class=" skycon-minify" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-minify" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-minify" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-twitter</td><td class="icon"><i class=" skycon-twitter" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-twitter" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-close</td><td class="icon"><i class=" skycon-close" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-close" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-close" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-menu</td><td class="icon"><i class=" skycon-menu" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-menu" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-menu" aria-hidden=true></i></td></tr>
+        
+        <tr ><td> skycon-google-plus</td><td class="icon"><i class=" skycon-google-plus" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-google-plus" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-google-plus" aria-hidden=true></i></td></tr>
+        
+        </tbody>
+    </table>
+</div>
+        <a name="svgs"></a>
+        <div class="example">
+    <h4>Multi-Coloured SVGs</h4>
+    <p class="develop-notes">
+        While there are only a few separate SVGs, we will serve these up separately
+    </p>
+    <table id=wiki-skycons>
+        <thead>
+            <tr>
+                <th>SVG</th>
+                <th>How it looks</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr ><td>sprite</td><td class="icon"><img class=" icon-sprite"></i></td></tr>
+
+        <tr ><td>carousel-next-over</td><td> icon-carousel-next-over</td><td class="icon"><i class=" icon-carousel-next-over"></i></td></tr>
+        <tr ><td>carousel-previous-over</td><td> icon-carousel-previous-over</td><td class="icon"><i class=" icon-carousel-previous-over"></i></td></tr>
+
+        <tr ><td>carousel-next</td><td> icon-carousel-next</td><td class="icon"><i class=" icon-carousel-next"></i></td></tr>
+        <tr ><td>carousel-previous</td><td> icon-carousel-previous</td><td class="icon"><i class=" icon-carousel-previous"></i></td></tr>
+
+        <tr ><td>carousel-play</td><td> icon-carousel-play</td><td class="icon"><i class=" icon-carousel-play"></i></td></tr>
+        <tr ><td>carousel-pause</td><td> icon-carousel-pause</td><td class="icon"><i class=" icon-carousel-pause"></i></td></tr>
+
+        <tr ><td>never-miss</td><td> icon-never-miss</td><td class="icon"><i class=" icon-never-miss"></i></td></tr>
+        <tr ><td>remote-record</td><td> icon-remote-record</td><td class="icon"><i class=" icon-remote-record"></i></td></tr>
+        <tr ><td>watch-now</td><td> icon-watch-now</td><td class="icon"><i class=" icon-watch-now"></i></td></tr>
+
+        <tr ><td>video-play</td><td> icon-video-play</td><td class="icon"><i class=" icon-video-play"></i></td></tr>
+        <tr ><td>close</td><td> icon-close</td><td class="icon"><i class=" icon-close"></i></td></tr>
+
+        <tr ><td>curved-arrow-bottom-left</td><td> icon-curved-arrow-bottom-left</td><td class="icon"><i class=" icon-curved-arrow-bottom-left"></i></td></tr>
+        <tr ><td>curved-arrow-down</td><td> icon-curved-arrow-down</td><td class="icon"><i class=" icon-curved-arrow-down"></i></td></tr>
+        <tr ><td>curved-arrow-right</td><td> icon-curved-arrow-right</td><td class="icon"><i class=" icon-curved-arrow-right"></i></td></tr>
+        <tr ><td>curved-arrow-top-right</td><td> icon-curved-arrow-top-right</td><td class="icon"><i class=" icon-curved-arrow-top-right"></i></td></tr>
+
+        </tbody>
+    </table>
+</div>
+    </div>
+    <a name="buttons" ></a>
+    <div class="sub-section">
+        <h3 class="wiki-h3">Buttons</h3>
+<p  class="developer-notes">
+    All buttons need the class <code>btn</code>.
+Submit buttons should be coded as <code>button type=submit</code> (not <code>input type=submit</code>)
+</p>
+
+<div class="example">
+    <h4>Primary</h4>
+    <p class="developer-notes">
+        Add the class <code>primary</code>.
+    </p>
+    <div class="demo" data-selector="button,a">
+        <button class="btn primary">Primary Button</button>
+        <a href="#" class="btn primary">Primary Link</a>
+        <button type="submit" class="btn primary">Primary Submit</button>
+        <button class="btn primary" disabled>Disabled Button</button>
+    </div>
+</div>
+
+<div class="example">
+    <h4>Secondary</h4>
+    <p class="developer-notes">
+        Add the class <code>secondary</code>
+    </p>
+    <div class="demo" data-selector="button,a">
+        <button href="#" class="btn secondary">Secondary Button</button>
+        <a href="#" class="btn secondary">Secondary Link</a>
+        <button type="submit" class="btn secondary">Secondary Submit</button>
+        <button class="btn secondary" disabled>Disabled Button</button>
+    </div>
+</div>
+    </div>
+    <a name="spinner" ></a>
+    <div class="sub-section">
+        <h3 class="wiki-h3">Spinner</h3>
+<p  class="developer-notes">
+    Add the class <code>sky-spinner</code> to get an ajax-style spinner icon.
+</p>
+
+<div class="example">
+    <div class="sky-spinner">
+        <h3>Please wait...</h3>
+    </div>
+</div>
+    </div>
+</section>
+
+<a name="components"></a>
+<section class="wiki-section">
+    <h2>Components</h2>
+    <a name="breadcrumbs"></a>
+    <div class="sub-section">
+        <h3 class="wiki-h3">Breadcrumb</h3>
+<div class="example">
+    <div class="demo" data-selector="*">
+        <aside  id="skycom-breadcrumb" class="skycom-container">
+            <h2 class=at>Navigational Trail</h2>
+            <ul>
+                <li ><i class=skycon-chevron aria-hidden=true></i><a href="#">Help & Support</a></li>
+                <li ><i class=skycon-chevron aria-hidden=true></i><a href="#">Profile & Setting</a></li>
+                <li ><i class=skycon-chevron aria-hidden=true></i><a href="#">Change your subscription</a></li>
+            </ul>
+        </aside>
+    </div>
+</div>
+    </div>
+    <a name="form"></a>
+    <div class="sub-section">
+        <h3 class="wiki-h3">Forms</h3>
+<p class="developer-notes">
+    Add class <code>sky-form</code> to the container.
+</p>
+
+<div class="example">
+    <h4>With Grey background</h4>
+    <p class="design-notes">
+        To be used for xxx types of forms</p>
+    <p class="developer-notes">
+        Add class <code>well</code> to the container.
+    </p>
+    <div class="demo" data-selector="*">
+
+        <form class="sky-form sky-well">
+            <div class="row">
+                <label for="first_name_g">First name</label>
+                <input id="first_name_g" type="text" placeholder="eg. Joe Bloggs"/>
+            </div>
+            <div class="row">
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="eg. joe.bloggs@me.com"/>
+            </div>
+            <div class="row">
+                <label for="telephone">Telephone</label>
+                <input id="telephone" type="tel" placeholder="eg. +447567567567"/>
+            </div>
+            <div class="row">
+                <label for="url">Homepage</label>
+                <input id="url" type="url" placeholder="eg. http://joebloggs.com"/>
+            </div>
+            <div class="row">
+                <label for="message">Homepage</label>
+                <textarea id="message" placeholder="eg. Please enter a message"></textarea>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="example">
+    <h4>Without Grey background</h4>
+    <p class="design-notes">
+        To be used for xxx types of forms</p>
+    <p class="developer-notes">
+
+    </p>
+    <div class="demo" data-selector="*">
+
+        <form class="sky-form ">
+            <div class="row">
+                <label for="title" class="required">Title</label>
+                <div class="select">
+                    <select id="title" name="title"><option value="">Please select</option>
+                        <option value="Mr">Mr</option>
+                        <option value="Mrs">Mrs</option>
+                        <option value="Ms">Ms</option>
+                        <option value="Sir">Sir</option>
+                        <option value="Dr">Dr</option>
+                        <option value="Prof.">Prof.</option>
+                    </select>
+                </div>
+                <div class="error"></div>
+            </div>
+
+            <div class="row">
+                <label for="first_name">First name</label>
+                <input id="first_name" type="text" placeholder="eg. Joe Bloggs" />
+            </div>
+
+            <fieldset class="row">
+                <legend>Select a payment type</legend>
+                <div class="radiocheck">
+                    <input type="radio" name="payment_type" value="direct_debit" id="direct-debit" checked />
+                    <label for="direct-debit">Direct debit</label>
+                    <br>
+                    <input type="radio" name="payment_type" value="credit_card" id="credit-card" />
+                    <label for="credit-card">Credit card</label>
+                </div>
+            </fieldset>
+
+            <div class="row">
+                <label class="required">Postcode</label>
+                <input type="text" placeholder="eg. TW8 1QW"/>
+                <button class="btn">Find address</button>
+            </div>
+            
+             <div class="row">
+                <label for="message2">Homepage</label>
+                <textarea id="message2" placeholder="eg. Please enter a message"></textarea>
+            </div>
+
+            <div class="row no-label">
+                <input type="checkbox" name="confirm_terms" value="true" id="confirm-terms" />
+                <label for="confirm-terms">I agree to the <a href="#">Terms &amp; Conditions</a></label>
+            </div>
+        </form>
+
+    </div>
+</div>
+    </div>
+    <a name="tabs" ></a>
+    <div class="sub-section">
+        <h3 class="wiki-h3">Tabs</h3>
+
+<div class="example">
+    <h4>Remembering State</h4>
+    <div class="design-notes">
+        The state (open or closed) of the tabs can optionally be remembered. i.e. Pressing the back button will open the page with the tab open that was clicked last.
+    </div>
+    <div class="developer-notes">
+        Add attribute <code>data-remember-state="true"</code>
+    </div>
+    <div class="demo" data-selector="*">
+        <section class="module clearfix" data-function="tabs" data-remember-state="true">
+
+            <h2 class="at">This is a screenreader header for tabs</h2>
+
+            <ul class="tabs clearfix" role="tablist">
+                <li id="first-tab" aria-controls="first" aria-label="first" role="tab" class="tab selected">
+                    <a href="#!first" class="skycom-ellipsis">First</a>
+                </li>
+                <li id="second-tab" aria-controls="second" aria-label="second" role="tab" class="tab" >
+                    <a href="#!second" class="skycom-ellipsis">Second</a>
+                </li>
+            </ul>
+
+            <div id="first" class="tabpanel selected" aria-labeledby="first-tab" role="tabpanel">
+                <section class="tabcontents clearfix">
+                    <h2 class="at">Screen reader header for First tab contents</h2>
+                    <div class="skycom-12 alpha">
+                        <img src="/wiki_images/beckham.jpg" alt="beckham looking for help">
+                    </div>
+                </section>
+            </div>
+
+            <div id="second" class="tabpanel" aria-labeledby="second-tab" role="tabpanel">
+                <section class="tabcontents clearfix">
+                    <h2 class="at">Screen reader header for Second tab contents</h2>
+                    <div class="skycom-12 alpha">
+                        <img src="/wiki_images/smash.jpg" alt="something else">
+                    </div>
+                </section>
+            </div>
+
+        </section>
+    </div>
+</div>
+    </div>
+    <a name="carousel"></a>
+    <div class="sub-section">
+        <h3 class="wiki-h3">Carousel</h3>
+<p class="design-notes">
+    The carousel is fully responsive, has a video player and works on touch devices (not microsoft).
+</p>
+
+<div class="dependencies">
+    <!-- for videos: <script src="js/lib/require.js" ></script>-->
+    <link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
+    <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
+</div>
+<div class="init">
+    <code>$('#hero').skycom_carousel({
+        carousel: {
+            autoplay: true,
+            videoAds: true
+        }
+    });</code>
+</div>
+
+<div class="example">
+    <h4>3:1 Carousel</h4>
+    <div class="design-notes">
+
+    </div>
+    <p class="developer-notes">
+        Add the class <code>hero-3-1</code>.
+    </p>
+    <div class="demo" data-selector="*">
+        <section class="module clearfix skycom-carousel hero-3-1" data-function="carousel" data-tracking-module="hero"
+                 id="hero">
+            <h2 class="at">Featured News, shows or Products from around Sky</h2>
+
+            <div class="skycom-carousel-container clearfix">
+                <div
+                        class="clearfix skycom-12 alpha bg-shading light-scheme"
+                        data-tracking-other="Sky Sports HD1"
+                        data-tracking-pod="tile-1"
+                        data-tracking-label="David Beckham And Sky Team Up"
+                        data-tracking-theme="tracking-theme"
+                        >
+                    <figure>
+                        <div class="shade"></div>
+                        <div class="poster">
+                            <img src="wiki_images/carousel/beckham.jpg"
+                                 alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
+                        </div>
+                        <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay content">
+                            <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb4002.png'
+                                 alt='Sky Sports HD1' class='channel-logo'/>
+                            <a href="#!beckham" class="clearfix">
+                                <h3 class="skycom-focus-el " id="title-beckham">David Beckham And Sky Team Up</h3>
+
+                                <p class="skycom-ellipsis">Global sports star David Beckham OBE is joining Sky as an ambassador.</p>
+                            </a>
+                        </figcaption>
+                        <a href="#" class="play-video" data-video-id="clip-00cwoia5">
+                            <i class="icon-video-play"></i>
+                            <span>Play Trailer</span>
+                        </a>
+                    </figure>
+                </div>
+
+                <div
+                        class="clearfix skycom-12 alpha  light-scheme"
+                        data-tracking-other="Sky News"
+                        data-tracking-pod="tile-2"
+                        data-tracking-label="Introducing Sky Entertainment Extra+"
+                        data-tracking-theme="tracking-theme"
+                        >
+                    <figure>
+                        <div class="shade"></div>
+                        <div class="poster">
+                            <img src="wiki_images/carousel/cube.jpg"
+                                 alt="Cube showing Sky Entertainment Extra Plus upgrade from £5 extra a month">
+                        </div>
+                        <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay content">
+                            <span class='channel-logo text-only'>Sky News</span>
+                            <a href="#!sky-entertainment-extra-plus" class="clearfix">
+                                <h3 class="skycom-focus-el " id="title-sky-entertainment-extra-plus">Introducing Sky
+                                    Entertainment Extra+</h3>
+
+                                <p class="skycom-ellipsis">Supercharge your TV</p>
+                            </a>
+                        </figcaption>
+                        <a href="#" class="play-video" data-video-id="clip-00ovbt3u">
+                            <i class="icon-video-play"></i>
+                            <span>Play Trailer</span>
+                        </a>
+                    </figure>
+                </div>
+                <div
+                        class="clearfix skycom-12 alpha bg-shading dark-scheme"
+                        data-tracking-other="Sky Movies Premiere"
+                        data-tracking-pod="tile-3"
+                        data-tracking-label="Watch The Avengers now in 9 hours"
+                        data-tracking-theme="tracking-theme"
+                        >
+                    <figure>
+                        <div class="shade"></div>
+                        <div class="poster">
+                            <img src="wiki_images/carousel/avengers.jpg" alt="Heroes">
+                        </div>
+                        <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay content">
+                            <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb1409.png'
+                                 alt='Sky Movies Premiere' class='channel-logo'/>
+                            <a href="#!avengers1" class="clearfix">
+                                <h3 class="skycom-focus-el " id="title-avengers1">Watch The Avengers now in 9 hours</h3>
+                                <p class="skycom-ellipsis">Watch Tonight</p>
+                            </a>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div class="video-wrapper">
+                <a href="#" class="close"><i class="icon-close"></i>
+                    <span class="at">Close</span>
+                </a>
+
+                <div class="videocontrolcontainer">
+                    <video></video>
+                    <img class="posterFrame"/>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+    </div>
+    <a name="share" ></a>
+    <div class="sub-section">
+        <h3 class="wiki-h3">Share</h3>
+
+<div class="example">
+    <h4>Share Popup</h4>
+    <div class="design-notes">
+        A share component to share external articles.
+    </div>
+    <div class="developer-notes">
+        Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
+    </div>
+    <div class="init">
+        standard: <code>toolkit.modules.init();</code>
+        explicit: <code>toolkit.modules.init({share:true, popup: true, skycons: true });</code>
+    </div>
+    <div class="demo" data-selector="*">
+        <div class="share-popup clearfix">
+            <a class="summary" href="#!" data-tracking-context="Shared article title" aria-label="Shared 146 times. Click to show share options">
+                <i class="skycon-share"></i>
+                <span class="share-word" aria-hidden="true">Share</span>
+                <span class="share-count" aria-hidden="true">146</span>
+            </a>
+            <ul class="popover">
+                <li class="tweet-button">
+                    <a class='tweet-link hover-colour' data-popup="{'width': '550','height':'420','title':'twitter-share-dialog'}"  href='https://twitter.com/intent/tweet?url=http%3A%2F%2Fnews.sky.com%2Fstory%2F1066004%2Fcyprus-bailout-savings-shift-amid-russia-offer&text=Cyprus Bailout: Savings Shift Amid Russia Offer' target='_blank'><i aria-hidden=true class='skycon-twitter'></i><span class='speak display-name'>Twitter</span></a><span class='share-count'>137</span>
+                </li>
+                <li class="facebook-button">
+                    <a class='fb-link hover-colour' data-popup="{'width': '626','height':'436','title':'facebook-share-dialog'}" target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fapps.facebook.com%2Fskynewsfb%2Farticle.php%3Fid%3D1066004'><i aria-hidden=true class='skycon-facebook'></i><span class='speak display-name'>Facebook</span></a><span class='share-count'>5</span>
+                </li>
+                <li class="gplus-button">
+                    <a class='gplus-link hover-colour' data-popup="{'width': '550','height':'420','title':'gplus-share-dialog'}"  target='_blank' href='https://plus.google.com/share?url=http%3A%2F%2Fnews.sky.com%2Fstory%2F1066004%2Fcyprus-bailout-savings-shift-amid-russia-offer'><i aria-hidden=true class='skycon-google-plus'></i><span class='speak display-name'>Google+</span></a><span class='share-count'>4</span>
+                </li>
+                <li class="email-button">
+                    <a class='email-link hover-colour' target='_blank' href='mailto:?subject=Sharing - Cyprus Bailout: Savings Shift Amid Russia Offer&body=http%3A%2F%2Fnews.sky.com%2Fstory%2F1066004%2Fcyprus-bailout-savings-shift-amid-russia-offer'><i aria-hidden=true class='skycon-mail'></i><span class='speak display-name'>Mail</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="example">
+    <h4>Share bar</h4>
+    <div class="design-notes">
+        A share bar component
+    </div>
+    <div class="developer-notes">
+        Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
+    </div>
+    <div class="init">
+        standard: <code>toolkit.modules.init({popup: true});</code>
+        with ie7 support: <code>toolkit.modules.init({popup: true, skycons:true});</code>
+    </div>
+    <div class="demo" data-selector="*">
+        <section id="share-this-page" class="share-bar">
+            <h3>Share this page</h3>
+            <ul >
+                <li class="share-page-by-facebook">
+                    <a class='fb-link hover-colour' data-popup="{'width': '626','height':'436','title':'facebook-share-dialog'}" target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F10.65.94.145%3A8080%2Fhp%2F%3Fshared%3Dtrue'><i aria-hidden=true class='skycon-facebook'></i><span class='speak display-name'>Facebook</span></a>
+                </li>
+                <li class="share-page-by-twitter">
+                    <a class='tweet-link hover-colour' data-popup="{'width': '550','height':'420','title':'twitter-share-dialog'}"  target='_blank' href='https://twitter.com/intent/tweet?url=http%3A%2F%2F10.65.94.145%3A8080%2Fhp%2F%3Fshared%3Dtrue&text=Sky.com Homepage' target='_blank'><i aria-hidden=true class='skycon-twitter'></i><span class='speak display-name'>Twitter</span></a>
+                </li>
+                <li class="share-page-by-gplus">
+                    <a class='gplus-link hover-colour' data-popup="{'width': '550','height':'420','title':'gplus-share-dialog'}" target='_blank' href='https://plus.google.com/share?url=http%3A%2F%2F10.65.94.145%3A8080%2Fhp%2F%3Fshared%3Dtrue'><i aria-hidden=true class='skycon-google-plus'></i><span class='speak display-name'>Google+</span></a>
+                </li>
+                <li class="share-page-by-email">
+                    <a class='email-link hover-colour' target='_blank' href='mailto:?subject=Sharing - Sky.com Homepage&body=http%3A%2F%2Fwww.sky.com0%2Fhp%2F%3Fshared%3Dtrue'><i aria-hidden=true class='skycon-mail'></i><span class='speak display-name'>Mail</span></a>
+                </li>
+            </ul>
+        </section>
+    </div>
+</div>
+    </div>
+</section>
+
+<a name="examples"></a>
+<section class="wiki-section">
+    <h2>Examples</h2>
+    <a name="error-page"></a>
+    <div class="sub-section">
+	    <h3 class="wiki-h3">Error Page</h3>
+<p >
+   Below you will see a number of pages that use the Toolkit to build the page
+</p>
+<div class="example">
+    <div class="demo" data-selector="*">
+        <div class=" error-page clearfix">
+            <div class="skycom-7">
+                <h1>The page you're looking for could not be found</h1>
+                <p>The link you used may be out of date or the address (url) may have been typed incorrectly. Please check and try again.</p>
+                <a href="http://www.sky.com">
+                    <i class="skycon-chevron" aria-hidden=true></i>
+                    Go to Sky.com
+                </a>
+                <p class="instructions hidden-mobile"><i class="sprite-desktop-hint-arrow-up"></i>try one of these links
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
+</section>
+	
+			</div>
+		</div>
+	    <script src="dist/scripts/lib/require.js" data-main='dist/scripts/wiki'></script>
+        <div></div>
+	</body>
+</html>
