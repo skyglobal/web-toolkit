@@ -17,7 +17,7 @@ define('utils/diff', ['lib/code-mirror'], function(CodeMirror) {
 
         dfd_old = $.ajax({
             crossDomain: true,
-            url:file,
+            url:oldFile,
             cache: false});
 
         $.when(dfd_latest,dfd_old).done(function(latest, old){
