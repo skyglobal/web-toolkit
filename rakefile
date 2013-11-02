@@ -18,8 +18,14 @@ def version_already_exists?
 end
 
 
-def files_to_upload
-  files = ["stylesheets/toolkit.css", "fonts/skycons.css", "fonts/skycons.eot", "fonts/skycons.svg", "fonts/skycons.ttf", "scripts/toolkit.js", "scripts/toolkit.js.map",  "images/icon.png"]
+def assets_to_upload
+  ["stylesheets/toolkit.css",
+    "fonts/skycons.css", "fonts/skycons.eot", "fonts/skycons.svg", "fonts/skycons.ttf",
+    "scripts/toolkit.js",  "images/icon.png"]
+end
+
+def templates_to_upload
+  Dir.glob("_includes/**/*.*")
 end
 
 def content_type(file)
@@ -71,7 +77,11 @@ task :deploy_new_version do
   doc_resources = []
   puts 'Uploading doc files'
   cd "dist"
-  files_to_upload.each do |file|
+  assets_to_upload.each do |file|
+    doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+  end
+  cd ".."
+  templates_to_upload.each do |file|
     doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
 
