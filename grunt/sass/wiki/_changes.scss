@@ -22,6 +22,7 @@
   overflow: hidden;
   &.open{
     height: auto;
+    overflow: auto;
   }
 }
 #changes-page{
