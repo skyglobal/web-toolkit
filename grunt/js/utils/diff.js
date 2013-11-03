@@ -17,7 +17,7 @@ define('utils/diff', function() {
 
         dfd_old = $.ajax({
             crossDomain: true,
-            url:file,
+            url:oldFile,
             cache: false});
 
         clear(name);
