@@ -132,6 +132,7 @@ define('utils/diff', function() {
 
     function clear(name){
         var tableBody = document.getElementById(name + '-table');
+        $('h3.has-toggle').removeClass('add').removeClass('del');
         if (!tableBody){ return; }
         while(tableBody.hasChildNodes()){
             tableBody.removeChild(tableBody.lastChild);
