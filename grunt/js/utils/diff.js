@@ -20,8 +20,6 @@ define('utils/diff', function() {
             url:oldFile,
             cache: false});
 
-        clear(name);
-
         $.when(dfd_latest,dfd_old).done(function(latest, old){
             var $container = $('<div class="togglee" data-toggle="' + name + '"><table id="' + name + '-table"></table></div>');
 
@@ -42,6 +40,7 @@ define('utils/diff', function() {
             return;
         }
         e.preventDefault();
+        clear();
         $('a[data-file]').each(getFile);
         return false;
     }
@@ -131,12 +130,8 @@ define('utils/diff', function() {
     }
 
     function clear(name){
-        var tableBody = document.getElementById(name + '-table');
-        $('h3.has-toggle').removeClass('add').removeClass('del');
-        if (!tableBody){ return; }
-        while(tableBody.hasChildNodes()){
-            tableBody.removeChild(tableBody.lastChild);
-        }
+        $('.togglee').remove();
+        $('.has-toggle').remove();
     }
 
     bindEvents();
