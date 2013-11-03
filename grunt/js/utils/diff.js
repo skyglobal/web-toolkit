@@ -6,7 +6,7 @@ define('utils/diff', function() {
 
     function getFile(){
         var dfd_latest, dfd_old;
-        var name = $(this).attr('href').replace('#',''),
+        var name = $(this).attr('href').replace('index.html#',''),
             file = '_includes/' + $(this).attr('data-file') + '.html',
             oldFile = 'http://web-toolkit.global.sky.com/' + $('#version').val() + '/_site/' + file;
 
@@ -17,7 +17,7 @@ define('utils/diff', function() {
 
         dfd_old = $.ajax({
             crossDomain: true,
-            url:oldFile,
+            url:file,
             cache: false});
 
         clear(name);
@@ -29,10 +29,10 @@ define('utils/diff', function() {
                 .append($('<textarea id="old-' + name + '" class=hidden></textarea>').val(old));
 
             $('.sky-form')
-                .append('<h3 class="has-toggle wiki-h3 smaller"><span class="toggler" for="' + name + '"></span>' + name + '</h3>')
+                .append('<h3 class="has-toggle wiki-h3 smaller" id="' + name + '-header"><span class="toggler" for="' + name + '"></span>' + name + '</h3>')
                 .append($container);
 
-            diff(name, latest[0].split('\n'), old[0].split('\n'));
+            diff(name, old[0].split('\n'), latest[0].split('\n'));
         });
     }
 
@@ -97,11 +97,14 @@ define('utils/diff', function() {
 
     function addRow(name, x, y, type, rij){
         var tableBody = document.getElementById(name + '-table');
+        var header = document.getElementById(name + '-header');
         var tr = document.createElement('tr');
         if(type==='+'){
             tr.className='add';
+            $(header).addClass('add');
         } else if(type==='-'){
             tr.className='del';
+            $(header).addClass('del');
         }
 
         var td1 = document.createElement('td');

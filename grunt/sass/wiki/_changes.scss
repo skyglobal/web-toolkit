@@ -2,7 +2,7 @@
   position: relative;
   .toggler{
     position: absolute;
-    left: -25px;
+    left: -20px;
     cursor: pointer;
     font-size: 0.5em;
     &:before{
@@ -25,6 +25,14 @@
   }
 }
 #changes-page{
+  h3.add:after,
+  h3.del:after{
+    font-size: 0.5em;
+    content: ' [changes]';
+    padding-left: 8px;
+    color: $inactive;
+  }
+
   table {
     border-collapse: collapse;
     margin-top: 10px;
