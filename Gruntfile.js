@@ -59,7 +59,7 @@ module.exports = function(grunt) {
                     baseUrl: "grunt/js",
                     dir: "dist/scripts",
                     removeCombined: true,
-                    generateSourceMaps: true,
+                    generateSourceMaps: false,
                     modules:[{
                         name: 'toolkit'
                     },
