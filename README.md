@@ -57,9 +57,9 @@ These tests can also be run individially by specifying a pattern:
 
 ### Deployment
 To release a new version with:
-  Code changes -  increment the version number (described below) in _config.yml. This will update gh-pages and the S3.
-  Documentation changes - Dont increment the version number. This will update gh-pages branch only.
-  Release Candidate changes - Add 'rc' to the end of the version number e.g. '1.0.1rc2'. this will update the S3 only
+  - Code changes -  increment the version number (described below) in _config.yml. This will update gh-pages and the S3.
+  - Documentation changes - Dont increment the version number. This will update gh-pages branch only.
+  - Release Candidate changes - Add 'rc' to the end of the version number e.g. '1.0.1rc2'. this will update the S3 only
 
 #### Versioning
 This library should follow the [Semantic versioning specification](http://semver.org/).
