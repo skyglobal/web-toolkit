@@ -3,22 +3,39 @@ layout: default
 title: Sky Web Toolkit
 ---
 <h1 class="wiki-header">Sky Web Toolkit <small>v{{ site.version }}</small></h1>
+<div class="secondary">Last Updated: {{ site.time | date: '%d-%m-%Y' }}</div>
 
 <a name="using-me"></a>
 <section class="wiki-section" id=changes-page>
     <h2>Calculate HTML changes</h2>
-    <div class="sub-section">
-        <form class="sky-form sky-well" >
+    <div class="developer-notes">
+        The earliest version this tool will work from is 1.0.0
+    </div>
+    <div class="sub-section ">
+        <form class="sky-form sky-well hidden" >
             <div class="row">
                 <label for="version">Which version are you using?</label>
-                <input id="version" type="text" placeholder="eg. 0.6.1" required="required"/>
+                <input id="version" type="text" placeholder="eg. 1.0.0" required="required"/>
             </div>
+            <div class="error row">
 
+            </div>
             <div class="row">
-                <label ></label>
+                <label >&nbsp;</label>
                 <button id="check" class="btn primary" >Check</button>
+                <a id="return" class="btn secondary" href='http://skyglobal.github.io/web-toolkit'>return to skyglobal.github.io</a>
             </div>
         </form>
-
+        <div class="warning error sky-well hidden" >
+            To workout changes we must go to
+            <a href="http://web-toolkit.global.sky.com/{{ site.version }}/_site/changes.html" target="_changes">here</a>.
+        </div>
     </div>
 </section>
+<script>
+    if (document.location.host === "web-toolkit.global.sky.com" || document.location.host.indexOf('localhost')>=0){
+        $('.sky-form').removeClass('hidden');
+    } else {
+        $('.warning').removeClass('hidden');
+    }
+</script>
