@@ -26,6 +26,8 @@
     height: 1em;
     line-height: 1em;
     padding-right: 10px;
+    z-index: 2;
+    position: relative;
 
     &.skycom-focus span {
       color: #fff;

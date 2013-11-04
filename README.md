@@ -56,14 +56,16 @@ These tests can also be run individially by specifying a pattern:
 3. Browse to http://localhost:4000
 
 ### Deployment
-In order to release a new version of the library, the version number in _config.yml must be
-incremented following the rules below:
+To release a new version with:
+  Code changes -  increment the version number (described below) in _config.yml. This will update gh-pages and the S3.
+  Documentation changes - Dont increment the version number. This will update gh-pages branch only.
+  Release Candidate changes - Add 'rc' to the end of the version number e.g. '1.0.1rc2'. this will update the S3 only
 
 #### Versioning
-This library should follow the [Semantic versioning
-specification](http://semver.org/). In short, that means the following:
+This library should follow the [Semantic versioning specification](http://semver.org/).
+In short, that means the following:
 
-Version: X.Y.Z
+Version: X.Y.Z(rc)?
 
 - API changes that are **not backwards compatible**, and break existing
   calls using the API must increment the X value.
@@ -75,6 +77,7 @@ Version: X.Y.Z
 - **Patches or bug fixes** that are backwards compatible should increment the
   Z value.
 
+- rc Represents 'release candidates'.  This is to create a public available url for testing purposes.
 
 Upon commiting and pushing your code to Github, the CI server will run through
 the functional tests and - if there are no errors - a new version of the library

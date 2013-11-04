@@ -17,6 +17,10 @@ def version_already_exists?
   bucket.objects.any?{|obj|obj.key.include? latest_version_number}
 end
 
+def version_is_release_candidate?
+  latest_version_number.include? 'rc'
+end
+
 
 def assets_to_upload
   ["stylesheets/toolkit.css",
@@ -54,33 +58,26 @@ def content_type(file)
     content_type
 end
 
-def saveVersionLog
-  system "echo version:#{latest_version_number} date:`date +'%d-%m-Y'` >> versioning"
-end
-
-
 desc 'Deploys a new version to the CDN'
 task :deploy_new_version do
 
+  #ensure at least the public css/js/images are grunt ready for akamai!
+  system "grunt"
+  system "git add ./dist"
+  system "git commit -m 'Rake deploy - adding grunted files'"
+  system "git push origin HEAD:master"
+
+  if !version_is_release_candidate?
+    #push new build to .io site
+    system "git checkout gh-pages"
+    system "git push origin master:gh-pages"
+    system "git checkout master"
+  end
 
   if version_already_exists?
     puts "Version #{latest_version_number} already exists. Exiting."
     next
   end
-
-  saveVersionLog
-
-  #ensure at least the public css/js/images are grunt ready for akamai!
-  system "grunt"
-  system "git add ./dist"
-  system "git add versioning"
-  system "git commit -m 'Rake deploy - adding grunted files'"
-  system "git push origin HEAD:master"
-
-  #push new build to .io site
-  system "git checkout gh-pages"
-  system "git push origin master:gh-pages"
-  system "git checkout master"
 
   doc_resources = []
   puts 'Uploading doc files'
