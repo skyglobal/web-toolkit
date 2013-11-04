@@ -35,13 +35,14 @@ define('utils/diff', function() {
     }
 
     function findFiles(e){
-        if (document.location.host !== "web-toolkit.global.sky.com" && document.location.host.indexOf('localhost')<0){
-            document.location = "http://web-toolkit.global.sky.com/" + $('.wiki-header small').text().replace('v','') + '/_site/changes.html';
-            return;
-        }
         e.preventDefault();
-        clear();
-        $('a[data-file]').each(getFile);
+        var version = $('#version').val().split('.');
+        if (version.length<3 || (version[0]<1)){
+            $('.sky-form .error').text('The version number is required, and must be 1.0.0 or higher');
+        } else {
+            clear();
+            $('a[data-file]').each(getFile);
+        }
         return false;
     }
 
@@ -130,6 +131,7 @@ define('utils/diff', function() {
     }
 
     function clear(name){
+        $('.sky-form .error').text('');
         $('.togglee').remove();
         $('.has-toggle').remove();
     }
