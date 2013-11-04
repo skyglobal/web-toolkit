@@ -1,5 +1,7 @@
 define('utils/diff', function() {
 
+    var version = '0.6.9';
+
     function bindEvents(){
         $('#check').on('click', findFiles);
     }
@@ -8,7 +10,7 @@ define('utils/diff', function() {
         var dfd_latest, dfd_old;
         var name = $(this).attr('href').replace('index.html#',''),
             file = '_includes/' + $(this).attr('data-file') + '.html',
-            oldFile = 'http://web-toolkit.global.sky.com/' + $('#version').val() + '/_site/' + file;
+            oldFile = 'http://web-toolkit.global.sky.com/' + version + '/_site/' + file;
 
         dfd_latest = $.ajax({
             crossDomain: true,
@@ -36,14 +38,15 @@ define('utils/diff', function() {
 
     function findFiles(e){
         e.preventDefault();
-        var version = $('#version').val().split('.');
-        if (version.length<3 || (version[0]<1)){
-            $('.sky-form .error').text('The version number is required, and must be 1.0.0 or higher');
-        } else {
-            clear();
-            $('a[data-file]').each(getFile);
+        clear();
+        version = $('#version').val();
+        if (version.split('.').length<3 || (version.split('.')[0]<1)){
+            $('.sky-form .error').text("The version number is required, and must be '1.0.0' or higher");
         }
-        return false;
+        if (parseInt(version,10)===1 || (version.split('.')[0]==='0')){
+            version = '0.6.9';//get lowest version available
+        }
+        $('a[data-file]').each(getFile);
     }
 
 
@@ -62,7 +65,6 @@ define('utils/diff', function() {
                 return;
             }
         }
-
     }
 
 
@@ -72,7 +74,6 @@ define('utils/diff', function() {
 
         for( y=0; y<matrix.length; y++){
             matrix[y] = new Array(a2.length+1);
-
             for( x=0; x<matrix[y].length; x++){
                 matrix[y][x] = 0;
             }
@@ -96,9 +97,16 @@ define('utils/diff', function() {
     }
 
     function addRow(name, x, y, type, rij){
-        var tableBody = document.getElementById(name + '-table');
-        var header = document.getElementById(name + '-header');
-        var tr = document.createElement('tr');
+        var tableBody = document.getElementById(name + '-table'),
+            header = document.getElementById(name + '-header'),
+            tr = document.createElement('tr'),
+            td1 = document.createElement('td'),
+            td2 = document.createElement('td'),
+            td3 = document.createElement('td'),
+            txt1 = document.createTextNode(y),
+            txt2 = document.createTextNode(x),
+            txt3 = document.createTextNode(type + ' ' + rij);
+
         if(type==='+'){
             tr.className='add';
             $(header).addClass('add');
@@ -107,26 +115,15 @@ define('utils/diff', function() {
             $(header).addClass('del');
         }
 
-        var td1 = document.createElement('td');
-        var td2 = document.createElement('td');
-        var td3 = document.createElement('td');
-
         td1.className = 'codekolom';
         td2.className = 'codekolom';
         td3.className = 'bredecode';
-
-        var txt1 = document.createTextNode(y);
-        var txt2 = document.createTextNode(x);
-        var txt3 = document.createTextNode(type + ' ' + rij);
-
         td1.appendChild(txt1);
         td2.appendChild(txt2);
         td3.appendChild(txt3);
-
         tr.appendChild(td1);
         tr.appendChild(td2);
         tr.appendChild(td3);
-
         tableBody.appendChild(tr);
     }
 
