@@ -1,7 +1,25 @@
-define('wiki', ['utils/developer-notes-logger', 'utils/diff', 'toolkit'], function(logger, diff, toolkit) {
+define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, toolkit) {
 
     function bindEvents(){
         $(document).on('click','.toggler', toggle);
+        $('#check').on('click', checkDiff);
+    }
+
+    function checkDiff(e){
+        e.preventDefault();
+        var oldVersion = $('#version').val(),
+            newVersion = $('.wiki-header small').replace('v'),
+            route = 'http://web-toolkit.global.sky.com';
+        if (oldVersion.split('.').length<3 || (oldVersion.split('.')[0]<1)){
+            $('.sky-form .error').text("The version number is required, and must be '1.0.0' or higher");
+        }
+        if (parseInt(oldVersion,10)===1 || (oldVersion.split('.')[0]==='0')){
+            oldVersion = '0.6.9';//get lowest version available
+        }
+        toolkit.diff({
+            oldRoute: route + '/' + oldVersion + '/_site/_includes/',
+            newRoute: route + '/' + newVersion + '/_site/_includes/'
+        });
     }
 
     function initModuleDemos(){

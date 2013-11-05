@@ -1,20 +1,25 @@
-define('utils/diff', function() {
+if (typeof toolkit==='undefined') toolkit={};
+toolkit.diff = (function(){
 
-    var version = '0.6.9';
-
-    function bindEvents(){
-        $('#check').on('click', findFiles);
+    function findFiles(opts){
+        var oldRoute = opts.oldRoute,
+            newRoute = opts.newRoute;
+        clear();
+        $('a[data-diff]').each(function(){
+            getFile(oldRoute, newRoute);
+        });
     }
 
-    function getFile(){
+    function getFile(oldVersion, newVersion){
         var dfd_latest, dfd_old;
-        var name = $(this).attr('href').replace('index.html#',''),
-            file = '_includes/' + $(this).attr('data-file') + '.html',
-            oldFile = 'http://web-toolkit.global.sky.com/' + version + '/_site/' + file;
+        var path = $(this).attr('data-diff'),
+            name = path.split('/')[path.split('/').length-1],
+            newFile = newVersion + '/' + path + '.html',
+            oldFile = oldVersion + '/' + path + '.html';
 
         dfd_latest = $.ajax({
             crossDomain: true,
-            url:file,
+            url:newFile,
             cache: false});
 
         dfd_old = $.ajax({
@@ -28,27 +33,13 @@ define('utils/diff', function() {
             $container.append( $('<textarea id="' + name + '" class="hidden latest"></textarea>').val(latest))
                 .append($('<textarea id="old-' + name + '" class=hidden></textarea>').val(old));
 
-            $('.sky-form')
+            $('[data-diff-container]')
                 .append('<h3 class="has-toggle wiki-h3 smaller" id="' + name + '-header"><span class="toggler" for="' + name + '"></span>' + name + '</h3>')
                 .append($container);
 
             diff(name, old[0].split('\n'), latest[0].split('\n'));
         });
     }
-
-    function findFiles(e){
-        e.preventDefault();
-        clear();
-        version = $('#version').val();
-        if (version.split('.').length<3 || (version.split('.')[0]<1)){
-            $('.sky-form .error').text("The version number is required, and must be '1.0.0' or higher");
-        }
-        if (parseInt(version,10)===1 || (version.split('.')[0]==='0')){
-            version = '0.6.9';//get lowest version available
-        }
-        $('a[data-file]').each(getFile);
-    }
-
 
     function getDiff(name, matrix, a1, a2, x, y){
         if(x>0 && y>0 && a1[y-1]===a2[x-1]){
@@ -133,6 +124,12 @@ define('utils/diff', function() {
         $('.has-toggle').remove();
     }
 
-    bindEvents();
+    return findFiles;
 
-});
+}());
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('utils/diff', function() {
+        return toolkit.diff;
+    });
+}
