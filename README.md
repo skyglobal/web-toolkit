@@ -30,6 +30,37 @@ See the [reference page](http://skyglobal.github.io/web-toolkit/) for a descript
 3. Install grunt either globally, or run the following to use the bundled project grunt
   - npm install
 
+### Code structure
+- grunt/js/
+  The source code, unminified and ready to work on.
+
+- grunt/js/toolkit.js
+  The public API is created here (returned at the bottom). This file brings together files from /modules and /utils.
+
+- grunt/js/wiki.js
+  JS to make the demo page work.  This JS is also used as part of the unit testing.
+
+- grunt/sass/
+  The look and feel for the /wiki and /toolkit pages.
+
+- dist/
+  Compiled code (via grunt)
+
+- _includes/
+  Source documentation for using the toolkit.
+
+- _site/
+  Compiled documentation (via jekyll) for using the API.
+
+- test/
+  the unit tests for the toolkit
+
+- circle.yml
+  Configuration for the CI server
+
+- Gruntfile.js
+  Configuration for grunt tasks - to do with compiling the javascript
+
 ### Testing
 These tests are automatically run on the CircleCI server upon pushing to Github
   - `grunt test` for unit (using [mocha](http://visionmedia.github.io/mocha/) and [chai](http://chaijs.com/‎))
