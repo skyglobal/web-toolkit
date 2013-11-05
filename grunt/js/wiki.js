@@ -8,7 +8,7 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
     function checkDiff(e){
         e.preventDefault();
         var oldVersion = $('#version').val(),
-            newVersion = $('.wiki-header small').replace('v'),
+            newVersion = $('.wiki-header small').text().replace('v'),
             route = 'http://web-toolkit.global.sky.com';
         if (oldVersion.split('.').length<3 || (oldVersion.split('.')[0]<1)){
             $('.sky-form .error').text("The version number is required, and must be '1.0.0' or higher");
