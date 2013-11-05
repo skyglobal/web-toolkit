@@ -1,4 +1,4 @@
-version: 1.0.0
+version: 1.0.1rc1
 destination: _site
 source: .
 exclude: [grunt, node_modules, test, Gemfile, Gemfile.lock,rakefile,README.md,Web-toolkit.iml,circle.yml,Gruntfile.js,package.json]
