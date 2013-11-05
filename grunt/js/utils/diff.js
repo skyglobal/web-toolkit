@@ -2,20 +2,17 @@ if (typeof toolkit==='undefined') toolkit={};
 toolkit.diff = (function(){
 
     function findFiles(opts){
-        var oldRoute = opts.oldRoute,
-            newRoute = opts.newRoute;
+        var oldFile = opts.oldFile,
+            newFile = opts.newFile;
         clear();
         $('a[data-diff]').each(function(){
-            getFile(oldRoute, newRoute);
+            getFile(oldFile, newFile);
         });
     }
 
-    function getFile(oldVersion, newVersion){
+    function getFile(oldFile, newFile){
         var dfd_latest, dfd_old;
-        var path = $(this).attr('data-diff'),
-            name = path.split('/')[path.split('/').length-1],
-            newFile = newVersion + '/' + path + '.html',
-            oldFile = oldVersion + '/' + path + '.html';
+        var name = newFile.split('/')[newFile.split('/').length-1];
 
         dfd_latest = $.ajax({
             crossDomain: true,

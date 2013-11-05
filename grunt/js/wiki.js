@@ -9,7 +9,8 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
         e.preventDefault();
         var oldVersion = $('#version').val(),
             newVersion = $('.wiki-header small').text().replace('v'),
-            route = 'http://web-toolkit.global.sky.com';
+            route = 'http://web-toolkit.global.sky.com',
+            file = $(this).attr("data-diff") + '.html';
         if (oldVersion.split('.').length<3 || (oldVersion.split('.')[0]<1)){
             $('.sky-form .error').text("The version number is required, and must be '1.0.0' or higher");
         }
@@ -17,8 +18,8 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
             oldVersion = '0.6.9';//get lowest version available
         }
         toolkit.diff({
-            oldRoute: route + '/' + oldVersion + '/_site/_includes/',
-            newRoute: route + '/' + newVersion + '/_site/_includes/'
+            oldFile: route + '/' + oldVersion + '/_site/_includes/' + file,
+            newFile: route + '/' + newVersion + '/_site/_includes/' + file
         });
     }
 
