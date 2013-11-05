@@ -6,15 +6,15 @@ toolkit.diff = (function(){
             newRoute = opts.newRoute;
         clear();
         $('a[data-diff]').each(function(){
-            getFile(oldRoute, newRoute, $(this).attr('data-diff') + '.html');
+            getFile(oldRoute, newRoute, $(this).attr('data-diff'));
         });
     }
 
     function getFile(oldVersion, newVersion, file){
         var dfd_latest, dfd_old;
         var name = file.split('/')[file.split('/').length-1],
-            newFile = newVersion + '/' + file,
-            oldFile = oldVersion + '/' + file;
+            newFile = newVersion + '/' + file + '.html',
+            oldFile = oldVersion + '/' + file + '.html';
 
         dfd_latest = $.ajax({
             crossDomain: true,
