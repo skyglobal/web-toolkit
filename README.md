@@ -8,15 +8,6 @@ Soon you will find an exciting and wonderful array of widgets that can be insert
 See the [reference page](http://skyglobal.github.io/web-toolkit/) for a description of each component.
 
 
-## Using the Toolkit
-//web-toolkit.global.sky.com/version-number/stylesheets/toolkit.css
-//web-toolkit.global.sky.com/version-number/scripts/toolkit.js
-//web-toolkit.global.sky.com/version-number/images/icons.png
-
-## Wiki
-[You can contribute to the wiki!!!](https://github.com/bskyb-commerce/bskyb-commerce.github.io/wiki)
-
-
 ## Building the Toolkit locally
 ### Prerequisites
 
@@ -25,7 +16,7 @@ See the [reference page](http://skyglobal.github.io/web-toolkit/) for a descript
 - npm
 
 ### Setup
-1. Clone the repository from Github onto your local machine
+1. Fork the repository from Github onto your local machine
 2. Install npm
   - echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bashrc
   - . ~/.bashrc
@@ -36,15 +27,12 @@ See the [reference page](http://skyglobal.github.io/web-toolkit/) for a descript
   - ./configure --prefix=/usr/local
   - make install # ok, fine, this step probably takes more than 30 seconds...
   - curl https://npmjs.org/install.sh | sh
+3. Install grunt either globally, or run the following to use the bundled project grunt
+  - npm install
 
 ### Testing
-You can run the Javascript Unit tests with the following:
-  - grunt test
-
-These tests can also be run individially by specifying a pattern:
-  - grunt test --pattern=Hash*
-
-(see [mocha](http://visionmedia.github.io/mocha/) and [chai](http://chaijs.com/‎) )
+These tests are automatically run on the CircleCI server upon pushing to Github
+  - `grunt test` for unit (using [mocha](http://visionmedia.github.io/mocha/) and [chai](http://chaijs.com/‎))
 
 ### Running
 
@@ -52,8 +40,9 @@ These tests can also be run individially by specifying a pattern:
   - bundle
   - jekyll serve --watch
 2. In another terminal run:
-  - grunt watch #(add '--beautify' to help when debugging)
-3. Browse to http://localhost:4000
+  - grunt watch (add '--beautify' to help when debugging)
+3. Browse to
+  - http://localhost:4000
 
 ### Deployment
 To release a new version with:
