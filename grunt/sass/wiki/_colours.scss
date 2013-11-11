@@ -1,109 +1,103 @@
-.colour-block{
-  box-sizing: border-box;
-  height: 100px;
-  color:white;
-  border-radius:5px;
-  margin-bottom:10px;
-  font-size:1.25em;
+.demo-colour-block{
+  .cushioned {
+    display: block;
+    height: 100px;
+    box-sizing: border-box;
+    border-radius:5px;
+    margin-bottom:10px;
+  }
 
-  &.colour-sky-1{
+  .demo-sky-1{
     background-color: $colour-sky-1;
   }
-  &.colour-sky-atlantic{
+  .demo-sky-atlantic{
     background-color: $colour-sky-atlantic;
   }
-  &.colour-sky-arts{
+  .demo-sky-arts{
     background-color: $colour-sky-arts;
   }
-  &.colour-sky-living{
+  .demo-sky-living{
     background-color: $colour-sky-living;
   }
-  &.colour-sky-movies{
+  .demo-sky-movies{
     background-color: $colour-sky-movies;
   }
 
-  &.colour-v3-red{
+  .demo-v3-red{
     background-color: $colour-v3-red;
   }
-  &.colour-v3-pink{
+  .demo-v3-pink{
     background-color: $colour-v3-pink;
   }
-  &.colour-v3-yellow{
+  .demo-v3-yellow{
     background-color: $colour-v3-yellow;
-    color: $primary;
   }
-  &.colour-v3-green{
+  .demo-v3-green{
     background-color: $colour-v3-green;
-    color: $primary;
   }
-  &.colour-v3-blue{
+  .demo-v3-blue{
     background-color: $colour-v3-blue;
   }
 
-  &.colour-sports{
+  .demo-sports{
     background-color: $colour-sports;
   }
-  &.colour-original{
+  .demo-original{
     background-color: $colour-original;
   }
-  &.colour-family{
+  .demo-family{
     background-color: $colour-family;
   }
-  &.colour-complete{
+  .demo-complete{
     background-color: $colour-complete;
-    color: $primary;
   }
-  &.colour-movies{
+  .demo-movies{
     background-color: $colour-movies;
   }
 
-  &.colour-primary{
+  .demo-primary{
     color: $primary;
   }
-  &.colour-secondary{
+  .demo-secondary{
     color: $secondary;
   }
-  &.colour-inactive{
+  .demo-inactive{
     color: $inactive;
   }
-  &.colour-error{
+  .demo-error{
     color: $error;
   }
-  &.colour-link{
+  .demo-link{
     color: $link;
   }
 
-  &.colour-primary-button{
+  .demo-primary-button{
     background-color: $primary-button;
   }
-  &.colour-secondary-button{
+  .demo-secondary-button{
     background-color: $secondary-button;
-    color: $primary;
   }
-  &.colour-success-icon{
+  .demo-success-icon{
     background-color: $success-icon;
   }
-  &.colour-sky-go{
+  .demo-sky-go{
     background-color: $colour-sky-go;
   }
-  &.colour-remote-record{
+  .demo-remote-record{
     background-color: $colour-remote-record;
   }
-  &.colour-never-miss{
+  .demo-never-miss{
     background-color: $colour-never-miss;
   }
 
-  &.colour-background-dark{
+  .demo-background-dark{
     background-color: $background-dark;
-    color: $primary;
   }
-  &.colour-background-light{
+  .demo-background-light{
     background-color: $background-light;
-    color: $primary;
   }
-  &.colour-key-line{
+  .demo-key-line{
     background-color: $key-line;
-    color: $primary;
   }
 
   small{
@@ -111,7 +105,7 @@
   }
 }
 
-.hex{
+.demo-hex{
   text-align: center;
   margin-bottom:10px;
 }

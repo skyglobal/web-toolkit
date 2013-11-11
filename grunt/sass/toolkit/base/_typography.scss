@@ -36,12 +36,12 @@ h3.smaller,
   line-height: 32px;
 }
 
-p.intro {
+.intro {
   font-size: 24px;
   line-height: 28px;
 }
 
-p.intro.smaller {
+.intro.smaller {
   font-size: 20px;
   line-height: 24px;
 }
@@ -52,7 +52,7 @@ p {
 }
 
 small,
-small.supportive {
+.supportive {
   font-size: 0.75em;
   line-height: 1.33em;
 }

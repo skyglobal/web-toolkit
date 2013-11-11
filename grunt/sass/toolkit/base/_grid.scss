@@ -18,7 +18,7 @@
 .skycom-2,  .skycom-1 {
   float: left;  margin-left: ($gutter/$container-width)*100%;
 }
-.skycom-right {
+.right {
   float: right;
 }
 .clear {
@@ -33,6 +33,7 @@
 .skycom-4:first-child, .skycom-3:first-child,
 .skycom-2:first-child, .skycom-1:first-child {
   margin-left: 0;
+  clear: left;
 }
 
 @for $i from 1 through 12 { //must loop backwards i.e. 13-1
@@ -88,6 +89,16 @@ body.lt-ie9 {
     padding:($gutter/(($column_plus_gutter * 12)- $gutter))*100%;
   }
 
+  .skycom-12-mobile, .skycom-11-mobile,
+  .skycom-10-mobile, .skycom-9-mobile,
+  .skycom-8-mobile,  .skycom-7-mobile,
+  .skycom-6-mobile,  .skycom-5-mobile,
+  .skycom-4-mobile,  .skycom-3-mobile,
+  .skycom-2-mobile,  .skycom-1-mobile {
+    float: left;  margin-left: ($gutter/$container-width)*100%;
+  }
+
+  .alpha-mobile,
   [class*=skycom-offset],[class*=skycom-offset]:first-child,
   .skycom-12-mobile:first-child,.skycom-11-mobile:first-child,
   .skycom-10-mobile:first-child,.skycom-9-mobile:first-child,
@@ -96,15 +107,7 @@ body.lt-ie9 {
   .skycom-4-mobile:first-child,.skycom-3-mobile:first-child,
   .skycom-2-mobile:first-child,.skycom-1-mobile:first-child {
     margin-left: 0;
-  }
-
-  .skycom-12-mobile, .skycom-11-mobile,
-  .skycom-10-mobile, .skycom-9-mobile,
-  .skycom-8-mobile,  .skycom-7-mobile,
-  .skycom-6-mobile,  .skycom-5-mobile,
-  .skycom-4-mobile,  .skycom-3-mobile,
-  .skycom-2-mobile,  .skycom-1-mobile {
-    float: left;  margin-left: ($gutter/$container-width)*100%;
+    clear:left;
   }
 
   @for $i from 1 through 12 {
