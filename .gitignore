@@ -1,12 +1,10 @@
 .idea
-Web-toolkit.iml
-web-toolkit.ipr
 .sass-cache
 .DS_Store
 .ruby-version
 *iws
 *iws
-*ipr
 *iml
-node_modules/
+*ipr
 .rakeTasks
+node_modules/
