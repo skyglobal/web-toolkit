@@ -22,7 +22,8 @@ toolkit.modules = (function(){
         var modulesToInitialize = $.extend({
             skycons : false,
             share : false,
-            popup : false
+            popup : false,
+            datepicker : false
         }, options);
         for (module in modulesToInitialize) {
             if ((modulesToInitialize[module] || !options ) && toolkit[module] && toolkit[module].init) {
@@ -52,8 +53,8 @@ if (typeof window.define === "function" && window.define.amd) {
         'modules',
         'modules/tabs',
         'modules/share',
-        'modules/carousel'], function(skycons, hashmanager, popup, diff, modules, tabs, share, carousel){
-
+        'modules/carousel',
+        'modules/datepicker'], function(skycons, hashmanager, popup, diff, modules, tabs, share, carousel, datepicker){
 
         return {
             modules: modules,
@@ -63,7 +64,8 @@ if (typeof window.define === "function" && window.define.amd) {
             diff: diff,
             tabs: tabs,
             share: share,
-            carousel: carousel
+            carousel: carousel,
+            datepicker: datepicker
         };
     });
 }
