@@ -26,7 +26,7 @@
   &.playing .actions .pause {
     display: block;
     @media all and (max-width: 768px) {
-        display: none;
+      display: none;
     }
   }
 
@@ -244,27 +244,6 @@
     margin-bottom: 6px;
   }
 
-  .play-video {
-    display: block;
-    position: absolute;
-    bottom: 10px;
-    left: 50px;
-    white-space: nowrap;
-    padding: 5px 10px 0 5px;
-    border-radius: 25px;
-    z-index: 1;
-    @include transition(background .3s, box-shadow .3s);
-
-    &:hover,
-    &:focus {
-      background-color: rgba(255, 255, 255, 0.2);
-      @include box-shadow(0 0 5px rgba(0, 0, 0, 0.25));
-    }
-
-    i {
-      margin: 0 5px 5px 0;
-    }
-  }
   @media all and (max-width: 900px) {
     .channel-logo{
       margin-bottom: 4px;
@@ -275,12 +254,6 @@
   }
 
   @media all and (max-width: 768px) {
-    .play-video {
-      padding-right: 0;
-      span {
-        display:none;
-      }
-    }
     .channel-logo{
       max-height: 26px;
       max-width: 140px;
@@ -388,89 +361,8 @@
   }
 }
 
-.video-overlay {
-  background:#000;
-  display:none;
-  height:100%;
-  width:100%;
-  left:0;
-  top:0;
-  position:absolute;
-  z-index: 11;
-}
-
-.video-wrapper {
-  display:none;
-  background:#000;
-  height:100%;
-  width:100%;
-  //top:0;
-
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  z-index: 10;
-  //display: inline-block;
-
-  video {
-    background:#000;
-  }
-  &:hover .close.active {
-    @include opacity(1);
-  }
-
-  &.playing-video{
-    width:100%;
-    height:100%;
-  }
-
-  .close {
-    @include transition(opacity 0.5s);
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 4;
-    @include opacity(0);
-    display: none;
-    &.active {
-      display: block;
-    }
-  }
-
-  .posterFrame {
-    display:none;
-  }
-
-  @media all and (max-width: 600px) {
-    width: inherit;
-    margin-top: 32%;
-    margin-top: 32vw;
-    top: -58px;
-    &.playing-video{
-      margin-top: 0%;
-      top: 0;
-      .play {
-        display:none;
-      }
-    }
-
-    .play {
-      left: 0;
-      padding-right: 0;
-      span {
-        display: none;
-      }
-    }
-  }
-  @media all and (max-width: 319px) {
-      margin-top: 100px;
-  }
-}
 
 .skycom-notouch {
-  .play-video{
-    left:50px;
-  }
   .skycom-carousel .content{
     padding-left:50px;
   }
@@ -482,9 +374,9 @@
   }
 }
 
-.skycom-touch {
+.skycom-notouch .skycom-carousel {
   .play-video{
-    left:5px;
+    left:50px;
   }
 }
 .lt-ie10{
@@ -494,19 +386,11 @@
 }
 .lt-ie9{
   .skycom-carousel .content{
-      padding-left:50px;
+    padding-left:50px;
   }
-  .play-video{
-      display: block; float:right; padding-left:5px; line-height:3em;
-      span {
-        padding: 15px 15px 15px 0;
-      }
-  }
+
 }
 .lt-ie8{
-  .play-video span{
-    position:relative; top:-20px; padding: 15px; left:-5px;
-  }
   .skycom-carousel {
     .actions .play,
     .actions .pause{

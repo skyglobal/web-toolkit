@@ -52,7 +52,8 @@ if (typeof window.define === "function" && window.define.amd) {
         'modules',
         'modules/tabs',
         'modules/share',
-        'modules/carousel'], function(skycons, hashmanager, popup, diff, modules, tabs, share, carousel){
+        'modules/video',
+        'modules/carousel'], function(skycons, hashmanager, popup, modules, tabs, share, video, carousel){
 
 
         return {
@@ -63,6 +64,7 @@ if (typeof window.define === "function" && window.define.amd) {
             diff: diff,
             tabs: tabs,
             share: share,
+            video: video,
             carousel: carousel
         };
     });
