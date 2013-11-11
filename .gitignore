@@ -6,4 +6,7 @@ web-toolkit.ipr
 .ruby-version
 *iws
 *iws
+*ipr
+*iml
 node_modules/
+.rakeTasks
