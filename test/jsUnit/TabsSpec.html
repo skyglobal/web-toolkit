@@ -1,16 +1,22 @@
-<h3 class="wiki-h3">Tabs</h3>
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="../../dist/scripts/lib/jquery-2.0.3.js"></script>
+    <script src="vendor/mocha.js"></script>
+    <script src="vendor/require.js"></script>
+    <script src="config.js" ></script>
 
-<div class="example">
-    <h4>Remembering State</h4>
-    <div class="design-notes">
-        The state (open or closed) of the tabs can optionally be remembered. i.e. Pressing the back button will open the page with the tab open that was clicked last.
-    </div>
-    <div class="developer-notes">
-        Add attribute <code>data-remember-state="true"</code>
-    </div>
-    <div class="demo" data-selector="*">
-        <section class="module clearfix" data-function="tabs" data-remember-state="true">
+</head>
+<body>
+<!--PLACEHOLDER FOR MOCHA TEST RESULTS-->
+<div id="mocha"></div>
 
+<!--FIXTURE HTML FOR TESTS-->
+<div id="spec-markup">
+
+	<div>
+		<section class="module clearfix" data-function="tabs" data-remember-state="true">
             <h2 class="at">This is a screenreader header for tabs</h2>
 
             <ul class="tabs clearfix" role="tablist">
@@ -107,5 +113,45 @@
             </div>
 
         </section>
-    </div>
+	</div>
 </div>
+
+<!--TEST-->
+<script>
+
+    require(['modules/share', '../../test/jsUnit/setup'],function(share){
+
+        describe('Share module with click', function() {
+            share.init();
+            it('clicking share link should open the popup', function() {
+                expect($('.share-popup.active').length).to.equal(0);
+                $('.summary').click();
+                expect($('.share-popup.active').length).to.equal(1);
+                $('.summary').click();
+                expect($('.share-popup.active').length).to.equal(0);
+            });
+
+            it(' Pressing enter on share link should open popup', function() {
+                expect($('.share-popup.active').length).to.equal(0);
+                var e = jQuery.Event("keypress");
+                e.which = 13; // # Some key code value
+                $(".summary").trigger(e);
+                expect($('.share-popup.active').length).to.equal(1);
+                $(".summary").trigger(e);
+                expect($('.share-popup.active').length).to.equal(0);
+            });
+
+            it('Pressing any key should not open share popup', function() {
+                expect($('.share-popup.active').length).to.equal(0);
+                var e = jQuery.Event("keypress");
+                e.which = 12; // # Some key code value
+                $(".summary").trigger(e);
+                expect($('.share-popup.active').length).to.equal(0);
+            });
+        });
+        mocha.run();
+    });
+</script>
+
+</body>
+</html>
