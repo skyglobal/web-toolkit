@@ -49,8 +49,6 @@
     }
 
     li:first-child {
-      font-weight:bold;
-      padding-left: 1px;
 
       .skycon-chevron {
         display:none;
@@ -58,7 +56,6 @@
 
       a {
         padding-left: 0;
-        letter-spacing: 0;
       }
     }
   }
