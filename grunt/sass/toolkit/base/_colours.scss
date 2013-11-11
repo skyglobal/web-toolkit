@@ -22,5 +22,18 @@ body {
     .skycon-facebook{
       color: $colour-facebook;
     }
+    .skycon-chevron,
+    .skycon-chevron-up,
+    .skycon-chevron-down{
+      color: $link;
+    }
+
+    .skycon-cloud,
+    .skycon-on-demand,
+    .skycon-sky-plus,
+    .skycon-mouse,
+    .skycon-tv{
+      color: $primary-button;
+    }
   }
 }
