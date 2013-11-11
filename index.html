@@ -2,9 +2,10 @@
 layout: default
 title: Sky Web Toolkit
 ---
-<h1 class="wiki-header">Sky Web Toolkit <small>v{{ site.version }}</small></h1>
+<h1 class="wiki-header">Sky Web Toolkit <small>v{{ site.version }} </small></h1>
+<div class="secondary">Last Updated: {{ site.time | date: '%d-%m-%Y' }}</div>
 
-<a name="using-me"></a>
+<a name="using-the-toolkit"></a>
 <section class="wiki-section">
     <h2>Using the Toolkit</h2>
     <div class="sub-section">
@@ -32,45 +33,59 @@ title: Sky Web Toolkit
     </div>
 </section>
 
-<a name="my-base"></a>
+<a name="base-styles"></a>
 <section class="wiki-section">
     <h2>Base Styles</h2>
+    <a name="grid"></a>
     <div class="sub-section">
         {% include base-styles/grid.html %}
     </div>
+    <a name="colours" ></a>
     <div class="sub-section">
         {% include base-styles/colours.html %}
     </div>
+    <a name="typography"></a>
     <div class="sub-section">
         {% include base-styles/typography.html %}
     </div>
+    <a name="icons"></a>
     <div class="sub-section">
         {% include base-styles/icons.html %}
+        <a name="skycons" ></a>
         {% include base-styles/skycons.html %}
+        <a name="svgs"></a>
+        {% include base-styles/svgs.html %}
     </div>
+    <a name="buttons" ></a>
     <div class="sub-section">
         {% include base-styles/buttons.html %}
     </div>
+    <a name="spinner" ></a>
     <div class="sub-section">
         {% include base-styles/spinner.html %}
     </div>
 </section>
 
+<a name="components"></a>
 <section class="wiki-section">
-    <a name="you-make-me-complete"></a>
     <h2>Components</h2>
+    <a name="breadcrumbs"></a>
     <div class="sub-section">
         {% include components/breadcrumbs.html %}
     </div>
+    <a name="form"></a>
     <div class="sub-section">
         {% include components/form.html %}
     </div>
+    <a name="tabs" ></a>
     <div class="sub-section">
         {% include components/tabs.html %}
     </div>
+    <a name="carousel"></a>
     <div class="sub-section">
         {% include components/carousel.html %}
     </div>
+    <a name="share" ></a>
     <div class="sub-section">
         {% include components/share.html %}
     </div>
@@ -79,9 +94,10 @@ title: Sky Web Toolkit
     </div>
 </section>
 
+<a name="examples"></a>
 <section class="wiki-section">
-	<a name="ta-dah"></a>
     <h2>Examples</h2>
+    <a name="error-page"></a>
     <div class="sub-section">
 	    {% include examples/error-page.html %}
     </div>

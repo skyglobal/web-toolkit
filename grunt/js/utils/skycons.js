@@ -32,6 +32,7 @@ toolkit.skycons = (function() {
     };
 
 
+
     function supportsPsuedo(){
         var doc = document,
             html = doc.documentElement,
