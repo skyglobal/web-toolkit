@@ -3,7 +3,7 @@ toolkit.video = (function (window, $) {
     'use strict';
 
     var $el = {
-            playingVideo: $('.media')
+        playingVideo: $('.media')
     };
 
     function Video(container, options) {
@@ -17,6 +17,11 @@ toolkit.video = (function (window, $) {
         });
         this.options = options;
         this.bindEvents();
+        //todo: remove once S3 autoplay bug is fixed.
+        if (options.autoplay) {
+            this.options.autoplay = false;
+            this.play();
+        }
     }
 
     Video.prototype = {

@@ -1,5 +1,5 @@
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.carousel = (function(window, $) {
+toolkit.carousel = (function(window, $, Video) {
     'use strict';
 
     // get CSS3 capabilities
@@ -222,7 +222,7 @@ toolkit.carousel = (function(window, $) {
             },
             video: {
                 token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-                autoplay: false,
+                autoplay: true,
                 videoId: null,
                 freewheel: false, //disable ads
                 placeHolderImage: '//static.video.sky.com/posterframes/skychasky.jpg'
@@ -315,10 +315,9 @@ toolkit.carousel = (function(window, $) {
                     $this.find('.actions, .indicators').show();
                 };
 
-                var video = new toolkit.video(carousel.$viewport, options.video);
+                var video = new Video(carousel.$viewport, options.video);
                 carousel.pause();
                 $this.find('.actions, .indicators').hide();
-                video.play();
             }).on('change',function(e, index) {
                     index = index || 0;
                     $this.find('.indicators .container > *').removeClass('active').eq(index).addClass('active');
@@ -370,10 +369,10 @@ toolkit.carousel = (function(window, $) {
             }
         });
     };
-}(window, jQuery));
+}(window, jQuery, toolkit.video));
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('modules/carousel', [], function() {
+    define('modules/carousel', ["modules/video"], function(Video) {
         return toolkit.carousel;
     });
 }
