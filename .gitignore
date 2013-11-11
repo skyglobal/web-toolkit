@@ -1,7 +1,7 @@
 .idea
 Web-toolkit.iml
+web-toolkit.ipr
 .sass-cache
-_site
 .DS_Store
 .ruby-version
 *iws
