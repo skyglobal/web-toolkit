@@ -1,12 +1,5 @@
 body {
   .hover-colour:hover,
-  .skycon-cloud,
-  .skycon-on-demand,
-  .skycon-sky-plus,
-  .skycon-mouse,
-  .skycon-tv {
-    color: $primary-button;
-  }
   .colour{
     .skycon-sky-go{
       color: $colour-sky-go;
@@ -33,6 +26,14 @@ body {
     .skycon-chevron-up,
     .skycon-chevron-down{
       color: $link;
+    }
+
+    .skycon-cloud,
+    .skycon-on-demand,
+    .skycon-sky-plus,
+    .skycon-mouse,
+    .skycon-tv{
+      color: $primary-button;
     }
   }
 }
