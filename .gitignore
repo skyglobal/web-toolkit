@@ -6,4 +6,7 @@ _site
 .ruby-version
 *iws
 *iws
+*iml
+*ipr
+.rakeTasks
 node_modules/
