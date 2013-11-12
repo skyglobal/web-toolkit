@@ -6,6 +6,7 @@
 	<head>
         <!--[if lt IE 9]> <script src="lib/jquery-1.10.2.js" ></script> <![endif]-->
         <!--[if gte IE 9]><!--> <script src="lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
+        <script src="lib/jquery.scrollspy.js" ></script>
 
 		{% include skycom_resources.html %}
 
@@ -25,22 +26,22 @@
         </script><![endif]-->
 
 	</head>
-	<body class="grid-1140">
-        <div class="quick-links  ">
-            <div class="skycom-container">
+	<body class="grid-1140" data-spy="scroll" data-target=".nav-container">
+        <div class="nav-container">
+            <div class="skycom-container nav">
                 <ul class="alpha skycom-12 primary-menu">
-                    <li>
+                    <li class="dropdown">
                         <a href="index.html#using-the-toolkit">Using the Toolkit</a>
-                        <ul class=secondary-menu>
+                        <ul class=dropdown-menu>
                             <li><a href="index.html#getting-started" data-diff="using-the-toolkit/getting-started">Getting Started</a></li>
                             <li><a href="index.html#contributing" data-diff="using-the-toolkit/contributing">Contributing</a></li>
                             <li><a href="index.html#accessibility" data-diff="using-the-toolkit/accessibility">Accessibility</a></li>
                             <li><a href="index.html#coding-practises" data-diff="using-the-toolkit/coding-practises">Coding Practises</a></li>
                         </ul>
                     </li>
-                    <li>
+                    <li class="dropdown">
                         <a href="index.html#base-styles">Base Styles</a>
-                        <ul class=secondary-menu>
+                        <ul class=dropdown-menu>
                             <li><a href="index.html#grid" data-diff="base-styles/grid">Grid</a></li>
                             <li><a href="index.html#colours" data-diff="base-styles/colours">Colours</a></li>
                             <li><a href="index.html#typography" data-diff="base-styles/typography">Typography</a></li>
@@ -50,9 +51,9 @@
                             <li><a href="index.html#spinner" data-diff="base-styles/spinner">Spinner</a></li>
                         </ul>
                     </li>
-                    <li>
+                    <li class="dropdown">
                         <a href="index.html#components">Components</a>
-                        <ul class=secondary-menu>
+                        <ul class=dropdown-menu>
                             <li><a href="index.html#breadcrumbs" data-diff="components/breadcrumbs">Breadcrumbs</a></li>
                             <li><a href="index.html#form" data-diff="components/form">Form</a></li>
                             <li><a href="index.html#tabs" data-diff="components/tabs">Tabs</a></li>
@@ -60,9 +61,9 @@
                             <li><a href="index.html#share" data-diff="components/share">Share</a></li>
                         </ul>
                     </li>
-                    <li>
+                    <li class="dropdown">
                         <a href="index.html#examples">Examples</a>
-                        <ul class=secondary-menu>
+                        <ul class=dropdown-menu>
                             <li><a href="index.html#error-page" data-diff="examples/error-page">Error Page</a></li>
                         </ul>
                     </li>
