@@ -194,7 +194,7 @@
     }
   }
 
-  .content {
+  .carousel-content {
     position: absolute;
     top:0;
     left: 0;
@@ -244,6 +244,14 @@
     margin-bottom: 6px;
   }
 
+  .terms-link {
+    z-index: 2;
+    position:absolute; bottom:10px; top:auto;
+    font-size: 0.9em;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   .play-video {
     display: block;
     position: absolute;
@@ -265,6 +273,31 @@
       margin: 0 5px 5px 0;
     }
   }
+}
+
+.terms-content{
+  padding-top: 0!important;
+  padding-bottom: 0!important;
+  p{
+    margin: 0;
+  }
+}
+
+
+.skycom-notouch .skycom-carousel a{
+  cursor: pointer;
+  &:hover {
+    h3, p {
+      text-decoration: underline;
+    }
+  }
+}
+
+
+
+
+.skycom-carousel {
+
   @media all and (max-width: 900px) {
     .channel-logo{
       margin-bottom: 4px;
@@ -316,7 +349,7 @@
     .shade{
       display: none!important;
     }
-    .content{
+    .carousel-content{
       position: relative;
     }
     .skycom-carousel-container > *,
@@ -354,21 +387,19 @@
     .skycom-carousel-container > *{
       margin-bottom:1.5em;
     }
-    figcaption.content{
+    figcaption.carousel-content{
       padding-bottom:0;
     }
     .indicators{
       background: none;
       position: absolute;
       bottom: 0;
-      width: 100%;
-      text-align: center;
       height:1.5em;
       line-height:1.5em;
-      .container{
-        width:100%;
-      }
       z-index: 1;
+    }
+    .terms-link {
+      bottom: 2px;
     }
   }
   @media all and (max-width: 319px) {
@@ -379,14 +410,12 @@
   }
 }
 
-.skycom-notouch .skycom-carousel a{
-  cursor: pointer;
-  &:hover {
-    h3, p {
-      text-decoration: underline;
-    }
-  }
-}
+
+
+
+
+
+
 
 .video-overlay {
   background:#000;
@@ -471,12 +500,12 @@
   .play-video{
     left:50px;
   }
-  .skycom-carousel .content{
+  .carousel-content{
     padding-left:50px;
   }
 
   @media all and (max-width: 600px) {
-    .skycom-carousel .content{
+    .carousel-content{
       padding-left:3.15789%;
     }
   }
@@ -493,7 +522,7 @@
   }
 }
 .lt-ie9{
-  .skycom-carousel .content{
+  .carousel-content {
       padding-left:50px;
   }
   .play-video{

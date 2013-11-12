@@ -14,6 +14,8 @@ toolkit.carousel = (function(window, $) {
     function Carousel(element, options) {
         this.options = options;
         this.$viewport = element;
+        this.$termsContent = element.next('.terms-content');
+        this.$termsLink = element.find('.terms-link');
         this.$slideContainer = element.find('.skycom-carousel-container');
         this.$slides = this.$slideContainer.find('>');
         this.currentIndex = 0;
@@ -37,6 +39,8 @@ toolkit.carousel = (function(window, $) {
         bindEvents: function() {
             this.bindTouchEvents();
             this.$slideContainer.find('a').on('click', this.pause.bind(this));
+            this.$termsLink.on('click', this.toggleTermsContent.bind(this));
+            this.showTermsLink(0);
         },
         unbindEvents: function() {
             this.unbindTouchEvents();
@@ -56,6 +60,34 @@ toolkit.carousel = (function(window, $) {
             }
             return this;
         },
+        toggleTermsContent: function(){
+            this.pause();
+            var termsHidden = this.$termsContent.find('.terms').length===0;
+            this[termsHidden ? 'showTermsContent' : 'hideTermsContent']();
+        },
+        showTermsContent: function(){
+            this.hideTermsContent();
+            var $terms = $(this.$slides[this.currentIndex]).find('.terms');
+            if ($terms.length){
+                this.$termsContent.append($terms.clone(true).removeClass('speak')).fadeIn(200);
+            }
+        },
+        hideTermsContent: function(){
+            this.$termsContent.fadeOut(200, function() {
+                $(this).find('.terms').remove();
+            });
+        },
+        showTermsLink: function(slideIndex){
+            this.hideTermsLink();
+            var $terms = $(this.$slides[slideIndex]).find('.terms');
+            if ($terms.length){
+                this.$termsLink.removeClass('hidden').fadeIn(200);
+            }
+        },
+        hideTermsLink: function(){
+            this.$termsLink.fadeOut(200);
+            this.hideTermsContent();
+        },
         moveSlide : function(opts){//index, start, end, callback, reverse
             var self = this,
                 $slides = this.$slides,
@@ -72,6 +104,7 @@ toolkit.carousel = (function(window, $) {
             if (typeof opts.end !== 'undefined'){
                 setTimeout(function(){
                     self.setOffset(opts.end, true);
+                    self.showTermsLink(indexToShow);
                     self.$viewport.trigger('change', indexToShow);
                 }, 20);
                 this.currentIndex = indexToShow;
