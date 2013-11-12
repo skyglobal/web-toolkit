@@ -420,10 +420,14 @@ toolkit.carousel = (function(window, $) {
                 video.play();
             }).on('change',function(e, index) {
                 index = index || 0;
+
+                checkAndApplyLegalText(carousel, index);
+
                 $this.find('.indicators .container > *').removeClass('active').eq(index).addClass('active');
                 carousel.$slides.removeClass('active').find('a').attr('tabindex',-1);
                 carousel.$slides.eq(index).addClass('active').find('a').removeAttr('tabindex');
-            }).on('playing',function() {
+
+                }).on('playing',function() {
                 $this.removeClass('paused').addClass('playing');
             }).on('paused',function() {
                 $this.removeClass('playing').addClass('paused');
@@ -466,6 +470,7 @@ toolkit.carousel = (function(window, $) {
                 $this.trigger('change');
             } else {
                 carousel.unbindTouchEvents();
+                checkAndApplyLegalText(carousel, 0, true);
             }
         });
     };
@@ -475,4 +480,31 @@ if (typeof window.define === "function" && window.define.amd) {
     define('modules/carousel', [], function() {
         return toolkit.carousel;
     });
+}
+
+
+function checkAndApplyLegalText(carousel, index, noCarousel) {
+    var slideTerms = carousel.$slides.eq(index).children('footer').children('p').text();
+    $('.skycom-carousel-terms p').fadeOut( 200, function(){
+        $('.skycom-carousel-terms p').text(slideTerms);
+    });
+
+    if (slideTerms.length > 0) {
+        $('.skycom-carousel-terms p').fadeIn(200);
+        $('.terms-header').fadeIn(200);
+    } else {
+        $('.terms-header').fadeOut( 200, function(){
+            $(this).hide();
+        });
+    }
+    if (noCarousel) {
+        if (slideTerms.length > 0) {
+            $('.skycom-carousel').addClass('single-hero-terms');
+            $('.terms-header').hide();
+            $('.skycom-carousel-terms').prepend("<span class='no-carousel'>Terms &amp; Conditions</span>");
+        } else{
+            $('.skycom-carousel').addClass('single-hero-no-terms');
+            $('.skycom-carousel-terms').hide();
+        }
+    }
 }
