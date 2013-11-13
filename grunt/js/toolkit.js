@@ -22,7 +22,9 @@ toolkit.modules = (function(){
         var modulesToInitialize = $.extend({
             skycons : false,
             share : false,
-            popup : false
+            popup : false,
+            tabs : false,
+            datepicker : false
         }, options);
         for (module in modulesToInitialize) {
             if ((modulesToInitialize[module] || !options ) && toolkit[module] && toolkit[module].init) {
