@@ -202,9 +202,12 @@ toolkit.tabs = (function(hash) {
         });
     }
 
-    bindEvents();
+    function init() {
+        bindEvents();
+    }
 
     return {
+        init: init,   
         getHashList: getHashList,
         changeTab: changeTab
     };
@@ -213,7 +216,7 @@ toolkit.tabs = (function(hash) {
 
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('modules/tabs', ['utils/hashmanager'], function() {
+    define('modules/tabs', ['utils/hashmanager'], function(hash) {
         return toolkit.tabs;
     });
 }
