@@ -8,7 +8,6 @@ utils/diff.js
 modules/tabs.js
 modules/share.js
 modules/carousel.js
-modules/datepicker.js
 toolkit.js
 
 wiki.js
@@ -21,6 +20,5 @@ utils/diff.js
 modules/tabs.js
 modules/share.js
 modules/carousel.js
-modules/datepicker.js
 toolkit.js
 wiki.js
