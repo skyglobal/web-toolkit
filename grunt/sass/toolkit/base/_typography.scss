@@ -51,7 +51,10 @@ p {
   line-height: 20px;
 }
 
-small,
+small {
+  font-size: em(13);
+  line-height: em(16);
+}
 .supportive {
   font-size: 13px;
   line-height: 16px;
