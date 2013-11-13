@@ -13,7 +13,7 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
         if (oldVersion.split('.').length<3 || (oldVersion.split('.')[0]<1)){
             $('.sky-form .error').text("The version number is required, and must be '1.0.0' or higher");
         }
-        if (parseInt(oldVersion,10)===1 || (oldVersion.split('.')[0]==='0')){
+        if (parseFloat(oldVersion,10)===1 || (oldVersion.split('.')[0]==='0')){
             oldVersion = '0.6.9';//get lowest version available
         }
         toolkit.diff({
