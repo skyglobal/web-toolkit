@@ -69,7 +69,7 @@ toolkit.carousel = (function(window, $) {
             this.hideTermsContent();
             var $terms = $(this.$slides[this.currentIndex]).find('.terms');
             if ($terms.length){
-                this.$termsContent.append($terms.clone(true).removeClass('speak')).fadeIn(200);
+                this.$termsContent.append($terms.clone(true).removeClass('speak').attr('aria-hidden','true')).fadeIn(200);
             }
         },
         hideTermsContent: function(){
