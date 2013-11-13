@@ -119,7 +119,7 @@ body .visible{
 }
 
 //DESKTOP ONLY CLASSES
-@media (max-width: $mobile-width+1) {
+@media (min-width: $mobile-width+1) {
   .sticky-desktop {
     @include sticky;
   }
