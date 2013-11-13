@@ -558,11 +558,11 @@
 /* Hero ratio 3:1 */
 .skycom-carousel.hero-3-1 {
   .poster{
-    min-height: 380px;
-    max-height: 380px;
+    min-height: 325px;
+    max-height: 325px;
     @media all and (max-width: 1212px) {
-      min-height: 31vw;
-      max-height: 32vw;
+      min-height: 27vw;
+      max-height: 31vw;
     }
   }
 
@@ -570,11 +570,14 @@
     max-height: 34px;
     max-width: 180px;
   }
-
-
-  @media all and (max-width: 767px) {
-    .poster{
-      min-height: 110px;
+}
+.grid-1140 .skycom-carousel.hero-3-1 {
+  .poster{
+    min-height: 380px;
+    max-height: 380px;
+    @media all and (max-width: 1212px) {
+      min-height: 31vw;
+      max-height: 32vw;
     }
   }
 }
