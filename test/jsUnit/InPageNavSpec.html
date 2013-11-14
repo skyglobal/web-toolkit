@@ -123,16 +123,41 @@
 <script>
     require(['utils/hashmanager', 'modules/tabs', '../../test/jsUnit/setup'],function(hash, tabs){
         tabs.init();
-        describe('Test mocha', function() {
+        describe('Test responsive tabs', function() {
 
             it('testing mocha', function() {
                 expect($('#fifth-tab span').text()).to.equal("FifthFifthFifthFifth");
             });
 
-            it('click on tab makes it active', function(){
-                $('#fifth-tab>a>span').click();
-                expect($('#fifth-tab').hasClass('selected')).to.be.ok;
+            it('check change tab removes class and adds classes for the correct controlID', function(){
+                $('#first-tab').click();
+                expect($('#first-tab').hasClass('selected')).to.equal(true);
+                expect(!$('#second-tab').hasClass('selected')).to.equal(true);                
+                tabs.changeTab('fourth');
+                expect(!$('#first-tab').hasClass('selected')).to.equal(true);
+                expect(!$('#third-tab').hasClass('selected')).to.equal(true);
+                expect($('#fourth-tab').hasClass('selected')).to.equal(true);
             });
+
+            it('Check that the correct number of elements are being put in the dropdown', function(){
+                tabs.moveTabsToDropdown(3);
+                expect($('.dropdown-tab-info').find('li').length).to.equal(4);
+                tabs.moveTabsToDropdown(2);
+                expect($('.dropdown-tab-info').find('li').length).to.equal(5);
+
+
+            });
+
+            it('Check the changeTab method it goes to the tabs li', function(){
+                // $noInTabs = $('.tabs').children('li').length;
+                tabs.changeTab('seventh');
+                expect($('.tabs').find('#first-tab').length).to.equal(1);
+
+
+
+            });
+
+
         });
         mocha.run();
     });
