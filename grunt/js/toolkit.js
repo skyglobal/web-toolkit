@@ -23,7 +23,6 @@ toolkit.modules = (function(){
             skycons : false,
             share : false,
             popup : false,
-            tabs : false,
             datepicker : false
         }, options);
         for (module in modulesToInitialize) {
