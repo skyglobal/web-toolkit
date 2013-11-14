@@ -1396,7 +1396,6 @@ button.btn {
 .skycom-carousel .actions .pause {
   bottom: 10px;
   display: none;
-  font-size: 0.9em;
   right: 50px;
   z-index: 2;
 }
@@ -1490,14 +1489,9 @@ button.btn {
 }
 .skycom-carousel h3 {
   margin: 0 0 1px 0;
-  font-size: 2.25em;
-  line-height: 1.11111em;
 }
 .skycom-carousel p {
   margin: 0 0 10px 0;
-  font-size: 1em;
-  line-height: 1.25em;
-  font-family: skytextmedium;
 }
 .skycom-carousel figure {
   position: relative;
@@ -1540,7 +1534,6 @@ button.btn {
   position: absolute;
   bottom: 10px;
   top: auto;
-  font-size: 0.9em;
   padding-top: 0;
   padding-bottom: 0;
 }

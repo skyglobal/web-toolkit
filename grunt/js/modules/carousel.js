@@ -377,7 +377,7 @@ toolkit.carousel = (function(window, $) {
                     if (action=='next' || action=='previous'){
                         extraClass=' hidden-touch ';
                     }
-                    html += '<a href="#" class="skycom-internal ' + extraClass + action + '" >';
+                    html += '<a href="#" class="skycom-internal supportive ' + extraClass + action + '" >';
                     html += '<span class="icon-carousel-' + action + '"></span>' + label;
                     if (action == 'next' || action == 'previous') {
                         html += '<span class="icon-carousel-' + action + '-over over"></span>';
@@ -412,7 +412,7 @@ toolkit.carousel = (function(window, $) {
                 return this;
             },
             terms: function($element) {
-                var $termsLink = $('<a href="#!" class="terms-link carousel-content cushioned hidden black internal-link" aria-hidden="true">Terms and Conditions</a>');
+                var $termsLink = $('<a href="#!" class="terms-link carousel-content cushioned hidden black internal-link supportive" aria-hidden="true">Terms and Conditions</a>');
                 var $termsContent = $('<div class="terms-content carousel-content  cushioned hidden"></div>');
                 if ($element.find('.terms').length){
                     $element.append($termsLink);

@@ -122,7 +122,6 @@
     .pause {
       bottom: 10px;
       display: none;
-      font-size: 0.9em;
       right: 50px;
       z-index: 2;
       span {
@@ -203,15 +202,10 @@
 
   h3 {
     margin: 0 0 1px 0;
-    font-size: em(36);
-    line-height: em(40,36);
   }
 
   p {
     margin: 0 0 10px 0;
-    font-size: em(16);
-    line-height: em(20,16);
-    font-family: skytextmedium;
   }
 
   figure{
@@ -247,7 +241,6 @@
   .terms-link {
     z-index: 2;
     position:absolute; bottom:10px; top:auto;
-    font-size: 0.9em;
     padding-top: 0;
     padding-bottom: 0;
   }
