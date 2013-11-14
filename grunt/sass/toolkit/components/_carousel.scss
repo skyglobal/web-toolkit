@@ -385,7 +385,7 @@
       }
     }
     .skycom-carousel-container > *{
-      margin-bottom:1.5em;
+      margin-bottom:2em;
     }
     figcaption.carousel-content{
       padding-bottom:0;
@@ -404,11 +404,14 @@
     &.has-terms{
       padding-bottom: 1em;
       .indicators{
-        bottom: 1em;
+        bottom: 1.25em;
       }
       .terms-link{
         position: absolute;
         bottom: 0;
+      }
+      p{
+        margin: 0;
       }
     }
   }

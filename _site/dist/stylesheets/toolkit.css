@@ -1665,7 +1665,7 @@ button.btn {
     float: right;
   }
   .skycom-carousel .skycom-carousel-container > * {
-    margin-bottom: 1.5em;
+    margin-bottom: 2em;
   }
   .skycom-carousel figcaption.carousel-content {
     padding-bottom: 0;
@@ -1685,11 +1685,14 @@ button.btn {
     padding-bottom: 1em;
   }
   .skycom-carousel.has-terms .indicators {
-    bottom: 1em;
+    bottom: 1.25em;
   }
   .skycom-carousel.has-terms .terms-link {
     position: absolute;
     bottom: 0;
+  }
+  .skycom-carousel.has-terms p {
+    margin: 0;
   }
 }
 @media all and (max-width: 319px) {
