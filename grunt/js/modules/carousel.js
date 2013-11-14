@@ -14,8 +14,6 @@ toolkit.carousel = (function(window, $) {
     function Carousel(element, options) {
         this.options = options;
         this.$viewport = element;
-        this.$termsContent = element.next('.terms-content');
-        this.$termsLink = element.find('.terms-link');
         this.$slideContainer = element.find('.skycom-carousel-container');
         this.$slides = this.$slideContainer.find('>');
         this.currentIndex = 0;
@@ -39,8 +37,6 @@ toolkit.carousel = (function(window, $) {
         bindEvents: function() {
             this.bindTouchEvents();
             this.$slideContainer.find('a').on('click', this.pause.bind(this));
-            this.$termsLink.on('click', this.toggleTermsContent.bind(this));
-            this.showTermsLink(0);
         },
         unbindEvents: function() {
             this.unbindTouchEvents();
@@ -62,18 +58,18 @@ toolkit.carousel = (function(window, $) {
         },
         toggleTermsContent: function(){
             this.pause();
-            var termsHidden = this.$termsContent.find('.terms').length===0;
+            var termsHidden = this.$viewport.next('.terms-content').find('.terms').length===0;
             this[termsHidden ? 'showTermsContent' : 'hideTermsContent']();
         },
         showTermsContent: function(){
             this.hideTermsContent();
             var $terms = $(this.$slides[this.currentIndex]).find('.terms');
             if ($terms.length){
-                this.$termsContent.append($terms.clone(true).removeClass('speak').attr('aria-hidden','true')).fadeIn(200);
+                this.$viewport.next('.terms-content').append($terms.clone(true).removeClass('speak').attr('aria-hidden','true')).fadeIn(200);
             }
         },
         hideTermsContent: function(){
-            this.$termsContent.fadeOut(200, function() {
+            this.$viewport.next('.terms-content').fadeOut(200, function() {
                 $(this).find('.terms').remove();
             });
         },
@@ -81,11 +77,11 @@ toolkit.carousel = (function(window, $) {
             this.hideTermsLink();
             var $terms = $(this.$slides[slideIndex]).find('.terms');
             if ($terms.length){
-                this.$termsLink.removeClass('hidden').fadeIn(200);
+                this.$viewport.find('.terms-link').removeClass('hidden').fadeIn(200);
             }
         },
         hideTermsLink: function(){
-            this.$termsLink.fadeOut(200);
+            this.$viewport.find('.terms-link').fadeOut(200);
             this.hideTermsContent();
         },
         moveSlide : function(opts){//index, start, end, callback, reverse
@@ -415,6 +411,16 @@ toolkit.carousel = (function(window, $) {
                 $element.append($indicators);
                 return this;
             },
+            terms: function($element) {
+                var $termsLink = $('<a href="#!" class="terms-link carousel-content cushioned hidden black internal-link" aria-hidden="true">Terms and Conditions</a>');
+                var $termsContent = $('<div class="terms-content carousel-content  cushioned hidden"></div>');
+                if ($element.find('.terms').length){
+                    $element.append($termsLink);
+                    $element.after($termsContent);
+                    $element.addClass('has-terms');
+                }
+                return this;
+            },
             video: function($element) {
                 $element.append('<div class="video-overlay"></div>');
                 return this;
@@ -431,6 +437,7 @@ toolkit.carousel = (function(window, $) {
                         carousel.goto(index);
                     }
                 })
+                .terms($this)
                 .actions($this, {
                     count: carousel.slideCount,
                     actions: options.carousel.actions,
@@ -451,6 +458,9 @@ toolkit.carousel = (function(window, $) {
                 }
                 var video = new Video(carousel, options.video);
                 video.play();
+
+            }).on('click', '.terms-link', function(e) {
+                carousel.toggleTermsContent();
             }).on('change',function(e, index) {
                 index = index || 0;
                 $this.find('.indicators .container > *').removeClass('active').eq(index).addClass('active');
@@ -496,6 +506,7 @@ toolkit.carousel = (function(window, $) {
             if(carousel.slideCount > 1) {
                 carousel[options.carousel.autoplay === true ? 'play' : 'pause'](false, options.carousel.interval);
                 carousel.goto(options.carousel.startSlideIndex, false);
+                carousel.showTermsLink(0);
                 $this.trigger('change');
             } else {
                 carousel.unbindTouchEvents();

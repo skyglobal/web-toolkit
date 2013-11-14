@@ -401,6 +401,16 @@
     .terms-link {
       bottom: 2px;
     }
+    &.has-terms{
+      padding-bottom: 1em;
+      .indicators{
+        bottom: 1em;
+      }
+      .terms-link{
+        position: absolute;
+        bottom: 0;
+      }
+    }
   }
   @media all and (max-width: 319px) {
     .actions .next,
