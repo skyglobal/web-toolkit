@@ -2,18 +2,18 @@ if (typeof toolkit==='undefined') toolkit={};
 toolkit.datepicker = (function () {
 
     var $el = {
-       datepicker: $('.datepicker input'),
-       day: $('#day'),
-       month: $('#month'),
-       year: $('#year'),
-       monthleft: $('.monthleft'),
-       monthright: $('.monthright'),
-       dayspan: $('.daycontainer .day'),
-       monthyear: $('.monthyear')
+        datepicker: $('.datepicker input'),
+        day: $('#day'),
+        month: $('#month'),
+        year: $('#year'),
+        monthleft: $('.monthleft'),
+        monthright: $('.monthright'),
+        dayspan: $('.daycontainer .day'),
+        monthyear: $('.monthyear')
     };
 
     var monthNames = [ "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December" ];
+        "July", "August", "September", "October", "November", "December" ];
 
     var day = getToday();
     var month = getMonth();
@@ -27,13 +27,11 @@ toolkit.datepicker = (function () {
     var toMonth = month;
     var toYear = year;
 
-    var calLeft, calTop;
-
     function bindEvents() {
 
         $el.datepicker.keyup(function () {
             if (this.value != this.value.replace(/\D/g, '')) {
-               this.value = this.value.replace(/\D/g, '');
+                this.value = this.value.replace(/\D/g, '');
             }
         });
 
@@ -57,21 +55,21 @@ toolkit.datepicker = (function () {
             }
 
         }).on('blur', function(event) {
-            if ($el.day.val().length < 2 && $el.day.val().length !== 0) {
-                day = parseInt($el.day.val(), 10);
-                inDay = parseInt(day, 10);
-                if ($el.day.val() !== "00" && $el.day.val() !== "0") {
-                    $el.day.val("0" + $el.day.val());
-                } else {
-                    $el.day.val("01");
+                if ($el.day.val().length < 2 && $el.day.val().length !== 0) {
+                    day = parseInt($el.day.val(), 10);
+                    inDay = parseInt(day, 10);
+                    if ($el.day.val() !== "00" && $el.day.val() !== "0") {
+                        $el.day.val("0" + $el.day.val());
+                    } else {
+                        $el.day.val("01");
+                    }
+                    renderCalendar();
                 }
-                renderCalendar();
-            }
 
-            if(event.shiftKey && event.keyCode == 9) {
-                $('.calendar').hide();
-            }
-        });
+                if(event.shiftKey && event.keyCode == 9) {
+                    $('.calendar').hide();
+                }
+            });
 
         $el.month.on('keyup', function() {
             if ($el.month.val() > 12) {
@@ -89,17 +87,17 @@ toolkit.datepicker = (function () {
             }
 
         }).on('blur', function() {
-            if ($el.month.val().length < 2 && $el.month.val().length !== 0) {
-                month = parseInt($el.month.val(), 10) - 1;
-                inMonth = parseInt(month, 10);
-                if ($el.month.val() !== "00" && $el.month.val() !== "0") {
-                    $el.month.val("0" + $el.month.val());
-                } else {
-                    $el.month.val("01");
+                if ($el.month.val().length < 2 && $el.month.val().length !== 0) {
+                    month = parseInt($el.month.val(), 10) - 1;
+                    inMonth = parseInt(month, 10);
+                    if ($el.month.val() !== "00" && $el.month.val() !== "0") {
+                        $el.month.val("0" + $el.month.val());
+                    } else {
+                        $el.month.val("01");
+                    }
+                    renderCalendar();
                 }
-                renderCalendar();
-            }
-        });
+            });
 
         $el.year.on('keyup', function() {
             if ($el.year.val().length === 4) {
@@ -108,10 +106,10 @@ toolkit.datepicker = (function () {
                 renderCalendar();
             }
         }).on('blur', function(e) {
-            if (e.which === 0) {
-                $('.calendar').hide();
-            }
-        });
+                if (e.which === 0) {
+                    $('.calendar').hide();
+                }
+            });
 
         $('.monthleft').on('click', monthLeft);
         $('.monthright').on('click', monthRight);
@@ -121,13 +119,6 @@ toolkit.datepicker = (function () {
                 $('.calendar').hide();
             }
         });
-
-        // $('.calendar').bind('lostFocus', function() {
-        //     $('.calendar').hide();
-        // });
-        // $('.datepicker input').blur(function() {
-        //       $('.calendar').trigger('lostFocus');
-        // });
     }
 
     function renderCalendar() {
@@ -149,15 +140,12 @@ toolkit.datepicker = (function () {
             inYear = year;
 
             $('.calendar').hide();
-            $el.day.css('border-radius', '5px');
-            $el.month.css('border-radius', '5px');
-            $el.year.css('border-radius', '5px');
         });
 
         $(document).click(function(e) {
 
             if (e.target.class != 'datepicker' && !$('.datepicker').find(e.target).length) {
-                    $(".calendar").hide();
+                $(".calendar").hide();
             }
 
         });
@@ -201,17 +189,6 @@ toolkit.datepicker = (function () {
         } else {
             e.siblings('div.calendar').hide();
         }
-        // height = e.height();
-        // calLeft = $el.day.position().left;
-        // calTop = $el.day.position().top + height;
-
-        // $('.calendar').css('left', calLeft);
-        // $('.calendar').css('top', calTop);
-        // $('.calendar').show();
-
-        // $el.day.css('border-radius', '5px 5px 0 0');
-        // $el.month.css('border-radius', '5px 5px 0 0');
-        // $el.year.css('border-radius', '5px 5px 0 0');
     }
 
     function monthLeft() {
@@ -256,7 +233,6 @@ toolkit.datepicker = (function () {
     }
 
     function isLeapYear(year) {
-        // solution by Matti Virkkunen: http://stackoverflow.com/a/4881951
         return year % 4 === 0 && year % 100 !== 0 || year % 400 === 0;
     }
 
