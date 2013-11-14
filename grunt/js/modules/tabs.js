@@ -73,18 +73,28 @@ toolkit.tabs = (function(hash) {
             .addClass('selected');
         $this = $("#" + controlId + "-tab");
         if($this.parents().is("ul.dropdown-tab-info")) {
-            $($("ul.tabs").children("li").last()).prependTo('.dropdown-tab-info');
-            $this.insertAfter($('ul.tabs').children("li").last());
-            sortDropdown();
-            vars.hasSwitchedOut = true;
+            if (vars.hasSwitchedOut) {
+                $($("ul.tabs").children("li").first()).appendTo('.dropdown-tab-info');
+                $this.insertBefore($('ul.tabs').children("li").first());
+                sortDropdown();
+                vars.hasSwitchedOut = true;
+            }
+            else{
+                console.log("dropdown-tab-info");
+                $($("ul.tabs").children("li").last()).prependTo('.dropdown-tab-info');
+                $this.insertBefore($('ul.tabs').children("li").first());
+                sortDropdown();
+                vars.hasSwitchedOut = true;
+            }
         } else {
             if (vars.hasSwitchedOut) {
-                $($("ul.tabs").children("li").last()).appendTo('.dropdown-tab-info');
+                $($("ul.tabs").children("li").first()).appendTo('.dropdown-tab-info');
                 $('.dropdown-tab-info').children("li").first().insertAfter($('ul.tabs').children("li").last());
                 sortDropdown();
                 vars.hasSwitchedOut = false;
+                }
             }
-        }
+        
     }
 
     function showMore(showMoreID){
@@ -144,34 +154,9 @@ toolkit.tabs = (function(hash) {
 
         //get width of li elements up to limit
         numberOfTabs = getNumberOfTabs();
-
-        // $('.tabs [id$=-tab]').each(function () {
-        //     totalWidth += ($(this).find('a span').innerWidth() + 30);
-        //     // if $totalWidth is more than $containerWidth then break out
-        //     if(totalWidth < $containerWidth) {
-        //         i++;
-        //     } else if (totalWidth > $containerWidth) {
-        //         numberOfTabs = i;
-        //         return false;
-        //     }
-        //     numberOfTabs = i;
-        // });
-
         
         //do another loop to start at the numberOfTabs allowed index, and move any after into the dropdown
         moveTabsToDropdown(numberOfTabs);
-
-        // i = 0;
-        // $('.tabs').children('li').each(function () {
-        //     // this moves any lis which should not be in the main tab
-        //     if(i >= numberOfTabs) {
-        //         $(this).appendTo('.dropdown-tab-info');
-        //         sortDropdown();
-        //         $('.dropdown-tab-select').show(); 
-        //     } else {
-        //         i++;
-        //     }
-        // });
 
         // remove any li's which can fit
         if (numberOfTabs >= ($('.tabs').children('li').length + 1)) {
@@ -209,7 +194,8 @@ toolkit.tabs = (function(hash) {
     return {
         init: init,   
         getHashList: getHashList,
-        changeTab: changeTab
+        changeTab: changeTab,
+        moveTabsToDropdown:moveTabsToDropdown
     };
 
 }(toolkit.hashmanager));
