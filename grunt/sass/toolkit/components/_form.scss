@@ -144,11 +144,11 @@
         width: 18px;
         text-align: center;
         padding: 2px;
-        cursor: pointer;
       }
-      span:hover {
+      span.day:hover {
         background-color: #0073c5;
         color: #fff;
+      cursor: pointer;
       }
 
       .past {

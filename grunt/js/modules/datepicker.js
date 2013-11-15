@@ -3,6 +3,7 @@ toolkit.datepicker = (function () {
 
     var $el = {
         datepicker: $('.datepicker input'),
+        date: $('.datepicker-input'),
         day: $('#day'),
         month: $('#month'),
         year: $('#year'),
@@ -36,9 +37,8 @@ toolkit.datepicker = (function () {
         });
 
         $el.datepicker.on('focus', function(){
-            showCalendar($(this), "show");
+            $('.calendar').show();
         });
-
 
         $el.day.on('keyup', function() {
             if ($el.day.val() > daysInMonth(month, year)) {
@@ -54,22 +54,23 @@ toolkit.datepicker = (function () {
                 renderCalendar();
             }
 
-        }).on('blur', function(event) {
-                if ($el.day.val().length < 2 && $el.day.val().length !== 0) {
-                    day = parseInt($el.day.val(), 10);
-                    inDay = parseInt(day, 10);
-                    if ($el.day.val() !== "00" && $el.day.val() !== "0") {
-                        $el.day.val("0" + $el.day.val());
-                    } else {
-                        $el.day.val("01");
-                    }
-                    renderCalendar();
+        }).on('blur', function(e) {
+            if ($el.day.val().length < 2 && $el.day.val().length !== 0) {
+                day = parseInt($el.day.val(), 10);
+                inDay = parseInt(day, 10);
+                if ($el.day.val() !== "00" && $el.day.val() !== "0") {
+                    $el.day.val("0" + $el.day.val());
+                } else {
+                    $el.day.val("01");
                 }
+                renderCalendar();
+            }
 
-                if(event.shiftKey && event.keyCode == 9) {
-                    $('.calendar').hide();
-                }
-            });
+        }).on('keydown', function(e) {
+            if(e.shiftKey && e.keyCode == 9) {
+                $('.calendar').hide();
+            }
+        });
 
         $el.month.on('keyup', function() {
             if ($el.month.val() > 12) {
@@ -105,11 +106,12 @@ toolkit.datepicker = (function () {
                 inYear = parseInt(year, 10);
                 renderCalendar();
             }
-        }).on('blur', function(e) {
-                if (e.which === 0) {
-                    $('.calendar').hide();
-                }
-            });
+        }).on('keydown', function(e) {
+            console.log(e.keyCode);
+            if (e.keyCode === 9) {
+                $('.calendar').hide();
+            }
+        });
 
         $('.monthleft').on('click', monthLeft);
         $('.monthright').on('click', monthRight);
@@ -167,16 +169,16 @@ toolkit.datepicker = (function () {
         for (var j = 1; j <= noOfDaysInMonth; j++) {
             if (j == inDay && month == inMonth && year == inYear) {
                 if ((month < toMonth && year <= toYear) || (j < toDay && month <= toMonth && year <= toYear)) {
-                    daysText += "<span class='past selected day'>" + j + "</span>";
+                    daysText += "<span class='past selected day' data-day='"+ j +"'>" + j + "</span>";
                 } else {
-                    daysText += "<span class='selected day'>" + j + "</span>";
+                    daysText += "<span class='selected day' data-day='"+ j +"'>" + j + "</span>";
                 }
             } else if (month < toMonth && year <= toYear) { //in the past
-                daysText += "<span class='past day'>" + j + "</span>";
+                daysText += "<span class='past day' data-day='"+ j +"'>" + j + "</span>";
             } else if (j < toDay && month <= toMonth && year <= toYear) {
-                daysText += "<span class='past day'>" + j + "</span>";
+                daysText += "<span class='past day' data-day='"+ j +"'>" + j + "</span>";
             } else {
-                daysText += "<span class='day'>" + j + "</span>";
+            daysText += "<span class='day' data-day='"+ j +"'>" + j + "</span>";
             }
         }
 
