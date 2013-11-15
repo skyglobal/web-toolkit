@@ -120,14 +120,15 @@
       right: 50px;
       z-index: 2;
       i {
-        font-size: 18px;
-        margin-top: -2px;
+        font-size: 20px;
+        line-height: 20px;
+        margin-top: 0;
         margin-right: 5px;
       }
     }
     .previous,
     .next {
-      height: 100%;
+      height: 85%;
       top: 0;
       width: 50px;
       z-index: 3;
@@ -308,16 +309,15 @@
 }
 
 
-
-
 .skycom-carousel {
 
   @media all and (max-width: 900px) {
     .channel-logo{
       margin-bottom: 4px;
     }
-    h3{
+    h3.section-title{
       font-size: em(24);
+      line-height: 1em;
     }
   }
 
@@ -345,13 +345,13 @@
   }
 
   @media all and (max-width: 630px) {
-    h3 {
+    h3.section-title {
       font-size: em(16);
     }
   }
 
   @media all and (max-width: 600px) {
-    h3 {
+    h3.section-title {
       font-family: SkyTextMedium;
     }
     .shade{
@@ -482,8 +482,12 @@
     z-index: 4;
     @include opacity(0);
     display: none;
+    font-size:28px;
     &.active {
       display: block;
+    }
+    i{
+      color: #fff;
     }
   }
 
@@ -538,8 +542,15 @@
   }
 }
 .lt-ie10{
-  .skycom-carousel .shade {
-    width: 66%; /* filter goes across whole slide, so stop it a little bit before */
+  .skycom-carousel {
+    .shade {
+      width: 66%; /* filter goes across whole slide, so stop it a little bit before */
+    }
+    .next, .previous{
+      .semi-circle{
+        background: rgba(0,0,0,0.35);
+      }
+    }
   }
 }
 .lt-ie9{
