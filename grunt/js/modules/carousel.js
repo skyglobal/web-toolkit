@@ -339,8 +339,7 @@ toolkit.carousel = (function(window, $) {
                     onclick: function(action) {
                         carousel[action]();
                     }
-                })
-                .video($this);
+                });
             };
 
             createMarkup(carousel);
@@ -358,7 +357,6 @@ toolkit.carousel = (function(window, $) {
                 var video = new toolkit.video(carousel.$viewport, options.video);
                 carousel.pause();
                 $this.find('.actions, .indicators').hide();
-                video.play();
             }).on('click', '.terms-link', function(e) {
                 carousel.toggleTermsContent();
             }).on('change',function(e, index) {
