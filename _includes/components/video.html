@@ -1,0 +1,76 @@
+<a name="video"></a>
+<h3 class="wiki-h3">Video</h3>
+
+<div class="dependencies">
+    <!-- for videos: <script src="js/lib/require.js" ></script>-->
+    <link rel="stylesheet" href="//player.sky.com/css/styles.min.css"/>
+    <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
+</div>
+<div class="design-notes">
+    A wrapper for the Sky video player, in this example it's embedded onto an image. The video will expand the parent
+    container to fit the 16/9 ratio of the video. CSS changes will need to be made to add text next to play button.
+</div>
+<div class="developer-notes">
+    Ensure that you include all the needed dependencies (htmlplayer.js and player css). Check the dependencies tab.
+</div>
+<div class="init-notes">
+    Example: <code> $(document).on('click','.play-video', function(e) {
+    e.preventDefault();
+    var videoOptionsObject = {
+    token:"<code>Your 36 long SkyVideo Token</code>",
+    autoplay: true,
+    videoId: $(this).attr('data-video-id'),
+    freewheel: false,
+    placeHolderImage: ''
+    },
+    video, videoContainer = $(this).parents('.video');
+    video = new toolkit.video(videoContainer, videoOptionsObject);
+    video.play();
+    });</code>
+</div>
+
+<div class="example">
+    <h4>Sky Video Player Wrapper</h4>
+
+    <div class="demo" data-selector="*">
+        <div class="video">
+            <img src="wiki_images/bling-ring.jpg"
+                 alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
+            <div class="video-wrapper">
+                <a href="#" class="close"><i class="icon-close"></i>
+                    <span class="speak">Close</span>
+                </a>
+
+                <div class="videocontrolcontainer">
+                    <video></video>
+                    <img class="posterFrame" alt=""/>
+                </div>
+            </div>
+            <div class="video-overlay"></div>
+            <a href="#" class="play-video" data-video-id="clip-007sstng"
+               data-tracking-context="David Beckham And Sky Team Up">
+                <i class="icon-video-play"></i>
+                <span class="speak">Play Trailer</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).on('click', '.play-video', function (e) {
+        e.preventDefault();
+        var options = {
+                    token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
+                    autoplay: false,
+                    animationSpeed: 500,
+                    videoId:$(this).attr('data-video-id'),
+                    freewheel:false, //disable ads
+                    placeHolderImage:'http://www.sky.com/hp/image/c983682f-a97a-4a8c-a2fa-e7194561fea8/desktopFront.jpg'
+                },
+                video, container = $(this).parents('.video');
+
+
+        video = new toolkit.video(container, options);
+        video.play();
+    });
+</script>
