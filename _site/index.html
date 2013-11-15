@@ -1228,7 +1228,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
     <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
 </div>
-<div class="init-notes">
+<div class="init">
     <code>$('#hero').skycom_carousel({
         carousel: {
             autoplay: true,
@@ -1343,11 +1343,6 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                 <a href="#" class="close"><i class="icon-close"></i>
                     <span class="at">Close</span>
                 </a>
-
-                <div class="videocontrolcontainer">
-                    <video></video>
-                    <img class="posterFrame"/>
-                </div>
             </div>
         </section>
     </div>
@@ -1448,16 +1443,6 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                     </figure>
                 </div>
             </div>
-            <div class="video-wrapper">
-                <a href="#" class="close"><i class="icon-close"></i>
-                    <span class="at">Close</span>
-                </a>
-
-                <div class="videocontrolcontainer">
-                    <video></video>
-                    <img class="posterFrame"/>
-                </div>
-            </div>
         </section>
     </div>
 </div>
@@ -1502,22 +1487,13 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         <div class="video">
             <img src="wiki_images/bling-ring.jpg"
                  alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
-            <div class="video-wrapper">
-                <a href="#" class="close"><i class="icon-close"></i>
-                    <span class="speak">Close</span>
-                </a>
 
-                <div class="videocontrolcontainer">
-                    <video></video>
-                    <img class="posterFrame" alt=""/>
-                </div>
-            </div>
-            <div class="video-overlay"></div>
-            <a href="#" class="play-video" data-video-id="clip-007sstng"
+            <a href="#" class="play-video" data-video-id="clip-00cwoia5"
                data-tracking-context="David Beckham And Sky Team Up">
                 <i class="icon-video-play"></i>
                 <span class="speak">Play Trailer</span>
             </a>
+
         </div>
     </div>
 </div>
@@ -1534,10 +1510,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                     placeHolderImage:'http://www.sky.com/hp/image/c983682f-a97a-4a8c-a2fa-e7194561fea8/desktopFront.jpg'
                 },
                 video, container = $(this).parents('.video');
-
-
         video = new toolkit.video(container, options);
-        video.play();
     });
 </script>
     </div>

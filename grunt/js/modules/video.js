@@ -3,23 +3,32 @@ toolkit.video = (function (window, $) {
     'use strict';
 
     var $el = {
-            playingVideo: $('.media')
+        playingVideo:$('.media')
     };
 
     function Video(container, options) {
         this.container = container;
+        this.createWrapper();
         this.wrapper = container.find('.video-wrapper');
         this.wrapper.attr('id', 'video-' + options.videoId);
-        this.videocontrolcontainer = container.find('.videocontrolcontainer');
         this.player = container.find('video');
-        this.videocontrolcontainer.find('img').on('error', function () {
-            this.src = options.placeHolderImage;
-        });
         this.options = options;
+        this.options.autoplay = false;
         this.bindEvents();
+        this.play();
     }
 
     Video.prototype = {
+        createWrapper:function () {
+            this.container.append('<div class="video-wrapper">' +
+                '<a href="#" class="close"><i class="icon-close"></i><span class="speak">Close</span></a>' +
+                '<div class="videocontrolcontainer"><video></video><img class="posterFrame"/></div>' +
+            '</div>');
+            this.container.find('.posterFrame').on('error', function () {
+                this.src = options.placeHolderImage;
+            });
+            this.container.append('<div class="video-overlay"></div>');
+        },
         bindEvents:function () {
             var $self = this,
                 hijackLink = function (e) {
@@ -31,8 +40,8 @@ toolkit.video = (function (window, $) {
                     return false;
                 },
                 $wrapper = this.wrapper;
-            $wrapper.on('keydown', function(e) {
-                if(e.keyCode === 17) {
+            $wrapper.on('keydown', function (e) {
+                if (e.keyCode === 17) {
                     e.preventDefault();
                     stop();
                 }
@@ -105,6 +114,8 @@ toolkit.video = (function (window, $) {
                     $overlay.hide();
                     $wrapper.fadeOut(animationSpeed);
                     $wrapper.removeClass('playing-video');
+                    $wrapper.remove();
+
                 });
             });
         }
