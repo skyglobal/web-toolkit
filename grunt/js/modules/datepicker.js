@@ -251,8 +251,8 @@ toolkit.datepicker = (function () {
     }
 
     function addCalenderHTML() {
-        $('.datepicker .datepicker-container').append('<div class="calendar">' +
-            '<div class="monthyear"><span class="monthleft">&larr;</span><span class="monthyearval"></span><span class="monthright">&rarr;</span></div>' +
+        $('.datepicker .datepicker-container').append('<div class="calendar" aria-hidden="true">' +
+            '<div class="monthyear"><span class="monthleft"><i class="skycon-arrow-left"></i></span><span class="monthyearval"></span><span class="monthright"><i class="skycon-arrow-right"></i></span></div>' +
             '<div class="days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>' +
             '<div class="daycontainer"></div></div>');
     }

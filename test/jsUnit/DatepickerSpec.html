@@ -7,7 +7,6 @@
     <script src="vendor/require.js"></script>
     <script src="config.js" ></script>
 
-
 </head>
 <body>
 <!--PLACEHOLDER FOR MOCHA TEST RESULTS-->
@@ -16,12 +15,6 @@
 <!--FIXTURE HTML FOR TESTS-->
 <div id="spec-markup">
     <div class="example">
-        <h4>With Grey background</h4>
-        <p class="design-notes">
-            To be used for xxx types of forms</p>
-        <p class="developer-notes">
-            Add class <code>well</code> to the container.
-        </p>
         <div class="demo" data-selector="*">
 
             <form class="sky-form sky-well">
@@ -40,9 +33,9 @@
                 <div class="row datepicker">
                     <label>Engineer visit</label>
                     <div class="datepicker-container">
-                        <input id="day" type="text" placeholder="DD" maxlength="2">
-                        <input id="month" type="text" placeholder="MM" maxlength="2">
-                        <input id="year" type="text" placeholder="YYYY" maxlength="4">
+                        <input id="day" type="text" placeholder="DD" maxlength="2" aria-label="day">
+                        <input id="month" type="text" placeholder="MM" maxlength="2" aria-label="month">
+                        <input id="year" type="text" placeholder="YYYY" maxlength="4" aria-label="year">
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -72,6 +65,7 @@
             datepicker.init();
 
             beforeEach(function(){
+                $('#spec-markup').show();
                 setDate(01, 01, 2035);
             })
 
@@ -80,7 +74,7 @@
             });
 
             it('Shows the calendar when the input field is clicked', function(){
-                $('.datepicker input').focus();
+                $('.datepicker #day').focus();
                 expect($('.datepicker').find('.calendar').css('display')).to.equal('block');
             });
 
@@ -93,7 +87,7 @@
             });
 
             it('Hides the calendar on shift+tab out', function() {
-                $('.calendar').show();
+                $('.datepicker input').focus();
                 expect($('.datepicker').find('.calendar').css('display')).to.equal('block');
 
                 $('.datepicker #day').trigger(jQuery.Event( 'keydown', { keyCode: 9, shiftKey: true }));
@@ -101,7 +95,7 @@
             });
 
             it('Hides the calendar on click off', function() {
-                $('.calendar').show();
+                $('.datepicker input').focus();
                 expect($('.datepicker').find('.calendar').css('display')).to.equal('block');
 
                 $('body').click();
@@ -245,7 +239,7 @@
             function setDate(day, month, year){
                 $('.datepicker #day').val(day).trigger('keyup').trigger('blur');
                 $('.datepicker #month').val(month).trigger('keyup').trigger('blur');
-                $('.datepicker #year').val(year).trigger('keyup').trigger('blur');
+                $('.datepicker #year').val(year).trigger('keyup');
             }
         });
         mocha.run();
