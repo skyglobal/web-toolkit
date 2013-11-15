@@ -344,10 +344,10 @@ toolkit.carousel = (function(window, $) {
         var options = $.extend(true, {
             carousel: {
                 actions: [
-                    { id: 'play', label: 'Play Carousel' },
-                    { id: 'pause', label: 'Pause Carousel' },
-                    { id: 'previous', label: 'Previous' },
-                    { id: 'next', label: 'Next' }
+                    { id: 'play', label: 'Play Carousel', icon: 'carousel-play' },
+                    { id: 'pause', label: 'Pause Carousel', icon: 'carousel-pause' },
+                    { id: 'previous', label: 'Previous', icon: 'chevron-left',speak:true },
+                    { id: 'next', label: 'Next', icon: 'chevron',speak:true }
                 ],
                 autoplay: true,
                 startSlideIndex: 0,
@@ -366,22 +366,18 @@ toolkit.carousel = (function(window, $) {
         // generating default markup
         var markup = {
             actions: function($element, options){
-                var html = '', action, label, i, extraClass,
+                var html = '', id, label, i, extraClass, icon, action,circle,
                     actions = options.actions,
                     onclick = options.onclick;
                 if(options.count <= 1) return this;
                 for (i in actions) {
-                    extraClass = '';
-                    action = actions[i].id;
-                    label = actions[i].label;
-                    if (action=='next' || action=='previous'){
-                        extraClass=' hidden-touch ';
-                    }
-                    html += '<a href="#" class="skycom-internal supportive ' + extraClass + action + '" >';
-                    html += '<span class="icon-carousel-' + action + '"></span>' + label;
-                    if (action == 'next' || action == 'previous') {
-                        html += '<span class="icon-carousel-' + action + '-over over"></span>';
-                    }
+                    action = actions[i];
+                    id = action.id;
+                    extraClass = (id=='next' || id=='previous') ? ' hidden-touch ' : '';
+                    icon = 'skycon-' + action.icon;
+                    label = (action.speak) ? '<span class="speak">' + action.label + '</span>' : action.label;
+                    html += '<a href="#" class="skycom-internal supportive ' + extraClass + id + '" >';
+                    html += '<span class="semi-circle"><i class="' + icon + '" aria-hidden="true"></i></span>' + label;
                     html += '</a>';
                 }
                 $element.find('.skycom-carousel-container').before('<div class="actions">' + html + '</div>');

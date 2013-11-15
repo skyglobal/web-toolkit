@@ -8,17 +8,12 @@
   position:relative;
 
   &:hover .actions {
-    .over {
-      @include opacity(0.3);
-    }
-    .next .over {
-      left: 5px;
-    }
-    .previous .over {
-      right: 5px;
-    }
-    a:hover .over{
-      @include opacity(1);
+    .next,
+    .previous {
+      .semi-circle{
+        background: rgb(0,0,0);
+        background: rgba(0,0,0,0.35);
+      }
     }
   }
 
@@ -64,7 +59,7 @@
 
   .dark-scheme {
     color: #fff;
-    a {
+    a, i {
       color: #fff;
     }
     &.bg-shading .shade {
@@ -124,41 +119,57 @@
       display: none;
       right: 50px;
       z-index: 2;
-      span {
+      i {
+        font-size: 18px;
         margin-top: -2px;
         margin-right: 5px;
       }
     }
     .previous,
     .next {
-      @include hide-text(left);
       height: 100%;
       top: 0;
       width: 50px;
       z-index: 3;
-      span {
+      .semi-circle {
         position: absolute;
         top: 50%;
+        display: block;
+        width: 36px;
+        border-radius: 36px;
+        line-height: 36px;
         margin: -30px 5px 0;
+        padding: 14px;
+        @include transition(background 0.3s ease-in);
+        text-shadow: 0px 0px 0px black;
+        i{
+          font-size: 30px;
+          color: #ddd;
+        }
+      }
+      &:hover{
+        .semi-circle{
+          background: rgba(0,0,0,0.7);
+        }
       }
     }
     .next {
       right: 0;
-      span {
-        left: 5px;
+      .semi-circle {
+        left: 10px;
+        i{
+          margin-left: -5px;
+        }
       }
     }
     .previous {
       left: 0;
-      span {
-        left: auto;
-        right: 5px;
+      .semi-circle {
+        right: 10px;
       }
-    }
-    .over{
-      @include opacity(0);
-      @include single-transition(opacity, .2s, linear);
-      left: -9999px;
+      i{
+        margin-left: 22px;
+      }
     }
   }
   .indicators {
@@ -245,25 +256,35 @@
     padding-bottom: 0;
   }
 
-  .play-video {
+  a.play-video {
     display: block;
     position: absolute;
     bottom: 10px;
     left: 50px;
     white-space: nowrap;
-    padding: 5px 10px 0 5px;
+    padding: 5px;
     border-radius: 25px;
     z-index: 1;
     @include transition(background .3s, box-shadow .3s);
-
+    text-decoration: none;
     &:hover,
     &:focus {
       background-color: rgba(255, 255, 255, 0.2);
       @include box-shadow(0 0 5px rgba(0, 0, 0, 0.25));
+      span{
+        text-decoration: underline;
+      }
     }
-
     i {
-      margin: 0 5px 5px 0;
+      font-size: 50px;
+      line-height: 1em;
+      border-radius: 27px;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      padding: 5px 3px 0px 3px;
+    }
+    span{
+      margin: 0 5px 0 5px;
     }
   }
 }
@@ -301,12 +322,6 @@
   }
 
   @media all and (max-width: 768px) {
-    .play-video {
-      padding-right: 0;
-      span {
-        display:none;
-      }
-    }
     .channel-logo{
       max-height: 26px;
       max-width: 140px;
