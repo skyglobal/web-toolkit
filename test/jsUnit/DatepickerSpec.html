@@ -33,8 +33,12 @@
                     <label for="email">Email</label>
                     <input id="email" type="email" placeholder="eg. joe.bloggs@me.com"/>
                 </div>
-                <div class="row datepicker">
+                <div class="row">
                     <label>Date of birth</label>
+                    <input id="dob" type="text" placeholder="DD/MM/YYYY" maxlength="10">
+                </div>
+                <div class="row datepicker">
+                    <label>Engineer visit</label>
                     <div class="datepicker-container">
                         <input id="day" type="text" placeholder="DD" maxlength="2">
                         <input id="month" type="text" placeholder="MM" maxlength="2">
@@ -75,10 +79,66 @@
                 expect($('.datepicker').find('.calendar').length).to.equal(1);
             });
 
+            it('Shows the calendar when the input field is clicked', function(){
+                $('.datepicker input').focus();
+                expect($('.datepicker').find('.calendar').css('display')).to.equal('block');
+            });
+
+            it('Hides the calendar on tab out', function() {
+                $('.datepicker input').focus();
+                expect($('.datepicker').find('.calendar').css('display')).to.equal('block');
+
+                $('.datepicker #year').trigger(jQuery.Event( 'keydown', { keyCode: 9 } ));
+                expect($('.datepicker').find('.calendar').css('display')).to.equal('none');
+            });
+
+            it('Hides the calendar on shift+tab out', function() {
+                $('.calendar').show();
+                expect($('.datepicker').find('.calendar').css('display')).to.equal('block');
+
+                $('.datepicker #day').trigger(jQuery.Event( 'keydown', { keyCode: 9, shiftKey: true }));
+                expect($('.datepicker').find('.calendar').css('display')).to.equal('none');
+            });
+
+            it('Hides the calendar on click off', function() {
+                $('.calendar').show();
+                expect($('.datepicker').find('.calendar').css('display')).to.equal('block');
+
+                $('body').click();
+                expect($('.datepicker').find('.calendar').css('display')).to.equal('none');
+            });
+
             it('Correctly selects a date', function() {
                 $('.datepicker .selected').click();
 
                 expect(parseInt($('.datepicker #day').val())).to.equal(1);
+                expect(parseInt($('.datepicker #month').val())).to.equal(1);
+                expect(parseInt($('.datepicker #year').val())).to.equal(2035);
+            });
+
+            it('Correctly sets a date after clicking on day input', function() {
+                $('.datepicker #day').trigger('focus');
+                $('.datepicker .day[data-day="2"]').click();
+
+                expect(parseInt($('.datepicker #day').val())).to.equal(2);
+                expect(parseInt($('.datepicker #month').val())).to.equal(1);
+                expect(parseInt($('.datepicker #year').val())).to.equal(2035);
+            });
+
+            it('Correctly sets a date after clicking on month input', function() {
+                $('.datepicker #month').trigger('focus');
+                $('.datepicker .day[data-day="2"]').click();
+
+                expect(parseInt($('.datepicker #day').val())).to.equal(2);
+                expect(parseInt($('.datepicker #month').val())).to.equal(1);
+                expect(parseInt($('.datepicker #year').val())).to.equal(2035);
+            });
+
+            it('Correctly sets a date after clicking on year input', function() {
+                $('.datepicker #year').trigger('focus');
+                $('.datepicker .day[data-day="2"]').click();
+
+                expect(parseInt($('.datepicker #day').val())).to.equal(2);
                 expect(parseInt($('.datepicker #month').val())).to.equal(1);
                 expect(parseInt($('.datepicker #year').val())).to.equal(2035);
             });
@@ -161,9 +221,25 @@
                 expect($('.datepicker .day').hasClass('past')).to.equal(true);
             });
 
-            it('It correctly shows leap years', function() {
+            it('Correctly shows leap years', function() {
                 setDate(01, 02, 2012);
                 expect($('.datepicker').find('.day:contains("29")').text()).to.equal('29');
+            });
+
+            it('Does not accept letters', function() {
+                setDate("x0a1", "l0g1", "20e35g");
+
+                expect(parseInt($('.datepicker #day').val())).to.equal(1);
+                expect(parseInt($('.datepicker #month').val())).to.equal(1);
+                expect(parseInt($('.datepicker #year').val())).to.equal(2035);
+            });
+
+            it('Does not accept symbols', function() {
+                setDate("0/1>", "@0-1", "2^0*35");
+
+                expect(parseInt($('.datepicker #day').val())).to.equal(1);
+                expect(parseInt($('.datepicker #month').val())).to.equal(1);
+                expect(parseInt($('.datepicker #year').val())).to.equal(2035);
             });
 
             function setDate(day, month, year){
