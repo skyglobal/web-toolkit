@@ -1,47 +1,44 @@
-<h3 class="wiki-h3">Tabs</h3>
+<h3 class="wiki-h3">In-Page Navigation</h3>
 
 <div class="example">
     <div class="design-notes error">
         This module is not yet complete.  If you need it, be aware that 'accessibility' checks have not been finished.
     </div>
     <div class="design-notes">
-        This module should be used when only a small section of the page changes after an item click.
+        This module should be used when the all of, or the majority of, the page changes after an item click.
     </div>
     <div class="design-notes">
-        If the all of, or the majority of, the page changes please use '<code>in-page navigation</code>'.
-    </div>
-    <div class="developer-notes">
-        Add Class '<code>classic</code>'.
+        If only a small section of the page changes please use '<code>tabs</code>'.
     </div>
     <div class="init-notes">
-        <code>$('#demo-classc-tabs').inPageNav();</code>
+        <code>$('#demo-inpage-nav-tabs').inPageNav();</code>
     </div>
     <div class="demo" data-selector="*">
-        <section class="module clearfix tabs-container classic" data-function="tabs" id='demo-classc-tabs'>
+        <section class="module clearfix tabs-container" data-function="tabs" id='demo-inpage-nav-tabs'>
 
             <h2 class="speak">This is a screenreader header for tabs</h2>
 
             <ul class="tabs clearfix" role="tablist">
-                <li id="first-classic-tab" aria-controls="first-classic" aria-label="first" role="tab" class="tab selected">
-                    <a href="#!first-classic" class="skycom-ellipsis internal-link"><span>First</span></a>
+                <li id="first-tab" aria-controls="first" aria-label="first" role="tab" class="tab selected">
+                    <a href="#!first" class="skycom-ellipsis internal-link"><span>First</span></a>
                 </li>
-                <li id="second-classic-tab" aria-controls="second-classic" aria-label="second" role="tab" class="tab" >
-                    <a href="#!second-classic" class="skycom-ellipsis internal-link"><span>SecondSecond</span></a>
+                <li id="second-tab" aria-controls="second" aria-label="second" role="tab" class="tab" >
+                    <a href="#!second" class="skycom-ellipsis internal-link"><span>SecondSecond</span></a>
                 </li>
-                <li id="third-classic-tab" aria-controls="third-classic" aria-label="third" role="tab" class="tab" >
-                    <a href="#!third-classic" class="skycom-ellipsis internal-link"><span>ThirdThirdThird</span></a>
+                <li id="third-tab" aria-controls="third" aria-label="third" role="tab" class="tab" >
+                    <a href="#!third" class="skycom-ellipsis internal-link"><span>ThirdThirdThird</span></a>
                 </li>
-                <li id="fourth-classic-tab" aria-controls="fourth-classic" aria-label="fourth" role="tab" class="tab" >
-                    <a href="#!fourth-classic" class="skycom-ellipsis internal-link"><span>FourthFourth</span></a>
+                <li id="fourth-tab" aria-controls="fourth" aria-label="fourth" role="tab" class="tab" >
+                    <a href="#!fourth" class="skycom-ellipsis internal-link"><span>FourthFourth</span></a>
                 </li>
-                <li id="fifth-classic-tab" aria-controls="fifth-classic" aria-label="fifth" role="tab" class="tab">
-                    <a href="#!fifth-classic" class="skycom-ellipsis internal-link"><span>FifthFifthFifthFifth</span></a>
+                <li id="fifth-tab" aria-controls="fifth" aria-label="fifth" role="tab" class="tab">
+                    <a href="#!fifth" class="skycom-ellipsis internal-link"><span>FifthFifthFifthFifth</span></a>
                 </li>
-                <li id="sixth-classic-tab" aria-controls="sixth-classic" aria-label="sixth" role="tab" class="tab" >
-                    <a href="#!sixth-classic" class="skycom-ellipsis internal-link"><span>Sixth</span></a>
+                <li id="sixth-tab" aria-controls="sixth" aria-label="sixth" role="tab" class="tab" >
+                    <a href="#!sixth" class="skycom-ellipsis internal-link"><span>Sixth</span></a>
                 </li>
-                <li id="seventh-classic-tab" aria-controls="seventh-classic" aria-label="seventh" role="tab" class="tab">
-                    <a href="#!seventh-classic" class="skycom-ellipsis internal-link"><span>Seventh</span></a>
+                <li id="seventh-tab" aria-controls="seventh" aria-label="seventh" role="tab" class="tab">
+                    <a href="#!seventh" class="skycom-ellipsis internal-link"><span>Seventh</span></a>
                 </li>
                 <div class="dropdown-tab-select">
                     <a href="#!" aria-controls="dropdown" aria-label="more tabs" class="medium">&hellip;</a>
@@ -51,7 +48,7 @@
                 </div>
             </ul>
 
-            <div id="first-classic" class="tabpanel selected" aria-labeledby="first-classic-tab" role="tabpanel">
+            <div id="first" class="tabpanel selected" aria-labeledby="first-tab" role="tabpanel">
                 <section class="tabcontents clearfix">
                     <h2 class="speak">Screen reader header for First tab contents</h2>
                     <div class="skycom-12 alpha">
@@ -60,7 +57,7 @@
                 </section>
             </div>
 
-            <div id="second-classic" class="tabpanel" aria-labeledby="second-classic-tab" role="tabpanel">
+            <div id="second" class="tabpanel" aria-labeledby="second-tab" role="tabpanel">
                 <section class="tabcontents clearfix">
                     <h2 class="speak">Screen reader header for Second tab contents</h2>
                     <div class="skycom-12 alpha">
@@ -69,7 +66,7 @@
                 </section>
             </div>
 
-            <div id="third-classic" class="tabpanel" aria-labeledby="third-classic-tab" role="tabpanel">
+            <div id="third" class="tabpanel" aria-labeledby="third-tab" role="tabpanel">
                 <section class="tabcontents clearfix">
                     <h2 class="speak">Screen reader header for Third tab contents</h2>
                     <div class="skycom-12 alpha">
@@ -78,7 +75,7 @@
                 </section>
             </div>
 
-            <div id="fourth-classic" class="tabpanel" aria-labeledby="fourth-classic-tab" role="tabpanel">
+            <div id="fourth" class="tabpanel" aria-labeledby="fourth-tab" role="tabpanel">
                 <section class="tabcontents clearfix">
                     <h2 class="speak">Screen reader header for Fourth tab contents</h2>
                     <div class="skycom-12 alpha">
@@ -87,7 +84,7 @@
                 </section>
             </div>
 
-            <div id="fifth-classic" class="tabpanel" aria-labeledby="fifth-classic-tab" role="tabpanel">
+            <div id="fifth" class="tabpanel" aria-labeledby="fifth-tab" role="tabpanel">
                 <section class="tabcontents clearfix">
                     <h2 class="speak">Screen reader header for Fifth tab contents</h2>
                     <div class="skycom-12 alpha">
@@ -96,7 +93,7 @@
                 </section>
             </div>
 
-            <div id="sixth-classic" class="tabpanel" aria-labeledby="sixth-classic-tab" role="tabpanel">
+            <div id="sixth" class="tabpanel" aria-labeledby="sixth-tab" role="tabpanel">
                 <section class="tabcontents clearfix">
                     <h2 class="speak">Screen reader header for Sixth tab contents</h2>
                     <div class="skycom-12 alpha">
@@ -105,7 +102,7 @@
                 </section>
             </div>
 
-            <div id="seventh-classic" class="tabpanel" aria-labeledby="seventh-classic-tab" role="tabpanel">
+            <div id="seventh" class="tabpanel" aria-labeledby="seventh-tab" role="tabpanel">
                 <section class="tabcontents clearfix">
                     <h2 class="speak">Screen reader header for Seventh tab contents</h2>
                     <div class="skycom-12 alpha">

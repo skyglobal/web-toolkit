@@ -23,7 +23,7 @@ toolkit.modules = (function(){
             skycons : false,
             share : false,
             popup : false,
-            tabs : false,
+            inPageNav : false,
             datepicker : false
         }, options);
         for (module in modulesToInitialize) {
@@ -52,9 +52,9 @@ if (typeof window.define === "function" && window.define.amd) {
         'utils/popup',
         'utils/diff',
         'modules',
-        'modules/tabs',
+        'modules/inPageNav',
         'modules/share',
-        'modules/carousel'], function(skycons, hashmanager, popup, diff, modules, tabs, share, carousel){
+        'modules/carousel'], function(skycons, hashmanager, popup, diff, modules, inPageNav, share, carousel){
 
 
         return {
@@ -63,7 +63,7 @@ if (typeof window.define === "function" && window.define.amd) {
             hashmanager: hashmanager,
             popup: popup,
             diff: diff,
-            tabs: tabs,
+            inPageNav: inPageNav,
             share: share,
             carousel: carousel
         };
