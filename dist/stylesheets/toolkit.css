@@ -960,32 +960,6 @@ button.btn {
   margin-top: 8px;
 }
 
-.tabs-container {
-  position: relative;
-}
-
-.tabs {
-  margin: 20px 0;
-  border-bottom: solid 1px #dcdcdc;
-  border-top: solid 1px #dcdcdc;
-}
-
-.tab {
-  float: left;
-  padding: 0 30px 0 0;
-}
-.tab a {
-  line-height: 44px;
-  text-decoration: none;
-}
-.tab.selected {
-  margin-bottom: -1px;
-}
-.tab.selected a {
-  font-family: SkyTextMedium, Helvetica, Arial, sans-serif;
-  border-bottom: 2px solid #0073c5;
-}
-
 .tabpanel {
   display: none;
   width: 100%;
@@ -1038,7 +1012,7 @@ button.btn {
   position: absolute;
   right: 0;
   top: 45px;
-  width: 320px;
+  width: 300px;
 }
 .more-tabs.dropdown-tab-selected {
   visibility: visible;
@@ -1051,6 +1025,110 @@ button.btn {
   background: #0073c5;
   color: white;
   cursor: pointer;
+}
+
+.tabs-container.page-nav {
+  position: relative;
+}
+.tabs-container.page-nav .tabs {
+  margin: 20px 0;
+  border-bottom: solid 1px #dcdcdc;
+  border-top: solid 1px #dcdcdc;
+}
+.tabs-container.page-nav .tab {
+  float: left;
+  padding: 0 30px 0 0;
+}
+.tabs-container.page-nav .tab a {
+  line-height: 44px;
+  text-decoration: none;
+}
+.tabs-container.page-nav .tab.selected {
+  margin-bottom: -1px;
+}
+.tabs-container.page-nav .tab.selected a {
+  font-family: SkyTextMedium, Helvetica, Arial, sans-serif;
+  border-bottom: 2px solid #0073c5;
+}
+
+.tabs-container.classic {
+  position: relative;
+}
+.tabs-container.classic .tabs {
+  font-size: 1.25em;
+  margin: 20px 0;
+  border-bottom: solid 1px #d7d5d5;
+}
+.tabs-container.classic .tab {
+  float: left;
+  margin-right: 4px;
+  position: relative;
+  border: solid 1px #bbbbbb;
+  background: #eee;
+  border-radius: 5px 5px 0 0;
+  border-bottom: 0;
+  position: relative;
+  bottom: -11px;
+}
+.tabs-container.classic .tab:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1.5%;
+  width: 97%;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.7);
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.9)), color-stop(100%, rgba(255, 255, 255, 0.5)));
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5));
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5));
+  background: -o-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5));
+  background: linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5));
+  background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5));
+  -webkit-border-radius: 0 0 20px 20px;
+  -moz-border-radius: 0 0 20px 20px;
+  -ms-border-radius: 0 0 20px 20px;
+  -o-border-radius: 0 0 20px 20px;
+  border-radius: 0 0 20px 20px;
+  -webkit-transition: opacity 0.25s;
+  -moz-transition: opacity 0.25s;
+  -o-transition: opacity 0.25s;
+  transition: opacity 0.25s;
+}
+.tabs-container.classic .tab:hover:before, .tabs-container.classic .tab:focus:before {
+  opacity: 0;
+}
+.tabs-container.classic .tab a {
+  position: relative;
+  color: #333;
+  display: block;
+  text-align: center;
+  padding: 0 40px;
+  line-height: 32px;
+  height: 32px;
+  -webkit-transition: background-color 0.25s;
+  -moz-transition: background-color 0.25s;
+  -o-transition: background-color 0.25s;
+  transition: background-color 0.25s;
+}
+.tabs-container.classic .tab.selected {
+  margin-bottom: -1px;
+  background-color: #fff;
+  bottom: 0;
+  font-size: 1.2em;
+}
+.tabs-container.classic .tab.selected:before {
+  background: rgba(255, 255, 255, 0.25);
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.4)), color-stop(100%, rgba(255, 255, 255, 0.05)));
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.05));
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.05));
+  background: -o-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.05));
+}
+.tabs-container.classic .tab.selected a {
+  text-decoration: none;
+  cursor: default;
+  height: 44px;
+  line-height: 44px;
 }
 
 .sky-form .row {
