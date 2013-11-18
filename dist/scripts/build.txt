@@ -5,7 +5,7 @@ utils/skycons.js
 utils/hashmanager.js
 utils/popup.js
 utils/diff.js
-modules/tabs.js
+modules/inPageNav.js
 modules/share.js
 modules/carousel.js
 toolkit.js
@@ -17,7 +17,7 @@ utils/skycons.js
 utils/hashmanager.js
 utils/popup.js
 utils/diff.js
-modules/tabs.js
+modules/inPageNav.js
 modules/share.js
 modules/carousel.js
 toolkit.js

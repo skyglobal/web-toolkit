@@ -29,12 +29,14 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
                 videoAds: false
             }
         });
-        $('#hero-16-9').skycom_carousel({
+        $('#hero-skinny').skycom_carousel({
             carousel: {
                 autoplay: true,
                 videoAds: false
             }
         });
+        $('#demo-classc-tabs').inPageNav();
+        $('#demo-inpage-nav-tabs').inPageNav();
         toolkit.modules.init();
     }
 
