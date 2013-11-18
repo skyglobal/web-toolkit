@@ -6,7 +6,7 @@
     <script src="vendor/mocha.js"></script>
     <script src="vendor/require.js"></script>
     <script src="config.js" ></script>
-
+    <!--<link rel="stylesheet" href="../../_site/dist/stylesheets/toolkit.css">-->
 </head>
 <body>
 <!--PLACEHOLDER FOR MOCHA TEST RESULTS-->
@@ -16,35 +16,35 @@
 <div id="spec-markup">
 
     <div class="demo" data-selector="*">
-        <section class="module clearfix" data-function="tabs" data-remember-state="true">
+        <section class="clearfix tabs-container " data-function="tabs">
 
-            <h2 class="at">This is a screenreader header for tabs</h2>
+            <h2 class="speak">This is a screenreader header for tabs</h2>
 
             <ul class="tabs clearfix" role="tablist">
-                <li id="first-tab" aria-controls="first" aria-label="first" role="tab" class="tab selected" data-value="1">
+                <li id="first-tab" aria-controls="first" aria-label="first" role="tab" class="tab selected" >
                     <a href="#!first" class="skycom-ellipsis"><span>First</span></a>
                 </li>
-                <li id="second-tab" aria-controls="second" aria-label="second" role="tab" class="tab" data-value="2">
+                <li id="second-tab" aria-controls="second" aria-label="second" role="tab" class="tab" >
                     <a href="#!second" class="skycom-ellipsis"><span>SecondSecond</span></a>
                 </li>
-                <li id="third-tab" aria-controls="third" aria-label="third" role="tab" class="tab" data-value="3">
+                <li id="third-tab" aria-controls="third" aria-label="third" role="tab" class="tab" >
                     <a href="#!third" class="skycom-ellipsis"><span>ThirdThirdThird</span></a>
                 </li>
-                <li id="fourth-tab" aria-controls="fourth" aria-label="fourth" role="tab" class="tab" data-value="4">
+                <li id="fourth-tab" aria-controls="fourth" aria-label="fourth" role="tab" class="tab" >
                     <a href="#!fourth" class="skycom-ellipsis"><span>FourthFourth</span></a>
                 </li>
-                <li id="fifth-tab" aria-controls="fifth" aria-label="fifth" role="tab" class="tab" data-value="5">
+                <li id="fifth-tab" aria-controls="fifth" aria-label="fifth" role="tab" class="tab" >
                     <a href="#!fifth" class="skycom-ellipsis"><span>FifthFifthFifthFifth</span></a>
                 </li>
-                <li id="sixth-tab" aria-controls="sixth" aria-label="sixth" role="tab" class="tab" data-value="6">
+                <li id="sixth-tab" aria-controls="sixth" aria-label="sixth" role="tab" class="tab" >
                     <a href="#!sixth" class="skycom-ellipsis"><span>Sixth</span></a>
                 </li>
-                <li id="seventh-tab" aria-controls="seventh" aria-label="seventh" role="tab" class="tab" data-value="7">
+                <li id="seventh-tab" aria-controls="seventh" aria-label="seventh" role="tab" class="tab" >
                     <a href="#!seventh" class="skycom-ellipsis"><span>Seventh</span></a>
                 </li>
                 <div class="dropdown-tab-select">
-                    <a href="#" aria-controls="dropdown" aria-label="more tabs">...</a>
-                    <ul class="dropdown-tab-info">
+                    <a href="#" aria-controls="dropdown" aria-label="more tabs">&hellip;</a>
+                    <ul class="more-tabs">
 
                     </ul>
                 </div>                 
@@ -122,41 +122,19 @@
 <!--TEST-->
 <script>
     require(['utils/hashmanager', 'modules/tabs', '../../test/jsUnit/setup'],function(hash, tabs){
-        tabs.init();
         describe('Test responsive tabs', function() {
 
-            it('testing mocha', function() {
-                expect($('#fifth-tab span').text()).to.equal("FifthFifthFifthFifth");
-            });
-
             it('check change tab removes class and adds classes for the correct controlID', function(){
+                expect($('#first-tab').hasClass('selected')).to.equal(true);
                 $('#first-tab').click();
                 expect($('#first-tab').hasClass('selected')).to.equal(true);
-                expect(!$('#second-tab').hasClass('selected')).to.equal(true);                
+                expect($('#second-tab').hasClass('selected')).to.equal(false);
                 tabs.changeTab('fourth');
-                expect(!$('#first-tab').hasClass('selected')).to.equal(true);
-                expect(!$('#third-tab').hasClass('selected')).to.equal(true);
+                expect($('#first-tab').hasClass('selected')).to.equal(false);
+                expect($('#third-tab').hasClass('selected')).to.equal(false);
                 expect($('#fourth-tab').hasClass('selected')).to.equal(true);
-            });
-
-            it('Check that the correct number of elements are being put in the dropdown', function(){
-                tabs.moveTabsToDropdown(3);
-                expect($('.dropdown-tab-info').find('li').length).to.equal(4);
-                tabs.moveTabsToDropdown(2);
-                expect($('.dropdown-tab-info').find('li').length).to.equal(5);
-
-
-            });
-
-            it('Check the changeTab method it goes to the tabs li', function(){
-                // $noInTabs = $('.tabs').children('li').length;
                 tabs.changeTab('seventh');
-                expect($('.tabs').find('#first-tab').length).to.equal(1);
-
-
-
             });
-
 
         });
         mocha.run();

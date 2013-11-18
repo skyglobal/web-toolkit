@@ -1,4 +1,4 @@
-.sky-form{
+.sky-form {
 
   .row {
     margin: 0 0 24px 0;
@@ -22,10 +22,12 @@
     font: 16px/1em $font-family;
   }
 
-  .row > label {
+  .row > label,
+  .row > .field_with_errors label {
     line-height: 32px;
   }
 
+  .row> .field_with_errors label,
   .row > label,
   legend {
     color: #3c3c3c;
@@ -35,7 +37,6 @@
     width: 24%;
     padding-right: 20px;
   }
-
 
   .no-label {
     margin-left: 24%;
@@ -89,28 +90,47 @@
       display: inline-block;
       margin-bottom: 5px;
     }
+  }
 
+  .error {
+    margin-left: 24%;
   }
 }
 
 //ie7
-.sky-form{
+.sky-form {
   .radiocheck {
-    *margin-top:-1em;
-    *margin-left:24%;
-    *padding-left:20px;
+    *margin-top: -1em;
+    *margin-left: 24%;
+    *padding-left: 20px;
   }
 }
 
-
 @media (max-width: $mobile-width) {
+  .sky-form {
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    textarea {
+      width: 100%;
+    }
+  }
+
   .sky-form .row {
-       margin: 0 0 16px 0;
+    margin: 0 0 16px 0;
     & > label {
-           float: none;
-           display: block;
-           width: 100%;
-           text-align: left;
-         }
+      float: none;
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+  }
+
+  button {
+    margin: 16px 0 0 0;
+  }
+  .no-label label {
+     display: inline;
   }
 }

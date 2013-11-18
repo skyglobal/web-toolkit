@@ -1,51 +1,50 @@
-<h3 class="wiki-h3">Tabs</h3>
+<h3 class="wiki-h3">In-Page Navigation</h3>
 
 <div class="example">
-    <h4>Remembering State</h4>
-    <div class="design-notes">
-        The state (open or closed) of the tabs can optionally be remembered. i.e. Pressing the back button will open the page with the tab open that was clicked last.
+    <div class="design-notes error">
+        This module is not yet complete.  If you need it be aware that 'accessibility' checks have not been finished.
     </div>
     <div class="developer-notes">
-        Add attribute <code>data-remember-state="true"</code>
+
     </div>
     <div class="demo" data-selector="*">
-        <section class="module clearfix" data-function="tabs" data-remember-state="true">
+        <section class="module clearfix tabs-container" data-function="tabs">
 
-            <h2 class="at">This is a screenreader header for tabs</h2>
+            <h2 class="speak">This is a screenreader header for tabs</h2>
 
             <ul class="tabs clearfix" role="tablist">
-                <li id="first-tab" aria-controls="first" aria-label="first" role="tab" class="tab selected" data-value="1">
-                    <a href="#!first" class="skycom-ellipsis"><span>First</span></a>
+                <li id="first-tab" aria-controls="first" aria-label="first" role="tab" class="tab selected">
+                    <a href="#!first" class="skycom-ellipsis internal-link"><span>First</span></a>
                 </li>
-                <li id="second-tab" aria-controls="second" aria-label="second" role="tab" class="tab" data-value="2">
-                    <a href="#!second" class="skycom-ellipsis"><span>SecondSecond</span></a>
+                <li id="second-tab" aria-controls="second" aria-label="second" role="tab" class="tab" >
+                    <a href="#!second" class="skycom-ellipsis internal-link"><span>SecondSecond</span></a>
                 </li>
-                <li id="third-tab" aria-controls="third" aria-label="third" role="tab" class="tab" data-value="3">
-                    <a href="#!third" class="skycom-ellipsis"><span>ThirdThirdThird</span></a>
+                <li id="third-tab" aria-controls="third" aria-label="third" role="tab" class="tab" >
+                    <a href="#!third" class="skycom-ellipsis internal-link"><span>ThirdThirdThird</span></a>
                 </li>
-                <li id="fourth-tab" aria-controls="fourth" aria-label="fourth" role="tab" class="tab" data-value="4">
-                    <a href="#!fourth" class="skycom-ellipsis"><span>FourthFourth</span></a>
+                <li id="fourth-tab" aria-controls="fourth" aria-label="fourth" role="tab" class="tab" >
+                    <a href="#!fourth" class="skycom-ellipsis internal-link"><span>FourthFourth</span></a>
                 </li>
-                <li id="fifth-tab" aria-controls="fifth" aria-label="fifth" role="tab" class="tab" data-value="5">
-                    <a href="#!fifth" class="skycom-ellipsis"><span>FifthFifthFifthFifth</span></a>
+                <li id="fifth-tab" aria-controls="fifth" aria-label="fifth" role="tab" class="tab">
+                    <a href="#!fifth" class="skycom-ellipsis internal-link"><span>FifthFifthFifthFifth</span></a>
                 </li>
-                <li id="sixth-tab" aria-controls="sixth" aria-label="sixth" role="tab" class="tab" data-value="6">
-                    <a href="#!sixth" class="skycom-ellipsis"><span>Sixth</span></a>
+                <li id="sixth-tab" aria-controls="sixth" aria-label="sixth" role="tab" class="tab" >
+                    <a href="#!sixth" class="skycom-ellipsis internal-link"><span>Sixth</span></a>
                 </li>
-                <li id="seventh-tab" aria-controls="seventh" aria-label="seventh" role="tab" class="tab" data-value="7">
-                    <a href="#!seventh" class="skycom-ellipsis"><span>Seventh</span></a>
+                <li id="seventh-tab" aria-controls="seventh" aria-label="seventh" role="tab" class="tab">
+                    <a href="#!seventh" class="skycom-ellipsis internal-link"><span>Seventh</span></a>
                 </li>
                 <div class="dropdown-tab-select">
-                    <a href="#" aria-controls="dropdown" aria-label="more tabs">...</a>
-                    <ul class="dropdown-tab-info">
+                    <a href="#!" aria-controls="dropdown" aria-label="more tabs" class="medium">&hellip;</a>
+                    <ul class="more-tabs">
 
                     </ul>
-                </div>                 
+                </div>
             </ul>
 
             <div id="first" class="tabpanel selected" aria-labeledby="first-tab" role="tabpanel">
                 <section class="tabcontents clearfix">
-                    <h2 class="at">Screen reader header for First tab contents</h2>
+                    <h2 class="speak">Screen reader header for First tab contents</h2>
                     <div class="skycom-12 alpha">
                         <img src="/wiki_images/beckham.jpg" alt="beckham looking for help">
                     </div>
@@ -54,7 +53,7 @@
 
             <div id="second" class="tabpanel" aria-labeledby="second-tab" role="tabpanel">
                 <section class="tabcontents clearfix">
-                    <h2 class="at">Screen reader header for Second tab contents</h2>
+                    <h2 class="speak">Screen reader header for Second tab contents</h2>
                     <div class="skycom-12 alpha">
                         <img src="/wiki_images/smash.jpg" alt="something else">
                     </div>
@@ -63,7 +62,7 @@
 
             <div id="third" class="tabpanel" aria-labeledby="third-tab" role="tabpanel">
                 <section class="tabcontents clearfix">
-                    <h2 class="at">Screen reader header for Third tab contents</h2>
+                    <h2 class="speak">Screen reader header for Third tab contents</h2>
                     <div class="skycom-12 alpha">
                         <img src="/wiki_images/beckham.jpg" alt="something else">
                     </div>
@@ -72,7 +71,7 @@
 
             <div id="fourth" class="tabpanel" aria-labeledby="fourth-tab" role="tabpanel">
                 <section class="tabcontents clearfix">
-                    <h2 class="at">Screen reader header for Fourth tab contents</h2>
+                    <h2 class="speak">Screen reader header for Fourth tab contents</h2>
                     <div class="skycom-12 alpha">
                         <img src="/wiki_images/smash.jpg" alt="something else">
                     </div>
@@ -81,7 +80,7 @@
 
             <div id="fifth" class="tabpanel" aria-labeledby="fifth-tab" role="tabpanel">
                 <section class="tabcontents clearfix">
-                    <h2 class="at">Screen reader header for Fifth tab contents</h2>
+                    <h2 class="speak">Screen reader header for Fifth tab contents</h2>
                     <div class="skycom-12 alpha">
                         <img src="/wiki_images/beckham.jpg" alt="something else">
                     </div>
@@ -90,7 +89,7 @@
 
             <div id="sixth" class="tabpanel" aria-labeledby="sixth-tab" role="tabpanel">
                 <section class="tabcontents clearfix">
-                    <h2 class="at">Screen reader header for Sixth tab contents</h2>
+                    <h2 class="speak">Screen reader header for Sixth tab contents</h2>
                     <div class="skycom-12 alpha">
                         <img src="/wiki_images/smash.jpg" alt="something else">
                     </div>
@@ -99,7 +98,7 @@
 
             <div id="seventh" class="tabpanel" aria-labeledby="seventh-tab" role="tabpanel">
                 <section class="tabcontents clearfix">
-                    <h2 class="at">Screen reader header for Seventh tab contents</h2>
+                    <h2 class="speak">Screen reader header for Seventh tab contents</h2>
                     <div class="skycom-12 alpha">
                         <img src="/wiki_images/beckham.jpg" alt="something else">
                     </div>
