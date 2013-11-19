@@ -6,5 +6,4 @@ web-toolkit.ipr
 .ruby-version
 *iws
 node_modules/
-_site
 grunt/fonts/min
