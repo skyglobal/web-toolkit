@@ -1,20 +1,23 @@
 <h3 class="wiki-h3">In-Page Navigation</h3>
 
 <div class="example">
-    <div class="design-notes error">
-        This module is not yet complete.  If you need it, be aware that 'accessibility' checks have not been finished.
+    <p class="design-notes">
+        <span class="error">This module is not yet complete.</span>  If you need it, please complete 'accessibility' checks an re-submit.
+    </p>
+    <div class="design-notes">
+        This module should be used when all of, or the majority of, the page changes after an item click.
     </div>
     <div class="design-notes">
-        This module should be used when the all of, or the majority of, the page changes after an item click.
+        If only a small section of the page changes please use '<code>Classic Tabs</code>'.
     </div>
-    <div class="design-notes">
-        If only a small section of the page changes please use '<code>tabs</code>'.
+    <div class="developer-notes">
+        Add Class '<code>page-nav</code>'.
     </div>
-    <div class="init-notes">
+    <div class="init">
         <code>$('#demo-inpage-nav-tabs').inPageNav();</code>
     </div>
     <div class="demo" data-selector="*">
-        <section class="module clearfix tabs-container" data-function="tabs" id='demo-inpage-nav-tabs'>
+        <section class="module clearfix tabs-container page-nav" data-function="tabs" id='demo-inpage-nav-tabs'>
 
             <h2 class="speak">This is a screenreader header for tabs</h2>
 
