@@ -121,7 +121,10 @@
 </div>
 <!--TEST-->
 <script>
-    require(['utils/hashmanager', 'modules/tabs', '../../test/jsUnit/setup'],function(hash, tabs){
+    require(['utils/hashmanager', 'modules/inPageNav', '../../test/jsUnit/setup'],function(hash, tabs){
+
+        $('.tabs-container').inPageNav();
+
         describe('Test responsive tabs', function() {
 
             it('check change tab removes class and adds classes for the correct controlID', function(){
@@ -129,11 +132,10 @@
                 $('#first-tab').click();
                 expect($('#first-tab').hasClass('selected')).to.equal(true);
                 expect($('#second-tab').hasClass('selected')).to.equal(false);
-                tabs.changeTab('fourth');
+                $('#fourth-tab').click();
                 expect($('#first-tab').hasClass('selected')).to.equal(false);
                 expect($('#third-tab').hasClass('selected')).to.equal(false);
                 expect($('#fourth-tab').hasClass('selected')).to.equal(true);
-                tabs.changeTab('seventh');
             });
 
         });

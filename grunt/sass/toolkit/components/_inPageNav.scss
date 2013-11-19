@@ -23,16 +23,18 @@
     text-decoration: none;
   }
   > a {
-    border:1px solid transparent;
-    border-top:0;
-    padding: 0; text-align: center;
-    height:44px; width:44px;
-    margin-bottom: -1px;
-    line-height: 31px;
-    z-index:10; position:relative;
-    color:$secondary;
     font-family: $font-family-medium;
     font-size:32px;
+    line-height: 31px;
+    text-align: center;
+    position:relative;
+    height:44px; width:44px;
+    margin-bottom: -1px;
+    padding: 0;
+    border:1px solid transparent;
+    border-top:0;
+    z-index:10;
+    color:$secondary;
     &.dropdown-tab-selected{
       visibility: visible;
       border-color:#dcdcdc;
@@ -58,9 +60,10 @@
     padding: 8px 10px;
     float: none;
     &:hover, &:hover a {
-      background: #0073c5;
-      color: $white;
+      text-decoration: underline;
+      color:$link;
       cursor: pointer;
+      float:none;
     }
   }
 }
@@ -75,12 +78,19 @@
     border-top: solid 1px #dcdcdc;
   }
 
-  .tab {
+  .tabs > .tab {
     float: left;
     padding: 0 30px 0 0;
     a {
       line-height: 44px;
       text-decoration: none;
+    }
+    &:hover{
+      margin-bottom:-1px;
+      a{
+        border-bottom: 2px solid #0073c5;
+        color:$link;
+      }
     }
     &.selected {
       margin-bottom:-1px;
@@ -99,7 +109,7 @@
     margin: 20px 0;
     border-bottom: solid 1px #d7d5d5;
   }
-  .tab {
+  .tabs > .tab {
     float: left;
     margin-right: 4px;
     position: relative;
@@ -158,4 +168,21 @@
       }
     }
   }
+}
+.classic .dropdown-tab-select{
+  >a{
+    border-top:1px solid transparent;
+    height:43px;
+  }
+  a.dropdown-tab-selected{
+    border-radius: 5px 5px 0 0;
+    border-top:1px solid #dcdcdc;
+  }
+  ul a{
+    font-size: 16px;
+  }
+}
+.classic .more-tabs{
+  z-index: 5;
+  top:44px;
 }
