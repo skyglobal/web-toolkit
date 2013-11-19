@@ -13,12 +13,25 @@
 <div id="mocha"></div>
 
 <!--FIXTURE HTML FOR TESTS-->
+
+
 <div id="spec-markup">
 
 
-    <div class="accordion">
-        Accordion goes here
-    </div>
+    <ul class="accordion">
+        <li>
+            <a class="accordion-heading" href="#first-accordion-content">First Accordion Item <span class="icon skycon-chevron-down"></span></a>
+            <div id="first-accordion-content" class="accordion-content accordion-invisible">First Accordion content</div>
+        </li>
+        <li>
+            <a class="accordion-heading" href="#second-accordion-content">Second Accordion Item <span class="icon skycon-chevron-down"></span></a>
+            <div id="second-accordion-content" class="accordion-content accordion-invisible">Second Accordion content</div>
+        </li>
+        <li>
+            <a class="accordion-heading" href="#third-accordion-content">Third Accordion Item <span class="icon skycon-chevron-down"></span></a>
+            <div id="third-accordion-content" class="accordion-content accordion-invisible">Third Accordion content</div>
+        </li>
+    </ul>
 
 </div>
 
@@ -27,12 +40,23 @@
 <!--TEST-->
 <script>
 
-    require(['modules/carousel', '../../test/jsUnit/setup'],function(){
+    require(['modules/accordion', '../../test/jsUnit/setup'],function(){
 
         describe('Accordion module', function() {
 
-            it('Returns True', function() {
-                expect(1).to.equal(1);
+            it('Accordion content should be closed by default', function() {
+
+                expect($('.accordion-heading.open').length).to.equal(0);
+
+            });
+
+            it('Accordion content should open and close when a user clicks an accordion item twice', function() {
+
+                expect($('.accordion-heading').first().hasClass('open')).to.equal(false);
+                $('.accordion-heading').first().click();
+                expect($('.accordion-heading').first().hasClass('open')).to.equal(true);
+                $('.accordion-heading').first().click();
+                expect($('.accordion-heading').first().hasClass('open')).to.equal(false);
             });
         });
         mocha.run();

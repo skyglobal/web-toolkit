@@ -107,6 +107,7 @@
                             <li><a href="index.html#breadcrumbs" data-diff="components/breadcrumbs">Breadcrumbs</a></li>
                             <li><a href="index.html#form" data-diff="components/form">Form</a></li>
                             <li><a href="index.html#tabs" data-diff="components/tabs">Tabs</a></li>
+                            <li><a href="index.html#accordion" data-diff="components/accordion">Accordion</a></li>
                             <li><a href="index.html#carousel" data-diff="components/carousel">Carousel</a></li>
                             <li><a href="index.html#share" data-diff="components/share">Share</a></li>
                         </ul>
@@ -126,7 +127,7 @@
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
 				<h1 class="wiki-header">Sky Web Toolkit <small>v1.3.0 </small></h1>
-<div class="secondary">Last Updated: 18-11-2013</div>
+<div class="secondary">Last Updated: 19-11-2013</div>
 
 <a name="using-the-toolkit"></a>
 <section class="wiki-section">
@@ -1209,11 +1210,41 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     </div>
 </div>
     </div>
+    <a name="accordion"></a>
+    <div class="sub-section">
+        <h3 class="wiki-h3">Accordion</h3>
+<p class="design-notes">
+    The accordion is fully responsive.
+</p>
+
+<div class="example">
+    <ul class="accordion">
+        <li>
+            <a class="accordion-heading" href="#first-accordion-content">First Accordion Item <span class="skycon-chevron-down accordion-icon"></span></a>
+            <div id="first-accordion-content" class="accordion-content accordion-invisible">
+                <p style="margin: 16px 0 8px 0;"> First Accordion content</p>
+            </div>
+        </li>
+        <li>
+            <a class="accordion-heading" href="#second-accordion-content">Second Accordion Item <span class="skycon-chevron-down accordion-icon"></span></a>
+            <div id="second-accordion-content" class="accordion-content accordion-invisible">
+                <p style="margin: 16px 0 8px 0;">Second Accordion content</p>
+            </div>
+        </li>
+        <li>
+            <a class="accordion-heading" href="#third-accordion-content">Third Accordion Item <span class="skycon-chevron-down accordion-icon"></span></a>
+            <div id="third-accordion-content" class="accordion-content accordion-invisible">
+                <p style="margin: 16px 0 8px 0;">Third Accordion content</p>
+            </div>
+        </li>
+    </ul>
+</div>
+    </div>
     <a name="carousel"></a>
     <div class="sub-section">
         <h3 class="wiki-h3">Carousel</h3>
 <p class="design-notes">
-    The carousel is fully responsive, has a video player and works on touch devices (not microsoft).
+    The carousel is fully responsive, incorporates the video player and works on touch devices (not microsoft).
 </p>
 
 <div class="dependencies">
@@ -1345,15 +1376,15 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
             </div>
         </section>
     </div>
-    <h4 class="medium">16:9 Carousel</h4>
+    <h4 class="medium">Skinny Carousel</h4>
     <div class="design-notes">
         Use a maximum of 2 lines of text in total (or 1 line plus channel logo).
     </div>
     <p class="developer-notes">
-        Add the class <code>hero-16-9</code>.
+        Add the class <code>hero-skinny</code>.
     </p>
     <div class="demo" data-selector="*">
-        <section class="module clearfix skycom-carousel hero-16-9" data-function="carousel" data-tracking-module="hero-169"
+        <section class="module clearfix skycom-carousel hero-skinny" data-function="carousel" data-tracking-module="hero-169"
                  id="hero-16-9">
             <h2 class="speak">Featured News, shows or Products from around Sky</h2>
 

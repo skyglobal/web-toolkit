@@ -1,5 +1,6 @@
 
 http_path = "../"
+https_path = "../"
 generated_images_path = "dist/images/"
 sprite_load_path = "grunt/"
 

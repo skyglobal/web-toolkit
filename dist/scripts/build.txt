@@ -6,6 +6,7 @@ utils/hashmanager.js
 utils/popup.js
 utils/diff.js
 modules/tabs.js
+modules/accordion.js
 modules/share.js
 modules/carousel.js
 toolkit.js
@@ -18,6 +19,7 @@ utils/hashmanager.js
 utils/popup.js
 utils/diff.js
 modules/tabs.js
+modules/accordion.js
 modules/share.js
 modules/carousel.js
 toolkit.js
