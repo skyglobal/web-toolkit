@@ -51,8 +51,9 @@ if (typeof window.define === "function" && window.define.amd) {
         'utils/diff',
         'modules',
         'modules/tabs',
+        'modules/accordion',
         'modules/share',
-        'modules/carousel'], function(skycons, hashmanager, popup, diff, modules, tabs, share, carousel){
+        'modules/carousel'], function(skycons, hashmanager, popup, diff, modules, tabs, accordion, share, carousel){
 
 
         return {
@@ -62,6 +63,7 @@ if (typeof window.define === "function" && window.define.amd) {
             popup: popup,
             diff: diff,
             tabs: tabs,
+            accordion: accordion,
             share: share,
             carousel: carousel
         };
