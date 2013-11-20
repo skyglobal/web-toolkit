@@ -87,9 +87,9 @@ toolkit.carousel = (function(window, $) {
         },
         initialiseVideos: function() {
             var carousel = this;
-            var videoSlides = this.$slides.video({
+            this.$slides.video({
                 token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-                freewheel: false, //disable ads
+                displayAdverts: false, //disable ads
                 onPlay: function() {
                     carousel.pause();
                     carousel.$viewport.find('.actions, .indicators').hide();
