@@ -234,111 +234,6 @@ toolkit.carousel = (function(window, $) {
         }
     };
 
-    function Video(carousel, options) {
-        this.carousel = carousel;
-        this.wrapper = carousel.$viewport.find('.video-wrapper');
-        this.wrapper.attr('id', 'video-' + options.videoId);
-        this.videocontrolcontainer = carousel.$viewport.find('.videocontrolcontainer');
-        this.player = carousel.$viewport.find('video');
-        this.videocontrolcontainer.find('img').on('error', function() {
-            this.src = options.placeHolderImage;
-        });
-        this.options = options;
-        this.bindEvents();
-    }
-
-    Video.prototype = {
-        bindEvents: function(){
-            var $self = this,
-                hijackLink = function(e) {
-                    e.preventDefault();
-                },
-                stop = function(e){
-                    $self.stop();
-                    $wrapper.off('click', hijackLink);
-                    return false;
-                },
-                $wrapper = this.wrapper;
-            $wrapper.on('click', hijackLink).find('.close').one('click touchstart', stop);
-            this.player.on('ended webkitendfullscreen', stop);
-        },
-        play: function() {
-            var $self = this,
-                carouselControls = this.carousel.$viewport.find('.actions, .indicators');
-            this.originalHtml = this.videocontrolcontainer.html();
-            this.carousel.pause();
-            this.showCanvas(function() {
-                carouselControls.hide();
-                $self.carousel.unbindTouchEvents();
-                $self.player.sky_html5player($self.options); //todo: move to main video function
-                setTimeout(function(){sky.html5player.play();},1333); //todo: call without setTimeout. S3 breaks as does flash ie8
-//                todo: do both todo's when video team add flash queueing + fixed S3
-            });
-        },
-        stop: function() {
-            var $self = this,
-                carouselControls = this.carousel.$viewport.find('.actions, .indicators');
-            $(window).off('skycom.resizeend', $self.resizeCarousel);
-            sky.html5player.close(this.wrapper);
-            $self.videocontrolcontainer.html($self.originalHtml); //todo: remove once video team fix 'ie 8 repeat play' bug
-            this.hideCanvas( function(){
-                $self.carousel.bindTouchEvents();
-                carouselControls.show();
-            });
-        },
-        showCanvas: function(callback) {
-            var height,
-                $carousel = this.carousel.$viewport,
-                $overlay = $carousel.find('.video-overlay'),
-                $wrapper = $carousel.find('.video-wrapper'),
-                $play = $carousel.find('.play-video'),
-                $close = $carousel.find('.video-wrapper .close'),
-                speed= 500,
-                $self = this;
-
-            this.originalHeight = $carousel.height();
-            $wrapper.addClass('playing-video');
-            $overlay.fadeIn(function() {
-                $play.fadeOut();
-                height = $self.calculateHeightForVideo();
-                $carousel.animate({ height: height }, speed, function() {
-                    $(window).on('skycom.resizeend', $.proxy($self.resizeCarousel, $self));
-                    $wrapper.show();
-                    $overlay.fadeOut(speed, function() {
-                        $close.addClass('active');
-                    });
-                    callback();
-                });
-            });
-        },
-        calculateHeightForVideo: function() {
-            return Math.round((this.carousel.$viewport.width() / 16) * 9);
-        },
-        resizeCarousel: function() {
-            this.carousel.$viewport.animate({ height: this.calculateHeightForVideo() }, 250);
-        },
-        hideCanvas: function(callback) {
-            var $carousel = this.carousel.$viewport,
-                $overlay = $carousel.find('.video-overlay'),
-                $wrapper = $carousel.find('.video-wrapper'),
-                $play = $carousel.find('.play-video'),
-                $close = $carousel.find('.video-wrapper .close'),
-                speed = 500,
-                originalHeight = this.originalHeight;
-            $overlay.fadeIn(speed, function() {
-                $close.removeClass('active');
-                $carousel.animate({ height: originalHeight }, speed, function(){
-                    $carousel.css({ height: 'auto' });
-                    callback();
-                    $play.fadeIn();
-                    $overlay.hide();
-                    $wrapper.fadeOut();
-                    $wrapper.removeClass('playing-video');
-                });
-            });
-        }
-    };
-
     // jquerify
     $.fn.skycom_carousel = function(params) {
         var options = $.extend(true, {
@@ -440,8 +335,7 @@ toolkit.carousel = (function(window, $) {
                     onclick: function(action) {
                         carousel[action]();
                     }
-                })
-                .video($this);
+                });
             };
 
             createMarkup(carousel);
@@ -452,9 +346,13 @@ toolkit.carousel = (function(window, $) {
                 if (options.carousel.videoAds){
                     options.video.freewheel = true;
                 }
-                var video = new Video(carousel, options.video);
-                video.play();
+                options.video.closeCallback = function() {
+                    $this.find('.actions, .indicators').show();
+                };
 
+                var video = new toolkit.video(carousel.$viewport, options.video);
+                carousel.pause();
+                $this.find('.actions, .indicators').hide();
             }).on('click', '.terms-link', function(e) {
                 carousel.toggleTermsContent();
             }).on('change',function(e, index) {
