@@ -110,6 +110,7 @@
                             <li><a href="index.html#tabs" data-diff="components/tabs">Classic Tabs</a></li>
                             <li><a href="index.html#carousel" data-diff="components/carousel">Carousel</a></li>
                             <li><a href="index.html#share" data-diff="components/share">Share</a></li>
+                            <li><a href="index.html#video" data-diff="components/video">Video</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -126,17 +127,17 @@
         </div>
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
-				<h1 class="wiki-header">Sky Web Toolkit <small>v1.4.0 </small></h1>
-<div class="secondary">Last Updated: 19-11-2013</div>
+				<h1 class="wiki-header">Sky Web Toolkit <small>v1.5.0rc1 </small></h1>
+<div class="secondary">Last Updated: 20-11-2013</div>
 
 <a name="using-the-toolkit"></a>
 <section class="wiki-section">
     <h2>Using the Toolkit</h2>
     <div class="sub-section">
         <p class="developer-notes">
-&lt;script src='//web-toolkit.global.sky.com/1.4.0/scripts/toolkit.js'&gt;&lt;/script&gt;
-&lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.4.0/stylesheets/toolkit.css"/&gt;
-&lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.4.0/fonts/skycons.css"/&gt;
+&lt;script src='//web-toolkit.global.sky.com/1.5.0rc1/scripts/toolkit.js'&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.5.0rc1/stylesheets/toolkit.css"/&gt;
+&lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.5.0rc1/fonts/skycons.css"/&gt;
         </p>
     </div>
     <a name="getting-started"></a>
@@ -148,7 +149,7 @@
 <p>
     Please take a look here for anything that is not documented below. <a href="http://storage.sky.com/other/GlobalGuides.pdf">Global Guidelines</a>
 </p>
-<div class="init">
+<div class="init-notes">
     Components that need javascript initialised can be initialized for everything, or individual modules can be turned off.
     e.g.    everything: <code>toolkit.modules.init();</code>
     e.g.    only Skycons <code>toolkit.modules.init({skycons: true});</code>
@@ -869,7 +870,7 @@ https://github.com/skyglobal/web-toolkit/
         for ie7 support execute <code>toolkit.skycons.init();</code> after the page has loaded.
     </p>
     <p class="developer-notes">
-    Dont forget to include <code>http://web-toolkit.global.sky.com/1.4.0/fonts/skycons.css</code>
+    Dont forget to include <code>http://web-toolkit.global.sky.com/1.5.0rc1/fonts/skycons.css</code>
     </p>
     <p class="developer-notes">
     Ensure <code>aria-hidden</code> is used on your <code>skycon</code> tags.
@@ -1447,7 +1448,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                  id="hero">
             <h2 class="speak">Featured News, shows or Products from around Sky</h2>
 
-            <div class="skycom-carousel-container clearfix">
+            <div class="skycom-carousel-container clearfix" data-video-id="clip-00cwoia5">
                 <div
                         class="clearfix skycom-12 alpha bg-shading light-scheme"
                         data-tracking-other="Sky Sports HD1"
@@ -1470,7 +1471,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                                 <p class="skycom-ellipsis">Global sports star David Beckham OBE is joining Sky as an ambassador.</p>
                             </a>
                         </figcaption>
-                        <a href="#" class="play-video" data-video-id="clip-00cwoia5">
+                        <a href="#" class="play-video">
                             <i class="skycon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
@@ -1481,7 +1482,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                     </p>
                 </div>
 
-                <div
+                <div data-video-id="clip-00ovbt3u"
                         class="clearfix skycom-12 alpha  light-scheme"
                         data-tracking-other="Sky News"
                         data-tracking-pod="tile-2"
@@ -1503,7 +1504,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                                 <p class="skycom-ellipsis">Supercharge your TV</p>
                             </a>
                         </figcaption>
-                        <a href="#" class="play-video" data-video-id="clip-00ovbt3u">
+                        <a href="#" class="play-video" >
                             <i class="skycon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
@@ -1536,17 +1537,6 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                     </figure>
                 </div>
             </div>
-            <div class="video-wrapper">
-                <a href="#" class="close">
-                    <i class="skycon-close"></i>
-                    <span class="speak">Close</span>
-                </a>
-
-                <div class="videocontrolcontainer">
-                    <video></video>
-                    <img class="posterFrame"/>
-                </div>
-            </div>
         </section>
     </div>
     <h4 class="medium">Skinny Carousel</h4>
@@ -1561,7 +1551,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                  id="hero-skinny">
             <h2 class="speak">Featured News, shows or Products from around Sky</h2>
 
-            <div class="skycom-carousel-container clearfix">
+            <div class="skycom-carousel-container clearfix" data-video-id="clip-00cwoia5">
                 <div
                         class="clearfix skycom-12 alpha bg-shading light-scheme"
                         data-tracking-other="Sky Sports HD1"
@@ -1583,7 +1573,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                                 <p class="skycom-ellipsis">for 6 months</p>
                             </a>
                         </figcaption>
-                        <a href="#" class="play-video" data-video-id="clip-00cwoia5">
+                        <a href="#" class="play-video">
                             <i class="skycon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
@@ -1619,7 +1609,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                         These are some different terms and conditions
                     </p>
                 </div>
-                <div
+                <div data-video-id="clip-00ovbt3u"
                         class="clearfix skycom-12 alpha bg-shading dark-scheme"
                         data-tracking-other="Sky Movies Premiere"
                         data-tracking-pod="tile-3"
@@ -1639,25 +1629,62 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                                 <p class="skycom-ellipsis">A fabulous collection</p>
                             </a>
                         </figcaption>
-                        <a href="#" class="play-video" data-video-id="clip-00ovbt3u">
+                        <a href="#" class="play-video" >
                             <i class="skycon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
                     </figure>
                 </div>
             </div>
-            <div class="video-wrapper">
-                <a href="#" class="close">
-                    <i class="skycon-close" aria-hidden="true"></i>
-                    <span class="speak">Close</span>
-                </a>
-
-                <div class="videocontrolcontainer">
-                    <video></video>
-                    <img class="posterFrame"/>
-                </div>
-            </div>
         </section>
+    </div>
+</div>
+    </div>
+    <a name="video" ></a>
+    <div class="sub-section">
+        <a name="video"></a>
+<h3 class="wiki-h3">Video</h3>
+
+<div class="dependencies">
+    <!-- for videos: <script src="js/lib/require.js" ></script>-->
+    <link rel="stylesheet" href="//player.sky.com/css/styles.min.css"/>
+    <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
+</div>
+<div class="design-notes">
+    A wrapper for the Sky video player, in this example it's embedded onto an image. The video will expand the parent
+    container to fit the 16/9 ratio of the video. CSS changes will need to be made to add text next to play button.
+</div>
+<div class="developer-notes">
+    Ensure that you include all the needed dependencies (htmlplayer.js and player css). Check the dependencies tab.
+</div>
+<div class="init-notes">
+    Example: <code> $('#demo-video .video').video({
+        token:"<code>Your 36 long SkyVideo Token</code>",
+        displayAdverts: false,
+        onPlay: function() { //optional
+            //stuff to do before video plays
+        },
+        closeCallback: function() { //optional
+            //stuff to do after video closes
+        }
+    });</code>
+</div>
+
+<div class="example">
+    <h4>Sky Video Player Wrapper</h4>
+
+    <div class="demo" data-selector="*" id="demo-video">
+        <div class="video" data-video-id="clip-00cwoia5">
+            <img src="wiki_images/bling-ring.jpg"
+                 alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
+
+            <a href="#!" class="play-video internal-link"
+               data-tracking-context="David Beckham And Sky Team Up">
+                <i class="skycon-video-play"></i>
+                <span class="speak">Play Trailer</span>
+            </a>
+
+        </div>
     </div>
 </div>
     </div>
@@ -1673,7 +1700,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="developer-notes">
         Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
     </div>
-    <div class="init">
+    <div class="init-notes">
         standard: <code>toolkit.modules.init();</code>
         explicit: <code>toolkit.modules.init({share:true, popup: true, skycons: true });</code>
     </div>
@@ -1710,7 +1737,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="developer-notes">
         Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
     </div>
-    <div class="init">
+    <div class="init-notes">
         standard: <code>toolkit.modules.init({popup: true});</code>
         with ie7 support: <code>toolkit.modules.init({popup: true, skycons:true});</code>
     </div>
@@ -1735,6 +1762,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     </div>
 </div>
     </div>
+
 </section>
 
 <a name="examples"></a>

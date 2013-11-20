@@ -21,6 +21,7 @@ toolkit.carousel = (function(window, $) {
         this.timerId = false;
         this.touchReset();
         this.bindEvents();
+        this.initialiseVideos();
     }
 
     Carousel.prototype = {
@@ -83,6 +84,21 @@ toolkit.carousel = (function(window, $) {
         hideTermsLink: function(){
             this.$viewport.find('.terms-link').fadeOut(200);
             this.hideTermsContent();
+        },
+        initialiseVideos: function() {
+            var carousel = this;
+            var videoSlides = this.$slides.video({
+                token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
+                freewheel: false, //disable ads
+                onPlay: function() {
+                    carousel.pause();
+                    carousel.$viewport.find('.actions, .indicators').hide();
+                },
+                closeCallback: function() {
+                    carousel.$viewport.find('.actions, .indicators').show();
+                }
+            });
+
         },
         moveSlide : function(opts){//index, start, end, callback, reverse
             var self = this,
@@ -248,13 +264,6 @@ toolkit.carousel = (function(window, $) {
                 startSlideIndex: 0,
                 onPlayDelay: 500,
                 interval: 6000
-            },
-            video: {
-                token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-                autoplay: false,
-                videoId: null,
-                freewheel: false, //disable ads
-                placeHolderImage: '//static.video.sky.com/posterframes/skychasky.jpg'
             }
         }, params);
 
@@ -340,20 +349,7 @@ toolkit.carousel = (function(window, $) {
 
             createMarkup(carousel);
 
-            $this.on('click', '.play-video', function(e) {
-                e.preventDefault();
-                options.video.videoId = $(this).attr('data-video-id');
-                if (options.carousel.videoAds){
-                    options.video.freewheel = true;
-                }
-                options.video.closeCallback = function() {
-                    $this.find('.actions, .indicators').show();
-                };
-
-                var video = new toolkit.video(carousel.$viewport, options.video);
-                carousel.pause();
-                $this.find('.actions, .indicators').hide();
-            }).on('click', '.terms-link', function(e) {
+            $this.on('click', '.terms-link', function(e) {
                 carousel.toggleTermsContent();
             }).on('change',function(e, index) {
                 index = index || 0;
