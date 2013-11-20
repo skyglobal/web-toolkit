@@ -11,7 +11,9 @@ toolkit.video = (function (window, $) {
             freewheel : options.displayAdverts,
             animationSpeed : (options.animationSpeed) ? options.animationSpeed : 500,
             autoplay : false,
-            videoId : $container.attr('data-video-id')
+            videoId : $container.attr('data-video-id'),
+            onPlay: options.onPlay,
+            closeCallback: options.closeCallback
         };
         this.bindEvents();
     }
