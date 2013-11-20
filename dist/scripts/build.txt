@@ -7,6 +7,7 @@ utils/popup.js
 utils/diff.js
 modules/tabs.js
 modules/accordion.js
+modules/form.js
 modules/share.js
 modules/carousel.js
 toolkit.js
@@ -20,6 +21,7 @@ utils/popup.js
 utils/diff.js
 modules/tabs.js
 modules/accordion.js
+modules/form.js
 modules/share.js
 modules/carousel.js
 toolkit.js

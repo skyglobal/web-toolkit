@@ -95,6 +95,32 @@
   .error {
     margin-left: 24%;
   }
+
+  .form-error,
+  label.form-error {
+    color: #d21717;
+  }
+
+
+  label.feedback.hidden {
+    display: none;
+  }
+
+  label.feedback {
+    margin-left: 24%;
+    text-align: left;
+    width: auto;
+    float: none;
+    display: block;
+  }
+
+  .skycon-warning {
+    margin-right: 8px;
+  }
+
+  .feedback-list label.feedback {
+    margin-left: 24px;
+  }
 }
 
 //ie7
@@ -115,6 +141,9 @@
     textarea {
       width: 100%;
     }
+    label.feedback {
+      margin-left: 0;
+    }
   }
 
   .sky-form .row {
@@ -133,4 +162,6 @@
   .no-label label {
      display: inline;
   }
+
+
 }

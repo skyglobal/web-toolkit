@@ -1,9 +1,8 @@
 /*jshint strict: true */
 /*global jQuery:false */
-
-(function ($) {
-
-    "use strict";
+if (typeof toolkit==='undefined') toolkit={};
+toolkit.accordion = (function ($) {
+    'use strict';
 
     $(".accordion").on("click", ".accordion-heading", function (event) {
         event.preventDefault();
@@ -40,9 +39,10 @@
         }
     });
 })(jQuery);
-
 if (typeof window.define === "function" && window.define.amd) {
     define('modules/accordion', [], function() {
+        'use strict';
+
         return toolkit.accordion;
     });
 }
