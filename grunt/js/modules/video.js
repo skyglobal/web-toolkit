@@ -2,85 +2,94 @@ if (typeof toolkit === 'undefined') toolkit = {};
 toolkit.video = (function (window, $) {
     'use strict';
 
-    var $el = {
-        playingVideo:$('.media')
-    };
-
-    function Video(container, options) {
-        this.container = container;
-        this.createWrapper();
-        this.wrapper = container.find('.video-wrapper');
-        this.wrapper.attr('id', 'video-' + options.videoId);
-        this.player = container.find('video');
-        this.options = options;
-        this.options.autoplay = false;
+    function Video($container, options) {
+        if (!$container.attr('data-video-id')){ return; }
+        var video = this;
+        this.$container = $container;
+        this.options = {
+            token : options.token,
+            freewheel : options.displayAdverts,
+            animationSpeed : (options.animationSpeed) ? options.animationSpeed : 500,
+            autoplay : false,
+            videoId : $container.attr('data-video-id')
+        };
         this.bindEvents();
-        this.play();
     }
 
     Video.prototype = {
+        bindEvents: function(){
+            var video = this;
+            video.$container.on('click','.play-video' ,function(){
+                video.createWrapper();
+                video.play();
+            });
+        },
+        bindWrapperEvents:function () {
+            var video = this;
+            video.$wrapper.on('keydown', video.stopOnEscape.bind(video));
+            video.$wrapper.one('click touchstart', '.close', video.stop.bind(video));
+            video.$player.on('ended webkitendfullscreen', video.stop.bind(video));
+        },
         createWrapper:function () {
-            this.container.append('<div class="video-wrapper">' +
-                '<a href="#" class="close"><i class="icon-close"></i><span class="speak">Close</span></a>' +
+            this.$container.append('<div class="video-wrapper">' +
+                '<a href="#!" class="close"><i class="skycon-close" aria-hidden=true></i><span class="speak">Close</span></a>' +
                 '<div class="videocontrolcontainer"><video></video><img class="posterFrame"/></div>' +
             '</div>');
-            this.container.find('.posterFrame').on('error', function () {
+            this.$container.find('.posterFrame').on('error', function () {
                 this.src = options.placeHolderImage;
             });
-            this.container.append('<div class="video-overlay"></div>');
+            this.$container.append('<div class="video-overlay"></div>');
+            this.$player = this.$container.find('video');
+            this.$wrapper = this.$container.find('.video-wrapper');
+            this.$wrapper.attr('id', 'video-' + this.options.videoId);
+            this.bindWrapperEvents();
         },
-        bindEvents:function () {
-            var $self = this,
-                hijackLink = function (e) {
-                    e.preventDefault();
-                },
-                stop = function (e) {
-                    $self.stop();
-                    $wrapper.off('click', hijackLink);
-                    return false;
-                },
-                $wrapper = this.wrapper;
-            $wrapper.on('keydown', function (e) {
-                if (e.keyCode === 17) {
-                    e.preventDefault();
-                    stop();
-                }
-            });
-            $wrapper.on('click', hijackLink).find('.close').one('click touchstart', stop);
-            this.player.on('ended webkitendfullscreen', stop);
+        removeWrapper: function(){
+            this.$wrapper.removeClass('playing-video').remove();
         },
-        play:function () {
-            var $self = this;
+
+        play:function (e) {
+            if(e) { e.preventDefault(); }
+            var video = this;
+            if(video.options.onPlay) {
+                video.options.onPlay();
+            }
             this.showCanvas(function () {
-                $self.player.sky_html5player($self.options); //todo: move to main video function
-                setTimeout(function () {
-                    sky.html5player.play();
-                }, 1333); //todo: call without setTimeout. S3 breaks as does flash ie8
+            video.$player.sky_html5player(video.options); //todo: move to main video function
+            setTimeout(function () {
+                sky.html5player.play();
+            }, 1333); //todo: call without setTimeout. S3 breaks as does flash ie8
 //                todo: do both todo's when video team add flash queueing + fixed S3
             });
         },
+        stopOnEscape: function(e){
+            if (e.keyCode === 17) {
+                e.preventDefault();
+                this.stop();
+            }
+        },
         stop:function () {
-            var $self = this;
-            $(window).off('skycom.resizeend', $self.resizeContainer);
-            sky.html5player.close(this.wrapper);
+            var video = this;
+            $(window).off('skycom.resizeend', video.resizeContainer);
+            sky.html5player.close(this.$wrapper);
             this.hideCanvas();
         },
         showCanvas:function (callback) {
             var height,
-                $container = this.container,
+                $container = this.$container,
                 $overlay = $container.find('.video-overlay'),
                 $wrapper = $container.find('.video-wrapper'),
                 $play = $container.find('.play-video'),
                 $close = $container.find('.video-wrapper .close'),
                 animationSpeed = (this.options.animationSpeed === 0) ? 0 : this.options.animationSpeed || 500,
-                $self = this;
+                video = this;
             this.originalHeight = $container.height();
             $wrapper.addClass('playing-video');
             $overlay.fadeIn(animationSpeed, function () {
                 $play.fadeOut(animationSpeed);
-                height = $self.calculateHeightForVideo();
+                height = video.calculateHeight();
                 $container.animate({ height:height }, animationSpeed, function () {
-                    $(window).on('skycom.resizeend', $.proxy($self.resizeContainer, $self));
+                    $(window).on('skycom.resizeend', $.proxy(video.resizeContainer, video));
                     $wrapper.show();
                     $overlay.fadeOut(animationSpeed, function () {
                         $close.addClass('active');
@@ -89,38 +98,41 @@ toolkit.video = (function (window, $) {
                 });
             });
         },
-        calculateHeightForVideo:function () {
-            return Math.round((this.container.width() / 16) * 9);
+        calculateHeight:function () {
+            return Math.round((this.$container.width() / 16) * 9);
         },
         resizeContainer:function () {
-            this.container.animate({ height:this.calculateHeightForVideo() }, 250);
+            this.$container.animate({ height:this.calculateHeight() }, 250);
         },
         hideCanvas:function () {
-            var $container = this.container,
+            var video = this,
+                $container = this.$container,
                 $overlay = $container.find('.video-overlay'),
                 $wrapper = $container.find('.video-wrapper'),
                 $play = $container.find('.play-video'),
                 $close = $container.find('.video-wrapper .close'),
                 animationSpeed = (this.options.animationSpeed === 0) ? 0 : this.options.animationSpeed || 500,
-                self = this,
                 originalHeight = this.originalHeight;
 
             $overlay.fadeIn(animationSpeed, function () {
                 $close.removeClass('active');
                 $container.animate({ height:originalHeight }, animationSpeed, function () {
                     $container.css({ height:'auto' });
-                    if (self.options.closeCallback) self.options.closeCallback();
+                    if (video.options.closeCallback) {
+                        video.options.closeCallback();
+                    }
                     $play.fadeIn(animationSpeed);
                     $overlay.hide();
-                    $wrapper.fadeOut(animationSpeed);
-                    $wrapper.removeClass('playing-video');
-                    $wrapper.remove();
-
+                    $wrapper.fadeOut(animationSpeed, video.removeWrapper.bind(video));
                 });
             });
         }
     };
-
+    $.fn.video = function(params) {
+        return this.each(function() {
+            var video = new Video($(this), params);
+        });
+    };
     return Video;
 }(window, jQuery));
 
