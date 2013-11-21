@@ -9,7 +9,7 @@ toolkit.video = (function (window, $) {
         this.options = {
             token : options.token,
             freewheel : options.displayAdverts,
-            animationSpeed : (options.animationSpeed) ? options.animationSpeed : 500,
+            animationSpeed : (options.animationSpeed !== undefined ) ? options.animationSpeed : 500,
             autoplay : false,
             videoId : $container.attr('data-video-id'),
             onPlay: options.onPlay,
@@ -28,9 +28,9 @@ toolkit.video = (function (window, $) {
         },
         bindWrapperEvents:function () {
             var video = this;
-            video.$wrapper.on('keydown', video.stopOnEscape.bind(video));
+            $('body').one('keydown', video.stopOnEscape.bind(video));
             video.$wrapper.one('click touchstart', '.close', video.stop.bind(video));
-            video.$player.on('ended webkitendfullscreen', video.stop.bind(video));
+            video.$player.one('ended webkitendfullscreen', video.stop.bind(video));
         },
         createWrapper:function () {
             this.$container.append('<div class="video-wrapper">' +
@@ -65,7 +65,7 @@ toolkit.video = (function (window, $) {
             });
         },
         stopOnEscape: function(e){
-            if (e.keyCode === 17) {
+            if (e.keyCode === 27) {
                 e.preventDefault();
                 this.stop();
             }

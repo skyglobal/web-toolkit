@@ -1,5 +1,5 @@
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.carousel = (function(window, $) {
+toolkit.carousel = (function(window, $, video) {
     'use strict';
 
     // get CSS3 capabilities
@@ -92,10 +92,10 @@ toolkit.carousel = (function(window, $) {
                 displayAdverts: false, //disable ads
                 onPlay: function() {
                     carousel.pause();
-                    carousel.$viewport.find('.actions, .indicators').hide();
+                    carousel.$viewport.find('.actions, .indicators, .terms-link').fadeOut(500);
                 },
                 closeCallback: function() {
-                    carousel.$viewport.find('.actions, .indicators').show();
+                    carousel.$viewport.find('.actions, .indicators, .terms-link').fadeIn(500);
                 }
             });
 
@@ -403,10 +403,10 @@ toolkit.carousel = (function(window, $) {
             }
         });
     };
-}(window, jQuery));
+}(window, jQuery, toolkit.video));
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('modules/carousel', [], function() {
+    define('modules/carousel', ['modules/video'], function(video) {
         return toolkit.carousel;
     });
 }
