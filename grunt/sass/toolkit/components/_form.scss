@@ -101,6 +101,11 @@
     color: #d21717;
   }
 
+  input.form-error {
+    border-color: #d21717;
+    color: #000;
+  }
+
 
   label.feedback.hidden {
     display: none;
@@ -116,9 +121,10 @@
 
   .skycon-warning {
     margin-right: 8px;
+
   }
 
-  .feedback-list label.feedback {
+  .feedback-list label {
     margin-left: 24px;
   }
 }
