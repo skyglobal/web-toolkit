@@ -106,10 +106,12 @@
                         <ul class=dropdown-menu>
                             <li><a href="index.html#breadcrumbs" data-diff="components/breadcrumbs">Breadcrumbs</a></li>
                             <li><a href="index.html#form" data-diff="components/form">Form</a></li>
-                            <li><a href="index.html#tabs" data-diff="components/tabs">Tabs</a></li>
+                            <li><a href="index.html#inPageNav" data-diff="components/inPageNav">In-Page Nav</a></li>
+                            <li><a href="index.html#tabs" data-diff="components/tabs">Classic Tabs</a></li>
                             <li><a href="index.html#accordion" data-diff="components/accordion">Accordion</a></li>
                             <li><a href="index.html#carousel" data-diff="components/carousel">Carousel</a></li>
                             <li><a href="index.html#share" data-diff="components/share">Share</a></li>
+                            <li><a href="index.html#video" data-diff="components/video">Video</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -126,17 +128,17 @@
         </div>
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
-				<h1 class="wiki-header">Sky Web Toolkit <small>v1.3.0 </small></h1>
-<div class="secondary">Last Updated: 19-11-2013</div>
+				<h1 class="wiki-header">Sky Web Toolkit <small>v1.5.0 </small></h1>
+<div class="secondary">Last Updated: 21-11-2013</div>
 
 <a name="using-the-toolkit"></a>
 <section class="wiki-section">
     <h2>Using the Toolkit</h2>
     <div class="sub-section">
         <p class="developer-notes">
-&lt;script src='//web-toolkit.global.sky.com/1.3.0/scripts/toolkit.js'&gt;&lt;/script&gt;
-&lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.3.0/stylesheets/toolkit.css"/&gt;
-&lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.3.0/fonts/skycons.css"/&gt;
+            &lt;script src='//web-toolkit.global.sky.com/1.5.0/scripts/toolkit.js'&gt;&lt;/script&gt;
+            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.5.0/stylesheets/toolkit.css"/&gt;
+            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.5.0/fonts/skycons.css"/&gt;
         </p>
     </div>
     <a name="getting-started"></a>
@@ -148,7 +150,7 @@
 <p>
     Please take a look here for anything that is not documented below. <a href="http://storage.sky.com/other/GlobalGuides.pdf">Global Guidelines</a>
 </p>
-<div class="init">
+<div class="init-notes">
     Components that need javascript initialised can be initialized for everything, or individual modules can be turned off.
     e.g.    everything: <code>toolkit.modules.init();</code>
     e.g.    only Skycons <code>toolkit.modules.init({skycons: true});</code>
@@ -832,12 +834,18 @@ https://github.com/skyglobal/web-toolkit/
 
 <style>
     #wiki-skycons tr i {
-        line-height:32px;
+        line-height:1.2em;
         cursor:pointer;
     }
+    #wiki-skycons tr:hover{
+        background: #eee;
+    }
     #wiki-skycons tr:hover i {
-        font-size:32px;
+        -moz-transform: scale(5);
+        -webkit-transform: scale(5);
+        transform: scale(5);
         overflow: visible;
+        background: white;
     }
     #wiki-skycons td,
     #wiki-skycons th{
@@ -863,7 +871,7 @@ https://github.com/skyglobal/web-toolkit/
         for ie7 support execute <code>toolkit.skycons.init();</code> after the page has loaded.
     </p>
     <p class="developer-notes">
-    Dont forget to include <code>http://web-toolkit.global.sky.com/1.3.0/fonts/skycons.css</code>
+    Dont forget to include <code>http://web-toolkit.global.sky.com/1.5.0/fonts/skycons.css</code>
     </p>
     <p class="developer-notes">
     Ensure <code>aria-hidden</code> is used on your <code>skycon</code> tags.
@@ -892,83 +900,84 @@ https://github.com/skyglobal/web-toolkit/
                 <th class="demo-col">How it looks</th>
                 <th class="demo-col">with .colour</th>
                 <th class="demo-col">with .hover-colour</th>
+                <th class="demo-col">for designers</th>
             </tr>
         </thead>
         <tbody>
         
-        <tr ><td> skycon-sky</td><td class="icon"><i class=" skycon-sky" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-sky" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-sky" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-sky</td><td class="icon"><i class=" skycon-sky" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-sky" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-sky" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/sky.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-chevron-down</td><td class="icon"><i class=" skycon-chevron-down" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-chevron-down" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-chevron-down" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-chevron-down</td><td class="icon"><i class=" skycon-chevron-down" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-chevron-down" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-chevron-down" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/chevron-down.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-sky-plus</td><td class="icon"><i class=" skycon-sky-plus" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-sky-plus" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-sky-plus" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-sky-plus</td><td class="icon"><i class=" skycon-sky-plus" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-sky-plus" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-sky-plus" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/sky-plus.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-tv</td><td class="icon"><i class=" skycon-tv" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-tv" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-tv" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-tv</td><td class="icon"><i class=" skycon-tv" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-tv" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-tv" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/tv.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-twitter-reply</td><td class="icon"><i class=" skycon-twitter-reply" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-twitter-reply" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-reply" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-twitter-reply</td><td class="icon"><i class=" skycon-twitter-reply" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-twitter-reply" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-reply" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/twitter-reply.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-arrow-down-left</td><td class="icon"><i class=" skycon-arrow-down-left" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-arrow-down-left" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-arrow-down-left" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-arrow-down-left</td><td class="icon"><i class=" skycon-arrow-down-left" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-arrow-down-left" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-arrow-down-left" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/arrow-down-left.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-chevron-up</td><td class="icon"><i class=" skycon-chevron-up" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-chevron-up" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-chevron-up" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-chevron-up</td><td class="icon"><i class=" skycon-chevron-up" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-chevron-up" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-chevron-up" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/chevron-up.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-chevron</td><td class="icon"><i class=" skycon-chevron" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-chevron" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-chevron" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-chevron</td><td class="icon"><i class=" skycon-chevron" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-chevron" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-chevron" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/chevron.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-facebook</td><td class="icon"><i class=" skycon-facebook" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-facebook" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-facebook" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-facebook</td><td class="icon"><i class=" skycon-facebook" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-facebook" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-facebook" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/facebook.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-tick</td><td class="icon"><i class=" skycon-tick" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-tick" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-tick" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-tick</td><td class="icon"><i class=" skycon-tick" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-tick" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-tick" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/tick.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-remote-record</td><td class="icon"><i class=" skycon-remote-record" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-remote-record" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-remote-record" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-remote-record</td><td class="icon"><i class=" skycon-remote-record" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-remote-record" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-remote-record" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/remote-record.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-warning</td><td class="icon"><i class=" skycon-warning" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-warning" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-warning" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-warning</td><td class="icon"><i class=" skycon-warning" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-warning" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-warning" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/warning.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-carousel-play</td><td class="icon"><i class=" skycon-carousel-play" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-carousel-play" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-carousel-play" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-carousel-play</td><td class="icon"><i class=" skycon-carousel-play" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-carousel-play" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-carousel-play" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/carousel-play.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-arrow-left</td><td class="icon"><i class=" skycon-arrow-left" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-arrow-left" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-arrow-left" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-arrow-left</td><td class="icon"><i class=" skycon-arrow-left" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-arrow-left" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-arrow-left" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/arrow-left.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-chevron-left</td><td class="icon"><i class=" skycon-chevron-left" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-chevron-left" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-chevron-left" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-chevron-left</td><td class="icon"><i class=" skycon-chevron-left" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-chevron-left" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-chevron-left" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/chevron-left.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-on-demand</td><td class="icon"><i class=" skycon-on-demand" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-on-demand" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-on-demand" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-on-demand</td><td class="icon"><i class=" skycon-on-demand" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-on-demand" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-on-demand" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/on-demand.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-user-profile</td><td class="icon"><i class=" skycon-user-profile" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-user-profile" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-user-profile" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-user-profile</td><td class="icon"><i class=" skycon-user-profile" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-user-profile" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-user-profile" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/user-profile.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-search</td><td class="icon"><i class=" skycon-search" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-search" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-search" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-search</td><td class="icon"><i class=" skycon-search" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-search" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-search" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/search.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-twitter-retweet</td><td class="icon"><i class=" skycon-twitter-retweet" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-twitter-retweet" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-retweet" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-twitter-retweet</td><td class="icon"><i class=" skycon-twitter-retweet" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-twitter-retweet" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-retweet" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/twitter-retweet.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-volume</td><td class="icon"><i class=" skycon-volume" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-volume" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-volume" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-volume</td><td class="icon"><i class=" skycon-volume" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-volume" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-volume" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/volume.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-twitter-favourite</td><td class="icon"><i class=" skycon-twitter-favourite" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-twitter-favourite" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-favourite" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-twitter-favourite</td><td class="icon"><i class=" skycon-twitter-favourite" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-twitter-favourite" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-favourite" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/twitter-favourite.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-expand</td><td class="icon"><i class=" skycon-expand" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-expand" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-expand" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-expand</td><td class="icon"><i class=" skycon-expand" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-expand" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-expand" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/expand.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-carousel-pause</td><td class="icon"><i class=" skycon-carousel-pause" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-carousel-pause" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-carousel-pause" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-carousel-pause</td><td class="icon"><i class=" skycon-carousel-pause" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-carousel-pause" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-carousel-pause" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/carousel-pause.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-mouse</td><td class="icon"><i class=" skycon-mouse" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-mouse" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-mouse" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-mouse</td><td class="icon"><i class=" skycon-mouse" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-mouse" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-mouse" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/mouse.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-share</td><td class="icon"><i class=" skycon-share" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-share" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-share" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-share</td><td class="icon"><i class=" skycon-share" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-share" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-share" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/share.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-never-miss</td><td class="icon"><i class=" skycon-never-miss" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-never-miss" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-never-miss" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-never-miss</td><td class="icon"><i class=" skycon-never-miss" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-never-miss" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-never-miss" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/never-miss.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-mail</td><td class="icon"><i class=" skycon-mail" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-mail" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-mail" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-mail</td><td class="icon"><i class=" skycon-mail" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-mail" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-mail" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/mail.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-sky-go</td><td class="icon"><i class=" skycon-sky-go" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-sky-go" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-sky-go" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-sky-go</td><td class="icon"><i class=" skycon-sky-go" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-sky-go" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-sky-go" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/sky-go.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-twitter-follow</td><td class="icon"><i class=" skycon-twitter-follow" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-twitter-follow" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-follow" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-twitter-follow</td><td class="icon"><i class=" skycon-twitter-follow" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-twitter-follow" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-follow" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/twitter-follow.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-minify</td><td class="icon"><i class=" skycon-minify" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-minify" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-minify" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-minify</td><td class="icon"><i class=" skycon-minify" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-minify" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-minify" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/minify.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-twitter</td><td class="icon"><i class=" skycon-twitter" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-twitter" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-twitter</td><td class="icon"><i class=" skycon-twitter" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-twitter" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/twitter.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-close</td><td class="icon"><i class=" skycon-close" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-close" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-close" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-close</td><td class="icon"><i class=" skycon-close" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-close" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-close" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/close.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-menu</td><td class="icon"><i class=" skycon-menu" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-menu" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-menu" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-menu</td><td class="icon"><i class=" skycon-menu" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-menu" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-menu" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/menu.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-phone</td><td class="icon"><i class=" skycon-phone" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-phone" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-phone" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-phone</td><td class="icon"><i class=" skycon-phone" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-phone" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-phone" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/phone.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-cloud</td><td class="icon"><i class=" skycon-cloud" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-cloud" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-cloud" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-cloud</td><td class="icon"><i class=" skycon-cloud" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-cloud" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-cloud" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/cloud.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-video-play</td><td class="icon"><i class=" skycon-video-play" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-video-play" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-video-play" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-video-play</td><td class="icon"><i class=" skycon-video-play" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-video-play" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-video-play" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/video-play.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
-        <tr ><td> skycon-google-plus</td><td class="icon"><i class=" skycon-google-plus" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-google-plus" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-google-plus" aria-hidden=true></i></td></tr>
+        <tr ><td> skycon-google-plus</td><td class="icon"><i class=" skycon-google-plus" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-google-plus" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-google-plus" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/google-plus.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
         </tbody>
     </table>
@@ -1162,46 +1171,242 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     </div>
 </div>
     </div>
-    <a name="tabs" ></a>
+    <a name="inPageNav" ></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">Tabs</h3>
+        <h3 class="wiki-h3">In-Page Navigation</h3>
 
 <div class="example">
-    <h4>Remembering State</h4>
+    <p class="design-notes">
+        <span class="error">This module is not yet complete.</span>  If you need it, please complete 'accessibility' checks an re-submit.
+    </p>
     <div class="design-notes">
-        The state (open or closed) of the tabs can optionally be remembered. i.e. Pressing the back button will open the page with the tab open that was clicked last.
+        This module should be used when all of, or the majority of, the page changes after an item click.
+    </div>
+    <div class="design-notes">
+        If only a small section of the page changes please use '<code>Classic Tabs</code>'.
     </div>
     <div class="developer-notes">
-        Add attribute <code>data-remember-state="true"</code>
+        Add Class '<code>page-nav</code>'.
+    </div>
+    <div class="init">
+        <code>$('#demo-inpage-nav-tabs').inPageNav();</code>
     </div>
     <div class="demo" data-selector="*">
-        <section class="module clearfix" data-function="tabs" data-remember-state="true">
+        <section class="module clearfix tabs-container page-nav" data-function="tabs" id='demo-inpage-nav-tabs'>
 
-            <h2 class="at">This is a screenreader header for tabs</h2>
+            <h2 class="speak">This is a screenreader header for tabs</h2>
 
             <ul class="tabs clearfix" role="tablist">
                 <li id="first-tab" aria-controls="first" aria-label="first" role="tab" class="tab selected">
-                    <a href="#!first" class="skycom-ellipsis">First</a>
+                    <a href="#!first" class="skycom-ellipsis internal-link"><span>First</span></a>
                 </li>
                 <li id="second-tab" aria-controls="second" aria-label="second" role="tab" class="tab" >
-                    <a href="#!second" class="skycom-ellipsis">Second</a>
+                    <a href="#!second" class="skycom-ellipsis internal-link"><span>SecondSecond</span></a>
                 </li>
+                <li id="third-tab" aria-controls="third" aria-label="third" role="tab" class="tab" >
+                    <a href="#!third" class="skycom-ellipsis internal-link"><span>ThirdThirdThird</span></a>
+                </li>
+                <li id="fourth-tab" aria-controls="fourth" aria-label="fourth" role="tab" class="tab" >
+                    <a href="#!fourth" class="skycom-ellipsis internal-link"><span>FourthFourth</span></a>
+                </li>
+                <li id="fifth-tab" aria-controls="fifth" aria-label="fifth" role="tab" class="tab">
+                    <a href="#!fifth" class="skycom-ellipsis internal-link"><span>FifthFifthFifthFifth</span></a>
+                </li>
+                <li id="sixth-tab" aria-controls="sixth" aria-label="sixth" role="tab" class="tab" >
+                    <a href="#!sixth" class="skycom-ellipsis internal-link"><span>Sixth</span></a>
+                </li>
+                <li id="seventh-tab" aria-controls="seventh" aria-label="seventh" role="tab" class="tab">
+                    <a href="#!seventh" class="skycom-ellipsis internal-link"><span>Seventh</span></a>
+                </li>
+                <div class="dropdown-tab-select">
+                    <a href="#!" aria-controls="dropdown" aria-label="more tabs" class="medium">&hellip;</a>
+                    <ul class="more-tabs">
+
+                    </ul>
+                </div>
             </ul>
 
             <div id="first" class="tabpanel selected" aria-labeledby="first-tab" role="tabpanel">
                 <section class="tabcontents clearfix">
-                    <h2 class="at">Screen reader header for First tab contents</h2>
+                    <h2 class="speak">Screen reader header for First tab contents</h2>
                     <div class="skycom-12 alpha">
-                        <img src="/wiki_images/beckham.jpg" alt="beckham looking for help">
+                        <img src="wiki_images/beckham.jpg" alt="beckham looking for help">
                     </div>
                 </section>
             </div>
 
             <div id="second" class="tabpanel" aria-labeledby="second-tab" role="tabpanel">
                 <section class="tabcontents clearfix">
-                    <h2 class="at">Screen reader header for Second tab contents</h2>
+                    <h2 class="speak">Screen reader header for Second tab contents</h2>
                     <div class="skycom-12 alpha">
-                        <img src="/wiki_images/smash.jpg" alt="something else">
+                        <img src="wiki_images/smash.jpg" alt="something else">
+                    </div>
+                </section>
+            </div>
+
+            <div id="third" class="tabpanel" aria-labeledby="third-tab" role="tabpanel">
+                <section class="tabcontents clearfix">
+                    <h2 class="speak">Screen reader header for Third tab contents</h2>
+                    <div class="skycom-12 alpha">
+                        <img src="wiki_images/beckham.jpg" alt="something else">
+                    </div>
+                </section>
+            </div>
+
+            <div id="fourth" class="tabpanel" aria-labeledby="fourth-tab" role="tabpanel">
+                <section class="tabcontents clearfix">
+                    <h2 class="speak">Screen reader header for Fourth tab contents</h2>
+                    <div class="skycom-12 alpha">
+                        <img src="wiki_images/smash.jpg" alt="something else">
+                    </div>
+                </section>
+            </div>
+
+            <div id="fifth" class="tabpanel" aria-labeledby="fifth-tab" role="tabpanel">
+                <section class="tabcontents clearfix">
+                    <h2 class="speak">Screen reader header for Fifth tab contents</h2>
+                    <div class="skycom-12 alpha">
+                        <img src="wiki_images/beckham.jpg" alt="something else">
+                    </div>
+                </section>
+            </div>
+
+            <div id="sixth" class="tabpanel" aria-labeledby="sixth-tab" role="tabpanel">
+                <section class="tabcontents clearfix">
+                    <h2 class="speak">Screen reader header for Sixth tab contents</h2>
+                    <div class="skycom-12 alpha">
+                        <img src="wiki_images/smash.jpg" alt="something else">
+                    </div>
+                </section>
+            </div>
+
+            <div id="seventh" class="tabpanel" aria-labeledby="seventh-tab" role="tabpanel">
+                <section class="tabcontents clearfix">
+                    <h2 class="speak">Screen reader header for Seventh tab contents</h2>
+                    <div class="skycom-12 alpha">
+                        <img src="wiki_images/beckham.jpg" alt="something else">
+                    </div>
+                </section>
+            </div>
+
+        </section>
+    </div>
+</div>
+    </div>
+    <a name="tabs" ></a>
+    <div class="sub-section">
+        <h3 class="wiki-h3">Classic Tabs</h3>
+
+<div class="example">
+    <p class="design-notes">
+        <span class="error">This module is not yet complete.</span>  If you need it, please complete 'accessibility' checks an re-submit.
+    </p>
+    <div class="design-notes">
+        This module should be used when only a small section of the page changes after an item click.
+    </div>
+    <div class="design-notes">
+        If the all of, or the majority of, the page changes please use '<code>in-page navigation</code>'.
+    </div>
+    <div class="developer-notes">
+        Add Class '<code>classic</code>'.
+    </div>
+    <div class="init">
+        <code>$('#demo-classc-tabs').inPageNav();</code>
+    </div>
+    <div class="demo" data-selector="*">
+        <section class="module clearfix tabs-container classic" data-function="tabs" id='demo-classc-tabs'>
+
+            <h2 class="speak">This is a screenreader header for tabs</h2>
+
+            <ul class="tabs clearfix" role="tablist">
+                <li id="first-classic-tab" aria-controls="first-classic" aria-label="first" role="tab" class="tab selected">
+                    <a href="#!first-classic" class="skycom-ellipsis internal-link"><span>First</span></a>
+                </li>
+                <li id="second-classic-tab" aria-controls="second-classic" aria-label="second" role="tab" class="tab" >
+                    <a href="#!second-classic" class="skycom-ellipsis internal-link"><span>SecondSecond</span></a>
+                </li>
+                <li id="third-classic-tab" aria-controls="third-classic" aria-label="third" role="tab" class="tab" >
+                    <a href="#!third-classic" class="skycom-ellipsis internal-link"><span>ThirdThirdThird</span></a>
+                </li>
+                <li id="fourth-classic-tab" aria-controls="fourth-classic" aria-label="fourth" role="tab" class="tab" >
+                    <a href="#!fourth-classic" class="skycom-ellipsis internal-link"><span>FourthFourth</span></a>
+                </li>
+                <li id="fifth-classic-tab" aria-controls="fifth-classic" aria-label="fifth" role="tab" class="tab">
+                    <a href="#!fifth-classic" class="skycom-ellipsis internal-link"><span>FifthFifthFifthFifth</span></a>
+                </li>
+                <li id="sixth-classic-tab" aria-controls="sixth-classic" aria-label="sixth" role="tab" class="tab" >
+                    <a href="#!sixth-classic" class="skycom-ellipsis internal-link"><span>Sixth</span></a>
+                </li>
+                <li id="seventh-classic-tab" aria-controls="seventh-classic" aria-label="seventh" role="tab" class="tab">
+                    <a href="#!seventh-classic" class="skycom-ellipsis internal-link"><span>Seventh</span></a>
+                </li>
+                <div class="dropdown-tab-select">
+                    <a href="#!" aria-controls="dropdown" aria-label="more tabs" class="medium">&hellip;</a>
+                    <ul class="more-tabs">
+
+                    </ul>
+                </div>
+            </ul>
+
+            <div id="first-classic" class="tabpanel selected" aria-labeledby="first-classic-tab" role="tabpanel">
+                <section class="tabcontents clearfix">
+                    <h2 class="speak">Screen reader header for First tab contents</h2>
+                    <div class="skycom-12 alpha">
+                        <img src="wiki_images/beckham.jpg" alt="beckham looking for help">
+                    </div>
+                </section>
+            </div>
+
+            <div id="second-classic" class="tabpanel" aria-labeledby="second-classic-tab" role="tabpanel">
+                <section class="tabcontents clearfix">
+                    <h2 class="speak">Screen reader header for Second tab contents</h2>
+                    <div class="skycom-12 alpha">
+                        <img src="wiki_images/smash.jpg" alt="something else">
+                    </div>
+                </section>
+            </div>
+
+            <div id="third-classic" class="tabpanel" aria-labeledby="third-classic-tab" role="tabpanel">
+                <section class="tabcontents clearfix">
+                    <h2 class="speak">Screen reader header for Third tab contents</h2>
+                    <div class="skycom-12 alpha">
+                        <img src="wiki_images/beckham.jpg" alt="something else">
+                    </div>
+                </section>
+            </div>
+
+            <div id="fourth-classic" class="tabpanel" aria-labeledby="fourth-classic-tab" role="tabpanel">
+                <section class="tabcontents clearfix">
+                    <h2 class="speak">Screen reader header for Fourth tab contents</h2>
+                    <div class="skycom-12 alpha">
+                        <img src="wiki_images/smash.jpg" alt="something else">
+                    </div>
+                </section>
+            </div>
+
+            <div id="fifth-classic" class="tabpanel" aria-labeledby="fifth-classic-tab" role="tabpanel">
+                <section class="tabcontents clearfix">
+                    <h2 class="speak">Screen reader header for Fifth tab contents</h2>
+                    <div class="skycom-12 alpha">
+                        <img src="wiki_images/beckham.jpg" alt="something else">
+                    </div>
+                </section>
+            </div>
+
+            <div id="sixth-classic" class="tabpanel" aria-labeledby="sixth-classic-tab" role="tabpanel">
+                <section class="tabcontents clearfix">
+                    <h2 class="speak">Screen reader header for Sixth tab contents</h2>
+                    <div class="skycom-12 alpha">
+                        <img src="wiki_images/smash.jpg" alt="something else">
+                    </div>
+                </section>
+            </div>
+
+            <div id="seventh-classic" class="tabpanel" aria-labeledby="seventh-classic-tab" role="tabpanel">
+                <section class="tabcontents clearfix">
+                    <h2 class="speak">Screen reader header for Seventh tab contents</h2>
+                    <div class="skycom-12 alpha">
+                        <img src="wiki_images/beckham.jpg" alt="something else">
                     </div>
                 </section>
             </div>
@@ -1220,21 +1425,33 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 <div class="example">
     <ul class="accordion">
         <li>
-            <a class="accordion-heading" href="#first-accordion-content">First Accordion Item <span class="skycon-chevron-down accordion-icon"></span></a>
-            <div id="first-accordion-content" class="accordion-content accordion-invisible">
-                <p style="margin: 16px 0 8px 0;"> First Accordion content</p>
+            <a class="accordion-heading colour" data-toggle-state="hidden" data-toggle="#first-accordion-content" href="#first-accordion-content">
+                <span>First Accordion Item</span> <i class="skycon-chevron-down"></i>
+            </a>
+            <div id="first-accordion-content" class="view-container toggle-hidden">
+                <div class=accordion-content>
+                    <p style="margin: 0;">First Accordion content</p>
+                </div>
             </div>
         </li>
         <li>
-            <a class="accordion-heading" href="#second-accordion-content">Second Accordion Item <span class="skycon-chevron-down accordion-icon"></span></a>
-            <div id="second-accordion-content" class="accordion-content accordion-invisible">
-                <p style="margin: 16px 0 8px 0;">Second Accordion content</p>
+            <a class="accordion-heading colour" data-toggle-state="hidden" data-toggle="#second-accordion-content" href="#second-accordion-content">
+                <span>Second Accordion Item</span> <i class="skycon-chevron-down"></i></span>
+            </a>
+            <div id="second-accordion-content" class="view-container toggle-hidden">
+                <div class=accordion-content>
+                    <p style="margin: 0; height: 400px; background-color: #f00;">Second Accordion content</p>
+                </div>
             </div>
         </li>
         <li>
-            <a class="accordion-heading" href="#third-accordion-content">Third Accordion Item <span class="skycon-chevron-down accordion-icon"></span></a>
-            <div id="third-accordion-content" class="accordion-content accordion-invisible">
-                <p style="margin: 16px 0 8px 0;">Third Accordion content</p>
+            <a class="accordion-heading colour" data-toggle-state="hidden" data-toggle="#third-accordion-content" href="#third-accordion-content">
+                <span>Third Accordion Item</span> <i class="skycon-chevron-down"></i>
+            </a>
+            <div id="third-accordion-content" class="view-container toggle-hidden">
+                <div class=accordion-content>
+                    <p style="margin: 0;">Third Accordion content</p>
+                </div>
             </div>
         </li>
     </ul>
@@ -1281,6 +1498,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                         data-tracking-pod="tile-1"
                         data-tracking-label="David Beckham And Sky Team Up"
                         data-tracking-theme="tracking-theme"
+                        data-video-id="clip-00cwoia5"
                         >
                     <figure>
                         <div class="shade"></div>
@@ -1297,7 +1515,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                                 <p class="skycom-ellipsis">Global sports star David Beckham OBE is joining Sky as an ambassador.</p>
                             </a>
                         </figcaption>
-                        <a href="#" class="play-video" data-video-id="clip-00cwoia5">
+                        <a href="#!" class="play-video">
                             <i class="skycon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
@@ -1308,7 +1526,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                     </p>
                 </div>
 
-                <div
+                <div data-video-id="clip-00ovbt3u"
                         class="clearfix skycom-12 alpha  light-scheme"
                         data-tracking-other="Sky News"
                         data-tracking-pod="tile-2"
@@ -1327,10 +1545,10 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                                 <h3 class="skycom-focus-el section-title smaller" id="title-sky-entertainment-extra-plus">Introducing Sky
                                     Entertainment Extra+</h3>
 
-                                <p class="skycom-ellipsis medium">Supercharge your TV</p>
+                                <p class="skycom-ellipsis">Supercharge your TV</p>
                             </a>
                         </figcaption>
-                        <a href="#" class="play-video" data-video-id="clip-00ovbt3u">
+                        <a href="#!" class="play-video" >
                             <i class="skycon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
@@ -1363,17 +1581,6 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                     </figure>
                 </div>
             </div>
-            <div class="video-wrapper">
-                <a href="#" class="close">
-                    <i class="skycon-close"></i>
-                    <span class="speak">Close</span>
-                </a>
-
-                <div class="videocontrolcontainer">
-                    <video></video>
-                    <img class="posterFrame"/>
-                </div>
-            </div>
         </section>
     </div>
     <h4 class="medium">Skinny Carousel</h4>
@@ -1385,7 +1592,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     </p>
     <div class="demo" data-selector="*">
         <section class="module clearfix skycom-carousel hero-skinny" data-function="carousel" data-tracking-module="hero-169"
-                 id="hero-16-9">
+                 id="hero-skinny">
             <h2 class="speak">Featured News, shows or Products from around Sky</h2>
 
             <div class="skycom-carousel-container clearfix">
@@ -1395,6 +1602,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                         data-tracking-pod="tile-1"
                         data-tracking-label="David Beckham And Sky Team Up"
                         data-tracking-theme="tracking-theme"
+                        data-video-id="clip-00cwoia5"
                         >
                     <figure>
                         <div class="shade"></div>
@@ -1410,7 +1618,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                                 <p class="skycom-ellipsis">for 6 months</p>
                             </a>
                         </figcaption>
-                        <a href="#" class="play-video" data-video-id="clip-00cwoia5">
+                        <a href="#!" class="play-video">
                             <i class="skycon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
@@ -1421,7 +1629,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                     </p>
                 </div>
 
-                <div
+                <div data-video-id="clip-00ovbt3u"
                         class="clearfix skycom-12 alpha  light-scheme"
                         data-tracking-other="Sky News"
                         data-tracking-pod="tile-2"
@@ -1437,7 +1645,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                         <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
                             <a href="#!sky-entertainment-extra-plus" class="clearfix">
                                 <h3 class="skycom-focus-el section-title smaller" id="title-sky-entertainment-extra-plus-169">Join Sky</h3>
-                                <p class="skycom-ellipsis medium">Save Money</p>
+                                <p class="skycom-ellipsis">Save Money</p>
                             </a>
                         </figcaption>
                     </figure>
@@ -1446,7 +1654,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                         These are some different terms and conditions
                     </p>
                 </div>
-                <div
+                <div data-video-id="clip-00ovbt3u"
                         class="clearfix skycom-12 alpha bg-shading dark-scheme"
                         data-tracking-other="Sky Movies Premiere"
                         data-tracking-pod="tile-3"
@@ -1466,25 +1674,62 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                                 <p class="skycom-ellipsis">A fabulous collection</p>
                             </a>
                         </figcaption>
-                        <a href="#" class="play-video" data-video-id="clip-00ovbt3u">
+                        <a href="#!" class="play-video" >
                             <i class="skycon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
                     </figure>
                 </div>
             </div>
-            <div class="video-wrapper">
-                <a href="#" class="close">
-                    <i class="skycon-close" aria-hidden="true"></i>
-                    <span class="speak">Close</span>
-                </a>
-
-                <div class="videocontrolcontainer">
-                    <video></video>
-                    <img class="posterFrame"/>
-                </div>
-            </div>
         </section>
+    </div>
+</div>
+    </div>
+    <a name="video" ></a>
+    <div class="sub-section">
+        <a name="video"></a>
+<h3 class="wiki-h3">Video</h3>
+
+<div class="dependencies">
+    <!-- for videos: <script src="js/lib/require.js" ></script>-->
+    <link rel="stylesheet" href="//player.sky.com/css/styles.min.css"/>
+    <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
+</div>
+<div class="design-notes">
+    A wrapper for the Sky video player, in this example it's embedded onto an image. The video will expand the parent
+    container to fit the 16/9 ratio of the video. CSS changes will need to be made to add text next to play button.
+</div>
+<div class="developer-notes">
+    Ensure that you include all the needed dependencies (htmlplayer.js and player css). Check the dependencies tab.
+</div>
+<div class="init-notes">
+    Example: <code> $('#demo-video .video').video({
+        token:"<code>Your 36 long SkyVideo Token</code>",
+        displayAdverts: false,
+        onPlay: function() { //optional
+            //stuff to do before video plays
+        },
+        closeCallback: function() { //optional
+            //stuff to do after video closes
+        }
+    });</code>
+</div>
+
+<div class="example">
+    <h4>Sky Video Player Wrapper</h4>
+
+    <div class="demo" data-selector="*" id="demo-video">
+        <div class="video" data-video-id="clip-00i9rvth">
+            <img src="wiki_images/bling-ring.jpg"
+                 alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
+
+            <a href="#!" class="play-video internal-link"
+               data-tracking-context="David Beckham And Sky Team Up">
+                <i class="skycon-video-play"></i>
+                <span class="speak">Play Trailer</span>
+            </a>
+
+        </div>
     </div>
 </div>
     </div>
@@ -1500,7 +1745,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="developer-notes">
         Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
     </div>
-    <div class="init">
+    <div class="init-notes">
         standard: <code>toolkit.modules.init();</code>
         explicit: <code>toolkit.modules.init({share:true, popup: true, skycons: true });</code>
     </div>
@@ -1537,7 +1782,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="developer-notes">
         Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
     </div>
-    <div class="init">
+    <div class="init-notes">
         standard: <code>toolkit.modules.init({popup: true});</code>
         with ie7 support: <code>toolkit.modules.init({popup: true, skycons:true});</code>
     </div>
@@ -1562,6 +1807,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     </div>
 </div>
     </div>
+
 </section>
 
 <a name="examples"></a>
@@ -1569,7 +1815,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <h2>Examples</h2>
     <a name="error-page"></a>
     <div class="sub-section">
-	    <h3 class="wiki-h3">Error Page</h3>
+        <h3 class="wiki-h3">Error Page</h3>
 <p >
    Below you will see a number of pages that use the Toolkit to build the page
 </p>

@@ -1,44 +1,34 @@
-/*jshint strict: true */
 /*global jQuery:false */
-
-(function ($) {
-
+if (typeof toolkit==='undefined') toolkit={};
+toolkit.accordion = (function ($) {
     "use strict";
 
-    $(".accordion").on("click", ".accordion-heading", function (event) {
-        event.preventDefault();
+    function Accordion($element){
+        this.$container = $element;
+        this.$headings = $element.find('.accordion-heading');
 
-        var $currentAccordionContent,
-            $accordionHeading;
+        this.bindEvents();
+    }
 
-        if ($(event.target).hasClass('icon')) {
-            $currentAccordionContent = $($(event.target).closest('.accordion-heading').attr('href'));
-            $accordionHeading = $(event.target).closest('.accordion-heading');
-        } else {
-            $currentAccordionContent = $($(event.target).attr('href'));
-            $accordionHeading = $(event.target);
+    Accordion.prototype = {
+        bindEvents:function(){
+            this.$headings.on("click",this.toggleContent.bind(this));
+        },
+        toggleContent:function(e){
+            e.preventDefault();
+            var $heading = $(e.currentTarget);
+            var content = $heading.attr('href');
+            toolkit.toggle({$elClicked: $heading});
         }
+    };
 
-        if ($currentAccordionContent.hasClass('open')) {
-            $accordionHeading.removeClass('open');
-            $currentAccordionContent.removeClass('open');
+    $.fn.accordion = function() {
+        return this.each(function() {
+            var accordion = new Accordion($(this));
+        });
+    };
 
-            setTimeout(function() {
-                // guard against rapid clicks that re-open the accordion
-                if ($currentAccordionContent.hasClass('accordion-visible') && !$currentAccordionContent.hasClass('open')) {
-                    $currentAccordionContent.removeClass('accordion-visible');
-                    $currentAccordionContent.addClass('accordion-invisible');
-                }
-            }, 500);
-        } else {
-            //add open class to accordion_content that corresponds to this
-            $accordionHeading.addClass('open');
-            $currentAccordionContent.addClass('open');
-
-            $currentAccordionContent.addClass('accordion-visible');
-            $currentAccordionContent.removeClass('accordion-invisible');
-        }
-    });
+    return Accordion;
 })(jQuery);
 
 if (typeof window.define === "function" && window.define.amd) {

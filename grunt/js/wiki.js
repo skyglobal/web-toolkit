@@ -41,6 +41,7 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
             token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
             freewheel:false //disable ads
         });
+        $('.accordion').accordion();
         toolkit.modules.init();
     }
 

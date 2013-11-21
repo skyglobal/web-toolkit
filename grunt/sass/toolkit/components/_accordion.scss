@@ -1,11 +1,6 @@
 .accordion {
   margin-top: 24px;
 
-  .skycom_4 {
-    width: 100%;
-    margin-left: 0;
-  }
-
   .accordion-heading {
     cursor: pointer;
     display: block;
@@ -14,7 +9,7 @@
     margin-top: 8px;
     font-size: 20px;
     line-height: 20px;
-    color: #333;
+    color: $primary;
     line-height: 32px;
     color: inherit;
     background-color: #f1f1f1;
@@ -23,68 +18,30 @@
     }
   }
 
-  .accordion-icon {
-    position: absolute;
-    right: 12px;
-    top: 21px;
-    width: 15px;
-    height: 9px;
-    display: none;
-    display: inline-block;
-    color: #0073c5;
-    font-size: 16px;
-    line-height: 16px;
-  }
-
-  .open .accordion-icon:before {
-    content: "\f106";
-  }
-
-  .accordion-visible {
-    visibility: visible;
-  }
-
-  .accordion-invisible {
-    visibility: hidden;
-  }
-
-  .accordion-content {
+  .view-container {
     border-left: 1px solid #f1f1f1;
     border-bottom: 1px solid #f1f1f1;
     border-right: 1px solid #f1f1f1;
-    padding: 0 16px 0 16px;
-    -webkit-transition: max-height 0.5s ease;
-    -moz-transition: max-height 0.5s ease;
-    -ms-transition: max-height 0.5s ease;
-    -o-transition: max-height 0.5s ease;
-    transition: max-height 0.5s ease;
   }
+  .skycon-chevron-down {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -5px;
+    height: 10px;
+    margin-bottom: 3px;
 
-  //.accordion-heading .chevron {
-  //  background-position: 0 -10px;
-  //  display: inline-block;
-  //}
-  //
-  //.accordion-heading.open .chevron {
-  //  background-position: 0 0;
-  //}
-
-  .accordion-content {
-    max-height: 0;
-    overflow: hidden;
-  }
-
-  & .lt-ie8 .accordion-content {
-    display: none;
-    max-height: auto;
-  }
-
-  .accordion-content.open {
-    max-height: 380px;
-  }
-
-  & .lt-ie8 .accordion-content.open {
-    display: block;
-    max-height: auto;
+    @include transition(all 0.5s ease-in-out);
+    &.rotate {
+      @include transform(rotate(180deg));
+      //todo: make this work cross browser!
+    }
   }
 }
+
+.accordion-content {
+  overflow: hidden;
+  padding: 16px;
+}
+
+
