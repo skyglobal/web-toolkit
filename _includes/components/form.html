@@ -107,39 +107,24 @@
 </div>
 
 <div class="example">
-    <h4>With accessible error messages</h4>
+    <h4>With accessible error messages for required fields:</h4>
 
     <div class="demo">
         <form class="sky-form sky-well">
             <div class="row">
-                <label class="required descriptor" for="form-input-one-input">Form Input One</label>
-                <input id="form-input-one-input" class="required" type="text" placeholder="Form Input One"/>
-                <label class="hidden form-error feedback" for="form-input-one-input">Please enter something into Form Input One</label>
+                <label class="required descriptor" for="input-one">Mandatory Input with Feedback</label>
+                <input id="input-one" type="text" placeholder="Text goes here" required/>
+                <label id="input-one-feedback" class="hidden form-error feedback" for="input-one">Please enter something into the first input</label>
             </div>
             <div class="row">
-                <label for="form-input-two">Form Input Two</label>
-                <input id="form-input-two" type="text" placeholder="Form Input Two"/>
-                <label class="hidden form-error feedback" for="form-input-one-input">Please enter something into Form Input Two</label>
+                <label for="input-two">Non Mandatory Input</label>
+                <input id="input-two" type="text" placeholder="Text goes here"/>
+                <label id="input-two-feedback" class="hidden form-error feedback" for="input-two">Please enter something into the second input</label>
             </div>
             <div class="row">
-                <label class="required descriptor" for="form-input-three-input">Form Input Three</label>
-                <input id="form-input-three-input" class="required" type="text" placeholder="Form Input Three"/>
-                <label class="hidden form-error feedback" for="form-input-three-input">Please enter something into Form Input Three</label>
+                <label class="required descriptor" for="input-three" required>Mandatory Input with no Feedback</label>
+                <input id="input-three" class="required" type="text" placeholder="Text goes here"/>
             </div>
-            <!--<fieldset class="row">-->
-                <!--<p id="radio-button-error-message" class="error hidden">Please select a radio button</p>-->
-                <!--<legend>Radio Buttons</legend>-->
-
-                <!--<div class="radiocheck required">-->
-
-                    <!--<input type="radio" name="radio-button" value="option-one" id="option-one"/>-->
-                    <!--<label for="option-one">Option One</label>-->
-                    <!--<br>-->
-                    <!--<input type="radio" name="radio-button" value="option-two" id="option-two"/>-->
-                    <!--<label for="option-two">Option Two</label>-->
-                <!--</div>-->
-                <!--<label class="hidden form-error feedback" for="form-input-one-input">Please select one of the radio buttons</label>-->
-            <!--</fieldset>-->
 
             <div class="row no-label">
                 <button name="form-submit" type="submit" class="form-submit btn primary-cta">Submit</button>
