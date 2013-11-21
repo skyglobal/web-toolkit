@@ -21,9 +21,9 @@ toolkit.video = (function (window, $) {
     Video.prototype = {
         bindEvents: function(){
             var video = this;
-            video.$container.on('click','.play-video' ,function(){
+            video.$container.on('click','.play-video' ,function(e){
                 video.createWrapper();
-                video.play();
+                video.play(e);
             });
         },
         bindWrapperEvents:function () {
@@ -50,7 +50,7 @@ toolkit.video = (function (window, $) {
             this.$wrapper.removeClass('playing-video').remove();
         },
 
-        play:function (e) {
+        play:function(e) {
             if(e) { e.preventDefault(); }
             var video = this;
             if(video.options.onPlay) {
@@ -70,7 +70,8 @@ toolkit.video = (function (window, $) {
                 this.stop();
             }
         },
-        stop:function () {
+        stop:function (e) {
+            if(e) { e.preventDefault(); }
             var video = this;
             $(window).off('skycom.resizeend', video.resizeContainer);
             sky.html5player.close(this.$wrapper);
