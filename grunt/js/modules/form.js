@@ -6,11 +6,22 @@ toolkit.form = (function ($) {
 
     "use strict";
 
-    //TODO: feature detect the required attribute
 
+    function isSafari() {
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.indexOf('safari')!=-1){
+            if(ua.indexOf('chrome')  > -1){
+                return false;
+            }else{
+                return true;
+            }
+        }
+        return false;
+    }
 
+    //feature detect the required attribute
 
-    if (!('required' in document.createElement('input'))) {
+    if (!('required' in document.createElement('input')) || isSafari()) {
 
         $('.sky-form').submit(function(event) {
 
