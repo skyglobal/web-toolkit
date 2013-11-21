@@ -50,13 +50,14 @@ if (typeof window.define === "function" && window.define.amd) {
         'utils/skycons',
         'utils/hashmanager',
         'utils/popup',
+        'utils/toggle',
         'utils/diff',
         'modules',
         'modules/inPageNav',
         'modules/accordion',
         'modules/share',
         'modules/video',
-        'modules/carousel'], function(skycons, hashmanager, popup, diff, modules, inPageNav, accordion, share, video, carousel){
+        'modules/carousel'], function(skycons, hashmanager, popup,toggle, diff, modules, inPageNav, accordion, share, video, carousel){
 
 
         return {
