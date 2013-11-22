@@ -48,6 +48,7 @@ toolkit.video = (function (window, $) {
         },
         removeWrapper: function(){
             this.$wrapper.removeClass('playing-video').remove();
+            this.$container.find('.video-overlay').remove();
         },
 
         play:function(e) {
