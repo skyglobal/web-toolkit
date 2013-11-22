@@ -24,6 +24,7 @@ toolkit.modules = (function(){
             share : false,
             popup : false,
             inPageNav : false,
+            accordion : false,
             datepicker : false
         }, options);
         for (module in modulesToInitialize) {

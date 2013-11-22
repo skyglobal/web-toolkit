@@ -1,12 +1,12 @@
 /*global jQuery:false */
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.accordion = (function ($) {
+toolkit.accordion = (function ($, toggle) {
     "use strict";
 
     function Accordion($element){
         this.$container = $element;
         this.$headings = $element.find('.accordion-heading');
-
+        this.$viewContainers = $element.find('.view-container');
         this.bindEvents();
     }
 
@@ -18,7 +18,9 @@ toolkit.accordion = (function ($) {
             e.preventDefault();
             var $heading = $(e.currentTarget);
             var content = $heading.attr('href');
-            toolkit.toggle({$elClicked: $heading});
+            var $containerToToggle = $heading.next('.view-container');
+            var action = $containerToToggle.hasClass('toggle-hidden') ? 'show' : 'hide';
+            toolkit.toggle({$container:$containerToToggle, action: action});
         }
     };
 
@@ -29,10 +31,10 @@ toolkit.accordion = (function ($) {
     };
 
     return Accordion;
-})(jQuery);
+})(jQuery, toolkit.toggle);
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('modules/accordion', [], function() {
+    define('modules/accordion', ['utils/toggle'], function(toggle) {
         return toolkit.accordion;
     });
 }

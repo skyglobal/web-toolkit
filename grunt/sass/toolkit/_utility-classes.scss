@@ -119,6 +119,13 @@ body .visible{
   @include speak;
 }
 
+.rotate-180 {
+  @include transform(rotate(180deg));
+  .lt-ie8 & {
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  }
+}
+
 //DESKTOP ONLY CLASSES
 @media (min-width: $mobile-width+1) {
   .sticky-desktop {
