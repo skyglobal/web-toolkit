@@ -1,0 +1,65 @@
+/*global jQuery:false */
+if (typeof toolkit==='undefined') toolkit={};
+<<<<<<< HEAD
+toolkit.accordion = (function ($) {
+    'use strict';
+=======
+toolkit.accordion = (function ($, toggle) {
+    "use strict";
+>>>>>>> upstream/master
+
+    function Accordion($element){
+        this.$container = $element;
+        this.$headings = $element.find('.accordion-heading');
+        this.bindEvents();
+    }
+
+    Accordion.prototype = {
+        bindEvents:function(){
+            this.$headings.on("click",this.toggleContent.bind(this));
+        },
+        toggleContent:function(e){
+            e.preventDefault();
+            var $heading = $(e.currentTarget);
+            toolkit.toggle({$elClicked:$heading});
+        }
+    };
+
+    $.fn.accordion = function() {
+        return this.each(function() {
+            var accordion = new Accordion($(this));
+        });
+    };
+
+<<<<<<< HEAD
+            setTimeout(function() {
+                // guard against rapid clicks that re-open the accordion
+                if ($currentAccordionContent.hasClass('accordion-visible') && !$currentAccordionContent.hasClass('open')) {
+                    $currentAccordionContent.removeClass('accordion-visible');
+                    $currentAccordionContent.addClass('accordion-invisible');
+                }
+            }, 500);
+        } else {
+            //add open class to accordion_content that corresponds to this
+            $accordionHeading.addClass('open');
+            $currentAccordionContent.addClass('open');
+
+            $currentAccordionContent.addClass('accordion-visible');
+            $currentAccordionContent.removeClass('accordion-invisible');
+        }
+    });
+})(jQuery);
+if (typeof window.define === "function" && window.define.amd) {
+    define('modules/accordion', [], function() {
+        'use strict';
+
+=======
+    return Accordion;
+})(jQuery, toolkit.toggle);
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('modules/accordion', ['utils/toggle'], function(toggle) {
+>>>>>>> upstream/master
+        return toolkit.accordion;
+    });
+}
