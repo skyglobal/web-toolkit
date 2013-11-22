@@ -6,22 +6,22 @@
     display: block;
     padding: 8px;
     position: relative;
-    margin-top: 8px;
+    margin-top: 4px;
     font-size: 20px;
     line-height: 20px;
     color: $primary;
     line-height: 32px;
     color: inherit;
-    background-color: $background-dark;
+    background-color: $background-light;
     &:hover, &:focus {
       text-decoration: underline;
     }
   }
 
   .view-container {
-    border-left: 1px solid $background-dark;
-    border-bottom: 1px solid $background-dark;
-    border-right: 1px solid $background-dark;
+    border-left: 1px solid $background-light;
+    border-bottom: 1px solid $background-light;
+    border-right: 1px solid $background-light;
   }
   .skycon-chevron-down {
     position: absolute;
