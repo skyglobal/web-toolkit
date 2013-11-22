@@ -1,0 +1,11 @@
+#toggle-tmp-height{
+  height:0;
+  overflow:hidden;
+  & > *{
+    visibility: hidden;
+  }
+}
+.toggle-hidden{
+  height:0;
+  overflow:hidden;
+}
