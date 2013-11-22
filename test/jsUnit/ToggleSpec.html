@@ -101,11 +101,11 @@
                 var toggleLink = $("#toggle-by-container .toggle-link");
                 toggle({$container:container, action:'hide'});
                 expect(toggleLink.text()).to.equal("Show");
-                expect(toggleLink.find('i').hasClass('rotate')).to.be.true;
+                expect(toggleLink.find('i').hasClass('rotate-180')).to.be.true;
                 toggle({$container:container, action:'show'});
                 expect(toggleLink.text()).to.equal("Hide");
                 expect(toggleLink.find('i').length).to.equal(1);
-                expect(toggleLink.find('i').hasClass('rotate')).to.be.false;
+                expect(toggleLink.find('i').hasClass('rotate-180')).to.be.false;
             });
 
             it('doesnt do anything if the container is already toggled to the state you are trying to change to', function () {
