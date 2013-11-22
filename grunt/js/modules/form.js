@@ -76,8 +76,9 @@ toolkit.form = (function ($) {
                 errorHtml += '<ul class="feedback-list">';
 
                 for (i = 0; i < errors.length; i++) {
-                    label     = '<label for="' + errors[i].attr("for") + '" class="form-error">' + errors[i].text() + '</label>';
-                    errorHtml += '<li>' + label + '</li>';
+//                    label     = '<label for="' + errors[i].attr("for") + '" class="form-error">' + errors[i].text() + '</label>';
+//                    errorHtml += '<li>' + label + '</li>';
+                    errorHtml += '<li class="form-error">' + errors[i].text() + '</li>';
                 }
 
                 errorHtml += '</ul></div>';
