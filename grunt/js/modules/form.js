@@ -31,7 +31,7 @@ toolkit.form = (function ($) {
 
             $('#feedback-list-container').remove();
 
-            $('input[required]').each(function (index, input) {
+            $('input.required').each(function (index, input) {
                 var inputId     = $(input).attr('id'),
                     $descriptor = $('label.descriptor[for=' + inputId + ']'),
                     $feedbacks  = $('label.feedback[for=' + inputId + ']');
@@ -76,8 +76,6 @@ toolkit.form = (function ($) {
                 errorHtml += '<ul class="feedback-list">';
 
                 for (i = 0; i < errors.length; i++) {
-//                    label     = '<label for="' + errors[i].attr("for") + '" class="form-error">' + errors[i].text() + '</label>';
-//                    errorHtml += '<li>' + label + '</li>';
                     errorHtml += '<li class="form-error">' + errors[i].text() + '</li>';
                 }
 
