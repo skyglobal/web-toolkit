@@ -17,10 +17,7 @@ toolkit.accordion = (function ($, toggle) {
         toggleContent:function(e){
             e.preventDefault();
             var $heading = $(e.currentTarget);
-            var content = $heading.attr('href');
-            var $containerToToggle = $heading.next('.view-container');
-            var action = $containerToToggle.hasClass('toggle-hidden') ? 'show' : 'hide';
-            toolkit.toggle({$container:$containerToToggle, action: action});
+            toolkit.toggle({$elClicked:$heading});
         }
     };
 
