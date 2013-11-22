@@ -31,7 +31,7 @@ toolkit.form = (function ($) {
 
             $('#feedback-list-container').remove();
 
-            $('input.required').each(function (index, input) {
+            $('input[required]').each(function (index, input) {
                 var inputId     = $(input).attr('id'),
                     $descriptor = $('label.descriptor[for=' + inputId + ']'),
                     $feedbacks  = $('label.feedback[for=' + inputId + ']');
