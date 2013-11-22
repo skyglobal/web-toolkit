@@ -3,12 +3,18 @@
 <% baseClass=''%>
 <style>
     #wiki-skycons tr i {
-        line-height:32px;
+        line-height:1.2em;
         cursor:pointer;
     }
+    #wiki-skycons tr:hover{
+        background: #eee;
+    }
     #wiki-skycons tr:hover i {
-        font-size:32px;
+        -moz-transform: scale(5);
+        -webkit-transform: scale(5);
+        transform: scale(5);
         overflow: visible;
+        background: white;
     }
     #wiki-skycons td,
     #wiki-skycons th{
@@ -63,11 +69,12 @@
                 <th class="demo-col">How it looks</th>
                 <th class="demo-col">with .colour</th>
                 <th class="demo-col">with .hover-colour</th>
+                <th class="demo-col">for designers</th>
             </tr>
         </thead>
         <tbody>
         <% for (var glyphIdx = 0; glyphIdx < glyphs.length; glyphIdx++) { var glyph = glyphs[glyphIdx] %>
-        <tr ><td><%= baseClass %> <%= classPrefix %><%= glyph %></td><td class="icon"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td><td class="icon colour"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td><td class="icon hover-colour"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td></tr>
+        <tr ><td><%= baseClass %> <%= classPrefix %><%= glyph %></td><td class="icon"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td><td class="icon colour"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td><td class="icon hover-colour"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/<%= glyph %>.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         <% } %>
         </tbody>
     </table>

@@ -58,6 +58,10 @@ def content_type(file)
     content_type
 end
 
+def getDate
+  `date +'%d-%m-%Y'`
+end
+
 desc 'Deploys a new version to the CDN'
 task :deploy_new_version do
 
@@ -65,6 +69,10 @@ task :deploy_new_version do
   system "grunt"
   system "git add ./dist"
   system "git commit -m 'Rake deploy - adding grunted files'"
+  if version_already_exists?
+    system "git tag release-#{latest_version_number} -m \"Release Date:#{getDate}\""
+    system "git push --tag"
+  end
   system "git push origin HEAD:master"
 
   if !version_is_release_candidate?

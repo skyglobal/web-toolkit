@@ -20,16 +20,34 @@
 
     <ul class="accordion">
         <li>
-            <a class="accordion-heading" href="#first-accordion-content">First Accordion Item <span class="icon skycon-chevron-down"></span></a>
-            <div id="first-accordion-content" class="accordion-content accordion-invisible">First Accordion content</div>
+            <a class="accordion-heading colour" data-toggle="#first-accordion-content" href="#first-accordion-content">
+                <span>First Accordion Item</span> <i class="skycon-chevron-down"></i>
+            </a>
+            <div id="first-accordion-content" class="view-container toggle-hidden">
+                <div class=accordion-content>
+                    <p style="margin: 0;">First Accordion content which goes on to a ton of lines</p>
+                </div>
+            </div>
         </li>
         <li>
-            <a class="accordion-heading" href="#second-accordion-content">Second Accordion Item <span class="icon skycon-chevron-down"></span></a>
-            <div id="second-accordion-content" class="accordion-content accordion-invisible">Second Accordion content</div>
+            <a class="accordion-heading colour" data-toggle="#second-accordion-content" href="#second-accordion-content">
+                <span>Second Accordion Item</span> <i class="skycon-chevron-down"></i></span>
+            </a>
+            <div id="second-accordion-content" class="view-container toggle-hidden">
+                <div class=accordion-content>
+                    <p style="margin: 0; height: 400px; background-color: #f00;">Second Accordion content</p>
+                </div>
+            </div>
         </li>
         <li>
-            <a class="accordion-heading" href="#third-accordion-content">Third Accordion Item <span class="icon skycon-chevron-down"></span></a>
-            <div id="third-accordion-content" class="accordion-content accordion-invisible">Third Accordion content</div>
+            <a class="accordion-heading colour" data-toggle="#third-accordion-content" href="#third-accordion-content">
+                <span>Third Accordion Item</span> <i class="skycon-chevron-down"></i>
+            </a>
+            <div id="third-accordion-content" class="view-container toggle-hidden">
+                <div class=accordion-content>
+                    <p style="margin: 0;">Third Accordion content</p>
+                </div>
+            </div>
         </li>
     </ul>
 
@@ -42,21 +60,22 @@
 
     require(['modules/accordion', '../../test/jsUnit/setup'],function(){
 
+        $('.accordion').accordion();
         describe('Accordion module', function() {
 
             it('Accordion content should be closed by default', function() {
-
-                expect($('.accordion-heading.open').length).to.equal(0);
-
+                expect($('.view-container.toggle-hidden').length).to.equal(3);
             });
 
             it('Accordion content should open and close when a user clicks an accordion item twice', function() {
-
-                expect($('.accordion-heading').first().hasClass('open')).to.equal(false);
+                expect($('.view-container').first().hasClass('toggle-hidden')).to.equal(true);
                 $('.accordion-heading').first().click();
-                expect($('.accordion-heading').first().hasClass('open')).to.equal(true);
+                expect($('.view-container').first().hasClass('toggle-hidden')).to.equal(false);
+                $('.accordion-heading').last().click();
+                expect($('.view-container').last().hasClass('toggle-hidden')).to.equal(false);
                 $('.accordion-heading').first().click();
-                expect($('.accordion-heading').first().hasClass('open')).to.equal(false);
+                expect($('.view-container').first().hasClass('toggle-hidden')).to.equal(true);
+                expect($('.view-container').last().hasClass('toggle-hidden')).to.equal(false);
             });
         });
         mocha.run();
