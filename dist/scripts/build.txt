@@ -4,8 +4,10 @@ toolkit.js
 utils/skycons.js
 utils/hashmanager.js
 utils/popup.js
+utils/toggle.js
 utils/diff.js
 modules/inPageNav.js
+modules/accordion.js
 modules/share.js
 modules/video.js
 modules/carousel.js
@@ -17,8 +19,10 @@ utils/developer-notes-logger.js
 utils/skycons.js
 utils/hashmanager.js
 utils/popup.js
+utils/toggle.js
 utils/diff.js
 modules/inPageNav.js
+modules/accordion.js
 modules/share.js
 modules/video.js
 modules/carousel.js
