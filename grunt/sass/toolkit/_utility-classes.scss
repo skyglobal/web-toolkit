@@ -90,8 +90,9 @@
 }
 
 .internal-link{
+  color: $primary;
   outline: 0!important;
-  border: 0!important;
+  border: 0;
 }
 
 //visibility classses
@@ -116,6 +117,13 @@ body .visible{
 }
 .speak{
   @include speak;
+}
+
+.rotate-180 {
+  @include transform(rotate(180deg));
+  .lt-ie8 & {
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  }
 }
 
 //DESKTOP ONLY CLASSES

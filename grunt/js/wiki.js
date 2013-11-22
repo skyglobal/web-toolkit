@@ -29,12 +29,19 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
                 videoAds: false
             }
         });
-        $('#hero-16-9').skycom_carousel({
+        $('#hero-skinny').skycom_carousel({
             carousel: {
                 autoplay: true,
                 videoAds: false
             }
         });
+        $('#demo-classc-tabs').inPageNav();
+        $('#demo-inpage-nav-tabs').inPageNav();
+        $('#demo-video .video').video({
+            token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
+            freewheel:false //disable ads
+        });
+        $('.accordion').accordion();
         toolkit.modules.init();
     }
 
