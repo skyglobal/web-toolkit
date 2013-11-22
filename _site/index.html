@@ -129,7 +129,7 @@
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
 				<h1 class="wiki-header">Sky Web Toolkit <small>v1.5.0 </small></h1>
-<div class="secondary">Last Updated: 21-11-2013</div>
+<div class="secondary">Last Updated: 22-11-2013</div>
 
 <a name="using-the-toolkit"></a>
 <section class="wiki-section">
@@ -1310,7 +1310,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="developer-notes">
         Add Class '<code>classic</code>'.
     </div>
-    <div class="init">
+    <div class="init-notes">
         <code>$('#demo-classc-tabs').inPageNav();</code>
     </div>
     <div class="demo" data-selector="*">
@@ -1422,20 +1422,24 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     The accordion is fully responsive.
 </p>
 
+<div class="init-notes">
+    <code>$('.accordion').accordion();</code>
+</div>
+
 <div class="example">
     <ul class="accordion">
         <li>
-            <a class="accordion-heading colour" data-toggle-state="hidden" data-toggle="#first-accordion-content" href="#first-accordion-content">
+            <a class="accordion-heading colour" data-toggle="#first-accordion-content" href="#first-accordion-content">
                 <span>First Accordion Item</span> <i class="skycon-chevron-down"></i>
             </a>
             <div id="first-accordion-content" class="view-container toggle-hidden">
                 <div class=accordion-content>
-                    <p style="margin: 0;">First Accordion content</p>
+                    <p style="margin: 0;">First Accordion content which goes on to a ton of lines</p>
                 </div>
             </div>
         </li>
         <li>
-            <a class="accordion-heading colour" data-toggle-state="hidden" data-toggle="#second-accordion-content" href="#second-accordion-content">
+            <a class="accordion-heading colour" data-toggle="#second-accordion-content" href="#second-accordion-content">
                 <span>Second Accordion Item</span> <i class="skycon-chevron-down"></i></span>
             </a>
             <div id="second-accordion-content" class="view-container toggle-hidden">
@@ -1445,7 +1449,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
             </div>
         </li>
         <li>
-            <a class="accordion-heading colour" data-toggle-state="hidden" data-toggle="#third-accordion-content" href="#third-accordion-content">
+            <a class="accordion-heading colour" data-toggle="#third-accordion-content" href="#third-accordion-content">
                 <span>Third Accordion Item</span> <i class="skycon-chevron-down"></i>
             </a>
             <div id="third-accordion-content" class="view-container toggle-hidden">

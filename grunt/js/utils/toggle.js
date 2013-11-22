@@ -55,7 +55,7 @@ toolkit.toggle = (function() {
     }
 
     function rotateIcon($elClicked) {
-        $elClicked.find('i').toggleClass('rotate');
+        $elClicked.find('i').toggleClass('rotate-180');
     }
 
     function show($elToToggle) {
