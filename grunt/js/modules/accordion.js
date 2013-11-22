@@ -6,7 +6,6 @@ toolkit.accordion = (function ($, toggle) {
     function Accordion($element){
         this.$container = $element;
         this.$headings = $element.find('.accordion-heading');
-        this.$viewContainers = $element.find('.view-container');
         this.bindEvents();
     }
 
