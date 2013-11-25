@@ -26,14 +26,6 @@ a.play-video {
       text-decoration: none;
     }
   }
-  i {
-    font-size: 50px;
-    line-height: 1em;
-    border-radius: 27px;
-    background: rgba(0,0,0,0.5);
-    color: white;
-    padding: 5px 3px 0px 3px;
-  }
   span{
     margin: 0 5px 0 5px;
   }
@@ -42,9 +34,6 @@ a.play-video {
 .lt-ie9{
   .play-video{
     display: block; float:right; padding-left:5px; line-height:3em;
-    i {
-      background-color: #777;
-    }
     span {
       padding: 15px 15px 15px 0;
     }
