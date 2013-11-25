@@ -6,7 +6,6 @@ toolkit.form = (function ($) {
 
     "use strict";
 
-
     function isSafari() {
         var ua = navigator.userAgent.toLowerCase();
         if (ua.indexOf('safari')!=-1){
@@ -27,7 +26,6 @@ toolkit.form = (function ($) {
 
             var hasError = false,
                 errors = [];
-
 
             $('#feedback-list-container').remove();
 
