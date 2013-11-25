@@ -42,8 +42,14 @@ a.play-video {
 .lt-ie9{
   .play-video{
     display: block; float:right; padding-left:5px; line-height:3em;
+    i {
+      background-color: #777;
+    }
     span {
       padding: 15px 15px 15px 0;
+    }
+    &:hover span {
+      text-decoration: underline;
     }
   }
 }
