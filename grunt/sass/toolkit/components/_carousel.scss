@@ -128,6 +128,9 @@
       top: 0;
       width: 50px;
       z-index: 3;
+      .skycom-touch & {
+        display: none;
+      }
       .semi-circle {
         position: absolute;
         top: 50%;
@@ -463,7 +466,11 @@
       max-height: 31vw;
     }
   }
-
+  @media all and (max-width: 767px) {
+    .poster{
+      min-height: 110px;
+    }
+  }
   .channel-logo {
     max-height: 34px;
     max-width: 180px;
@@ -478,4 +485,5 @@
       max-height: 32vw;
     }
   }
+
 }
