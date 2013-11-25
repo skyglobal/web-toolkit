@@ -108,7 +108,13 @@
 
 <div class="example">
     <h4>With accessible error messages for required fields:</h4>
-
+    <p>This requires the use of the native <code>required</code> attribute on an input field.  See below for an example.</p>
+    <code>&lt;input id="my-input" type="text" required/&gt;</code>
+    <p>If you are following xhtml, use the following:</p>
+    <code>&lt;input id="my-input" type="text" required="required"/&gt;</code>
+    <p>Alternatively, if you want to customise the error label, you can provide a custom error label as in the example below.</p>
+    <code>&lt;input id="my-input" type="text" required/&gt;&lt;label class="hidden form-error feedback" for="input"&gt;Please enter some text&lt;/label&gt;</code>
+    <p>Browsers that support the required attribute will get their native experience, so this logic can only be observed on browsers that do not support it (IE8, IE9, Safari)</p>
     <div class="demo">
         <form class="sky-form sky-well">
             <div class="row">
