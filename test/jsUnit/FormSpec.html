@@ -78,7 +78,7 @@
             //    Try IE9 or IE8 or Safari
 
             if (!('required' in document.createElement('input')) || isSafari()) {
-
+            
                 it('should display error message if a user does not fill in a mandatory input', function () {
                     expect($("#input-one").hasClass("form-error")).to.equal(false);
                     expect($("#input-one-feedback").first().hasClass("hidden")).to.equal(true);
