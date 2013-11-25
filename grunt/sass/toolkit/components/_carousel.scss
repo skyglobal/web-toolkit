@@ -466,12 +466,11 @@
       min-height: 27vw;
       max-height: 31vw;
     }
-  }
-  @media all and (max-width: 767px) {
-    .poster{
+    @media all and (max-width: 767px) {
       min-height: 110px;
     }
   }
+
   .channel-logo {
     max-height: 34px;
     max-width: 180px;
@@ -484,6 +483,9 @@
     @media all and (max-width: 1212px) {
       min-height: 31vw;
       max-height: 32vw;
+    }
+    @media all and (max-width: 767px) {
+        min-height: 110px;
     }
   }
 
