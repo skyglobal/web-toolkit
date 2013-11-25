@@ -88,6 +88,7 @@ toolkit.carousel = (function(window, $, video) {
         initialiseVideos: function() {
             var carousel = this;
             this.$slides.video({
+                $wrapperLocation: carousel.$viewport,
                 token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
                 displayAdverts: false, //disable ads
                 onPlay: function() {
