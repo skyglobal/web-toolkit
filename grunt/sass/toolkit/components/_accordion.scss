@@ -1,0 +1,41 @@
+.accordion {
+  margin-top: 24px;
+
+  .accordion-heading {
+    cursor: pointer;
+    display: block;
+    padding: 8px;
+    position: relative;
+    margin-top: 4px;
+    font-size: 20px;
+    line-height: 20px;
+    color: $primary;
+    line-height: 32px;
+    color: inherit;
+    background-color: $background-light;
+    &:hover, &:focus {
+      text-decoration: underline;
+    }
+  }
+
+  .view-container {
+    border-left: 1px solid $background-light;
+    border-bottom: 1px solid $background-light;
+    border-right: 1px solid $background-light;
+  }
+  .skycon-chevron-down {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -5px;
+    height: 10px;
+    margin-bottom: 3px;
+    @include transition(all 0.5s ease-in-out);
+  }
+}
+//keep outside so the toggle calculates the height correctly
+.accordion-content {
+  padding: 8px;
+}
+
+

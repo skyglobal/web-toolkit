@@ -8,17 +8,12 @@
   position:relative;
 
   &:hover .actions {
-    .over {
-      @include opacity(0.3);
-    }
-    .next .over {
-      left: 5px;
-    }
-    .previous .over {
-      right: 5px;
-    }
-    a:hover .over{
-      @include opacity(1);
+    .next,
+    .previous {
+      .semi-circle{
+        background: rgb(0,0,0);
+        background: rgba(0,0,0,0.35);
+      }
     }
   }
 
@@ -28,10 +23,6 @@
     @media all and (max-width: 768px) {
         display: none;
     }
-  }
-
-  a:hover {
-    text-decoration: underline;
   }
 
   .skycom-carousel-container {
@@ -64,7 +55,7 @@
 
   .dark-scheme {
     color: #fff;
-    a {
+    a, i {
       color: #fff;
     }
     &.bg-shading .shade {
@@ -122,44 +113,60 @@
     .pause {
       bottom: 10px;
       display: none;
-      font-size: 0.9em;
       right: 50px;
       z-index: 2;
-      span {
-        margin-top: -2px;
+      i {
+        font-size: 20px;
+        line-height: 20px;
+        margin-top: 0;
         margin-right: 5px;
       }
     }
     .previous,
     .next {
-      @include hide-text(left);
-      height: 100%;
+      height: 85%;
       top: 0;
       width: 50px;
       z-index: 3;
-      span {
+      .semi-circle {
         position: absolute;
         top: 50%;
-        margin: -30px 5px 0;
+        display: block;
+        width: 36px;
+        border-radius: 36px;
+        line-height: 36px;
+        margin: -15px 5px 0;
+        padding: 14px;
+        @include transition(background 0.3s ease-in);
+        text-shadow: 0px 0px 0px black;
+        i{
+          font-size: 30px;
+          color: #ddd;
+        }
+      }
+      &:hover{
+        .semi-circle{
+          background: rgba(0,0,0,0.7);
+        }
       }
     }
     .next {
       right: 0;
-      span {
-        left: 5px;
+      .semi-circle {
+        left: 10px;
+        i{
+          margin-left: -5px;
+        }
       }
     }
     .previous {
       left: 0;
-      span {
-        left: auto;
-        right: 5px;
+      .semi-circle {
+        right: 10px;
       }
-    }
-    .over{
-      @include opacity(0);
-      @include single-transition(opacity, .2s, linear);
-      left: -9999px;
+      i{
+        margin-left: 22px;
+      }
     }
   }
   .indicators {
@@ -203,15 +210,10 @@
 
   h3 {
     margin: 0 0 1px 0;
-    font-size: em(36);
-    line-height: em(40,36);
   }
 
   p {
     margin: 0 0 10px 0;
-    font-size: em(16);
-    line-height: em(20,16);
-    font-family: skytextmedium;
   }
 
   figure{
@@ -247,31 +249,8 @@
   .terms-link {
     z-index: 2;
     position:absolute; bottom:10px; top:auto;
-    font-size: 0.9em;
     padding-top: 0;
     padding-bottom: 0;
-  }
-
-  .play-video {
-    display: block;
-    position: absolute;
-    bottom: 10px;
-    left: 50px;
-    white-space: nowrap;
-    padding: 5px 10px 0 5px;
-    border-radius: 25px;
-    z-index: 1;
-    @include transition(background .3s, box-shadow .3s);
-
-    &:hover,
-    &:focus {
-      background-color: rgba(255, 255, 255, 0.2);
-      @include box-shadow(0 0 5px rgba(0, 0, 0, 0.25));
-    }
-
-    i {
-      margin: 0 5px 5px 0;
-    }
   }
 }
 
@@ -294,26 +273,19 @@
 }
 
 
-
-
 .skycom-carousel {
 
   @media all and (max-width: 900px) {
     .channel-logo{
       margin-bottom: 4px;
     }
-    h3{
+    h3.section-title{
       font-size: em(24);
+      line-height: 1em;
     }
   }
 
   @media all and (max-width: 768px) {
-    .play-video {
-      padding-right: 0;
-      span {
-        display:none;
-      }
-    }
     .channel-logo{
       max-height: 26px;
       max-width: 140px;
@@ -337,13 +309,13 @@
   }
 
   @media all and (max-width: 630px) {
-    h3 {
+    h3.section-title {
       font-size: em(16);
     }
   }
 
   @media all and (max-width: 600px) {
-    h3 {
+    h3.section-title {
       font-family: SkyTextMedium;
     }
     .shade{
@@ -385,7 +357,7 @@
       }
     }
     .skycom-carousel-container > *{
-      margin-bottom:1.5em;
+      margin-bottom:2em;
     }
     figcaption.carousel-content{
       padding-bottom:0;
@@ -401,6 +373,19 @@
     .terms-link {
       bottom: 2px;
     }
+    &.has-terms{
+      padding-bottom: 1em;
+      .indicators{
+        bottom: 1.25em;
+      }
+      .terms-link{
+        position: absolute;
+        bottom: 0;
+      }
+      p{
+        margin: 0;
+      }
+    }
   }
   @media all and (max-width: 319px) {
     .actions .next,
@@ -411,93 +396,8 @@
 }
 
 
-
-
-
-
-
-
-.video-overlay {
-  background:#000;
-  display:none;
-  height:100%;
-  width:100%;
-  left:0;
-  top:0;
-  position:absolute;
-  z-index: 11;
-}
-
-.video-wrapper {
-  display:none;
-  background:#000;
-  height:100%;
-  width:100%;
-  //top:0;
-
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  z-index: 10;
-  //display: inline-block;
-
-  video {
-    background:#000;
-  }
-  &:hover .close.active {
-    @include opacity(1);
-  }
-
-  &.playing-video{
-    width:100%;
-    height:100%;
-  }
-
-  .close {
-    @include transition(opacity 0.5s);
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 4;
-    @include opacity(0);
-    display: none;
-    &.active {
-      display: block;
-    }
-  }
-
-  .posterFrame {
-    display:none;
-  }
-
-  @media all and (max-width: 600px) {
-    width: inherit;
-    margin-top: 32%;
-    margin-top: 32vw;
-    top: -58px;
-    &.playing-video{
-      margin-top: 0%;
-      top: 0;
-      .play {
-        display:none;
-      }
-    }
-
-    .play {
-      left: 0;
-      padding-right: 0;
-      span {
-        display: none;
-      }
-    }
-  }
-  @media all and (max-width: 319px) {
-      margin-top: 100px;
-  }
-}
-
 .skycom-notouch {
-  .play-video{
+  .skycom-carousel .play-video{
     left:50px;
   }
   .carousel-content{
@@ -517,25 +417,23 @@
   }
 }
 .lt-ie10{
-  .skycom-carousel .shade {
-    width: 66%; /* filter goes across whole slide, so stop it a little bit before */
+  .skycom-carousel {
+    .shade {
+      width: 66%; /* filter goes across whole slide, so stop it a little bit before */
+    }
+    .next, .previous{
+      .semi-circle{
+        background: rgba(0,0,0,0.35);
+      }
+    }
   }
 }
 .lt-ie9{
   .carousel-content {
       padding-left:50px;
   }
-  .play-video{
-      display: block; float:right; padding-left:5px; line-height:3em;
-      span {
-        padding: 15px 15px 15px 0;
-      }
-  }
 }
 .lt-ie8{
-  .play-video span{
-    position:relative; top:-20px; padding: 15px; left:-5px;
-  }
   .skycom-carousel {
     .actions .play,
     .actions .pause{

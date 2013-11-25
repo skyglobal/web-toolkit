@@ -1,5 +1,5 @@
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.carousel = (function(window, $) {
+toolkit.carousel = (function(window, $, video) {
     'use strict';
 
     // get CSS3 capabilities
@@ -14,8 +14,6 @@ toolkit.carousel = (function(window, $) {
     function Carousel(element, options) {
         this.options = options;
         this.$viewport = element;
-        this.$termsContent = element.next('.terms-content');
-        this.$termsLink = element.find('.terms-link');
         this.$slideContainer = element.find('.skycom-carousel-container');
         this.$slides = this.$slideContainer.find('>');
         this.currentIndex = 0;
@@ -23,6 +21,7 @@ toolkit.carousel = (function(window, $) {
         this.timerId = false;
         this.touchReset();
         this.bindEvents();
+        this.initialiseVideos();
     }
 
     Carousel.prototype = {
@@ -39,8 +38,6 @@ toolkit.carousel = (function(window, $) {
         bindEvents: function() {
             this.bindTouchEvents();
             this.$slideContainer.find('a').on('click', this.pause.bind(this));
-            this.$termsLink.on('click', this.toggleTermsContent.bind(this));
-            this.showTermsLink(0);
         },
         unbindEvents: function() {
             this.unbindTouchEvents();
@@ -62,18 +59,18 @@ toolkit.carousel = (function(window, $) {
         },
         toggleTermsContent: function(){
             this.pause();
-            var termsHidden = this.$termsContent.find('.terms').length===0;
+            var termsHidden = this.$viewport.next('.terms-content').find('.terms').length===0;
             this[termsHidden ? 'showTermsContent' : 'hideTermsContent']();
         },
         showTermsContent: function(){
             this.hideTermsContent();
             var $terms = $(this.$slides[this.currentIndex]).find('.terms');
             if ($terms.length){
-                this.$termsContent.append($terms.clone(true).removeClass('speak').attr('aria-hidden','true')).fadeIn(200);
+                this.$viewport.next('.terms-content').append($terms.clone(true).removeClass('speak').attr('aria-hidden','true')).fadeIn(200);
             }
         },
         hideTermsContent: function(){
-            this.$termsContent.fadeOut(200, function() {
+            this.$viewport.next('.terms-content').fadeOut(200, function() {
                 $(this).find('.terms').remove();
             });
         },
@@ -81,12 +78,27 @@ toolkit.carousel = (function(window, $) {
             this.hideTermsLink();
             var $terms = $(this.$slides[slideIndex]).find('.terms');
             if ($terms.length){
-                this.$termsLink.removeClass('hidden').fadeIn(200);
+                this.$viewport.find('.terms-link').removeClass('hidden').fadeIn(200);
             }
         },
         hideTermsLink: function(){
-            this.$termsLink.fadeOut(200);
+            this.$viewport.find('.terms-link').fadeOut(200);
             this.hideTermsContent();
+        },
+        initialiseVideos: function() {
+            var carousel = this;
+            this.$slides.video({
+                token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
+                displayAdverts: false, //disable ads
+                onPlay: function() {
+                    carousel.pause();
+                    carousel.$viewport.find('.actions, .indicators, .terms-link').fadeOut(500);
+                },
+                closeCallback: function() {
+                    carousel.$viewport.find('.actions, .indicators, .terms-link').fadeIn(500);
+                }
+            });
+
         },
         moveSlide : function(opts){//index, start, end, callback, reverse
             var self = this,
@@ -238,154 +250,38 @@ toolkit.carousel = (function(window, $) {
         }
     };
 
-    function Video(carousel, options) {
-        this.carousel = carousel;
-        this.wrapper = carousel.$viewport.find('.video-wrapper');
-        this.wrapper.attr('id', 'video-' + options.videoId);
-        this.videocontrolcontainer = carousel.$viewport.find('.videocontrolcontainer');
-        this.player = carousel.$viewport.find('video');
-        this.videocontrolcontainer.find('img').on('error', function() {
-            this.src = options.placeHolderImage;
-        });
-        this.options = options;
-        this.bindEvents();
-    }
-
-    Video.prototype = {
-        bindEvents: function(){
-            var $self = this,
-                hijackLink = function(e) {
-                    e.preventDefault();
-                },
-                stop = function(e){
-                    $self.stop();
-                    $wrapper.off('click', hijackLink);
-                    return false;
-                },
-                $wrapper = this.wrapper;
-            $wrapper.on('click', hijackLink).find('.close').one('click touchstart', stop);
-            this.player.on('ended webkitendfullscreen', stop);
-        },
-        play: function() {
-            var $self = this,
-                carouselControls = this.carousel.$viewport.find('.actions, .indicators');
-            this.originalHtml = this.videocontrolcontainer.html();
-            this.carousel.pause();
-            this.showCanvas(function() {
-                carouselControls.hide();
-                $self.carousel.unbindTouchEvents();
-                $self.player.sky_html5player($self.options); //todo: move to main video function
-                setTimeout(function(){sky.html5player.play();},1333); //todo: call without setTimeout. S3 breaks as does flash ie8
-//                todo: do both todo's when video team add flash queueing + fixed S3
-            });
-        },
-        stop: function() {
-            var $self = this,
-                carouselControls = this.carousel.$viewport.find('.actions, .indicators');
-            $(window).off('skycom.resizeend', $self.resizeCarousel);
-            sky.html5player.close(this.wrapper);
-            $self.videocontrolcontainer.html($self.originalHtml); //todo: remove once video team fix 'ie 8 repeat play' bug
-            this.hideCanvas( function(){
-                $self.carousel.bindTouchEvents();
-                carouselControls.show();
-            });
-        },
-        showCanvas: function(callback) {
-            var height,
-                $carousel = this.carousel.$viewport,
-                $overlay = $carousel.find('.video-overlay'),
-                $wrapper = $carousel.find('.video-wrapper'),
-                $play = $carousel.find('.play-video'),
-                $close = $carousel.find('.video-wrapper .close'),
-                speed= 500,
-                $self = this;
-
-            this.originalHeight = $carousel.height();
-            $wrapper.addClass('playing-video');
-            $overlay.fadeIn(function() {
-                $play.fadeOut();
-                height = $self.calculateHeightForVideo();
-                $carousel.animate({ height: height }, speed, function() {
-                    $(window).on('skycom.resizeend', $.proxy($self.resizeCarousel, $self));
-                    $wrapper.show();
-                    $overlay.fadeOut(speed, function() {
-                        $close.addClass('active');
-                    });
-                    callback();
-                });
-            });
-        },
-        calculateHeightForVideo: function() {
-            return Math.round((this.carousel.$viewport.width() / 16) * 9);
-        },
-        resizeCarousel: function() {
-            this.carousel.$viewport.animate({ height: this.calculateHeightForVideo() }, 250);
-        },
-        hideCanvas: function(callback) {
-            var $carousel = this.carousel.$viewport,
-                $overlay = $carousel.find('.video-overlay'),
-                $wrapper = $carousel.find('.video-wrapper'),
-                $play = $carousel.find('.play-video'),
-                $close = $carousel.find('.video-wrapper .close'),
-                speed = 500,
-                originalHeight = this.originalHeight;
-            $overlay.fadeIn(speed, function() {
-                $close.removeClass('active');
-                $carousel.animate({ height: originalHeight }, speed, function(){
-                    $carousel.css({ height: 'auto' });
-                    callback();
-                    $play.fadeIn();
-                    $overlay.hide();
-                    $wrapper.fadeOut();
-                    $wrapper.removeClass('playing-video');
-                });
-            });
-        }
-    };
-
     // jquerify
     $.fn.skycom_carousel = function(params) {
         var options = $.extend(true, {
             carousel: {
                 actions: [
-                    { id: 'play', label: 'Play Carousel' },
-                    { id: 'pause', label: 'Pause Carousel' },
-                    { id: 'previous', label: 'Previous' },
-                    { id: 'next', label: 'Next' }
+                    { id: 'play', label: 'Play Carousel', icon: 'carousel-play' },
+                    { id: 'pause', label: 'Pause Carousel', icon: 'carousel-pause' },
+                    { id: 'previous', label: 'Previous', icon: 'chevron-left',speak:true },
+                    { id: 'next', label: 'Next', icon: 'chevron',speak:true }
                 ],
                 autoplay: true,
                 startSlideIndex: 0,
                 onPlayDelay: 500,
                 interval: 6000
-            },
-            video: {
-                token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-                autoplay: false,
-                videoId: null,
-                freewheel: false, //disable ads
-                placeHolderImage: '//static.video.sky.com/posterframes/skychasky.jpg'
             }
         }, params);
 
         // generating default markup
         var markup = {
             actions: function($element, options){
-                var html = '', action, label, i, extraClass,
+                var html = '', id, label, i, extraClass, icon, action,circle,
                     actions = options.actions,
                     onclick = options.onclick;
                 if(options.count <= 1) return this;
                 for (i in actions) {
-                    extraClass = '';
-                    action = actions[i].id;
-                    label = actions[i].label;
-                    if (action=='next' || action=='previous'){
-                        extraClass=' hidden-touch ';
-                    }
-                    html += '<a href="#" class="skycom-internal ' + extraClass + action + '" >';
-                    html += '<span class="icon-carousel-' + action + '"></span>' + label;
-                    if (action == 'next' || action == 'previous') {
-                        html += '<span class="icon-carousel-' + action + '-over over"></span>';
-                    }
+                    action = actions[i];
+                    id = action.id;
+                    extraClass = (id=='next' || id=='previous') ? ' hidden-touch ' : '';
+                    icon = 'skycon-' + action.icon;
+                    label = (action.speak) ? '<span class="speak">' + action.label + '</span>' : action.label;
+                    html += '<a href="#" class="skycom-internal supportive ' + extraClass + id + '" >';
+                    html += '<span class="semi-circle"><i class="' + icon + '" aria-hidden="true"></i></span>' + label;
                     html += '</a>';
                 }
                 $element.find('.skycom-carousel-container').before('<div class="actions">' + html + '</div>');
@@ -415,6 +311,16 @@ toolkit.carousel = (function(window, $) {
                 $element.append($indicators);
                 return this;
             },
+            terms: function($element) {
+                var $termsLink = $('<a href="#!" class="terms-link carousel-content cushioned hidden black internal-link supportive" aria-hidden="true">Terms and Conditions</a>');
+                var $termsContent = $('<div class="terms-content carousel-content  cushioned hidden"></div>');
+                if ($element.find('.terms').length){
+                    $element.append($termsLink);
+                    $element.after($termsContent);
+                    $element.addClass('has-terms');
+                }
+                return this;
+            },
             video: function($element) {
                 $element.append('<div class="video-overlay"></div>');
                 return this;
@@ -431,26 +337,20 @@ toolkit.carousel = (function(window, $) {
                         carousel.goto(index);
                     }
                 })
+                .terms($this)
                 .actions($this, {
                     count: carousel.slideCount,
                     actions: options.carousel.actions,
                     onclick: function(action) {
                         carousel[action]();
                     }
-                })
-                .video($this);
+                });
             };
 
             createMarkup(carousel);
 
-            $this.on('click', '.play-video', function(e) {
-                e.preventDefault();
-                options.video.videoId = $(this).attr('data-video-id');
-                if (options.carousel.videoAds){
-                    options.video.freewheel = true;
-                }
-                var video = new Video(carousel, options.video);
-                video.play();
+            $this.on('click', '.terms-link', function(e) {
+                carousel.toggleTermsContent();
             }).on('change',function(e, index) {
                 index = index || 0;
                 $this.find('.indicators .container > *').removeClass('active').eq(index).addClass('active');
@@ -496,16 +396,17 @@ toolkit.carousel = (function(window, $) {
             if(carousel.slideCount > 1) {
                 carousel[options.carousel.autoplay === true ? 'play' : 'pause'](false, options.carousel.interval);
                 carousel.goto(options.carousel.startSlideIndex, false);
+                carousel.showTermsLink(0);
                 $this.trigger('change');
             } else {
                 carousel.unbindTouchEvents();
             }
         });
     };
-}(window, jQuery));
+}(window, jQuery, toolkit.video));
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('modules/carousel', [], function() {
+    define('modules/carousel', ['modules/video'], function(video) {
         return toolkit.carousel;
     });
 }

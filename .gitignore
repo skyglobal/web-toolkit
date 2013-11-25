@@ -5,5 +5,7 @@ web-toolkit.ipr
 .DS_Store
 .ruby-version
 *iws
-*iws
+*ipr
+*iml
 node_modules/
+grunt/fonts/min
