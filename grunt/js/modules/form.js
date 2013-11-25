@@ -94,7 +94,6 @@ toolkit.form = (function ($) {
 if (typeof window.define === "function" && window.define.amd) {
     define('modules/form', [], function() {
         'use strict';
-
         return toolkit.form;
     });
 }
