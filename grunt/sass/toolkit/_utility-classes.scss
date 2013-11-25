@@ -121,7 +121,7 @@ body .visible{
 
 .rotate-180 {
   @include transform(rotate(180deg));
-  .lt-ie8 & {
+  .lt-ie9 & {
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
   }
 }
