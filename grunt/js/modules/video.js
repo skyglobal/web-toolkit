@@ -13,7 +13,8 @@ toolkit.video = (function (window, $) {
             autoplay : false,
             videoId : $container.attr('data-video-id'),
             onPlay: options.onPlay,
-            closeCallback: options.closeCallback
+            closeCallback: options.closeCallback,
+            $wrapperLocation: options.$wrapperLocation || this.$container
         };
         this.bindEvents();
     }
@@ -33,22 +34,22 @@ toolkit.video = (function (window, $) {
             video.$player.one('ended webkitendfullscreen', video.stop.bind(video));
         },
         createWrapper:function () {
-            this.$container.append('<div class="video-wrapper">' +
+            this.options.$wrapperLocation.append('<div class="video-wrapper">' +
                 '<a href="#!" class="close"><i class="skycon-close" aria-hidden=true></i><span class="speak">Close</span></a>' +
                 '<div class="videocontrolcontainer"><video></video><img class="posterFrame"/></div>' +
             '</div>');
-            this.$container.find('.posterFrame').on('error', function () {
+            this.options.$wrapperLocation.find('.posterFrame').on('error', function () {
                 this.src = options.placeHolderImage;
             });
-            this.$container.append('<div class="video-overlay"></div>');
-            this.$player = this.$container.find('video');
-            this.$wrapper = this.$container.find('.video-wrapper');
+            this.options.$wrapperLocation.append('<div class="video-overlay"></div>');
+            this.$player = this.options.$wrapperLocation.parent().find('video');
+            this.$wrapper = this.options.$wrapperLocation.find('.video-wrapper');
             this.$wrapper.attr('id', 'video-' + this.options.videoId);
             this.bindWrapperEvents();
         },
         removeWrapper: function(){
             this.$wrapper.removeClass('playing-video').remove();
-            this.$container.find('.video-overlay').remove();
+            this.options.$wrapperLocation.find('.video-overlay').remove();
         },
 
         play:function(e) {
@@ -81,10 +82,11 @@ toolkit.video = (function (window, $) {
         showCanvas:function (callback) {
             var height,
                 $container = this.$container,
-                $overlay = $container.find('.video-overlay'),
-                $wrapper = $container.find('.video-wrapper'),
+                $wrapperLocation = this.options.$wrapperLocation,
+                $overlay = $wrapperLocation.find('.video-overlay'),
+                $wrapper = $wrapperLocation.find('.video-wrapper'),
                 $play = $container.find('.play-video'),
-                $close = $container.find('.video-wrapper .close'),
+                $close = $wrapper.find('.close'),
                 animationSpeed = (this.options.animationSpeed === 0) ? 0 : this.options.animationSpeed || 500,
                 video = this;
             this.originalHeight = $container.height();
@@ -111,10 +113,11 @@ toolkit.video = (function (window, $) {
         hideCanvas:function () {
             var video = this,
                 $container = this.$container,
-                $overlay = $container.find('.video-overlay'),
-                $wrapper = $container.find('.video-wrapper'),
+                $wrapperLocation = this.options.$wrapperLocation,
+                $overlay = $wrapperLocation.find('.video-overlay'),
+                $wrapper = $wrapperLocation.find('.video-wrapper'),
                 $play = $container.find('.play-video'),
-                $close = $container.find('.video-wrapper .close'),
+                $close = $wrapper.find('.close'),
                 animationSpeed = (this.options.animationSpeed === 0) ? 0 : this.options.animationSpeed || 500,
                 originalHeight = this.originalHeight;
 
