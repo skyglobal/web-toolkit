@@ -7,6 +7,8 @@
   .required:after {
     content: "*";
     color: $error;
+    position: absolute;
+    margin-left: 4px;
   }
 
   select {
@@ -98,13 +100,12 @@
   }
 
 
-  .form-error,
-  label.form-error {
-    color: #d21717;
+  .form-error {
+    color: $error;
   }
 
   input.form-error {
-    border-color: #d21717;
+    border-color: $error;
     color: #000;
   }
 
@@ -123,6 +124,11 @@
 
   .skycon-warning {
     margin-right: 8px;
+    font-size: 20px;
+    margin-bottom: 4px;
+    .lt-ie9 & {
+      margin-bottom: -4px;
+    }
   }
 
   .feedback-list .form-error {

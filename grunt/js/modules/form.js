@@ -18,74 +18,119 @@ toolkit.form = (function ($) {
         return false;
     }
 
-    //feature detect the required attribute
+    var useCustomFormErrors =  (!('required' in document.createElement('input')) || isSafari());
 
-    if (!('required' in document.createElement('input')) || isSafari()) {
+    function Form($form) {
+        this.$form = $form;
+        this.$requiredInputs = $form.find('input[required]');
+        this.errors = [];
+        this.hasError = false;
 
-        $('.sky-form').submit(function(event) {
+        this.bindEvents();
+    }
 
-            var hasError = false,
-                errors = [];
+    Form.prototype = {
+        bindEvents: function() {
+            var form = this;
+            //feature detect the required attribute
+            if (useCustomFormErrors) {
+                this.$form.submit(function(e) {
+                    form.validate(e);
+                });
+            }
+        },
 
-            $('#feedback-list-container').remove();
+        addErrorMessageToInput: function($input) {
+            var inputId     = $input.attr('id'),
+                $descriptor = this.$form.find('label.descriptor[for=' + inputId + ']'),
+                $feedbacks  = this.$form.find('label.feedback[for=' + inputId + ']');
 
-            $('input[required]').each(function (index, input) {
-                var inputId     = $(input).attr('id'),
-                    $descriptor = $('label.descriptor[for=' + inputId + ']'),
-                    $feedbacks  = $('label.feedback[for=' + inputId + ']');
+            this.hasError = true;
 
-                if ($(input).val() === '') {
-                    hasError = true;
+            $descriptor.addClass('form-error');
 
-                    $descriptor.addClass('form-error');
+            if ($feedbacks.length > 0) {
+                $feedbacks.removeClass('hidden');
+            } else {
+                //create a feedback if one does not exist
+                $feedbacks = $('<label class="form-error feedback" for="' + $input.attr('id') + '">' + $descriptor.text() + ' is required</label>').insertAfter($input);
+            }
 
-                    if ($feedbacks.length > 0) {
-                        $feedbacks.removeClass('hidden');
-                    } else {
-                        //create a feedback if one does not exist
-                        $feedbacks = $('<label class="form-error feedback" for="' + $(input).attr('id') + '">' + $descriptor.text() + ' is required</label>').insertAfter($(input));
-                    }
+            if (!$input.hasClass('form-error')) {
+                $input.addClass('form-error');
+                $('<i class="form-error skycon-warning"></i>').insertAfter($input);
+            }
 
-                    if (!$(input).hasClass('form-error')) {
-                        $(input).addClass('form-error');
-                        $('<span class="form-error skycon-warning"></span>').insertAfter($(input));
-                    }
+            this.errors.push($feedbacks.first());
+        },
 
-                    errors.push($feedbacks.first());
+        removeErrorsFromInput: function($input) {
+            var inputId     = $input.attr('id'),
+                $descriptor = this.$form.find('label.descriptor[for=' + inputId + ']'),
+                $feedbacks  = this.$form.find('label.feedback[for=' + inputId + ']');
 
+            if ($input.hasClass('form-error')) {
+                $input.removeClass('form-error');
+                $input.next('.skycon-warning').remove();
+            }
+            $descriptor.removeClass('form-error');
+            $feedbacks.addClass('hidden');
+        },
+
+        createErrorsAtTop: function() {
+            var errorHtml = '<div id="feedback-list-container" class="row" aria-live="polite"><p><i class="form-error skycon-warning"></i>Please correct the highlighted fields below:</p>',
+                label,
+                i;
+
+            errorHtml += '<ul class="feedback-list">';
+
+            for (i = 0; i < this.errors.length; i++) {
+                errorHtml += '<li class="form-error">' + this.errors[i].text() + '</li>';
+            }
+
+            errorHtml += '</ul></div>';
+
+            this.$form.closest('form').prepend(errorHtml);
+            // scroll to the top of the forms
+            window.location.href = window.location.href.split('#')[0] + '#feedback-list-container';
+        },
+
+        resetErrors: function() {
+            this.hasError = false;
+            this.errors = [];
+            this.$form.find('#feedback-list-container').remove();
+        },
+
+        validate: function(e) {
+            var $form = $(e.currentTarget),
+                form = this;
+
+            form.resetErrors();
+
+            this.$requiredInputs.each(function (index, input) {
+                var $input = $(input);
+                if ($input.val() === '') {
+                    form.addErrorMessageToInput($input);
                 } else {
-                    if ($(input).hasClass('form-error')) {
-                        $(input).removeClass('form-error');
-                        $(input).next('.skycon-warning').remove();
-                    }
-                    $descriptor.removeClass('form-error');
-                    $feedbacks.addClass('hidden');
+                    form.removeErrorsFromInput($input);
                 }
             });
 
             // create list of error messages at the top of the form if there has been any errors
-            if (hasError) {
-                event.preventDefault();
-
-                var errorHtml = '<div id="feedback-list-container" class="row" aria-live="polite"><p><span class="form-error skycon-warning"></span>Please correct the highlighted fields below:</p>',
-                    label,
-                    i;
-
-                errorHtml += '<ul class="feedback-list">';
-
-                for (i = 0; i < errors.length; i++) {
-                    errorHtml += '<li class="form-error">' + errors[i].text() + '</li>';
-                }
-
-                errorHtml += '</ul></div>';
-
-                $(event.currentTarget).closest('form').prepend(errorHtml);
-
-                // scroll to the top of the forms
-                window.location.href = window.location.href.split('#')[0] + '#feedback-list-container';
+            if (form.hasError) {
+                e.preventDefault();
+                form.createErrorsAtTop();
             }
+        }
+
+    };
+    $.fn.form = function() {
+        return this.each(function() {
+            var form = new Form($(this));
         });
-    }
+    };
+
+    $('.sky-form').form();
 
 })(jQuery);
 

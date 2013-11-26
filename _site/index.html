@@ -128,17 +128,17 @@
         </div>
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
-				<h1 class="wiki-header">Sky Web Toolkit <small>v1.6.1 </small></h1>
-<div class="secondary">Last Updated: 25-11-2013</div>
+				<h1 class="wiki-header">Sky Web Toolkit <small>v1.6.5 </small></h1>
+<div class="secondary">Last Updated: 26-11-2013</div>
 
 <a name="using-the-toolkit"></a>
 <section class="wiki-section">
     <h2>Using the Toolkit</h2>
     <div class="sub-section">
         <p class="developer-notes">
-            &lt;script src='//web-toolkit.global.sky.com/1.6.1/scripts/toolkit.js'&gt;&lt;/script&gt;
-            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.6.1/stylesheets/toolkit.css"/&gt;
-            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.6.1/fonts/skycons.css"/&gt;
+            &lt;script src='//web-toolkit.global.sky.com/1.6.5/scripts/toolkit.js'&gt;&lt;/script&gt;
+            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.6.5/stylesheets/toolkit.css"/&gt;
+            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.6.5/fonts/skycons.css"/&gt;
         </p>
     </div>
     <a name="getting-started"></a>
@@ -824,6 +824,7 @@ https://github.com/skyglobal/web-toolkit/
         <tr ><td>curved-arrow-down</td><td> icon-curved-arrow-down</td><td class="icon"><i class=" icon-curved-arrow-down"></i></td></tr>
         <tr ><td>curved-arrow-right</td><td> icon-curved-arrow-right</td><td class="icon"><i class=" icon-curved-arrow-right"></i></td></tr>
         <tr ><td>curved-arrow-top-right</td><td> icon-curved-arrow-top-right</td><td class="icon"><i class=" icon-curved-arrow-top-right"></i></td></tr>
+        <tr ><td>video-play</td><td> icon-video-play</td><td class="icon"><i class=" icon-video-play"></i></td></tr>
 
         </tbody>
     </table>
@@ -840,7 +841,7 @@ https://github.com/skyglobal/web-toolkit/
     #wiki-skycons tr:hover{
         background: #eee;
     }
-    #wiki-skycons tr:hover i {
+    #wiki-skycons tr:hover i[class^="skycon-"] {
         -moz-transform: scale(5);
         -webkit-transform: scale(5);
         transform: scale(5);
@@ -871,7 +872,7 @@ https://github.com/skyglobal/web-toolkit/
         for ie7 support execute <code>toolkit.skycons.init();</code> after the page has loaded.
     </p>
     <p class="developer-notes">
-    Dont forget to include <code>http://web-toolkit.global.sky.com/1.6.1/fonts/skycons.css</code>
+    Dont forget to include <code>http://web-toolkit.global.sky.com/1.6.5/fonts/skycons.css</code>
     </p>
     <p class="developer-notes">
     Ensure <code>aria-hidden</code> is used on your <code>skycon</code> tags.
@@ -1200,11 +1201,11 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                 <input id="input-two" type="text" placeholder="Text goes here"/>
                 <label id="input-two-feedback" class="hidden form-error feedback" for="input-two">Please enter something into the second input</label>
             </div>
+
             <div class="row">
                 <label class="required descriptor" for="input-three">Mandatory Input with no Feedback</label>
                 <input id="input-three" class="required" type="text" placeholder="Text goes here" required/>
             </div>
-
             <div class="row no-label">
                 <button name="form-submit" type="submit" class="form-submit btn primary-cta">Submit</button>
             </div>
@@ -1561,7 +1562,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                             </a>
                         </figcaption>
                         <a href="#!" class="play-video">
-                            <i class="skycon-video-play" aria-hidden="true"></i>
+                            <i class="icon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
                     </figure>
@@ -1594,7 +1595,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                             </a>
                         </figcaption>
                         <a href="#!" class="play-video" >
-                            <i class="skycon-video-play" aria-hidden="true"></i>
+                            <i class="icon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
                     </figure>
@@ -1664,7 +1665,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                             </a>
                         </figcaption>
                         <a href="#!" class="play-video">
-                            <i class="skycon-video-play" aria-hidden="true"></i>
+                            <i class="icon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
                     </figure>
@@ -1720,7 +1721,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                             </a>
                         </figcaption>
                         <a href="#!" class="play-video" >
-                            <i class="skycon-video-play" aria-hidden="true"></i>
+                            <i class="icon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
                     </figure>
@@ -1770,7 +1771,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 
             <a href="#!" class="play-video internal-link"
                data-tracking-context="David Beckham And Sky Team Up">
-                <i class="skycon-video-play"></i>
+                <i class="icon-video-play"></i>
                 <span class="speak">Play Trailer</span>
             </a>
 
