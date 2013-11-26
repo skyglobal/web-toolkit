@@ -128,7 +128,7 @@
         </div>
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
-				<h1 class="wiki-header">Sky Web Toolkit <small>v1.6.3 </small></h1>
+				<h1 class="wiki-header">Sky Web Toolkit <small>v1.6.1 </small></h1>
 <div class="secondary">Last Updated: 25-11-2013</div>
 
 <a name="using-the-toolkit"></a>
@@ -136,9 +136,9 @@
     <h2>Using the Toolkit</h2>
     <div class="sub-section">
         <p class="developer-notes">
-            &lt;script src='//web-toolkit.global.sky.com/1.6.3/scripts/toolkit.js'&gt;&lt;/script&gt;
-            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.6.3/stylesheets/toolkit.css"/&gt;
-            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.6.3/fonts/skycons.css"/&gt;
+            &lt;script src='//web-toolkit.global.sky.com/1.6.1/scripts/toolkit.js'&gt;&lt;/script&gt;
+            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.6.1/stylesheets/toolkit.css"/&gt;
+            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.6.1/fonts/skycons.css"/&gt;
         </p>
     </div>
     <a name="getting-started"></a>
@@ -824,7 +824,6 @@ https://github.com/skyglobal/web-toolkit/
         <tr ><td>curved-arrow-down</td><td> icon-curved-arrow-down</td><td class="icon"><i class=" icon-curved-arrow-down"></i></td></tr>
         <tr ><td>curved-arrow-right</td><td> icon-curved-arrow-right</td><td class="icon"><i class=" icon-curved-arrow-right"></i></td></tr>
         <tr ><td>curved-arrow-top-right</td><td> icon-curved-arrow-top-right</td><td class="icon"><i class=" icon-curved-arrow-top-right"></i></td></tr>
-        <tr ><td>video-play</td><td> icon-video-play</td><td class="icon"><i class=" icon-video-play"></i></td></tr>
 
         </tbody>
     </table>
@@ -841,7 +840,7 @@ https://github.com/skyglobal/web-toolkit/
     #wiki-skycons tr:hover{
         background: #eee;
     }
-    #wiki-skycons tr:hover i[class^="skycon-"] {
+    #wiki-skycons tr:hover i {
         -moz-transform: scale(5);
         -webkit-transform: scale(5);
         transform: scale(5);
@@ -872,7 +871,7 @@ https://github.com/skyglobal/web-toolkit/
         for ie7 support execute <code>toolkit.skycons.init();</code> after the page has loaded.
     </p>
     <p class="developer-notes">
-    Dont forget to include <code>http://web-toolkit.global.sky.com/1.6.3/fonts/skycons.css</code>
+    Dont forget to include <code>http://web-toolkit.global.sky.com/1.6.1/fonts/skycons.css</code>
     </p>
     <p class="developer-notes">
     Ensure <code>aria-hidden</code> is used on your <code>skycon</code> tags.
@@ -1079,11 +1078,14 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 
 <div class="example">
     <h4>With Grey background</h4>
+
     <p class="design-notes">
         To be used for xxx types of forms</p>
+
     <p class="developer-notes">
         Add class <code>well</code> to the container.
     </p>
+
     <div class="demo" data-selector="*">
 
         <form class="sky-form sky-well">
@@ -1113,18 +1115,23 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 
 <div class="example">
     <h4>Without Grey background</h4>
+
     <p class="design-notes">
         To be used for xxx types of forms</p>
+
     <p class="developer-notes">
 
     </p>
+
     <div class="demo" data-selector="*">
 
         <form class="sky-form ">
             <div class="row">
                 <label for="title" class="required">Title</label>
+
                 <div class="select">
-                    <select id="title" name="title"><option value="">Please select</option>
+                    <select id="title" name="title">
+                        <option value="">Please select</option>
                         <option value="Mr">Mr</option>
                         <option value="Mrs">Mrs</option>
                         <option value="Ms">Ms</option>
@@ -1138,16 +1145,16 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 
             <div class="row">
                 <label for="first_name">First name</label>
-                <input id="first_name" type="text" placeholder="eg. Joe Bloggs" />
+                <input id="first_name" type="text" placeholder="eg. Joe Bloggs"/>
             </div>
 
             <fieldset class="row">
                 <legend>Select a payment type</legend>
                 <div class="radiocheck">
-                    <input type="radio" name="payment_type" value="direct_debit" id="direct-debit" checked />
+                    <input type="radio" name="payment_type" value="direct_debit" id="direct-debit" checked/>
                     <label for="direct-debit">Direct debit</label>
                     <br>
-                    <input type="radio" name="payment_type" value="credit_card" id="credit-card" />
+                    <input type="radio" name="payment_type" value="credit_card" id="credit-card"/>
                     <label for="credit-card">Credit card</label>
                 </div>
             </fieldset>
@@ -1157,18 +1164,51 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                 <input type="text" placeholder="eg. TW8 1QW"/>
                 <button class="btn">Find address</button>
             </div>
-            
-             <div class="row">
+
+            <div class="row">
                 <label for="message2">Homepage</label>
                 <textarea id="message2" placeholder="eg. Please enter a message"></textarea>
             </div>
 
             <div class="row no-label">
-                <input type="checkbox" name="confirm_terms" value="true" id="confirm-terms" />
+                <input type="checkbox" name="confirm_terms" value="true" id="confirm-terms"/>
                 <label for="confirm-terms">I agree to the <a href="#">Terms &amp; Conditions</a></label>
             </div>
         </form>
 
+    </div>
+</div>
+
+<div class="example">
+    <h4>With accessible error messages for required fields:</h4>
+    <p>This requires the use of the native <code>required</code> attribute on an input field.  See below for an example.</p>
+    <code>&lt;input id="my-input" type="text" required/&gt;</code>
+    <p>If you are following xhtml, use the following:</p>
+    <code>&lt;input id="my-input" type="text" required="required"/&gt;</code>
+    <p>Alternatively, if you want to customise the error label, you can provide a custom error label as in the example below.</p>
+    <code>&lt;input id="my-input" type="text" required/&gt;&lt;label class="hidden form-error feedback" for="input"&gt;Please enter some text&lt;/label&gt;</code>
+    <p>Browsers that support the required attribute will get their native experience, so this logic can only be observed on browsers that do not support it (IE8, IE9, Safari)</p>
+    <div class="demo">
+        <form class="sky-form sky-well">
+            <div class="row">
+                <label class="required descriptor" for="input-one">Mandatory Input with Feedback</label>
+                <input id="input-one" type="text" placeholder="Text goes here" required/>
+                <label id="input-one-feedback" class="hidden form-error feedback" for="input-one">Please enter something into the first input</label>
+            </div>
+            <div class="row">
+                <label for="input-two">Non Mandatory Input</label>
+                <input id="input-two" type="text" placeholder="Text goes here"/>
+                <label id="input-two-feedback" class="hidden form-error feedback" for="input-two">Please enter something into the second input</label>
+            </div>
+            <div class="row">
+                <label class="required descriptor" for="input-three">Mandatory Input with no Feedback</label>
+                <input id="input-three" class="required" type="text" placeholder="Text goes here" required/>
+            </div>
+
+            <div class="row no-label">
+                <button name="form-submit" type="submit" class="form-submit btn primary-cta">Submit</button>
+            </div>
+        </form>
     </div>
 </div>
     </div>
@@ -1521,7 +1561,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                             </a>
                         </figcaption>
                         <a href="#!" class="play-video">
-                            <i class="icon-video-play" aria-hidden="true"></i>
+                            <i class="skycon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
                     </figure>
@@ -1554,7 +1594,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                             </a>
                         </figcaption>
                         <a href="#!" class="play-video" >
-                            <i class="icon-video-play" aria-hidden="true"></i>
+                            <i class="skycon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
                     </figure>
@@ -1624,7 +1664,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                             </a>
                         </figcaption>
                         <a href="#!" class="play-video">
-                            <i class="icon-video-play" aria-hidden="true"></i>
+                            <i class="skycon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
                     </figure>
@@ -1680,7 +1720,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                             </a>
                         </figcaption>
                         <a href="#!" class="play-video" >
-                            <i class="icon-video-play" aria-hidden="true"></i>
+                            <i class="skycon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
                     </figure>
@@ -1730,7 +1770,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 
             <a href="#!" class="play-video internal-link"
                data-tracking-context="David Beckham And Sky Team Up">
-                <i class="icon-video-play"></i>
+                <i class="skycon-video-play"></i>
                 <span class="speak">Play Trailer</span>
             </a>
 
