@@ -96,6 +96,38 @@
   .error {
     margin-left: 24%;
   }
+
+
+  .form-error,
+  label.form-error {
+    color: #d21717;
+  }
+
+  input.form-error {
+    border-color: #d21717;
+    color: #000;
+  }
+
+
+  label.feedback.hidden {
+    display: none;
+  }
+
+  label.feedback {
+    margin-left: 24%;
+    text-align: left;
+    width: auto;
+    float: none;
+    display: block;
+  }
+
+  .skycon-warning {
+    margin-right: 8px;
+  }
+
+  .feedback-list .form-error {
+    margin-left: 24px;
+  }
 }
 
 //ie7
@@ -116,6 +148,9 @@
     input[type="url"],
     textarea {
       width: 100%;
+    }
+    label.feedback {
+      margin-left: 0;
     }
   }
 
