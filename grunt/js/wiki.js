@@ -38,10 +38,11 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
         $('#demo-classc-tabs').inPageNav();
         $('#demo-inpage-nav-tabs').inPageNav();
         $('#demo-video .video').video({
-            token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-            freewheel:false //disable ads
+            token:		"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
+            freewheel:	false // disable ads
         });
         $('.accordion').accordion();
+		$('.lightbox').skyLightbox();
         toolkit.modules.init();
     }
 
