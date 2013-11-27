@@ -12,6 +12,7 @@ modules/form.js
 modules/share.js
 modules/video.js
 modules/carousel.js
+modules/datepicker.js
 toolkit.js
 
 wiki.js
@@ -28,5 +29,6 @@ modules/form.js
 modules/share.js
 modules/video.js
 modules/carousel.js
+modules/datepicker.js
 toolkit.js
 wiki.js

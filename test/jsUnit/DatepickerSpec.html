@@ -1,0 +1,250 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="../../lib/jquery-2.0.3.js"></script>
+    <script src="vendor/mocha.js"></script>
+    <script src="vendor/require.js"></script>
+    <script src="config.js" ></script>
+
+</head>
+<body>
+<!--PLACEHOLDER FOR MOCHA TEST RESULTS-->
+<div id="mocha"></div>
+
+<!--FIXTURE HTML FOR TESTS-->
+<div id="spec-markup">
+    <div class="example">
+        <div class="demo" data-selector="*">
+
+            <form class="sky-form sky-well">
+                <div class="row">
+                    <label for="first_name_g">First name</label>
+                    <input id="first_name_g" type="text" placeholder="eg. Joe Bloggs"/>
+                </div>
+                <div class="row">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" placeholder="eg. joe.bloggs@me.com"/>
+                </div>
+                <div class="row">
+                    <label>Date of birth</label>
+                    <input id="dob" type="text" placeholder="DD/MM/YYYY" maxlength="10">
+                </div>
+                <div class="row datepicker">
+                    <label>Engineer visit</label>
+                    <div class="datepicker-container">
+                        <input id="day" type="text" placeholder="DD" maxlength="2" aria-label="day">
+                        <input id="month" type="text" placeholder="MM" maxlength="2" aria-label="month">
+                        <input id="year" type="text" placeholder="YYYY" maxlength="4" aria-label="year">
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="row">
+                    <label for="telephone">Telephone</label>
+                    <input id="telephone" type="tel" placeholder="eg. +447567567567"/>
+                </div>
+                <div class="row">
+                    <label for="url">Homepage</label>
+                    <input id="url" type="url" placeholder="eg. http://joebloggs.com"/>
+                </div>
+                <div class="row">
+                    <label for="message">Homepage</label>
+                    <textarea id="message" placeholder="eg. Please enter a message"></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--TEST-->
+<script>
+
+    require(['modules/datepicker', '../../test/jsUnit/setup'],function(datepicker) {
+
+        describe('Datepicker module', function() {
+            datepicker.init();
+
+            beforeEach(function(){
+                $('#spec-markup').show();
+                setDate(01, 01, 2035);
+            })
+
+            it('Renders the calendar', function() {
+                expect($('.datepicker').find('.calendar').length).to.equal(1);
+            });
+
+            it('Shows the calendar when the input field is clicked', function(){
+                $('.datepicker #day').focus();
+                expect($('.datepicker').find('.calendar').css('display')).to.equal('block');
+            });
+
+            it('Hides the calendar on tab out', function() {
+                $('.datepicker input').focus();
+                expect($('.datepicker').find('.calendar').css('display')).to.equal('block');
+
+                $('.datepicker #year').trigger(jQuery.Event( 'keydown', { keyCode: 9 } ));
+                expect($('.datepicker').find('.calendar').css('display')).to.equal('none');
+            });
+
+            it('Hides the calendar on shift+tab out', function() {
+                $('.datepicker input').focus();
+                expect($('.datepicker').find('.calendar').css('display')).to.equal('block');
+
+                $('.datepicker #day').trigger(jQuery.Event( 'keydown', { keyCode: 9, shiftKey: true }));
+                expect($('.datepicker').find('.calendar').css('display')).to.equal('none');
+            });
+
+            it('Hides the calendar on click off', function() {
+                $('.datepicker input').focus();
+                expect($('.datepicker').find('.calendar').css('display')).to.equal('block');
+
+                $('body').click();
+                expect($('.datepicker').find('.calendar').css('display')).to.equal('none');
+            });
+
+            it('Correctly selects a date', function() {
+                $('.datepicker .selected').click();
+
+                expect(parseInt($('.datepicker #day').val())).to.equal(1);
+                expect(parseInt($('.datepicker #month').val())).to.equal(1);
+                expect(parseInt($('.datepicker #year').val())).to.equal(2035);
+            });
+
+            it('Correctly sets a date after clicking on day input', function() {
+                $('.datepicker #day').trigger('focus');
+                $('.datepicker .day[data-day="2"]').click();
+
+                expect(parseInt($('.datepicker #day').val())).to.equal(2);
+                expect(parseInt($('.datepicker #month').val())).to.equal(1);
+                expect(parseInt($('.datepicker #year').val())).to.equal(2035);
+            });
+
+            it('Correctly sets a date after clicking on month input', function() {
+                $('.datepicker #month').trigger('focus');
+                $('.datepicker .day[data-day="2"]').click();
+
+                expect(parseInt($('.datepicker #day').val())).to.equal(2);
+                expect(parseInt($('.datepicker #month').val())).to.equal(1);
+                expect(parseInt($('.datepicker #year').val())).to.equal(2035);
+            });
+
+            it('Correctly sets a date after clicking on year input', function() {
+                $('.datepicker #year').trigger('focus');
+                $('.datepicker .day[data-day="2"]').click();
+
+                expect(parseInt($('.datepicker #day').val())).to.equal(2);
+                expect(parseInt($('.datepicker #month').val())).to.equal(1);
+                expect(parseInt($('.datepicker #year').val())).to.equal(2035);
+            });
+
+            it('Shows the right number of days in each month', function() {
+                // January
+                expect($('.daycontainer').children('.day').length).to.equal(31);
+                // February
+                setDate(01, 02, 2035);
+                expect($('.daycontainer').children('.day').length).to.equal(28);
+                // March
+                setDate(01, 03, 2035);
+                expect($('.daycontainer').children('.day').length).to.equal(31);
+                // April
+                setDate(01, 04, 2035);
+                expect($('.daycontainer').children('.day').length).to.equal(30);
+                // May
+                setDate(01, 05, 2035);
+                expect($('.daycontainer').children('.day').length).to.equal(31);
+                // June
+                setDate(01, 06, 2035);
+                expect($('.daycontainer').children('.day').length).to.equal(30);
+                // July
+                setDate(01, 07, 2035);
+                expect($('.daycontainer').children('.day').length).to.equal(31);
+                // August
+                setDate(01, 08, 2035);
+                expect($('.daycontainer').children('.day').length).to.equal(31);
+                // September
+                setDate(01, 09, 2035);
+                expect($('.daycontainer').children('.day').length).to.equal(30);
+                // October
+                setDate(01, 10, 2035);
+                expect($('.daycontainer').children('.day').length).to.equal(31);
+                // November
+                setDate(01, 11, 2035);
+                expect($('.daycontainer').children('.day').length).to.equal(30);
+                // December
+                setDate(01, 12, 2035);
+                expect($('.daycontainer').children('.day').length).to.equal(31);
+            });
+
+            it('Shows the correct month and year in the calendar title', function() {
+                expect($('.monthyearval').text()).to.equal('January 2035');
+            });
+
+            it('Goes to the next month', function() {
+                $('.monthright').click();
+                expect($('.monthyearval').text()).to.equal('February 2035');
+            });
+
+            it('Goes to the previous month in the same year', function() {
+                setDate(01, 02, 2035);
+                $('.monthleft').click();
+                expect($('.monthyearval').text()).to.equal('January 2035');
+            });
+
+            it('Goes to the previous month in the previous year', function() {
+                $('.monthleft').click();
+                expect($('.monthyearval').text()).to.equal('December 2034');
+            });
+
+            it('Changes the selected day of the calendar from the input', function() {
+                $('.datepicker #day').val(12).trigger('keyup').trigger('blur');
+                expect($('.datepicker .selected').text()).to.equal('12');
+            });
+
+            it('Changes the month of the calendar from user input', function() {
+                $('.datepicker #month').val(5).trigger('keyup').trigger('blur');
+                expect($('.monthyearval').text()).to.include('May');
+            });
+
+            it('Changes the year of the calendar from user input', function() {
+                $('.datepicker #year').val(2030).trigger('keyup').trigger('blur');
+                expect($('.monthyearval').text()).to.include('2030');
+            });
+
+            it('Greys out past days', function() {
+                setDate(01, 01, 1900);
+                expect($('.datepicker .day').hasClass('past')).to.equal(true);
+            });
+
+            it('Correctly shows leap years', function() {
+                setDate(01, 02, 2012);
+                expect($('.datepicker').find('.day:contains("29")').text()).to.equal('29');
+            });
+
+            it('Does not accept letters', function() {
+                setDate("x0a1", "l0g1", "20e35g");
+
+                expect(parseInt($('.datepicker #day').val())).to.equal(1);
+                expect(parseInt($('.datepicker #month').val())).to.equal(1);
+                expect(parseInt($('.datepicker #year').val())).to.equal(2035);
+            });
+
+            it('Does not accept symbols', function() {
+                setDate("0/1>", "@0-1", "2^0*35");
+
+                expect(parseInt($('.datepicker #day').val())).to.equal(1);
+                expect(parseInt($('.datepicker #month').val())).to.equal(1);
+                expect(parseInt($('.datepicker #year').val())).to.equal(2035);
+            });
+
+            function setDate(day, month, year){
+                $('.datepicker #day').val(day).trigger('keyup').trigger('blur');
+                $('.datepicker #month').val(month).trigger('keyup').trigger('blur');
+                $('.datepicker #year').val(year).trigger('keyup');
+            }
+        });
+        mocha.run();
+    });
+</script>
+
+</body>
+</html>
