@@ -1,10 +1,12 @@
+$form-offset: 34%;
+
 .sky-form {
 
   .row {
     margin: 0 0 24px 0;
   }
 
-  .required:after {
+  label.required:after {
     content: "*";
     color: $error;
     position: absolute;
@@ -24,24 +26,18 @@
     font: 16px/1em $font-family;
   }
 
-  .row > label,
-  .row > .field_with_errors label {
-    line-height: 32px;
-  }
-
   .row> .field_with_errors label,
   .row > label,
   legend {
-    color: #3c3c3c;
     @include box-sizing(border-box);
     float: left;
     text-align: right;
-    width: 24%;
+    width: $form-offset;
     padding-right: 20px;
   }
 
   .no-label {
-    margin-left: 24%;
+    margin-left: $form-offset;
     label {
       float: none !important;
     }
@@ -96,7 +92,7 @@
   }
 
   .error {
-    margin-left: 24%;
+    margin-left: $form-offset;
   }
 
 
@@ -115,7 +111,8 @@
   }
 
   label.feedback {
-    margin-left: 24%;
+    margin-left: $form-offset;
+    margin-top: 8px;
     text-align: left;
     width: auto;
     float: none;
@@ -140,12 +137,12 @@
 .sky-form {
   .radiocheck {
     *margin-top: -1em;
-    *margin-left: 24%;
+    *margin-left: $form-offset;
     *padding-left: 20px;
   }
 }
 
-@media (max-width: $mobile-width) {
+@media (max-width: 600px) {
   .sky-form {
     input[type="text"],
     input[type="password"],
