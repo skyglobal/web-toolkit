@@ -47,8 +47,6 @@ toolkit.form = (function ($) {
 
             this.hasError = true;
 
-            $descriptor.addClass('form-error');
-
             if ($feedbacks.length > 0) {
                 $feedbacks.removeClass('hidden');
             } else {
@@ -66,14 +64,12 @@ toolkit.form = (function ($) {
 
         removeErrorsFromInput: function($input) {
             var inputId     = $input.attr('id'),
-                $descriptor = this.$form.find('label.descriptor[for=' + inputId + ']'),
                 $feedbacks  = this.$form.find('label.feedback[for=' + inputId + ']');
 
             if ($input.hasClass('form-error')) {
                 $input.removeClass('form-error');
                 $input.next('.skycon-warning').remove();
             }
-            $descriptor.removeClass('form-error');
             $feedbacks.addClass('hidden');
         },
 
