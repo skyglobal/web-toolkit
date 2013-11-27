@@ -1,5 +1,6 @@
 Web Toolkit
 ========================
+![Build Status](https://circleci.com/gh/skyglobal/web-toolkit.png?circle-token=24eeba25d7352dec038ea9fa25b22671ba28be5e)
 
 Look and feel for sky.com
 
