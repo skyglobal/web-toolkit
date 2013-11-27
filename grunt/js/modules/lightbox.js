@@ -31,14 +31,17 @@ toolkit.lightbox = (function ($) {
 
 		open: function(e) {
 			e.preventDefault();
+			this.$originator = $(e.target);
 			this.$container.addClass('lightbox-open');
 			$('body').addClass('lightbox-active');
+			this.$closeIcon[0].focus();
 		},
 
 		close: function(e) {
 			e.preventDefault();
 			this.$container.removeClass('lightbox-open');
 			$('body').removeClass('lightbox-active');
+			this.$originator.focus();
 		}
 	};
 
