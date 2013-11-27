@@ -1,26 +1,20 @@
 <h3 class="wiki-h3">Lightbox</h3>
 
 <p class="design-notes">
-    The lightbox goes here...
+    Click the link below to see a *L*I*G*H*T* *B*O*X*!!
+</p>
+<p class="design-notes">
+	<a id="lightbox-demo-text-link-for-large-lightbox" href="#" data-skyLightbox="#lightbox-demo-large">Show Lightbox</a>
+</p>
+<p class="design-notes">
+	Ensure your anchor tag has a <code>data-skyLightbox</code> attribute with the id of of the lightbox. Example:
+</p>
+<p>
+	<code>&lt;a href="#" data-skyLightbox="#my-lightbox"&gt;Show Lightbox&lt;/a&gt;</code>
 </p>
 
 <div class="init-notes">
 	<code>$('.lightbox').skyLightbox();</code>
-</div>
-
-<h4>Text Links</h4>
-<ul>
-    <li><a id="lightbox-demo-text-link-for-small-lightbox" href="#" data-skyLightbox="#lightbox-demo-small">Small Lightbox</a></li>
-    <li><a id="lightbox-demo-text-link-for-large-lightbox" href="#" data-skyLightbox="#lightbox-demo-large">Large Lightbox</a></li>
-</ul>
-<h4>Image Links</h4>
-<ul>
-    <li>Small Lightbox</li>
-    <li>Large Lightbox</li>
-</ul>
-
-<div id="lightbox-text-link-small-lightbox">
-
 </div>
 
 <div id="lightbox-demo-large" class="lightbox">
@@ -30,9 +24,9 @@
                 <span class="speak">Close</span>
             </a>
 
-            <img src="wiki_images/bling-ring.jpg" height="380" width="1140" style="width:100%;height:auto;" alt="Promotional Image for Lightbox" />
+            <img src="wiki_images/bling-ring.jpg" height="380" width="1140" style="width:100%;height:auto;" />
 
-            <!-- Note you can use the sky-grid in lightboxs -->
+            <!-- Note you can use the sky-grid in lightboxes -->
             <div class="skycom-container clearfix">
                 <div class="skycom-7 alpha">
                     <h2>Large Lightbox</h2>
