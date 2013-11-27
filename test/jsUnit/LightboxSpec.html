@@ -85,6 +85,7 @@
 
 			beforeEach(function() {
 				$('.lightbox').removeClass('lightbox-open');
+				$('#lightbox-demo-text-link-for-large-lightbox').removeClass('skycom-focus');
 			});
 
 			var givenTheLargeLightBoxIsOpen = function() {
@@ -148,6 +149,7 @@
 				expect($('body').hasClass('lightbox-active')).to.equal(false);
 			});
 
+
 			context('Focus Behaviour', function() {
 
 				beforeEach(function() {
@@ -172,7 +174,17 @@
 					// then
 					expect($('#lightbox-demo-text-link-for-large-lightbox:focus')[0]).to.equal(document.activeElement);
 				});
+
+				it("Sets the 'skycom-focus' class on the close icon if the ORIGINATOR had the 'skycom-focus' class.", function() {
+					// given
+					expect($('#lightbox-demo-large .lightbox-close').hasClass('skycom-focus')).to.equal(false);
+					$('#lightbox-demo-text-link-for-large-lightbox').addClass('skycom-focus');
+					givenTheLargeLightBoxIsOpen();
+					// then
+					expect($('#lightbox-demo-large .lightbox-close').hasClass('skycom-focus')).to.equal(true);
+				});
 			});
+
 
 			// TODO: hightlight the close icon (more) when focused
 
