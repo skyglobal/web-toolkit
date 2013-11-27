@@ -9,14 +9,12 @@
 
 </head>
 <body>
+
 <!--PLACEHOLDER FOR MOCHA TEST RESULTS-->
 <div id="mocha"></div>
 
 <!--FIXTURE HTML FOR TESTS-->
-
-
 <div id="spec-markup">
-
 	<h4>Text Links</h4>
 	<ul>
 		<li><a id="lightbox-demo-text-link-for-small-lightbox" href="#" data-skyLightbox="#lightbox-demo-small">Small Lightbox</a></li>
@@ -83,7 +81,7 @@
 
 		$('.lightbox').skyLightbox();
 
-		describe('Accordion module', function() {
+		describe('Lightbox module', function() {
 
 			beforeEach(function() {
 				$('.lightbox').removeClass('lightbox-open');
@@ -131,7 +129,7 @@
 			});
 
 
-			it('Does NOT closes when lightbox itself is clicked', function() {
+			it('Does NOT close when the lightbox itself is clicked', function() {
 				givenTheLargeLightBoxIsOpen();
 				// when
 				$('#lightbox-demo-large .lightbox-content').click();
@@ -149,6 +147,34 @@
 				// then
 				expect($('body').hasClass('lightbox-active')).to.equal(false);
 			});
+
+			context('Focus Behaviour', function() {
+
+				beforeEach(function() {
+					$('#spec-markup').show();
+				});
+
+				afterEach(function() {
+					$('#spec-markup').hide();
+				});
+
+				it('Gives focus to the close icon when opened', function() {
+					givenTheLargeLightBoxIsOpen();
+					// then
+					expect($('#lightbox-demo-large .lightbox-close:focus')[0]).to.equal(document.activeElement);
+				});
+
+				it('Returns focus back to the ORIGINATOR when closed', function() {
+					// given
+					givenTheLargeLightBoxIsOpen();
+					// when
+					$('#lightbox-demo-large .lightbox-close').click();
+					// then
+					expect($('#lightbox-demo-text-link-for-large-lightbox:focus')[0]).to.equal(document.activeElement);
+				});
+			});
+
+			// TODO: hightlight the close icon (more) when focused
 
 //            it('Displays a small lightbox for small content when a user clicks an image link', function() {
 //                //TODO
