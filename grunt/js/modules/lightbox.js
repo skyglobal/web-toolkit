@@ -35,6 +35,9 @@ toolkit.lightbox = (function ($) {
 			this.$container.addClass('lightbox-open');
 			$('body').addClass('lightbox-active');
 			this.$closeIcon[0].focus();
+			if (this.$originator.hasClass('skycom-focus')) {
+				this.$closeIcon.addClass('skycom-focus');
+			}
 		},
 
 		close: function(e) {
