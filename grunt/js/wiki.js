@@ -1,6 +1,6 @@
 define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, toolkit) {
 
-    function bindEvents(){
+    function bindEvents() {
         $(document).on('click','.toggler', toggle);
         $('#check').on('click', checkDiff);
     }
@@ -42,7 +42,18 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
             freewheel:	false // disable ads
         });
         $('.accordion').accordion();
+
+
+		console.log(window.toolkit);;
+
 		$('.lightbox').skyLightbox();
+
+		$('#lightbox-demo-text-link-for-lightbox').on('click', function(event) {
+			event.preventDefault();
+			// TODO: disable carousel
+			window.toolkit.lightbox.show('#lightbox-demo', '#lightbox-demo-text-link-for-lightbox');
+		});
+
         toolkit.modules.init();
     }
 
