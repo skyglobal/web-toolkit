@@ -3,6 +3,8 @@ if (typeof toolkit==='undefined') toolkit={};
 toolkit.lightbox = (function ($) {
     "use strict";
 
+	var scrollbarWidth;
+
     console.info("Fo' shizzle my nizzle, da lightbox is here!");
 
 	function Lightbox($element){
@@ -10,6 +12,18 @@ toolkit.lightbox = (function ($) {
 		this.$closeIcon = $element.find('.lightbox-close');
 		this.bindEvents();
 	}
+
+	scrollbarWidth = function() {
+		var scrollDiv = document.createElement("div"),
+			scrollbarWidth;
+		scrollDiv.className = "lightbox-scrollbar-measure";
+		document.body.appendChild(scrollDiv);
+		scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+		document.body.removeChild(scrollDiv);
+		return scrollbarWidth;
+	}();
+
+	console.info("width: " + scrollbarWidth);
 
 	Lightbox.prototype = {
 		bindEvents: function() {
@@ -32,9 +46,22 @@ toolkit.lightbox = (function ($) {
 		open: function(e) {
 			e.preventDefault();
 			this.$originator = $(e.target);
+
+			// hide the scrollbar on the body ('cos we don't want the user to scroll that any more) and replace the
+			// space it took up with a (dynamically calculated) padding. If we don't, the grid resizes itself to take
+			// up the newly available space and the page content jumps around.
+			$('body').css( {
+				'overflow':		'hidden',
+				'padding-right': scrollbarWidth + 'px'
+			});
+
+			// show the lightbox
 			this.$container.addClass('lightbox-open');
-			$('body').addClass('lightbox-active');
+
+			// move the focus to the close icon
 			this.$closeIcon[0].focus();
+
+			// if we were navigated by the keybaord, propogate that focus class to the lightbox
 			if (this.$originator.hasClass('skycom-focus')) {
 				this.$closeIcon.addClass('skycom-focus');
 			}
@@ -42,9 +69,15 @@ toolkit.lightbox = (function ($) {
 
 		close: function(e) {
 			e.preventDefault();
+
+			// hide the lightbox
 			this.$container.removeClass('lightbox-open');
-			$('body').removeClass('lightbox-active');
+
+			// move the focus back to the element that opened the lightbox
 			this.$originator.focus();
+
+			// remove our inline stying for the scrollbar fudge
+			$('body').removeAttr('style');
 		}
 	};
 
