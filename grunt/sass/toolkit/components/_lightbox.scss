@@ -1,3 +1,10 @@
+.lightbox-scrollbar-measure {
+  width:	100px;
+  height:	100px;
+  overflow:	scroll;
+  position:	absolute;
+  top: 		-200px;
+}
 
 .lightbox {
 	display:			none;
@@ -44,8 +51,4 @@
 		  	margin-right:	0;
 		}
 	}
-}
-
-body.lightbox-active {
-  overflow:		hidden;
 }
