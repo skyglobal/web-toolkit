@@ -4,20 +4,23 @@
     Click the link below to see a <font style="background-image: url(http://i361.photobucket.com/albums/oo54/crackysparkles/sparkles/10.gif); font-size: 55px;">*L*I*G*H*T* *B*O*X*!!</font>
 </p>
 <p class="design-notes">
-	<a id="lightbox-demo-text-link-for-large-lightbox" href="#" data-skyLightbox="#lightbox-demo-large">Show Lightbox</a>
+	<a id="lightbox-demo-text-link-for-lightbox" href="#" data-skyLightbox="#lightbox-demo">Show Lightbox</a> <br/>
+	<a id="lightbox-demo-text-link-for-lightbox2" href="#" >Show Lightbox 2</a>
 </p>
 <p class="design-notes">
-	Ensure your anchor tag has a <code>data-skyLightbox</code> attribute with the id of of the lightbox. Example:
+	To automatically bind an click event to a lightbox, give the element a <code>data-skyLightbox</code> attribute with the id of of the lightbox. Example:
 </p>
 <p>
 	<code>&lt;a href="#" data-skyLightbox="#my-lightbox"&gt;Show Lightbox&lt;/a&gt;</code>
 </p>
 
+
+
 <div class="init-notes">
 	<code>$('.lightbox').skyLightbox();</code>
 </div>
 
-<div id="lightbox-demo-large" class="lightbox">
+<div id="lightbox-demo" class="lightbox">
     <div class="skycom-container lightbox-container clearfix">
         <article class="lightbox-content skycom-10 skycom-offset1" role="dialog" aria-labelledby="lightbox-demo-text-link-for-large-lightbox">
             <a class="lightbox-close skycon-close" href="#">

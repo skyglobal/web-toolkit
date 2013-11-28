@@ -6,7 +6,7 @@
     <script src="vendor/mocha.js"></script>
     <script src="vendor/require.js"></script>
     <script src="config.js"></script>
-
+	<script src="jquery.tabbable.js"></script>
 </head>
 <body>
 
@@ -18,7 +18,7 @@
 	<h4>Text Links</h4>
 	<ul>
 		<li><a id="lightbox-demo-text-link-for-small-lightbox" href="#" data-skyLightbox="#lightbox-demo-small">Small Lightbox</a></li>
-		<li><a id="lightbox-demo-text-link-for-large-lightbox" href="#" data-skyLightbox="#lightbox-demo-large">Large Lightbox</a></li>
+		<li><a id="lightbox-demo-text-link-for-large-lightbox" href="#" data-skyLightbox="#lightbox-demo">Large Lightbox</a></li>
 	</ul>
 	<h4>Image Links</h4>
 	<ul>
@@ -30,7 +30,7 @@
 
 	</div>
 
-	<div id="lightbox-demo-large" class="lightbox">
+	<div id="lightbox-demo" class="lightbox">
 		<div class="skycom-container">
 			<article class="skycom-10 skycom-offset1 lightbox-content" role="dialog" aria-labelledby="lightbox-demo-text-link-for-large-lightbox">
 				<a class="lightbox-close skycon-close" href="#">
@@ -43,13 +43,17 @@
 
 						<p>Lorem ipsum dolor sit amet</p>
 
-						<p style="margin-bottom: 16px;">
+						<p>
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
 							exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
 							reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
 							occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						</p>
 
+						Text: <input id="lightboxInput" type="text" placeholder="focusable input">
+
+						<p style="margin-bottom: 16px;">
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 							tempor incididunt ut labore et dolore magna aliqua.
 						</p>
@@ -61,9 +65,6 @@
 						<ul>
 							<li><a href="#">Lorem Ipsum</a></li>
 							<li><a href="#">Dolor sit amet</a></li>
-							<li><a href="#">Consectetur adipisicing elit</a></li>
-							<li><a href="#">Sed do eiusmod</a></li>
-							<li><a href="#">Tempor incididunt</a></li>
 						</ul>
 					</div>
 				</div>
@@ -86,67 +87,61 @@
 			beforeEach(function() {
 				$('.lightbox').removeClass('lightbox-open');
 				$('#lightbox-demo-text-link-for-large-lightbox').removeClass('skycom-focus');
+				$('body').removeAttr('style');
 			});
 
 			var givenTheLargeLightBoxIsOpen = function() {
 				$('#lightbox-demo-text-link-for-large-lightbox').click();
-				expect($('#lightbox-demo-large').hasClass('lightbox-open')).to.equal(true);
+				expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(true);
 			};
-
-//            it('Displays a small lightbox for small content when a user clicks a text link', function () {
-//                //TODO
-//                expect(true).to.equal(false);
-//
-////                $('#lightbox-demo-text-link-for-small-lightbox').click();
-////                expect($('#lightbox-demo-small').hasClass('open')).to.equal(true);
-//            });
 
 
 			it('Displays a lightbox when a user clicks a text link', function() {
 				// given
-				expect($('#lightbox-demo-large').hasClass('lightbox-open')).to.equal(false);
+				expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(false);
 				// when
 				$('#lightbox-demo-text-link-for-large-lightbox').click();
 				// then
-                expect($('#lightbox-demo-large').hasClass('lightbox-open')).to.equal(true);
+                expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(true);
             });
 
 
 			it('Closes when the close icon is clicked', function() {
 				givenTheLargeLightBoxIsOpen();
 				// when
-				$('#lightbox-demo-large .lightbox-close').click();
+				$('#lightbox-demo .lightbox-close').click();
 				// then
-				expect($('#lightbox-demo-large').hasClass('lightbox-open')).to.equal(false);
+				expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(false);
 			});
 
 
 			it('Closes when the faded grey bit is clicked', function() {
 				givenTheLargeLightBoxIsOpen();
 				// when
-				$('#lightbox-demo-large').click();
+				$('#lightbox-demo').click();
 				// then
-				expect($('#lightbox-demo-large').hasClass('lightbox-open')).to.equal(false);
+				expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(false);
 			});
 
 
 			it('Does NOT close when the lightbox itself is clicked', function() {
 				givenTheLargeLightBoxIsOpen();
 				// when
-				$('#lightbox-demo-large .lightbox-content').click();
+				$('#lightbox-demo .lightbox-content').click();
 				// then
-				expect($('#lightbox-demo-large').hasClass('lightbox-open')).to.equal(true);
+				expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(true);
 			});
 
 
 			it('Hides the double scrollbar from the body element', function() {
 				givenTheLargeLightBoxIsOpen();
 				// then
-				expect($('body').hasClass('lightbox-active')).to.equal(true);
+				expect($('body').is('[style]')).to.equal(true);
+				expect($('body').css('overflow')).to.equal('hidden');
 				// when
-				$('#lightbox-demo-large .lightbox-close').click();
+				$('#lightbox-demo .lightbox-close').click();
 				// then
-				expect($('body').hasClass('lightbox-active')).to.equal(false);
+				expect($('body').is('[style]')).to.equal(false);
 			});
 
 
@@ -163,40 +158,43 @@
 				it('Gives focus to the close icon when opened', function() {
 					givenTheLargeLightBoxIsOpen();
 					// then
-					expect($('#lightbox-demo-large .lightbox-close:focus')[0]).to.equal(document.activeElement);
+					expect(document.activeElement).to.equal($('#lightbox-demo .lightbox-close:focus')[0]);
 				});
 
 				it('Returns focus back to the ORIGINATOR when closed', function() {
 					// given
 					givenTheLargeLightBoxIsOpen();
 					// when
-					$('#lightbox-demo-large .lightbox-close').click();
+					$('#lightbox-demo .lightbox-close').click();
 					// then
-					expect($('#lightbox-demo-text-link-for-large-lightbox:focus')[0]).to.equal(document.activeElement);
+					expect(document.activeElement).to.equal($('#lightbox-demo-text-link-for-large-lightbox:focus')[0]);
 				});
 
 				it("Sets the 'skycom-focus' class on the close icon if the ORIGINATOR had the 'skycom-focus' class.", function() {
 					// given
-					expect($('#lightbox-demo-large .lightbox-close').hasClass('skycom-focus')).to.equal(false);
+					expect($('#lightbox-demo .lightbox-close').hasClass('skycom-focus')).to.equal(false);
 					$('#lightbox-demo-text-link-for-large-lightbox').addClass('skycom-focus');
 					givenTheLargeLightBoxIsOpen();
 					// then
-					expect($('#lightbox-demo-large .lightbox-close').hasClass('skycom-focus')).to.equal(true);
+					expect($('#lightbox-demo .lightbox-close').hasClass('skycom-focus')).to.equal(true);
+				});
+
+				it('Constrains the tab focus to the lightbox', function() {
+					givenTheLargeLightBoxIsOpen();
+					expect(document.activeElement).to.equal($('#lightbox-demo .lightbox-close:focus')[0]);
+
+					// then
+					$.tabNext();
+					expect(document.activeElement).to.equal($('#lightboxInput:focus')[0]);
+					$.tabNext();	// tab to link
+					$.tabNext();	// tab to link
+					$.tabNext();	// tab should loop back to close icon
+					expect(document.activeElement).to.equal($('#lightbox-demo .lightbox-close:focus')[0]);
 				});
 			});
 
-
 			// TODO: hightlight the close icon (more) when focused
 
-//            it('Displays a small lightbox for small content when a user clicks an image link', function() {
-//                //TODO
-//                expect(true).to.equal(false);
-//            });
-//
-//            it('Displays a large lightbox for large content when a user clicks an image link', function() {
-//                //TODO
-//                expect(true).to.equal(false);
-//            });
         });
         mocha.run();
     });
