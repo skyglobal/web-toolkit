@@ -56,10 +56,11 @@ if (typeof window.define === "function" && window.define.amd) {
         'modules',
         'modules/inPageNav',
         'modules/accordion',
+        'modules/datepicker',
         'modules/form',
         'modules/share',
         'modules/video',
-        'modules/carousel'], function(skycons, hashmanager, popup,toggle, diff, modules, inPageNav, accordion, form, share, video, carousel){
+        'modules/carousel'], function(skycons, hashmanager, popup,toggle, diff, modules, inPageNav, accordion, datepicker,form, share, video, carousel){
 
         return {
             modules: modules,
@@ -69,6 +70,7 @@ if (typeof window.define === "function" && window.define.amd) {
             diff: diff,
             inPageNav: inPageNav,
             accordion: accordion,
+            datepicker: datepicker,
             form: form,
             share: share,
             video: video,

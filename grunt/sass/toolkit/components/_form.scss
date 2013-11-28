@@ -67,11 +67,11 @@ $form-offset: 34%;
     }
   }
   .datepicker {
-    #day, #month, #year {
+    .day, .month, .year {
       width: 57px;
       margin-right: 9px;
     }
-    #year {
+    .year {
       width: 83px;
     }
 
