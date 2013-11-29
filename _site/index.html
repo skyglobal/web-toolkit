@@ -4,7 +4,7 @@
 <!--[if IE 9]>         <html class="lt-ie10" > <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 	<head>
-        <!--[if lt IE 9]> <script src="lib/jquery-1.10.2.js" ></script> <![endif]-->
+		<!--[if lt IE 9]> <script src="lib/jquery-1.10.2.js" ></script> <![endif]-->
         <!--[if gte IE 9]><!--> <script src="lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
         <script src="lib/jquery.scrollspy.js" ></script>
 
@@ -108,6 +108,7 @@
                             <li><a href="index.html#form" data-diff="components/form">Form</a></li>
                             <li><a href="index.html#inPageNav" data-diff="components/inPageNav">In-Page Nav</a></li>
                             <li><a href="index.html#tabs" data-diff="components/tabs">Classic Tabs</a></li>
+                            <li><a href="index.html#lightbox" data-diff="components/lightbox">Lightbox</a></li>
                             <li><a href="index.html#accordion" data-diff="components/accordion">Accordion</a></li>
                             <li><a href="index.html#carousel" data-diff="components/carousel">Carousel</a></li>
                             <li><a href="index.html#share" data-diff="components/share">Share</a></li>
@@ -129,7 +130,7 @@
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
 				<h1 class="wiki-header">Sky Web Toolkit <small>v1.6.1 </small></h1>
-<div class="secondary">Last Updated: 25-11-2013</div>
+<div class="secondary">Last Updated: 29-11-2013</div>
 
 <a name="using-the-toolkit"></a>
 <section class="wiki-section">
@@ -1455,6 +1456,89 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         </section>
     </div>
 </div>
+    </div>
+    <a name="lightbox"></a>
+    <div class="sub-section">
+        <h3 class="wiki-h3">Lightbox</h3>
+
+<p class="design-notes">
+    Click the link below to see a <font style="background-image: url(http://i361.photobucket.com/albums/oo54/crackysparkles/sparkles/10.gif); font-size: 55px;">*L*I*G*H*T* *B*O*X*!!</font>
+</p>
+<p class="design-notes">
+	<a id="lightbox-demo-text-link-for-lightbox" href="#">Show Lightbox</a> <br/>
+</p>
+<p class="design-notes">
+	To automatically bind a click event to a lightbox, give the clicky element a <code>data-skyLightbox</code> attribute with the id of of the lightbox. Example:
+</p>
+<p>
+	<code>&lt;a href="#" data-skyLightbox="#my-lightbox"&gt;Show Lightbox&lt;/a&gt;</code>
+</p>
+<p class="design-notes">
+	To manually show a lightbox, use the global toolkit <code>show()</code> method:
+</p>
+<pre><code>$('#my-clickable').on('click', function(event) {
+    event.preventDefault();
+
+    // don't forget to pause any carousels, otherwise they steal tab focus!
+    $('[data-function=carousel]').trigger("pause");
+
+    // pass in the originating clicked element the lightbox may return focus returns to it when closed
+    window.toolkit.lightbox.show('#lightbox', '#my-clickable');
+});</code></pre>
+
+
+<div class="init-notes">
+	<code>$('.lightbox').skyLightbox();</code>
+</div>
+
+<div id="lightbox-demo" class="lightbox">
+    <div class="skycom-container lightbox-container clearfix">
+        <article class="lightbox-content skycom-10 skycom-offset1" role="dialog" aria-labelledby="lightbox-demo-text-link-for-large-lightbox">
+            <a class="lightbox-close skycon-close" href="#">
+                <span class="speak">Close</span>
+            </a>
+
+            <img src="wiki_images/bling-ring.jpg" height="380" width="1140" style="width:100%;height:auto;" />
+
+            <!-- Note you can use the sky-grid in lightboxes -->
+            <div class="skycom-container clearfix">
+                <div class="skycom-7 alpha">
+                    <h2>Large Lightbox</h2>
+
+                    <p>Lorem ipsum dolor sit amet</p>
+
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+
+					Text: <input id="lightboxInput" type="text" placeholder="focusable input">
+
+					<p style="margin-bottom: 16px;">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua.
+                    </p>
+                </div>
+
+                <div class="skycom-5">
+                    <h3>Other Links</h3>
+
+                    <ul>
+                        <li><a href="#">Lorem Ipsum</a></li>
+                        <li><a href="#">Dolor sit amet</a></li>
+                        <li><a href="#">Consectetur adipisicing elit</a></li>
+                        <li><a href="#">Sed do eiusmod</a></li>
+                        <li><a href="#">Tempor incididunt</a></li>
+                    </ul>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+
     </div>
     <a name="accordion"></a>
     <div class="sub-section">

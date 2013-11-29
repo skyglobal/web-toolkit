@@ -43,14 +43,9 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
         });
         $('.accordion').accordion();
 
-
-		console.log(window.toolkit);;
-
-		$('.lightbox').skyLightbox();
-
 		$('#lightbox-demo-text-link-for-lightbox').on('click', function(event) {
 			event.preventDefault();
-			// TODO: disable carousel
+			$('[data-function=carousel]').trigger("pause");
 			window.toolkit.lightbox.show('#lightbox-demo', '#lightbox-demo-text-link-for-lightbox');
 		});
 

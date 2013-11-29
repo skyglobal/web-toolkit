@@ -4,16 +4,26 @@
     Click the link below to see a <font style="background-image: url(http://i361.photobucket.com/albums/oo54/crackysparkles/sparkles/10.gif); font-size: 55px;">*L*I*G*H*T* *B*O*X*!!</font>
 </p>
 <p class="design-notes">
-	<a id="lightbox-demo-text-link-for-lightbox" href="#" data-skyLightbox="#lightbox-demo">Show Lightbox</a> <br/>
-	<a id="lightbox-demo-text-link-for-lightbox2" href="#" >Show Lightbox 2</a>
+	<a id="lightbox-demo-text-link-for-lightbox" href="#">Show Lightbox</a> <br/>
 </p>
 <p class="design-notes">
-	To automatically bind an click event to a lightbox, give the element a <code>data-skyLightbox</code> attribute with the id of of the lightbox. Example:
+	To automatically bind a click event to a lightbox, give the clicky element a <code>data-skyLightbox</code> attribute with the id of of the lightbox. Example:
 </p>
 <p>
 	<code>&lt;a href="#" data-skyLightbox="#my-lightbox"&gt;Show Lightbox&lt;/a&gt;</code>
 </p>
+<p class="design-notes">
+	To manually show a lightbox, use the global toolkit <code>show()</code> method:
+</p>
+<pre><code>$('#my-clickable').on('click', function(event) {
+    event.preventDefault();
 
+    // don't forget to pause any carousels, otherwise they steal tab focus!
+    $('[data-function=carousel]').trigger("pause");
+
+    // pass in the originating clicked element the lightbox may return focus returns to it when closed
+    window.toolkit.lightbox.show('#lightbox', '#my-clickable');
+});</code></pre>
 
 
 <div class="init-notes">
