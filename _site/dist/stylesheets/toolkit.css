@@ -1264,18 +1264,17 @@ button.btn {
 .sky-form .error {
   margin-left: 24%;
 }
-.sky-form .form-error,
-.sky-form label.form-error {
+.sky-form .form-error {
   color: #d21717;
 }
 .sky-form input.form-error {
   border-color: #d21717;
   color: #000;
 }
-.sky-form label.feedback.hidden {
+.sky-form .feedback.hidden {
   display: none;
 }
-.sky-form label.feedback {
+.sky-form .feedback {
   margin-left: 24%;
   text-align: left;
   width: auto;
