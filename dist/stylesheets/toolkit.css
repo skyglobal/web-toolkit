@@ -1325,6 +1325,106 @@ button.btn {
     display: inline;
   }
 }
+.lightbox-scrollbar-measure {
+  width: 100px;
+  height: 100px;
+  overflow: scroll;
+  position: absolute;
+  top: -200px;
+}
+
+.lightbox {
+  display: none;
+  width: 100%;
+  position: fixed;
+  z-index: 310;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: auto;
+  overflow-y: scroll;
+  background-color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}
+.lightbox.lightbox-open {
+  display: block;
+  -webkit-animation: lightbox-fade-in 0.5s;
+  animation: lightbox-fade-in 0.5s;
+}
+.lightbox.lightbox-closing {
+  opacity: 0;
+  -webkit-animation: lightbox-fade-out 0.5s;
+  animation: lightbox-fade-out 0.5s;
+}
+.lightbox .lightbox-content {
+  position: relative;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: #fff;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 10px 0px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 10px 0px;
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 10px 0px;
+  cursor: default;
+}
+.lightbox .lightbox-close {
+  display: block;
+  z-index: 1;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  color: #FFFFFF;
+  font-size: 24px;
+  text-decoration: none;
+}
+@media (max-width: 768px) {
+  .lightbox .lightbox-container {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@-webkit-keyframes lightbox-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightbox-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes lightbox-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes lightbox-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
 .accordion {
   margin-top: 24px;
 }
