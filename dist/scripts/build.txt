@@ -9,6 +9,7 @@ utils/diff.js
 modules/inPageNav.js
 modules/accordion.js
 modules/form.js
+modules/lightbox.js
 modules/share.js
 modules/video.js
 modules/carousel.js
@@ -25,6 +26,7 @@ utils/diff.js
 modules/inPageNav.js
 modules/accordion.js
 modules/form.js
+modules/lightbox.js
 modules/share.js
 modules/video.js
 modules/carousel.js
