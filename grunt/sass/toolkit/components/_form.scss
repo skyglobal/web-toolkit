@@ -106,11 +106,11 @@ $form-offset: 34%;
   }
 
 
-  label.feedback.hidden {
+  .feedback.hidden {
     display: none;
   }
 
-  label.feedback {
+  .feedback {
     margin-left: $form-offset;
     margin-top: 8px;
     text-align: left;
@@ -152,7 +152,7 @@ $form-offset: 34%;
     textarea {
       width: 100%;
     }
-    label.feedback {
+    .feedback {
       margin-left: 0;
     }
   }
@@ -171,6 +171,6 @@ $form-offset: 34%;
     margin: 16px 0 0 0;
   }
   .no-label label {
-     display: inline;
+    display: inline;
   }
 }

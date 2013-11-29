@@ -43,7 +43,7 @@ toolkit.form = (function ($) {
         addErrorMessageToInput: function($input) {
             var inputId     = $input.attr('id'),
                 $descriptor = this.$form.find('label.descriptor[for=' + inputId + ']'),
-                $feedbacks  = this.$form.find('label.feedback[for=' + inputId + ']');
+                $feedbacks  = this.$form.find('.feedback[data-for=' + inputId + ']');
 
             this.hasError = true;
 
@@ -51,7 +51,7 @@ toolkit.form = (function ($) {
                 $feedbacks.removeClass('hidden');
             } else {
                 //create a feedback if one does not exist
-                $feedbacks = $('<label class="form-error feedback" for="' + $input.attr('id') + '">' + $descriptor.text() + ' is required</label>').insertAfter($input);
+                $feedbacks = $('<span class="form-error feedback" data-for="' + $input.attr('id') + '">' + $descriptor.text() + ' is required</span>').insertAfter($input);
             }
 
             if (!$input.hasClass('form-error')) {
@@ -64,7 +64,7 @@ toolkit.form = (function ($) {
 
         removeErrorsFromInput: function($input) {
             var inputId     = $input.attr('id'),
-                $feedbacks  = this.$form.find('label.feedback[for=' + inputId + ']');
+                $feedbacks  = this.$form.find('.feedback[data-for=' + inputId + ']');
 
             if ($input.hasClass('form-error')) {
                 $input.removeClass('form-error');
