@@ -1,6 +1,6 @@
 define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, toolkit) {
 
-    function bindEvents(){
+    function bindEvents() {
         $(document).on('click','.toggler', toggle);
         $('#check').on('click', checkDiff);
     }
@@ -38,10 +38,17 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
         $('#demo-classc-tabs').inPageNav();
         $('#demo-inpage-nav-tabs').inPageNav();
         $('#demo-video .video').video({
-            token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-            freewheel:false //disable ads
+            token:		"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
+            freewheel:	false // disable ads
         });
         $('.accordion').accordion();
+
+		$('#lightbox-demo-text-link-for-lightbox').on('click', function(event) {
+			event.preventDefault();
+			$('[data-function=carousel]').trigger("pause");
+			window.toolkit.lightbox.show('#lightbox-demo', '#lightbox-demo-text-link-for-lightbox');
+		});
+
         toolkit.modules.init();
     }
 

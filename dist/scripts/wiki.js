@@ -753,7 +753,8 @@ if (typeof window.define === "function" && window.define.amd) {
     define('modules/accordion', ['utils/toggle'], function(toggle) {
         return toolkit.accordion;
     });
-};
+}
+;
 /*jshint strict: true */
 /*global jQuery:false */
 
@@ -851,6 +852,148 @@ if (typeof window.define === "function" && window.define.amd) {
         return toolkit.form;
     });
 };
+/*global jQuery:false */
+if (typeof toolkit==='undefined') toolkit={};
+toolkit.lightbox = (function ($) {
+    
+
+	var scrollbarWidth;
+
+    console.info("Fo' shizzle my nizzle, da lightbox is here!");
+
+	function Lightbox($element){
+		this.$container = $element;
+		this.$closeIcon = $element.find('.lightbox-close');
+		this.bindEvents();
+	}
+
+	scrollbarWidth = function() {
+		var scrollDiv = document.createElement("div"),
+			scrollbarWidth;
+		scrollDiv.className = "lightbox-scrollbar-measure";
+		document.body.appendChild(scrollDiv);
+		scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+		document.body.removeChild(scrollDiv);
+		return scrollbarWidth;
+	}();
+
+	function hideTabIndex(index, element) {
+		var $element = $(element);
+		// Note that if tabindex is 'undefined', data-tabindex does not get set
+		$element.attr('data-tabindex', $element.attr('tabindex'));
+		$element.attr('tabindex', -1);
+	}
+
+	function restoreTabIndex(index, element) {
+		var $element = $(element);
+		if ($element.attr('data-tabindex')) {
+			$element.attr('tabindex', $element.attr('data-tabindex'));
+			$element.removeAttr('data-tabindex');
+		} else {
+			// if the element didn't have a data-tabindex, then it did not define a tabindex
+			$element.removeAttr('tabindex');
+		}
+	}
+
+	Lightbox.prototype = {
+		bindEvents: function() {
+			// bind the grey faded bits
+			this.$container.on("click", this.close.bind(this));
+
+			// bind the close icon
+			this.$closeIcon.on("click", this.close.bind(this));
+
+			// bind all lightbox open links
+			var lightboxId = this.$container.attr('id');
+			$('[data-skyLightbox=#' + lightboxId + ']').on("click", this.open.bind(this));
+
+			// prevent clicks on the lightbox from closing it
+			this.$container.find('.lightbox-content').on("click", function(e) {
+				return false;
+			}.bind(this));
+		},
+
+		open: function(event, $target) {
+			// event doesn't exist if called manually
+			if (event) {
+				event.preventDefault();
+				this.$originator = $(event.target);
+			}
+
+			if ($target) {
+				this.$originator = $target;
+			}
+
+			// hide the scrollbar on the body ('cos we don't want the user to scroll that any more) and replace the
+			// space it took up with a (dynamically calculated) padding. If we don't, the grid resizes itself to take
+			// up the newly available space and the page content jumps around.
+			$('body').css( {
+				'overflow':		'hidden',
+				'padding-right': scrollbarWidth + 'px'
+			});
+
+			// show the lightbox
+			this.$container.addClass('lightbox-open');
+
+			// move the focus to the close icon
+			this.$closeIcon[0].focus();
+
+			// if we were navigated by the keybaord, propogate that focus class to the lightbox
+			if (this.$originator.hasClass('skycom-focus')) {
+				this.$closeIcon.addClass('skycom-focus');
+			}
+
+			// remove tabbing for all elements and re-enable for elements in the lightbox
+			$('a, input, select, textarea, button, *[tabindex]').each(hideTabIndex);
+			this.$container.find('*[tabindex]').each(restoreTabIndex);
+		},
+
+		close: function(event) {
+			event.preventDefault();
+
+			if (!this.$container.hasClass('lightbox-closing')) {
+				this.$container.addClass('lightbox-closing');
+
+				// really really hode the lightbox once the 0.5 sec animation has finished
+				var cont = this.$container;
+				var orig = this.$originator;
+				window.setTimeout(function() {
+					cont.removeClass('lightbox-open');
+					cont.removeClass('lightbox-closing');
+
+					// move the focus back to the element that opened the lightbox
+					// defend against not passing in the 'originator' in the show() method
+					if (orig) {
+						orig.focus();
+					}
+
+					// remove our inline stying for the scrollbar fudge
+					$('body').removeAttr('style');
+
+					// restore all tabbing
+					$('*[tabindex]').each(restoreTabIndex);
+				}, 500);
+			}
+		}
+	};
+
+	$.fn.skyLightbox = function() {
+		return this.each(function() {
+			var lightbox = new Lightbox($(this));
+		});
+	};
+
+    return {
+		show: function(lightbox, originator) {
+			var lbox = new Lightbox($(lightbox));
+			lbox.open.bind(lbox)(false, $(originator));
+		}
+	};
+
+})(jQuery);
+
+define("modules/lightbox", function(){});
+
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.share = (function() {
 
@@ -1452,7 +1595,8 @@ if (typeof window.define === "function" && window.define.amd) {
     define('modules/carousel', ['modules/video'], function(video) {
         return toolkit.carousel;
     });
-};
+}
+;
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.main = (function() {
 
@@ -1480,6 +1624,7 @@ toolkit.modules = (function(){
             popup : false,
             inPageNav : false,
             accordion : false,
+			lightbox : false,
             datepicker : false
         }, options);
         for (module in modulesToInitialize) {
@@ -1512,9 +1657,10 @@ if (typeof window.define === "function" && window.define.amd) {
         'modules/inPageNav',
         'modules/accordion',
         'modules/form',
+        'modules/lightbox',
         'modules/share',
         'modules/video',
-        'modules/carousel'], function(skycons, hashmanager, popup,toggle, diff, modules, inPageNav, accordion, form, share, video, carousel){
+        'modules/carousel'], function(skycons, hashmanager, popup, toggle, diff, modules, inPageNav, accordion, form, lightbox, share, video, carousel){
 
         return {
             modules: modules,
@@ -1525,6 +1671,7 @@ if (typeof window.define === "function" && window.define.amd) {
             inPageNav: inPageNav,
             accordion: accordion,
             form: form,
+            lightbox: lightbox,
             share: share,
             video: video,
             carousel: carousel
@@ -1533,7 +1680,7 @@ if (typeof window.define === "function" && window.define.amd) {
 };
 define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, toolkit) {
 
-    function bindEvents(){
+    function bindEvents() {
         $(document).on('click','.toggler', toggle);
         $('#check').on('click', checkDiff);
     }
@@ -1571,10 +1718,17 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
         $('#demo-classc-tabs').inPageNav();
         $('#demo-inpage-nav-tabs').inPageNav();
         $('#demo-video .video').video({
-            token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-            freewheel:false //disable ads
+            token:		"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
+            freewheel:	false // disable ads
         });
         $('.accordion').accordion();
+
+		$('#lightbox-demo-text-link-for-lightbox').on('click', function(event) {
+			event.preventDefault();
+			$('[data-function=carousel]').trigger("pause");
+			window.toolkit.lightbox.show('#lightbox-demo', '#lightbox-demo-text-link-for-lightbox');
+		});
+
         toolkit.modules.init();
     }
 
