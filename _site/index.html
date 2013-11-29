@@ -12,9 +12,9 @@
 <link rel='stylesheet' href='//assets.sky.com/css/desktop-12grid.css' media='screen' />
 <![endif]-->
 <meta content='width=device-width, initial-scale=1.0' name='viewport'>
-<link rel='stylesheet' href='//assets.sky.com/css/responsive-12grid.css' class='skycom-responsive-css' media='screen and (min-width: 768px)' />
+<link rel='stylesheet' href='//assets.sky.com/dist/latest/css/responsive-12.css' class='skycom-responsive-css' media='screen and (min-width: 768px)' />
 <!--[mobilestart]-->
-<link rel='stylesheet' href='//assets.sky.com/css/mobile-12grid.css' class='skycom-mobile-css' media='screen and (max-width: 767px)' />
+<link rel='stylesheet' href='//assets.sky.com/dist/latest/css/mobile-12.css' class='skycom-mobile-css' media='screen and (max-width: 767px)' />
 <!--[mobileend]-->
 
 <link href='//assets.sky.com/images/favicon.png' rel='icon' type='image/png'>
@@ -22,23 +22,22 @@
 <link href='//assets.sky.com/fonts/sky_regular.svg' rel='prefetch'>
 <link href='//assets.sky.com/fonts/sky_medium.ttf' rel='prefetch'>
 <link href='//assets.sky.com/fonts/sky_medium.svg' rel='prefetch'>
-<link rel='stylesheet' href='//assets.sky.com/css/css-print.css' media='print' />
-<link rel='stylesheet' href='//assets.sky.com/css/app-fonts.css' />
-
+<link href='//assets.sky.com/dist/latest/css/fonts.css' rel='stylesheet'>
+<link href='//assets.sky.com/dist/latest/fonts/skyicons.css' rel='stylesheet'>
 <!--[if IE 6]>
-<link rel='stylesheet' href='//assets.sky.com/css/app-ie6.css' />
+<link href='//assets.sky.com/dist/latest/css/ie/ie6.css' rel='stylesheet'>
 <![endif]-->
 <!--[if IE 7]>
-<link rel='stylesheet' href='//assets.sky.com/css/app-ie7.css' />
+<link href='//assets.sky.com/dist/latest/css/ie/ie7.css' rel='stylesheet'>
 <![endif]-->
 <!--[if LT IE 9]>
-<link rel='stylesheet' href='//assets.sky.com/css/app-ielt9.css' />
+<link href='//assets.sky.com/dist/latest/css/ie/ielt9.css' rel='stylesheet'>
 <![endif]-->
 <!--[if IE 9]>
-<link rel='stylesheet' href='//assets.sky.com/css/app-ie9.css' />
+<link href='//assets.sky.com/dist/latest/css/ie/ie9.css' rel='stylesheet'>
 <![endif]-->
 <!--[if LT IE 10]>
-<link rel='stylesheet' href='//assets.sky.com/css/app-ielt10.css' />
+<link href='//assets.sky.com/dist/latest/css/ie/ielt10.css' rel='stylesheet'>
 <![endif]-->
 <script id='skycom-view-type'></script>
 <script id='skycom-orientation'></script>
@@ -46,7 +45,7 @@
   var globalskycom = globalskycom || {};
   globalskycom.serverHost = 'assets.sky.com';
 </script>
-<script src='//assets.sky.com/js/app.js'></script>
+<script src='//assets.sky.com/dist/latest/js/masthead.js'></script>
 <script>
   $(function() {
     var i, len,
@@ -128,7 +127,7 @@
         </div>
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
-				<h1 class="wiki-header">Sky Web Toolkit <small>v1.6.1 </small></h1>
+				<h1 class="wiki-header">Sky Web Toolkit <small>v1.7.3 </small></h1>
 <div class="secondary">Last Updated: 29-11-2013</div>
 
 <a name="using-the-toolkit"></a>
@@ -136,9 +135,9 @@
     <h2>Using the Toolkit</h2>
     <div class="sub-section">
         <p class="developer-notes">
-            &lt;script src='//web-toolkit.global.sky.com/1.6.1/scripts/toolkit.js'&gt;&lt;/script&gt;
-            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.6.1/stylesheets/toolkit.css"/&gt;
-            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.6.1/fonts/skycons.css"/&gt;
+            &lt;script src='//web-toolkit.global.sky.com/1.7.3/scripts/toolkit.js'&gt;&lt;/script&gt;
+            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.7.3/stylesheets/toolkit.css"/&gt;
+            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.7.3/fonts/skycons.css"/&gt;
         </p>
     </div>
     <a name="getting-started"></a>
@@ -616,7 +615,7 @@ https://github.com/skyglobal/web-toolkit/
     <div class="skycom-2 demo-colour-block ">
         <div class="white demo-success-icon cushioned">Success
             <small>Icons only</small></div>
-        <div class="demo-hex secondary">#167255</div>
+        <div class="demo-hex secondary">#6dbb00</div>
     </div>
     <div class="skycom-2 demo-colour-block ">
         <div class="white demo-sky-go cushioned">Sky Go
@@ -824,6 +823,7 @@ https://github.com/skyglobal/web-toolkit/
         <tr ><td>curved-arrow-down</td><td> icon-curved-arrow-down</td><td class="icon"><i class=" icon-curved-arrow-down"></i></td></tr>
         <tr ><td>curved-arrow-right</td><td> icon-curved-arrow-right</td><td class="icon"><i class=" icon-curved-arrow-right"></i></td></tr>
         <tr ><td>curved-arrow-top-right</td><td> icon-curved-arrow-top-right</td><td class="icon"><i class=" icon-curved-arrow-top-right"></i></td></tr>
+        <tr ><td>video-play</td><td> icon-video-play</td><td class="icon"><i class=" icon-video-play"></i></td></tr>
 
         </tbody>
     </table>
@@ -840,7 +840,7 @@ https://github.com/skyglobal/web-toolkit/
     #wiki-skycons tr:hover{
         background: #eee;
     }
-    #wiki-skycons tr:hover i {
+    #wiki-skycons tr:hover i[class*="skycon-"] {
         -moz-transform: scale(5);
         -webkit-transform: scale(5);
         transform: scale(5);
@@ -871,7 +871,7 @@ https://github.com/skyglobal/web-toolkit/
         for ie7 support execute <code>toolkit.skycons.init();</code> after the page has loaded.
     </p>
     <p class="developer-notes">
-    Dont forget to include <code>http://web-toolkit.global.sky.com/1.6.1/fonts/skycons.css</code>
+    Dont forget to include <code>http://web-toolkit.global.sky.com/1.7.3/fonts/skycons.css</code>
     </p>
     <p class="developer-notes">
     Ensure <code>aria-hidden</code> is used on your <code>skycon</code> tags.
@@ -888,7 +888,7 @@ https://github.com/skyglobal/web-toolkit/
     &bull; press ctrl+g to group the objects
     &bull; choose Path - simplify
     &bull; choose Path - union
-    &bull; save font into /grunt/fonts/ folder
+    &bull; save font into /lib/font-svgs folder
     &bull; Run `<code>grunt fonts</code>`
     &bull; copy the icons JS from the skycons.css over the icons var in skycons.js
     &bull; Run `<code>grunt</code>`
@@ -908,6 +908,8 @@ https://github.com/skyglobal/web-toolkit/
         <tr ><td> skycon-sky</td><td class="icon"><i class=" skycon-sky" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-sky" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-sky" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/sky.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
         <tr ><td> skycon-chevron-down</td><td class="icon"><i class=" skycon-chevron-down" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-chevron-down" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-chevron-down" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/chevron-down.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        
+        <tr ><td> skycon-plus-circle</td><td class="icon"><i class=" skycon-plus-circle" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-plus-circle" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-plus-circle" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/plus-circle.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
         <tr ><td> skycon-sky-plus</td><td class="icon"><i class=" skycon-sky-plus" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-sky-plus" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-sky-plus" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/sky-plus.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
@@ -1222,11 +1224,12 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         <span class="error">This module is not yet complete.</span>  If you need it, please complete 'accessibility' checks an re-submit.
     </p>
     <div class="design-notes">
-        This module should be used when all of, or the majority of, the page changes after an item click.
+        This module should be used when only a small section of the page changes after an item click.
     </div>
     <div class="design-notes">
-        If only a small section of the page changes please use '<code>Classic Tabs</code>'.
+        If all of, or the majority of, the page changes please use '<code>classic navigation</code>'.
     </div>
+
     <div class="developer-notes">
         Add Class '<code>page-nav</code>'.
     </div>
@@ -1344,10 +1347,10 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         <span class="error">This module is not yet complete.</span>  If you need it, please complete 'accessibility' checks an re-submit.
     </p>
     <div class="design-notes">
-        This module should be used when only a small section of the page changes after an item click.
+        This module should be used when all of, or the majority of, the page changes after an item click.
     </div>
     <div class="design-notes">
-        If the all of, or the majority of, the page changes please use '<code>in-page navigation</code>'.
+        If only a small section of the page changes please use '<code>In-Page Navigation</code>'.
     </div>
     <div class="developer-notes">
         Add Class '<code>classic</code>'.
@@ -1355,6 +1358,10 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="init-notes">
         <code>$('#demo-classc-tabs').inPageNav();</code>
     </div>
+    <div class="developer-notes">
+        If reinitialising tabs (e.g. after transition in a single-page app), call '<code>toolkit.hashmanager.resetHash()</code>' first.
+    </div>
+
     <div class="demo" data-selector="*">
         <section class="module clearfix tabs-container classic" data-function="tabs" id='demo-classc-tabs'>
 
@@ -1562,7 +1569,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                             </a>
                         </figcaption>
                         <a href="#!" class="play-video">
-                            <i class="skycon-video-play" aria-hidden="true"></i>
+                            <i class="icon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
                     </figure>
@@ -1595,7 +1602,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                             </a>
                         </figcaption>
                         <a href="#!" class="play-video" >
-                            <i class="skycon-video-play" aria-hidden="true"></i>
+                            <i class="icon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
                     </figure>
@@ -1665,7 +1672,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                             </a>
                         </figcaption>
                         <a href="#!" class="play-video">
-                            <i class="skycon-video-play" aria-hidden="true"></i>
+                            <i class="icon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
                     </figure>
@@ -1721,7 +1728,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                             </a>
                         </figcaption>
                         <a href="#!" class="play-video" >
-                            <i class="skycon-video-play" aria-hidden="true"></i>
+                            <i class="icon-video-play" aria-hidden="true"></i>
                             <span class="hidden-mobile">Play Trailer</span>
                         </a>
                     </figure>
@@ -1771,7 +1778,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 
             <a href="#!" class="play-video internal-link"
                data-tracking-context="David Beckham And Sky Team Up">
-                <i class="skycon-video-play"></i>
+                <i class="icon-video-play"></i>
                 <span class="speak">Play Trailer</span>
             </a>
 
