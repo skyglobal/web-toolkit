@@ -21,12 +21,12 @@
 		<div class="row">
 			<label class="required descriptor" for="input-one">Mandatory Input with Feedback</label>
 			<input id="input-one" type="text" placeholder="Text goes here" aria-required="true" aria-labelledby="input-one-feedback" required/>
-			<span id="input-one-feedback" class="hidden form-error feedback" for="input-one">Please enter something into the first input</span>
+			<span id="input-one-feedback" data-for="input-one" class="hidden form-error feedback">Please enter something into the first input</span>
 		</div>
 		<div class="row">
 			<label for="input-two">Non Mandatory Input</label>
 			<input id="input-two" type="text" placeholder="Text goes here"/>
-			<span id="input-two-feedback" class="hidden form-error feedback" for="input-two">Please enter something into the second input</span>
+			<span id="input-two-feedback" data-for="input-two" class="hidden form-error feedback">Please enter something into the second input</span>
 		</div>
 		<div class="row">
 			<label class="required descriptor" for="input-three" aria-required="true">Mandatory Input with no Feedback</label>

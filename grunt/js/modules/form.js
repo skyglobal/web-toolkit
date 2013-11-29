@@ -32,7 +32,7 @@ toolkit.form = (function ($) {
             $('input[required]').each(function (index, input) {
                 var inputId     = $(input).attr('id'),
                     $descriptor = $('label.descriptor[for=' + inputId + ']'),
-                    $feedbacks  = $('label.feedback[for=' + inputId + ']');
+                    $feedbacks  = $('.feedback[data-for=' + inputId + ']');
 
                 if ($(input).val() === '') {
                     hasError = true;
@@ -43,7 +43,7 @@ toolkit.form = (function ($) {
                         $feedbacks.removeClass('hidden');
                     } else {
                         //create a feedback if one does not exist
-                        $feedbacks = $('<label class="form-error feedback" for="' + $(input).attr('id') + '">' + $descriptor.text() + ' is required</label>').insertAfter($(input));
+                        $feedbacks = $('<span class="form-error feedback" data-for="' + inputId +'">' + $descriptor.text() + ' is required</span>').insertAfter($(input));
                     }
 
                     if (!$(input).hasClass('form-error')) {
