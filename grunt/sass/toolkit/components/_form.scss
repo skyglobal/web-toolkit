@@ -96,9 +96,7 @@
     margin-left: 24%;
   }
 
-
-  .form-error,
-  label.form-error {
+  .form-error {
     color: #d21717;
   }
 
@@ -108,11 +106,11 @@
   }
 
 
-  label.feedback.hidden {
+  .feedback.hidden {
     display: none;
   }
 
-  label.feedback {
+  .feedback {
     margin-left: 24%;
     text-align: left;
     width: auto;
