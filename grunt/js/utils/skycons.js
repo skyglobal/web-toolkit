@@ -42,7 +42,7 @@ toolkit.skycons = (function() {
         'skycon-phone' : "&#xf122;",
         'skycon-cloud' : "&#xf123;",
         'skycon-video-play' : "&#xf124;",
-        'skycon-google-plus' : "&#xf125;",
+        'skycon-google-plus' : "&#xf125;"
     };
 
 
