@@ -18,7 +18,7 @@ toolkit.form = (function ($) {
         return false;
     }
 
-    var useCustomFormErrors =  (!('required' in document.createElement('input')) || isSafari());
+    var useCustomFormErrors =  (!('required' in document.createElement('input')) || isSafari()); //todo: find version number where required works
 
     function Form($form) {
         this.$form = $form;
@@ -75,7 +75,6 @@ toolkit.form = (function ($) {
 
         createErrorsAtTop: function() {
             var errorHtml = '<div id="feedback-list-container" class="row" aria-live="polite"><p><i class="form-error skycon-warning"></i>Please correct the highlighted fields below:</p>',
-                label,
                 i;
 
             errorHtml += '<ul class="feedback-list">';
@@ -98,9 +97,7 @@ toolkit.form = (function ($) {
         },
 
         validate: function(e) {
-            var $form = $(e.currentTarget),
-                form = this;
-
+            var form = this;
             form.resetErrors();
 
             this.$requiredInputs.each(function (index, input) {
