@@ -57,13 +57,13 @@ toolkit.datePicker = (function () {
             var datePicker = this;
 
             datePicker.$container
-                .on('click','.daycontainer .date', datePicker.selectDate.bind(datePicker))
+                .on('click','.date', datePicker.selectDate.bind(datePicker))
                 .on('click', '.prev', datePicker.displayPreviousMonth.bind(datePicker))
                 .on('click', '.next', datePicker.displayNextMonth.bind(datePicker))
                 .on('focus', 'input', function(){ datePicker.$el.calendar.show();})
-                .on('keyup blur', 'input', datePicker.updateCalendarView.bind(datePicker))
-                .on('keydown', 'input', function(e) {
-                    if(e.shiftKey && e.keyCode == 9) {
+                .on('keyup', 'input', datePicker.updateCalendarView.bind(datePicker))
+                .on('keydown blur', 'input', function(e) {
+                    if(e.keyCode == 9 || e.type=='blur') {
                         datePicker.$el.calendar.hide();
                     }
                 });
@@ -120,7 +120,7 @@ toolkit.datePicker = (function () {
             datePicker.renderCalendar();
         },
 
-        updateCalendarView: function() {
+        updateCalendarView: function(e) {
             var datePicker = this;
 
             datePicker.calendarDate.day = parseInt(datePicker.$el.day.val(), 10) || currentDate.day;
@@ -130,6 +130,7 @@ toolkit.datePicker = (function () {
             datePicker.renderCalendar();
 
         },
+
         renderCalendar: function() {
             var datePicker = this;
             datePicker.$el.monthyear.html(monthNames[datePicker.calendarDate.month] + " " + datePicker.calendarDate.year);
