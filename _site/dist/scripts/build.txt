@@ -8,8 +8,8 @@ utils/toggle.js
 utils/diff.js
 modules/inPageNav.js
 modules/accordion.js
-modules/datepicker.js
-modules/form.js
+modules/datePicker.js
+modules/validation.js
 modules/share.js
 modules/video.js
 modules/carousel.js
@@ -25,8 +25,8 @@ utils/toggle.js
 utils/diff.js
 modules/inPageNav.js
 modules/accordion.js
-modules/datepicker.js
-modules/form.js
+modules/datePicker.js
+modules/validation.js
 modules/share.js
 modules/video.js
 modules/carousel.js

@@ -43,6 +43,7 @@ $form-offset: 34%;
     }
   }
 
+  input[type="number"],
   input[type="text"],
   input[type="password"],
   input[type="email"],
@@ -66,24 +67,22 @@ $form-offset: 34%;
       border: 1px solid #0094ff;
     }
   }
-  .datepicker {
-    .day, .month, .year {
+  .date-picker {
+    display: inline-block;
+    position: relative;
+
+    &:after {
+      clear: both;
+    }
+    .day,
+    .month,
+    .year {
       width: 57px;
       margin-right: 9px;
     }
     .year {
       width: 83px;
     }
-
-    .datepicker-container {
-      float: left;
-      position: relative;
-
-      &:after {
-        clear: both;
-      }
-    }
-
   }
 
   .calendar {
@@ -92,8 +91,6 @@ $form-offset: 34%;
     top: 28px;
     left: 0;
     z-index: 10;
-    // left: 346px;
-    // top: 7222.140625px;
     background-color: #fff;
     padding: 16px 9px 20px 9px;
     width: 201px;
@@ -106,18 +103,19 @@ $form-offset: 34%;
       color: #0073c5;
     }
 
-    .monthyear {
+    .header {
       margin-bottom: 16px;
 
-      span.monthleft, span.monthright {
+      .prev,
+      .next {
         color: #0073c5;
         font-weight: bold;
         cursor: pointer;
       }
-      .monthleft {
+      .prev {
         float: left;
       }
-      .monthright {
+      .next {
         float: right;
       }
     }
@@ -147,10 +145,10 @@ $form-offset: 34%;
         text-align: center;
         padding: 2px;
       }
-      span.day:hover {
+      .date:hover {
         background-color: #0073c5;
         color: #fff;
-      cursor: pointer;
+        cursor: pointer;
       }
 
       .past {
@@ -161,16 +159,15 @@ $form-offset: 34%;
         font-weight: bold;
         color: #0073c5;
       }
+      .today{
+        font-weight: bold;
+      }
     }
   }
 
   textarea {
     height: 5em;
     padding: 5px 10px;
-  }
-
-  .date-picker input[type="text"] {
-    background-color: red;
   }
 
   fieldset {

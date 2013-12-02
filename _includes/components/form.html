@@ -28,23 +28,24 @@
                 <label>Date of birth</label>
                 <input id="dob" type="text" placeholder="DD/MM/YYYY" maxlength="10">
             </div>
-            <div class="row datepicker">
-                <label>Engineer visit</label>
-                <div class="datepicker-container">
-                    <input class="day" type="text" placeholder="DD" maxlength="2" aria-label="day">
-                    <input class="month" type="text" placeholder="MM" maxlength="2" aria-label="month">
-                    <input class="year" type="text" placeholder="YYYY" maxlength="4" aria-label="year">
+            <div class="row" data-date-picker>
+                <label class="descriptor" for="date-one-day-feedback">Engineer visit</label>
+                <div class="date-picker">
+                    <input class="day" type="text" pattern="[0-9]*" placeholder="DD" maxlength="2" aria-label="day" id=date-one-day>
+                    <input class="month" type="text"  pattern="[0-9]*" placeholder="MM" maxlength="2" aria-label="month" id=date-one-month>
+                    <input class="year" type="text"  pattern="[0-9]*" placeholder="YYYY" maxlength="4" aria-label="year" id=date-one-year>
                 </div>
-                <div class="clear"></div>
+                <label id="date-one-day-feedback" class="hidden form-error feedback" for="date-one-day">Day must be 31 or less</label>
+                <label id="date-one-month-feedback" class="hidden form-error feedback" for="date-one-month">Month must be 12 or less</label>
+                <label id="date-one-year-feedback" class="hidden form-error feedback" for="date-one-year">Year must be valid</label>
             </div>
-            <div class="row datepicker">
+            <div class="row">
                 <label>Another date</label>
-                <div class="datepicker-container">
+                <div class="date-picker">
                     <input class="day" type="text" placeholder="DD" maxlength="2" aria-label="day">
                     <input class="month" type="text" placeholder="MM" maxlength="2" aria-label="month">
                     <input class="year" type="text" placeholder="YYYY" maxlength="4" aria-label="year">
                 </div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <label for="telephone">Telephone</label>
