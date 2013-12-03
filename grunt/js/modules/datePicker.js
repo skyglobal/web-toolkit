@@ -76,7 +76,7 @@ toolkit.datePicker = (function () {
                 $next = $('<span class="next"><i class="skycon-arrow-right"></i></span>'),
                 $dateDescription = $('<span data-date></span>'),
                 $daysHeader = $('<div class="days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>'),
-                $dayContainer = $('<div class="daycontainer"></div>');
+                $dayContainer = $('<div class="day-container"></div>');
             $header.append($prev).append($dateDescription).append($next);
             $calendar.append($header).append($daysHeader).append($dayContainer);
             this.$container.append($calendar);
