@@ -25,29 +25,6 @@
                 <input id="email" type="email" placeholder="eg. joe.bloggs@me.com"/>
             </div>
             <div class="row">
-                <label>Date of birth</label>
-                <input id="dob" type="text" placeholder="DD/MM/YYYY" maxlength="10">
-            </div>
-            <div class="row" data-date-picker>
-                <label class="descriptor" for="date-one-day-feedback">Engineer visit</label>
-                <div class="date-picker">
-                    <input class="day" type="text" pattern="[0-9]*" placeholder="DD" maxlength="2" aria-label="day" id=date-one-day>
-                    <input class="month" type="text"  pattern="[0-9]*" placeholder="MM" maxlength="2" aria-label="month" id=date-one-month>
-                    <input class="year" type="text"  pattern="[0-9]*" placeholder="YYYY" maxlength="4" aria-label="year" id=date-one-year>
-                </div>
-                <label id="date-one-day-feedback" class="hidden form-error feedback" for="date-one-day">Day must be 31 or less</label>
-                <label id="date-one-month-feedback" class="hidden form-error feedback" for="date-one-month">Month must be 12 or less</label>
-                <label id="date-one-year-feedback" class="hidden form-error feedback" for="date-one-year">Year must be valid</label>
-            </div>
-            <div class="row">
-                <label>Another date</label>
-                <div class="date-picker">
-                    <input class="day" type="text" placeholder="DD" maxlength="2" aria-label="day">
-                    <input class="month" type="text" placeholder="MM" maxlength="2" aria-label="month">
-                    <input class="year" type="text" placeholder="YYYY" maxlength="4" aria-label="year">
-                </div>
-            </div>
-            <div class="row">
                 <label for="telephone">Telephone</label>
                 <input id="telephone" type="tel" placeholder="eg. +447567567567"/>
             </div>
@@ -58,9 +35,6 @@
             <div class="row">
                 <label for="message">Message</label>
                 <textarea id="message" placeholder="eg. Please enter a message"></textarea>
-            </div>
-            <div class="row no-label">
-                <button name="form-submit" type="submit" class="form-submit btn primary-cta">Submit</button>
             </div>
         </form>
     </div>
@@ -83,7 +57,7 @@
                 <label for="title" class="required">Title</label>
 
                 <div class="select">
-                    <select id="title" name="title" required>
+                    <select id="title" name="title">
                         <option value="">Please select</option>
                         <option value="Mr">Mr</option>
                         <option value="Mrs">Mrs</option>
@@ -114,7 +88,7 @@
 
             <div class="row">
                 <label class="required">Postcode</label>
-                <input type="text" placeholder="eg. TW8 1QW" required/>
+                <input type="text" placeholder="eg. TW8 1QW"/>
                 <button class="btn">Find address</button>
             </div>
 
@@ -127,9 +101,6 @@
                 <input type="checkbox" name="confirm_terms" value="true" id="confirm-terms"/>
                 <label for="confirm-terms">I agree to the <a href="#">Terms &amp; Conditions</a></label>
             </div>
-            <div class="row no-label">
-                <button name="form-submit" type="submit" class="form-submit btn primary-cta">Submit</button>
-            </div>
         </form>
 
     </div>
@@ -137,30 +108,34 @@
 
 <div class="example">
     <h4>With accessible error messages for required fields:</h4>
-    <p>This requires the use of the native <code>required</code> attribute on an input field and <code>required</code> class on the label.</p>
-    <p>Optionally, if you want to customise the error label, you can provide a custom error label as in the example below.</p>
-    <code>&lt;input id="my-input" type="text" required/&gt;&lt;label class="hidden form-error feedback" for="input"&gt;Please enter some text&lt;/label&gt;</code>
+    <p>This requires the use of the native <code>required</code> attribute on an input field.  See below for an example.</p>
+    <code>&lt;input id="my-input" type="text" required/&gt;</code>
+    <p>If you are following xhtml, use the following:</p>
+    <code>&lt;input id="my-input" type="text" required="required"/&gt;</code>
+    <p>Alternatively, if you want to customise the error label, you can provide a custom error label as in the example below.</p>
+    <pre><code>&lt;input id="my-input" type="text" aria-required="true" aria-labelledby="my-input-feedback" required/&gt;
+&lt;span id="my-input-feedback" class="hidden form-error feedback" data-for="my-input"&gt;Please enter some text&lt;/span&gt;</code></pre>
     <p>Browsers that support the required attribute will get their native experience, so this logic can only be observed on browsers that do not support it (IE8, IE9, Safari)</p>
     <div class="demo">
-        <form class="sky-form sky-well">
-            <div class="row">
-                <label class="required descriptor" for="input-one">Mandatory Input with Feedback</label>
-                <input id="input-one" type="text" placeholder="Text goes here" required/>
-                <label id="input-one-feedback" class="hidden form-error feedback" for="input-one">Please enter something into the first input</label>
-            </div>
-            <div class="row">
-                <label for="input-two">Non Mandatory Input</label>
-                <input id="input-two" type="text" placeholder="Text goes here"/>
-                <label id="input-two-feedback" class="hidden form-error feedback" for="input-two">Please enter something into the second input</label>
-            </div>
+		<form class="sky-form sky-well">
+			<div class="row">
+				<label class="required descriptor" for="input-one">Mandatory Input with Feedback</label>
+				<input id="input-one" type="text" placeholder="Text goes here" aria-required="true" aria-labelledby="input-one-feedback" required/>
+				<span id="input-one-feedback" data-for="input-one" class="hidden form-error feedback">Please enter something into the first input</span>
+			</div>
+			<div class="row">
+				<label for="input-two">Non Mandatory Input</label>
+				<input id="input-two" type="text" placeholder="Text goes here"/>
+				<span id="input-two-feedback" data-for="input-two" class="hidden form-error feedback">Please enter something into the second input</span>
+			</div>
+			<div class="row">
+				<label class="required descriptor" for="input-three" aria-required="true">Mandatory Input with no Feedback</label>
+				<input id="input-three" class="required" type="text" placeholder="Text goes here" required/>
+			</div>
 
-            <div class="row">
-                <label class="required descriptor" for="input-three">Mandatory Input with no Feedback</label>
-                <input id="input-three" class="required" type="text" placeholder="Text goes here" required/>
-            </div>
-            <div class="row no-label">
-                <button name="form-submit" type="submit" class="form-submit btn primary-cta">Submit</button>
-            </div>
-        </form>
+			<div class="row no-label">
+				<button name="form-submit" type="submit" class="form-submit btn primary-cta">Submit</button>
+			</div>
+		</form>
     </div>
 </div>
