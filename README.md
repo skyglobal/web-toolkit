@@ -66,6 +66,8 @@ See the [reference page](http://skyglobal.github.io/web-toolkit/) for a descript
 These tests are automatically run on the CircleCI server upon pushing to Github
   - `grunt test` for unit (using [mocha](http://visionmedia.github.io/mocha/) and [chai](http://chaijs.com/‎))
 
+*Please note: jQuery 'show' and 'hide' dont work well, please add and remove the class 'hidden' instead.*
+
 ### Running
 
 1. In the root of the project, run the following:
