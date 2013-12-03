@@ -9,7 +9,7 @@
     line-height: 1.2em;
     list-style: none;
     margin: 0;
-    padding: 8px 10px 0px;
+    padding: 8px 10px 0px 21px;
     font-size: 0.812em;
     line-height: 1.2em;
     min-height: 32px;
@@ -49,8 +49,6 @@
     }
 
     li:first-child {
-      font-weight:bold;
-      padding-left: 1px;
 
       .skycon-chevron {
         display:none;
@@ -58,20 +56,22 @@
 
       a {
         padding-left: 0;
-        letter-spacing: 0;
       }
     }
   }
 }
 
-.skycom-mobile #skycom-breadcrumb ul {
-  li {
-    display: none;
-    &:nth-last-child(2) {
-      display: block;
-    }
-    span{
-      margin-top: 0;
+@media (max-width: $mobile-width) {
+  #skycom-breadcrumb ul {
+    padding-left:10px;
+    li {
+      display: none;
+      &:nth-last-child(2) {
+        display: block;
+      }
+      span{
+        margin-top: 0;
+      }
     }
   }
 }

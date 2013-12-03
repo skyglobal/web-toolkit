@@ -79,6 +79,10 @@ toolkit.hashmanager = (function() {
         });
     }
 
+    function resetHash() {
+        vars.globalHashList = [];
+    }
+
     function cleanHash(hash) {
         return hash.replace(/[#!]/g, '');
     }
@@ -90,6 +94,7 @@ toolkit.hashmanager = (function() {
         change: change,
         remove: remove,
         onHashChange: onHashChange,
+        resetHash: resetHash,
         cleanHash: cleanHash
     };
 }());

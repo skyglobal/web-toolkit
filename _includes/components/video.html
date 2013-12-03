@@ -1,0 +1,45 @@
+<a name="video"></a>
+<h3 class="wiki-h3">Video</h3>
+
+<div class="dependencies">
+    <!-- for videos: <script src="js/lib/require.js" ></script>-->
+    <link rel="stylesheet" href="//player.sky.com/css/styles.min.css"/>
+    <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
+</div>
+<div class="design-notes">
+    A wrapper for the Sky video player, in this example it's embedded onto an image. The video will expand the parent
+    container to fit the 16/9 ratio of the video. CSS changes will need to be made to add text next to play button.
+</div>
+<div class="developer-notes">
+    Ensure that you include all the needed dependencies (htmlplayer.js and player css). Check the dependencies tab.
+</div>
+<div class="init-notes">
+    Example: <code> $('#demo-video .video').video({
+        token:"<code>Your 36 long SkyVideo Token</code>",
+        displayAdverts: false,
+        onPlay: function() { //optional
+            //stuff to do before video plays
+        },
+        closeCallback: function() { //optional
+            //stuff to do after video closes
+        }
+    });</code>
+</div>
+
+<div class="example">
+    <h4>Sky Video Player Wrapper</h4>
+
+    <div class="demo" data-selector="*" id="demo-video">
+        <div class="video" data-video-id="clip-00i9rvth">
+            <img src="wiki_images/bling-ring.jpg"
+                 alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
+
+            <a href="#!" class="play-video internal-link"
+               data-tracking-context="David Beckham And Sky Team Up">
+                <i class="icon-video-play"></i>
+                <span class="speak">Play Trailer</span>
+            </a>
+
+        </div>
+    </div>
+</div>

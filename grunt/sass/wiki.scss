@@ -1,5 +1,5 @@
-@import "toolkit";
-@import "wiki/solarized-light";
+@import "toolkit/variables";
+@import "wiki/lib/solarized-light";
 
 @import "wiki/menu";
 @import "wiki/wiki";
@@ -7,5 +7,6 @@
 @import "wiki/typography";
 @import "wiki/colours";
 @import "wiki/grid";
-@import "wiki/tabs";
+@import 'wiki/video';
+@import "wiki/changes";
 

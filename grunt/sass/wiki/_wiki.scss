@@ -1,3 +1,6 @@
+.wiki-header{
+  margin-bottom: 0;
+}
 .wiki-section {
 	border-top: 2px solid #333;
     margin-bottom:25px;
@@ -25,7 +28,7 @@ a[name]:not([href]){
   font-family:SkyTextMedium;
 }
 
-.init,
+.init-notes,
 .dependencies,
 .developer-notes{
   display: none;

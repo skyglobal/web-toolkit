@@ -90,8 +90,9 @@
 }
 
 .internal-link{
+  color: $primary;
   outline: 0!important;
-  border: 0!important;
+  border: 0;
 }
 
 //visibility classses
@@ -118,8 +119,15 @@ body .visible{
   @include speak;
 }
 
+.rotate-180 {
+  @include transform(rotate(180deg));
+  .lt-ie9 & {
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  }
+}
+
 //DESKTOP ONLY CLASSES
-@media (max-width: $mobile-width+1) {
+@media (min-width: $mobile-width+1) {
   .sticky-desktop {
     @include sticky;
   }

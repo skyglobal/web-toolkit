@@ -52,6 +52,15 @@ a.btn,
   &:last-child {
     margin-right: 0;
   }
+
+  &[disabled] {
+    cursor: default;
+    @include opacity(0.3);
+    &:hover:before {
+      @include opacity(1);
+    }
+  }
+
 }
 
 //IE 7 hacks

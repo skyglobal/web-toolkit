@@ -23,6 +23,8 @@ toolkit.modules = (function(){
             skycons : false,
             share : false,
             popup : false,
+            inPageNav : false,
+            accordion : false,
             datepicker : false
         }, options);
         for (module in modulesToInitialize) {
@@ -49,22 +51,28 @@ if (typeof window.define === "function" && window.define.amd) {
         'utils/skycons',
         'utils/hashmanager',
         'utils/popup',
+        'utils/toggle',
+        'utils/diff',
         'modules',
-        'modules/tabs',
+        'modules/inPageNav',
+        'modules/accordion',
+        'modules/form',
         'modules/share',
-        'modules/carousel',
-        'modules/datepicker'], function(skycons, hashmanager, popup, modules, tabs, share, carousel, datepicker){
-
+        'modules/video',
+        'modules/carousel'], function(skycons, hashmanager, popup,toggle, diff, modules, inPageNav, accordion, form, share, video, carousel){
 
         return {
             modules: modules,
             skycons: skycons,
             hashmanager: hashmanager,
             popup: popup,
-            tabs: tabs,
+            diff: diff,
+            inPageNav: inPageNav,
+            accordion: accordion,
+            form: form,
             share: share,
-            carousel: carousel,
-            datepicker: datepicker
+            video: video,
+            carousel: carousel
         };
     });
 }

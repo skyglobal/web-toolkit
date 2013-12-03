@@ -59,7 +59,7 @@ module.exports = function(grunt) {
                     baseUrl: "grunt/js",
                     dir: "dist/scripts",
                     removeCombined: true,
-                    generateSourceMaps: true,
+                    generateSourceMaps: false,
                     modules:[{
                         name: 'toolkit'
                     },
@@ -108,7 +108,7 @@ module.exports = function(grunt) {
             fonts: {                         // Target
                 files: [{                   // Dictionary of files
                     expand: true,           // Enable dynamic expansion.
-                    cwd: 'grunt/fonts/orig/',    // Src matches are relative to this path.
+                    cwd: 'lib/font-svgs/',    // Src matches are relative to this path.
                     src: ['*.svg'],      // Actual pattern(s) to match.
                     dest: 'grunt/fonts/min/', // Destination path prefix.
                     ext: '.svg'         // Dest filepaths will have this extension.
@@ -147,6 +147,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-grunticon');
 
     grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
+    grunt.registerTask('spy', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'watch']);
     grunt.registerTask('css', ['clean:css', 'compass:toolkit']);
     grunt.registerTask('js', ['clean:js', 'jshint', 'requirejs']);
     grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);

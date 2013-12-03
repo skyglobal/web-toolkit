@@ -4,12 +4,14 @@
 <!--[if IE 9]>         <html class="lt-ie10" > <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 	<head>
-        <!--[if lt IE 9]> <script src="dist/scripts/lib/jquery-1.10.2.js" ></script> <![endif]-->
-        <!--[if gte IE 9]><!--> <script src="dist/scripts/lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
+        <!--[if lt IE 9]> <script src="lib/jquery-1.10.2.js" ></script> <![endif]-->
+        <!--[if gte IE 9]><!--> <script src="lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
+        <script src="lib/jquery.scrollspy.js" ></script>
 
 		{% include skycom_resources.html %}
 
         <link rel="stylesheet" href="dist/stylesheets/wiki.css">
+        <link rel="stylesheet" href="dist/stylesheets/toolkit.css">
         <link rel="stylesheet" href="dist/fonts/skycons.css">
 
         <!--[if lt IE 10]><script type="text/javascript">
@@ -25,45 +27,52 @@
         </script><![endif]-->
 
 	</head>
-	<body class="grid-1140">
-        <div class="quick-links  ">
-            <div class="skycom-container">
+	<body class="grid-1140" data-spy="scroll" data-target=".nav-container">
+        <div class="nav-container">
+            <div class="skycom-container nav">
                 <ul class="alpha skycom-12 primary-menu">
-                    <li>
-                        <a href="#using-me">Using the Toolkit</a>
-                        <ul class=secondary-menu>
-                            <li><a href="#getting-started">Getting Started</a></li>
-                            <li><a href="#contributing">Contributing</a></li>
-                            <li><a href="#accessibility">Accessibility</a></li>
-                            <li><a href="#coding-practises">Coding Practises</a></li>
+                    <li class="dropdown">
+                        <a href="index.html#using-the-toolkit">Using the Toolkit</a>
+                        <ul class=dropdown-menu>
+                            <li><a href="index.html#getting-started" data-diff="using-the-toolkit/getting-started">Getting Started</a></li>
+                            <li><a href="index.html#contributing" data-diff="using-the-toolkit/contributing">Contributing</a></li>
+                            <li><a href="index.html#accessibility" data-diff="using-the-toolkit/accessibility">Accessibility</a></li>
+                            <li><a href="index.html#coding-practices" data-diff="using-the-toolkit/coding-practices">Coding Practices</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#base-styles">Base Styles</a>
+                        <ul class=dropdown-menu>
+                            <li><a href="index.html#grid" data-diff="base-styles/grid">Grid</a></li>
+                            <li><a href="index.html#colours" data-diff="base-styles/colours">Colours</a></li>
+                            <li><a href="index.html#typography" data-diff="base-styles/typography">Typography</a></li>
+                            <li><a href="index.html#icons" data-diff="base-styles/icons">Icons</a></li>
+                            <li><a href="index.html#skycons" data-diff="base-styles/skycons">Skycons</a></li>
+                            <li><a href="index.html#buttons" data-diff="base-styles/buttons">Buttons</a></li>
+                            <li><a href="index.html#spinner" data-diff="base-styles/spinner">Spinner</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#components">Components</a>
+                        <ul class=dropdown-menu>
+                            <li><a href="index.html#breadcrumbs" data-diff="components/breadcrumbs">Breadcrumbs</a></li>
+                            <li><a href="index.html#form" data-diff="components/form">Form</a></li>
+                            <li><a href="index.html#inPageNav" data-diff="components/inPageNav">In-Page Nav</a></li>
+                            <li><a href="index.html#tabs" data-diff="components/tabs">Classic Tabs</a></li>
+                            <li><a href="index.html#accordion" data-diff="components/accordion">Accordion</a></li>
+                            <li><a href="index.html#carousel" data-diff="components/carousel">Carousel</a></li>
+                            <li><a href="index.html#share" data-diff="components/share">Share</a></li>
+                            <li><a href="index.html#video" data-diff="components/video">Video</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="index.html#examples">Examples</a>
+                        <ul class=dropdown-menu>
+                            <li><a href="index.html#error-page" data-diff="examples/error-page">Error Page</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#my-base">Base Styles</a>
-                        <ul class=secondary-menu>
-                            <li><a href="#grid">Grid</a></li>
-                            <li><a href="#colours">Colours</a></li>
-                            <li><a href="#typography">Typography</a></li>
-                            <li><a href="#icons">Icons</a></li>
-                            <li><a href="#buttons">Buttons</a></li>
-                            <li><a href="#spinner">Spinner</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#you-make-me-complete">Components</a>
-                        <ul class=secondary-menu>
-                            <li><a href="#breadcrumbs">Breadcrumbs</a></li>
-                            <li><a href="#form">Form</a></li>
-                            <li><a href="#tabs">Tabs</a></li>
-                            <li><a href="#carousel">Carousel</a></li>
-                            <li><a href="#share">Share</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#ta-dah">Examples</a>
-                        <ul class=secondary-menu>
-                            <li><a href="#error-page">Error Page</a></li>
-                        </ul>
+                        <a href="changes.html">Changes</a>
                     </li>
                 </ul>
             </div>
@@ -73,7 +82,7 @@
 				{{ content }}	
 			</div>
 		</div>
-	    <script src="dist/scripts/lib/require.js" data-main='dist/scripts/wiki'></script>
+	    <script src="lib/require.js" data-main='dist/scripts/wiki'></script>
         <div></div>
 	</body>
 </html>
