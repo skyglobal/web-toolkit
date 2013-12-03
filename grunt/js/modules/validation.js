@@ -2,7 +2,7 @@
 /*global jQuery:false */
 
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.validation = (function ($) {
+toolkit.form = (function ($) {
 
     "use strict";
 
@@ -57,7 +57,7 @@ toolkit.validation = (function ($) {
         addErrorMessageToInput: function($input) {
             var inputId     = $input.attr('id'),
                 $descriptor = this.$container.find('label.descriptor[for=' + inputId + ']'),
-                $feedbacks  = this.$container.find('label.feedback[for=' + inputId + ']');
+                $feedbacks  = this.$container.find('.feedback[data-for=' + inputId + ']');
 
             this.hasError = true;
 
@@ -65,7 +65,7 @@ toolkit.validation = (function ($) {
                 $feedbacks.removeClass('hidden');
             } else {
                 //create a feedback if one does not exist
-                $feedbacks = $('<label class="form-error feedback" for="' + $input.attr('id') + '">' + $descriptor.text() + ' is required</label>').insertAfter($input);
+                $feedbacks = $('<span class="form-error feedback" data-for="' + $input.attr('id') + '">' + $descriptor.text() + ' is required</span>').insertAfter($input);
             }
 
             if (!$input.hasClass('form-error')) {
@@ -78,7 +78,7 @@ toolkit.validation = (function ($) {
 
         removeErrorsFromInput: function($input) {
             var inputId     = $input.attr('id'),
-                $feedbacks  = this.$container.find('label.feedback[for=' + inputId + ']');
+                $feedbacks  = this.$container.find('.feedback[data-for=' + inputId + ']');
 
             if ($input.hasClass('form-error')) {
                 $input.removeClass('form-error');
