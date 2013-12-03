@@ -776,12 +776,8 @@ toolkit.datePicker = (function () {
     }
 
     function firstDay(month, year) {
-        var day = new Date(year, month, 1).getDay();
-        if (day === 0) {
-            return 7;
-        } else {
-            return day;
-        }
+        var day = new Date(year, month - 1, 1).getDay();
+        return (day === 0) ? 7 : day - 1;
     }
 
     function isLeapYear(year) {
@@ -789,7 +785,7 @@ toolkit.datePicker = (function () {
     }
 
     function normaliseDate(date){
-        return date.length < 2 ? "0" + date : date;
+        return date.toString().length < 2 ? "0" + date : date;
     }
 
     function DatePicker($container) {
@@ -830,6 +826,10 @@ toolkit.datePicker = (function () {
                         datePicker.$calendar.hide();
                     }
                 });
+        },
+
+        setFormValidation: function(){
+
         },
 
         addCalendarHTML: function() {
@@ -978,7 +978,33 @@ toolkit.form = (function ($) {
                 .length > 0 : $el.val());
     }
 
-    var useCustomFormErrors =  (!('required' in document.createElement('input')) || !('pattern' in document.createElement('input')) || isSafari());
+    function InvalidInputHelper(input, options) {
+        input.setCustomValidity(options.defaultText);
+
+        function changeOrInput() {
+            if (input.value === "") {
+                input.setCustomValidity(options.emptyText);
+            } else {
+                input.setCustomValidity("");
+            }
+        }
+
+        function invalid() {
+            if (input.value === "") {
+                input.setCustomValidity(options.emptyText);
+            } else {
+                input.setCustomValidity(options.invalidText);
+            }
+        }
+
+        input.addEventListener("change", changeOrInput);
+        input.addEventListener("input", changeOrInput);
+        input.addEventListener("invalid", invalid);
+    }
+
+    var useCustomFormErrors =  (!('required' in document.createElement('input')) ||
+                                !('pattern' in document.createElement('input')) || isSafari());
+    var canCustomerHTML5Message = ('setCustomValidity' in document.createElement('input'));
 
     function Validation($container) {
         this.$container = $container;
@@ -986,7 +1012,7 @@ toolkit.form = (function ($) {
         this.$patternInputs = $container.find('input[pattern]');
         this.errors = [];
         this.hasError = false;
-
+        this.customiseHTML5Messages();
         this.bindEvents();
     }
 
@@ -999,6 +1025,13 @@ toolkit.form = (function ($) {
                     validation.validate(e);
                 });
             }
+        },
+
+        customiseHTML5Messages: function(){
+            if (!canCustomerHTML5Message) return;
+            this.$container.find('.feedback[data-for]').each(function(){
+                new InvalidInputHelper(document.getElementById($(this).attr('data-for')), {invalidText: this.innerText});
+            });
         },
 
         addErrorMessageToInput: function($input) {
