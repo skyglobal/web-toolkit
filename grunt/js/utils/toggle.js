@@ -37,7 +37,7 @@ toolkit.toggle = (function() {
         }
 
         $('body')
-            .append($('<div id="toggle-tmp-height"></div>')
+            .append($('<div id="toggle-tmp-height" class="skycom-container"></div>')
             .append($el.clone().attr('style', '').removeClass('toggle-hidden')));
         $el.data('openHeight', $('#toggle-tmp-height > div').height());
         $('#toggle-tmp-height').remove();
