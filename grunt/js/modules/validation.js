@@ -26,11 +26,15 @@ toolkit.form = (function ($) {
     }
 
     function InvalidInputHelper(input, options) {
-        input.setCustomValidity(options.defaultText);
+        if (options.emptyText){
+            input.setCustomValidity(options.defaultText);
+        }
 
         function changeOrInput() {
             if (input.value === "") {
-                input.setCustomValidity(options.emptyText);
+                if (options.emptyText){
+                    input.setCustomValidity(options.emptyText);
+                }
             } else {
                 input.setCustomValidity("");
             }
@@ -38,8 +42,10 @@ toolkit.form = (function ($) {
 
         function invalid() {
             if (input.value === "") {
-                input.setCustomValidity(options.emptyText);
-            } else {
+                if (options.emptyText){
+                    input.setCustomValidity(options.emptyText);
+                }
+            } else if (options.invalidText) {
                 input.setCustomValidity(options.invalidText);
             }
         }
@@ -78,7 +84,7 @@ toolkit.form = (function ($) {
             if (!canCustomerHTML5Message) return;
             this.$container.find('.feedback[data-for]').each(function(){
                 var el = document.getElementById($(this).attr('data-for'));
-                new InvalidInputHelper(el, {invalidText: this.innerText});
+                new InvalidInputHelper(el, {invalidText: this.innerText || this.innerHTML});
             });
         },
 
