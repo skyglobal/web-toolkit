@@ -839,7 +839,7 @@ toolkit.datePicker = (function () {
                 $next = $('<span class="next"><i class="skycon-arrow-right"></i></span>'),
                 $dateDescription = $('<span data-date></span>'),
                 $daysHeader = $('<div class="days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>'),
-                $dayContainer = $('<div class="daycontainer"></div>');
+                $dayContainer = $('<div class="day-container"></div>');
             $header.append($prev).append($dateDescription).append($next);
             $calendar.append($header).append($daysHeader).append($dayContainer);
             this.$container.append($calendar);
@@ -950,21 +950,15 @@ if (typeof window.define === "function" && window.define.amd) {
 
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.form = (function ($) {
-
     
 
     function isSafari() {
         var ua = navigator.userAgent.toLowerCase();
         if (ua.indexOf('safari')!=-1){
-            if(ua.indexOf('chrome')  > -1){
-                return false;
-            }else{
-                return true;
-            }
+            return (ua.indexOf('chrome') === -1);
         }
         return false;
     }
-
 
     function getValue($el){
         var $radiosWithSameName = null;
@@ -1030,7 +1024,8 @@ toolkit.form = (function ($) {
         customiseHTML5Messages: function(){
             if (!canCustomerHTML5Message) return;
             this.$container.find('.feedback[data-for]').each(function(){
-                new InvalidInputHelper(document.getElementById($(this).attr('data-for')), {invalidText: this.innerText});
+                var el = document.getElementById($(this).attr('data-for'));
+                new InvalidInputHelper(el, {invalidText: this.innerText});
             });
         },
 

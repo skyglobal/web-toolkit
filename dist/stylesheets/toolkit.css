@@ -1307,32 +1307,32 @@ button.btn {
   display: inline-block;
   width: 28px;
 }
-.sky-form .calendar .daycontainer {
+.sky-form .calendar .day-container {
   font-family: "Helvetica", Arial, sans-serif;
   font-size: 14px;
   color: #333;
   text-align: left;
 }
-.sky-form .calendar .daycontainer span {
+.sky-form .calendar .day-container span {
   margin: 3px;
   display: inline-block;
   width: 18px;
   text-align: center;
   padding: 2px;
 }
-.sky-form .calendar .daycontainer .date:hover {
+.sky-form .calendar .day-container .date:hover {
   background-color: #0073c5;
   color: #fff;
   cursor: pointer;
 }
-.sky-form .calendar .daycontainer .past {
+.sky-form .calendar .day-container .past {
   color: #a5a5a5;
 }
-.sky-form .calendar .daycontainer .selected {
+.sky-form .calendar .day-container .selected {
   font-weight: bold;
   color: #0073c5;
 }
-.sky-form .calendar .daycontainer .today {
+.sky-form .calendar .day-container .today {
   font-weight: bold;
 }
 .sky-form textarea {

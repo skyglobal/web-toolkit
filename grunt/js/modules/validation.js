@@ -3,21 +3,15 @@
 
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.form = (function ($) {
-
     "use strict";
 
     function isSafari() {
         var ua = navigator.userAgent.toLowerCase();
         if (ua.indexOf('safari')!=-1){
-            if(ua.indexOf('chrome')  > -1){
-                return false;
-            }else{
-                return true;
-            }
+            return (ua.indexOf('chrome') === -1);
         }
         return false;
     }
-
 
     function getValue($el){
         var $radiosWithSameName = null;
@@ -83,7 +77,8 @@ toolkit.form = (function ($) {
         customiseHTML5Messages: function(){
             if (!canCustomerHTML5Message) return;
             this.$container.find('.feedback[data-for]').each(function(){
-                new InvalidInputHelper(document.getElementById($(this).attr('data-for')), {invalidText: this.innerText});
+                var el = document.getElementById($(this).attr('data-for'));
+                new InvalidInputHelper(el, {invalidText: this.innerText});
             });
         },
 
