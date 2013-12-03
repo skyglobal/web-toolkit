@@ -13,12 +13,8 @@ toolkit.datePicker = (function () {
     }
 
     function firstDay(month, year) {
-        var day = new Date(year, month, 1).getDay();
-        if (day === 0) {
-            return 7;
-        } else {
-            return day;
-        }
+        var day = new Date(year, month - 1, 1).getDay();
+        return (day === 0) ? 7 : day - 1;
     }
 
     function isLeapYear(year) {
@@ -26,7 +22,7 @@ toolkit.datePicker = (function () {
     }
 
     function normaliseDate(date){
-        return date.length < 2 ? "0" + date : date;
+        return date.toString().length < 2 ? "0" + date : date;
     }
 
     function DatePicker($container) {
@@ -67,6 +63,10 @@ toolkit.datePicker = (function () {
                         datePicker.$calendar.hide();
                     }
                 });
+        },
+
+        setFormValidation: function(){
+
         },
 
         addCalendarHTML: function() {
