@@ -1,13 +1,16 @@
-.sky-form{
+$form-offset: 34%;
+
+.sky-form {
 
   .row {
     margin: 0 0 24px 0;
-    position: relative;
   }
 
-  .required:after {
+  label.required:after {
     content: "*";
     color: $error;
+    position: absolute;
+    margin-left: 4px;
   }
 
   select {
@@ -23,29 +26,25 @@
     font: 16px/1em $font-family;
   }
 
-  .row > label {
-    line-height: 32px;
-  }
-
+  .row> .field_with_errors label,
   .row > label,
   legend {
-    color: #3c3c3c;
     @include box-sizing(border-box);
     float: left;
     text-align: right;
-    width: 24%;
+    width: $form-offset;
     padding-right: 20px;
   }
 
-
   .no-label {
-    margin-left: 24%;
+    margin-left: $form-offset;
     label {
       float: none !important;
     }
   }
 
   input[type="text"],
+  input[type="password"],
   input[type="email"],
   input[type="tel"],
   input[type="url"],
@@ -65,99 +64,6 @@
 
     &:focus {
       border: 1px solid #0094ff;
-    }
-  }
-  .datepicker {
-    #day, #month, #year {
-      width: 57px;
-      margin-right: 9px;
-    }
-    #year {
-      width: 83px;
-    }
-
-    .datepicker-container {
-      float: left;
-      position: relative;
-
-      &:after {
-        clear: both;
-      }
-    }
-
-  }
-
-  .calendar {
-    position: absolute;
-    display: none;
-    top: 28px;
-    left: 0;
-    z-index: 10;
-    // left: 346px;
-    // top: 7222.140625px;
-    background-color: #fff;
-    padding: 16px 9px 20px 9px;
-    width: 201px;
-    border: 1px solid #dcdcdc;
-    font-size: 20px;
-    color: #666;
-    text-align: center;
-
-    .monthyear {
-      margin-bottom: 16px;
-
-      span.monthleft, span.monthright {
-        color: #0073c5;
-        font-weight: bold;
-        cursor: pointer;
-      }
-      .monthleft {
-        float: left;
-      }
-      .monthright {
-        float: right;
-      }
-    }
-
-    .days {
-      padding-bottom: 8px;
-      margin-bottom: 24px;
-      border-bottom: solid 1px #dcdcdc;
-      font-size: 16px;
-
-      span {
-        display: inline-block;
-        width: 28px;
-      }
-    }
-
-    .daycontainer {
-      font-family: "Helvetica", Arial, sans-serif;
-      font-size: 14px;
-      color: #333;
-      text-align: left;
-
-      span {
-        margin: 3px;
-        display: inline-block;
-        width: 18px;
-        text-align: center;
-        padding: 2px;
-        cursor: pointer;
-      }
-      span:hover {
-        background-color: #0073c5;
-        color: #fff;
-      }
-
-      .past {
-        color: #a5a5a5;
-      }
-
-      .selected {
-        font-weight: bold;
-        color: #0073c5;
-      }
     }
   }
 
@@ -183,57 +89,88 @@
       display: inline-block;
       margin-bottom: 5px;
     }
+  }
 
+  .error {
+    margin-left: $form-offset;
+  }
+
+
+  .form-error {
+    color: $error;
+  }
+
+  input.form-error {
+    border-color: $error;
+    color: #000;
+  }
+
+
+  .feedback.hidden {
+    display: none;
+  }
+
+  .feedback {
+    margin-left: $form-offset;
+    margin-top: 8px;
+    text-align: left;
+    width: auto;
+    float: none;
+    display: block;
+  }
+
+  .skycon-warning {
+    margin-right: 8px;
+    font-size: 20px;
+    margin-bottom: 4px;
+    .lt-ie9 & {
+      margin-bottom: -4px;
+    }
+  }
+
+  .feedback-list .form-error {
+    margin-left: 24px;
   }
 }
 
 //ie7
-.sky-form{
+.sky-form {
   .radiocheck {
-    *margin-top:-1em;
-    *margin-left:24%;
-    *padding-left:20px;
+    *margin-top: -1em;
+    *margin-left: $form-offset;
+    *padding-left: 20px;
   }
 }
 
+@media (max-width: 600px) {
+  .sky-form {
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    textarea {
+      width: 100%;
+    }
+    .feedback {
+      margin-left: 0;
+    }
+  }
 
-// MOBILE //
-//@media (min-width: $mobile-width) {
-//  .sky-form{
-//    input[type="text"],
-//    input[type="email"],
-//    input[type="tel"],
-//    input[type="url"],
-//    textarea {
-//      @include box-shadow(none);
-//      margin-right: 0;
-//    }
-//
-//    .row > label {
-//      float: none;
-//      text-align: left;
-//    }
-//
-//    legend {
-//      width: 100%;
-//      text-align: left;
-//      margin-bottom: 10px;
-//    }
-//
-//    input[type="text"] {
-//      max-width: 100%;
-//    }
-//
-//    .select {
-//      display: block;
-//    }
-//
-//    .btn {
-//      margin-top: 20px;
-//    }
-//
-//    .no-label {
-//      margin: 0;
-//    }
-//  }
-//}
+  .sky-form .row {
+    margin: 0 0 16px 0;
+    & > label {
+      float: none;
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+  }
+
+  button {
+    margin: 16px 0 0 0;
+  }
+  .no-label label {
+    display: inline;
+  }
+}

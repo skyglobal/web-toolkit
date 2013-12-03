@@ -1,5 +1,10 @@
-version: 0.5.1
+version: 1.7.5
 destination: _site
 source: .
-exclude: [grunt, node_modules, test]
+exclude: [
+  grunt,
+  node_modules, test, README.md,
+  Gemfile, Gemfile.lock, rakefile,
+  Web-toolkit.iml, circle.yml, Gruntfile.js,package.json]
+include: [_includes, lib]
 port: 4000

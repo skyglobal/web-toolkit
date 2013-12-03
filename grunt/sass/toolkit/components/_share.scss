@@ -26,6 +26,8 @@
     height: 1em;
     line-height: 1em;
     padding-right: 10px;
+    z-index: 2;
+    position: relative;
 
     &.skycom-focus span {
       color: #fff;
@@ -35,7 +37,6 @@
   & .skycon-share {
     position: relative;
     padding-right: 2px;
-    top: -2px;
   }
 
   .share-count {
@@ -150,7 +151,7 @@
       li {
         margin: 1%;
         padding: 10px 0;
-        width: 35px;
+        width: 33px;
         text-align: center;
         a {
           width: 100%;
