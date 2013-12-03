@@ -77,21 +77,25 @@ $form-offset: 34%;
     .day,
     .month,
     .year {
+      text-align:center;
       width: 57px;
-      margin-right: 9px;
+      margin-right: 0;
     }
     .year {
-      width: 83px;
+      width: 77px;
+    }
+    .data-separator{
+      margin: 0 5px 0 2px;
     }
   }
 
   .calendar {
     position: absolute;
-    top: 28px;
+    top: 29px;
     left: 0;
     z-index: 10;
     background-color: #fff;
-    padding: 16px 9px 20px 9px;
+    padding: 16px 9px;
     width: 201px;
     border: 1px solid #dcdcdc;
     font-size: 20px;
@@ -121,7 +125,7 @@ $form-offset: 34%;
 
     .days {
       padding-bottom: 8px;
-      margin-bottom: 24px;
+      margin-bottom: 12px;
       border-bottom: solid 1px #dcdcdc;
       font-size: 16px;
 
