@@ -25,6 +25,29 @@
                 <input id="email" type="email" placeholder="eg. joe.bloggs@me.com"/>
             </div>
             <div class="row">
+                <label>Date of birth</label>
+                <input id="dob" type="text" placeholder="DD/MM/YYYY" maxlength="10">
+            </div>
+            <div class="row" data-date-picker>
+                <label class="descriptor" for="date-one-day-feedback">Engineer visit</label>
+                <div class="date-picker">
+                    <input class="day" type="text" pattern="[0-9]*" placeholder="DD" maxlength="2" aria-label="day" id=date-one-day>
+                    <input class="month" type="text"  pattern="[0-9]*" placeholder="MM" maxlength="2" aria-label="month" id=date-one-month>
+                    <input class="year" type="text"  pattern="[0-9]*" placeholder="YYYY" maxlength="4" aria-label="year" id=date-one-year>
+                </div>
+                <label id="date-one-day-feedback" class="hidden form-error feedback" for="date-one-day">Day must be 31 or less</label>
+                <label id="date-one-month-feedback" class="hidden form-error feedback" for="date-one-month">Month must be 12 or less</label>
+                <label id="date-one-year-feedback" class="hidden form-error feedback" for="date-one-year">Year must be valid</label>
+            </div>
+            <div class="row">
+                <label>Another date</label>
+                <div class="date-picker">
+                    <input class="day" type="text" placeholder="DD" maxlength="2" aria-label="day">
+                    <input class="month" type="text" placeholder="MM" maxlength="2" aria-label="month">
+                    <input class="year" type="text" placeholder="YYYY" maxlength="4" aria-label="year">
+                </div>
+            </div>
+            <div class="row">
                 <label for="telephone">Telephone</label>
                 <input id="telephone" type="tel" placeholder="eg. +447567567567"/>
             </div>
@@ -35,6 +58,9 @@
             <div class="row">
                 <label for="message">Message</label>
                 <textarea id="message" placeholder="eg. Please enter a message"></textarea>
+            </div>
+            <div class="row no-label">
+                <button name="form-submit" type="submit" class="form-submit btn primary-cta">Submit</button>
             </div>
         </form>
     </div>
@@ -57,7 +83,7 @@
                 <label for="title" class="required">Title</label>
 
                 <div class="select">
-                    <select id="title" name="title">
+                    <select id="title" name="title" required>
                         <option value="">Please select</option>
                         <option value="Mr">Mr</option>
                         <option value="Mrs">Mrs</option>
@@ -88,7 +114,7 @@
 
             <div class="row">
                 <label class="required">Postcode</label>
-                <input type="text" placeholder="eg. TW8 1QW"/>
+                <input type="text" placeholder="eg. TW8 1QW" required/>
                 <button class="btn">Find address</button>
             </div>
 
@@ -100,6 +126,9 @@
             <div class="row no-label">
                 <input type="checkbox" name="confirm_terms" value="true" id="confirm-terms"/>
                 <label for="confirm-terms">I agree to the <a href="#">Terms &amp; Conditions</a></label>
+            </div>
+            <div class="row no-label">
+                <button name="form-submit" type="submit" class="form-submit btn primary-cta">Submit</button>
             </div>
         </form>
 
