@@ -764,8 +764,7 @@ if (typeof window.define === "function" && window.define.amd) {
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.datePicker = (function () {
 
-    var monthNames=["", "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December" ],
+    var monthNames=["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ],
         currentDate = {
             day: new Date().getDate(),
             month: new Date().getMonth() + 1,
@@ -795,23 +794,12 @@ toolkit.datePicker = (function () {
 
     function DatePicker($container) {
         this.calendarDate = $.extend(currentDate);
-
         this.$container = $container;
+        this.$day = $container.find('.day');
+        this.$month = $container.find('.month');
+        this.$year = $container.find('.year');
         this.addCalendarHTML();
-
-        this.$el = {
-            calendar: $container.find('.calendar'),
-            day:  $container.find('.day'),
-            month:  $container.find('.month'),
-            year:  $container.find('.year'),
-            prev:  $container.find('.prev'),
-            next:  $container.find('.next'),
-            monthyear:  $container.find('*[data-date]')
-        };
-
-        this.renderCalendar();
         this.bindEvents();
-
     }
 
     DatePicker.prototype = {
@@ -823,40 +811,92 @@ toolkit.datePicker = (function () {
                 .on('click','.date', datePicker.selectDate.bind(datePicker))
                 .on('click', '.prev', datePicker.displayPreviousMonth.bind(datePicker))
                 .on('click', '.next', datePicker.displayNextMonth.bind(datePicker))
-                .on('focus', 'input', function(){ datePicker.$el.calendar.show();})
                 .on('keyup', 'input', datePicker.updateCalendarView.bind(datePicker))
+                .on('focus', 'input', function(){ datePicker.$calendar.show();})
                 .on('keydown blur', 'input', function(e) {
                     if(e.keyCode == 9 || e.type=='blur') {
-                        datePicker.$el.calendar.hide();
+                        datePicker.$calendar.hide();
                     }
                 });
 
             $(document)
                 .on('keydown', function(e) {
                     if (e.keyCode == 27) {
-                        datePicker.$el.calendar.hide();
+                        datePicker.$calendar.hide();
                     }
                 })
                 .on('click', function(e) {
                     if (e.target.class != 'date-picker' && !datePicker.$container.find(e.target).length) {
-                        datePicker.$el.calendar.hide();
+                        datePicker.$calendar.hide();
                     }
                 });
         },
 
+        addCalendarHTML: function() {
+            var $calendar = $('<div class="calendar" aria-hidden="true"></div>'),
+                $header = $('<div class="header"></div>'),
+                $prev = $('<span class="prev"><i class="skycon-arrow-left"></i></span>'),
+                $next = $('<span class="next"><i class="skycon-arrow-right"></i></span>'),
+                $dateDescription = $('<span data-date></span>'),
+                $daysHeader = $('<div class="days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>'),
+                $dayContainer = $('<div class="daycontainer"></div>');
+            $header.append($prev).append($dateDescription).append($next);
+            $calendar.append($header).append($daysHeader).append($dayContainer);
+            this.$container.append($calendar);
+            this.$calendar = $calendar;
+            this.$dateDescription = $dateDescription;
+            this.$dayContainer = $dayContainer;
+            this.renderCalendar();
+        },
+
+        renderCalendar: function() {
+            var datePicker = this;
+            datePicker.$dateDescription.text(monthNames[datePicker.calendarDate.month] + " " + datePicker.calendarDate.year);
+            datePicker.fillDays(daysInMonth(datePicker.calendarDate.month, datePicker.calendarDate.year), firstDay(datePicker.calendarDate.month, datePicker.calendarDate.year));
+        },
+
+        fillDays: function(noOfDaysInMonth, firstDay) {
+            var i= 1,
+                date = 1,
+                datePicker = this,
+                calendarDate = datePicker.calendarDate,
+                daysText = [],
+                classNames = [],
+                isToday = false,
+                isInputDate = false,
+                isPastDate = false,
+                monthIsInPast = (calendarDate.month < currentDate.month && calendarDate.year <= currentDate.year) || (calendarDate.year < currentDate.year),
+                monthIsNow = calendarDate.month == currentDate.month && calendarDate.year == currentDate.year,
+                monthIsInInput = calendarDate.month ==  datePicker.$month.val() && calendarDate.year ==  datePicker.$year.val();
+
+            for (i; i < firstDay; i++) {
+                daysText.push("<span></span>");
+            }
+
+            for (date; date <= noOfDaysInMonth; date++) {
+                classNames = [];
+                isInputDate = (date ==  datePicker.$day.val() && monthIsInInput);
+                isPastDate = (date < currentDate.day && monthIsNow) || monthIsInPast;
+                isToday = (date == currentDate.day && monthIsNow);
+
+                if (isInputDate) classNames.push('selected');
+                if (isPastDate) classNames.push('past');
+                if (isToday) classNames.push('today');
+
+                daysText.push("<span class='date " + classNames.join(' ')  + "' >" + date + "</span>");
+            }
+            datePicker.$dayContainer.html(daysText.join(''));
+        },
+
         selectDate: function(e) {
             var datePicker = this;
-
             datePicker.$container.find('.selected').removeClass('selected');
             $(e.currentTarget).addClass('selected');
-
             datePicker.calendarDate.day = parseInt(e.currentTarget.innerText,10);
-
-            datePicker.$el.day.val(normaliseDate(datePicker.calendarDate.day));
-            datePicker.$el.month.val(normaliseDate(datePicker.calendarDate.month));
-            datePicker.$el.year.val(normaliseDate(datePicker.calendarDate.year));
-
-            datePicker.$el.calendar.hide();
+            datePicker.$day.val(normaliseDate(datePicker.calendarDate.day));
+            datePicker.$month.val(normaliseDate(datePicker.calendarDate.month));
+            datePicker.$year.val(normaliseDate(datePicker.calendarDate.year));
+            datePicker.$calendar.hide();
         },
 
         displayPreviousMonth: function() {
@@ -867,7 +907,6 @@ toolkit.datePicker = (function () {
             } else {
                 datePicker.calendarDate.month--;
             }
-
             datePicker.renderCalendar();
         },
 
@@ -879,63 +918,15 @@ toolkit.datePicker = (function () {
             } else {
                 datePicker.calendarDate.month++;
             }
-
             datePicker.renderCalendar();
         },
 
         updateCalendarView: function(e) {
             var datePicker = this;
-
-            datePicker.calendarDate.day = parseInt(datePicker.$el.day.val(), 10) || currentDate.day;
-            datePicker.calendarDate.month = parseInt(datePicker.$el.month.val(), 10) || currentDate.month;
-            datePicker.calendarDate.year = parseInt(datePicker.$el.year.val(), 10) || currentDate.year;
-
+            datePicker.calendarDate.day = parseInt(datePicker.$day.val(), 10) || currentDate.day;
+            datePicker.calendarDate.month = parseInt(datePicker.$month.val(), 10) || currentDate.month;
+            datePicker.calendarDate.year = parseInt(datePicker.$year.val(), 10) || currentDate.year;
             datePicker.renderCalendar();
-
-        },
-
-        renderCalendar: function() {
-            var datePicker = this;
-            datePicker.$el.monthyear.html(monthNames[datePicker.calendarDate.month] + " " + datePicker.calendarDate.year);
-            datePicker.fillDays(daysInMonth(datePicker.calendarDate.month, datePicker.calendarDate.year), firstDay(datePicker.calendarDate.month, datePicker.calendarDate.year));
-        },
-
-        addCalendarHTML: function() {
-            this.$container.append('<div class="calendar" aria-hidden="true">' +
-                '<div class="header"><span class="prev"><i class="skycon-arrow-left"></i></span><span data-date></span><span class="next"><i class="skycon-arrow-right"></i></span></div>' +
-                '<div class="days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>' +
-                '<div class="daycontainer"></div></div>');
-        },
-
-        fillDays: function(noOfDaysInMonth, firstDay) {
-            var i= 1,
-                date = 1,
-                datePicker = this,
-                calendarDate = datePicker.calendarDate,
-                daysText = "",
-                className = "",
-                isToday = false,
-                isInputDate = false,
-                isPastDate = false;
-
-            for (i; i < firstDay; i++) {
-                daysText += "<span></span>";
-            }
-
-            for (date; date <= noOfDaysInMonth; date++) {
-                isInputDate = (date ==  datePicker.$el.day.val() && calendarDate.month ==  datePicker.$el.month.val() && calendarDate.year ==  datePicker.$el.year.val());
-                isPastDate = (date < currentDate.day && calendarDate.month <= currentDate.month && calendarDate.year <= currentDate.year) ||
-                            (calendarDate.month < currentDate.month && calendarDate.year <= currentDate.year) ||
-                            (calendarDate.year < currentDate.year);
-                isToday = (date == currentDate.day && calendarDate.month == currentDate.month && calendarDate.year == currentDate.year);
-
-                className = (isInputDate) ? ' selected ' : '';
-                if (isPastDate) className += ' past ';
-                if (isToday) className += ' today ';
-
-                daysText += "<span class='date " + className  + "' >" + date + "</span>";
-            }
-            datePicker.$container.find('.daycontainer').html(daysText);
         }
 
     };
