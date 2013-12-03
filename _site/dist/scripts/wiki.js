@@ -803,37 +803,43 @@ toolkit.datePicker = (function () {
         bindEvents: function() {
             var datePicker = this;
 
-            datePicker.$container
+            datePicker.$calendar
                 .on('click','.date', datePicker.selectDate.bind(datePicker))
                 .on('click', '.prev', datePicker.displayPreviousMonth.bind(datePicker))
-                .on('click', '.next', datePicker.displayNextMonth.bind(datePicker))
+                .on('click', '.next', datePicker.displayNextMonth.bind(datePicker));
+
+            datePicker.$container
                 .on('keyup', 'input', datePicker.updateCalendarView.bind(datePicker))
-                .on('focus', 'input', function(){ datePicker.$calendar.show();})
-                .on('keydown blur', 'input', function(e) {
-                    if(e.keyCode == 9 || e.type=='blur') {
-                        datePicker.$calendar.hide();
+                .on('focus', 'input',datePicker.show.bind(datePicker))
+                .on('keydown', 'input', function(e) {
+                    if (e.keyCode == 9) {
+                        datePicker.hide();
                     }
                 });
 
             $(document)
                 .on('keydown', function(e) {
                     if (e.keyCode == 27) {
-                        datePicker.$calendar.hide();
+                        datePicker.hide();
                     }
                 })
                 .on('click', function(e) {
-                    if (e.target.class != 'date-picker' && !datePicker.$container.find(e.target).length) {
-                        datePicker.$calendar.hide();
+                    if (e.target.className != 'date-picker' && !datePicker.$container.find(e.target).length) {
+                        datePicker.hide();
                     }
                 });
         },
 
-        setFormValidation: function(){
+        show: function(){
+            this.$calendar.removeClass('hidden');
+        },
 
+        hide: function(){
+            this.$calendar.addClass('hidden');
         },
 
         addCalendarHTML: function() {
-            var $calendar = $('<div class="calendar" aria-hidden="true"></div>'),
+            var $calendar = $('<div class="calendar hidden" aria-hidden="true"></div>'),
                 $header = $('<div class="header"></div>'),
                 $prev = $('<span class="prev"><i class="skycon-arrow-left"></i></span>'),
                 $next = $('<span class="next"><i class="skycon-arrow-right"></i></span>'),
@@ -896,7 +902,7 @@ toolkit.datePicker = (function () {
             datePicker.$day.val(normaliseDate(datePicker.calendarDate.day));
             datePicker.$month.val(normaliseDate(datePicker.calendarDate.month));
             datePicker.$year.val(normaliseDate(datePicker.calendarDate.year));
-            datePicker.$calendar.hide();
+            datePicker.hide();
         },
 
         displayPreviousMonth: function() {
