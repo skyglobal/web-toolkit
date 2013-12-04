@@ -106,7 +106,6 @@
                             <li><a href="index.html#breadcrumbs" data-diff="components/breadcrumbs">Breadcrumbs</a></li>
                             <li><a href="index.html#form" data-diff="components/form">Form</a></li>
                             <li><a href="index.html#inPageNav" data-diff="components/inPageNav">In-Page Nav</a></li>
-                            <li><a href="index.html#tabs" data-diff="components/tabs">Classic Tabs</a></li>
                             <li><a href="index.html#lightbox" data-diff="components/lightbox">Lightbox</a></li>
                             <li><a href="index.html#accordion" data-diff="components/accordion">Accordion</a></li>
                             <li><a href="index.html#carousel" data-diff="components/carousel">Carousel</a></li>
@@ -1089,18 +1088,28 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 <p class="developer-notes">You can customise error messages using a <code>span class=feedback</code>. see the date examples.</p>
 
 <div class="example">
-    <h4>With Grey background</h4>
-
-    <p class="design-notes">
-        To be used for xxx types of forms</p>
-
     <p class="developer-notes">
-        Add class <code>well</code> to the container.
+        For a grey background, add class <code>sky-well</code> to the <code>sky-form</code> container.
     </p>
 
     <div class="demo" data-selector="*">
 
-        <form class="sky-form sky-well">
+        <form class="sky-form">
+            <div class="row">
+                <label for="title" class="required">Title</label>
+
+                <div class="select">
+                    <select id="title" name="title" required>
+                        <option value="">Please select</option>
+                        <option value="Mr">Mr</option>
+                        <option value="Mrs">Mrs</option>
+                        <option value="Ms">Ms</option>
+                        <option value="Sir">Sir</option>
+                        <option value="Dr">Dr</option>
+                        <option value="Prof.">Prof.</option>
+                    </select>
+                </div>
+            </div>
             <div class="row">
                 <label for="first_name_g">First name</label>
                 <input id="first_name_g" type="text" placeholder="eg. Joe Bloggs"/>
@@ -1109,6 +1118,24 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                 <label for="email">Email</label>
                 <input id="email" type="email" placeholder="eg. joe.bloggs@me.com"/>
             </div>
+
+
+            <div class="row">
+                <label class="required">Postcode</label>
+                <input type="text" placeholder="eg. TW8 1QW" required/>
+                <button class="btn">Find address</button>
+            </div>
+
+            <fieldset class="row">
+                <legend>Select a payment type</legend>
+                <div class="radiocheck">
+                    <input type="radio" name="payment_type" value="direct_debit" id="direct-debit" checked/>
+                    <label for="direct-debit">Direct debit</label>
+                    <br>
+                    <input type="radio" name="payment_type" value="credit_card" id="credit-card"/>
+                    <label for="credit-card">Credit card</label>
+                </div>
+            </fieldset>
             <div class="row">
                 <label>Date of birth</label>
                 <input id="dob" type="text" placeholder="DD/MM/YYYY" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" maxlength="10" aria-labelledby=dob-feedback />
@@ -1149,70 +1176,6 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                 <textarea id="message" placeholder="eg. Please enter a message"></textarea>
             </div>
             <div class="row no-label">
-                <button name="form-submit" type="submit" class="form-submit btn primary-cta">Submit</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<div class="example">
-    <h4>Without Grey background</h4>
-
-    <p class="design-notes">
-        To be used for xxx types of forms</p>
-
-    <p class="developer-notes">
-
-    </p>
-
-    <div class="demo" data-selector="*">
-
-        <form class="sky-form ">
-            <div class="row">
-                <label for="title" class="required">Title</label>
-
-                <div class="select">
-                    <select id="title" name="title" required>
-                        <option value="">Please select</option>
-                        <option value="Mr">Mr</option>
-                        <option value="Mrs">Mrs</option>
-                        <option value="Ms">Ms</option>
-                        <option value="Sir">Sir</option>
-                        <option value="Dr">Dr</option>
-                        <option value="Prof.">Prof.</option>
-                    </select>
-                </div>
-                <div class="error"></div>
-            </div>
-
-            <div class="row">
-                <label for="first_name">First name</label>
-                <input id="first_name" type="text" placeholder="eg. Joe Bloggs"/>
-            </div>
-
-            <fieldset class="row">
-                <legend>Select a payment type</legend>
-                <div class="radiocheck">
-                    <input type="radio" name="payment_type" value="direct_debit" id="direct-debit" checked/>
-                    <label for="direct-debit">Direct debit</label>
-                    <br>
-                    <input type="radio" name="payment_type" value="credit_card" id="credit-card"/>
-                    <label for="credit-card">Credit card</label>
-                </div>
-            </fieldset>
-
-            <div class="row">
-                <label class="required">Postcode</label>
-                <input type="text" placeholder="eg. TW8 1QW" required/>
-                <button class="btn">Find address</button>
-            </div>
-
-            <div class="row">
-                <label for="message2">Homepage</label>
-                <textarea id="message2" placeholder="eg. Please enter a message"></textarea>
-            </div>
-
-            <div class="row no-label">
                 <input type="checkbox" name="confirm_terms" value="true" id="confirm-terms"/>
                 <label for="confirm-terms">I agree to the <a href="#">Terms &amp; Conditions</a></label>
             </div>
@@ -1220,18 +1183,18 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                 <button name="form-submit" type="submit" class="form-submit btn primary-cta">Submit</button>
             </div>
         </form>
-
     </div>
 </div>
     </div>
     <a name="inPageNav" ></a>
     <div class="sub-section">
         <h3 class="wiki-h3">In-Page Navigation</h3>
+<p class="design-notes">
+    <span class="error">These modules are not yet complete.</span>  If you need them, please complete 'accessibility' checks an re-submit.
+</p>
 
 <div class="example">
-    <p class="design-notes">
-        <span class="error">This module is not yet complete.</span>  If you need it, please complete 'accessibility' checks an re-submit.
-    </p>
+    <h4 class="medium">Sleek Nav</h4>
     <div class="design-notes">
         This module should be used when only a small section of the page changes after an item click.
     </div>
@@ -1346,15 +1309,9 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         </section>
     </div>
 </div>
-    </div>
-    <a name="tabs" ></a>
-    <div class="sub-section">
-        <h3 class="wiki-h3">Classic Tabs</h3>
 
-<div class="example">
-    <p class="design-notes">
-        <span class="error">This module is not yet complete.</span>  If you need it, please complete 'accessibility' checks an re-submit.
-    </p>
+        <div class="example">
+    <h4 class="medium">Classic Tabs</h4>
     <div class="design-notes">
         This module should be used when only a small section of the page changes after an item click.
     </div>
@@ -1865,12 +1822,11 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <a name="share" ></a>
     <div class="sub-section">
         <h3 class="wiki-h3">Share</h3>
-
+<div class="design-notes">
+    A share component to share external articles.
+</div>
 <div class="example">
-    <h4>Share Popup</h4>
-    <div class="design-notes">
-        A share component to share external articles.
-    </div>
+    <h4 class="medium">Popup</h4>
     <div class="developer-notes">
         Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
     </div>
@@ -1904,10 +1860,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 </div>
 
 <div class="example">
-    <h4>Share bar</h4>
-    <div class="design-notes">
-        A share bar component
-    </div>
+    <h4 class="medium">Bar</h4>
     <div class="developer-notes">
         Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
     </div>
