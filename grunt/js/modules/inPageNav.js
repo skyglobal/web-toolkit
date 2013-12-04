@@ -30,7 +30,10 @@ toolkit.inPageNav = (function(hash) {
             this.$tabs.on('click', function(e){
                 self.changeTab($(this).find('a').attr('href'));
             });
-            this.$showMore.on('click', this.toggleShowMore.bind(self));
+            this.$showMore.on('click', function(e){
+                e.preventDefault();
+                self.toggleShowMore();
+            });
             $('body').on('click', this.hideMore.bind(self));
             $(window).bind('skycom.resizeend',  this.initTabs.bind(self));
         },
