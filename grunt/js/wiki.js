@@ -1,11 +1,11 @@
 define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, toolkit) {
 
-    function bindEvents(){
+    function bindEvents() {
         $(document).on('click','.toggler', toggle);
         $('#check').on('click', checkDiff);
     }
 
-    function checkDiff(e){
+    function checkDiff(e) {
         e.preventDefault();
         var oldVersion = $('#version').val(),
             newVersion = $('.wiki-header small').text().replace('v',''),
@@ -22,7 +22,7 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
         });
     }
 
-    function initModuleDemos(){
+    function initModuleDemos() {
         $('#hero').skycom_carousel({
             carousel: {
                 autoplay: true,
@@ -42,6 +42,13 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
             freewheel:false //disable ads
         });
         $('.accordion').accordion();
+
+		$('#lightbox-demo-text-link-for-lightbox').on('click', function(e) {
+			e.preventDefault();
+			$('[data-function=carousel]').trigger("pause");
+			window.toolkit.lightbox.show('#lightbox-demo', '#lightbox-demo-text-link-for-lightbox');
+		});
+
         toolkit.modules.init();
     }
 
