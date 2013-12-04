@@ -15,10 +15,12 @@ a.btn,
   box-sizing: border-box;
   cursor: pointer;
   margin-right: 20px;
+  text-decoration: none;
 
   &:before {
     @include transition(opacity .25s);
     @include border-radius(0 0 20px 20px);
+    @include background(rgba(255, 255, 255, 0.3));
     @include background(linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)));
     background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
 
@@ -31,20 +33,21 @@ a.btn,
     height: 10px;
   }
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     text-decoration: none;
     &:before {
-      opacity: 0;
+      @include opacity(0.3);
     }
   }
 
   &.secondary {
-    // not done!;
     border: solid 1px #cfcfcf;
     background: $secondary-button;
     color: #333;
 
     &:before {
+      @include background(rgba(255, 255, 255, 0.4));
       @include background(linear-gradient(top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0)));
     }
   }
@@ -78,3 +81,24 @@ button.btn {
   *line-height: 16px;
 }
 
+.lt-ie9 {
+  .btn{
+    &:before{
+      left:1px;
+      width:99%;
+      background: #56a2d8;
+    }
+    &.secondary:before{
+      background: #fff;
+    }
+    &:hover:before{
+      background: none;
+    }
+  }
+}
+
+.lt-ie8 {
+  .btn:hover{
+    text-decoration: underline;
+  }
+}

@@ -52,10 +52,10 @@ $form-offset: 34%;
   textarea {
     @include box-sizing(border-box);
     @include box-shadow(1px 1px 3px 0px rgba(0, 0, 0, 0.06) inset);
-    height: 2em;
     font-family: SkyTextRegular;
     font-size: 16px;
     width: 221px;
+    height: 2em;
     margin: 0;
     border-radius: 5px;
     padding: 0 10px;
@@ -78,11 +78,12 @@ $form-offset: 34%;
     .month,
     .year {
       text-align:center;
-      width: 57px;
+      width: 35px;
       margin-right: 0;
+      @include box-sizing(content-box);
     }
     .year {
-      width: 77px;
+      width: 55px;
     }
     .data-separator{
       margin: 0 5px 0 2px;
@@ -122,32 +123,28 @@ $form-offset: 34%;
         float: right;
       }
     }
-
+    .days,
+    .day-container {
+      span {
+        display: inline-block;
+        width: 18px;
+        margin: 3px;
+        padding: 2px;
+        text-align: center;
+      }
+    }
     .days {
       padding-bottom: 8px;
       margin-bottom: 12px;
       border-bottom: solid 1px #dcdcdc;
       font-size: 16px;
-
-      span {
-        display: inline-block;
-        width: 28px;
-      }
     }
-
     .day-container {
       font-family: "Helvetica", Arial, sans-serif;
       font-size: 14px;
       color: #333;
       text-align: left;
 
-      span {
-        margin: 3px;
-        display: inline-block;
-        width: 18px;
-        text-align: center;
-        padding: 2px;
-      }
       .date:hover {
         background-color: #0073c5;
         color: #fff;
@@ -269,5 +266,11 @@ $form-offset: 34%;
   }
   .no-label label {
     display: inline;
+  }
+}
+
+.lt-ie9 {
+  input{
+    line-height: 2em;
   }
 }
