@@ -55,9 +55,8 @@ toolkit.form = (function ($) {
         input.addEventListener("invalid", invalid);
     }
 
-    var useCustomFormErrors =  true;
-                                //(!('required' in document.createElement('input')) ||
-                                //!('pattern' in document.createElement('input')) || isSafari());
+    var useCustomFormErrors =  (!('required' in document.createElement('input')) ||
+                                !('pattern' in document.createElement('input')) || isSafari());
     var canCustomiseHTML5Message = ('setCustomValidity' in document.createElement('input'));
 
     function Validation($container) {
