@@ -127,17 +127,17 @@
         </div>
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
-				<h1 class="wiki-header">Sky Web Toolkit <small>v1.8.3 </small></h1>
-<div class="secondary">Last Updated: 04-12-2013</div>
+				<h1 class="wiki-header">Sky Web Toolkit <small>v1.9.0 </small></h1>
+<div class="secondary">Last Updated: 05-12-2013</div>
 
 <a name="using-the-toolkit"></a>
 <section class="wiki-section">
     <h2>Using the Toolkit</h2>
     <div class="sub-section">
         <p class="developer-notes">
-            &lt;script src='//web-toolkit.global.sky.com/1.8.3/scripts/toolkit.js'&gt;&lt;/script&gt;
-            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.8.3/stylesheets/toolkit.css"/&gt;
-            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.8.3/fonts/skycons.css"/&gt;
+            &lt;script src='//web-toolkit.global.sky.com/1.9.0/scripts/toolkit.js'&gt;&lt;/script&gt;
+            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.9.0/stylesheets/toolkit.css"/&gt;
+            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.9.0/fonts/skycons.css"/&gt;
         </p>
     </div>
     <a name="getting-started"></a>
@@ -808,7 +808,7 @@ https://github.com/skyglobal/web-toolkit/
     <p class="designer-notes">
         These are not likely to look good on Retina devices
     </p>
-    <table id=wiki-skycons>
+    <table id=wiki-icons class="icons-table">
         <thead>
             <tr>
                 <th>Icon</th>
@@ -833,30 +833,30 @@ https://github.com/skyglobal/web-toolkit/
 
 
 <style>
-    #wiki-skycons tr i {
+    .icons-table tr i {
         line-height:1.2em;
         cursor:pointer;
     }
-    #wiki-skycons tr:hover{
+    .icons-table tr:hover{
         background: #eee;
     }
-    #wiki-skycons tr:hover i[class*="skycon-"] {
+    .icons-table tr:hover i[class*="skycon-"] {
         -moz-transform: scale(5);
         -webkit-transform: scale(5);
         transform: scale(5);
         overflow: visible;
         background: white;
     }
-    #wiki-skycons td,
-    #wiki-skycons th{
+    .icons-table td,
+    .icons-table th{
         text-align: left;
     }
-    #wiki-skycons th.demo-col{
+    .icons-table th.demo-col{
         text-align: center;
         width: 140px;
     }
-    #wiki-skycons th.icon,
-    #wiki-skycons td.icon{
+    .icons-table th.icon,
+    .icons-table td.icon{
         text-align: center;
     }
 
@@ -871,7 +871,7 @@ https://github.com/skyglobal/web-toolkit/
         for ie7 support execute <code>toolkit.skycons.init();</code> after the page has loaded.
     </p>
     <p class="developer-notes">
-    Dont forget to include <code>http://web-toolkit.global.sky.com/1.8.3/fonts/skycons.css</code>
+    Dont forget to include <code>http://web-toolkit.global.sky.com/1.9.0/fonts/skycons.css</code>
     </p>
     <p class="developer-notes">
     Ensure <code>aria-hidden</code> is used on your <code>skycon</code> tags.
@@ -893,7 +893,7 @@ https://github.com/skyglobal/web-toolkit/
     &bull; copy the icons JS from the skycons.css over the icons var in skycons.js
     &bull; Run `<code>grunt</code>`
     </p>
-    <table id=wiki-skycons>
+    <table id=wiki-skycons class="icons-table">
         <thead>
             <tr>
                 <th>CSS Class</th>

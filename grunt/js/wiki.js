@@ -52,6 +52,27 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
         toolkit.modules.init();
     }
 
+    function sortSkyconsTable(){
+        var skycons = [];
+        var rows = $('#wiki-skycons tbody tr');
+        rows.each(function(i){
+            skycons.push({i:i, skycon:$(this).find('td').first().text().trim()});
+        });
+        skycons.sort(function (a, b) {
+            if (a.skycon > b.skycon) {
+                return 1;
+            } else if (a.skycon < b.skycon) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+        $('#wiki-skycons tbody tr').remove();
+        for (var i=0; i<skycons.length; i++){
+            $('#wiki-skycons tbody').append($(rows[skycons[i].i]));
+        };
+    }
+
     function toggle(){
         var $toggler = $(this);
         var $example = $('div[data-toggle=' + $toggler.attr('for') + ']');
@@ -67,5 +88,6 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
     logger();
     initModuleDemos();
     bindEvents();
+    sortSkyconsTable();
 
 });
