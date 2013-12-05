@@ -41,8 +41,8 @@
 
 
             <div class="row">
-                <label class="required">Postcode</label>
-                <input type="text" placeholder="eg. TW8 1QW" required/>
+                <label class="required" for="postcode">Postcode</label>
+                <input type="text" placeholder="eg. TW8 1QW" id="postcode" required/>
                 <button class="btn">Find address</button>
             </div>
 
@@ -57,7 +57,7 @@
                 </div>
             </fieldset>
             <div class="row">
-                <label>Date of birth</label>
+                <label for="dob">Date of birth</label>
                 <input id="dob" type="text" placeholder="DD/MM/YYYY" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" maxlength="10" aria-labelledby=dob-feedback />
                 <span class="hidden form-error feedback" data-for="dob" id="dob-feedback" >Please use the format 'DD/MM/YYYY'</span>
             </div>
@@ -73,7 +73,7 @@
                 <span class="hidden form-error feedback" data-for="date-one-year" id="date-one-year-feedback">Year must be 4 digits</span>
             </div>
             <div class="row">
-                <label>Another date</label>
+                <label for="date-two-day">Another date</label>
                 <div class="date-picker">
                     <input class="day" type="text" pattern="[0-9]{2}" placeholder="DD" maxlength="2" aria-label="day" id="date-two-day" aria-labelledby="date-two-day-feedback" />
                     <span class="data-separator">-</span><input class="month" type="text" pattern="[0-9]{2}" placeholder="MM" maxlength="2" aria-label="month" id="date-two-month" aria-labelledby="date-two-month-feedback" />
@@ -108,5 +108,6 @@
     <script>
         saveHTMLForDemo('.sky-form');
         $('.date-picker').datePicker();
+        $('.sky-form').validation();
     </script>
 </div>

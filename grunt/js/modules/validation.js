@@ -55,14 +55,15 @@ toolkit.form = (function ($) {
         input.addEventListener("invalid", invalid);
     }
 
-    var useCustomFormErrors =  (!('required' in document.createElement('input')) ||
-                                !('pattern' in document.createElement('input')) || isSafari());
-    var canCustomerHTML5Message = ('setCustomValidity' in document.createElement('input'));
+    var useCustomFormErrors =  true;
+                                //(!('required' in document.createElement('input')) ||
+                                //!('pattern' in document.createElement('input')) || isSafari());
+    var canCustomiseHTML5Message = ('setCustomValidity' in document.createElement('input'));
 
     function Validation($container) {
         this.$container = $container;
-        this.$requiredInputs = $container.find('input[required]');
-        this.$patternInputs = $container.find('input[pattern]');
+        this.$requiredInputs = $container.find('*[required]');
+        this.$patternInputs = $container.find('*[pattern]');
         this.errors = [];
         this.hasError = false;
         this.customiseHTML5Messages();
@@ -81,7 +82,7 @@ toolkit.form = (function ($) {
         },
 
         customiseHTML5Messages: function(){
-            if (!canCustomerHTML5Message) return;
+            if (!canCustomiseHTML5Message) return;
             this.$container.find('.feedback[data-for]').each(function(){
                 var el = document.getElementById($(this).attr('data-for'));
                 new InvalidInputHelper(el, {invalidText: this.innerText || this.innerHTML});
@@ -90,7 +91,7 @@ toolkit.form = (function ($) {
 
         addErrorMessageToInput: function($input) {
             var inputId     = $input.attr('id'),
-                $descriptor = this.$container.find('label.descriptor[for=' + inputId + ']'),
+                $descriptor = this.$container.find('label[for=' + inputId + ']'),
                 $feedbacks  = this.$container.find('.feedback[data-for=' + inputId + ']');
 
             this.hasError = true;
@@ -99,7 +100,7 @@ toolkit.form = (function ($) {
                 $feedbacks.removeClass('hidden');
             } else {
                 //create a feedback if one does not exist
-                $feedbacks = $('<span class="form-error feedback" data-for="' + $input.attr('id') + '">' + $descriptor.text() + ' is required</span>').insertAfter($input);
+                $feedbacks = $('<span class="form-error feedback" data-for="' + $input.attr('id') + '">' + $descriptor.text() + ' is required</span>').appendTo($input.closest('.row'));
             }
 
             if (!$input.hasClass('form-error')) {
@@ -186,7 +187,6 @@ toolkit.form = (function ($) {
             var validation = new Validation($(this));
         });
     };
-    $('.sky-form').validation();
 
     return Validation;
 
