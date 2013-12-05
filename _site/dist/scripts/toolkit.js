@@ -1208,8 +1208,12 @@ toolkit.lightbox = (function ($) {
 
 })(jQuery);
 
-define("modules/lightbox", function(){});
-
+if (typeof window.define === "function" && window.define.amd) {
+    define('modules/lightbox', [], function() {
+        
+        return toolkit.lightbox;
+    });
+};
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.share = (function() {
 

@@ -64,7 +64,7 @@ module.exports = function(grunt) {
                         name: 'toolkit'
                     },
                     {
-                        name: 'wiki'
+                        name: 'demo'
                     }]
                 }
             }
