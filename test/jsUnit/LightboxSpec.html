@@ -67,7 +67,7 @@
 <!--TEST-->
 <script>
 
-    require(['modules/lightbox', '../../test/jsUnit/setup'], function () {
+    require(['utils/focus','modules/lightbox', '../../test/jsUnit/setup'], function (focus) {
 
 
         var $demo = $('#lightbox-demo-source').clone();
@@ -183,13 +183,13 @@
                     },501);
 				});
 
-				it("Sets the 'skycom-focus' class on the close icon if the ORIGINATOR had the 'skycom-focus' class.", function() {
+				it("Sets the 'skycom-focus' class on the close icon if the ORIGINATOR had the 'focus' class.", function() {
 					// given
-					expect($('#lightbox-demo .lightbox-close').hasClass('skycom-focus')).to.equal(false);
-					$('#open-links .lightbox-demo-link').addClass('skycom-focus');
+					expect($('#lightbox-demo .lightbox-close').hasClass(focus.className)).to.equal(false);
+					$('#open-links .lightbox-demo-link').addClass(focus.className);
 					givenTheLargeLightBoxIsOpen();
 					// then
-					expect($('#lightbox-demo .lightbox-close').hasClass('skycom-focus')).to.equal(true);
+					expect($('#lightbox-demo .lightbox-close').hasClass(focus.className)).to.equal(true);
 				});
 
 //				it('Constrains the tab focus to the lightbox', function() {
