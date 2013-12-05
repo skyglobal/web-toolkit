@@ -49,6 +49,7 @@ $form-offset: 34%;
   input[type="email"],
   input[type="tel"],
   input[type="url"],
+  select,
   textarea {
     @include box-sizing(border-box);
     @include box-shadow(1px 1px 3px 0px rgba(0, 0, 0, 0.06) inset);
@@ -194,6 +195,7 @@ $form-offset: 34%;
     color: $error;
   }
 
+  select.form-error,
   input.form-error {
     border-color: $error;
     color: #000;

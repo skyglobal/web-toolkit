@@ -180,7 +180,6 @@ toolkit.datePicker = (function () {
         });
     };
 
-    $('.date-picker').datePicker();
 }());
 
 if (typeof window.define === "function" && window.define.amd) {
