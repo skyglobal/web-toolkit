@@ -9,14 +9,7 @@
     <div class="developer-notes">
         Add Class '<code>classic</code>'.
     </div>
-    <div class="init-notes">
-        <code>$('#demo-classc-tabs').inPageNav();</code>
-    </div>
-    <div class="developer-notes">
-        If reinitialising tabs (e.g. after transition in a single-page app), call '<code>toolkit.hashmanager.resetHash()</code>' first.
-    </div>
-
-    <div class="demo" data-selector="*">
+    <div class="demo" data-selector="#demo-classc-tabs">
         <section class="module clearfix tabs-container classic" data-function="tabs" id='demo-classc-tabs'>
 
             <h2 class="speak">This is a screenreader header for tabs</h2>
@@ -116,4 +109,8 @@
 
         </section>
     </div>
+    <script>
+        saveHTMLForDemo('#demo-classc-tabs');
+        $('#demo-classc-tabs').inPageNav();
+    </script>
 </div>

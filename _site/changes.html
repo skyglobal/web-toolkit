@@ -76,6 +76,13 @@
 
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target=".nav-container">
+        <script>
+            window.demoCode = {};
+            window.saveHTMLForDemo = function(selector){
+                demoCode[selector] = $(selector)[0].outerHTML;
+            };
+        </script>
+        <script src="dist/scripts/toolkit.js" ></script>
         <div class="nav-container">
             <div class="skycom-container nav">
                 <ul class="alpha skycom-12 primary-menu">
@@ -166,7 +173,7 @@
 </script>	
 			</div>
 		</div>
-	    <script src="lib/require.js" data-main='dist/scripts/wiki'></script>
+	    <script src="lib/require.js" data-main='dist/scripts/demo'></script>
         <div></div>
 	</body>
 </html>

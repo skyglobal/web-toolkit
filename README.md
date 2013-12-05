@@ -38,7 +38,7 @@ See the [reference page](http://skyglobal.github.io/web-toolkit/) for a descript
 - grunt/js/toolkit.js
   The public API is created here (returned at the bottom). This file brings together files from /modules and /utils.
 
-- grunt/js/wiki.js
+- grunt/js/demo.js
   JS to make the demo page work.  This JS is also used as part of the unit testing.
 
 - grunt/sass/

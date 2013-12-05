@@ -76,6 +76,13 @@
 
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target=".nav-container">
+        <script>
+            window.demoCode = {};
+            window.saveHTMLForDemo = function(selector){
+                demoCode[selector] = $(selector)[0].outerHTML;
+            };
+        </script>
+        <script src="dist/scripts/toolkit.js" ></script>
         <div class="nav-container">
             <div class="skycom-container nav">
                 <ul class="alpha skycom-12 primary-menu">
@@ -996,7 +1003,7 @@ https://github.com/skyglobal/web-toolkit/
     <p class="develop-notes">
         While there are only a few separate SVGs, we will serve these up separately
     </p>
-    <table id=wiki-skycons>
+    <table id=wiki-svgs class="icons-table">
         <thead>
             <tr>
                 <th>SVG</th>
@@ -1192,6 +1199,9 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 <p class="design-notes">
     <span class="error">These modules are not yet complete.</span>  If you need them, please complete 'accessibility' checks an re-submit.
 </p>
+<div class="developer-notes">
+    If reinitialising tabs (e.g. after transition in a single-page app), call '<code>toolkit.hashmanager.resetHash()</code>' first.
+</div>
 
 <div class="example">
     <h4 class="medium">Sleek Nav</h4>
@@ -1208,7 +1218,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="init-notes">
         <code>$('#demo-inpage-nav-tabs').inPageNav();</code>
     </div>
-    <div class="demo" data-selector="*">
+    <div class="demo" data-selector="#demo-inpage-nav-tabs">
         <section class="module clearfix tabs-container page-nav" data-function="tabs" id='demo-inpage-nav-tabs'>
 
             <h2 class="speak">This is a screenreader header for tabs</h2>
@@ -1308,6 +1318,10 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 
         </section>
     </div>
+    <script>
+        saveHTMLForDemo('#demo-inpage-nav-tabs');
+        $('#demo-inpage-nav-tabs').inPageNav();
+    </script>
 </div>
 
         <div class="example">
@@ -1321,14 +1335,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="developer-notes">
         Add Class '<code>classic</code>'.
     </div>
-    <div class="init-notes">
-        <code>$('#demo-classc-tabs').inPageNav();</code>
-    </div>
-    <div class="developer-notes">
-        If reinitialising tabs (e.g. after transition in a single-page app), call '<code>toolkit.hashmanager.resetHash()</code>' first.
-    </div>
-
-    <div class="demo" data-selector="*">
+    <div class="demo" data-selector="#demo-classc-tabs">
         <section class="module clearfix tabs-container classic" data-function="tabs" id='demo-classc-tabs'>
 
             <h2 class="speak">This is a screenreader header for tabs</h2>
@@ -1428,6 +1435,10 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 
         </section>
     </div>
+    <script>
+        saveHTMLForDemo('#demo-classc-tabs');
+        $('#demo-classc-tabs').inPageNav();
+    </script>
 </div>
     </div>
     <a name="lightbox"></a>
@@ -1441,59 +1452,67 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 <p class="developer-notes">
 	To automatically bind lightboxes use the attribute <code>data-skyLightbox="#my-lightbox-id"</code>.
 </p>
-<p class="developer-notes">
-	To manually show a lightbox, use <code class="js">toolkit.lightbox.show('#lightbox', '#my-lightbox-id');</code>
-</p>
 <div class="init-notes">
 	<code>$('.lightbox').skyLightbox();</code>
 </div>
+<div class="example">
+    <div class="demo" data-selector="#lightbox-demo">
+        <div id="lightbox-demo" class="lightbox">
+            <div class="skycom-container lightbox-container clearfix">
+                <article class="lightbox-content skycom-10 skycom-offset1" role="dialog" aria-labelledby="lightbox-demo-text-link-for-large-lightbox">
+                    <a class="internal-link lightbox-close skycon-close" href="#">
+                        <span class="speak">Close</span>
+                    </a>
 
-<div id="lightbox-demo" class="lightbox">
-    <div class="skycom-container lightbox-container clearfix">
-        <article class="lightbox-content skycom-10 skycom-offset1" role="dialog" aria-labelledby="lightbox-demo-text-link-for-large-lightbox">
-            <a class="internal-link lightbox-close skycon-close" href="#">
-                <span class="speak">Close</span>
-            </a>
+                    <img src="wiki_images/bling-ring.jpg" height="380" width="1140" style="width:100%;height:auto;" />
 
-            <img src="wiki_images/bling-ring.jpg" height="380" width="1140" style="width:100%;height:auto;" />
+                    <!-- Note you can use the sky-grid in lightboxes -->
+                    <div class="skycom-container clearfix">
+                        <div class="skycom-7 alpha">
+                            <h2>Large Lightbox</h2>
 
-            <!-- Note you can use the sky-grid in lightboxes -->
-            <div class="skycom-container clearfix">
-                <div class="skycom-7 alpha">
-                    <h2>Large Lightbox</h2>
+                            <p>Lorem ipsum dolor sit amet</p>
 
-                    <p>Lorem ipsum dolor sit amet</p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                            </p>
 
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-					</p>
+                            Text: <input id="lightboxInput" type="text" placeholder="focusable input">
 
-					Text: <input id="lightboxInput" type="text" placeholder="focusable input">
+                            <p style="margin-bottom: 16px;">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                tempor incididunt ut labore et dolore magna aliqua.
+                            </p>
+                        </div>
 
-					<p style="margin-bottom: 16px;">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua.
-                    </p>
-                </div>
+                        <div class="skycom-5">
+                            <h3>Other Links</h3>
 
-                <div class="skycom-5">
-                    <h3>Other Links</h3>
-
-                    <ul>
-                        <li><a href="#"><i class="skycon-chevron colour"></i>Lorem Ipsum</a></li>
-                        <li><a href="#"><i class="skycon-chevron colour"></i>Dolor sit amet</a></li>
-                        <li><a href="#"><i class="skycon-chevron colour"></i>Consectetur adipisicing elit</a></li>
-                        <li><a href="#"><i class="skycon-chevron colour"></i>Sed do eiusmod</a></li>
-                        <li><a href="#"><i class="skycon-chevron colour"></i>Tempor incididunt</a></li>
-                    </ul>
-                </div>
+                            <ul>
+                                <li><a href="#"><i class="skycon-chevron colour"></i>Lorem Ipsum</a></li>
+                                <li><a href="#"><i class="skycon-chevron colour"></i>Dolor sit amet</a></li>
+                                <li><a href="#"><i class="skycon-chevron colour"></i>Consectetur adipisicing elit</a></li>
+                                <li><a href="#"><i class="skycon-chevron colour"></i>Sed do eiusmod</a></li>
+                                <li><a href="#"><i class="skycon-chevron colour"></i>Tempor incididunt</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
             </div>
-        </article>
+        </div>
     </div>
+    <script>
+        saveHTMLForDemo('#lightbox-demo');
+        $('#lightbox-demo-text-link-for-lightbox').on('click', function(e) {
+            e.preventDefault();
+            $('[data-function=carousel]').trigger("pause");
+            window.toolkit.lightbox.show('#lightbox-demo', '#lightbox-demo-text-link-for-lightbox');
+        });
+    </script>
 </div>
 
     </div>
@@ -1503,44 +1522,45 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 <p class="design-notes">
     The accordion is fully responsive.
 </p>
-
-<div class="init-notes">
-    <code>$('.accordion').accordion();</code>
-</div>
-
 <div class="example">
-    <ul class="accordion">
-        <li>
-            <a class="accordion-heading colour" data-toggle-state="hidden"  data-toggle="#first-accordion-content" href="#first-accordion-content">
-                <span>First Accordion Item</span> <i class="skycon-chevron-down"></i>
-            </a>
-            <div id="first-accordion-content" class="view-container toggle-hidden">
-                <div class=accordion-content>
-                    <p style="margin: 0;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget commodo nulla. Sed nec magna pellentesque, aliquam orci eu, cursus augue. Morbi eget hendrerit nunc. Aliquam interdum non sem a scelerisque. In convallis est augue, eget dictum tortor posuere et. Vivamus neque dolor, elementum sed porttitor ac, aliquet sit amet lectus. Nullam libero arcu, auctor ut neque id, varius tempus arcu. Mauris rhoncus eros egestas facilisis convallis. Phasellus elementum elit eget ligula posuere malesuada</p>
+    <div class="demo" data-selector=".accordion">
+        <ul class="accordion">
+            <li>
+                <a class="accordion-heading colour" data-toggle-state="hidden"  data-toggle="#first-accordion-content" href="#first-accordion-content">
+                    <span>First Accordion Item</span> <i class="skycon-chevron-down"></i>
+                </a>
+                <div id="first-accordion-content" class="view-container toggle-hidden">
+                    <div class=accordion-content>
+                        <p style="margin: 0;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget commodo nulla. Sed nec magna pellentesque, aliquam orci eu, cursus augue. Morbi eget hendrerit nunc. Aliquam interdum non sem a scelerisque. In convallis est augue, eget dictum tortor posuere et. Vivamus neque dolor, elementum sed porttitor ac, aliquet sit amet lectus. Nullam libero arcu, auctor ut neque id, varius tempus arcu. Mauris rhoncus eros egestas facilisis convallis. Phasellus elementum elit eget ligula posuere malesuada</p>
+                    </div>
                 </div>
-            </div>
-        </li>
-        <li>
-            <a class="accordion-heading colour" data-toggle-state="hidden"  data-toggle="#second-accordion-content" href="#second-accordion-content">
-                <span>Second Accordion Item</span> <i class="skycon-chevron-down"></i></span>
-            </a>
-            <div id="second-accordion-content" class="view-container toggle-hidden">
-                <div class=accordion-content>
-                    <p style="margin: 0; height: 400px; background-color: #f00;">Second Accordion content</p>
+            </li>
+            <li>
+                <a class="accordion-heading colour" data-toggle-state="hidden"  data-toggle="#second-accordion-content" href="#second-accordion-content">
+                    <span>Second Accordion Item</span> <i class="skycon-chevron-down"></i></span>
+                </a>
+                <div id="second-accordion-content" class="view-container toggle-hidden">
+                    <div class=accordion-content>
+                        <p style="margin: 0; height: 400px; background-color: #f00;">Second Accordion content</p>
+                    </div>
                 </div>
-            </div>
-        </li>
-        <li>
-            <a class="accordion-heading colour" data-toggle-state="hidden"  data-toggle="#third-accordion-content" href="#third-accordion-content">
-                <span>Third Accordion Item</span> <i class="skycon-chevron-down"></i>
-            </a>
-            <div id="third-accordion-content" class="view-container toggle-hidden">
-                <div class=accordion-content>
-                    <p style="margin: 0;">Third Accordion content</p>
+            </li>
+            <li>
+                <a class="accordion-heading colour" data-toggle-state="hidden"  data-toggle="#third-accordion-content" href="#third-accordion-content">
+                    <span>Third Accordion Item</span> <i class="skycon-chevron-down"></i>
+                </a>
+                <div id="third-accordion-content" class="view-container toggle-hidden">
+                    <div class=accordion-content>
+                        <p style="margin: 0;">Third Accordion content</p>
+                    </div>
                 </div>
-            </div>
-        </li>
-    </ul>
+            </li>
+        </ul>
+    </div>
+    <script>
+        saveHTMLForDemo('.accordion');
+        $('.accordion').accordion();
+    </script>
 </div>
     </div>
     <a name="carousel"></a>
@@ -1555,14 +1575,6 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
     <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
 </div>
-<div class="init-notes">
-    <code>$('#hero').skycom_carousel({
-        carousel: {
-            autoplay: true,
-            videoAds: true
-        }
-    });</code>
-</div>
 
 <div class="example">
     <h4 class="medium">3:1 Carousel</h4>
@@ -1572,7 +1584,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <p class="developer-notes">
         Add the class <code>hero-3-1</code>.
     </p>
-    <div class="demo" data-selector="*">
+    <div class="demo" data-selector="#hero">
         <section class="module clearfix skycom-carousel hero-3-1" data-function="carousel" data-tracking-module="hero"
                  id="hero">
             <h2 class="speak">Featured News, shows or Products from around Sky</h2>
@@ -1669,6 +1681,17 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
             </div>
         </section>
     </div>
+    <script>
+        saveHTMLForDemo('#hero');
+        $('#hero').skycom_carousel({
+            carousel: {
+                autoplay: true,
+                videoAds: false
+            }
+        });
+    </script>
+</div>
+<div class="example">
     <h4 class="medium">Skinny Carousel</h4>
     <div class="design-notes">
         Use a maximum of 2 lines of text in total (or 1 line plus channel logo).
@@ -1676,7 +1699,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <p class="developer-notes">
         Add the class <code>hero-skinny</code>.
     </p>
-    <div class="demo" data-selector="*">
+    <div class="demo" data-selector="#hero-skinny">
         <section class="module clearfix skycom-carousel hero-skinny" data-function="carousel" data-tracking-module="hero-169"
                  id="hero-skinny">
             <h2 class="speak">Featured News, shows or Products from around Sky</h2>
@@ -1769,6 +1792,15 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
             </div>
         </section>
     </div>
+    <script>
+        saveHTMLForDemo('#hero-skinny');
+        $('#hero-skinny').skycom_carousel({
+            carousel: {
+                autoplay: true,
+                videoAds: false
+            }
+        });
+    </script>
 </div>
     </div>
     <a name="video" ></a>
@@ -1776,35 +1808,16 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         <a name="video"></a>
 <h3 class="wiki-h3">Video</h3>
 
+<div class="design-notes">
+    A wrapper for the Sky video player, The video will expand to fit the ratio of the video.
+</div>
 <div class="dependencies">
-    <!-- for videos: <script src="js/lib/require.js" ></script>-->
+    include: Require.js
     <link rel="stylesheet" href="//player.sky.com/css/styles.min.css"/>
     <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
 </div>
-<div class="design-notes">
-    A wrapper for the Sky video player, in this example it's embedded onto an image. The video will expand the parent
-    container to fit the 16/9 ratio of the video. CSS changes will need to be made to add text next to play button.
-</div>
-<div class="developer-notes">
-    Ensure that you include all the needed dependencies (htmlplayer.js and player css). Check the dependencies tab.
-</div>
-<div class="init-notes">
-    Example: <code> $('#demo-video .video').video({
-        token:"<code>Your 36 long SkyVideo Token</code>",
-        displayAdverts: false,
-        onPlay: function() { //optional
-            //stuff to do before video plays
-        },
-        closeCallback: function() { //optional
-            //stuff to do after video closes
-        }
-    });</code>
-</div>
-
 <div class="example">
-    <h4>Sky Video Player Wrapper</h4>
-
-    <div class="demo" data-selector="*" id="demo-video">
+    <div class="demo" data-selector=".video-container" id="demo-video">
         <div class="video-container" data-video-id="clip-00i9rvth">
             <img src="wiki_images/bling-ring.jpg"
                  alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
@@ -1814,9 +1827,21 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                 <i class="icon-video-play"></i>
                 <span class="speak">Play Trailer</span>
             </a>
-
         </div>
     </div>
+    <script>
+        saveHTMLForDemo('.video-container');
+        $('#demo-video .video-container').video({
+            token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85", //this token should be unique to your team
+            displayAdverts:false ,
+            onPlay: function() { //optional
+                //stuff to do before video plays
+            },
+            closeCallback: function() { //optional
+                //stuff to do after video closes
+            }
+        });
+    </script>
 </div>
     </div>
     <a name="share" ></a>
@@ -1923,7 +1948,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 	
 			</div>
 		</div>
-	    <script src="lib/require.js" data-main='dist/scripts/wiki'></script>
+	    <script src="lib/require.js" data-main='dist/scripts/demo'></script>
         <div></div>
 	</body>
 </html>

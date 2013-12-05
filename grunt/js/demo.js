@@ -1,4 +1,4 @@
-define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, toolkit) {
+define('demo', ['utils/developer-notes-logger'], function(logger) {
 
     function bindEvents() {
         $(document).on('click','.toggler', toggle);
@@ -16,40 +16,10 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
         if (parseFloat(oldVersion,10)===1 || (oldVersion.split('.')[0]==='0')){
             oldVersion = '0.6.9';//get lowest version available
         }
-        toolkit.diff({
+        window.toolkit.diff({
             oldRoute: route + '/' + oldVersion + '/_site/_includes/',
             newRoute: route + '/' + newVersion + '/_site/_includes/'
         });
-    }
-
-    function initModuleDemos() {
-        $('#hero').skycom_carousel({
-            carousel: {
-                autoplay: true,
-                videoAds: false
-            }
-        });
-        $('#hero-skinny').skycom_carousel({
-            carousel: {
-                autoplay: true,
-                videoAds: false
-            }
-        });
-        $('#demo-classc-tabs').inPageNav();
-        $('#demo-inpage-nav-tabs').inPageNav();
-        $('#demo-video .video-container').video({
-            token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-            freewheel:false //disable ads
-        });
-        $('.accordion').accordion();
-
-		$('#lightbox-demo-text-link-for-lightbox').on('click', function(e) {
-			e.preventDefault();
-			$('[data-function=carousel]').trigger("pause");
-			window.toolkit.lightbox.show('#lightbox-demo', '#lightbox-demo-text-link-for-lightbox');
-		});
-
-        toolkit.modules.init();
     }
 
     function sortSkyconsTable(){
@@ -70,7 +40,7 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
         $('#wiki-skycons tbody tr').remove();
         for (var i=0; i<skycons.length; i++){
             $('#wiki-skycons tbody').append($(rows[skycons[i].i]));
-        };
+        }
     }
 
     function toggle(){
@@ -86,7 +56,7 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
     }
 
     logger();
-    initModuleDemos();
+    window.toolkit.modules.init();
     bindEvents();
     sortSkyconsTable();
 

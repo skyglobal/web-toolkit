@@ -2,6 +2,9 @@
 <p class="design-notes">
     <span class="error">These modules are not yet complete.</span>  If you need them, please complete 'accessibility' checks an re-submit.
 </p>
+<div class="developer-notes">
+    If reinitialising tabs (e.g. after transition in a single-page app), call '<code>toolkit.hashmanager.resetHash()</code>' first.
+</div>
 
 <div class="example">
     <h4 class="medium">Sleek Nav</h4>
@@ -18,7 +21,7 @@
     <div class="init-notes">
         <code>$('#demo-inpage-nav-tabs').inPageNav();</code>
     </div>
-    <div class="demo" data-selector="*">
+    <div class="demo" data-selector="#demo-inpage-nav-tabs">
         <section class="module clearfix tabs-container page-nav" data-function="tabs" id='demo-inpage-nav-tabs'>
 
             <h2 class="speak">This is a screenreader header for tabs</h2>
@@ -118,4 +121,8 @@
 
         </section>
     </div>
+    <script>
+        saveHTMLForDemo('#demo-inpage-nav-tabs');
+        $('#demo-inpage-nav-tabs').inPageNav();
+    </script>
 </div>

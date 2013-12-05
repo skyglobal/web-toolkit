@@ -128,3 +128,10 @@ toolkit.lightbox = (function ($) {
 	};
 
 })(jQuery);
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('modules/lightbox', [], function() {
+        'use strict';
+        return toolkit.lightbox;
+    });
+}
