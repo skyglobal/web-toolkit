@@ -15,25 +15,15 @@
 
 <!--FIXTURE HTML FOR TESTS-->
 <div id="spec-markup">
-	<h4>Text Links</h4>
-	<ul>
-		<li><a id="lightbox-demo-text-link-for-small-lightbox" href="#" data-skyLightbox="#lightbox-demo-small">Small Lightbox</a></li>
-		<li><a id="lightbox-demo-text-link-for-large-lightbox" href="#" data-skyLightbox="#lightbox-demo">Large Lightbox</a></li>
-	</ul>
-	<h4>Image Links</h4>
-	<ul>
-		<li>Small Lightbox</li>
-		<li>Large Lightbox</li>
-	</ul>
+    <div id="open-links-source">
+    	<a class="lightbox-demo-link" href="#" data-skyLightbox="#lightbox-demo">Large Lightbox</a>
+        <a class="link-with-tab-index" tabindex="101">test tabbable link</a>
+    </div>
 
-	<div id="lightbox-text-link-small-lightbox">
-
-	</div>
-
-	<div id="lightbox-demo" class="lightbox">
+    <div id="lightbox-demo-source" class="lightbox">
 		<div class="skycom-container">
-			<article class="skycom-10 skycom-offset1 lightbox-content" role="dialog" aria-labelledby="lightbox-demo-text-link-for-large-lightbox">
-				<a class="lightbox-close skycon-close" href="#">
+			<article class="skycom-10 skycom-offset1 lightbox-content" role="dialog" aria-labelledby="lightbox-demo-link">
+				<a class="lightbox-close skycon-close" href="#" id="close-button">
 					<span class="speak">Close</span>
 				</a>
 				<!-- Note you can use the sky-grid in lightboxs -->
@@ -71,7 +61,6 @@
 			</article>
 		</div>
 	</div>
-
 </div>
 
 
@@ -80,18 +69,29 @@
 
     require(['modules/lightbox', '../../test/jsUnit/setup'], function () {
 
-		$('.lightbox').skyLightbox();
+
+        var $demo = $('#lightbox-demo-source').clone();
+        var $links = $('#open-links-source').clone();
+        $demo.attr('id','lightbox-demo');
+        $links.attr('id','open-links');
 
 		describe('Lightbox module', function() {
 
 			beforeEach(function() {
-				$('.lightbox').removeClass('lightbox-open');
-				$('#lightbox-demo-text-link-for-large-lightbox').removeClass('skycom-focus');
-				$('body').removeAttr('style');
+                $('body').append($demo);
+                $('body').append($links);
+                $links.find('.lightbox-demo-link').removeAttr('tabindex');
+                $links.find('.link-with-tab-index').attr('tabindex','101');
+                $('#lightbox-demo').skyLightbox();
 			});
+            afterEach(function() {
+                $('#lightbox-demo').remove();
+                $('#open-links').remove();
+                $('body').removeAttr('style');
+            });
 
 			var givenTheLargeLightBoxIsOpen = function() {
-				$('#lightbox-demo-text-link-for-large-lightbox').click();
+				$('#open-links .lightbox-demo-link').click();
 				expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(true);
 			};
 
@@ -100,27 +100,34 @@
 				// given
 				expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(false);
 				// when
-				$('#lightbox-demo-text-link-for-large-lightbox').click();
+				$('#open-links .lightbox-demo-link').click();
 				// then
                 expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(true);
             });
 
 
-			it('Closes when the close icon is clicked', function() {
+			it('Closes when the close icon is clicked', function(done) {
 				givenTheLargeLightBoxIsOpen();
 				// when
 				$('#lightbox-demo .lightbox-close').click();
 				// then
-				expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(false);
+                setTimeout(function(){
+                    expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(false);
+                    done();
+                },501);
+
 			});
 
 
-			it('Closes when the faded grey bit is clicked', function() {
+			it('Closes when the faded grey bit is clicked', function(done) {
 				givenTheLargeLightBoxIsOpen();
 				// when
 				$('#lightbox-demo').click();
 				// then
-				expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(false);
+                setTimeout(function(){
+				    expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(false);
+                    done();
+                },501);
 			});
 
 
@@ -133,7 +140,7 @@
 			});
 
 
-			it('Hides the double scrollbar from the body element', function() {
+			it('Hides the double scrollbar from the body element', function(done) {
 				givenTheLargeLightBoxIsOpen();
 				// then
 				expect($('body').is('[style]')).to.equal(true);
@@ -141,7 +148,10 @@
 				// when
 				$('#lightbox-demo .lightbox-close').click();
 				// then
-				expect($('body').is('[style]')).to.equal(false);
+                setTimeout(function(){
+				    expect($('body').is('[style]')).to.equal(false);
+                    done();
+                },501);
 			});
 
 
@@ -158,43 +168,56 @@
 				it('Gives focus to the close icon when opened', function() {
 					givenTheLargeLightBoxIsOpen();
 					// then
-					expect(document.activeElement).to.equal($('#lightbox-demo .lightbox-close:focus')[0]);
+					expect(document.activeElement.id).to.equal('close-button');
 				});
 
-				it('Returns focus back to the ORIGINATOR when closed', function() {
+				it('Returns focus back to the ORIGINATOR when closed', function(done) {
 					// given
 					givenTheLargeLightBoxIsOpen();
 					// when
 					$('#lightbox-demo .lightbox-close').click();
 					// then
-					expect(document.activeElement).to.equal($('#lightbox-demo-text-link-for-large-lightbox:focus')[0]);
+                    setTimeout(function(){
+					    expect(document.activeElement.className).to.equal('lightbox-demo-link');
+                        done();
+                    },501);
 				});
 
 				it("Sets the 'skycom-focus' class on the close icon if the ORIGINATOR had the 'skycom-focus' class.", function() {
 					// given
 					expect($('#lightbox-demo .lightbox-close').hasClass('skycom-focus')).to.equal(false);
-					$('#lightbox-demo-text-link-for-large-lightbox').addClass('skycom-focus');
+					$('#open-links .lightbox-demo-link').addClass('skycom-focus');
 					givenTheLargeLightBoxIsOpen();
 					// then
 					expect($('#lightbox-demo .lightbox-close').hasClass('skycom-focus')).to.equal(true);
 				});
 
-				it('Constrains the tab focus to the lightbox', function() {
-					givenTheLargeLightBoxIsOpen();
-					expect(document.activeElement).to.equal($('#lightbox-demo .lightbox-close:focus')[0]);
-
-					// then
-					$.tabNext();
-					expect(document.activeElement).to.equal($('#lightboxInput:focus')[0]);
-					$.tabNext();	// tab to link
-					$.tabNext();	// tab to link
-					$.tabNext();	// tab should loop back to close icon
-					expect(document.activeElement).to.equal($('#lightbox-demo .lightbox-close:focus')[0]);
-				});
+//				it('Constrains the tab focus to the lightbox', function() {
+//					givenTheLargeLightBoxIsOpen();
+//                    expect(document.activeElement.id).to.equal('close-button');
+//
+//					// then
+//					$.tabNext();
+//					expect(document.activeElement.id).to.equal('lightboxInput');
+//					$.tabNext();	// tab to link
+//					$.tabNext();	// tab to link
+//					$.tabNext();	// tab should loop back to close icon
+//                    expect(document.activeElement.id).to.equal('close-button');
+//				});
+                it('disables tabbing of page elements', function(done) {
+                    expect($('#open-links .lightbox-demo-link').attr('tabindex')).to.equal(undefined);
+                    expect($('#open-links .link-with-tab-index').attr('tabindex')).to.equal('101');
+                    givenTheLargeLightBoxIsOpen();
+                    expect($('#open-links .lightbox-demo-link').attr('tabindex')).to.equal('-1');
+                    expect($('#open-links .link-with-tab-index').attr('tabindex')).to.equal('-1');
+                    $('#lightbox-demo .lightbox-close').click();
+                    setTimeout(function(){
+                        expect($('#open-links .lightbox-demo-link').attr('tabindex')).to.equal(undefined);
+                        expect($('#open-links .link-with-tab-index').attr('tabindex')).to.equal('101');
+                        done();
+                    },501);
+                });
 			});
-
-			// TODO: hightlight the close icon (more) when focused
-
         });
         mocha.run();
     });
