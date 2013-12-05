@@ -46,7 +46,7 @@
     require(['modules/share', '../../test/jsUnit/setup'],function(share){
 
         describe('Share module with click', function() {
-            share.init();
+
             it('clicking share link should open the popup', function() {
                 expect($('.share-popup.active').length).to.equal(0);
                 $('.summary').click();
