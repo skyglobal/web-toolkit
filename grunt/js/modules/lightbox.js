@@ -1,6 +1,6 @@
 /*global jQuery:false */
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.lightbox = (function ($, focus) {
+toolkit.lightbox = (function ($, keyboardFocus) {
     "use strict";
 	var scrollbarWidth = function() {
         var scrollDiv = document.createElement("div"),
@@ -72,8 +72,8 @@ toolkit.lightbox = (function ($, focus) {
 			this.$container.addClass('lightbox-open');
 
 			// if we were navigated by the keybaord, propogate that focus class to the lightbox
-			if (this.$originator.hasClass(focus.className)) {
-				focus.apply(this.$closeIcon[0]);
+			if (this.$originator.hasClass(keyboardFocus.className)) {
+                keyboardFocus.apply(this.$closeIcon[0]);
 			}else{
                 this.$closeIcon[0].focus();
             }
@@ -125,7 +125,7 @@ toolkit.lightbox = (function ($, focus) {
 		}
 	};
 
-})(jQuery, toolkit.focus);
+}(jQuery, toolkit.focus));
 
 if (typeof window.define === "function" && window.define.amd) {
     define('modules/lightbox', ['utils/focus'], function(focus) {
