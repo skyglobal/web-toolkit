@@ -44,7 +44,7 @@ toolkit.lightbox = (function ($) {
 			this.$closeIcon.on("click", this.close.bind(this));
 
 			// bind all lightbox open links
-			$('[data-skyLightbox=#' + lightboxId + ']').on("click", this.open.bind(this));
+			$('[data-lightbox=#' + lightboxId + ']').on("click", this.open.bind(this));
 
 			// prevent clicks on the lightbox from closing it
 			this.$container.find('.lightbox-content').on("click", function(e) { return false; });
@@ -114,7 +114,7 @@ toolkit.lightbox = (function ($) {
 		}
 	};
 
-	$.fn.skyLightbox = function() {
+	$.fn.lightbox = function() {
 		return this.each(function() {
 			var lightbox = new Lightbox($(this));
 		});

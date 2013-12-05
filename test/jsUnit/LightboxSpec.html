@@ -16,7 +16,7 @@
 <!--FIXTURE HTML FOR TESTS-->
 <div id="spec-markup">
     <div id="open-links-source">
-    	<a class="lightbox-demo-link" href="#" data-skyLightbox="#lightbox-demo">Large Lightbox</a>
+    	<a class="lightbox-demo-link" href="#" data-lightbox="#lightbox-demo">Large Lightbox</a>
         <a class="link-with-tab-index" tabindex="101">test tabbable link</a>
     </div>
 
@@ -82,7 +82,7 @@
                 $('body').append($links);
                 $links.find('.lightbox-demo-link').removeAttr('tabindex');
                 $links.find('.link-with-tab-index').attr('tabindex','101');
-                $('#lightbox-demo').skyLightbox();
+                $('#lightbox-demo').lightbox();
 			});
             afterEach(function() {
                 $('#lightbox-demo').remove();
