@@ -1,6 +1,6 @@
 /*global jQuery:false */
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.lightbox = (function ($) {
+toolkit.lightbox = (function ($, focus) {
     "use strict";
 	var scrollbarWidth = function() {
         var scrollDiv = document.createElement("div"),
@@ -69,16 +69,14 @@ toolkit.lightbox = (function ($) {
 				'padding-right': scrollbarWidth + 'px'
 			});
 
-			// show the lightbox
 			this.$container.addClass('lightbox-open');
 
-			// move the focus to the close icon
-			this.$closeIcon[0].focus();
-
 			// if we were navigated by the keybaord, propogate that focus class to the lightbox
-			if (this.$originator.hasClass('skycom-focus')) {
-				this.$closeIcon.addClass('skycom-focus');
-			}
+			if (this.$originator.hasClass(focus.className)) {
+				focus.apply(this.$closeIcon[0]);
+			}else{
+                this.$closeIcon[0].focus();
+            }
 
 			// remove tabbing for all elements and re-enable for elements in the lightbox
 			$('a, input, select, textarea, button, *[tabindex]').each(hideTabIndex);
@@ -127,10 +125,10 @@ toolkit.lightbox = (function ($) {
 		}
 	};
 
-})(jQuery);
+})(jQuery, toolkit.focus);
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('modules/lightbox', [], function() {
+    define('modules/lightbox', ['utils/focus'], function(focus) {
         'use strict';
         return toolkit.lightbox;
     });

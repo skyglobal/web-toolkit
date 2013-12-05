@@ -54,6 +54,7 @@ if (typeof window.define === "function" && window.define.amd) {
         'utils/popup',
         'utils/toggle',
         'utils/diff',
+        'utils/focus',
         'modules',
         'modules/inPageNav',
         'modules/accordion',
@@ -62,7 +63,7 @@ if (typeof window.define === "function" && window.define.amd) {
         'modules/lightbox',
         'modules/share',
         'modules/video',
-        'modules/carousel'], function(skycons, hashmanager, popup,toggle, diff, modules, inPageNav, accordion, datePicker, validation, lightbox, share, video, carousel){
+        'modules/carousel'], function(skycons, hashmanager, popup,toggle, diff, focus, modules, inPageNav, accordion, datePicker, validation, lightbox, share, video, carousel){
 
         return {
             modules: modules,
@@ -70,6 +71,7 @@ if (typeof window.define === "function" && window.define.amd) {
             hashmanager: hashmanager,
             popup: popup,
             diff: diff,
+            focus: focus,
             inPageNav: inPageNav,
             accordion: accordion,
             datePicker: datePicker,
