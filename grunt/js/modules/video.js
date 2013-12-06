@@ -141,10 +141,12 @@ toolkit.video = (function (window, $) {
         });
     };
     return Video;
-}(window, jQuery));
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('modules/video', [], function () {
-        return toolkit.video;
+        return toolkit.video(window, jQuery);
     });
+} else {
+    toolkit.video =  toolkit.video(window, jQuery);
 }

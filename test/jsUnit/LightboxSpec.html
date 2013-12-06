@@ -7,6 +7,7 @@
     <script src="vendor/require.js"></script>
     <script src="config.js"></script>
 	<script src="vendor/jquery.tabbable.js"></script>
+    <script src="vendor/blanket.min.js" data-cover-only="modules/lightbox"></script>
 </head>
 <body>
 
@@ -67,7 +68,7 @@
 <!--TEST-->
 <script>
 
-    require(['utils/focus','modules/lightbox', '../../test/jsUnit/setup'], function (focus) {
+    require(['modules/lightbox','utils/focus', '../../test/jsUnit/setup'], function (focus) {
 
 
         var $demo = $('#lightbox-demo-source').clone();
@@ -223,5 +224,11 @@
     });
 </script>
 
+
+<script>
+    if (window.PHANTOMJS) {
+        blanket.options("reporter", "../../node_modules/grunt-blanket-mocha/support/grunt-reporter.js");
+    }
+</script>
 </body>
 </html>

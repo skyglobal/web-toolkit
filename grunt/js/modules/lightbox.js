@@ -125,11 +125,13 @@ toolkit.lightbox = (function ($, keyboardFocus) {
 		}
 	};
 
-}(jQuery, toolkit.focus));
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('modules/lightbox', ['utils/focus'], function(focus) {
         'use strict';
-        return toolkit.lightbox;
+        return toolkit.lightbox(jQuery, focus);
     });
+} else {
+    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus);
 }

@@ -125,10 +125,12 @@ toolkit.diff = (function(){
 
     return findFiles;
 
-}());
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/diff', function() {
-        return toolkit.diff;
+        return toolkit.diff();
     });
+} else {
+    toolkit.diff = toolkit.diff();
 }

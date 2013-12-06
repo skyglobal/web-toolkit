@@ -7,6 +7,7 @@
     <script src="vendor/require.js"></script>
     <script src="config.js" ></script>
     <link href="../../dist/stylesheets/toolkit.css" rel="stylesheet"/>
+    <script src="vendor/blanket.min.js" data-cover-only="modules/video"></script>
 
 
 </head>
@@ -39,8 +40,8 @@
             freewheel:false //disable ads
         };
         $('#spec-markup').show();
-        var video = new toolkit.video($('.video'), options);
-        video.createWrapper();
+        var video = $('.video').video( options);
+//        video.createWrapper();
 
         describe('Video module', function() {
 
@@ -57,7 +58,7 @@
                 expect($wrapper.attr('class')).to.contain('playing-video');
                 expect($wrapper.length).to.equal(1);
                 expect($close.attr('class')).to.contain("active");
-                expect(callbackCalled).to.be.true;
+                expect(callbackCalled).to.be.true();
 
             });
 
@@ -86,7 +87,7 @@
                             skyPlayCalled = true;
                         }
                     }
-                }
+                };
                 video.stop();
                 expect(skyPlayCalled).to.be.true;
                 expect($wrapper.length).to.equal(0);
@@ -120,5 +121,10 @@
     });
 </script>
 
+<script>
+    if (window.PHANTOMJS) {
+        blanket.options("reporter", "../../node_modules/grunt-blanket-mocha/support/grunt-reporter.js");
+    }
+</script>
 </body>
 </html>

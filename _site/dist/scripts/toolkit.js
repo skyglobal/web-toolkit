@@ -46,13 +46,15 @@ toolkit.polyfill = (function () {
     stringTtrim();
     arrayIndexOf();
 
-}());
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/polyfill', [], function() {
         
-        return toolkit.polyfill;
+        return toolkit.polyfill();
     });
+} else {
+    toolkit.polyfill = toolkit.polyfill();
 };
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.detect = (function () {
@@ -130,13 +132,15 @@ toolkit.detect = (function () {
         state: state
     };
 
-}());
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/detect', [], function() {
         
-        return toolkit.detect;
+        return toolkit.detect();
     });
+} else {
+    toolkit.detect = toolkit.detect();
 };
 /**
  purpose:
@@ -246,14 +250,15 @@ toolkit.skycons = (function() {
         add: addSkycon,
         init: init
     };
-}());
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/skycons', [], function() {
-        return toolkit.skycons;
+        return toolkit.skycons();
     });
-}
-;
+} else {
+    toolkit.skycons = toolkit.skycons();
+};
 /**
  purpose:
  to let 'anchor' tags do their job and change the hash in the url for internal links.
@@ -353,12 +358,14 @@ toolkit.hashmanager = (function() {
         resetHash: resetHash,
         cleanHash: cleanHash
     };
-}());
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/hashmanager', [], function() {
-        return toolkit.hashmanager;
+        return toolkit.hashmanager();
     });
+} else {
+    toolkit.hashmanager =  toolkit.hashmanager();
 };
 if (typeof toolkit==='undefined') toolkit={};
 
@@ -386,12 +393,14 @@ toolkit.popup = (function() {
         init: init,
         open: open
     };
-})();
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/popup', [], function() {
-        return toolkit.popup;
+        return toolkit.popup();
     });
+} else {
+    toolkit.popup = toolkit.popup();
 };
 /*
  returns toggle(); function
@@ -510,12 +519,14 @@ toolkit.toggle = (function() {
 
     return toggle;
 
-    })();
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/toggle', [], function() {
-        return toolkit.toggle;
+        return toolkit.toggle();
     });
+} else {
+    toolkit.toggle = toolkit.toggle();
 }
 ;
 if (typeof toolkit==='undefined') toolkit={};
@@ -645,12 +656,14 @@ toolkit.diff = (function(){
 
     return findFiles;
 
-}());
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/diff', [],function() {
-        return toolkit.diff;
+        return toolkit.diff();
     });
+} else {
+    toolkit.diff = toolkit.diff();
 };
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.focus = (function () {
@@ -699,382 +712,21 @@ toolkit.focus = (function () {
         className: focusClass
     };
 
-}());
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/focus', [], function() {
         
-        return toolkit.focus;
+        return toolkit.focus();
     });
-};
-/**
- purpose:
- to automatically hook into the bootstrap html and shows/hides tabs.
- Works based registering the tabs 'hash' with the changeTab function.
- no onclick events needed.
-**/
-if (typeof toolkit==='undefined') toolkit={};
-toolkit.inPageNav = (function(hash) {
-//    todo: accessibility check when moving tabs about - perhaps dont have 2 separate lists.
-//    todo: move 'more' link to outside the ul
-
-    function InPageNav($element){
-        this.$tabContainer = $element;
-        this.$tabs = $element.find('li[role=tab]');
-        this.$tabTargets = $element.find('div[role=tabpanel]');
-        this.$showMore = $element.find('.dropdown-tab-select > a');
-        this.$moreTabsContainer = $element.find('.dropdown-tab-select');
-        this.$moreTabsLink = $element.find('.more-tabs');
-        this.numberOfTabsToShow = 0;
-
-        this.saveTabOrder();
-        this.bindEvents();
-        this.initTabs();
-    }
-
-    InPageNav.prototype = {
-        bindEvents : function(){
-            var self = this;
-            hash.register(this.getHashList(), this.changeTab.bind(self));
-            this.$tabs.on('click', function(e){
-                self.changeTab($(this).find('a').attr('href'));
-            });
-            this.$showMore.on('click', function(e){
-                e.preventDefault();
-                self.toggleShowMore();
-            });
-            $('body').on('click', this.hideMore.bind(self));
-            $(window).bind('skycom.resizeend',  this.initTabs.bind(self));
-        },
-
-        getHashList: function() {
-            var arrHash = [];
-            this.$tabs.each(function(){
-                arrHash.push($(this).attr('aria-controls'));
-            });
-            return arrHash;
-        },
-
-        saveTabOrder: function(){
-            this.$tabs.each(function(i){
-                $(this).attr('data-position', i);
-            });
-        },
-
-        initTabs: function(){
-            this.moveTabsToList();
-            this.moveTabsToDropdown();
-        },
-
-        changeTab: function(controlId){
-            controlId = controlId.replace('#!','');
-            var $thisTab = $("#" + controlId + "-tab"),
-                $thisTabTarget = $("#" + controlId);
-            this.$tabTargets.add(this.$tabs).removeClass("selected");
-            $thisTab.add($thisTabTarget).addClass('selected');
-            this.initTabs();
-        },
-
-        hideMore: function(e){
-            if ($(e.target).closest(this.$showMore).length) { return; }
-            this.toggleShowMore('hide');
-        },
-
-        toggleShowMore: function(type){
-            var action = (this.$moreTabsLink.hasClass('dropdown-tab-selected') || type==='hide') ? 'remove' : 'add';
-            this.$showMore.add(this.$moreTabsLink)[action + 'Class']('dropdown-tab-selected');
-        },
-
-        getNumberOfTabsToShow: function() {
-            var containerWidth = this.$tabContainer.outerWidth(true) -
-                    this.$moreTabsContainer.show().outerWidth(true) -
-                    this.$tabs.filter('.selected').outerWidth(true),
-                totalWidth = 0,
-                numberOfTabs = 0;
-            this.$tabs.not('.selected').attr('style','float:left').each(function () {
-                totalWidth += ($(this).outerWidth(true));
-                if (totalWidth > containerWidth) { return ; }
-                numberOfTabs++;
-            });
-            this.$tabs.add(this.$moreTabsContainer).removeAttr('style');
-            return numberOfTabs;
-        },
-
-        moveTabsToList: function() {
-            var self = this;
-            this.$tabs.each(function (i) {
-                $(this).appendTo(self.$tabContainer.find('.tabs'));
-            });
-            sortTabs(this.$tabContainer.find('.tabs'));
-            this.numberOfTabsToShow = this.getNumberOfTabsToShow();
-        },
-
-        moveTabsToDropdown: function() {
-            var self = this;
-            this.$tabs.not('.selected').each(function (i) {
-                if(i < self.numberOfTabsToShow) { return ; }
-                $(this).appendTo(self.$moreTabsLink);
-                self.$moreTabsContainer.show();
-            });
-            sortTabs(this.$moreTabsLink);
-        }
-    };
-
-    function sortTabs($el) {
-        var list = [];
-        $el.find('li').each(function () {
-            list.push($(this).attr('data-position'));
-        });
-        list.sort();
-        $.each(list, function () {
-            $el.find('li[data-position="'+this+'"]').appendTo($el);
-        });
-    }
-
-    $.fn.inPageNav = function(params) {
-        return this.each(function() {
-            var inPageNav = new InPageNav($(this), params);
-        });
-    };
-
-}(toolkit.hashmanager));
-
-if (typeof window.define === "function" && window.define.amd) {
-    define('modules/inPageNav', ['utils/hashmanager'], function(hash) {
-        return toolkit.inPageNav;
-    });
-};
-/*global jQuery:false */
-if (typeof toolkit==='undefined') toolkit={};
-toolkit.accordion = (function ($, toggle) {
-    
-
-    function Accordion($element){
-        this.$container = $element;
-        this.$headings = $element.find('.accordion-heading');
-        this.bindEvents();
-    }
-
-    Accordion.prototype = {
-        bindEvents:function(){
-            this.$headings.on("click",this.toggleContent.bind(this));
-        },
-        toggleContent:function(e){
-            e.preventDefault();
-            var $heading = $(e.currentTarget);
-            toolkit.toggle({$elClicked:$heading});
-        }
-    };
-
-    $.fn.accordion = function() {
-        return this.each(function() {
-            var accordion = new Accordion($(this));
-        });
-    };
-
-    return Accordion;
-})(jQuery, toolkit.toggle);
-
-if (typeof window.define === "function" && window.define.amd) {
-    define('modules/accordion', ['utils/toggle'], function(toggle) {
-        return toolkit.accordion;
-    });
-}
-;
-if (typeof toolkit==='undefined') toolkit={};
-toolkit.datePicker = (function () {
-
-    var monthNames=["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ],
-        currentDate = {
-            day: new Date().getDate(),
-            month: new Date().getMonth() + 1,
-            year: new Date().getFullYear()
-        };
-
-    function daysInMonth(month, year) {
-        return [null, 31, isLeapYear(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
-    }
-
-    function firstDay(month, year) {
-        var day = new Date(year, month - 1, 1).getDay();
-        return (day === 0) ? 7 : day - 1;
-    }
-
-    function isLeapYear(year) {
-        return year % 4 === 0 && year % 100 !== 0 || year % 400 === 0;
-    }
-
-    function normaliseDate(date){
-        return date.toString().length < 2 ? "0" + date : date;
-    }
-
-    function DatePicker($container) {
-        this.calendarDate = $.extend(currentDate);
-        this.$container = $container;
-        this.$day = $container.find('.day');
-        this.$month = $container.find('.month');
-        this.$year = $container.find('.year');
-        this.addCalendarHTML();
-        this.bindEvents();
-    }
-
-    DatePicker.prototype = {
-
-        bindEvents: function() {
-            var datePicker = this;
-
-            datePicker.$calendar
-                .on('click','.date', datePicker.selectDate.bind(datePicker))
-                .on('click', '.prev', datePicker.displayPreviousMonth.bind(datePicker))
-                .on('click', '.next', datePicker.displayNextMonth.bind(datePicker));
-
-            datePicker.$container
-                .on('keyup', 'input', datePicker.updateCalendarView.bind(datePicker))
-                .on('focus', 'input',datePicker.show.bind(datePicker))
-                .on('keydown', 'input', function(e) {
-                    if (e.keyCode == 9) {
-                        datePicker.hide();
-                    }
-                });
-
-            $(document)
-                .on('keydown', function(e) {
-                    if (e.keyCode == 27) {
-                        datePicker.hide();
-                    }
-                })
-                .on('click', function(e) {
-                    if (e.target.className != 'date-picker' && !datePicker.$container.find(e.target).length) {
-                        datePicker.hide();
-                    }
-                });
-        },
-
-        show: function(){
-            this.$calendar.removeClass('hidden');
-        },
-
-        hide: function(){
-            this.$calendar.addClass('hidden');
-        },
-
-        addCalendarHTML: function() {
-            var $calendar = $('<div class="calendar hidden" aria-hidden="true"></div>'),
-                $header = $('<div class="header"></div>'),
-                $prev = $('<span class="prev"><i class="skycon-arrow-left"></i></span>'),
-                $next = $('<span class="next"><i class="skycon-arrow-right"></i></span>'),
-                $dateDescription = $('<span data-date></span>'),
-                $daysHeader = $('<div class="days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>'),
-                $dayContainer = $('<div class="day-container"></div>');
-            $header.append($prev).append($dateDescription).append($next);
-            $calendar.append($header).append($daysHeader).append($dayContainer);
-            this.$container.append($calendar);
-            this.$calendar = $calendar;
-            this.$dateDescription = $dateDescription;
-            this.$dayContainer = $dayContainer;
-            this.renderCalendar();
-        },
-
-        renderCalendar: function() {
-            var datePicker = this;
-            datePicker.$dateDescription.text(monthNames[datePicker.calendarDate.month] + " " + datePicker.calendarDate.year);
-            datePicker.fillDays(daysInMonth(datePicker.calendarDate.month, datePicker.calendarDate.year), firstDay(datePicker.calendarDate.month, datePicker.calendarDate.year));
-        },
-
-        fillDays: function(noOfDaysInMonth, firstDay) {
-            var i= 1,
-                date = 1,
-                datePicker = this,
-                calendarDate = datePicker.calendarDate,
-                daysText = [],
-                classNames = [],
-                isToday = false,
-                isInputDate = false,
-                isPastDate = false,
-                monthIsInPast = (calendarDate.month < currentDate.month && calendarDate.year <= currentDate.year) || (calendarDate.year < currentDate.year),
-                monthIsNow = calendarDate.month == currentDate.month && calendarDate.year == currentDate.year,
-                monthIsInInput = calendarDate.month ==  datePicker.$month.val() && calendarDate.year ==  datePicker.$year.val();
-
-            for (i; i < firstDay; i++) {
-                daysText.push("<span></span>");
-            }
-
-            for (date; date <= noOfDaysInMonth; date++) {
-                classNames = [];
-                isInputDate = (date ==  datePicker.$day.val() && monthIsInInput);
-                isPastDate = (date < currentDate.day && monthIsNow) || monthIsInPast;
-                isToday = (date == currentDate.day && monthIsNow);
-
-                if (isInputDate) classNames.push('selected');
-                if (isPastDate) classNames.push('past');
-                if (isToday) classNames.push('today');
-
-                daysText.push("<span class='date " + classNames.join(' ')  + "' >" + date + "</span>");
-            }
-            datePicker.$dayContainer.html(daysText.join(''));
-        },
-
-        selectDate: function(e) {
-            var datePicker = this;
-            datePicker.$container.find('.selected').removeClass('selected');
-            $(e.currentTarget).addClass('selected');
-            datePicker.calendarDate.day = parseInt(e.currentTarget.innerText,10);
-            datePicker.$day.val(normaliseDate(datePicker.calendarDate.day));
-            datePicker.$month.val(normaliseDate(datePicker.calendarDate.month));
-            datePicker.$year.val(normaliseDate(datePicker.calendarDate.year));
-            datePicker.hide();
-        },
-
-        displayPreviousMonth: function() {
-            var datePicker = this;
-            if (datePicker.calendarDate.month === 1) {
-                datePicker.calendarDate.month = 12;
-                datePicker.calendarDate.year--;
-            } else {
-                datePicker.calendarDate.month--;
-            }
-            datePicker.renderCalendar();
-        },
-
-        displayNextMonth: function() {
-            var datePicker = this;
-            if (datePicker.calendarDate.month === 12) {
-                datePicker.calendarDate.month = 1;
-                datePicker.calendarDate.year++;
-            } else {
-                datePicker.calendarDate.month++;
-            }
-            datePicker.renderCalendar();
-        },
-
-        updateCalendarView: function(e) {
-            var datePicker = this;
-            datePicker.calendarDate.day = parseInt(datePicker.$day.val(), 10) || currentDate.day;
-            datePicker.calendarDate.month = parseInt(datePicker.$month.val(), 10) || currentDate.month;
-            datePicker.calendarDate.year = parseInt(datePicker.$year.val(), 10) || currentDate.year;
-            datePicker.renderCalendar();
-        }
-
-    };
-
-    $.fn.datePicker = function() {
-        return this.each(function() {
-            var datePicker = new DatePicker($(this));
-        });
-    };
-
-}());
-
-if (typeof window.define === "function" && window.define.amd) {
-    define('modules/datePicker', [], function() {
-        return toolkit.datePicker;
-    });
+} else {
+    toolkit.focus = toolkit.focus();
 };
 /*jshint strict: true */
 /*global jQuery:false */
 
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.form = (function ($) {
+toolkit.validation = (function ($) {
     
 
     function isSafari() {
@@ -1261,13 +913,384 @@ toolkit.form = (function ($) {
 
     return Validation;
 
-})(jQuery);
+});
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('modules/validation', [], function() {
+    define('utils/validation', [], function() {
         
-        return toolkit.validation;
+        return toolkit.validation(jQuery);
     });
+} else {
+    toolkit.validation =  toolkit.validation(jQuery);
+};
+/**
+ purpose:
+ to automatically hook into the bootstrap html and shows/hides tabs.
+ Works based registering the tabs 'hash' with the changeTab function.
+ no onclick events needed.
+**/
+if (typeof toolkit==='undefined') toolkit={};
+toolkit.inPageNav = (function(hash) {
+//    todo: accessibility check when moving tabs about - perhaps dont have 2 separate lists.
+//    todo: move 'more' link to outside the ul
+
+    function InPageNav($element){
+        this.$tabContainer = $element;
+        this.$tabs = $element.find('li[role=tab]');
+        this.$tabTargets = $element.find('div[role=tabpanel]');
+        this.$showMore = $element.find('.dropdown-tab-select > a');
+        this.$moreTabsContainer = $element.find('.dropdown-tab-select');
+        this.$moreTabsLink = $element.find('.more-tabs');
+        this.numberOfTabsToShow = 0;
+
+        this.saveTabOrder();
+        this.bindEvents();
+        this.initTabs();
+    }
+
+    InPageNav.prototype = {
+        bindEvents : function(){
+            var self = this;
+            hash.register(this.getHashList(), this.changeTab.bind(self));
+            this.$tabs.on('click', function(e){
+                self.changeTab($(this).find('a').attr('href'));
+            });
+            this.$showMore.on('click', function(e){
+                e.preventDefault();
+                self.toggleShowMore();
+            });
+            $('body').on('click', this.hideMore.bind(self));
+            $(window).bind('skycom.resizeend',  this.initTabs.bind(self));
+        },
+
+        getHashList: function() {
+            var arrHash = [];
+            this.$tabs.each(function(){
+                arrHash.push($(this).attr('aria-controls'));
+            });
+            return arrHash;
+        },
+
+        saveTabOrder: function(){
+            this.$tabs.each(function(i){
+                $(this).attr('data-position', i);
+            });
+        },
+
+        initTabs: function(){
+            this.moveTabsToList();
+            this.moveTabsToDropdown();
+        },
+
+        changeTab: function(controlId){
+            controlId = controlId.replace('#!','');
+            var $thisTab = $("#" + controlId + "-tab"),
+                $thisTabTarget = $("#" + controlId);
+            this.$tabTargets.add(this.$tabs).removeClass("selected");
+            $thisTab.add($thisTabTarget).addClass('selected');
+            this.initTabs();
+        },
+
+        hideMore: function(e){
+            if ($(e.target).closest(this.$showMore).length) { return; }
+            this.toggleShowMore('hide');
+        },
+
+        toggleShowMore: function(type){
+            var action = (this.$moreTabsLink.hasClass('dropdown-tab-selected') || type==='hide') ? 'remove' : 'add';
+            this.$showMore.add(this.$moreTabsLink)[action + 'Class']('dropdown-tab-selected');
+        },
+
+        getNumberOfTabsToShow: function() {
+            var containerWidth = this.$tabContainer.outerWidth(true) -
+                    this.$moreTabsContainer.show().outerWidth(true) -
+                    this.$tabs.filter('.selected').outerWidth(true),
+                totalWidth = 0,
+                numberOfTabs = 0;
+            this.$tabs.not('.selected').attr('style','float:left').each(function () {
+                totalWidth += ($(this).outerWidth(true));
+                if (totalWidth > containerWidth) { return ; }
+                numberOfTabs++;
+            });
+            this.$tabs.add(this.$moreTabsContainer).removeAttr('style');
+            return numberOfTabs;
+        },
+
+        moveTabsToList: function() {
+            var self = this;
+            this.$tabs.each(function (i) {
+                $(this).appendTo(self.$tabContainer.find('.tabs'));
+            });
+            sortTabs(this.$tabContainer.find('.tabs'));
+            this.numberOfTabsToShow = this.getNumberOfTabsToShow();
+        },
+
+        moveTabsToDropdown: function() {
+            var self = this;
+            this.$tabs.not('.selected').each(function (i) {
+                if(i < self.numberOfTabsToShow) { return ; }
+                $(this).appendTo(self.$moreTabsLink);
+                self.$moreTabsContainer.show();
+            });
+            sortTabs(this.$moreTabsLink);
+        }
+    };
+
+    function sortTabs($el) {
+        var list = [];
+        $el.find('li').each(function () {
+            list.push($(this).attr('data-position'));
+        });
+        list.sort();
+        $.each(list, function () {
+            $el.find('li[data-position="'+this+'"]').appendTo($el);
+        });
+    }
+
+    $.fn.inPageNav = function() {
+        return this.each(function() {
+            var inPageNav = new InPageNav($(this));
+        });
+    };
+
+});
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('modules/inPageNav', ['utils/hashmanager'], function(hash) {
+        return toolkit.inPageNav(hash);
+    });
+} else {
+    toolkit.inPageNav = toolkit.inPageNav(toolkit.hashmanager);
+};
+/*global jQuery:false */
+if (typeof toolkit==='undefined') toolkit={};
+toolkit.accordion = (function (toggle) {
+    
+
+    function Accordion($element){
+        this.$container = $element;
+        this.$headings = $element.find('.accordion-heading');
+        this.bindEvents();
+    }
+
+    Accordion.prototype = {
+        bindEvents:function(){
+            this.$headings.on("click",this.toggleContent.bind(this));
+        },
+        toggleContent:function(e){
+            e.preventDefault();
+            var $heading = $(e.currentTarget);
+            toolkit.toggle({$elClicked:$heading});
+        }
+    };
+
+    $.fn.accordion = function() {
+        return this.each(function() {
+            var accordion = new Accordion($(this));
+        });
+    };
+
+    return Accordion;
+});
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('modules/accordion', ['utils/toggle'], function(toggle) {
+        return toolkit.accordion(toggle);
+    });
+} else {
+    toolkit.accordion = toolkit.accordion(toolkit.toggle);
+}
+;
+if (typeof toolkit==='undefined') toolkit={};
+toolkit.datePicker = (function () {
+
+    var monthNames=["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ],
+        currentDate = {
+            day: new Date().getDate(),
+            month: new Date().getMonth() + 1,
+            year: new Date().getFullYear()
+        };
+
+    function daysInMonth(month, year) {
+        return [null, 31, isLeapYear(year) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
+    }
+
+    function firstDay(month, year) {
+        var day = new Date(year, month - 1, 1).getDay();
+        return (day === 0) ? 7 : day - 1;
+    }
+
+    function isLeapYear(year) {
+        return year % 4 === 0 && year % 100 !== 0 || year % 400 === 0;
+    }
+
+    function normaliseDate(date){
+        return date.toString().length < 2 ? "0" + date : date;
+    }
+
+    function DatePicker($container) {
+        this.calendarDate = $.extend(currentDate);
+        this.$container = $container;
+        this.$day = $container.find('.day');
+        this.$month = $container.find('.month');
+        this.$year = $container.find('.year');
+        this.addCalendarHTML();
+        this.bindEvents();
+    }
+
+    DatePicker.prototype = {
+
+        bindEvents: function() {
+            var datePicker = this;
+
+            datePicker.$calendar
+                .on('click','.date', datePicker.selectDate.bind(datePicker))
+                .on('click', '.prev', datePicker.displayPreviousMonth.bind(datePicker))
+                .on('click', '.next', datePicker.displayNextMonth.bind(datePicker));
+
+            datePicker.$container
+                .on('keyup', 'input', datePicker.updateCalendarView.bind(datePicker))
+                .on('focus', 'input',datePicker.show.bind(datePicker))
+                .on('keydown', 'input', function(e) {
+                    if (e.keyCode == 9) {
+                        datePicker.hide();
+                    }
+                });
+
+            $(document)
+                .on('keydown', function(e) {
+                    if (e.keyCode == 27) {
+                        datePicker.hide();
+                    }
+                })
+                .on('click', function(e) {
+                    if (e.target.className != 'date-picker' && !datePicker.$container.find(e.target).length) {
+                        datePicker.hide();
+                    }
+                });
+        },
+
+        show: function(){
+            this.$calendar.removeClass('hidden');
+        },
+
+        hide: function(){
+            this.$calendar.addClass('hidden');
+        },
+
+        addCalendarHTML: function() {
+            var $calendar = $('<div class="calendar hidden" aria-hidden="true"></div>'),
+                $header = $('<div class="header"></div>'),
+                $prev = $('<span class="prev"><i class="skycon-arrow-left"></i></span>'),
+                $next = $('<span class="next"><i class="skycon-arrow-right"></i></span>'),
+                $dateDescription = $('<span data-date></span>'),
+                $daysHeader = $('<div class="days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span></div>'),
+                $dayContainer = $('<div class="day-container"></div>');
+            $header.append($prev).append($dateDescription).append($next);
+            $calendar.append($header).append($daysHeader).append($dayContainer);
+            this.$container.append($calendar);
+            this.$calendar = $calendar;
+            this.$dateDescription = $dateDescription;
+            this.$dayContainer = $dayContainer;
+            this.renderCalendar();
+        },
+
+        renderCalendar: function() {
+            var datePicker = this;
+            datePicker.$dateDescription.text(monthNames[datePicker.calendarDate.month] + " " + datePicker.calendarDate.year);
+            datePicker.fillDays(daysInMonth(datePicker.calendarDate.month, datePicker.calendarDate.year), firstDay(datePicker.calendarDate.month, datePicker.calendarDate.year));
+        },
+
+        fillDays: function(noOfDaysInMonth, firstDay) {
+            var i= 1,
+                date = 1,
+                datePicker = this,
+                calendarDate = datePicker.calendarDate,
+                daysText = [],
+                classNames = [],
+                isToday = false,
+                isInputDate = false,
+                isPastDate = false,
+                monthIsInPast = (calendarDate.month < currentDate.month && calendarDate.year <= currentDate.year) || (calendarDate.year < currentDate.year),
+                monthIsNow = calendarDate.month == currentDate.month && calendarDate.year == currentDate.year,
+                monthIsInInput = calendarDate.month ==  datePicker.$month.val() && calendarDate.year ==  datePicker.$year.val();
+
+            for (i; i < firstDay; i++) {
+                daysText.push("<span></span>");
+            }
+
+            for (date; date <= noOfDaysInMonth; date++) {
+                classNames = [];
+                isInputDate = (date ==  datePicker.$day.val() && monthIsInInput);
+                isPastDate = (date < currentDate.day && monthIsNow) || monthIsInPast;
+                isToday = (date == currentDate.day && monthIsNow);
+
+                if (isInputDate) classNames.push('selected');
+                if (isPastDate) classNames.push('past');
+                if (isToday) classNames.push('today');
+
+                daysText.push("<span class='date " + classNames.join(' ')  + "' >" + date + "</span>");
+            }
+            datePicker.$dayContainer.html(daysText.join(''));
+        },
+
+        selectDate: function(e) {
+            var datePicker = this;
+            datePicker.$container.find('.selected').removeClass('selected');
+            $(e.currentTarget).addClass('selected');
+            datePicker.calendarDate.day = parseInt(e.currentTarget.innerText,10);
+            datePicker.$day.val(normaliseDate(datePicker.calendarDate.day));
+            datePicker.$month.val(normaliseDate(datePicker.calendarDate.month));
+            datePicker.$year.val(normaliseDate(datePicker.calendarDate.year));
+            datePicker.hide();
+        },
+
+        displayPreviousMonth: function() {
+            var datePicker = this;
+            if (datePicker.calendarDate.month === 1) {
+                datePicker.calendarDate.month = 12;
+                datePicker.calendarDate.year--;
+            } else {
+                datePicker.calendarDate.month--;
+            }
+            datePicker.renderCalendar();
+        },
+
+        displayNextMonth: function() {
+            var datePicker = this;
+            if (datePicker.calendarDate.month === 12) {
+                datePicker.calendarDate.month = 1;
+                datePicker.calendarDate.year++;
+            } else {
+                datePicker.calendarDate.month++;
+            }
+            datePicker.renderCalendar();
+        },
+
+        updateCalendarView: function(e) {
+            var datePicker = this;
+            datePicker.calendarDate.day = parseInt(datePicker.$day.val(), 10) || currentDate.day;
+            datePicker.calendarDate.month = parseInt(datePicker.$month.val(), 10) || currentDate.month;
+            datePicker.calendarDate.year = parseInt(datePicker.$year.val(), 10) || currentDate.year;
+            datePicker.renderCalendar();
+        }
+
+    };
+
+    $.fn.datePicker = function() {
+        return this.each(function() {
+            var datePicker = new DatePicker($(this));
+        });
+    };
+
+});
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('modules/datePicker', [], function() {
+        return toolkit.datePicker();
+    });
+} else {
+    toolkit.datePicker = toolkit.datePicker();
 };
 /*global jQuery:false */
 if (typeof toolkit==='undefined') toolkit={};
@@ -1396,13 +1419,15 @@ toolkit.lightbox = (function ($, keyboardFocus) {
 		}
 	};
 
-}(jQuery, toolkit.focus));
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('modules/lightbox', ['utils/focus'], function(focus) {
         
-        return toolkit.lightbox;
+        return toolkit.lightbox(jQuery, focus);
     });
+} else {
+    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus);
 };
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.share = (function() {
@@ -1433,12 +1458,14 @@ toolkit.share = (function() {
     return {
         toggleSharePopover: toggleSharePopover
     };
-}());
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('modules/share', [], function() {
-        return toolkit.share;
+        return toolkit.share();
     });
+} else {
+    toolkit.share = toolkit.share();
 }
 ;
 if (typeof toolkit === 'undefined') toolkit = {};
@@ -1584,12 +1611,14 @@ toolkit.video = (function (window, $) {
         });
     };
     return Video;
-}(window, jQuery));
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('modules/video', [], function () {
-        return toolkit.video;
+        return toolkit.video(window, jQuery);
     });
+} else {
+    toolkit.video =  toolkit.video(window, jQuery);
 };
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.carousel = (function(window, $, video) {
@@ -1997,12 +2026,14 @@ toolkit.carousel = (function(window, $, video) {
             }
         });
     };
-}(window, jQuery, toolkit.video));
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('modules/carousel', ['modules/video'], function(video) {
-        return toolkit.carousel;
+        return toolkit.carousel(window, jQuery, video);
     });
+} else {
+    toolkit.carousel = toolkit.carousel(window, jQuery, toolkit.video);
 }
 ;
 if (typeof window.define === "function" && window.define.amd) {
@@ -2016,14 +2047,14 @@ if (typeof window.define === "function" && window.define.amd) {
         'utils/toggle',
         'utils/diff',
         'utils/focus',
+        'utils/validation',
         'modules/inPageNav',
         'modules/accordion',
         'modules/datePicker',
-        'modules/validation',
         'modules/lightbox',
         'modules/share',
         'modules/video',
-        'modules/carousel'], function(polyfill, detect, skycons, hashmanager, popup,toggle, diff, focus, inPageNav, accordion, datePicker, validation, lightbox, share, video, carousel){
+        'modules/carousel'], function(polyfill, detect, skycons, hashmanager, popup,toggle, diff, focus, validation, inPageNav, accordion, datePicker, lightbox, share, video, carousel){
 
         return {
             polyfill: polyfill,

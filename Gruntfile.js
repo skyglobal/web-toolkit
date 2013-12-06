@@ -132,6 +132,13 @@ module.exports = function(grunt) {
                     dest: "dist/svgs/"
                 }
             }
+        },
+
+        blanket_mocha: {
+            all: [ 'test/jsUnit/*Spec.html',  ],
+            options: {
+                threshold: 50
+            }
         }
     });
 
@@ -145,6 +152,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-webfont'); //https://github.com/sapegin/grunt-webfont
     grunt.loadNpmTasks('grunt-svgmin');
     grunt.loadNpmTasks('grunt-grunticon');
+    grunt.loadNpmTasks('grunt-blanket-mocha');
 
     grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
     grunt.registerTask('spy', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'watch']);
