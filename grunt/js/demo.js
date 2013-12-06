@@ -56,7 +56,6 @@ define('demo', ['utils/developer-notes-logger'], function(logger) {
     }
 
     logger();
-    window.toolkit.modules.init();
     bindEvents();
     sortSkyconsTable();
 
