@@ -404,10 +404,12 @@ toolkit.carousel = (function(window, $, video) {
             }
         });
     };
-}(window, jQuery, toolkit.video));
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('modules/carousel', ['modules/video'], function(video) {
-        return toolkit.carousel;
+        return toolkit.carousel(window, jQuery, video);
     });
+} else {
+    toolkit.carousel = toolkit.carousel(window, jQuery, toolkit.video);
 }

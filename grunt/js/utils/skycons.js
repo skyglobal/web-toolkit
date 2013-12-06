@@ -106,10 +106,12 @@ toolkit.skycons = (function() {
         add: addSkycon,
         init: init
     };
-}());
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/skycons', [], function() {
-        return toolkit.skycons;
+        return toolkit.skycons();
     });
+} else {
+    toolkit.skycons = toolkit.skycons();
 }

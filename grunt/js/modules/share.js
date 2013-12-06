@@ -27,10 +27,12 @@ toolkit.share = (function() {
     return {
         toggleSharePopover: toggleSharePopover
     };
-}());
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('modules/share', [], function() {
-        return toolkit.share;
+        return toolkit.share();
     });
+} else {
+    toolkit.share = toolkit.share();
 }

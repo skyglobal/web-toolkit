@@ -45,11 +45,13 @@ toolkit.polyfill = (function () {
     stringTtrim();
     arrayIndexOf();
 
-}());
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/polyfill', [], function() {
         'use strict';
-        return toolkit.polyfill;
+        return toolkit.polyfill();
     });
+} else {
+    toolkit.polyfill = toolkit.polyfill();
 }

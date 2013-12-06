@@ -6,7 +6,7 @@
     <script src="vendor/mocha.js"></script>
     <script src="vendor/require.js"></script>
     <script src="config.js" ></script>
-    <!--<link rel="stylesheet" href="../../_site/dist/stylesheets/toolkit.css">-->
+    <script src="vendor/blanket.min.js" data-cover-only="modules/inPageNav"></script>
 </head>
 <body>
 <!--PLACEHOLDER FOR MOCHA TEST RESULTS-->
@@ -118,10 +118,8 @@
 
 </div>
 
-</div>
-<!--TEST-->
 <script>
-    require(['utils/hashmanager', 'modules/inPageNav', '../../test/jsUnit/setup'],function(hash, tabs){
+    require(['utils/hashmanager', 'modules/inPageNav', '../../test/jsUnit/setup'],function( tabs, hash){
 
         $('.tabs-container').inPageNav();
 
@@ -143,5 +141,10 @@
     });
 </script>
 
+<script>
+    if (window.PHANTOMJS) {
+        blanket.options("reporter", "../../node_modules/grunt-blanket-mocha/support/grunt-reporter.js");
+    }
+</script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 /*global jQuery:false */
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.accordion = (function ($, toggle) {
+toolkit.accordion = (function (toggle) {
     "use strict";
 
     function Accordion($element){
@@ -27,10 +27,12 @@ toolkit.accordion = (function ($, toggle) {
     };
 
     return Accordion;
-})(jQuery, toolkit.toggle);
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('modules/accordion', ['utils/toggle'], function(toggle) {
-        return toolkit.accordion;
+        return toolkit.accordion(toggle);
     });
+} else {
+    toolkit.accordion = toolkit.accordion(toolkit.toggle);
 }

@@ -6,6 +6,7 @@
     <script src="vendor/mocha.js"></script>
     <script src="vendor/require.js"></script>
     <script src="config.js" ></script>
+    <script src="vendor/blanket.min.js" data-cover-only="modules/carousel"></script>
 
 </head>
 <body>
@@ -100,7 +101,6 @@
         </section>
     </div>
 
-    </div>
     <script>
         globalskycom = {
             browserSupport: {
@@ -295,5 +295,10 @@
     });
     </script>
 
+    <script>
+        if (window.PHANTOMJS) {
+            blanket.options("reporter", "../../node_modules/grunt-blanket-mocha/support/grunt-reporter.js");
+        }
+    </script>
 </body>
 </html>

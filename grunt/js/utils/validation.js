@@ -2,7 +2,7 @@
 /*global jQuery:false */
 
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.form = (function ($) {
+toolkit.validation = (function ($) {
     "use strict";
 
     function isSafari() {
@@ -189,11 +189,13 @@ toolkit.form = (function ($) {
 
     return Validation;
 
-})(jQuery);
+});
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('modules/validation', [], function() {
+    define('utils/validation', [], function() {
         'use strict';
-        return toolkit.validation;
+        return toolkit.validation(jQuery);
     });
+} else {
+    toolkit.validation =  toolkit.validation(jQuery);
 }

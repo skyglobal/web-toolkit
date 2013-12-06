@@ -6,6 +6,7 @@
     <script src="vendor/mocha.js"></script>
     <script src="vendor/require.js"></script>
     <script src="config.js" ></script>
+    <script src="vendor/blanket.min.js" data-cover-only="utils/hashmanager"></script>
 
 </head>
 <body>
@@ -17,8 +18,7 @@
 
     <!--TEST-->
     <script>
-        require(['utils/hashmanager',
-                 '../../test/jsUnit/setup'], function(hash){
+        require(['utils/hashmanager', '../../test/jsUnit/setup'], function(hash){
 
             describe('Hash Utility', function(){
 
@@ -68,5 +68,10 @@
         });
     </script>
 
+    <script>
+        if (window.PHANTOMJS) {
+            blanket.options("reporter", "../../node_modules/grunt-blanket-mocha/support/grunt-reporter.js");
+        }
+    </script>
 </body>
 </html>

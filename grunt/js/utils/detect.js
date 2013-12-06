@@ -74,11 +74,13 @@ toolkit.detect = (function () {
         state: state
     };
 
-}());
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/detect', [], function() {
         'use strict';
-        return toolkit.detect;
+        return toolkit.detect();
     });
+} else {
+    toolkit.detect = toolkit.detect();
 }

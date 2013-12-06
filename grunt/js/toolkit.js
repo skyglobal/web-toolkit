@@ -9,14 +9,14 @@ if (typeof window.define === "function" && window.define.amd) {
         'utils/toggle',
         'utils/diff',
         'utils/focus',
+        'utils/validation',
         'modules/inPageNav',
         'modules/accordion',
         'modules/datePicker',
-        'modules/validation',
         'modules/lightbox',
         'modules/share',
         'modules/video',
-        'modules/carousel'], function(polyfill, detect, skycons, hashmanager, popup,toggle, diff, focus, inPageNav, accordion, datePicker, validation, lightbox, share, video, carousel){
+        'modules/carousel'], function(polyfill, detect, skycons, hashmanager, popup,toggle, diff, focus, validation, inPageNav, accordion, datePicker, lightbox, share, video, carousel){
 
         return {
             polyfill: polyfill,

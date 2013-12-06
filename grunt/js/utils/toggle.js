@@ -115,10 +115,12 @@ toolkit.toggle = (function() {
 
     return toggle;
 
-    })();
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/toggle', [], function() {
-        return toolkit.toggle;
+        return toolkit.toggle();
     });
+} else {
+    toolkit.toggle = toolkit.toggle();
 }
