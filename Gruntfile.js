@@ -135,7 +135,7 @@ module.exports = function(grunt) {
         },
 
         blanket_mocha: {
-            all: [ 'test/jsUnit/*Spec.html',  ],
+            all: [ 'test/jsUnit/A*Spec.html',  ],
             options: {
                 threshold: 50
             }

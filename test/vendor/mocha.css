@@ -1,8 +1,14 @@
 @charset "utf-8";
 
-body {
-    font: 20px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
-    padding: 60px 50px;
+#spec-markup {
+    display:none;
+}
+
+#toggleView {
+    font-size:14px;
+    left:20px;
+    position:absolute;
+    top:20px;
 }
 
 #mocha ul, #mocha li {
@@ -16,6 +22,7 @@ body {
 
 #mocha h1, #mocha h2 {
     margin: 0;
+    line-height: 1em;
 }
 
 #mocha h1 {
@@ -36,10 +43,6 @@ body {
 #mocha .suite .suite h1 {
     margin-top: 0;
     font-size: .8em;
-}
-
-.hidden {
-    display: none;
 }
 
 #mocha h2 {
@@ -186,7 +189,7 @@ body {
 
 #mocha-error {
     color: #c00;
-    font-size: 1.5  em;
+    font-size: 1.5em;
     font-weight: 100;
     letter-spacing: 1px;
 }
@@ -232,10 +235,6 @@ code .keyword { color: #8A6343 }
 code .number { color: #2F6FAD }
 
 @media screen and (max-device-width: 480px) {
-    body {
-        padding: 60px 0px;
-    }
-
     #stats {
         position: absolute;
     }

@@ -233,18 +233,19 @@ toolkit.skycons = (function() {
     }
 
     function init(){
-        if (!supportsPsuedo()){
-            var els = document.getElementsByTagName('*'),
-                i, c, el;
-            for (i = 0; ; i += 1) {
-                el = els[i];
-                if(!el) { break; }
-                c = el.className;
-                c = c.match(/skycon-[^\s'"]+/);
-                if (c) { addSkycon(el, c[0]); }
-            }
+        if (supportsPsuedo()){ return; }
+        var els = document.getElementsByTagName('*'),
+            i, c, el;
+        for (i = 0; ; i += 1) {
+            el = els[i];
+            if(!el) { break; }
+            c = el.className;
+            c = c.match(/skycon-[^\s'"]+/);
+            if (c) { addSkycon(el, c[0]); }
         }
     }
+
+    $(document).ready(init);
 
     return {
         add: addSkycon,
@@ -1876,18 +1877,16 @@ toolkit.carousel = (function(window, $, video) {
     // jquerify
     $.fn.skycom_carousel = function(params) {
         var options = $.extend(true, {
-            carousel: {
-                actions: [
-                    { id: 'play', label: 'Play Carousel', icon: 'carousel-play' },
-                    { id: 'pause', label: 'Pause Carousel', icon: 'carousel-pause' },
-                    { id: 'previous', label: 'Previous', icon: 'chevron-left',speak:true },
-                    { id: 'next', label: 'Next', icon: 'chevron',speak:true }
-                ],
-                autoplay: true,
-                startSlideIndex: 0,
-                onPlayDelay: 500,
-                interval: 6000
-            }
+            actions: [
+                { id: 'play', label: 'Play Carousel', icon: 'carousel-play' },
+                { id: 'pause', label: 'Pause Carousel', icon: 'carousel-pause' },
+                { id: 'previous', label: 'Previous', icon: 'chevron-left',speak:true },
+                { id: 'next', label: 'Next', icon: 'chevron',speak:true }
+            ],
+            autoplay: true,
+            startSlideIndex: 0,
+            onPlayDelay: 500,
+            interval: 6000
         }, params);
 
         // generating default markup
@@ -1923,10 +1922,12 @@ toolkit.carousel = (function(window, $, video) {
                     onclick = options.onclick,
                     html = '<div class="indicators"><div class="container">',
                     className = ' class="active"';
-                if (count <= 1) return this;
-                for (i = count; i--;) {
-                    html += '<span' + className + ' data-tracking data-tracking-label="indicator"></span>';
-                    className = '';
+//                if (count <= 1) return this;
+                if (count>1){
+                    for (i = count; i--;) {
+                        html += '<span' + className + ' data-tracking data-tracking-label="indicator"></span>';
+                        className = '';
+                    }
                 }
                 $indicators = $(html + '</div></div>').on('click', 'span', function(e) {
                     onclick($(e.currentTarget).index());
@@ -1952,7 +1953,7 @@ toolkit.carousel = (function(window, $, video) {
 
         return this.each(function() {
             var $this = $(this);
-            var carousel = new Carousel($this, options.carousel);
+            var carousel = new Carousel($this, options);
             var createMarkup = function(carousel) {
                 markup.indicators($this, {
                     count: carousel.slideCount,
@@ -1963,7 +1964,7 @@ toolkit.carousel = (function(window, $, video) {
                 .terms($this)
                 .actions($this, {
                     count: carousel.slideCount,
-                    actions: options.carousel.actions,
+                    actions: options.actions,
                     onclick: function(action) {
                         carousel[action]();
                     }
@@ -1987,26 +1988,19 @@ toolkit.carousel = (function(window, $, video) {
                 carousel.pause();
             }).on('play',function() {
                 carousel.play();
-            }).on('refresh',function(e, index) {
+            }).on('goto',function(e, slideIndex) {
+                carousel.goto(slideIndex, true);
+            }).on('refresh',function(e, slideIndex) {
                 carousel.$slides = carousel.$slideContainer.find('>');
                 carousel.slideCount = carousel.$slides.length;
                 $this.find('.indicators').remove();
                 $this.find('.actions').remove();
                 $this.find('.video-overlay').remove();
-
+                slideIndex = parseInt(slideIndex, 10);
+                slideIndex = (isNaN(slideIndex) || slideIndex < 0) ? 0 : slideIndex;
+                slideIndex = (slideIndex > (carousel.slideCount - 1)) ?  carousel.slideCount - 1 : slideIndex;
+                carousel.goto(slideIndex, true);
                 createMarkup(carousel);
-
-                index = parseInt(index, 10);
-                if (isNaN(index) || index < 0) {
-                    index = 0;
-                } else if (index > (carousel.slideCount - 1)){
-                    index = carousel.slideCount - 1;
-                }
-                if (index > carousel.currentIndex) {
-                    carousel.moveSlide({index: index, start:0, end:-50});
-                } else {
-                    carousel.moveSlide({index: index, start:-50, end: 0});
-                }
             }).on('keyup',function(e){
                 switch(e.keyCode){
                     case 9: carousel.pause(); break; //tab
@@ -2017,11 +2011,12 @@ toolkit.carousel = (function(window, $, video) {
                 carousel.$viewport.toggleClass('showing-tandcs');
             });
             if(carousel.slideCount > 1) {
-                carousel[options.carousel.autoplay === true ? 'play' : 'pause'](false, options.carousel.interval);
-                carousel.goto(options.carousel.startSlideIndex, false);
+                carousel[options.autoplay === true ? 'play' : 'pause'](false, options.interval);
+                carousel.goto(options.startSlideIndex, false);
                 carousel.showTermsLink(0);
                 $this.trigger('change');
             } else {
+                carousel.showTermsLink(0);
                 carousel.unbindTouchEvents();
             }
         });

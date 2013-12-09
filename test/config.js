@@ -1,7 +1,23 @@
-define(['chai', 'smoax'], function(chai) {
+requirejs.config({
+    baseUrl: 'dist/scripts/',
+    paths: {
+        mocha: '../../test/vendor/mocha',
+        chai: '../../test/vendor/chai',
+        smoax: '../../test/vendor/smoax',
+        blanket: '../../test/vendor/blanket.min'
+    },
+    shim: {
+        smoax: {
+            exports: 'Smoax'
+        }
+    },
+    urlArgs: 'v=' + new Date().getTime()
+});
+
+define('setup',['chai', 'smoax'], function(chai, smoax) {
 
     function uiSetup(headElement) {
-        var styles = ['vendor/mocha.css', 'main.css'];
+        var styles = ['test/vendor/mocha.css'];
         var body = document.getElementsByTagName('body').item(0);
         var div = document.createElement('div');
         var linkElement, i;
@@ -60,3 +76,6 @@ define(['chai', 'smoax'], function(chai) {
     mocha.setup('bdd');
     mocha.setup({ignoreLeaks: true}); //otherwise mocha complains about jquery and moment being globals
 });
+
+
+require(['setup']);

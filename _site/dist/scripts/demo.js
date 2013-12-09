@@ -1,5 +1,5 @@
 
-define('utils/developer-notes-logger', [],function() {
+var developerNotesLogger = (function() {
 
     function logPage(){
         if (!console || !console.group){
@@ -85,8 +85,16 @@ define('utils/developer-notes-logger', [],function() {
 
     return logPage;
 });
-define('demo', ['utils/developer-notes-logger'], function(logger) {
 
+if (typeof window.define === "function" && window.define.amd){
+     define('utils/developer-notes-logger', [],function() {
+          return developerNotesLogger();
+    });
+} else {
+    developerNotesLogger();
+}
+;
+var demo = (function(logger) {
     function bindEvents() {
         $(document).on('click','.toggler', toggle);
         $('#check').on('click', checkDiff);
@@ -145,5 +153,13 @@ define('demo', ['utils/developer-notes-logger'], function(logger) {
     logger();
     bindEvents();
     sortSkyconsTable();
-
 });
+
+if (typeof window.define === "function" && window.define.amd){
+    define('demo', ['utils/developer-notes-logger'], function(developerNotesLogger) {
+            return demo(developerNotesLogger);
+ });
+} else {
+    demo(developerNotesLogger);
+}
+;

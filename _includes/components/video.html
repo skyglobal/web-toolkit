@@ -11,20 +11,13 @@
 </div>
 <div class="example">
     <div class="demo" data-selector=".video-container" id="demo-video">
-        <div class="video-container" data-video-id="clip-00i9rvth">
-            <img src="wiki_images/bling-ring.jpg"
-                 alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
 
-            <a href="#!" class="play-video internal-link"
-               data-tracking-context="David Beckham And Sky Team Up">
-                <i class="icon-video-play"></i>
-                <span class="speak">Play Trailer</span>
-            </a>
-        </div>
+        {% include components/video/default.html %}
+
     </div>
     <script>
         saveHTMLForDemo('.video-container');
-        $('#demo-video .video-container').video({
+        componentConfig = {
             token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85", //this token should be unique to your team
             displayAdverts:false ,
             onPlay: function() { //optional
@@ -33,6 +26,13 @@
             closeCallback: function() { //optional
                 //stuff to do after video closes
             }
-        });
+        };
+        if (window.require){
+            require(['toolkit'], function(){
+                $('#demo-video .video-container').video(componentConfig);
+            });
+        } else {
+            $('#demo-video .video-container').video(componentConfig);
+        }
     </script>
 </div>

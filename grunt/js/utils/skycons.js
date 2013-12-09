@@ -89,18 +89,19 @@ toolkit.skycons = (function() {
     }
 
     function init(){
-        if (!supportsPsuedo()){
-            var els = document.getElementsByTagName('*'),
-                i, c, el;
-            for (i = 0; ; i += 1) {
-                el = els[i];
-                if(!el) { break; }
-                c = el.className;
-                c = c.match(/skycon-[^\s'"]+/);
-                if (c) { addSkycon(el, c[0]); }
-            }
+        if (supportsPsuedo()){ return; }
+        var els = document.getElementsByTagName('*'),
+            i, c, el;
+        for (i = 0; ; i += 1) {
+            el = els[i];
+            if(!el) { break; }
+            c = el.className;
+            c = c.match(/skycon-[^\s'"]+/);
+            if (c) { addSkycon(el, c[0]); }
         }
     }
+
+    $(document).ready(init);
 
     return {
         add: addSkycon,
