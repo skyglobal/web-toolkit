@@ -4,6 +4,7 @@
 <!--[if IE 9]>         <html class="lt-ie10" > <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 	<head>
+        <meta charset="UTF-8"/>
 		<!--[if lt IE 9]> <script src="lib/jquery-1.10.2.js" ></script> <![endif]-->
         <!--[if gte IE 9]><!--> <script src="lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
         <script src="lib/jquery.scrollspy.js" ></script>
@@ -62,6 +63,7 @@
         <link rel="stylesheet" href="dist/stylesheets/toolkit.css">
         <link rel="stylesheet" href="dist/fonts/skycons.css">
 
+
         <!--[if lt IE 10]><script type="text/javascript">
             document.createElement('header');
             document.createElement('section');
@@ -76,66 +78,75 @@
 
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target=".nav-container">
+        <script src="dist/scripts/toolkit.js"></script>
         <script>
             window.demoCode = {};
+            window.componentConfig = '';
             window.saveHTMLForDemo = function(selector){
-                demoCode[selector] = $(selector)[0].outerHTML;
+                if (!$(selector)[0]){
+                    console.log(selector + ' not found');
+                } else {
+                    demoCode[selector] = $(selector)[0].outerHTML;
+                }
             };
         </script>
-        <script src="dist/scripts/toolkit.js" ></script>
-        <div class="nav-container">
-            <div class="skycom-container nav">
-                <ul class="alpha skycom-12 primary-menu">
-                    <li class="dropdown">
-                        <a href="index.html#using-the-toolkit">Using the Toolkit</a>
-                        <ul class=dropdown-menu>
-                            <li><a href="index.html#getting-started" data-diff="using-the-toolkit/getting-started">Getting Started</a></li>
-                            <li><a href="index.html#contributing" data-diff="using-the-toolkit/contributing">Contributing</a></li>
-                            <li><a href="index.html#accessibility" data-diff="using-the-toolkit/accessibility">Accessibility</a></li>
-                            <li><a href="index.html#coding-practices" data-diff="using-the-toolkit/coding-practices">Coding Practices</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="index.html#base-styles">Base Styles</a>
-                        <ul class=dropdown-menu>
-                            <li><a href="index.html#grid" data-diff="base-styles/grid">Grid</a></li>
-                            <li><a href="index.html#colours" data-diff="base-styles/colours">Colours</a></li>
-                            <li><a href="index.html#typography" data-diff="base-styles/typography">Typography</a></li>
-                            <li><a href="index.html#icons" data-diff="base-styles/icons">Icons</a></li>
-                            <li><a href="index.html#skycons" data-diff="base-styles/skycons">Skycons</a></li>
-                            <li><a href="index.html#buttons" data-diff="base-styles/buttons">Buttons</a></li>
-                            <li><a href="index.html#spinner" data-diff="base-styles/spinner">Spinner</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="index.html#components">Components</a>
-                        <ul class=dropdown-menu>
-                            <li><a href="index.html#breadcrumbs" data-diff="components/breadcrumbs">Breadcrumbs</a></li>
-                            <li><a href="index.html#form" data-diff="components/form">Form</a></li>
-                            <li><a href="index.html#inPageNav" data-diff="components/inPageNav">In-Page Nav</a></li>
-                            <li><a href="index.html#lightbox" data-diff="components/lightbox">Lightbox</a></li>
-                            <li><a href="index.html#accordion" data-diff="components/accordion">Accordion</a></li>
-                            <li><a href="index.html#carousel" data-diff="components/carousel">Carousel</a></li>
-                            <li><a href="index.html#share" data-diff="components/share">Share</a></li>
-                            <li><a href="index.html#video" data-diff="components/video">Video</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="index.html#examples">Examples</a>
-                        <ul class=dropdown-menu>
-                            <li><a href="index.html#error-page" data-diff="examples/error-page">Error Page</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="changes.html">Changes</a>
-                    </li>
+
+        
+<div class="nav-container">
+    <div class="skycom-container nav">
+        <ul class="alpha skycom-12 primary-menu">
+            <li class="dropdown">
+                <a href="index.html#using-the-toolkit">Using the Toolkit</a>
+                <ul class=dropdown-menu>
+                    <li><a href="index.html#getting-started" data-diff="using-the-toolkit/getting-started">Getting Started</a></li>
+                    <li><a href="index.html#contributing" data-diff="using-the-toolkit/contributing">Contributing</a></li>
+                    <li><a href="index.html#accessibility" data-diff="using-the-toolkit/accessibility">Accessibility</a></li>
+                    <li><a href="index.html#coding-practices" data-diff="using-the-toolkit/coding-practices">Coding Practices</a></li>
                 </ul>
-            </div>
-        </div>
+            </li>
+            <li class="dropdown">
+                <a href="index.html#base-styles">Base Styles</a>
+                <ul class=dropdown-menu>
+                    <li><a href="index.html#grid" data-diff="base-styles/grid">Grid</a></li>
+                    <li><a href="index.html#colours" data-diff="base-styles/colours">Colours</a></li>
+                    <li><a href="index.html#typography" data-diff="base-styles/typography">Typography</a></li>
+                    <li><a href="index.html#icons" data-diff="base-styles/icons">Icons</a></li>
+                    <li><a href="index.html#skycons" data-diff="base-styles/skycons">Skycons</a></li>
+                    <li><a href="index.html#buttons" data-diff="base-styles/buttons">Buttons</a></li>
+                    <li><a href="index.html#spinner" data-diff="base-styles/spinner">Spinner</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="index.html#components">Components</a>
+                <ul class=dropdown-menu>
+                    <li><a href="index.html#breadcrumbs" data-diff="components/breadcrumbs">Breadcrumbs</a></li>
+                    <li><a href="index.html#form" data-diff="components/form">Form</a></li>
+                    <li><a href="index.html#inPageNav" data-diff="components/inPageNav">In-Page Nav</a></li>
+                    <li><a href="index.html#lightbox" data-diff="components/lightbox">Lightbox</a></li>
+                    <li><a href="index.html#accordion" data-diff="components/accordion">Accordion</a></li>
+                    <li><a href="index.html#carousel" data-diff="components/carousel">Carousel</a></li>
+                    <li><a href="index.html#share" data-diff="components/share">Share</a></li>
+                    <li><a href="index.html#video" data-diff="components/video">Video</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="index.html#examples">Examples</a>
+                <ul class=dropdown-menu>
+                    <li><a href="index.html#error-page" data-diff="examples/error-page">Error Page</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="changes.html">Changes</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
 				<h1 class="wiki-header">Sky Web Toolkit <small>v1.9.2 </small></h1>
 <div class="secondary">Last Updated: 09-12-2013</div>
+
 
 <a name="using-the-toolkit"></a>
 <section class="wiki-section">
@@ -1076,14 +1087,16 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         <h3 class="wiki-h3">Breadcrumb</h3>
 <div class="example">
     <div class="demo" data-selector="*">
+
         <aside  id="skycom-breadcrumb" class="skycom-container">
-            <h2 class=at>Navigational Trail</h2>
-            <ul>
-                <li class=medium><a href="#">Help & Support</a></li>
-                <li ><i class=skycon-chevron aria-hidden=true></i><a href="#">Profile & Setting</a></li>
-                <li ><i class=skycon-chevron aria-hidden=true></i><a href="#">Change your subscription</a></li>
-            </ul>
-        </aside>
+    <h2 class=at>Navigational Trail</h2>
+    <ul>
+        <li class=medium><a href="#">Help & Support</a></li>
+        <li ><i class=skycon-chevron aria-hidden=true></i><a href="#">Profile & Setting</a></li>
+        <li ><i class=skycon-chevron aria-hidden=true></i><a href="#">Change your subscription</a></li>
+    </ul>
+</aside>
+
     </div>
 </div>
     </div>
@@ -1106,100 +1119,107 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="demo" data-selector=".sky-form">
 
         <form class="sky-form">
-            <div class="row">
-                <label for="title" class="required">Title</label>
+    <div class="row">
+        <label for="title" class="required">Title</label>
 
-                <div class="select">
-                    <select id="title" name="title" required>
-                        <option value="">Please select</option>
-                        <option value="Mr">Mr</option>
-                        <option value="Mrs">Mrs</option>
-                        <option value="Ms">Ms</option>
-                        <option value="Sir">Sir</option>
-                        <option value="Dr">Dr</option>
-                        <option value="Prof.">Prof.</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <label for="first_name_g">First name</label>
-                <input id="first_name_g" type="text" placeholder="eg. Joe Bloggs"/>
-            </div>
-            <div class="row">
-                <label for="email">Email</label>
-                <input id="email" type="email" placeholder="eg. joe.bloggs@me.com"/>
-            </div>
+        <div class="select">
+            <select id="title" name="title" required>
+                <option value="">Please select</option>
+                <option value="Mr">Mr</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Ms">Ms</option>
+                <option value="Sir">Sir</option>
+                <option value="Dr">Dr</option>
+                <option value="Prof.">Prof.</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <label for="first_name_g">First name</label>
+        <input id="first_name_g" type="text" placeholder="eg. Joe Bloggs"/>
+    </div>
+    <div class="row">
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="eg. joe.bloggs@me.com"/>
+    </div>
 
 
-            <div class="row">
-                <label class="required" for="postcode">Postcode</label>
-                <input type="text" placeholder="eg. TW8 1QW" id="postcode" required/>
-                <button class="btn">Find address</button>
-            </div>
+    <div class="row">
+        <label class="required" for="postcode">Postcode</label>
+        <input type="text" placeholder="eg. TW8 1QW" id="postcode" required/>
+        <button class="btn">Find address</button>
+    </div>
 
-            <fieldset class="row">
-                <legend>Select a payment type</legend>
-                <div class="radiocheck">
-                    <input type="radio" name="payment_type" value="direct_debit" id="direct-debit" checked/>
-                    <label for="direct-debit">Direct debit</label>
-                    <br>
-                    <input type="radio" name="payment_type" value="credit_card" id="credit-card"/>
-                    <label for="credit-card">Credit card</label>
-                </div>
-            </fieldset>
-            <div class="row">
-                <label for="dob">Date of birth</label>
-                <input id="dob" type="text" placeholder="DD/MM/YYYY" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" maxlength="10" aria-labelledby=dob-feedback />
-                <span class="hidden form-error feedback" data-for="dob" id="dob-feedback" >Please use the format 'DD/MM/YYYY'</span>
-            </div>
-            <div class="row">
-                <label class="descriptor" for="date-one-day">Engineer visit</label>
-                <div class="date-picker">
-                    <input class="day" type="text" pattern="[0-9]{2}" placeholder="DD" maxlength="2" aria-label="day" id="date-one-day" aria-labelledby="date-one-day-feedback" />
-                    <span class="data-separator">-</span><input class="month" type="text" pattern="[0-9]{2}" placeholder="MM" maxlength="2" aria-label="month" id=date-one-month aria-labelledby="date-one-month-feedback" />
-                    <span class="data-separator">-</span><input class="year" type="text" pattern="[0-9]{4}" placeholder="YYYY" maxlength="4" aria-label="year" id=date-one-year aria-labelledby="date-one-year-feedback" />
-                </div>
-                <span class="hidden form-error feedback" data-for="date-one-day" id="date-one-day-feedback" >Day must 31 or less and 2 digits</span>
-                <span class="hidden form-error feedback" data-for="date-one-month" id="date-one-month-feedback">Month must be 12 or less and 2 digits</span>
-                <span class="hidden form-error feedback" data-for="date-one-year" id="date-one-year-feedback">Year must be 4 digits</span>
-            </div>
-            <div class="row">
-                <label for="date-two-day">Another date</label>
-                <div class="date-picker">
-                    <input class="day" type="text" pattern="[0-9]{2}" placeholder="DD" maxlength="2" aria-label="day" id="date-two-day" aria-labelledby="date-two-day-feedback" />
-                    <span class="data-separator">-</span><input class="month" type="text" pattern="[0-9]{2}" placeholder="MM" maxlength="2" aria-label="month" id="date-two-month" aria-labelledby="date-two-month-feedback" />
-                    <span class="data-separator">-</span><input class="year" type="text" pattern="[0-9]{4}" placeholder="YYYY" maxlength="4" aria-label="year" id="date-two-year" aria-labelledby="date-two-year-feedback" />
-                </div>
-                <span class="hidden form-error feedback" data-for="date-two-day" id="date-two-day-feedback" >Day must 31 or less and 2 digits</span>
-                <span class="hidden form-error feedback" data-for="date-two-month" id="date-two-month-feedback">Month must be 12 or less and 2 digits</span>
-                <span class="hidden form-error feedback" data-for="date-two-year" id="date-two-year-feedback">Year must be 4 digits</span>
-            </div>
-            <div class="row">
-                <label for="telephone">Telephone</label>
-                <input id="telephone" type="tel" placeholder="eg. +447567567567"/>
-            </div>
-            <div class="row">
-                <label for="url">Homepage</label>
-                <input id="url" type="url" placeholder="eg. http://joebloggs.com"/>
-            </div>
-            <div class="row">
-                <label for="message">Message</label>
-                <textarea id="message" placeholder="eg. Please enter a message"></textarea>
-            </div>
-            <div class="row no-label">
-                <input type="checkbox" name="confirm_terms" value="true" id="confirm-terms"/>
-                <label for="confirm-terms">I agree to the <a href="#">Terms &amp; Conditions</a></label>
-            </div>
-            <div class="row no-label">
-                <button name="form-submit" type="submit" class="form-submit btn primary-cta">Submit</button>
-            </div>
-        </form>
+    <fieldset class="row">
+        <legend>Select a payment type</legend>
+        <div class="radiocheck">
+            <input type="radio" name="payment_type" value="direct_debit" id="direct-debit" checked/>
+            <label for="direct-debit">Direct debit</label>
+            <br>
+            <input type="radio" name="payment_type" value="credit_card" id="credit-card"/>
+            <label for="credit-card">Credit card</label>
+        </div>
+    </fieldset>
+    <div class="row">
+        <label for="dob">Date of birth</label>
+        <input id="dob" type="text" placeholder="DD/MM/YYYY" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" maxlength="10" aria-labelledby=dob-feedback />
+        <span class="hidden form-error feedback" data-for="dob" id="dob-feedback" >Please use the format 'DD/MM/YYYY'</span>
+    </div>
+    <div class="row">
+        <label class="descriptor" for="date-one-day">Engineer visit</label>
+        <div class="date-picker">
+            <input class="day" type="text" pattern="[0-9]{2}" placeholder="DD" maxlength="2" aria-label="day" id="date-one-day" aria-labelledby="date-one-day-feedback" />
+            <span class="data-separator">-</span><input class="month" type="text" pattern="[0-9]{2}" placeholder="MM" maxlength="2" aria-label="month" id=date-one-month aria-labelledby="date-one-month-feedback" />
+            <span class="data-separator">-</span><input class="year" type="text" pattern="[0-9]{4}" placeholder="YYYY" maxlength="4" aria-label="year" id=date-one-year aria-labelledby="date-one-year-feedback" />
+        </div>
+        <span class="hidden form-error feedback" data-for="date-one-day" id="date-one-day-feedback" >Day must 31 or less and 2 digits</span>
+        <span class="hidden form-error feedback" data-for="date-one-month" id="date-one-month-feedback">Month must be 12 or less and 2 digits</span>
+        <span class="hidden form-error feedback" data-for="date-one-year" id="date-one-year-feedback">Year must be 4 digits</span>
+    </div>
+    <div class="row">
+        <label for="date-two-day">Another date</label>
+        <div class="date-picker">
+            <input class="day" type="text" pattern="[0-9]{2}" placeholder="DD" maxlength="2" aria-label="day" id="date-two-day" aria-labelledby="date-two-day-feedback" />
+            <span class="data-separator">-</span><input class="month" type="text" pattern="[0-9]{2}" placeholder="MM" maxlength="2" aria-label="month" id="date-two-month" aria-labelledby="date-two-month-feedback" />
+            <span class="data-separator">-</span><input class="year" type="text" pattern="[0-9]{4}" placeholder="YYYY" maxlength="4" aria-label="year" id="date-two-year" aria-labelledby="date-two-year-feedback" />
+        </div>
+        <span class="hidden form-error feedback" data-for="date-two-day" id="date-two-day-feedback" >Day must 31 or less and 2 digits</span>
+        <span class="hidden form-error feedback" data-for="date-two-month" id="date-two-month-feedback">Month must be 12 or less and 2 digits</span>
+        <span class="hidden form-error feedback" data-for="date-two-year" id="date-two-year-feedback">Year must be 4 digits</span>
+    </div>
+    <div class="row">
+        <label for="telephone">Telephone</label>
+        <input id="telephone" type="tel" placeholder="eg. +447567567567"/>
+    </div>
+    <div class="row">
+        <label for="url">Homepage</label>
+        <input id="url" type="url" placeholder="eg. http://joebloggs.com"/>
+    </div>
+    <div class="row">
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="eg. Please enter a message"></textarea>
+    </div>
+    <div class="row no-label">
+        <input type="checkbox" name="confirm_terms" value="true" id="confirm-terms"/>
+        <label for="confirm-terms">I agree to the <a href="#">Terms &amp; Conditions</a></label>
+    </div>
+    <div class="row no-label">
+        <button name="form-submit" type="submit" class="form-submit btn primary-cta">Submit</button>
+    </div>
+</form>
 
     </div>
     <script>
         saveHTMLForDemo('.sky-form');
-        $('.date-picker').datePicker();
-        $('.sky-form').validation();
+        if (window.require){
+            require(['toolkit'], function(){
+                $('.date-picker').datePicker();
+                $('.sky-form').validation();
+            });
+        } else {
+            $('.date-picker').datePicker();
+            $('.sky-form').validation();
+        }
     </script>
 </div>
     </div>
@@ -1229,112 +1249,120 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         <code>$('#demo-inpage-nav-tabs').inPageNav();</code>
     </div>
     <div class="demo" data-selector="#demo-inpage-nav-tabs">
+
         <section class="module clearfix tabs-container page-nav" data-function="tabs" id='demo-inpage-nav-tabs'>
 
-            <h2 class="speak">This is a screenreader header for tabs</h2>
+    <h2 class="speak">This is a screenreader header for tabs</h2>
 
-            <ul class="tabs clearfix" role="tablist">
-                <li id="first-tab" aria-controls="first" aria-label="first" role="tab" class="tab selected">
-                    <a href="#!first" class="skycom-ellipsis internal-link"><span>First</span></a>
-                </li>
-                <li id="second-tab" aria-controls="second" aria-label="second" role="tab" class="tab" >
-                    <a href="#!second" class="skycom-ellipsis internal-link"><span>SecondSecond</span></a>
-                </li>
-                <li id="third-tab" aria-controls="third" aria-label="third" role="tab" class="tab" >
-                    <a href="#!third" class="skycom-ellipsis internal-link"><span>ThirdThirdThird</span></a>
-                </li>
-                <li id="fourth-tab" aria-controls="fourth" aria-label="fourth" role="tab" class="tab" >
-                    <a href="#!fourth" class="skycom-ellipsis internal-link"><span>FourthFourth</span></a>
-                </li>
-                <li id="fifth-tab" aria-controls="fifth" aria-label="fifth" role="tab" class="tab">
-                    <a href="#!fifth" class="skycom-ellipsis internal-link"><span>FifthFifthFifthFifth</span></a>
-                </li>
-                <li id="sixth-tab" aria-controls="sixth" aria-label="sixth" role="tab" class="tab" >
-                    <a href="#!sixth" class="skycom-ellipsis internal-link"><span>Sixth</span></a>
-                </li>
-                <li id="seventh-tab" aria-controls="seventh" aria-label="seventh" role="tab" class="tab">
-                    <a href="#!seventh" class="skycom-ellipsis internal-link"><span>Seventh</span></a>
-                </li>
-                <div class="dropdown-tab-select">
-                    <a href="#!" aria-controls="dropdown" aria-label="more tabs" class="medium">&hellip;</a>
-                    <ul class="more-tabs">
+    <ul class="tabs clearfix" role="tablist">
+        <li id="first-tab" aria-controls="first" aria-label="first" role="tab" class="tab selected">
+            <a href="#!first" class="skycom-ellipsis internal-link"><span>First</span></a>
+        </li>
+        <li id="second-tab" aria-controls="second" aria-label="second" role="tab" class="tab" >
+            <a href="#!second" class="skycom-ellipsis internal-link"><span>SecondSecond</span></a>
+        </li>
+        <li id="third-tab" aria-controls="third" aria-label="third" role="tab" class="tab" >
+            <a href="#!third" class="skycom-ellipsis internal-link"><span>ThirdThirdThird</span></a>
+        </li>
+        <li id="fourth-tab" aria-controls="fourth" aria-label="fourth" role="tab" class="tab" >
+            <a href="#!fourth" class="skycom-ellipsis internal-link"><span>FourthFourth</span></a>
+        </li>
+        <li id="fifth-tab" aria-controls="fifth" aria-label="fifth" role="tab" class="tab">
+            <a href="#!fifth" class="skycom-ellipsis internal-link"><span>FifthFifthFifthFifth</span></a>
+        </li>
+        <li id="sixth-tab" aria-controls="sixth" aria-label="sixth" role="tab" class="tab" >
+            <a href="#!sixth" class="skycom-ellipsis internal-link"><span>Sixth</span></a>
+        </li>
+        <li id="seventh-tab" aria-controls="seventh" aria-label="seventh" role="tab" class="tab">
+            <a href="#!seventh" class="skycom-ellipsis internal-link"><span>Seventh</span></a>
+        </li>
+        <div class="dropdown-tab-select">
+            <a href="#!" aria-controls="dropdown" aria-label="more tabs" class="medium">&hellip;</a>
+            <ul class="more-tabs">
 
-                    </ul>
-                </div>
             </ul>
+        </div>
+    </ul>
 
-            <div id="first" class="tabpanel selected" aria-labeledby="first-tab" role="tabpanel">
-                <section class="tabcontents clearfix">
-                    <h2 class="speak">Screen reader header for First tab contents</h2>
-                    <div class="skycom-12 alpha">
-                        <img src="wiki_images/beckham.jpg" alt="beckham looking for help">
-                    </div>
-                </section>
+    <div id="first" class="tabpanel selected" aria-labeledby="first-tab" role="tabpanel">
+        <section class="tabcontents clearfix">
+            <h2 class="speak">Screen reader header for First tab contents</h2>
+            <div class="skycom-12 alpha">
+                <img src="wiki_images/beckham.jpg" alt="beckham looking for help">
             </div>
-
-            <div id="second" class="tabpanel" aria-labeledby="second-tab" role="tabpanel">
-                <section class="tabcontents clearfix">
-                    <h2 class="speak">Screen reader header for Second tab contents</h2>
-                    <div class="skycom-12 alpha">
-                        <img src="wiki_images/smash.jpg" alt="something else">
-                    </div>
-                </section>
-            </div>
-
-            <div id="third" class="tabpanel" aria-labeledby="third-tab" role="tabpanel">
-                <section class="tabcontents clearfix">
-                    <h2 class="speak">Screen reader header for Third tab contents</h2>
-                    <div class="skycom-12 alpha">
-                        <img src="wiki_images/beckham.jpg" alt="something else">
-                    </div>
-                </section>
-            </div>
-
-            <div id="fourth" class="tabpanel" aria-labeledby="fourth-tab" role="tabpanel">
-                <section class="tabcontents clearfix">
-                    <h2 class="speak">Screen reader header for Fourth tab contents</h2>
-                    <div class="skycom-12 alpha">
-                        <img src="wiki_images/smash.jpg" alt="something else">
-                    </div>
-                </section>
-            </div>
-
-            <div id="fifth" class="tabpanel" aria-labeledby="fifth-tab" role="tabpanel">
-                <section class="tabcontents clearfix">
-                    <h2 class="speak">Screen reader header for Fifth tab contents</h2>
-                    <div class="skycom-12 alpha">
-                        <img src="wiki_images/beckham.jpg" alt="something else">
-                    </div>
-                </section>
-            </div>
-
-            <div id="sixth" class="tabpanel" aria-labeledby="sixth-tab" role="tabpanel">
-                <section class="tabcontents clearfix">
-                    <h2 class="speak">Screen reader header for Sixth tab contents</h2>
-                    <div class="skycom-12 alpha">
-                        <img src="wiki_images/smash.jpg" alt="something else">
-                    </div>
-                </section>
-            </div>
-
-            <div id="seventh" class="tabpanel" aria-labeledby="seventh-tab" role="tabpanel">
-                <section class="tabcontents clearfix">
-                    <h2 class="speak">Screen reader header for Seventh tab contents</h2>
-                    <div class="skycom-12 alpha">
-                        <img src="wiki_images/beckham.jpg" alt="something else">
-                    </div>
-                </section>
-            </div>
-
         </section>
+    </div>
+
+    <div id="second" class="tabpanel" aria-labeledby="second-tab" role="tabpanel">
+        <section class="tabcontents clearfix">
+            <h2 class="speak">Screen reader header for Second tab contents</h2>
+            <div class="skycom-12 alpha">
+                <img src="wiki_images/smash.jpg" alt="something else">
+            </div>
+        </section>
+    </div>
+
+    <div id="third" class="tabpanel" aria-labeledby="third-tab" role="tabpanel">
+        <section class="tabcontents clearfix">
+            <h2 class="speak">Screen reader header for Third tab contents</h2>
+            <div class="skycom-12 alpha">
+                <img src="wiki_images/beckham.jpg" alt="something else">
+            </div>
+        </section>
+    </div>
+
+    <div id="fourth" class="tabpanel" aria-labeledby="fourth-tab" role="tabpanel">
+        <section class="tabcontents clearfix">
+            <h2 class="speak">Screen reader header for Fourth tab contents</h2>
+            <div class="skycom-12 alpha">
+                <img src="wiki_images/smash.jpg" alt="something else">
+            </div>
+        </section>
+    </div>
+
+    <div id="fifth" class="tabpanel" aria-labeledby="fifth-tab" role="tabpanel">
+        <section class="tabcontents clearfix">
+            <h2 class="speak">Screen reader header for Fifth tab contents</h2>
+            <div class="skycom-12 alpha">
+                <img src="wiki_images/beckham.jpg" alt="something else">
+            </div>
+        </section>
+    </div>
+
+    <div id="sixth" class="tabpanel" aria-labeledby="sixth-tab" role="tabpanel">
+        <section class="tabcontents clearfix">
+            <h2 class="speak">Screen reader header for Sixth tab contents</h2>
+            <div class="skycom-12 alpha">
+                <img src="wiki_images/smash.jpg" alt="something else">
+            </div>
+        </section>
+    </div>
+
+    <div id="seventh" class="tabpanel" aria-labeledby="seventh-tab" role="tabpanel">
+        <section class="tabcontents clearfix">
+            <h2 class="speak">Screen reader header for Seventh tab contents</h2>
+            <div class="skycom-12 alpha">
+                <img src="wiki_images/beckham.jpg" alt="something else">
+            </div>
+        </section>
+    </div>
+
+</section>
+
     </div>
     <script>
         saveHTMLForDemo('#demo-inpage-nav-tabs');
-        $('#demo-inpage-nav-tabs').inPageNav();
+        if (window.require){
+            require(['toolkit'], function(){
+                $('#demo-inpage-nav-tabs').inPageNav();
+            });
+        } else {
+            $('#demo-inpage-nav-tabs').inPageNav();
+        }
     </script>
 </div>
 
-        <div class="example">
+<div class="example">
     <h4 class="medium">Classic Tabs</h4>
     <div class="design-notes">
         This module should be used when only a small section of the page changes after an item click.
@@ -1346,110 +1374,120 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         Add Class '<code>classic</code>'.
     </div>
     <div class="demo" data-selector="#demo-classc-tabs">
+
         <section class="module clearfix tabs-container classic" data-function="tabs" id='demo-classc-tabs'>
 
-            <h2 class="speak">This is a screenreader header for tabs</h2>
+    <h2 class="speak">This is a screenreader header for tabs</h2>
 
-            <ul class="tabs clearfix" role="tablist">
-                <li id="first-classic-tab" aria-controls="first-classic" aria-label="first" role="tab" class="tab selected">
-                    <a href="#!first-classic" class="skycom-ellipsis internal-link"><span>First</span></a>
-                </li>
-                <li id="second-classic-tab" aria-controls="second-classic" aria-label="second" role="tab" class="tab" >
-                    <a href="#!second-classic" class="skycom-ellipsis internal-link"><span>SecondSecond</span></a>
-                </li>
-                <li id="third-classic-tab" aria-controls="third-classic" aria-label="third" role="tab" class="tab" >
-                    <a href="#!third-classic" class="skycom-ellipsis internal-link"><span>ThirdThirdThird</span></a>
-                </li>
-                <li id="fourth-classic-tab" aria-controls="fourth-classic" aria-label="fourth" role="tab" class="tab" >
-                    <a href="#!fourth-classic" class="skycom-ellipsis internal-link"><span>FourthFourth</span></a>
-                </li>
-                <li id="fifth-classic-tab" aria-controls="fifth-classic" aria-label="fifth" role="tab" class="tab">
-                    <a href="#!fifth-classic" class="skycom-ellipsis internal-link"><span>FifthFifthFifthFifth</span></a>
-                </li>
-                <li id="sixth-classic-tab" aria-controls="sixth-classic" aria-label="sixth" role="tab" class="tab" >
-                    <a href="#!sixth-classic" class="skycom-ellipsis internal-link"><span>Sixth</span></a>
-                </li>
-                <li id="seventh-classic-tab" aria-controls="seventh-classic" aria-label="seventh" role="tab" class="tab">
-                    <a href="#!seventh-classic" class="skycom-ellipsis internal-link"><span>Seventh</span></a>
-                </li>
-                <div class="dropdown-tab-select">
-                    <a href="#!" aria-controls="dropdown" aria-label="more tabs" class="medium">&hellip;</a>
-                    <ul class="more-tabs">
+    <ul class="tabs clearfix" role="tablist">
+        <li id="first-classic-tab" aria-controls="first-classic" aria-label="first" role="tab" class="tab selected">
+            <a href="#!first-classic" class="skycom-ellipsis internal-link"><span>First</span></a>
+        </li>
+        <li id="second-classic-tab" aria-controls="second-classic" aria-label="second" role="tab" class="tab" >
+            <a href="#!second-classic" class="skycom-ellipsis internal-link"><span>SecondSecond</span></a>
+        </li>
+        <li id="third-classic-tab" aria-controls="third-classic" aria-label="third" role="tab" class="tab" >
+            <a href="#!third-classic" class="skycom-ellipsis internal-link"><span>ThirdThirdThird</span></a>
+        </li>
+        <li id="fourth-classic-tab" aria-controls="fourth-classic" aria-label="fourth" role="tab" class="tab" >
+            <a href="#!fourth-classic" class="skycom-ellipsis internal-link"><span>FourthFourth</span></a>
+        </li>
+        <li id="fifth-classic-tab" aria-controls="fifth-classic" aria-label="fifth" role="tab" class="tab">
+            <a href="#!fifth-classic" class="skycom-ellipsis internal-link"><span>FifthFifthFifthFifth</span></a>
+        </li>
+        <li id="sixth-classic-tab" aria-controls="sixth-classic" aria-label="sixth" role="tab" class="tab" >
+            <a href="#!sixth-classic" class="skycom-ellipsis internal-link"><span>Sixth</span></a>
+        </li>
+        <li id="seventh-classic-tab" aria-controls="seventh-classic" aria-label="seventh" role="tab" class="tab">
+            <a href="#!seventh-classic" class="skycom-ellipsis internal-link"><span>Seventh</span></a>
+        </li>
+        <div class="dropdown-tab-select">
+            <a href="#!" aria-controls="dropdown" aria-label="more tabs" class="medium">&hellip;</a>
+            <ul class="more-tabs">
 
-                    </ul>
-                </div>
             </ul>
+        </div>
+    </ul>
 
-            <div id="first-classic" class="tabpanel selected" aria-labeledby="first-classic-tab" role="tabpanel">
-                <section class="tabcontents clearfix">
-                    <h2 class="speak">Screen reader header for First tab contents</h2>
-                    <div class="skycom-12 alpha">
-                        <img src="wiki_images/beckham.jpg" alt="beckham looking for help">
-                    </div>
-                </section>
+    <div id="first-classic" class="tabpanel selected" aria-labeledby="first-classic-tab" role="tabpanel">
+        <section class="tabcontents clearfix">
+            <h2 class="speak">Screen reader header for First tab contents</h2>
+            <div class="skycom-12 alpha">
+                <img src="wiki_images/beckham.jpg" alt="beckham looking for help">
             </div>
-
-            <div id="second-classic" class="tabpanel" aria-labeledby="second-classic-tab" role="tabpanel">
-                <section class="tabcontents clearfix">
-                    <h2 class="speak">Screen reader header for Second tab contents</h2>
-                    <div class="skycom-12 alpha">
-                        <img src="wiki_images/smash.jpg" alt="something else">
-                    </div>
-                </section>
-            </div>
-
-            <div id="third-classic" class="tabpanel" aria-labeledby="third-classic-tab" role="tabpanel">
-                <section class="tabcontents clearfix">
-                    <h2 class="speak">Screen reader header for Third tab contents</h2>
-                    <div class="skycom-12 alpha">
-                        <img src="wiki_images/beckham.jpg" alt="something else">
-                    </div>
-                </section>
-            </div>
-
-            <div id="fourth-classic" class="tabpanel" aria-labeledby="fourth-classic-tab" role="tabpanel">
-                <section class="tabcontents clearfix">
-                    <h2 class="speak">Screen reader header for Fourth tab contents</h2>
-                    <div class="skycom-12 alpha">
-                        <img src="wiki_images/smash.jpg" alt="something else">
-                    </div>
-                </section>
-            </div>
-
-            <div id="fifth-classic" class="tabpanel" aria-labeledby="fifth-classic-tab" role="tabpanel">
-                <section class="tabcontents clearfix">
-                    <h2 class="speak">Screen reader header for Fifth tab contents</h2>
-                    <div class="skycom-12 alpha">
-                        <img src="wiki_images/beckham.jpg" alt="something else">
-                    </div>
-                </section>
-            </div>
-
-            <div id="sixth-classic" class="tabpanel" aria-labeledby="sixth-classic-tab" role="tabpanel">
-                <section class="tabcontents clearfix">
-                    <h2 class="speak">Screen reader header for Sixth tab contents</h2>
-                    <div class="skycom-12 alpha">
-                        <img src="wiki_images/smash.jpg" alt="something else">
-                    </div>
-                </section>
-            </div>
-
-            <div id="seventh-classic" class="tabpanel" aria-labeledby="seventh-classic-tab" role="tabpanel">
-                <section class="tabcontents clearfix">
-                    <h2 class="speak">Screen reader header for Seventh tab contents</h2>
-                    <div class="skycom-12 alpha">
-                        <img src="wiki_images/beckham.jpg" alt="something else">
-                    </div>
-                </section>
-            </div>
-
         </section>
+    </div>
+
+    <div id="second-classic" class="tabpanel" aria-labeledby="second-classic-tab" role="tabpanel">
+        <section class="tabcontents clearfix">
+            <h2 class="speak">Screen reader header for Second tab contents</h2>
+            <div class="skycom-12 alpha">
+                <img src="wiki_images/smash.jpg" alt="something else">
+            </div>
+        </section>
+    </div>
+
+    <div id="third-classic" class="tabpanel" aria-labeledby="third-classic-tab" role="tabpanel">
+        <section class="tabcontents clearfix">
+            <h2 class="speak">Screen reader header for Third tab contents</h2>
+            <div class="skycom-12 alpha">
+                <img src="wiki_images/beckham.jpg" alt="something else">
+            </div>
+        </section>
+    </div>
+
+    <div id="fourth-classic" class="tabpanel" aria-labeledby="fourth-classic-tab" role="tabpanel">
+        <section class="tabcontents clearfix">
+            <h2 class="speak">Screen reader header for Fourth tab contents</h2>
+            <div class="skycom-12 alpha">
+                <img src="wiki_images/smash.jpg" alt="something else">
+            </div>
+        </section>
+    </div>
+
+    <div id="fifth-classic" class="tabpanel" aria-labeledby="fifth-classic-tab" role="tabpanel">
+        <section class="tabcontents clearfix">
+            <h2 class="speak">Screen reader header for Fifth tab contents</h2>
+            <div class="skycom-12 alpha">
+                <img src="wiki_images/beckham.jpg" alt="something else">
+            </div>
+        </section>
+    </div>
+
+    <div id="sixth-classic" class="tabpanel" aria-labeledby="sixth-classic-tab" role="tabpanel">
+        <section class="tabcontents clearfix">
+            <h2 class="speak">Screen reader header for Sixth tab contents</h2>
+            <div class="skycom-12 alpha">
+                <img src="wiki_images/smash.jpg" alt="something else">
+            </div>
+        </section>
+    </div>
+
+    <div id="seventh-classic" class="tabpanel" aria-labeledby="seventh-classic-tab" role="tabpanel">
+        <section class="tabcontents clearfix">
+            <h2 class="speak">Screen reader header for Seventh tab contents</h2>
+            <div class="skycom-12 alpha">
+                <img src="wiki_images/beckham.jpg" alt="something else">
+            </div>
+        </section>
+    </div>
+
+</section>
+
     </div>
     <script>
         saveHTMLForDemo('#demo-classc-tabs');
-        $('#demo-classc-tabs').inPageNav();
+        if (window.require){
+            require(['toolkit'], function(){
+                $('#demo-classc-tabs').inPageNav();
+            });
+        } else {
+            $('#demo-classc-tabs').inPageNav();
+        }
     </script>
 </div>
+
+        Included file 'components/tabs.html' not found in _includes directory
     </div>
     <a name="lightbox"></a>
     <div class="sub-section">
@@ -1464,61 +1502,73 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 </p>
 <div class="example">
     <div class="demo" data-selector="#lightbox-demo">
+
         <div id="lightbox-demo" class="lightbox">
-            <div class="skycom-container lightbox-container clearfix">
-                <article class="lightbox-content skycom-10 skycom-offset1" role="dialog" aria-labelledby="lightbox-demo-text-link-for-large-lightbox">
-                    <a class="internal-link lightbox-close skycon-close" href="#">
-                        <span class="speak">Close</span>
-                    </a>
+    <div class="skycom-container lightbox-container clearfix">
+        <article class="lightbox-content skycom-10 skycom-offset1" role="dialog" aria-labelledby="lightbox-demo-text-link-for-large-lightbox">
+            <a class="internal-link lightbox-close skycon-close" href="#">
+                <span class="speak">Close</span>
+            </a>
 
-                    <img src="wiki_images/bling-ring.jpg" height="380" width="1140" style="width:100%;height:auto;" />
+            <img src="wiki_images/bling-ring.jpg" height="380" width="1140" style="width:100%;height:auto;" />
 
-                    <!-- Note you can use the sky-grid in lightboxes -->
-                    <div class="skycom-container clearfix">
-                        <div class="skycom-7 alpha">
-                            <h2>Large Lightbox</h2>
+            <!-- Note you can use the sky-grid in lightboxes -->
+            <div class="skycom-container clearfix">
+                <div class="skycom-7 alpha">
+                    <h2>Large Lightbox</h2>
 
-                            <p>Lorem ipsum dolor sit amet</p>
+                    <p>Lorem ipsum dolor sit amet</p>
 
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
 
-                            Text: <input id="lightboxInput" type="text" placeholder="focusable input">
+                    Text: <input id="lightboxInput" type="text" placeholder="focusable input">
 
-                            <p style="margin-bottom: 16px;">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua.
-                            </p>
-                        </div>
+                    <p style="margin-bottom: 16px;">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua.
+                    </p>
+                </div>
 
-                        <div class="skycom-5">
-                            <h3>Other Links</h3>
+                <div class="skycom-5">
+                    <h3>Other Links</h3>
 
-                            <ul>
-                                <li><a href="#"><i class="skycon-chevron colour"></i>Lorem Ipsum</a></li>
-                                <li><a href="#"><i class="skycon-chevron colour"></i>Dolor sit amet</a></li>
-                                <li><a href="#"><i class="skycon-chevron colour"></i>Consectetur adipisicing elit</a></li>
-                                <li><a href="#"><i class="skycon-chevron colour"></i>Sed do eiusmod</a></li>
-                                <li><a href="#"><i class="skycon-chevron colour"></i>Tempor incididunt</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </article>
+                    <ul>
+                        <li><a href="#"><i class="skycon-chevron colour"></i>Lorem Ipsum</a></li>
+                        <li><a href="#"><i class="skycon-chevron colour"></i>Dolor sit amet</a></li>
+                        <li><a href="#"><i class="skycon-chevron colour"></i>Consectetur adipisicing elit</a></li>
+                        <li><a href="#"><i class="skycon-chevron colour"></i>Sed do eiusmod</a></li>
+                        <li><a href="#"><i class="skycon-chevron colour"></i>Tempor incididunt</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        </article>
+    </div>
+</div>
+
     </div>
     <script>
         saveHTMLForDemo('#lightbox-demo');
-        $('#lightbox-demo-text-link-for-lightbox').on('click', function(e) {
-            e.preventDefault();
-            $('[data-function=carousel]').trigger("pause");
-            window.toolkit.lightbox.show('#lightbox-demo', '#lightbox-demo-text-link-for-lightbox');
-        });
+        if (window.require){
+            require(['toolkit'], function(){
+                $('#lightbox-demo-text-link-for-lightbox').on('click', function(e) {
+                    e.preventDefault();
+                    $('[data-function=carousel]').trigger("pause");
+                    window.toolkit.lightbox.show('#lightbox-demo', '#lightbox-demo-text-link-for-lightbox');
+                });
+            });
+        } else {
+            $('#lightbox-demo-text-link-for-lightbox').on('click', function(e) {
+                e.preventDefault();
+                $('[data-function=carousel]').trigger("pause");
+                window.toolkit.lightbox.show('#lightbox-demo', '#lightbox-demo-text-link-for-lightbox');
+            });
+        }
     </script>
 </div>
 
@@ -1531,42 +1581,50 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 </p>
 <div class="example">
     <div class="demo" data-selector=".accordion">
+
         <ul class="accordion">
-            <li>
-                <a class="accordion-heading colour" data-toggle-state="hidden"  data-toggle="#first-accordion-content" href="#first-accordion-content">
-                    <span>First Accordion Item</span> <i class="skycon-chevron-down"></i>
-                </a>
-                <div id="first-accordion-content" class="view-container toggle-hidden">
-                    <div class=accordion-content>
-                        <p style="margin: 0;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget commodo nulla. Sed nec magna pellentesque, aliquam orci eu, cursus augue. Morbi eget hendrerit nunc. Aliquam interdum non sem a scelerisque. In convallis est augue, eget dictum tortor posuere et. Vivamus neque dolor, elementum sed porttitor ac, aliquet sit amet lectus. Nullam libero arcu, auctor ut neque id, varius tempus arcu. Mauris rhoncus eros egestas facilisis convallis. Phasellus elementum elit eget ligula posuere malesuada</p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a class="accordion-heading colour" data-toggle-state="hidden"  data-toggle="#second-accordion-content" href="#second-accordion-content">
-                    <span>Second Accordion Item</span> <i class="skycon-chevron-down"></i></span>
-                </a>
-                <div id="second-accordion-content" class="view-container toggle-hidden">
-                    <div class=accordion-content>
-                        <p style="margin: 0; height: 400px; background-color: #f00;">Second Accordion content</p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <a class="accordion-heading colour" data-toggle-state="hidden"  data-toggle="#third-accordion-content" href="#third-accordion-content">
-                    <span>Third Accordion Item</span> <i class="skycon-chevron-down"></i>
-                </a>
-                <div id="third-accordion-content" class="view-container toggle-hidden">
-                    <div class=accordion-content>
-                        <p style="margin: 0;">Third Accordion content</p>
-                    </div>
-                </div>
-            </li>
-        </ul>
+    <li>
+        <a class="accordion-heading colour" data-toggle-state="hidden"  data-toggle="#first-accordion-content" href="#first-accordion-content">
+            <span>First Accordion Item</span> <i class="skycon-chevron-down"></i>
+        </a>
+        <div id="first-accordion-content" class="view-container toggle-hidden">
+            <div class=accordion-content>
+                <p style="margin: 0;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget commodo nulla. Sed nec magna pellentesque, aliquam orci eu, cursus augue. Morbi eget hendrerit nunc. Aliquam interdum non sem a scelerisque. In convallis est augue, eget dictum tortor posuere et. Vivamus neque dolor, elementum sed porttitor ac, aliquet sit amet lectus. Nullam libero arcu, auctor ut neque id, varius tempus arcu. Mauris rhoncus eros egestas facilisis convallis. Phasellus elementum elit eget ligula posuere malesuada</p>
+            </div>
+        </div>
+    </li>
+    <li>
+        <a class="accordion-heading colour" data-toggle-state="hidden"  data-toggle="#second-accordion-content" href="#second-accordion-content">
+            <span>Second Accordion Item</span> <i class="skycon-chevron-down"></i></span>
+        </a>
+        <div id="second-accordion-content" class="view-container toggle-hidden">
+            <div class=accordion-content>
+                <p style="margin: 0; height: 400px; background-color: #f00;">Second Accordion content</p>
+            </div>
+        </div>
+    </li>
+    <li>
+        <a class="accordion-heading colour" data-toggle-state="hidden"  data-toggle="#third-accordion-content" href="#third-accordion-content">
+            <span>Third Accordion Item</span> <i class="skycon-chevron-down"></i>
+        </a>
+        <div id="third-accordion-content" class="view-container toggle-hidden">
+            <div class=accordion-content>
+                <p style="margin: 0;">Third Accordion content</p>
+            </div>
+        </div>
+    </li>
+</ul>
+
     </div>
     <script>
         saveHTMLForDemo('.accordion');
-        $('.accordion').accordion();
+        if (window.require){
+            require(['toolkit'], function(){
+                $('.accordion').accordion();
+            });
+        } else {
+            $('.accordion').accordion();
+        }
     </script>
 </div>
     </div>
@@ -1592,112 +1650,120 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         Add the class <code>hero-3-1</code>.
     </p>
     <div class="demo" data-selector="#hero">
-        <section class="module clearfix skycom-carousel hero-3-1" data-function="carousel" data-tracking-module="hero"
-                 id="hero">
-            <h2 class="speak">Featured News, shows or Products from around Sky</h2>
 
-            <div class="skycom-carousel-container clearfix">
-                <div
-                        class="clearfix skycom-12 alpha bg-shading light-scheme"
-                        data-tracking-other="Sky Sports HD1"
-                        data-tracking-pod="tile-1"
-                        data-tracking-label="David Beckham And Sky Team Up"
-                        data-tracking-theme="tracking-theme"
-                        data-video-id="clip-00cwoia5"
-                        >
-                    <figure>
-                        <div class="shade"></div>
-                        <div class="poster">
-                            <img src="wiki_images/carousel/beckham.jpg"
-                                 alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
-                        </div>
-                        <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
-                            <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb4002.png'
-                                 alt='Sky Sports HD1' class='channel-logo'/>
-                            <a href="#!beckham" class="clearfix">
-                                <h3 class="skycom-focus-el  section-title smaller" id="title-beckham">David Beckham And Sky Team Up</h3>
-
-                                <p class="skycom-ellipsis">Global sports star David Beckham OBE is joining Sky as an ambassador.</p>
-                            </a>
-                        </figcaption>
-                        <a href="#!" class="play-video">
-                            <i class="icon-video-play" aria-hidden="true"></i>
-                            <span class="hidden-mobile">Play Trailer</span>
-                        </a>
-                    </figure>
-                    <h4 class="speak">Terms and Conditions</h4>
-                    <p class="terms speak legal">
-                        These are some terms and conditions
-                    </p>
+        
+<section class="module clearfix skycom-carousel hero-3-1" data-function="carousel" data-tracking-module="hero"
+         id="hero">
+    <h2 class="speak">Featured News, shows or Products from around Sky</h2>
+    <div class="skycom-carousel-container clearfix">
+        <div
+                class="clearfix skycom-12 alpha bg-shading light-scheme"
+                data-tracking-other="Sky Sports HD1"
+                data-tracking-pod="tile-1"
+                data-tracking-label="David Beckham And Sky Team Up"
+                data-tracking-theme="tracking-theme"
+                data-video-id="clip-00cwoia5"
+                >
+            <figure>
+                <div class="shade"></div>
+                <div class="poster">
+                    <img src="wiki_images/carousel/beckham.jpg"
+                         alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
                 </div>
+                <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
+                    <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb4002.png'
+                         alt='Sky Sports HD1' class='channel-logo'/>
+                    <a href="#!beckham" class="clearfix">
+                        <h3 class="skycom-focus-el  section-title smaller" id="title-beckham">David Beckham And Sky Team Up</h3>
+                        <p class="skycom-ellipsis">Global sports star David Beckham OBE is joining Sky as an ambassador.</p>
+                    </a>
+                </figcaption>
+                <a href="#!" class="play-video">
+                    <i class="icon-video-play" aria-hidden="true"></i>
+                    <span class="hidden-mobile">Play Trailer</span>
+                </a>
+            </figure>
+            <h4 class="speak">Terms and Conditions</h4>
+            <p class="terms speak legal">
+                These are some terms and conditions
+            </p>
+        </div>
 
-                <div data-video-id="clip-00ovbt3u"
-                        class="clearfix skycom-12 alpha  light-scheme"
-                        data-tracking-other="Sky News"
-                        data-tracking-pod="tile-2"
-                        data-tracking-label="Introducing Sky Entertainment Extra+"
-                        data-tracking-theme="tracking-theme"
-                        >
-                    <figure>
-                        <div class="shade"></div>
-                        <div class="poster">
-                            <img src="wiki_images/carousel/cube.jpg"
-                                 alt="Cube showing Sky Entertainment Extra Plus upgrade from £5 extra a month">
-                        </div>
-                        <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
-                            <span class='channel-logo text-only'>Sky News</span>
-                            <a href="#!sky-entertainment-extra-plus" class="clearfix">
-                                <h3 class="skycom-focus-el section-title smaller" id="title-sky-entertainment-extra-plus">Introducing Sky
-                                    Entertainment Extra+</h3>
+        <div data-video-id="clip-00ovbt3u"
+             class="clearfix skycom-12 alpha  light-scheme"
+             data-tracking-other="Sky News"
+             data-tracking-pod="tile-2"
+             data-tracking-label="Introducing Sky Entertainment Extra+"
+             data-tracking-theme="tracking-theme"
+                >
+            <figure>
+                <div class="shade"></div>
+                <div class="poster">
+                    <img src="wiki_images/carousel/cube.jpg"
+                         alt="Cube showing Sky Entertainment Extra Plus upgrade from £5 extra a month">
+                </div>
+                <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
+                    <span class='channel-logo text-only'>Sky News</span>
+                    <a href="#!sky-entertainment-extra-plus" class="clearfix">
+                        <h3 class="skycom-focus-el section-title smaller" id="title-sky-entertainment-extra-plus">Introducing Sky
+                            Entertainment Extra+</h3>
 
-                                <p class="skycom-ellipsis">Supercharge your TV</p>
-                            </a>
-                        </figcaption>
-                        <a href="#!" class="play-video" >
-                            <i class="icon-video-play" aria-hidden="true"></i>
-                            <span class="hidden-mobile">Play Trailer</span>
-                        </a>
-                    </figure>
-                    <h4 class="speak">Terms and Conditions</h4>
-                    <p class="terms speak legal">
-                        These are some different terms and conditions
-                    </p>
+                        <p class="skycom-ellipsis">Supercharge your TV</p>
+                    </a>
+                </figcaption>
+                <a href="#!" class="play-video" >
+                    <i class="icon-video-play" aria-hidden="true"></i>
+                    <span class="hidden-mobile">Play Trailer</span>
+                </a>
+            </figure>
+            <h4 class="speak">Terms and Conditions</h4>
+            <p class="terms speak legal">
+                These are some different terms and conditions
+            </p>
+        </div>
+        <div
+                class="clearfix skycom-12 alpha bg-shading dark-scheme"
+                data-tracking-other="Sky Movies Premiere"
+                data-tracking-pod="tile-3"
+                data-tracking-label="Watch The Avengers now in 9 hours"
+                data-tracking-theme="tracking-theme"
+                >
+            <figure>
+                <div class="shade"></div>
+                <div class="poster">
+                    <img src="wiki_images/carousel/avengers.jpg" alt="Heroes">
                 </div>
-                <div
-                        class="clearfix skycom-12 alpha bg-shading dark-scheme"
-                        data-tracking-other="Sky Movies Premiere"
-                        data-tracking-pod="tile-3"
-                        data-tracking-label="Watch The Avengers now in 9 hours"
-                        data-tracking-theme="tracking-theme"
-                        >
-                    <figure>
-                        <div class="shade"></div>
-                        <div class="poster">
-                            <img src="wiki_images/carousel/avengers.jpg" alt="Heroes">
-                        </div>
-                        <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
-                            <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb1409.png'
-                                 alt='Sky Movies Premiere' class='channel-logo'/>
-                            <a href="#!avengers1" class="clearfix">
-                                <h3 class="skycom-focus-el  section-title smaller" id="title-avengers1">Watch The Avengers now in 9 hours</h3>
-                                <p class="skycom-ellipsis">Watch Tonight</p>
-                            </a>
-                        </figcaption>
-                    </figure>
-                </div>
-            </div>
-        </section>
+                <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
+                    <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb1409.png'
+                         alt='Sky Movies Premiere' class='channel-logo'/>
+                    <a href="#!avengers1" class="clearfix">
+                        <h3 class="skycom-focus-el  section-title smaller" id="title-avengers1">Watch The Avengers now in 9 hours</h3>
+                        <p class="skycom-ellipsis">Watch Tonight</p>
+                    </a>
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
     </div>
     <script>
         saveHTMLForDemo('#hero');
-        $('#hero').skycom_carousel({
-            carousel: {
-                autoplay: true,
-                videoAds: false
-            }
-        });
+        componentConfig =  {
+            autoplay: true,
+            videoAds: false
+        };
+        if (window.require){
+            require(['toolkit'], function(){
+                $('#hero').skycom_carousel(componentConfig);
+            });
+        } else {
+            $('#hero').skycom_carousel(componentConfig);
+        }
+
     </script>
 </div>
+
 <div class="example">
     <h4 class="medium">Skinny Carousel</h4>
     <div class="design-notes">
@@ -1707,106 +1773,177 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         Add the class <code>hero-skinny</code>.
     </p>
     <div class="demo" data-selector="#hero-skinny">
-        <section class="module clearfix skycom-carousel hero-skinny" data-function="carousel" data-tracking-module="hero-169"
-                 id="hero-skinny">
-            <h2 class="speak">Featured News, shows or Products from around Sky</h2>
 
-            <div class="skycom-carousel-container clearfix">
-                <div
-                        class="clearfix skycom-12 alpha bg-shading light-scheme"
-                        data-tracking-other="Sky Sports HD1"
-                        data-tracking-pod="tile-1"
-                        data-tracking-label="David Beckham And Sky Team Up"
-                        data-tracking-theme="tracking-theme"
-                        data-video-id="clip-00cwoia5"
-                        >
-                    <figure>
-                        <div class="shade"></div>
-                        <div class="poster">
-                            <img src="wiki_images/carousel/169-half-price.jpg"
-                                 alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
-                        </div>
-                        <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
-                            <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb1409.png'
-                                 alt='Sky Movies' class='channel-logo'/>
-                            <a href="#!beckham" class="clearfix">
-                                <h3 class="skycom-focus-el  section-title smaller" id="title-beckham-169">Half Price</h3>
-                                <p class="skycom-ellipsis">for 6 months</p>
-                            </a>
-                        </figcaption>
-                        <a href="#!" class="play-video">
-                            <i class="icon-video-play" aria-hidden="true"></i>
-                            <span class="hidden-mobile">Play Trailer</span>
-                        </a>
-                    </figure>
-                    <h4 class="speak">Terms and Conditions</h4>
-                    <p class="terms speak legal">
-                        These are some terms and conditions
-                    </p>
-                </div>
+        <section class="module clearfix skycom-carousel hero-skinny" data-function="carousel" data-tracking-module="hero-skinny"
+         id="hero-skinny">
+    <h2 class="speak">Featured News, shows or Products from around Sky</h2>
 
-                <div data-video-id="clip-00ovbt3u"
-                        class="clearfix skycom-12 alpha  light-scheme"
-                        data-tracking-other="Sky News"
-                        data-tracking-pod="tile-2"
-                        data-tracking-label="Introducing Sky Entertainment Extra+"
-                        data-tracking-theme="tracking-theme"
-                        >
-                    <figure>
-                        <div class="shade"></div>
-                        <div class="poster">
-                            <img src="wiki_images/carousel/169-offers.jpg"
-                                 alt="Cube showing Sky Entertainment Extra Plus upgrade from £5 extra a month">
-                        </div>
-                        <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
-                            <a href="#!sky-entertainment-extra-plus" class="clearfix">
-                                <h3 class="skycom-focus-el section-title smaller" id="title-sky-entertainment-extra-plus-169">Join Sky</h3>
-                                <p class="skycom-ellipsis">Save Money</p>
-                            </a>
-                        </figcaption>
-                    </figure>
-                    <h4 class="speak">Terms and Conditions</h4>
-                    <p class="terms speak legal">
-                        These are some different terms and conditions
-                    </p>
+    <div class="skycom-carousel-container clearfix">
+        <div
+                class="clearfix skycom-12 alpha bg-shading light-scheme"
+                data-tracking-other="Sky Sports HD1"
+                data-tracking-pod="tile-1"
+                data-tracking-label="David Beckham And Sky Team Up"
+                data-tracking-theme="tracking-theme"
+                data-video-id="clip-00cwoia5"
+                >
+            <figure>
+                <div class="shade"></div>
+                <div class="poster">
+                    <img src="wiki_images/carousel/169-half-price.jpg"
+                         alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
                 </div>
-                <div data-video-id="clip-00ovbt3u"
-                        class="clearfix skycom-12 alpha bg-shading dark-scheme"
-                        data-tracking-other="Sky Movies Premiere"
-                        data-tracking-pod="tile-3"
-                        data-tracking-label="Watch The Avengers now in 9 hours"
-                        data-tracking-theme="tracking-theme"
-                        >
-                    <figure>
-                        <div class="shade"></div>
-                        <div class="poster">
-                            <img src="wiki_images/carousel/169-box-sets.jpg" alt="Heroes">
-                        </div>
-                        <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
-                            <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb1409.png'
-                                 alt='Sky Movies Premiere' class='channel-logo'/>
-                            <a href="#!avengers1" class="clearfix">
-                                <h3 class="skycom-focus-el  section-title smaller" id="title-avengers1-169">TV Box Sets</h3>
-                                <p class="skycom-ellipsis">A fabulous collection</p>
-                            </a>
-                        </figcaption>
-                        <a href="#!" class="play-video" >
-                            <i class="icon-video-play" aria-hidden="true"></i>
-                            <span class="hidden-mobile">Play Trailer</span>
-                        </a>
-                    </figure>
+                <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
+                    <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb1409.png'
+                         alt='Sky Movies' class='channel-logo'/>
+                    <a href="#!beckham" class="clearfix">
+                        <h3 class="skycom-focus-el  section-title smaller" id="title-beckham-169">Half Price</h3>
+                        <p class="skycom-ellipsis">for 6 months</p>
+                    </a>
+                </figcaption>
+                <a href="#!" class="play-video">
+                    <i class="icon-video-play" aria-hidden="true"></i>
+                    <span class="hidden-mobile">Play Trailer</span>
+                </a>
+            </figure>
+        </div>
+
+        <div data-video-id="clip-00ovbt3u"
+             class="clearfix skycom-12 alpha  light-scheme"
+             data-tracking-other="Sky News"
+             data-tracking-pod="tile-2"
+             data-tracking-label="Introducing Sky Entertainment Extra+"
+             data-tracking-theme="tracking-theme"
+                >
+            <figure>
+                <div class="shade"></div>
+                <div class="poster">
+                    <img src="wiki_images/carousel/169-offers.jpg"
+                         alt="Cube showing Sky Entertainment Extra Plus upgrade from £5 extra a month">
                 </div>
-            </div>
-        </section>
+                <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
+                    <a href="#!sky-entertainment-extra-plus" class="clearfix">
+                        <h3 class="skycom-focus-el section-title smaller" id="title-sky-entertainment-extra-plus-169">Join Sky</h3>
+                        <p class="skycom-ellipsis">Save Money</p>
+                    </a>
+                </figcaption>
+            </figure>
+            <h4 class="speak">Terms and Conditions</h4>
+            <p class="terms speak legal">
+                These are some different terms and conditions
+            </p>
+        </div>
+        <div data-video-id="clip-00ovbt3u"
+             class="clearfix skycom-12 alpha bg-shading dark-scheme"
+             data-tracking-other="Sky Movies Premiere"
+             data-tracking-pod="tile-3"
+             data-tracking-label="Watch The Avengers now in 9 hours"
+             data-tracking-theme="tracking-theme"
+                >
+            <figure>
+                <div class="shade"></div>
+                <div class="poster">
+                    <img src="wiki_images/carousel/169-box-sets.jpg" alt="Heroes">
+                </div>
+                <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
+                    <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb1409.png'
+                         alt='Sky Movies Premiere' class='channel-logo'/>
+                    <a href="#!avengers1" class="clearfix">
+                        <h3 class="skycom-focus-el  section-title smaller" id="title-avengers1-169">TV Box Sets</h3>
+                        <p class="skycom-ellipsis">A fabulous collection</p>
+                    </a>
+                </figcaption>
+                <a href="#!" class="play-video" >
+                    <i class="icon-video-play" aria-hidden="true"></i>
+                    <span class="hidden-mobile">Play Trailer</span>
+                </a>
+            </figure>
+            <h4 class="speak">Terms and Conditions</h4>
+            <p class="terms speak legal">
+                These are some terms and conditions
+            </p>
+        </div>
+    </div>
+</section>
+
     </div>
     <script>
         saveHTMLForDemo('#hero-skinny');
-        $('#hero-skinny').skycom_carousel({
-            carousel: {
-                autoplay: true,
-                videoAds: false
-            }
-        });
+        componentConfig =  {
+            autoplay: true,
+            videoAds: false
+        };
+        if (window.require){
+            require(['toolkit'], function(){
+                $('#hero-skinny').skycom_carousel(componentConfig);
+            });
+        } else {
+            $('#hero-skinny').skycom_carousel(componentConfig);
+        }
+    </script>
+</div>
+
+<div class="example">
+    <h4 class="medium">Single Slide Carousel</h4>
+    <div class="design-notes">
+        This will behave like it isn't a carousel as there is only one slide.
+    </div>
+    <div class="demo" data-selector="#empty-hero">
+
+        
+<section class="module clearfix skycom-carousel hero-3-1" data-function="carousel" data-tracking-module="empty-hero"
+         id="empty-hero">
+    <h2 class="speak">Featured News, shows or Products from around Sky</h2>
+    <div class="skycom-carousel-container clearfix">
+        <div
+                class="clearfix skycom-12 alpha bg-shading light-scheme"
+                data-tracking-other="Sky Sports HD1"
+                data-tracking-pod="tile-1"
+                data-tracking-label="David Beckham And Sky Team Up"
+                data-tracking-theme="tracking-theme"
+                data-video-id="clip-00cwoia5"
+                >
+            <figure>
+                <div class="shade"></div>
+                <div class="poster">
+                    <img src="wiki_images/carousel/beckham.jpg"
+                         alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
+                </div>
+                <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
+                    <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb4002.png'
+                         alt='Sky Sports HD1' class='channel-logo'/>
+                    <a href="#!beckham" class="clearfix">
+                        <h3 class="skycom-focus-el  section-title smaller" id="title-beckham">David Beckham And Sky Team Up</h3>
+                        <p class="skycom-ellipsis">Global sports star David Beckham OBE is joining Sky as an ambassador.</p>
+                    </a>
+                </figcaption>
+                <a href="#!" class="play-video">
+                    <i class="icon-video-play" aria-hidden="true"></i>
+                    <span class="hidden-mobile">Play Trailer</span>
+                </a>
+            </figure>
+            <h4 class="speak">Terms and Conditions</h4>
+            <p class="terms speak legal">
+                These are some terms and conditions
+            </p>
+        </div>
+    </div>
+</section>
+
+    </div>
+    <script>
+        saveHTMLForDemo('#empty-hero');
+        componentConfig =  {
+            autoplay: true,
+            videoAds: false
+        };
+        if (window.require){
+            require(['toolkit'], function(){
+                $('#empty-hero').skycom_carousel(componentConfig);
+            });
+        } else {
+            $('#empty-hero').skycom_carousel(componentConfig);
+        }
     </script>
 </div>
     </div>
@@ -1825,20 +1962,22 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 </div>
 <div class="example">
     <div class="demo" data-selector=".video-container" id="demo-video">
-        <div class="video-container" data-video-id="clip-00i9rvth">
-            <img src="wiki_images/bling-ring.jpg"
-                 alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
 
-            <a href="#!" class="play-video internal-link"
-               data-tracking-context="David Beckham And Sky Team Up">
-                <i class="icon-video-play"></i>
-                <span class="speak">Play Trailer</span>
-            </a>
-        </div>
+        <div class="video-container" data-video-id="clip-00i9rvth">
+    <img src="wiki_images/bling-ring.jpg"
+         alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
+
+    <a href="#!" class="play-video internal-link"
+       data-tracking-context="David Beckham And Sky Team Up">
+        <i class="icon-video-play"></i>
+        <span class="speak">Play Trailer</span>
+    </a>
+</div>
+
     </div>
     <script>
         saveHTMLForDemo('.video-container');
-        $('#demo-video .video-container').video({
+        componentConfig = {
             token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85", //this token should be unique to your team
             displayAdverts:false ,
             onPlay: function() { //optional
@@ -1847,7 +1986,14 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
             closeCallback: function() { //optional
                 //stuff to do after video closes
             }
-        });
+        };
+        if (window.require){
+            require(['toolkit'], function(){
+                $('#demo-video .video-container').video(componentConfig);
+            });
+        } else {
+            $('#demo-video .video-container').video(componentConfig);
+        }
     </script>
 </div>
     </div>
@@ -1862,32 +2008,30 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="developer-notes">
         Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
     </div>
-    <div class="init-notes">
-        standard: <code>toolkit.modules.init();</code>
-        explicit: <code>toolkit.modules.init({share:true, popup: true, skycons: true });</code>
-    </div>
     <div class="demo" data-selector="*">
+
         <div class="share-popup clearfix">
-            <a class="summary" href="#!" data-tracking-context="Shared article title" aria-label="Shared 146 times. Click to show share options">
-                <i class="skycon-share"></i>
-                <span class="share-word" aria-hidden="true">Share</span>
-                <span class="share-count" aria-hidden="true">146</span>
-            </a>
-            <ul class="popover">
-                <li class="tweet-button">
-                    <a class='tweet-link hover-colour' data-popup="{'width': '550','height':'420','title':'twitter-share-dialog'}"  href='https://twitter.com/intent/tweet?url=http%3A%2F%2Fnews.sky.com%2Fstory%2F1066004%2Fcyprus-bailout-savings-shift-amid-russia-offer&text=Cyprus Bailout: Savings Shift Amid Russia Offer' target='_blank'><i aria-hidden=true class='skycon-twitter'></i><span class='speak display-name'>Twitter</span></a><span class='share-count'>137</span>
-                </li>
-                <li class="facebook-button">
-                    <a class='fb-link hover-colour' data-popup="{'width': '626','height':'436','title':'facebook-share-dialog'}" target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fapps.facebook.com%2Fskynewsfb%2Farticle.php%3Fid%3D1066004'><i aria-hidden=true class='skycon-facebook'></i><span class='speak display-name'>Facebook</span></a><span class='share-count'>5</span>
-                </li>
-                <li class="gplus-button">
-                    <a class='gplus-link hover-colour' data-popup="{'width': '550','height':'420','title':'gplus-share-dialog'}"  target='_blank' href='https://plus.google.com/share?url=http%3A%2F%2Fnews.sky.com%2Fstory%2F1066004%2Fcyprus-bailout-savings-shift-amid-russia-offer'><i aria-hidden=true class='skycon-google-plus'></i><span class='speak display-name'>Google+</span></a><span class='share-count'>4</span>
-                </li>
-                <li class="email-button">
-                    <a class='email-link hover-colour' target='_blank' href='mailto:?subject=Sharing - Cyprus Bailout: Savings Shift Amid Russia Offer&body=http%3A%2F%2Fnews.sky.com%2Fstory%2F1066004%2Fcyprus-bailout-savings-shift-amid-russia-offer'><i aria-hidden=true class='skycon-mail'></i><span class='speak display-name'>Mail</span></a>
-                </li>
-            </ul>
-        </div>
+    <a class="summary" href="#!" data-tracking-context="Shared article title" aria-label="Shared 146 times. Click to show share options">
+        <i class="skycon-share"></i>
+        <span class="share-word" aria-hidden="true">Share</span>
+        <span class="share-count" aria-hidden="true">146</span>
+    </a>
+    <ul class="popover">
+        <li class="tweet-button">
+            <a class='tweet-link hover-colour' data-popup="{'width': '550','height':'420','title':'twitter-share-dialog'}"  href='https://twitter.com/intent/tweet?url=http%3A%2F%2Fnews.sky.com%2Fstory%2F1066004%2Fcyprus-bailout-savings-shift-amid-russia-offer&text=Cyprus Bailout: Savings Shift Amid Russia Offer' target='_blank'><i aria-hidden=true class='skycon-twitter'></i><span class='speak display-name'>Twitter</span></a><span class='share-count'>137</span>
+        </li>
+        <li class="facebook-button">
+            <a class='fb-link hover-colour' data-popup="{'width': '626','height':'436','title':'facebook-share-dialog'}" target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fapps.facebook.com%2Fskynewsfb%2Farticle.php%3Fid%3D1066004'><i aria-hidden=true class='skycon-facebook'></i><span class='speak display-name'>Facebook</span></a><span class='share-count'>5</span>
+        </li>
+        <li class="gplus-button">
+            <a class='gplus-link hover-colour' data-popup="{'width': '550','height':'420','title':'gplus-share-dialog'}"  target='_blank' href='https://plus.google.com/share?url=http%3A%2F%2Fnews.sky.com%2Fstory%2F1066004%2Fcyprus-bailout-savings-shift-amid-russia-offer'><i aria-hidden=true class='skycon-google-plus'></i><span class='speak display-name'>Google+</span></a><span class='share-count'>4</span>
+        </li>
+        <li class="email-button">
+            <a class='email-link hover-colour' target='_blank' href='mailto:?subject=Sharing - Cyprus Bailout: Savings Shift Amid Russia Offer&body=http%3A%2F%2Fnews.sky.com%2Fstory%2F1066004%2Fcyprus-bailout-savings-shift-amid-russia-offer'><i aria-hidden=true class='skycon-mail'></i><span class='speak display-name'>Mail</span></a>
+        </li>
+    </ul>
+</div>
+
     </div>
 </div>
 
@@ -1896,28 +2040,26 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="developer-notes">
         Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
     </div>
-    <div class="init-notes">
-        standard: <code>toolkit.modules.init({popup: true});</code>
-        with ie7 support: <code>toolkit.modules.init({popup: true, skycons:true});</code>
-    </div>
     <div class="demo" data-selector="*">
+
         <section id="share-this-page" class="share-bar">
-            <h3>Share this page</h3>
-            <ul >
-                <li class="share-page-by-facebook">
-                    <a class='fb-link hover-colour' data-popup="{'width': '626','height':'436','title':'facebook-share-dialog'}" target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F10.65.94.145%3A8080%2Fhp%2F%3Fshared%3Dtrue'><i aria-hidden=true class='skycon-facebook'></i><span class='speak display-name'>Facebook</span></a>
-                </li>
-                <li class="share-page-by-twitter">
-                    <a class='tweet-link hover-colour' data-popup="{'width': '550','height':'420','title':'twitter-share-dialog'}"  target='_blank' href='https://twitter.com/intent/tweet?url=http%3A%2F%2F10.65.94.145%3A8080%2Fhp%2F%3Fshared%3Dtrue&text=Sky.com Homepage' target='_blank'><i aria-hidden=true class='skycon-twitter'></i><span class='speak display-name'>Twitter</span></a>
-                </li>
-                <li class="share-page-by-gplus">
-                    <a class='gplus-link hover-colour' data-popup="{'width': '550','height':'420','title':'gplus-share-dialog'}" target='_blank' href='https://plus.google.com/share?url=http%3A%2F%2F10.65.94.145%3A8080%2Fhp%2F%3Fshared%3Dtrue'><i aria-hidden=true class='skycon-google-plus'></i><span class='speak display-name'>Google+</span></a>
-                </li>
-                <li class="share-page-by-email">
-                    <a class='email-link hover-colour' target='_blank' href='mailto:?subject=Sharing - Sky.com Homepage&body=http%3A%2F%2Fwww.sky.com0%2Fhp%2F%3Fshared%3Dtrue'><i aria-hidden=true class='skycon-mail'></i><span class='speak display-name'>Mail</span></a>
-                </li>
-            </ul>
-        </section>
+    <h3>Share this page</h3>
+    <ul >
+        <li class="share-page-by-facebook">
+            <a class='fb-link hover-colour' data-popup="{'width': '626','height':'436','title':'facebook-share-dialog'}" target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F10.65.94.145%3A8080%2Fhp%2F%3Fshared%3Dtrue'><i aria-hidden=true class='skycon-facebook'></i><span class='speak display-name'>Facebook</span></a>
+        </li>
+        <li class="share-page-by-twitter">
+            <a class='tweet-link hover-colour' data-popup="{'width': '550','height':'420','title':'twitter-share-dialog'}"  target='_blank' href='https://twitter.com/intent/tweet?url=http%3A%2F%2F10.65.94.145%3A8080%2Fhp%2F%3Fshared%3Dtrue&text=Sky.com Homepage' target='_blank'><i aria-hidden=true class='skycon-twitter'></i><span class='speak display-name'>Twitter</span></a>
+        </li>
+        <li class="share-page-by-gplus">
+            <a class='gplus-link hover-colour' data-popup="{'width': '550','height':'420','title':'gplus-share-dialog'}" target='_blank' href='https://plus.google.com/share?url=http%3A%2F%2F10.65.94.145%3A8080%2Fhp%2F%3Fshared%3Dtrue'><i aria-hidden=true class='skycon-google-plus'></i><span class='speak display-name'>Google+</span></a>
+        </li>
+        <li class="share-page-by-email">
+            <a class='email-link hover-colour' target='_blank' href='mailto:?subject=Sharing - Sky.com Homepage&body=http%3A%2F%2Fwww.sky.com0%2Fhp%2F%3Fshared%3Dtrue'><i aria-hidden=true class='skycon-mail'></i><span class='speak display-name'>Mail</span></a>
+        </li>
+    </ul>
+</section>
+
     </div>
 </div>
     </div>
@@ -1955,7 +2097,6 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 	
 			</div>
 		</div>
-	    <script src="lib/require.js" data-main='dist/scripts/demo'></script>
-        <div></div>
+	    <script src="dist/scripts/demo.js"></script>
 	</body>
 </html>

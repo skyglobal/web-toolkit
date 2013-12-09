@@ -7,5 +7,5 @@ exclude: [
   Gemfile, Gemfile.lock, rakefile,
   Web-toolkit.iml, circle.yml, Gruntfile.js,package.json,
   build.txt]
-include: [_includes, lib]
+include: [_includes, lib, test]
 port: 4000

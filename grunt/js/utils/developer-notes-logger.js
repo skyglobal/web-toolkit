@@ -1,4 +1,4 @@
-define('utils/developer-notes-logger', function() {
+var developerNotesLogger = (function() {
 
     function logPage(){
         if (!console || !console.group){
@@ -84,3 +84,11 @@ define('utils/developer-notes-logger', function() {
 
     return logPage;
 });
+
+if (typeof window.define === "function" && window.define.amd){
+     define('utils/developer-notes-logger', function() {
+          return developerNotesLogger();
+    });
+} else {
+    developerNotesLogger();
+}
