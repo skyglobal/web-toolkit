@@ -1,4 +1,6 @@
-require(['modules/accordion'],function(){
+define( 'specs/accordionSpec',
+    ['modules/accordion'],
+    function(){
 
     describe('Accordion module', function() {
 
@@ -17,5 +19,5 @@ require(['modules/accordion'],function(){
             expect($('.view-container').last().hasClass('toggle-hidden')).to.equal(false);
         });
     });
-    mocha.run();
+
 });

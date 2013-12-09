@@ -1,4 +1,5 @@
-require(['modules/carousel'], function(){
+define('specs/carouselSpec',
+    ['modules/carousel'], function(){
 
     globalskycom = {
         browserSupport: {
@@ -141,7 +142,6 @@ require(['modules/carousel'], function(){
 
         var checkActiveSlideAfterAction = function(action, startExpectedSlide, endExpectedSlide, time, done) {
             setTimeout(function() {
-                debugger;
                 checkActiveSlide(startExpectedSlide);
                 action();
                 setTimeout(function() {
@@ -176,7 +176,6 @@ require(['modules/carousel'], function(){
         });
 
         it('defaults to slide maximum if index is too big', function(done) {
-            debugger;
             checkActiveSlideAfterAction(function() {$('#hero').trigger('refresh', 666);}, 0, 3, 0, done);
         });
 
@@ -188,5 +187,4 @@ require(['modules/carousel'], function(){
             checkActiveSlideAfterAction(function() {$('#hero').trigger('refresh', 0);}, 2, 0, 400, done);
         });
     });
-    mocha.run();
 });
