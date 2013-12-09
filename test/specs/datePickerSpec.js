@@ -37,7 +37,6 @@ define( 'specs/datePickerSpec',
             });
 
             it('Hides the calendar on tab out', function() {
-                debugger;
                 expect($("#demo-date-picker-one .calendar:visible").length).to.equal(0);
                 $('#demo-date-picker-one.date-picker .year').focus();
                 expect($("#demo-date-picker-one .calendar:visible").length).to.equal(1);
