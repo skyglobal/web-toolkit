@@ -4,7 +4,8 @@ requirejs.config({
         mocha: '../../test/vendor/mocha',
         chai: '../../test/vendor/chai',
         smoax: '../../test/vendor/smoax',
-        blanket: '../../test/vendor/blanket.min'
+        runner: '../../test/runner',
+        specs: '../../test/specs/'
     },
     shim: {
         smoax: {
