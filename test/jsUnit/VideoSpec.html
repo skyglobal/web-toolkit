@@ -7,7 +7,7 @@
     <script src="vendor/require.js"></script>
     <script src="config.js" ></script>
     <link href="../../dist/stylesheets/toolkit.css" rel="stylesheet"/>
-    <script src="vendor/blanket.min.js" data-cover-only="modules/video"></script>
+    <!--<script src="vendor/blanket.min.js" data-cover-only="modules/video"></script>-->
 
 
 </head>
@@ -33,15 +33,15 @@
 <!--TEST-->
 <script>
 
-    require(['modules/video', '../../test/jsUnit/setup'],function(){
+    require(['modules/video', '../../test/jsUnit/setup'],function(Video){
         var options = {
             token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
             animationSpeed: 0,
             freewheel:false //disable ads
         };
         $('#spec-markup').show();
-        var video = $('.video').video( options);
-//        video.createWrapper();
+        var video = new Video($('.video'), options);
+        video.createWrapper();
 
         describe('Video module', function() {
 
@@ -58,7 +58,7 @@
                 expect($wrapper.attr('class')).to.contain('playing-video');
                 expect($wrapper.length).to.equal(1);
                 expect($close.attr('class')).to.contain("active");
-                expect(callbackCalled).to.be.true();
+                expect(callbackCalled).to.equal(true);
 
             });
 
@@ -89,7 +89,7 @@
                     }
                 };
                 video.stop();
-                expect(skyPlayCalled).to.be.true;
+                expect(skyPlayCalled).to.equal(true);
                 expect($wrapper.length).to.equal(0);
             });
 
@@ -107,11 +107,11 @@
                     }
                 }
                 $.fn.sky_html5player = function(blah) {};
-                toolkit.video.prototype.showCanvas = function(callback) { callback(); callbackCalled = true}
+                Video.prototype.showCanvas = function(callback) { callback(); callbackCalled = true}
                 video.play();
-                expect(callbackCalled).to.be.true;
+                expect(callbackCalled).to.equal(true);
                 setTimeout(function() {
-                    expect(skyPlayCalled).to.be.true;
+                    expect(skyPlayCalled).to.equal(true);
                     done();
                 },1334)
             });
@@ -123,7 +123,7 @@
 
 <script>
     if (window.PHANTOMJS) {
-        blanket.options("reporter", "../../node_modules/grunt-blanket-mocha/support/grunt-reporter.js");
+//        blanket.options("reporter", "../../node_modules/grunt-blanket-mocha/support/grunt-reporter.js");
     }
 </script>
 </body>

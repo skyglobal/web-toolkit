@@ -6,8 +6,8 @@
     <script src="vendor/mocha.js"></script>
     <script src="vendor/require.js"></script>
     <script src="config.js"></script>
-	<script src="vendor/jquery.tabbable.js"></script>
-    <script src="vendor/blanket.min.js" data-cover-only="modules/lightbox"></script>
+	<!--<script src="vendor/jquery.tabbable.js"></script>-->
+    <!--<script src="vendor/blanket.min.js" data-cover-only="modules/lightbox"></script>-->
 </head>
 <body>
 
@@ -68,7 +68,7 @@
 <!--TEST-->
 <script>
 
-    require(['modules/lightbox','utils/focus', '../../test/jsUnit/setup'], function (focus) {
+    require(['modules/lightbox','utils/focus', '../../test/jsUnit/setup'], function (lb, focus) {
 
 
         var $demo = $('#lightbox-demo-source').clone();
@@ -184,7 +184,7 @@
                     },501);
 				});
 
-				it("Sets the 'skycom-focus' class on the close icon if the ORIGINATOR had the 'focus' class.", function() {
+				it("Sets the 'has-focus' class on the close icon if the ORIGINATOR had the 'focus' class.", function() {
 					// given
 					expect($('#lightbox-demo .lightbox-close').hasClass(focus.className)).to.equal(false);
 					$('#open-links .lightbox-demo-link').addClass(focus.className);
@@ -227,7 +227,7 @@
 
 <script>
     if (window.PHANTOMJS) {
-        blanket.options("reporter", "../../node_modules/grunt-blanket-mocha/support/grunt-reporter.js");
+//        blanket.options("reporter", "../../node_modules/grunt-blanket-mocha/support/grunt-reporter.js");
     }
 </script>
 </body>
