@@ -6,8 +6,8 @@
     <script src="vendor/mocha.js"></script>
     <script src="vendor/require.js"></script>
     <script src="config.js" ></script>
-    <script src="vendor/blanket.min.js" data-cover-only="modules/accordion"></script>
-
+    <!--<script src="vendor/blanket.min.js" data-cover-only="modules/accordion"></script>-->
+    <!--<script src="vendor/mocha-blanket.js"></script>-->
 </head>
 <body>
 <!--PLACEHOLDER FOR MOCHA TEST RESULTS-->
@@ -54,11 +54,15 @@
 
 </div>
 
-</div>
 
 <!--TEST-->
 <script>
-
+//    if (document.location.host){
+//        var blanket = document.createElement('script');
+//        blanket.src = 'vendor/blanket.min.js';
+//        blanket.setAttribute('data-cover-only','modules/accordion');
+//        document.head.appendChild(blanket);
+//    }
     require(['modules/accordion', '../../test/jsUnit/setup'],function(){
 
         $('.accordion').accordion();
@@ -83,9 +87,9 @@
     });
 </script>
 <script>
-    if (window.PHANTOMJS) {
-        blanket.options("reporter", "../../node_modules/grunt-blanket-mocha/support/grunt-reporter.js");
-    }
+//    if (window.PHANTOMJS) {
+//        blanket.options("reporter", "../../node_modules/grunt-blanket-mocha/support/grunt-reporter.js");
+//    }
 </script>
 </body>
 </html>

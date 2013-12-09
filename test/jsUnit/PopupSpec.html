@@ -18,7 +18,6 @@
     <a class='tweet-link hover-colour' data-popup="{'width': '550','height':'420','title':'twitter-share-dialog'}" data-tracking-context='Cyprus Bailout: Savings Shift Amid Russia Offer' href='https://twitter.com/intent/tweet?url=http%3A%2F%2Fnews.sky.com%2Fstory%2F1066004%2Fcyprus-bailout-savings-shift-amid-russia-offer&text=Cyprus Bailout: Savings Shift Amid Russia Offer' target='_blank'><i aria-hidden=true class='skycon-twitter'></i><span class='speak display-name'>Twitter</span></a><span class='share-count'>137</span>
 </div>
 
-</div>
 <!--TEST-->
 <script>
 
@@ -35,12 +34,12 @@
                 top: 600,
                 left: 137,
                 title: 'test title'
-            }
+            };
 
             it('clicking share link should open the popup', function() {
                 window.open = function(url, title, options) {
                     return { url: url, title: title, options: options};
-                }
+                };
 
                 var windowOpened = popup.open(args);
                 expect(windowOpened.url).to.equal("http://www.google.com");
@@ -51,7 +50,7 @@
             it('clicking share link without arguments uses defaults', function() {
                 window.open = function(url, title, options) {
                     return { url: url, title: title, options: options};
-                }
+                };
 
                 var windowOpened = popup.open({});
                 var expectedOptions = "top=" + (screen.height/2 -200 )+ ",left=" + (screen.width/2 -200)+",width=400,height=400"
@@ -66,7 +65,7 @@
 </script>
 <script>
     if (window.PHANTOMJS) {
-        blanket.options("reporter", "../../node_modules/grunt-blanket-mocha/support/grunt-reporter.js");
+//        blanket.options("reporter", "../../node_modules/grunt-blanket-mocha/support/grunt-reporter.js");
     }
 </script>
 

@@ -1080,7 +1080,7 @@ toolkit.accordion = (function (toggle) {
         toggleContent:function(e){
             e.preventDefault();
             var $heading = $(e.currentTarget);
-            toolkit.toggle({$elClicked:$heading});
+            toggle({$elClicked:$heading});
         }
     };
 
