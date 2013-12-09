@@ -1,27 +1,6 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <script src="../../lib/jquery-2.0.3.js"></script>
-    <script src="vendor/mocha.js"></script>
-    <script src="vendor/require.js"></script>
-    <script src="config.js" ></script>
-    <script src="vendor/blanket.min.js" data-cover-only="utils/popup"></script>
-
-</head>
-<body>
-<!--PLACEHOLDER FOR MOCHA TEST RESULTS-->
-<div id="mocha"></div>
-
-<!--FIXTURE HTML FOR TESTS-->
-<div id="spec-markup">
-    <a class='tweet-link hover-colour' data-popup="{'width': '550','height':'420','title':'twitter-share-dialog'}" data-tracking-context='Cyprus Bailout: Savings Shift Amid Russia Offer' href='https://twitter.com/intent/tweet?url=http%3A%2F%2Fnews.sky.com%2Fstory%2F1066004%2Fcyprus-bailout-savings-shift-amid-russia-offer&text=Cyprus Bailout: Savings Shift Amid Russia Offer' target='_blank'><i aria-hidden=true class='skycon-twitter'></i><span class='speak display-name'>Twitter</span></a><span class='share-count'>137</span>
-</div>
-
-<!--TEST-->
-<script>
-
-    require(['utils/popup', '../../test/jsUnit/setup'],function(popup){
+define( 'specs/popupSpec',
+    ['utils/popup'],
+    function(popup){
 
         describe('Popup in new window', function() {
             popup.init();
@@ -60,14 +39,4 @@
             });
 
         });
-        mocha.run();
-    });
-</script>
-<script>
-    if (window.PHANTOMJS) {
-//        blanket.options("reporter", "../../node_modules/grunt-blanket-mocha/support/grunt-reporter.js");
-    }
-</script>
-
-</body>
-</html>
+});
