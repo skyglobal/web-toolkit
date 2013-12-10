@@ -124,6 +124,25 @@ a:hover {
   text-decoration: underline;
 }
 
+ul.grey-bullets {
+  list-style: none;
+
+  li {
+    position: relative;
+    margin: 0 0 0.5em 1.2em;
+
+    &:before {
+      content: '•';
+      display: block;
+      position: absolute;
+      text-align: center;
+      margin-left: -1.2em;
+      width: 1em;
+      color: #999;
+    }
+  }
+}
+
 
 //@media (max-width: $mobile-width) {
 //  h1,
