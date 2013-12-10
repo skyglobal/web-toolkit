@@ -7,7 +7,7 @@ define('runner',[
         ,'specs/shareSpec'
         ,'specs/videoSpec'
         ,'specs/validationSpec'
-//        ,'specs/toggleSpec'
+        ,'specs/toggleSpec'
     ], function(){
 
     mocha.run();

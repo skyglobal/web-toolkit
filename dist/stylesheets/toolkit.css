@@ -2510,6 +2510,13 @@ a.play-video span {
   overflow: hidden;
 }
 
+.transition {
+  -webkit-transition: "height 0.5s ease-in-out";
+  -moz-transition: "height 0.5s ease-in-out";
+  -o-transition: "height 0.5s ease-in-out";
+  transition: "height 0.5s ease-in-out";
+}
+
 body .hover-colour:hover .skycon-sky-go,
 body .colour .skycon-sky-go {
   color: #44ad3a;
