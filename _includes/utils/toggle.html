@@ -1,0 +1,62 @@
+<h3 class="wiki-h3">Toggle</h3>
+
+<p class="design-notes">
+</p>
+<p class="developer-notes">
+    Make sure the containers height is correct. i.e. elements with margin don't count towards the height!!
+</p>
+
+<div class="example">
+    <h4 class="medium">By Element</h4>
+    <p class="developer-notes">
+    </p>
+    <div class="demo" data-selector="#toggle-by-element">
+
+        {% include utils/toggle/element.html %}
+
+    </div>
+    <script>
+        saveHTMLForDemo('#toggle-by-element');
+        if (window.require){
+            require(['toolkit'], function(toolkit){
+                $('#toggle-by-element .toggle-link').on('click', function() {
+                    toolkit.toggle({$elClicked:$(this)});
+                });
+            });
+        } else {
+            $('#toggle-by-element .toggle-link').on('click', function() {
+                toolkit.toggle({$elClicked:$(this)});
+            });
+        }
+    </script>
+</div>
+
+<div class="example">
+    <h4 class="medium">By Container</h4>
+    <p class="developer-notes">
+    </p>
+    <div class="demo" data-selector="#toggle-by-container">
+
+        {% include utils/toggle/container.html %}
+
+    </div>
+    <script>
+        saveHTMLForDemo('#toggle-by-container');
+
+    </script>
+</div>
+
+<div class="example">
+    <h4 class="medium">Complete</h4>
+    <p class="developer-notes">
+    </p>
+    <div class="demo" data-selector="#toggle-already-done">
+
+        {% include utils/toggle/complete.html %}
+
+    </div>
+    <script>
+        saveHTMLForDemo('#toggle-already-done');
+
+    </script>
+</div>
