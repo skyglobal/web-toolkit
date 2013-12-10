@@ -191,6 +191,13 @@ ul.primary-menu.primary-menu > li > a {
   color: #0070a5;
 }
 
+#mocha {
+  margin: 0 !important;
+}
+#mocha h1, #mocha h2 {
+  line-height: 1em;
+}
+
 .sub-section #mocha-stats {
   position: inherit;
 }
