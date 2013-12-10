@@ -1,5 +1,5 @@
 define( 'specs/inPageNavSpec',
-    ['utils/hashmanager', 'modules/inPageNav'],
+    ['utils/hashManager', 'modules/inPageNav'],
     function(hash, tabs){
 
         describe('Test responsive tabs', function() {

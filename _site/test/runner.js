@@ -8,6 +8,8 @@ define('runner',[
         ,'specs/videoSpec'
         ,'specs/validationSpec'
         ,'specs/toggleSpec'
+        ,'specs/lightboxSpec'
+        ,'specs/hashManagerSpec'
     ], function(){
 
     mocha.run();
