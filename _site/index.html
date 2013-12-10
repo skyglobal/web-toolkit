@@ -63,7 +63,6 @@
         <link rel="stylesheet" href="dist/stylesheets/toolkit.css">
         <link rel="stylesheet" href="dist/fonts/skycons.css">
 
-
         <!--[if lt IE 10]><script type="text/javascript">
             document.createElement('header');
             document.createElement('section');
@@ -1502,8 +1501,8 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 <p>
     Dont forget to think about things like stopping carousels when people open lightboxes.
 </p>
-<a id="lightbox-demo-link" href="#">Show Lightbox</a>
-<a id="lightbox-demo-tabbable-link" tabindex="101" href="#">Show Lightbox</a>
+<a id="lightbox-demo-link" href="#">Show Lightbox</a> |
+<a id="lightbox-demo-tabbable-link" tabindex="101" href="#!">link that cant be tabbed to if lightbox is open</a>
 
 <p class="developer-notes">
 	To automatically bind lightboxes use the attribute <code>data-lightbox="#my-lightbox-id"</code>.
@@ -1583,7 +1582,10 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     </div>
     <a name="accordion"></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">Accordion</h3>
+        <h3 class="wiki-h3">
+    <a href="#test/accordionSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+    Accordion
+</h3>
 <p class="design-notes">
     The accordion is fully responsive.
 </p>
@@ -1638,7 +1640,10 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     </div>
     <a name="carousel"></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">Carousel</h3>
+        <h3 class="wiki-h3">
+    <a href="#test/carouselSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+    Carousel
+</h3>
 <p class="design-notes">
     The carousel is fully responsive, incorporates the video player and works on touch devices (not microsoft).
 </p>
@@ -2254,5 +2259,10 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 			</div>
 		</div>
 	    <script src="dist/scripts/demo.js"></script>
+
+
+        <script src="test/vendor/mocha.js"></script>
+        <script src="test/vendor/require.js"></script>
+        <script src="test/config.js" ></script>
 	</body>
 </html>

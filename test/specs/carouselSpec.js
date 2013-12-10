@@ -1,5 +1,4 @@
-define('specs/carouselSpec',
-    ['modules/carousel'], function(){
+function carouselSpec(){
 
     globalskycom = {
         browserSupport: {
@@ -187,4 +186,13 @@ define('specs/carouselSpec',
             checkActiveSlideAfterAction(function() {$('#hero').trigger('refresh', 0);}, 2, 0, 400, done);
         });
     });
-});
+}
+
+if (window.define){
+    define('specs/carouselSpec',
+        ['modules/carousel'], function(){
+            carouselSpec();
+    });
+} else {
+    carouselSpec();
+}
