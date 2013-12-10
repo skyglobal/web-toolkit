@@ -9,6 +9,10 @@ toolkit.accordion = (function (toggle) {
         this.bindEvents();
     }
 
+    function rotateIcon($elClicked) {
+        $elClicked.find('i').toggleClass('rotate-180');
+    }
+
     Accordion.prototype = {
         bindEvents:function(){
             this.$headings.on("click",this.toggleContent.bind(this));
@@ -17,6 +21,7 @@ toolkit.accordion = (function (toggle) {
             e.preventDefault();
             var $heading = $(e.currentTarget);
             toggle({$elClicked:$heading});
+            rotateIcon($heading);
         }
     };
 

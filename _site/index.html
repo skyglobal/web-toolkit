@@ -59,7 +59,7 @@
   });
 </script>
 
-        <link rel="stylesheet" href="dist/stylesheets/wiki.css">
+        <link rel="stylesheet" href="dist/stylesheets/demo.css">
         <link rel="stylesheet" href="dist/stylesheets/toolkit.css">
         <link rel="stylesheet" href="dist/fonts/skycons.css">
 
@@ -2135,7 +2135,17 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     </div>
     <script>
         saveHTMLForDemo('#toggle-by-container');
-
+        if (window.require){
+            require(['toolkit'], function(toolkit){
+                $('#toggle-by-element .toggle-link').on('click', function() {
+                    toolkit.toggle({$elClicked:$(this)});
+                });
+            });
+        } else {
+            $('#toggle-by-element .toggle-link').on('click', function() {
+                toolkit.toggle({$elClicked:$(this)});
+            });
+        }
     </script>
 </div>
 

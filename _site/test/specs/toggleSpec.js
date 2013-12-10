@@ -38,7 +38,7 @@ define( 'specs/toggleSpec',
                 expect(toggleLink.attr("data-toggle-state")).to.equal("hidden");
                 expect(toggleLink.attr("data-toggle-text")).to.equal("Hide");
                 expect(toggleLink.attr("data-tracking-label")).to.equal("Hide");
-                expect(toggleLink.text()).to.equal("Show"`);
+                expect(toggleLink.text()).to.equal("Show");
                 expect(container.hasClass('toggle-hidden')).to.be.true;
 
                 toggle({$container:container, action:'show'});
@@ -50,16 +50,16 @@ define( 'specs/toggleSpec',
 
             });
 
-            it("only changes the text inside a span if a span exists, and rotates the icon", function () {
+            it("only changes the text inside a span if a span exists", function () {
                 var container = $('#toggle-by-container .edit-container');
                 var toggleLink = $("#toggle-by-container .toggle-link");
                 toggle({$container:container, action:'hide'});
                 expect(toggleLink.text()).to.equal("Show");
-                expect(toggleLink.find('i').hasClass('rotate-180')).to.be.true;
+//                expect(toggleLink.find('i').hasClass('rotate-180')).to.be.true;
                 toggle({$container:container, action:'show'});
                 expect(toggleLink.text()).to.equal("Hide");
                 expect(toggleLink.find('i').length).to.equal(1);
-                expect(toggleLink.find('i').hasClass('rotate-180')).to.be.false;
+//                expect(toggleLink.find('i').hasClass('rotate-180')).to.be.false;
             });
 
             it('doesnt do anything if the container is already toggled to the state you are trying to change to', function () {
