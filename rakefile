@@ -71,7 +71,7 @@ task :deploy_new_version do
   system "git commit -m 'Rake deploy - adding grunted files'"
   if version_already_exists?
     system "git tag release-#{latest_version_number} -m \"Release Date:#{getDate}\""
-    system "git push --tag"
+    system "git push --tags release-#{latest_version_number}"
   end
   system "git push origin HEAD:master"
 

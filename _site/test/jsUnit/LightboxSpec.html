@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="../../lib/jquery-2.0.3.js"></script>
+    <script src="vendor/mocha.js"></script>
+    <script src="vendor/require.js"></script>
+    <script src="config.js"></script>
+	<!--<script src="vendor/jquery.tabbable.js"></script>-->
+    <!--<script src="vendor/blanket.min.js" data-cover-only="modules/lightbox"></script>-->
+</head>
+<body>
+
+<!--PLACEHOLDER FOR MOCHA TEST RESULTS-->
+<div id="mocha"></div>
+
+<!--FIXTURE HTML FOR TESTS-->
+<div id="spec-markup">
+    <div id="open-links-source">
+    	<a class="lightbox-demo-link" href="#" data-lightbox="#lightbox-demo">Large Lightbox</a>
+        <a class="link-with-tab-index" tabindex="101">test tabbable link</a>
+    </div>
+
+    <div id="lightbox-demo-source" class="lightbox">
+		<div class="skycom-container">
+			<article class="skycom-10 skycom-offset1 lightbox-content" role="dialog" aria-labelledby="lightbox-demo-link">
+				<a class="lightbox-close skycon-close" href="#" id="close-button">
+					<span class="speak">Close</span>
+				</a>
+				<!-- Note you can use the sky-grid in lightboxs -->
+				<div class="skycom-container clearfix">
+					<div class="skycom-7 alpha">
+						<h2>Large Lightbox</h2>
+
+						<p>Lorem ipsum dolor sit amet</p>
+
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+							exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+							reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+							occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						</p>
+
+						Text: <input id="lightboxInput" type="text" placeholder="focusable input">
+
+						<p style="margin-bottom: 16px;">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua.
+						</p>
+					</div>
+
+					<div class="skycom-5">
+						<h3>Other Links</h3>
+
+						<ul>
+							<li><a href="#">Lorem Ipsum</a></li>
+							<li><a href="#">Dolor sit amet</a></li>
+						</ul>
+					</div>
+				</div>
+			</article>
+		</div>
+	</div>
+</div>
+
+
+<!--TEST-->
+<script>
+
+    require(['modules/lightbox','utils/focus', '../../test/jsUnit/setup'], function (lb, focus) {
+
+
+        var $demo = $('#lightbox-demo-source').clone();
+        var $links = $('#open-links-source').clone();
+        $demo.attr('id','lightbox-demo');
+        $links.attr('id','open-links');
+
+		describe('Lightbox module', function() {
+
+			beforeEach(function() {
+                $('body').append($demo);
+                $('body').append($links);
+                $links.find('.lightbox-demo-link').removeAttr('tabindex');
+                $links.find('.link-with-tab-index').attr('tabindex','101');
+                $('#lightbox-demo').lightbox();
+			});
+            afterEach(function() {
+                $('#lightbox-demo').remove();
+                $('#open-links').remove();
+                $('body').removeAttr('style');
+            });
+
+			var givenTheLargeLightBoxIsOpen = function() {
+				$('#open-links .lightbox-demo-link').click();
+				expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(true);
+			};
+
+
+			it('Displays a lightbox when a user clicks a text link', function() {
+				// given
+				expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(false);
+				// when
+				$('#open-links .lightbox-demo-link').click();
+				// then
+                expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(true);
+            });
+
+
+			it('Closes when the close icon is clicked', function(done) {
+				givenTheLargeLightBoxIsOpen();
+				// when
+				$('#lightbox-demo .lightbox-close').click();
+				// then
+                setTimeout(function(){
+                    expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(false);
+                    done();
+                },501);
+
+			});
+
+
+			it('Closes when the faded grey bit is clicked', function(done) {
+				givenTheLargeLightBoxIsOpen();
+				// when
+				$('#lightbox-demo').click();
+				// then
+                setTimeout(function(){
+				    expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(false);
+                    done();
+                },501);
+			});
+
+
+			it('Does NOT close when the lightbox itself is clicked', function() {
+				givenTheLargeLightBoxIsOpen();
+				// when
+				$('#lightbox-demo .lightbox-content').click();
+				// then
+				expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(true);
+			});
+
+
+			it('Hides the double scrollbar from the body element', function(done) {
+				givenTheLargeLightBoxIsOpen();
+				// then
+				expect($('body').is('[style]')).to.equal(true);
+				expect($('body').css('overflow')).to.equal('hidden');
+				// when
+				$('#lightbox-demo .lightbox-close').click();
+				// then
+                setTimeout(function(){
+				    expect($('body').is('[style]')).to.equal(false);
+                    done();
+                },501);
+			});
+
+
+			context('Focus Behaviour', function() {
+
+				beforeEach(function() {
+					$('#spec-markup').show();
+				});
+
+				afterEach(function() {
+					$('#spec-markup').hide();
+				});
+
+				it('Gives focus to the close icon when opened', function() {
+					givenTheLargeLightBoxIsOpen();
+					// then
+					expect(document.activeElement.id).to.equal('close-button');
+				});
+
+				it('Returns focus back to the ORIGINATOR when closed', function(done) {
+					// given
+					givenTheLargeLightBoxIsOpen();
+					// when
+					$('#lightbox-demo .lightbox-close').click();
+					// then
+                    setTimeout(function(){
+					    expect(document.activeElement.className).to.equal('lightbox-demo-link');
+                        done();
+                    },501);
+				});
+
+				it("Sets the 'has-focus' class on the close icon if the ORIGINATOR had the 'focus' class.", function() {
+					// given
+					expect($('#lightbox-demo .lightbox-close').hasClass(focus.className)).to.equal(false);
+					$('#open-links .lightbox-demo-link').addClass(focus.className);
+					givenTheLargeLightBoxIsOpen();
+					// then
+					expect($('#lightbox-demo .lightbox-close').hasClass(focus.className)).to.equal(true);
+				});
+
+//				it('Constrains the tab focus to the lightbox', function() {
+//					givenTheLargeLightBoxIsOpen();
+//                    expect(document.activeElement.id).to.equal('close-button');
+//
+//					// then
+//					$.tabNext();
+//					expect(document.activeElement.id).to.equal('lightboxInput');
+//					$.tabNext();	// tab to link
+//					$.tabNext();	// tab to link
+//					$.tabNext();	// tab should loop back to close icon
+//                    expect(document.activeElement.id).to.equal('close-button');
+//				});
+                it('disables tabbing of page elements', function(done) {
+                    expect($('#open-links .lightbox-demo-link').attr('tabindex')).to.equal(undefined);
+                    expect($('#open-links .link-with-tab-index').attr('tabindex')).to.equal('101');
+                    givenTheLargeLightBoxIsOpen();
+                    expect($('#open-links .lightbox-demo-link').attr('tabindex')).to.equal('-1');
+                    expect($('#open-links .link-with-tab-index').attr('tabindex')).to.equal('-1');
+                    $('#lightbox-demo .lightbox-close').click();
+                    setTimeout(function(){
+                        expect($('#open-links .lightbox-demo-link').attr('tabindex')).to.equal(undefined);
+                        expect($('#open-links .link-with-tab-index').attr('tabindex')).to.equal('101');
+                        done();
+                    },501);
+                });
+			});
+        });
+        mocha.run();
+    });
+</script>
+
+
+<script>
+    if (window.PHANTOMJS) {
+//        blanket.options("reporter", "../../node_modules/grunt-blanket-mocha/support/grunt-reporter.js");
+    }
+</script>
+</body>
+</html>
