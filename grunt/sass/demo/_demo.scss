@@ -8,6 +8,25 @@
 .wiki-h3{
   border-bottom: 1px solid $key-line;
 }
+.run-test{
+  float: right;
+  i{
+    font-size: 20px;
+  }
+  &.failed{
+    color:$error;
+  }
+  &.success{
+    color:$success-icon;
+  }
+  &:hover i{
+    color:$link;
+  }
+}
+
+.sub-section  #mocha-stats {
+  position: inherit;
+}
 
 .block {
 	display: block;
@@ -33,3 +52,4 @@ a[name]:not([href]){
 .developer-notes{
   display: none;
 }
+

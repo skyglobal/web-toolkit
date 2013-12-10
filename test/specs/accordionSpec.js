@@ -1,7 +1,4 @@
-define( 'specs/accordionSpec',
-    ['modules/accordion'],
-    function(){
-
+function accordionSpec(){
     describe('Accordion module', function() {
 
         it('Accordion content should be closed by default', function() {
@@ -29,4 +26,12 @@ define( 'specs/accordionSpec',
         });
     });
 
-});
+}
+
+if (window.define){
+    define( 'specs/accordionSpec',    ['modules/accordion'],function(){
+        accordionSpec();
+    })
+} else {
+    accordionSpec();
+}

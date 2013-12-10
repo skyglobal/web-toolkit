@@ -1,4 +1,4 @@
-var demo = (function(logger) {
+var demo = (function(logger, hash, lightbox) {
     function bindEvents() {
         $(document).on('click','.toggler', toggle);
         $('#check').on('click', checkDiff);
@@ -54,15 +54,80 @@ var demo = (function(logger) {
         }
     }
 
+//    function updateRunTests($anchor, $mocha){
+//        var is100pc = false;
+//        if (!is100pc){
+//            setTimeout(function() {
+//                updateRunTests($anchor, $mocha);
+//            }, 100);
+//            return;
+//        }
+//    }
+
+    function createLightbox($mocha, spec){
+        //todo: make lightbox do this automatically
+        var lightboxDiv = document.createElement('div');
+        var container = document.createElement('div');
+        var article = document.createElement('article');
+        var $close = $('<a class="internal-link lightbox-close skycon-close black" href="#"><span class="speak">Close</span></a>');
+        lightboxDiv.className = 'lightbox';
+        lightboxDiv.id = spec + '-lightbox';
+        container.className = 'skycom-container lightbox-container clearfix';
+        article.className = 'lightbox-content skycom-10 skycom-offset1';
+        $(article).append($close);
+        $(article).append($mocha.find('#mocha-report'));
+        $(container).append($(article));
+        $(lightboxDiv).append($(container));
+        $mocha.append($(lightboxDiv));
+        lightbox.show('#' +  spec + '-lightbox');
+    }
+
+    function runTest(hash){
+        var spec = hash.replace('test/','');
+        var script = document.createElement('script');
+        script.src = "/test/specs/" + spec + ".js";
+        script.onload =  function(){
+            var $trigger = $('a[href*="#' + hash + '"]'),
+                $mocha = $('<div id="mocha"></div>');
+            $trigger.parent().after($mocha);
+            window[spec]();
+            mocha.run(function(){
+//                updateRunTests();
+            });
+            $trigger.removeAttr('href');
+            $('html, body').animate({
+                scrollTop: $mocha.parent().prev().offset().top
+            }, 200);
+            createLightbox($mocha, spec);
+        };
+        document.head.appendChild(script);
+
+    }
+
+    function registerTests(){
+        if (!window.require || !window.describe){
+            setTimeout(registerTests,250);
+            return;
+        }
+        var hashes = [];
+        $('.run-test').each(function(){
+            hashes.push($(this).attr('href').split('#')[1]);
+        });
+        hash.register(hashes, runTest);
+    }
+
     logger();
     bindEvents();
     sortSkyconsTable();
+    registerTests();
 });
 
 if (typeof window.define === "function" && window.define.amd){
-    define('demo', ['utils/developer-notes-logger'], function(developerNotesLogger) {
-            return demo(developerNotesLogger);
+    define('demo', ['utils/developer-notes-logger',
+                    'utils/hashManager',
+                    'modules/lightbox'], function(developerNotesLogger, hash,lightbox) {
+            return demo(developerNotesLogger, hash, lightbox);
  });
 } else {
-    demo(developerNotesLogger);
+    demo(developerNotesLogger, toolkit.hashManager, toolkit.lightbox);
 }

@@ -175,6 +175,26 @@ ul.primary-menu.primary-menu > li > a {
   border-bottom: 1px solid gainsboro;
 }
 
+.run-test {
+  float: right;
+}
+.run-test i {
+  font-size: 20px;
+}
+.run-test.failed {
+  color: #d21717;
+}
+.run-test.success {
+  color: #6dbb00;
+}
+.run-test:hover i {
+  color: #0070a5;
+}
+
+.sub-section #mocha-stats {
+  position: inherit;
+}
+
 .block {
   display: block;
 }

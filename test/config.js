@@ -20,7 +20,6 @@ define('setup',['chai', 'smoax'], function(chai, smoax) {
     function uiSetup(headElement) {
         var styles = ['test/vendor/mocha.css'];
         var body = document.getElementsByTagName('body').item(0);
-        var div = document.createElement('div');
         var linkElement, i;
 
         for (i in styles) {
@@ -29,16 +28,6 @@ define('setup',['chai', 'smoax'], function(chai, smoax) {
             linkElement.setAttribute('href', styles[i]);
             headElement.appendChild(linkElement);
         }
-
-        div.setAttribute('id', 'mocha');
-        body.appendChild(div);
-
-        $(body).prepend(
-            $('<a href="#" id="toggleView">Toggle view</div>').click(function(e) {
-                e.preventDefault();
-                $('#spec-markup').toggle();
-            })
-        );
     }
     //phantomjs doesnt support .bind, so need to polyfill
     if (!Function.prototype.bind) {
