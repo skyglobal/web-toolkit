@@ -2,6 +2,10 @@ function toggleSpec(toggle) {
 
     var describeSpec = 'Toggling elements visibility';
 
+    if(!toggle) { //needed for running tests in demo page
+        toggle = toolkit.toggle;
+    }
+
     describe(describeSpec, function () {
 
         it('can toggle based on the element that was clicked on', function () {

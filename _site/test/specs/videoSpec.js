@@ -5,6 +5,11 @@ function videoSpec(Video) {
     var $container = $('#demo-video'),
         $wrapper, $overlay, $close;
 
+    if (!window.sky){ //needed for grunt test.
+        window.sky = { html5player : { close: function(){}, play: function(){}}};
+        $.fn.sky_html5player = function(){};
+    }
+
     function updateElements() {
         $wrapper = $('#demo-video .video-wrapper');
         $overlay = $('#demo-video .video-overlay');
@@ -23,7 +28,7 @@ function videoSpec(Video) {
             $.fx.off = false; //todo: change this for css animation
         });
 
-        it.only('will play the video when play is clicked', function () {
+        it('will play the video when play is clicked', function () {
             expect($wrapper.length).to.equal(0);
             expect($overlay.length).to.equal(0);
             $('#demo-video .play-video ').click();
@@ -36,7 +41,7 @@ function videoSpec(Video) {
             expect($close.hasClass('active')).to.equal(true);
         });
 
-        it.only('will stop + fade out when the close button is clicked', function () {
+        it('will stop + fade out when the close button is clicked', function () {
             expect($container.find('playing-video').length).to.equal(0);
             $('#demo-video .play-video ').click();
             updateElements();
@@ -46,7 +51,7 @@ function videoSpec(Video) {
             expect($overlay.length).to.equal(0);
         });
 
-        it.only('will stop + fade out when the video finishes', function () {
+        it('will stop + fade out when the video finishes', function () {
             expect($container.find('playing-video').length).to.equal(0);
             $('#demo-video .play-video ').click();
             updateElements();

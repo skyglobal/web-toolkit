@@ -2,6 +2,10 @@ function lightboxSpec(lightbox, focus) {
 
     var describeSpec = 'Lightbox module';
 
+    if (!focus){ //needed for running test in demo page
+        focus = toolkit.focus;
+    }
+
     var $demo = $('#lightbox-demo-source').clone();
     var $links = $('#open-links-source').clone();
     $demo.attr('id', 'lightbox-demo');
@@ -27,7 +31,6 @@ function lightboxSpec(lightbox, focus) {
                 done();
             }, 500);
         }
-
 
         it('Displays a lightbox when a user clicks a text link', function () {
             // given

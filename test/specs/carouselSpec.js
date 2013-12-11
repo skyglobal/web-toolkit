@@ -12,6 +12,10 @@ function carouselSpec() {
 
     describe(describeSpec, function () {
 
+        beforeEach(function() {
+            $('#hero-skinny').trigger('goto', 0);
+        });
+
         it('Creates the controls', function () {
             expect($('#hero').find('.indicators span').length).to.equal(3);
             expect($('#hero').children('.actions').find('a.previous').length).to.equal(1);

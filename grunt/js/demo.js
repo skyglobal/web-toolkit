@@ -64,6 +64,15 @@ var demo = (function(logger, hash, lightbox) {
         }
     }
 
+    function hideLightbox(e,$box){
+        e.preventDefault();
+        var hide =  $(e.target).hasClass('lightbox-close') ||
+            (!$(e.target).hasClass('lightbox-content') && !$(e.target).parents('.lightbox-content').length);
+        if ( hide){
+            $box.hide();
+        }
+    }
+
     function createLightbox($mocha, spec){
         //todo: make lightbox do this automatically
         var lightboxDiv = document.createElement('div');
@@ -80,7 +89,10 @@ var demo = (function(logger, hash, lightbox) {
         $(container).append($(article));
         $(lightboxDiv).append($(container));
         $mocha.append($(lightboxDiv));
-        lightbox.show('#' +  spec + '-lightbox');
+        $('#' +  spec + '-lightbox').show();
+        $close.add($(lightboxDiv)).on('click', function(e){
+            hideLightbox(e, $('#' +  spec + '-lightbox'));
+        });
     }
 
     function runTest(hash){
@@ -103,7 +115,7 @@ var demo = (function(logger, hash, lightbox) {
             }, 200);
             createLightbox($mocha, spec);
             $runTestLink.on('click', function(){
-                lightbox.show('#' +  spec + '-lightbox');
+                $('#' +  spec + '-lightbox').show();
             })
         };
         document.head.appendChild(script);
