@@ -127,7 +127,7 @@ toolkit.lightbox = (function ($, keyboardFocus) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('modules/lightbox', ['utils/focus'], function(focus) {
+    define('components/lightbox', ['utils/focus'], function(focus) {
         'use strict';
         return toolkit.lightbox(jQuery, focus);
     });

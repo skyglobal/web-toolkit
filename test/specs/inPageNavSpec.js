@@ -20,7 +20,7 @@ function inPageNavSpec(hash, tabs) {
 }
 
 if (window.define) {
-    define('specs/inPageNavSpec', ['utils/hashManager', 'modules/inPageNav'],
+    define('specs/inPageNavSpec', ['utils/hashManager', 'components/inPageNav'],
         function (hash, tabs) {
             return inPageNavSpec(hash, tabs);
         }

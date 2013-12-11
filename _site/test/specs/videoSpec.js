@@ -65,7 +65,7 @@ function videoSpec(Video) {
 }
 
 if (window.define) {
-    define('specs/videoSpec', ['modules/video'], function (Video) {
+    define('specs/videoSpec', ['components/video'], function (Video) {
         return videoSpec(Video);
     });
 }
