@@ -12,8 +12,10 @@ function carouselSpec() {
 
     describe(describeSpec, function () {
 
-        beforeEach(function(done) {
+        beforeEach(function() {
             $('#hero').trigger('goto', 0);
+            $('#empty-hero').trigger('goto', 0);
+            $('#hero-skinny').trigger('goto', 0);
         });
 
         it('Creates the controls', function () {
@@ -38,7 +40,6 @@ function carouselSpec() {
         });
 
         it('Doesnt show terms link if its not needed', function () {
-            $('#hero-skinny').trigger('goto', 0);
             expect($('#hero-skinny').children('.terms-link:visible').length).to.equal(0);
             expect($('#hero-skinny').next('.terms-content:visible').length).to.equal(0);
         });
