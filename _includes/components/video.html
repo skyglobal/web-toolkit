@@ -1,5 +1,8 @@
 <a name="video"></a>
-<h3 class="wiki-h3">Video</h3>
+<h3 class="wiki-h3">
+    <a href="#test/videoSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+    Video
+</h3>
 
 <div class="design-notes">
     A wrapper for the Sky video player, The video will expand to fit the ratio of the video.
@@ -29,10 +32,10 @@
         };
         if (window.require){
             require(['toolkit'], function(){
-                $('#demo-video .video-container').video(componentConfig);
+                $('#demo-video.video-container').video(componentConfig);
             });
         } else {
-            $('#demo-video .video-container').video(componentConfig);
+            $('#demo-video.video-container').video(componentConfig);
         }
     </script>
 </div>

@@ -2,19 +2,8 @@ function videoSpec(Video) {
 
     var describeSpec = 'Video module';
 
-    var options = {
-        token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-        animationSpeed:0,
-        freewheel:false //disable ads
-    };
-
-    var video = new Video($('#demo-video'), options),
-        $container = $('#demo-video'),
-        $wrapper, $overlay, $close,
-        skyPlayCalled = false,
-        callbackCalled = false;
-
-    video.createWrapper();
+    var $container = $('#demo-video'),
+        $wrapper, $overlay, $close;
 
     function updateElements() {
         $wrapper = $('#demo-video .video-wrapper');
@@ -25,71 +14,46 @@ function videoSpec(Video) {
     describe(describeSpec, function () {
 
         beforeEach(function () {
-            callbackCalled = false;
-            skyPlayCalled = false;
+            $.fx.off = true; //todo: change this for css animation
+            updateElements();
         });
 
-        it('showCanvas will expand the video container', function () {
-            expect($container.find('playing-video').length).to.equal(0);
-            video.showCanvas(function () {
-                callbackCalled = true;
-            });
-            updateElements();
-
-            expect($container.find('.playing-video').length).to.equal(1);
-            expect($wrapper.hasClass('playing-video')).to.equal(true);
-            expect($wrapper.length).to.equal(1);
-            expect($close.hasClass('active')).to.equal(true);
-            expect(callbackCalled).to.equal(true);
-
+        afterEach(function(){
+            $('#demo-video .close.active').click();
+            $.fx.off = false; //todo: change this for css animation
         });
 
-        it('hideCanvas will collapse the container and hide the video', function () {
-            video.showCanvas(function () {
-            });
-            updateElements();
-            video.hideCanvas();
-            expect($close.hasClass('active')).to.equal(false);
-
-            expect($overlay.attr('style')).to.contain("display: none;");
-            expect($wrapper.hasClass('playing-video')).to.equal(false);
-        });
-
-        it('stop will stop the video', function () {
-            window.sky = {
-                html5player:{
-                    close:function (blah) {
-                        skyPlayCalled = true;
-                    }
-                }
-            };
-            video.stop();
-            updateElements();
-            expect(skyPlayCalled).to.equal(true);
+        it.only('will play the video when play is clicked', function () {
             expect($wrapper.length).to.equal(0);
+            expect($overlay.length).to.equal(0);
+            $('#demo-video .play-video ').click();
+            updateElements();
+            expect($wrapper.hasClass('playing-video')).to.equal(true);
+            expect($container.find('.playing-video').length).to.equal(1);
+            expect($wrapper.length).to.equal(1);
+            expect($overlay.length).to.equal(1);
+
+            expect($close.hasClass('active')).to.equal(true);
         });
 
-        it('play will start the video', function (done) {
-            window.sky = {
-                html5player:{
-                    play:function () {
-                        skyPlayCalled = true;
-                    }
-                }
-            };
-            $.fn.sky_html5player = function (blah) {
-            };
-            Video.prototype.showCanvas = function (callback) {
-                callback();
-                callbackCalled = true;
-            }
-            video.play();
-            expect(callbackCalled).to.equal(true);
-            setTimeout(function () {
-                expect(skyPlayCalled).to.equal(true);
-                done();
-            }, 1334)
+        it.only('will stop + fade out when the close button is clicked', function () {
+            expect($container.find('playing-video').length).to.equal(0);
+            $('#demo-video .play-video ').click();
+            updateElements();
+            $('#demo-video .close.active').click();
+            updateElements();
+            expect($wrapper.length).to.equal(0);
+            expect($overlay.length).to.equal(0);
         });
+
+        it.only('will stop + fade out when the video finishes', function () {
+            expect($container.find('playing-video').length).to.equal(0);
+            $('#demo-video .play-video ').click();
+            updateElements();
+            $('video').trigger('ended');
+            expect($container.find('playing-video').length).to.equal(0);
+        });
+
     });
 
     return describeSpec;

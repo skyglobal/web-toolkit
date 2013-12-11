@@ -93,13 +93,12 @@ toolkit.video = (function (window, $) {
             $wrapper.addClass('playing-video');
             $overlay.fadeIn(animationSpeed, function () {
                 $play.fadeOut(animationSpeed);
+                $close.addClass('active');
                 height = video.calculateHeight();
                 $container.animate({ height:height }, animationSpeed, function () {
                     $(window).on('skycom.resizeend', $.proxy(video.resizeContainer, video));
                     $wrapper.show();
-                    $overlay.fadeOut(animationSpeed, function () {
-                        $close.addClass('active');
-                    });
+                    $overlay.fadeOut(animationSpeed);
                     callback();
                 });
             });
