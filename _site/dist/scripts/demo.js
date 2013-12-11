@@ -480,6 +480,10 @@ var demo = (function(logger, hash, lightbox) {
         lightbox.show('#' +  spec + '-lightbox');
     }
 
+    function saveTestResults(spec){
+
+    }
+
     function runTest(hash){
         var spec = hash.replace('test/','');
         var script = document.createElement('script');
@@ -488,11 +492,13 @@ var demo = (function(logger, hash, lightbox) {
             var $trigger = $('a[href*="#' + hash + '"]'),
                 $mocha = $('<div id="mocha"></div>');
             $trigger.parent().after($mocha);
-            window[spec]();
+            var grep = window[spec]();
+            mocha.grep(grep);
             mocha.run(function(){
+                saveTestResults(spec);
 //                updateRunTests();
             });
-            $trigger.removeAttr('href');
+//            $trigger.removeAttr('href');
             $('html, body').animate({
                 scrollTop: $mocha.parent().prev().offset().top
             }, 200);

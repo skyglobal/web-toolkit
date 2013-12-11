@@ -1,5 +1,6 @@
 function accordionSpec(){
-    describe('Accordion module', function() {
+    var describeSpec = 'Accordion module';
+    describe(describeSpec, function() {
 
         it('Accordion content should be closed by default', function() {
             expect($('.view-container.toggle-hidden').length).to.equal(3);
@@ -25,13 +26,11 @@ function accordionSpec(){
             expect($last.hasClass('toggle-hidden')).to.equal(false);
         });
     });
-
+    return describeSpec;
 }
 
 if (window.define){
     define( 'specs/accordionSpec',    ['modules/accordion'],function(){
-        accordionSpec();
+        return accordionSpec();
     })
-} else {
-    accordionSpec();
 }
