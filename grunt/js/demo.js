@@ -54,15 +54,15 @@ var demo = (function(logger, hash, lightbox) {
         }
     }
 
-//    function updateRunTests($anchor, $mocha){
-//        var is100pc = false;
-//        if (!is100pc){
-//            setTimeout(function() {
-//                updateRunTests($anchor, $mocha);
-//            }, 100);
-//            return;
-//        }
-//    }
+    function updateTestsResults($runTestLink, $mocha){
+        var findFailure = $mocha.find('.failures em').text();
+
+        if(findFailure === '0'){
+            $runTestLink.append("<span class='colour result-summary'><i class='skycon-tick' aria-hidden='true'></i> Tests Passed</span>");
+        } else {
+            $runTestLink.append("<span class='colour error result-summary'><i class='skycon-warning' aria-hidden='true'></i> Tests Failed</span>");
+        }
+    }
 
     function createLightbox($mocha, spec){
         //todo: make lightbox do this automatically
@@ -75,6 +75,7 @@ var demo = (function(logger, hash, lightbox) {
         container.className = 'skycom-container lightbox-container clearfix';
         article.className = 'lightbox-content skycom-10 skycom-offset1';
         $(article).append($close);
+        $(article).append($mocha.find('#mocha-stats'));
         $(article).append($mocha.find('#mocha-report'));
         $(container).append($(article));
         $(lightboxDiv).append($(container));
@@ -82,32 +83,31 @@ var demo = (function(logger, hash, lightbox) {
         lightbox.show('#' +  spec + '-lightbox');
     }
 
-    function saveTestResults(spec){
-
-    }
-
     function runTest(hash){
         var spec = hash.replace('test/','');
         var script = document.createElement('script');
         script.src = "/test/specs/" + spec + ".js";
         script.onload =  function(){
-            var $trigger = $('a[href*="#' + hash + '"]'),
-                $mocha = $('<div id="mocha"></div>');
-            $trigger.parent().after($mocha);
+            debugger;
+            var $runTestLink = $('a[href*="#' + hash + '"]'),
+                $mocha = $('<div id="mocha" class="mocha-container"></div>');
+            $runTestLink.parent().after($mocha);
             var grep = window[spec]();
             mocha.grep(grep);
             mocha.run(function(){
-                saveTestResults(spec);
-//                updateRunTests();
+                updateTestsResults($runTestLink, $mocha);
+                $mocha.attr('id','mocha-' + spec)
             });
-//            $trigger.removeAttr('href');
+            $runTestLink.removeAttr('href');
             $('html, body').animate({
                 scrollTop: $mocha.parent().prev().offset().top
             }, 200);
             createLightbox($mocha, spec);
+            $runTestLink.on('click', function(){
+                lightbox.show('#' +  spec + '-lightbox');
+            })
         };
         document.head.appendChild(script);
-
     }
 
     function registerTests(){

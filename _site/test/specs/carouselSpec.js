@@ -1,4 +1,5 @@
 function carouselSpec(){
+    var describeSpec = 'Carousel module';
 
     globalskycom = {
         browserSupport: {
@@ -8,7 +9,7 @@ function carouselSpec(){
         }
     };
 
-    describe('Carousel module', function() {
+    describe(describeSpec, function() {
 
         it('Creates the controls', function() {
             expect($('#hero').find('.indicators span').length).to.equal(3);
@@ -186,13 +187,13 @@ function carouselSpec(){
             checkActiveSlideAfterAction(function() {$('#hero').trigger('refresh', 0);}, 2, 0, 400, done);
         });
     });
+
+    return describeSpec;
 }
 
 if (window.define){
     define('specs/carouselSpec',
         ['modules/carousel'], function(){
-            carouselSpec();
+            return carouselSpec();
     });
-} else {
-    carouselSpec();
 }
