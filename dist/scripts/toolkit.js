@@ -1395,30 +1395,29 @@ toolkit.lightbox = (function ($, keyboardFocus) {
 
 		close: function(event) {
 			event.preventDefault();
+            if (this.$container.hasClass('lightbox-closing')) { return ; }
 
-			if (!this.$container.hasClass('lightbox-closing')) {
-				this.$container.addClass('lightbox-closing');
+            this.$container.addClass('lightbox-closing');
 
-				// really really hode the lightbox once the 0.5 sec animation has finished
-				var cont = this.$container;
-				var orig = this.$originator;
-				window.setTimeout(function() {
-					cont.removeClass('lightbox-open');
-					cont.removeClass('lightbox-closing');
+            // really really hode the lightbox once the 0.5 sec animation has finished
+            var cont = this.$container;
+            var orig = this.$originator;
+            window.setTimeout(function() {
+                cont.removeClass('lightbox-open');
+                cont.removeClass('lightbox-closing');
 
-					// move the focus back to the element that opened the lightbox
-					// defend against not passing in the 'originator' in the show() method
-					if (orig) {
-						orig.focus();
-					}
+                // move the focus back to the element that opened the lightbox
+                // defend against not passing in the 'originator' in the show() method
+                if (orig) {
+                    orig.focus();
+                }
 
-					// remove our inline stying for the scrollbar fudge
-					$('body').removeAttr('style');
+                // remove our inline stying for the scrollbar fudge
+                $('body').removeAttr('style');
 
-					// restore all tabbing
-					$('*[tabindex]').each(restoreTabIndex);
-				}, 500);
-			}
+                // restore all tabbing
+                $('*[tabindex]').each(restoreTabIndex);
+            }, 500);
 		}
 	};
 

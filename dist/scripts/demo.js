@@ -346,30 +346,29 @@ toolkit.lightbox = (function ($, keyboardFocus) {
 
 		close: function(event) {
 			event.preventDefault();
+            if (this.$container.hasClass('lightbox-closing')) { return ; }
 
-			if (!this.$container.hasClass('lightbox-closing')) {
-				this.$container.addClass('lightbox-closing');
+            this.$container.addClass('lightbox-closing');
 
-				// really really hode the lightbox once the 0.5 sec animation has finished
-				var cont = this.$container;
-				var orig = this.$originator;
-				window.setTimeout(function() {
-					cont.removeClass('lightbox-open');
-					cont.removeClass('lightbox-closing');
+            // really really hode the lightbox once the 0.5 sec animation has finished
+            var cont = this.$container;
+            var orig = this.$originator;
+            window.setTimeout(function() {
+                cont.removeClass('lightbox-open');
+                cont.removeClass('lightbox-closing');
 
-					// move the focus back to the element that opened the lightbox
-					// defend against not passing in the 'originator' in the show() method
-					if (orig) {
-						orig.focus();
-					}
+                // move the focus back to the element that opened the lightbox
+                // defend against not passing in the 'originator' in the show() method
+                if (orig) {
+                    orig.focus();
+                }
 
-					// remove our inline stying for the scrollbar fudge
-					$('body').removeAttr('style');
+                // remove our inline stying for the scrollbar fudge
+                $('body').removeAttr('style');
 
-					// restore all tabbing
-					$('*[tabindex]').each(restoreTabIndex);
-				}, 500);
-			}
+                // restore all tabbing
+                $('*[tabindex]').each(restoreTabIndex);
+            }, 500);
 		}
 	};
 
@@ -462,6 +461,15 @@ var demo = (function(logger, hash, lightbox) {
         }
     }
 
+    function hideLightbox(e,$box){
+        e.preventDefault();
+        var hide =  $(e.target).hasClass('lightbox-close') ||
+            (!$(e.target).hasClass('lightbox-content') && !$(e.target).parents('.lightbox-content').length);
+        if ( hide){
+            $box.hide();
+        }
+    }
+
     function createLightbox($mocha, spec){
         //todo: make lightbox do this automatically
         var lightboxDiv = document.createElement('div');
@@ -478,7 +486,10 @@ var demo = (function(logger, hash, lightbox) {
         $(container).append($(article));
         $(lightboxDiv).append($(container));
         $mocha.append($(lightboxDiv));
-        lightbox.show('#' +  spec + '-lightbox');
+        $('#' +  spec + '-lightbox').show();
+        $close.add($(lightboxDiv)).on('click', function(e){
+            hideLightbox(e, $('#' +  spec + '-lightbox'));
+        });
     }
 
     function runTest(hash){
@@ -501,7 +512,7 @@ var demo = (function(logger, hash, lightbox) {
             }, 200);
             createLightbox($mocha, spec);
             $runTestLink.on('click', function(){
-                lightbox.show('#' +  spec + '-lightbox');
+                $('#' +  spec + '-lightbox').show();
             })
         };
         document.head.appendChild(script);
