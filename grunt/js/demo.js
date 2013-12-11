@@ -88,7 +88,6 @@ var demo = (function(logger, hash, lightbox) {
         var script = document.createElement('script');
         script.src = "/test/specs/" + spec + ".js";
         script.onload =  function(){
-            debugger;
             var $runTestLink = $('a[href*="#' + hash + '"]'),
                 $mocha = $('<div id="mocha" class="mocha-container"></div>');
             $runTestLink.parent().after($mocha);
