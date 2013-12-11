@@ -35,7 +35,7 @@ function shareSpec(share) {
 }
 
 if (window.define) {
-    define('specs/shareSpec', ['modules/share'], function (share) {
+    define('specs/shareSpec', ['components/share'], function (share) {
             return shareSpec(share);
         }
     );

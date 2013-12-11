@@ -10,13 +10,13 @@ if (typeof window.define === "function" && window.define.amd) {
         'utils/diff',
         'utils/focus',
         'utils/validation',
-        'modules/inPageNav',
-        'modules/accordion',
-        'modules/datePicker',
-        'modules/lightbox',
-        'modules/share',
-        'modules/video',
-        'modules/carousel'], function(polyfill, detect, skycons, hashManager, popup,toggle, diff, focus, validation, inPageNav, accordion, datePicker, lightbox, share, video, carousel){
+        'components/inPageNav',
+        'components/accordion',
+        'components/datePicker',
+        'components/lightbox',
+        'components/share',
+        'components/video',
+        'components/carousel'], function(polyfill, detect, skycons, hashManager, popup,toggle, diff, focus, validation, inPageNav, accordion, datePicker, lightbox, share, video, carousel){
 
         return {
             polyfill: polyfill,

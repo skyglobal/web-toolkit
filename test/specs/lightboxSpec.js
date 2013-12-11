@@ -153,7 +153,7 @@ function lightboxSpec(lightbox, focus) {
 }
 
 if (window.define) {
-    define('specs/lightboxSpec', ['modules/lightbox', 'utils/focus'], function (lightbox, focus) {
+    define('specs/lightboxSpec', ['components/lightbox', 'utils/focus'], function (lightbox, focus) {
             return lightboxSpec(lightbox, focus);
         }
     );

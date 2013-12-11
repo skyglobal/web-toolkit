@@ -24,7 +24,7 @@ module.exports = function(grunt) {
             fonts: ['grunt/fonts/min','dist/fonts']
         },
         jshint: {
-            toolkit: ['grunt/js/modules/*.js',
+            toolkit: ['grunt/js/components/*.js',
                       'grunt/js/utils/*.js'],
             others: ['Gruntfile.js'],
             options: {

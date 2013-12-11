@@ -142,7 +142,7 @@ var demo = (function(logger, hash, lightbox) {
 if (typeof window.define === "function" && window.define.amd){
     define('demo', ['utils/developer-notes-logger',
                     'utils/hashManager',
-                    'modules/lightbox'], function(developerNotesLogger, hash,lightbox) {
+                    'components/lightbox'], function(developerNotesLogger, hash,lightbox) {
             return demo(developerNotesLogger, hash, lightbox);
  });
 } else {
