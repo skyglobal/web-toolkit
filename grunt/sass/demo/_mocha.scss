@@ -1,0 +1,41 @@
+
+.mocha-container {
+  margin:0!important;
+  h1, h2{
+    line-height: 1em;
+  }
+
+  #mocha-stats li {
+    margin-left: 15px;
+  }
+  .lightbox-content{
+    padding: 16px;
+  }
+}
+.sub-section  #mocha-stats {
+  position: inherit;
+}
+
+.result-summary {
+  cursor: pointer;
+  font-size: 12px;
+  color: $success-icon;
+  background: #eee;
+  border: 1px solid $success-icon;
+  border-radius: 3px;
+  line-height: 20px;
+  display: inline-block;
+  padding: 0 4px;
+  position: relative;
+  top: -4px;
+  margin-left: 6px;
+
+  &.error {
+    color: $error;
+    border: 1px solid $error;
+  }
+
+  i{
+    font-size: 14px;
+  }
+}

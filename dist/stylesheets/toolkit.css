@@ -2545,6 +2545,10 @@ body .hover-colour:hover .skycon-facebook,
 body .colour .skycon-facebook {
   color: #3b5998;
 }
+body .hover-colour:hover .skycon-tick,
+body .colour .skycon-tick {
+  color: #6dbb00;
+}
 body .hover-colour:hover .skycon-chevron,
 body .hover-colour:hover .skycon-chevron-up,
 body .hover-colour:hover .skycon-chevron-down,
