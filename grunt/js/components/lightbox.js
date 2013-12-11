@@ -1,6 +1,6 @@
 /*global jQuery:false */
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.lightbox = (function ($, keyboardFocus) {
+toolkit.lightbox = (function ($, keyboardFocus, hash) {
     "use strict";
 	var scrollbarWidth = function() {
         var scrollDiv = document.createElement("div"),
@@ -30,40 +30,57 @@ toolkit.lightbox = (function ($, keyboardFocus) {
 		}
 	}
 
-    function Lightbox($element){
-        this.$container = $element;
-        this.$closeIcon = $element.find('.lightbox-close');
-        this.bindEvents();
+    function Lightbox(id, $originator, options){
+        var $element = $('#' + id.replace('lightbox/',''));
+
+        this.id = id;
+        this.$container = ($element.hasClass('lightbox')) ? $element : $element.parents('.lightbox');
+        this.$contents = (this.$container.length) ? this.$container.find('.lightbox-content') : $element ;
+        this.$closeIcon = this.$container.find('.lightbox-close');
+        this.$originator = $originator;
+
+        if (!this.$container.length){
+            this.create();
+            this.bindEvents();
+        }
+        this.onShowCallback = options.onShow;
     }
 
 	Lightbox.prototype = {
 		bindEvents: function() {
-            var lightboxId = this.$container.attr('id');
+            hash.register([this.id],this.open.bind(this) );
 
             this.$container.on("click", this.close.bind(this));
 			this.$closeIcon.on("click", this.close.bind(this));
-
-			// bind all lightbox open links
-			$('[data-lightbox=#' + lightboxId + ']').on("click", this.open.bind(this));
-
-			// prevent clicks on the lightbox from closing it
-			this.$container.find('.lightbox-content').on("click", function(e) { return false; });
+			this.$contents.on("click", function(e) { return false; });
 		},
 
-		open: function(event, $target) {
-			// event doesn't exist if called manually
-			if (event) {
-				event.preventDefault();
-				this.$originator = $(event.target);
-			}
+        create: function(){
+            var $contents = this.$contents;
+            var $parent = this.$contents.parent();
+            var lightboxDiv = document.createElement('div');
+            var container = document.createElement('div');
+            var $close = $('<a class="internal-link lightbox-close skycon-close" href="#!"><span class="speak">Close</span></a>');
 
-			if ($target) {
-				this.$originator = $target;
-			}
+            lightboxDiv.className = 'lightbox';
+            container.className = 'skycom-container lightbox-container clearfix';
+            $contents.addClass('lightbox-content skycom-10 skycom-offset1').attr('role','dialog');
+            $contents.prepend($close);
 
-			// hide the scrollbar on the body ('cos we don't want the user to scroll that any more) and replace the
-			// space it took up with a (dynamically calculated) padding. If we don't, the grid resizes itself to take
-			// up the newly available space and the page content jumps around.
+            $(container).append($contents);
+            $(lightboxDiv).append($(container));
+            $parent.append($(lightboxDiv));
+
+            this.$container = $(lightboxDiv);
+            this.$closeIcon = $close;
+        },
+
+		open: function() {
+            if (this.onShowCallback){
+                this.onShowCallback();
+            }
+
+			// hide the scrollbar on the body
 			$('body').css( {
 				'overflow':		'hidden',
 				'padding-right': scrollbarWidth + 'px'
@@ -92,6 +109,7 @@ toolkit.lightbox = (function ($, keyboardFocus) {
             // really really hode the lightbox once the 0.5 sec animation has finished
             var cont = this.$container;
             var orig = this.$originator;
+
             window.setTimeout(function() {
                 cont.removeClass('lightbox-open');
                 cont.removeClass('lightbox-closing');
@@ -108,29 +126,24 @@ toolkit.lightbox = (function ($, keyboardFocus) {
                 // restore all tabbing
                 $('*[tabindex]').each(restoreTabIndex);
             }, 500);
+
+            hash.remove();
 		}
 	};
 
-	$.fn.lightbox = function() {
+	$.fn.lightbox = function(options) {
 		return this.each(function() {
-			var lightbox = new Lightbox($(this));
+			var lb = new Lightbox($(this).attr('href').replace('#!',''),$(this), options);
 		});
-	};
-
-    return {
-		show: function(lightbox, originator) {
-			var lbox = new Lightbox($(lightbox));
-			lbox.open.bind(lbox)(false, $(originator));
-		}
 	};
 
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/lightbox', ['utils/focus'], function(focus) {
+    define('components/lightbox', ['utils/focus', 'utils/hashManager'], function(focus, hash) {
         'use strict';
-        return toolkit.lightbox(jQuery, focus);
+        return toolkit.lightbox(jQuery, focus, hash);
     });
 } else {
-    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus);
+    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager);
 }

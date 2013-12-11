@@ -4,7 +4,7 @@
 <p>
     Dont forget to think about things like stopping carousels when people open lightboxes.
 </p>
-<a id="lightbox-demo-link" href="#">Show Lightbox</a> |
+<a id="lightbox-demo-link" href="#!lightbox/lightbox-demo" >Show Lightbox</a> |
 <a id="lightbox-demo-tabbable-link" tabindex="101" href="#!">link that cant be tabbed to if lightbox is open</a>
 
 <p class="developer-notes">
@@ -18,19 +18,18 @@
     </div>
     <script>
         saveHTMLForDemo('#lightbox-demo');
+        function pauseCarousel(){
+            $('[data-function=carousel]').trigger("pause");
+        }
         if (window.require){
             require(['toolkit'], function(toolkit){
-                $('#lightbox-demo-link').on('click', function(e) {
-                    e.preventDefault();
-                    $('[data-function=carousel]').trigger("pause");
-                    toolkit.lightbox.show('#lightbox-demo', '#lightbox-demo-link');
-                });
+                    $(this).lightbox({
+                        onShow: pauseCarousel
+                    });
             });
         } else {
-            $('#lightbox-demo-link').on('click', function(e) {
-                e.preventDefault();
-                $('[data-function=carousel]').trigger("pause");
-                toolkit.lightbox.show('#lightbox-demo', '#lightbox-demo-link');
+            $('#lightbox-demo-link').lightbox({
+                onShow: pauseCarousel
             });
         }
     </script>
