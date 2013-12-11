@@ -1,12 +1,14 @@
-function accordionSpec(){
-    var describeSpec = 'Accordion module';
-    describe(describeSpec, function() {
+function accordionSpec() {
 
-        it('Accordion content should be closed by default', function() {
+    var describeSpec = 'Accordion module';
+
+    describe(describeSpec, function () {
+
+        it('Accordion content should be closed by default', function () {
             expect($('.view-container.toggle-hidden').length).to.equal(3);
         });
 
-        it('Accordion content should open and close when a user clicks an accordion item twice', function() {
+        it('Accordion content should open and close when a user clicks an accordion item twice', function () {
             var $first = $('.view-container').first();
             var $firstLink = $('.accordion-heading').first();
             var $last = $('.view-container').last();
@@ -26,11 +28,13 @@ function accordionSpec(){
             expect($last.hasClass('toggle-hidden')).to.equal(false);
         });
     });
+
     return describeSpec;
+
 }
 
-if (window.define){
-    define( 'specs/accordionSpec',    ['modules/accordion'],function(){
+if (window.define) {
+    define('specs/accordionSpec', ['modules/accordion'], function () {
         return accordionSpec();
     })
 }
