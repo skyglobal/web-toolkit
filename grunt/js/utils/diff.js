@@ -6,15 +6,24 @@ toolkit.diff = (function(){
             newRoute = opts.newRoute;
         clear();
         $('a[data-diff]').each(function(){
-            getFile(oldRoute, newRoute, $(this).attr('data-diff'));
+            var dir = $(this).attr('data-diff');
+            var demos = $(this).attr('data-diff-demos');
+            var arrDemos;
+            if (demos){
+                arrDemos = demos.split(',');
+                for (var i in arrDemos){
+                    getFile(oldRoute, newRoute, dir, arrDemos[i]);
+                }
+            }
+            getFile(oldRoute, newRoute, dir);
         });
     }
 
-    function getFile(oldVersion, newVersion, file){
+    function getFile(oldVersion, newVersion, file, demo){
         var dfd_latest, dfd_old;
-        var name = file.split('/')[file.split('/').length-1],
-            newFile = newVersion + '/' + file + '.html',
-            oldFile = oldVersion + '/' + file + '.html';
+        var name = file.split('/')[1],
+            newFile = newVersion + '/' + file + (demo?'/'+demo:'') + '.html',
+            oldFile = oldVersion + '/' + file + (demo?'/'+demo:'') + '.html';
 
         dfd_latest = $.ajax({
             crossDomain: true,
@@ -27,16 +36,54 @@ toolkit.diff = (function(){
             cache: false});
 
         $.when(dfd_latest,dfd_old).done(function(latest, old){
-            var $container = $('<div class="togglee" data-toggle="' + name + '"><table id="' + name + '-table"></table></div>');
+            displayComparison(latest, old, name, demo);
+        }).fail(function(){
+            displayNewFile(newFile, name, demo);
+        });
+    }
 
-            $container.append( $('<textarea id="' + name + '" class="hidden latest"></textarea>').val(latest))
-                .append($('<textarea id="old-' + name + '" class=hidden></textarea>').val(old));
+    function displayComparison(latest, old, name, demo){
+        var fullName = name + (demo ? '-' + demo : '');
+        var $container = $('[data-toggle="' + name +'"]');
+        var $header = $('h3#' + name + '-header');
+        var $tabList = $container.find('.tab-list');
 
+        if ($container.length===0){
+            $header = $('<h3 class="has-toggle wiki-h3 smaller" id="' + name + '-header"><span class="toggler" for="' + name + '"></span>' + name + '</h3>');
+            $container = $('<div class="togglee" data-toggle="' + name + '"></div>');
+            $tabList = $('<ul class="tab-list" ></ul>');
+            $container.append($tabList);
             $('[data-diff-container]')
-                .append('<h3 class="has-toggle wiki-h3 smaller" id="' + name + '-header"><span class="toggler" for="' + name + '"></span>' + name + '</h3>')
+                .append($header)
                 .append($container);
+        }
+        var $tabListItem = $('<li for="' + fullName + '-tab">' +  (demo || 'Supporting Docs') + '</li>');
+        var $tab = $('<div class="tab hidden" id="' + fullName + '-tab"></div>');
+        var $table = $('<table id="' + fullName + '-table"></table>');
+        $tabList[(demo ? 'append' : 'prepend')]($tabListItem);
+        $tab.append($table)
+            .append( $('<textarea id="' + fullName + '" class="hidden latest"></textarea>').val(latest))
+            .append($('<textarea id="old-' + fullName + '" class=hidden></textarea>').val(old));
+        $container.append($tab);
 
-            diff(name, old[0].split('\n'), latest[0].split('\n'));
+        $tabList.on('click', 'li', function(){
+           $(this).closest('.togglee').find('.tab-list > li').removeClass('medium');
+           $(this).closest('.togglee').find('.tab').addClass('hidden');
+            $('#' + $(this).attr('for')).removeClass('hidden');
+            $(this).addClass('medium');
+        });
+        $tabList.find('li').first().click();
+
+        diff(fullName, old[0].split('\n'), latest[0].split('\n'));
+    }
+
+    function displayNewFile(newFile, name, demo){
+        $.ajax({
+            crossDomain: true,
+            url:newFile,
+            cache: false
+        }).done(function(latest){
+            displayComparison([latest], [''], name, demo);
         });
     }
 
@@ -117,7 +164,7 @@ toolkit.diff = (function(){
         tableBody.appendChild(tr);
     }
 
-    function clear(name){
+    function clear(){
         $('.sky-form .error').text('');
         $('.togglee').remove();
         $('.has-toggle').remove();

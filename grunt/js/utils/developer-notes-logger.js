@@ -51,8 +51,7 @@ var developerNotesLogger = (function() {
     }
 
     function logDemoCode($this){
-        var selector = $this.find('> .demo').attr('data-selector'),
-            $examples = $this.find('> .demo > ' + selector).not('.developer-notes');
+        var $examples = $this.find('> .demo > *').not('.developer-notes');
 
         $examples.each(function(){
             var html = window.demoCode[selector] || this.outerHTML;
