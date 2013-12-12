@@ -548,15 +548,24 @@ toolkit.diff = (function(){
             newRoute = opts.newRoute;
         clear();
         $('a[data-diff]').each(function(){
-            getFile(oldRoute, newRoute, $(this).attr('data-diff'));
+            var dir = $(this).attr('data-diff');
+            var demos = $(this).attr('data-diff-demos');
+            var arrDemos;
+            if (demos){
+                arrDemos = demos.split(',');
+                for (var i in arrDemos){
+                    getFile(oldRoute, newRoute, dir, arrDemos[i]);
+                }
+            }
+            getFile(oldRoute, newRoute, dir);
         });
     }
 
-    function getFile(oldVersion, newVersion, file){
+    function getFile(oldVersion, newVersion, file, demo){
         var dfd_latest, dfd_old;
-        var name = file.split('/')[file.split('/').length-1],
-            newFile = newVersion + '/' + file + '.html',
-            oldFile = oldVersion + '/' + file + '.html';
+        var name = file.split('/')[1],
+            newFile = newVersion + '/' + file + (demo?'/'+demo:'') + '.html',
+            oldFile = oldVersion + '/' + file + (demo?'/'+demo:'') + '.html';
 
         dfd_latest = $.ajax({
             crossDomain: true,
@@ -569,16 +578,54 @@ toolkit.diff = (function(){
             cache: false});
 
         $.when(dfd_latest,dfd_old).done(function(latest, old){
-            var $container = $('<div class="togglee" data-toggle="' + name + '"><table id="' + name + '-table"></table></div>');
+            displayComparison(latest, old, name, demo);
+        }).fail(function(){
+            displayNewFile(newFile, name, demo);
+        });
+    }
 
-            $container.append( $('<textarea id="' + name + '" class="hidden latest"></textarea>').val(latest))
-                .append($('<textarea id="old-' + name + '" class=hidden></textarea>').val(old));
+    function displayComparison(latest, old, name, demo){
+        var fullName = name + (demo ? '-' + demo : '');
+        var $container = $('[data-toggle="' + name +'"]');
+        var $header = $('h3#' + name + '-header');
+        var $tabList = $container.find('.tab-list');
 
+        if ($container.length===0){
+            $header = $('<h3 class="has-toggle wiki-h3 smaller" id="' + name + '-header"><span class="toggler" for="' + name + '"></span>' + name + '</h3>');
+            $container = $('<div class="togglee" data-toggle="' + name + '"></div>');
+            $tabList = $('<ul class="tab-list" ></ul>');
+            $container.append($tabList);
             $('[data-diff-container]')
-                .append('<h3 class="has-toggle wiki-h3 smaller" id="' + name + '-header"><span class="toggler" for="' + name + '"></span>' + name + '</h3>')
+                .append($header)
                 .append($container);
+        }
+        var $tabListItem = $('<li for="' + fullName + '-tab">' +  (demo || 'Supporting Docs') + '</li>');
+        var $tab = $('<div class="tab hidden" id="' + fullName + '-tab"></div>');
+        var $table = $('<table id="' + fullName + '-table"></table>');
+        $tabList[(demo ? 'append' : 'prepend')]($tabListItem);
+        $tab.append($table)
+            .append( $('<textarea id="' + fullName + '" class="hidden latest"></textarea>').val(latest))
+            .append($('<textarea id="old-' + fullName + '" class=hidden></textarea>').val(old));
+        $container.append($tab);
 
-            diff(name, old[0].split('\n'), latest[0].split('\n'));
+        $tabList.on('click', 'li', function(){
+           $(this).closest('.togglee').find('.tab-list > li').removeClass('medium');
+           $(this).closest('.togglee').find('.tab').addClass('hidden');
+            $('#' + $(this).attr('for')).removeClass('hidden');
+            $(this).addClass('medium');
+        });
+        $tabList.find('li').first().click();
+
+        diff(fullName, old[0].split('\n'), latest[0].split('\n'));
+    }
+
+    function displayNewFile(newFile, name, demo){
+        $.ajax({
+            crossDomain: true,
+            url:newFile,
+            cache: false
+        }).done(function(latest){
+            displayComparison([latest], [''], name, demo);
         });
     }
 
@@ -659,7 +706,7 @@ toolkit.diff = (function(){
         tableBody.appendChild(tr);
     }
 
-    function clear(name){
+    function clear(){
         $('.sky-form .error').text('');
         $('.togglee').remove();
         $('.has-toggle').remove();
@@ -1310,7 +1357,7 @@ if (typeof window.define === "function" && window.define.amd) {
 };
 /*global jQuery:false */
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.lightbox = (function ($, keyboardFocus, hash) {
+toolkit.lightbox = (function ($, keyboardFocus) {
     
 	var scrollbarWidth = function() {
         var scrollDiv = document.createElement("div"),
@@ -1340,57 +1387,40 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
 		}
 	}
 
-    function Lightbox(id, $originator, options){
-        var $element = $('#' + id.replace('lightbox/',''));
-
-        this.id = id;
-        this.$container = ($element.hasClass('lightbox')) ? $element : $element.parents('.lightbox');
-        this.$contents = (this.$container.length) ? this.$container.find('.lightbox-content') : $element ;
-        this.$closeIcon = this.$container.find('.lightbox-close');
-        this.$originator = $originator;
-
-        if (!this.$container.length){
-            this.create();
-            this.bindEvents();
-        }
-        this.onShowCallback = options.onShow;
+    function Lightbox($element){
+        this.$container = $element;
+        this.$closeIcon = $element.find('.lightbox-close');
+        this.bindEvents();
     }
 
 	Lightbox.prototype = {
 		bindEvents: function() {
-            hash.register([this.id],this.open.bind(this) );
+            var lightboxId = this.$container.attr('id');
 
             this.$container.on("click", this.close.bind(this));
 			this.$closeIcon.on("click", this.close.bind(this));
-			this.$contents.on("click", function(e) { return false; });
+
+			// bind all lightbox open links
+			$('[data-lightbox=#' + lightboxId + ']').on("click", this.open.bind(this));
+
+			// prevent clicks on the lightbox from closing it
+			this.$container.find('.lightbox-content').on("click", function(e) { return false; });
 		},
 
-        create: function(){
-            var $contents = this.$contents;
-            var $parent = this.$contents.parent();
-            var lightboxDiv = document.createElement('div');
-            var container = document.createElement('div');
-            var $close = $('<a class="internal-link lightbox-close skycon-close" href="#!"><span class="speak">Close</span></a>');
+		open: function(event, $target) {
+			// event doesn't exist if called manually
+			if (event) {
+				event.preventDefault();
+				this.$originator = $(event.target);
+			}
 
-            lightboxDiv.className = 'lightbox';
-            container.className = 'skycom-container lightbox-container clearfix';
-            $contents.addClass('lightbox-content skycom-10 skycom-offset1').attr('role','dialog');
-            $contents.prepend($close);
+			if ($target) {
+				this.$originator = $target;
+			}
 
-            $(container).append($contents);
-            $(lightboxDiv).append($(container));
-            $parent.append($(lightboxDiv));
-
-            this.$container = $(lightboxDiv);
-            this.$closeIcon = $close;
-        },
-
-		open: function() {
-            if (this.onShowCallback){
-                this.onShowCallback();
-            }
-
-			// hide the scrollbar on the body
+			// hide the scrollbar on the body ('cos we don't want the user to scroll that any more) and replace the
+			// space it took up with a (dynamically calculated) padding. If we don't, the grid resizes itself to take
+			// up the newly available space and the page content jumps around.
 			$('body').css( {
 				'overflow':		'hidden',
 				'padding-right': scrollbarWidth + 'px'
@@ -1419,7 +1449,6 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             // really really hode the lightbox once the 0.5 sec animation has finished
             var cont = this.$container;
             var orig = this.$originator;
-
             window.setTimeout(function() {
                 cont.removeClass('lightbox-open');
                 cont.removeClass('lightbox-closing');
@@ -1436,26 +1465,31 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
                 // restore all tabbing
                 $('*[tabindex]').each(restoreTabIndex);
             }, 500);
-
-            hash.remove();
 		}
 	};
 
-	$.fn.lightbox = function(options) {
+	$.fn.lightbox = function() {
 		return this.each(function() {
-			var lb = new Lightbox($(this).attr('href').replace('#!',''),$(this), options);
+			var lightbox = new Lightbox($(this));
 		});
+	};
+
+    return {
+		show: function(lightbox, originator) {
+			var lbox = new Lightbox($(lightbox));
+			lbox.open.bind(lbox)(false, $(originator));
+		}
 	};
 
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/lightbox', ['utils/focus', 'utils/hashManager'], function(focus, hash) {
+    define('components/lightbox', ['utils/focus'], function(focus) {
         
-        return toolkit.lightbox(jQuery, focus, hash);
+        return toolkit.lightbox(jQuery, focus);
     });
 } else {
-    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager);
+    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus);
 };
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.share = (function() {

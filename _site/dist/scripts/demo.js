@@ -52,8 +52,7 @@ var developerNotesLogger = (function() {
     }
 
     function logDemoCode($this){
-        var selector = $this.find('> .demo').attr('data-selector'),
-            $examples = $this.find('> .demo > ' + selector).not('.developer-notes');
+        var $examples = $this.find('> .demo > *').not('.developer-notes');
 
         $examples.each(function(){
             var html = window.demoCode[selector] || this.outerHTML;
@@ -261,7 +260,7 @@ if (typeof window.define === "function" && window.define.amd) {
 };
 /*global jQuery:false */
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.lightbox = (function ($, keyboardFocus, hash) {
+toolkit.lightbox = (function ($, keyboardFocus) {
     
 	var scrollbarWidth = function() {
         var scrollDiv = document.createElement("div"),
@@ -291,57 +290,40 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
 		}
 	}
 
-    function Lightbox(id, $originator, options){
-        var $element = $('#' + id.replace('lightbox/',''));
-
-        this.id = id;
-        this.$container = ($element.hasClass('lightbox')) ? $element : $element.parents('.lightbox');
-        this.$contents = (this.$container.length) ? this.$container.find('.lightbox-content') : $element ;
-        this.$closeIcon = this.$container.find('.lightbox-close');
-        this.$originator = $originator;
-
-        if (!this.$container.length){
-            this.create();
-            this.bindEvents();
-        }
-        this.onShowCallback = options.onShow;
+    function Lightbox($element){
+        this.$container = $element;
+        this.$closeIcon = $element.find('.lightbox-close');
+        this.bindEvents();
     }
 
 	Lightbox.prototype = {
 		bindEvents: function() {
-            hash.register([this.id],this.open.bind(this) );
+            var lightboxId = this.$container.attr('id');
 
             this.$container.on("click", this.close.bind(this));
 			this.$closeIcon.on("click", this.close.bind(this));
-			this.$contents.on("click", function(e) { return false; });
+
+			// bind all lightbox open links
+			$('[data-lightbox=#' + lightboxId + ']').on("click", this.open.bind(this));
+
+			// prevent clicks on the lightbox from closing it
+			this.$container.find('.lightbox-content').on("click", function(e) { return false; });
 		},
 
-        create: function(){
-            var $contents = this.$contents;
-            var $parent = this.$contents.parent();
-            var lightboxDiv = document.createElement('div');
-            var container = document.createElement('div');
-            var $close = $('<a class="internal-link lightbox-close skycon-close" href="#!"><span class="speak">Close</span></a>');
+		open: function(event, $target) {
+			// event doesn't exist if called manually
+			if (event) {
+				event.preventDefault();
+				this.$originator = $(event.target);
+			}
 
-            lightboxDiv.className = 'lightbox';
-            container.className = 'skycom-container lightbox-container clearfix';
-            $contents.addClass('lightbox-content skycom-10 skycom-offset1').attr('role','dialog');
-            $contents.prepend($close);
+			if ($target) {
+				this.$originator = $target;
+			}
 
-            $(container).append($contents);
-            $(lightboxDiv).append($(container));
-            $parent.append($(lightboxDiv));
-
-            this.$container = $(lightboxDiv);
-            this.$closeIcon = $close;
-        },
-
-		open: function() {
-            if (this.onShowCallback){
-                this.onShowCallback();
-            }
-
-			// hide the scrollbar on the body
+			// hide the scrollbar on the body ('cos we don't want the user to scroll that any more) and replace the
+			// space it took up with a (dynamically calculated) padding. If we don't, the grid resizes itself to take
+			// up the newly available space and the page content jumps around.
 			$('body').css( {
 				'overflow':		'hidden',
 				'padding-right': scrollbarWidth + 'px'
@@ -370,7 +352,6 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             // really really hode the lightbox once the 0.5 sec animation has finished
             var cont = this.$container;
             var orig = this.$originator;
-
             window.setTimeout(function() {
                 cont.removeClass('lightbox-open');
                 cont.removeClass('lightbox-closing');
@@ -387,38 +368,49 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
                 // restore all tabbing
                 $('*[tabindex]').each(restoreTabIndex);
             }, 500);
-
-            hash.remove();
 		}
 	};
 
-	$.fn.lightbox = function(options) {
+	$.fn.lightbox = function() {
 		return this.each(function() {
-			var lb = new Lightbox($(this).attr('href').replace('#!',''),$(this), options);
+			var lightbox = new Lightbox($(this));
 		});
+	};
+
+    return {
+		show: function(lightbox, originator) {
+			var lbox = new Lightbox($(lightbox));
+			lbox.open.bind(lbox)(false, $(originator));
+		}
 	};
 
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/lightbox', ['utils/focus', 'utils/hashManager'], function(focus, hash) {
+    define('components/lightbox', ['utils/focus'], function(focus) {
         
-        return toolkit.lightbox(jQuery, focus, hash);
+        return toolkit.lightbox(jQuery, focus);
     });
 } else {
-    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager);
+    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus);
 };
 var demo = (function(logger, hash, lightbox) {
     function bindEvents() {
         $(document).on('click','.toggler', toggle);
-        $('#check').on('click', checkDiff);
+        $('.sky-form').on('submit', checkDiff);
     }
 
     function checkDiff(e) {
         e.preventDefault();
-        var oldVersion = $('#version').val(),
+        var newRouteDir,
+            oldVersion = $('#version').val(),
             newVersion = $('.wiki-header small').text().replace('v',''),
-            route = 'http://web-toolkit.global.sky.com';
+            route = 'http://web-toolkit.global.sky.com',
+            routeDir = newRouteDir = '_site/_includes';
+        if (location.hostname.indexOf('local')===0){
+            route = 'http://'+location.host;
+            newRouteDir = '../_includes';
+        }
         if (oldVersion.split('.').length<3 || (oldVersion.split('.')[0]<1)){
             $('.sky-form .error').text("The version number is required, and must be '1.0.0' or higher");
         }
@@ -426,8 +418,8 @@ var demo = (function(logger, hash, lightbox) {
             oldVersion = '0.6.9';//get lowest version available
         }
         window.toolkit.diff({
-            oldRoute: route + '/' + oldVersion + '/_site/_includes/',
-            newRoute: route + '/' + newVersion + '/_site/_includes/'
+            oldRoute: route + '/' + oldVersion + '/' + routeDir,
+            newRoute: route + '/' + newVersion + '/' + newRouteDir
         });
     }
 

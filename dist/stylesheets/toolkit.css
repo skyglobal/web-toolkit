@@ -1494,10 +1494,6 @@ button.btn {
   top: -200px;
 }
 
-.lightbox-content {
-  display: none;
-}
-
 .lightbox {
   display: none;
   width: 100%;
@@ -1516,9 +1512,6 @@ button.btn {
   display: block;
   -webkit-animation: lightbox-fade-in 0.5s;
   animation: lightbox-fade-in 0.5s;
-}
-.lightbox.lightbox-open .lightbox-content {
-  display: block;
 }
 .lightbox.lightbox-closing {
   opacity: 0;

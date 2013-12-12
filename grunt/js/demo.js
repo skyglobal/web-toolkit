@@ -1,14 +1,20 @@
 var demo = (function(logger, hash, lightbox) {
     function bindEvents() {
         $(document).on('click','.toggler', toggle);
-        $('#check').on('click', checkDiff);
+        $('.sky-form').on('submit', checkDiff);
     }
 
     function checkDiff(e) {
         e.preventDefault();
-        var oldVersion = $('#version').val(),
+        var newRouteDir,
+            oldVersion = $('#version').val(),
             newVersion = $('.wiki-header small').text().replace('v',''),
-            route = 'http://web-toolkit.global.sky.com';
+            route = 'http://web-toolkit.global.sky.com',
+            routeDir = newRouteDir = '_site/_includes';
+        if (location.hostname.indexOf('local')===0){
+            route = 'http://'+location.host;
+            newRouteDir = '../_includes';
+        }
         if (oldVersion.split('.').length<3 || (oldVersion.split('.')[0]<1)){
             $('.sky-form .error').text("The version number is required, and must be '1.0.0' or higher");
         }
@@ -16,8 +22,8 @@ var demo = (function(logger, hash, lightbox) {
             oldVersion = '0.6.9';//get lowest version available
         }
         window.toolkit.diff({
-            oldRoute: route + '/' + oldVersion + '/_site/_includes/',
-            newRoute: route + '/' + newVersion + '/_site/_includes/'
+            oldRoute: route + '/' + oldVersion + '/' + routeDir,
+            newRoute: route + '/' + newVersion + '/' + newRouteDir
         });
     }
 
