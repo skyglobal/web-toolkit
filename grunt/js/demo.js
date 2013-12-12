@@ -75,8 +75,11 @@ var demo = (function(logger, hash, lightbox) {
         var hide =  $(e.target).hasClass('lightbox-close') ||
             (!$(e.target).hasClass('lightbox-content') && !$(e.target).parents('.lightbox-content').length);
         if ( hide){
-            $box.hide();
+            $box.hide().removeClass('lightbox-open');
         }
+    }
+    function showLightbox($box){
+        $box.show().addClass('lightbox-open');
     }
 
     function createLightbox($mocha, spec){
@@ -95,7 +98,7 @@ var demo = (function(logger, hash, lightbox) {
         $(container).append($(article));
         $(lightboxDiv).append($(container));
         $mocha.append($(lightboxDiv));
-        $('#' +  spec + '-lightbox').show();
+        showLightbox($('#' +  spec + '-lightbox'));
         $close.add($(lightboxDiv)).on('click', function(e){
             hideLightbox(e, $('#' +  spec + '-lightbox'));
         });
@@ -121,7 +124,7 @@ var demo = (function(logger, hash, lightbox) {
             }, 200);
             createLightbox($mocha, spec);
             $runTestLink.on('click', function(){
-                $('#' +  spec + '-lightbox').show();
+                showLightbox($('#' +  spec + '-lightbox'));
             })
         };
         document.head.appendChild(script);

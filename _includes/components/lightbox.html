@@ -1,14 +1,11 @@
 <h3 class="wiki-h3">
     <a href="#test/lightboxSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
     Lightbox</h3>
-<p>
-    Dont forget to think about things like stopping carousels when people open lightboxes.
-</p>
 <a id="lightbox-demo-link" href="#!lightbox/lightbox-demo" >Show Lightbox</a> |
 <a id="lightbox-demo-tabbable-link" tabindex="101" href="#!">link that cant be tabbed to if lightbox is open</a>
 
 <p class="developer-notes">
-	To automatically bind lightboxes use the attribute <code>data-lightbox="#my-lightbox-id"</code>.
+	Bind lightboxes to links using the <code>href=#!lightbox/</code> then the ID of the element to be shown.
 </p>
 <div class="example">
     <div class="demo" >
@@ -18,19 +15,6 @@
     </div>
     <script>
         saveHTMLForDemo('#lightbox-demo');
-        function pauseCarousel(){
-            $('[data-function=carousel]').trigger("pause");
-        }
-        if (window.require){
-            require(['toolkit'], function(toolkit){
-                    $(this).lightbox({
-                        onShow: pauseCarousel
-                    });
-            });
-        } else {
-            $('#lightbox-demo-link').lightbox({
-                onShow: pauseCarousel
-            });
-        }
+        {% include components/lightbox/default.js %}
     </script>
 </div>

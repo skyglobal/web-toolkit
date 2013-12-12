@@ -1,6 +1,6 @@
 function lightboxSpec(lightbox, focus) {
 
-    var describeSpec = 'Lightbox module';
+    var describeSpec = 'Lightbox';
 
     if (!focus){ //needed for running test in demo page
         focus = toolkit.focus;
@@ -32,7 +32,7 @@ function lightboxSpec(lightbox, focus) {
             }, 500);
         }
 
-        it('Displays a lightbox when a user clicks a text link', function () {
+        it('will be displayed when a user clicks a lightbox link', function () {
             // given
             expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(false);
             // when
@@ -43,7 +43,7 @@ function lightboxSpec(lightbox, focus) {
         });
 
 
-        it('Closes when the close icon is clicked', function (done) {
+        it('closes when the close icon is clicked', function (done) {
             givenTheLightBoxIsOpen();
             // when
             $('#lightbox-demo .lightbox-close').click();
@@ -56,7 +56,7 @@ function lightboxSpec(lightbox, focus) {
         });
 
 
-        it('Closes when the faded grey bit is clicked', function (done) {
+        it('closes when the faded background is clicked', function (done) {
             givenTheLightBoxIsOpen();
             // when
             $('#lightbox-demo').click();
@@ -68,7 +68,7 @@ function lightboxSpec(lightbox, focus) {
         });
 
 
-        it('Does NOT close when the lightbox itself is clicked', function () {
+        it('does NOT close when the lightbox itself is clicked', function () {
             givenTheLightBoxIsOpen();
             // when
             $('#lightbox-demo .lightbox-content').click();
@@ -77,7 +77,7 @@ function lightboxSpec(lightbox, focus) {
         });
 
 
-        it('Hides the double scrollbar from the body element', function (done) {
+        it('hides the double scrollbar from the body element', function (done) {
             givenTheLightBoxIsOpen();
             // then
             expect($('body').is('[style]')).to.equal(true);
@@ -91,16 +91,26 @@ function lightboxSpec(lightbox, focus) {
             }, 501);
         });
 
+        it('automatically pauses carousels on the page', function () {
+            //todo
+        });
+        it('executes a given function before the lightbox is shown (onShow)', function () {
+            //todo
+        });
+        it('executes a given function after the lightbox is closes (onClose)', function () {
+            //todo
+        });
 
-        context('Focus Behaviour', function () {
 
-            it('Gives focus to the close icon when opened', function () {
+        context('accessibility features', function () {
+
+            it('gives focus to the close icon when opened', function () {
                 givenTheLightBoxIsOpen();
                 // then
                 expect($(document.activeElement).hasClass('lightbox-close')).to.equal(true);
             });
 
-            it('Returns focus back to the ORIGINATOR when closed', function (done) {
+            it('gives focus back to the lightbox link when closed', function (done) {
                 // given
                 givenTheLightBoxIsOpen();
                 // when
@@ -112,7 +122,7 @@ function lightboxSpec(lightbox, focus) {
                 }, 501);
             });
 
-            it("Sets the 'has-focus' class on the close icon if the ORIGINATOR had the 'focus' class.", function () {
+            it("highlights the close button in blue if the lightbox link is highlighted in blue", function () {
                 // given
                 expect($('#lightbox-demo .lightbox-close').hasClass(focus.className)).to.equal(false);
                 $('#lightbox-demo-link').addClass(focus.className);

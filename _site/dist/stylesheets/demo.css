@@ -522,14 +522,24 @@ h4 {
 }
 #changes-page .tab-list li {
   float: left;
-  padding: 0 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  color: #0070a5;
+}
+#changes-page .tab-list li:hover {
+  text-decoration: underline;
 }
 #changes-page table {
   border-collapse: collapse;
   margin-top: 10px;
-  width: 100%;
+  width: 99%;
   font-family: 'Bitstream Vera Sans Mono', Courier, monospace;
   border: 1px solid #CCC;
+  display: block;
+  clear: left;
+}
+#changes-page thead {
+  display: block;
 }
 #changes-page thead tr {
   font-weight: normal;
@@ -540,6 +550,17 @@ h4 {
   background: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#ececec));
   background: -moz-linear-gradient(top, #fafafa, #ececec);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#ECECEC');
+  display: block;
+  line-height: 2em;
+}
+#changes-page thead tr td {
+  display: block;
+}
+#changes-page tbody {
+  max-width: 100%;
+  display: block;
+  overflow: auto;
+  max-height: 400px;
 }
 #changes-page td {
   padding: 1px 2px;

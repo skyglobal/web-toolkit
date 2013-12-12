@@ -190,7 +190,6 @@ toolkit.validation = (function ($) {
     return Validation;
 
 });
-
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/validation', [], function() {
         'use strict';

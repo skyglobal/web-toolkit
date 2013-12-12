@@ -548,106 +548,43 @@ toolkit.diff = (function(){
             newRoute = opts.newRoute;
         clear();
         $('a[data-diff]').each(function(){
-            var dir = $(this).attr('data-diff');
-            var demos = $(this).attr('data-diff-demos');
-            var arrDemos;
-            if (demos){
-                arrDemos = demos.split(',');
-                for (var i in arrDemos){
-                    getFile(oldRoute, newRoute, dir, arrDemos[i]);
-                }
+            var demo, newFile, oldFile,
+                dir = $(this).attr('data-diff');
+            var demos = $(this).attr('data-diff-demos') || '';
+            var arrDemos = demos.split(',');
+            var componentName = dir.split('/')[1];
+            for (var i in arrDemos){
+                demo = arrDemos[i];
+                newFile = newRoute + '/' + dir + (demo ? '/' + demo : '');
+                oldFile = oldRoute + '/' + dir + (demo ? '/' + demo : '');
+                new CompareCodeBase({
+                    name: componentName,
+                    demo: demo,
+                    newCodeSource: newFile,
+                    oldCodeSource: oldFile
+                });
             }
-            getFile(oldRoute, newRoute, dir);
         });
     }
 
-    function getFile(oldVersion, newVersion, file, demo){
-        var dfd_latest, dfd_old;
-        var name = file.split('/')[1],
-            newFile = newVersion + '/' + file + (demo?'/'+demo:'') + '.html',
-            oldFile = oldVersion + '/' + file + (demo?'/'+demo:'') + '.html';
-
-        dfd_latest = $.ajax({
-            crossDomain: true,
-            url:newFile,
-            cache: false});
-
-        dfd_old = $.ajax({
-            crossDomain: true,
-            url:oldFile,
-            cache: false});
-
-        $.when(dfd_latest,dfd_old).done(function(latest, old){
-            displayComparison(latest, old, name, demo);
-        }).fail(function(){
-            displayNewFile(newFile, name, demo);
-        });
-    }
-
-    function displayComparison(latest, old, name, demo){
-        var fullName = name + (demo ? '-' + demo : '');
-        var $container = $('[data-toggle="' + name +'"]');
-        var $header = $('h3#' + name + '-header');
-        var $tabList = $container.find('.tab-list');
-
-        if ($container.length===0){
-            $header = $('<h3 class="has-toggle wiki-h3 smaller" id="' + name + '-header"><span class="toggler" for="' + name + '"></span>' + name + '</h3>');
-            $container = $('<div class="togglee" data-toggle="' + name + '"></div>');
-            $tabList = $('<ul class="tab-list" ></ul>');
-            $container.append($tabList);
-            $('[data-diff-container]')
-                .append($header)
-                .append($container);
-        }
-        var $tabListItem = $('<li for="' + fullName + '-tab">' +  (demo || 'Supporting Docs') + '</li>');
-        var $tab = $('<div class="tab hidden" id="' + fullName + '-tab"></div>');
-        var $table = $('<table id="' + fullName + '-table"></table>');
-        $tabList[(demo ? 'append' : 'prepend')]($tabListItem);
-        $tab.append($table)
-            .append( $('<textarea id="' + fullName + '" class="hidden latest"></textarea>').val(latest))
-            .append($('<textarea id="old-' + fullName + '" class=hidden></textarea>').val(old));
-        $container.append($tab);
-
-        $tabList.on('click', 'li', function(){
-           $(this).closest('.togglee').find('.tab-list > li').removeClass('medium');
-           $(this).closest('.togglee').find('.tab').addClass('hidden');
-            $('#' + $(this).attr('for')).removeClass('hidden');
-            $(this).addClass('medium');
-        });
-        $tabList.find('li').first().click();
-
-        diff(fullName, old[0].split('\n'), latest[0].split('\n'));
-    }
-
-    function displayNewFile(newFile, name, demo){
-        $.ajax({
-            crossDomain: true,
-            url:newFile,
-            cache: false
-        }).done(function(latest){
-            displayComparison([latest], [''], name, demo);
-        });
-    }
-
-    function getDiff(name, matrix, a1, a2, x, y){
+    function getDiff(name, ext, matrix, a1, a2, x, y){
         if(x>0 && y>0 && a1[y-1]===a2[x-1]){
-            getDiff(name, matrix, a1, a2, x-1, y-1);
-            addRow(name, x, y, ' ', a1[y-1]);
+            getDiff(name, ext, matrix, a1, a2, x-1, y-1);
+            addRow(name, ext, x, y, ' ', a1[y-1]);
         } else {
             if(x>0 && (y===0 || matrix[y][x-1] >= matrix[y-1][x])){
-                getDiff(name, matrix, a1, a2, x-1, y);
-                addRow(name, x, '', '+', a2[x-1]);
+                getDiff(name, ext, matrix, a1, a2, x-1, y);
+                addRow(name, ext, x, '', '+', a2[x-1]);
             } else if(y>0 && (x===0 || matrix[y][x-1] < matrix[y-1][x])){
-                getDiff(name, matrix, a1, a2, x, y-1);
-                addRow(name, '', y, '-', a1[y-1], '');
+                getDiff(name, ext, matrix, a1, a2, x, y-1);
+                addRow(name, ext, '', y, '-', a1[y-1], '');
             } else {
                 return;
             }
         }
     }
 
-
-    function diff(name, a1, a2){
+    function prepareCode(name, ext, a1, a2){
         var matrix = new Array(a1.length+1);
         var x,y;
 
@@ -667,16 +604,15 @@ toolkit.diff = (function(){
                 }
             }
         }
-
-        try {
-            getDiff(name, matrix, a1, a2, x-1, y-1);
-        } catch(e){
-            alert(e);
-        }
+        return {
+            matrix: matrix,
+            xPosition: x-1,
+            yPosition: y-1
+        };
     }
 
-    function addRow(name, x, y, type, rij){
-        var tableBody = document.getElementById(name + '-table'),
+    function addRow(name, ext, x, y, type, rij){
+        var tableBody = $(document.getElementById(ext + '-' + name + '-table')).find('tbody')[0],
             header = document.getElementById(name + '-header'),
             tr = document.createElement('tr'),
             td1 = document.createElement('td'),
@@ -711,6 +647,109 @@ toolkit.diff = (function(){
         $('.togglee').remove();
         $('.has-toggle').remove();
     }
+
+    function CompareCodeBase(options){
+        this.name = options.name;
+        this.newCodeSource = options.newCodeSource;
+        this.oldCodeSource = options.oldCodeSource;
+        this.demoName = options.demo;
+        this.complete = {};
+
+        this.getCode();
+    }
+
+    CompareCodeBase.prototype.getCode = function(){
+        this.getFileByExtension('new','html');
+        this.getFileByExtension('old','html');
+        this.getFileByExtension('new','js');
+        this.getFileByExtension('old','js');
+    };
+
+    CompareCodeBase.prototype.getFileByExtension = function(age, ext){
+        var self = this;
+        var version = age + ext;
+        var dfd = $.ajax({ crossDomain: true, cache: false, url:this[age + 'CodeSource'] + '.' + ext});
+        dfd.always(function(data){
+            self[version] = (typeof data === 'string') ? data : '';
+            self.addToPage(version);
+            if (!self.complete[self.name + '.' + ext]){
+                self.complete[self.name + '.' + ext] = [age];
+            } else {
+                self.compare(ext);
+            }
+        });
+    };
+
+    CompareCodeBase.prototype.addToPage = function(version){
+
+        this.fullName = this.name + (this.demoName ? '-' + this.demoName : '');
+        this.$container = $('[data-toggle="' + this.name +'"]');
+        this.$header = $('h3#' + this.name + '-header');
+        this.$tabList = this.$container.find('.tab-list');
+
+        this.addContainer();
+        this.addTab();
+        this.saveCode(version);
+        this.bindEvents();
+    };
+
+    CompareCodeBase.prototype.addContainer = function(){
+        if (this.$container.length){ return ; }
+
+        this.$header = $('<h3 class="has-toggle wiki-h3 smaller" id="' + this.name + '-header"><span class="toggler" for="' + this.name + '"></span>' + this.name + '</h3>');
+        this.$container = $('<div class="togglee" data-toggle="' + this.name + '"></div>');
+        this.$tabList = $('<ul class="tab-list clearfix" ></ul>');
+        this.$container.append(this.$tabList);
+        $('[data-diff-container]')
+            .append(this.$header)
+            .append(this.$container);
+    };
+
+    CompareCodeBase.prototype.createTable = function(ext){
+        return $('<div class="codeContainer"><table id="' + ext + '-' + this.fullName + '-table"><thead><tr><th colspan="3">' + ext.toUpperCase() + '</th></tr></thead><tbody></tbody></table></div> ');
+    };
+
+    CompareCodeBase.prototype.addTab = function(){
+        if (this.$container.find('#' + this.fullName + '-tab').length){ return ; }
+
+        var $tabListItem = $('<li for="' + this.fullName + '-tab">' + (this.demoName ? this.demoName : 'default') + '</li>');
+        this.$tabList.append($tabListItem);
+
+        var $tab = $('<div class="tab hidden" id="' + this.fullName + '-tab"></div>');
+
+        $tab.append(this.createTable('html'))
+            .append(this.createTable('js'))
+            .append( $('<textarea id="newhtml-' + this.fullName + '" class="hidden latest"></textarea>'))
+            .append($('<textarea id="oldhtml-' + this.fullName + '" class=hidden></textarea>'))
+            .append( $('<textarea id="newjs-' + this.fullName + '" class="hidden latest"></textarea>'))
+            .append($('<textarea id="oldjs-' + this.fullName + '" class=hidden></textarea>'));
+
+        this.$container.append($tab);
+    };
+
+    CompareCodeBase.prototype.saveCode = function(version){
+        $('#' + version + '-' + this.fullName).val(this[version]);
+    };
+
+    CompareCodeBase.prototype.changeTab = function(){
+        var $li = $(this);
+        $li.closest('.togglee').find('.tab-list > li').removeClass('medium');
+        $li.closest('.togglee').find('.tab').addClass('hidden');
+        $('#' + $li.attr('for')).removeClass('hidden');
+        $li.addClass('medium');
+    };
+
+    CompareCodeBase.prototype.bindEvents = function(){
+        this.$tabList.on('click', 'li', this.changeTab);
+        this.$tabList.find('li').first().click();
+    };
+
+    CompareCodeBase.prototype.compare = function(ext){
+        var oldCode = (this['old' + ext]) ? this['old' + ext].split('\n') : '' ;
+        var newCode = (this['new' + ext]) ? this['new' + ext].split('\n') : '' ;
+        var codeObj = prepareCode(this.fullName, ext, oldCode, newCode);
+        getDiff(this.fullName, ext, codeObj.matrix, oldCode, newCode, codeObj.xPosition, codeObj.yPosition);
+    };
 
     return findFiles;
 
@@ -972,7 +1011,6 @@ toolkit.validation = (function ($) {
     return Validation;
 
 });
-
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/validation', [], function() {
         
@@ -1357,139 +1395,168 @@ if (typeof window.define === "function" && window.define.amd) {
 };
 /*global jQuery:false */
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.lightbox = (function ($, keyboardFocus) {
+toolkit.lightbox = (function ($, keyboardFocus, hash) {
     
-	var scrollbarWidth = function() {
-        var scrollDiv = document.createElement("div"),
-            scrollbarWidth;
-        scrollDiv.className = "lightbox-scrollbar-measure";
-        document.body.appendChild(scrollDiv);
-        scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-        document.body.removeChild(scrollDiv);
-        return scrollbarWidth;
-    }();
+	var classes = {
+            main: 'lightbox',
+            closing: 'lightbox-closing',
+            content: 'lightbox-content',
+            closeButton: 'lightbox-close',
+            open: 'lightbox-open'
+        },
+        scrollbarWidth = function() {
+            var scrollDiv = document.createElement("div"),
+                scrollbarWidth;
+            scrollDiv.className = "lightbox-scrollbar-measure";
+            document.body.appendChild(scrollDiv);
+            scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+            document.body.removeChild(scrollDiv);
+            return scrollbarWidth;
+        }();
 
-	function hideTabIndex(index, element) {
+	function disableElementTabbing(index, element) {
 		var $element = $(element);
-		// Note that if tabindex is 'undefined', data-tabindex does not get set
 		$element.attr('data-tabindex', $element.attr('tabindex'));
 		$element.attr('tabindex', -1);
 	}
+    function enableElementTabIndex(index, element) {
+        var $element = $(element);
+        if ($element.attr('data-tabindex')) {
+            $element.attr('tabindex', $element.attr('data-tabindex'));
+            $element.removeAttr('data-tabindex');
+        } else {
+            $element.removeAttr('tabindex');
+        }
+    }
 
-	function restoreTabIndex(index, element) {
-		var $element = $(element);
-		if ($element.attr('data-tabindex')) {
-			$element.attr('tabindex', $element.attr('data-tabindex'));
-			$element.removeAttr('data-tabindex');
-		} else {
-			// if the element didn't have a data-tabindex, then it did not define a tabindex
-			$element.removeAttr('tabindex');
-		}
-	}
+    function disablePageTabbing(){
+        $('a, input, select, textarea, button, *[tabindex]').each(disableElementTabbing);
+    }
+    function enablePageTabbing($container){
+        $container.find('*[tabindex]').each(enableElementTabIndex);
+    }
 
-    function Lightbox($element){
-        this.$container = $element;
-        this.$closeIcon = $element.find('.lightbox-close');
-        this.bindEvents();
+    function focusOnLightboxLink(link){
+        if (!link) { return; }
+        link.focus();
+    }
+    function focusOnCloseButton($lightboxLink, $closeIcon){
+        if ($lightboxLink.hasClass(keyboardFocus.className)) {
+            keyboardFocus.apply($closeIcon[0]);
+        }else{
+            $closeIcon[0].focus();
+        }
+    }
+
+    function hideBodyScrollBar(){
+        $('body').css( {
+            'overflow':		'hidden',
+            'padding-right': scrollbarWidth + 'px'
+        });
+    }
+    function showBodyScrollBar(){
+        $('body').removeAttr('style');
+    }
+
+    function pauseCarousels(){
+        $('[data-function=carousel]').trigger("pause");
+    }
+
+    function Lightbox(id, $lightboxLink, options){
+        var $element = $('#' + id.replace('lightbox/',''));
+
+        this.id = id;
+        this.$container = ($element.hasClass(classes.main)) ? $element : $element.parents('.' + classes.main);
+        this.$contents = (this.$container.length) ? this.$container.find('.' + classes.content) : $element ;
+        this.$closeIcon = this.$container.find('.' + classes.closeButton);
+        this.$lightboxLink = $lightboxLink;
+
+        if (!this.$container.length){
+            this.create();
+            this.bindEvents();
+        }
+        if (options){
+            this.onShow = options.onShow;
+            this.onClose = options.onClose;
+        }
     }
 
 	Lightbox.prototype = {
 		bindEvents: function() {
-            var lightboxId = this.$container.attr('id');
+            hash.register([this.id],this.open.bind(this) );
 
             this.$container.on("click", this.close.bind(this));
 			this.$closeIcon.on("click", this.close.bind(this));
-
-			// bind all lightbox open links
-			$('[data-lightbox=#' + lightboxId + ']').on("click", this.open.bind(this));
-
-			// prevent clicks on the lightbox from closing it
-			this.$container.find('.lightbox-content').on("click", function(e) { return false; });
+			this.$contents.on("click", function(e) { return false; });
 		},
 
-		open: function(event, $target) {
-			// event doesn't exist if called manually
-			if (event) {
-				event.preventDefault();
-				this.$originator = $(event.target);
-			}
+        create: function(){
+            var $contents = this.$contents,
+                $parent = this.$contents.parent(),
+                $lightboxDiv = $('<div class="' + classes.main + '"></div>'),
+                $container = $('<div class="skycom-container lightbox-container clearfix"></div>'),
+                $close = $('<a class="internal-link ' + classes.closeButton + ' skycon-close" href="#!"><span class="speak">Close</span></a>');
 
-			if ($target) {
-				this.$originator = $target;
-			}
+            $contents.addClass(classes.content + ' skycom-10 skycom-offset1').attr('role','dialog');
+            $contents.prepend($close);
 
-			// hide the scrollbar on the body ('cos we don't want the user to scroll that any more) and replace the
-			// space it took up with a (dynamically calculated) padding. If we don't, the grid resizes itself to take
-			// up the newly available space and the page content jumps around.
-			$('body').css( {
-				'overflow':		'hidden',
-				'padding-right': scrollbarWidth + 'px'
-			});
+            $container.append($contents);
+            $lightboxDiv.append($container);
+            $parent.append($lightboxDiv);
 
-			this.$container.addClass('lightbox-open');
+            this.$container = $lightboxDiv;
+            this.$closeIcon = $close;
+        },
 
-			// if we were navigated by the keybaord, propogate that focus class to the lightbox
-			if (this.$originator.hasClass(keyboardFocus.className)) {
-                keyboardFocus.apply(this.$closeIcon[0]);
-			}else{
-                this.$closeIcon[0].focus();
+		open: function() {
+            pauseCarousels();
+            if (this.onShow){
+                this.onShow();
             }
+            hideBodyScrollBar();
 
-			// remove tabbing for all elements and re-enable for elements in the lightbox
-			$('a, input, select, textarea, button, *[tabindex]').each(hideTabIndex);
-			this.$container.find('*[tabindex]').each(restoreTabIndex);
+			this.$container.addClass(classes.open);
+
+            focusOnCloseButton(this.$lightboxLink, this.$closeIcon);
+            disablePageTabbing();
+            enablePageTabbing(this.$container);
 		},
 
 		close: function(event) {
+            var lightbox = this;
 			event.preventDefault();
-            if (this.$container.hasClass('lightbox-closing')) { return ; }
+            if (this.$container.hasClass(classes.closing)) { return ; }
 
-            this.$container.addClass('lightbox-closing');
+            this.$container.addClass(classes.closing);
+            hash.remove();
 
-            // really really hode the lightbox once the 0.5 sec animation has finished
-            var cont = this.$container;
-            var orig = this.$originator;
             window.setTimeout(function() {
-                cont.removeClass('lightbox-open');
-                cont.removeClass('lightbox-closing');
-
-                // move the focus back to the element that opened the lightbox
-                // defend against not passing in the 'originator' in the show() method
-                if (orig) {
-                    orig.focus();
+                lightbox.$container.removeClass(classes.open + ' ' + classes.closing);
+                focusOnLightboxLink(this.$lightboxLink);
+                showBodyScrollBar();
+                enablePageTabbing($('body'));
+                if (this.onClose){
+                    this.onClose();
                 }
-
-                // remove our inline stying for the scrollbar fudge
-                $('body').removeAttr('style');
-
-                // restore all tabbing
-                $('*[tabindex]').each(restoreTabIndex);
             }, 500);
 		}
 	};
 
-	$.fn.lightbox = function() {
+	$.fn.lightbox = function(options) {
 		return this.each(function() {
-			var lightbox = new Lightbox($(this));
+			var lb = new Lightbox($(this).attr('href').replace('#!',''),$(this), options);
 		});
-	};
-
-    return {
-		show: function(lightbox, originator) {
-			var lbox = new Lightbox($(lightbox));
-			lbox.open.bind(lbox)(false, $(originator));
-		}
 	};
 
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/lightbox', ['utils/focus'], function(focus) {
+    define('components/lightbox', ['utils/focus', 'utils/hashManager'], function(focus, hash) {
         
-        return toolkit.lightbox(jQuery, focus);
+        return toolkit.lightbox(jQuery, focus, hash);
     });
 } else {
-    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus);
+    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager);
 };
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.share = (function() {

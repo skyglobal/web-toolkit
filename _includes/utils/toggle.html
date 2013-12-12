@@ -20,17 +20,7 @@
     </div>
     <script>
         saveHTMLForDemo('#toggle-by-element');
-        if (window.require){
-            require(['toolkit'], function(toolkit){
-                $('#toggle-by-element .toggle-link').on('click', function() {
-                    toolkit.toggle({$elClicked:$(this)});
-                });
-            });
-        } else {
-            $('#toggle-by-element .toggle-link').on('click', function() {
-                toolkit.toggle({$elClicked:$(this)});
-            });
-        }
+        {% include utils/toggle/element.js %}
     </script>
 </div>
 
@@ -45,17 +35,7 @@
     </div>
     <script>
         saveHTMLForDemo('#toggle-by-container');
-        if (window.require){
-            require(['toolkit'], function(toolkit){
-                $('#toggle-by-container .toggle-link').on('click', function() {
-                    toolkit.toggle({$elClicked:$(this)});
-                });
-            });
-        } else {
-            $('#toggle-by-container .toggle-link').on('click', function() {
-                toolkit.toggle({$elClicked:$(this)});
-            });
-        }
+        {% include utils/toggle/container.js %}
     </script>
 </div>
 
@@ -70,16 +50,6 @@
     </div>
     <script>
         saveHTMLForDemo('#toggle-already-done');
-        if (window.require){
-            require(['toolkit'], function(toolkit){
-                $('#toggle-already-done .toggle-link').on('click', function() {
-                    toolkit.toggle({$elClicked:$(this)});
-                });
-            });
-        } else {
-            $('#toggle-already-done .toggle-link').on('click', function() {
-                toolkit.toggle({$elClicked:$(this)});
-            });
-        }
+        {% include utils/toggle/complete.js %}
     </script>
 </div>

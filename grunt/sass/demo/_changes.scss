@@ -37,17 +37,27 @@
 
   .tab-list li{
     float: left;
-    padding: 0 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    color: $link;
+    &:hover{
+      text-decoration: underline;
+    }
   }
 
   table {
     border-collapse: collapse;
     margin-top: 10px;
-    width:100%;
+    width:99%;
     font-family: 'Bitstream Vera Sans Mono', Courier, monospace;
     border: 1px solid #CCC;
+    display: block;
+    clear: left;
   }
 
+  thead {
+    display: block;
+  }
   thead tr {
     font-weight: normal;
     text-align: left;
@@ -57,6 +67,17 @@
     background: -webkit-gradient(linear, left top, left bottom, from(#FAFAFA), to(#ECECEC));
     background: -moz-linear-gradient(top,  #FAFAFA,  #ECECEC);
     filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#ECECEC');
+    display: block;
+    line-height: 2em;
+    td{
+      display: block;
+    }
+  }
+  tbody {
+    max-width: 100%;
+    display: block;
+    overflow: auto;
+    max-height: 400px;
   }
 
   td {
