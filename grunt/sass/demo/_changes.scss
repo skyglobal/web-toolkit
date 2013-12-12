@@ -25,6 +25,7 @@
     overflow: auto;
   }
 }
+
 #changes-page{
   h3.add:after,
   h3.del:after{
@@ -32,6 +33,11 @@
     content: ' [changes]';
     padding-left: 8px;
     color: $inactive;
+  }
+
+  .tab-list li{
+    float: left;
+    padding: 0 4px;
   }
 
   table {

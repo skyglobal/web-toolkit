@@ -4,79 +4,79 @@ body {
     margin:0;
 }
 
-.mocha-container {
+#mocha {
     font: 20px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 60px 50px;
 }
 
-.mocha-container ul,
-.mocha-container li {
+#mocha ul,
+#mocha li {
     margin: 0;
     padding: 0;
 }
 
-.mocha-container ul {
+#mocha ul {
     list-style: none;
 }
 
-.mocha-container h1,
-.mocha-container h2 {
+#mocha h1,
+#mocha h2 {
     margin: 0;
 }
 
-.mocha-container h1 {
+#mocha h1 {
     margin-top: 15px;
     font-size: 1em;
     font-weight: 200;
 }
 
-.mocha-container h1 a {
+#mocha h1 a {
     text-decoration: none;
     color: inherit;
 }
 
-.mocha-container h1 a:hover {
+#mocha h1 a:hover {
     text-decoration: underline;
 }
 
-.mocha-container .suite .suite h1 {
+#mocha .suite .suite h1 {
     margin-top: 0;
     font-size: .8em;
 }
 
-.mocha-container .hidden {
+#mocha .hidden {
     display: none;
 }
 
-.mocha-container h2 {
+#mocha h2 {
     font-size: 12px;
     font-weight: normal;
     cursor: pointer;
 }
 
-.mocha-container .suite {
+#mocha .suite {
     margin-left: 15px;
 }
 
-.mocha-container .test {
+#mocha .test {
     margin-left: 15px;
     overflow: hidden;
 }
 
-.mocha-container .test.pending:hover h2::after {
+#mocha .test.pending:hover h2::after {
     content: '(pending)';
     font-family: arial, sans-serif;
 }
 
-.mocha-container .test.pass.medium .duration {
+#mocha .test.pass.medium .duration {
     background: #c09853;
 }
 
-.mocha-container .test.pass.slow .duration {
+#mocha .test.pass.slow .duration {
     background: #b94a48;
 }
 
-.mocha-container .test.pass::before {
+#mocha .test.pass::before {
     content: '✓';
     font-size: 12px;
     display: block;
@@ -85,7 +85,7 @@ body {
     color: #00d6b2;
 }
 
-.mocha-container .test.pass .duration {
+#mocha .test.pass .duration {
     font-size: 9px;
     margin-left: 5px;
     padding: 2px 5px;
@@ -100,28 +100,28 @@ body {
     border-radius: 5px;
 }
 
-.mocha-container .test.pass.fast .duration {
+#mocha .test.pass.fast .duration {
     display: none;
 }
 
-.mocha-container .test.pending {
+#mocha .test.pending {
     color: #0b97c4;
 }
 
-.mocha-container .test.pending::before {
+#mocha .test.pending::before {
     content: '◦';
     color: #0b97c4;
 }
 
-.mocha-container .test.fail {
+#mocha .test.fail {
     color: #c00;
 }
 
-.mocha-container .test.fail pre {
+#mocha .test.fail pre {
     color: black;
 }
 
-.mocha-container .test.fail::before {
+#mocha .test.fail::before {
     content: '✖';
     font-size: 12px;
     display: block;
@@ -130,7 +130,7 @@ body {
     color: #c00;
 }
 
-.mocha-container .test pre.error {
+#mocha .test pre.error {
     color: #c00;
     max-height: 300px;
     overflow: auto;
@@ -141,7 +141,7 @@ body {
  * (2): 42 = 2*15 + 2*10 + 2*1 (padding + margin + border)
  *      ^^ seriously
  */
-.mocha-container .test pre {
+#mocha .test pre {
     display: block;
     float: left;
     clear: left;
@@ -160,11 +160,11 @@ body {
     border-radius: 3px;
 }
 
-.mocha-container .test h2 {
+#mocha .test h2 {
     position: relative;
 }
 
-.mocha-container .test a.replay {
+#mocha .test a.replay {
     position: absolute;
     top: 3px;
     right: 0;
@@ -186,7 +186,7 @@ body {
     color: #888;
 }
 
-.mocha-container .test:hover a.replay {
+#mocha .test:hover a.replay {
     opacity: 1;
 }
 
@@ -253,18 +253,18 @@ body {
     height: 40px;
 }
 
-.mocha-container code .comment { color: #ddd; }
-.mocha-container code .init { color: #2f6fad; }
-.mocha-container code .string { color: #5890ad; }
-.mocha-container code .keyword { color: #8a6343; }
-.mocha-container code .number { color: #2f6fad; }
+#mocha code .comment { color: #ddd; }
+#mocha code .init { color: #2f6fad; }
+#mocha code .string { color: #5890ad; }
+#mocha code .keyword { color: #8a6343; }
+#mocha code .number { color: #2f6fad; }
 
 @media screen and (max-device-width: 480px) {
-    .mocha-container {
+    #mocha {
         margin: 60px 0px;
     }
 
-    .mocha-container #stats {
+    #mocha #stats {
         position: absolute;
     }
 }
