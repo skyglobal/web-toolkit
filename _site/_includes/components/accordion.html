@@ -13,12 +13,6 @@
     </div>
     <script>
         saveHTMLForDemo('.accordion');
-        if (window.require){
-            require(['toolkit'], function(){
-                $('.accordion').accordion();
-            });
-        } else {
-            $('.accordion').accordion();
-        }
+        {% include components/accordion/default.js %}
     </script>
 </div>

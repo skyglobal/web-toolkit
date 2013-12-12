@@ -13,7 +13,7 @@
 </div>
 
 <div class="example">
-    <h4 class="medium">3:1 Carousel</h4>
+    <h4 class="medium">Default</h4>
     <div class="design-notes">
         Use a maximum of 4 lines of text in total (or 3 lines plus channel logo).
     </div>
@@ -22,28 +22,19 @@
     </p>
     <div class="demo" >
 
-        {% include components/carousel/3-1.html %}
+        {% include components/carousel/default.html %}
 
     </div>
+
     <script>
         saveHTMLForDemo('#hero');
-        componentConfig =  {
-            autoplay: true,
-            videoAds: false
-        };
-        if (window.require){
-            require(['toolkit'], function(){
-                $('#hero').skycom_carousel(componentConfig);
-            });
-        } else {
-            $('#hero').skycom_carousel(componentConfig);
-        }
-
+        {% include components/carousel/default.js %}
     </script>
+
 </div>
 
 <div class="example">
-    <h4 class="medium">Skinny Carousel</h4>
+    <h4 class="medium">Skinny</h4>
     <div class="design-notes">
         Use a maximum of 2 lines of text in total (or 1 line plus channel logo).
     </div>
@@ -55,24 +46,18 @@
         {% include components/carousel/skinny.html %}
 
     </div>
+
     <script>
         saveHTMLForDemo('#hero-skinny');
-        componentConfig =  {
-            autoplay: true,
-            videoAds: false
-        };
-        if (window.require){
-            require(['toolkit'], function(){
-                $('#hero-skinny').skycom_carousel(componentConfig);
-            });
-        } else {
-            $('#hero-skinny').skycom_carousel(componentConfig);
-        }
+        {% include components/carousel/skinny.js %}
     </script>
+
+
+
 </div>
 
 <div class="example">
-    <h4 class="medium">Single Slide Carousel</h4>
+    <h4 class="medium">Single Slide</h4>
     <div class="design-notes">
         This will behave like it isn't a carousel as there is only one slide.
     </div>
@@ -81,18 +66,10 @@
         {% include components/carousel/singleSlide.html %}
 
     </div>
+
     <script>
         saveHTMLForDemo('#empty-hero');
-        componentConfig =  {
-            autoplay: true,
-            videoAds: false
-        };
-        if (window.require){
-            require(['toolkit'], function(){
-                $('#empty-hero').skycom_carousel(componentConfig);
-            });
-        } else {
-            $('#empty-hero').skycom_carousel(componentConfig);
-        }
+        {% include components/carousel/singleSlide.js %}
     </script>
+
 </div>

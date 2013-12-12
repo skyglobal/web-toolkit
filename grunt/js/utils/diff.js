@@ -6,106 +6,43 @@ toolkit.diff = (function(){
             newRoute = opts.newRoute;
         clear();
         $('a[data-diff]').each(function(){
-            var dir = $(this).attr('data-diff');
-            var demos = $(this).attr('data-diff-demos');
-            var arrDemos;
-            if (demos){
-                arrDemos = demos.split(',');
-                for (var i in arrDemos){
-                    getFile(oldRoute, newRoute, dir, arrDemos[i]);
-                }
+            var demo, newFile, oldFile,
+                dir = $(this).attr('data-diff');
+            var demos = $(this).attr('data-diff-demos') || '';
+            var arrDemos = demos.split(',');
+            var componentName = dir.split('/')[1];
+            for (var i in arrDemos){
+                demo = arrDemos[i];
+                newFile = newRoute + '/' + dir + (demo ? '/' + demo : '');
+                oldFile = oldRoute + '/' + dir + (demo ? '/' + demo : '');
+                new CompareCodeBase({
+                    name: componentName,
+                    demo: demo,
+                    newCodeSource: newFile,
+                    oldCodeSource: oldFile
+                });
             }
-            getFile(oldRoute, newRoute, dir);
         });
     }
 
-    function getFile(oldVersion, newVersion, file, demo){
-        var dfd_latest, dfd_old;
-        var name = file.split('/')[1],
-            newFile = newVersion + '/' + file + (demo?'/'+demo:'') + '.html',
-            oldFile = oldVersion + '/' + file + (demo?'/'+demo:'') + '.html';
-
-        dfd_latest = $.ajax({
-            crossDomain: true,
-            url:newFile,
-            cache: false});
-
-        dfd_old = $.ajax({
-            crossDomain: true,
-            url:oldFile,
-            cache: false});
-
-        $.when(dfd_latest,dfd_old).done(function(latest, old){
-            displayComparison(latest, old, name, demo);
-        }).fail(function(){
-            displayNewFile(newFile, name, demo);
-        });
-    }
-
-    function displayComparison(latest, old, name, demo){
-        var fullName = name + (demo ? '-' + demo : '');
-        var $container = $('[data-toggle="' + name +'"]');
-        var $header = $('h3#' + name + '-header');
-        var $tabList = $container.find('.tab-list');
-
-        if ($container.length===0){
-            $header = $('<h3 class="has-toggle wiki-h3 smaller" id="' + name + '-header"><span class="toggler" for="' + name + '"></span>' + name + '</h3>');
-            $container = $('<div class="togglee" data-toggle="' + name + '"></div>');
-            $tabList = $('<ul class="tab-list" ></ul>');
-            $container.append($tabList);
-            $('[data-diff-container]')
-                .append($header)
-                .append($container);
-        }
-        var $tabListItem = $('<li for="' + fullName + '-tab">' +  (demo || 'Supporting Docs') + '</li>');
-        var $tab = $('<div class="tab hidden" id="' + fullName + '-tab"></div>');
-        var $table = $('<table id="' + fullName + '-table"></table>');
-        $tabList[(demo ? 'append' : 'prepend')]($tabListItem);
-        $tab.append($table)
-            .append( $('<textarea id="' + fullName + '" class="hidden latest"></textarea>').val(latest))
-            .append($('<textarea id="old-' + fullName + '" class=hidden></textarea>').val(old));
-        $container.append($tab);
-
-        $tabList.on('click', 'li', function(){
-           $(this).closest('.togglee').find('.tab-list > li').removeClass('medium');
-           $(this).closest('.togglee').find('.tab').addClass('hidden');
-            $('#' + $(this).attr('for')).removeClass('hidden');
-            $(this).addClass('medium');
-        });
-        $tabList.find('li').first().click();
-
-        diff(fullName, old[0].split('\n'), latest[0].split('\n'));
-    }
-
-    function displayNewFile(newFile, name, demo){
-        $.ajax({
-            crossDomain: true,
-            url:newFile,
-            cache: false
-        }).done(function(latest){
-            displayComparison([latest], [''], name, demo);
-        });
-    }
-
-    function getDiff(name, matrix, a1, a2, x, y){
+    function getDiff(name, ext, matrix, a1, a2, x, y){
         if(x>0 && y>0 && a1[y-1]===a2[x-1]){
-            getDiff(name, matrix, a1, a2, x-1, y-1);
-            addRow(name, x, y, ' ', a1[y-1]);
+            getDiff(name, ext, matrix, a1, a2, x-1, y-1);
+            addRow(name, ext, x, y, ' ', a1[y-1]);
         } else {
             if(x>0 && (y===0 || matrix[y][x-1] >= matrix[y-1][x])){
-                getDiff(name, matrix, a1, a2, x-1, y);
-                addRow(name, x, '', '+', a2[x-1]);
+                getDiff(name, ext, matrix, a1, a2, x-1, y);
+                addRow(name, ext, x, '', '+', a2[x-1]);
             } else if(y>0 && (x===0 || matrix[y][x-1] < matrix[y-1][x])){
-                getDiff(name, matrix, a1, a2, x, y-1);
-                addRow(name, '', y, '-', a1[y-1], '');
+                getDiff(name, ext, matrix, a1, a2, x, y-1);
+                addRow(name, ext, '', y, '-', a1[y-1], '');
             } else {
                 return;
             }
         }
     }
 
-
-    function diff(name, a1, a2){
+    function prepareCode(name, ext, a1, a2){
         var matrix = new Array(a1.length+1);
         var x,y;
 
@@ -125,16 +62,15 @@ toolkit.diff = (function(){
                 }
             }
         }
-
-        try {
-            getDiff(name, matrix, a1, a2, x-1, y-1);
-        } catch(e){
-            alert(e);
-        }
+        return {
+            matrix: matrix,
+            xPosition: x-1,
+            yPosition: y-1
+        };
     }
 
-    function addRow(name, x, y, type, rij){
-        var tableBody = document.getElementById(name + '-table'),
+    function addRow(name, ext, x, y, type, rij){
+        var tableBody = $(document.getElementById(ext + '-' + name + '-table')).find('tbody')[0],
             header = document.getElementById(name + '-header'),
             tr = document.createElement('tr'),
             td1 = document.createElement('td'),
@@ -169,6 +105,109 @@ toolkit.diff = (function(){
         $('.togglee').remove();
         $('.has-toggle').remove();
     }
+
+    function CompareCodeBase(options){
+        this.name = options.name;
+        this.newCodeSource = options.newCodeSource;
+        this.oldCodeSource = options.oldCodeSource;
+        this.demoName = options.demo;
+        this.complete = {};
+
+        this.getCode();
+    }
+
+    CompareCodeBase.prototype.getCode = function(){
+        this.getFileByExtension('new','html');
+        this.getFileByExtension('old','html');
+        this.getFileByExtension('new','js');
+        this.getFileByExtension('old','js');
+    };
+
+    CompareCodeBase.prototype.getFileByExtension = function(age, ext){
+        var self = this;
+        var version = age + ext;
+        var dfd = $.ajax({ crossDomain: true, cache: false, url:this[age + 'CodeSource'] + '.' + ext});
+        dfd.always(function(data){
+            self[version] = (typeof data === 'string') ? data : '';
+            self.addToPage(version);
+            if (!self.complete[self.name + '.' + ext]){
+                self.complete[self.name + '.' + ext] = [age];
+            } else {
+                self.compare(ext);
+            }
+        });
+    };
+
+    CompareCodeBase.prototype.addToPage = function(version){
+
+        this.fullName = this.name + (this.demoName ? '-' + this.demoName : '');
+        this.$container = $('[data-toggle="' + this.name +'"]');
+        this.$header = $('h3#' + this.name + '-header');
+        this.$tabList = this.$container.find('.tab-list');
+
+        this.addContainer();
+        this.addTab();
+        this.saveCode(version);
+        this.bindEvents();
+    };
+
+    CompareCodeBase.prototype.addContainer = function(){
+        if (this.$container.length){ return ; }
+
+        this.$header = $('<h3 class="has-toggle wiki-h3 smaller" id="' + this.name + '-header"><span class="toggler" for="' + this.name + '"></span>' + this.name + '</h3>');
+        this.$container = $('<div class="togglee" data-toggle="' + this.name + '"></div>');
+        this.$tabList = $('<ul class="tab-list clearfix" ></ul>');
+        this.$container.append(this.$tabList);
+        $('[data-diff-container]')
+            .append(this.$header)
+            .append(this.$container);
+    };
+
+    CompareCodeBase.prototype.createTable = function(ext){
+        return $('<div class="codeContainer"><table id="' + ext + '-' + this.fullName + '-table"><thead><tr><th colspan="3">' + ext.toUpperCase() + '</th></tr></thead><tbody></tbody></table></div> ');
+    };
+
+    CompareCodeBase.prototype.addTab = function(){
+        if (this.$container.find('#' + this.fullName + '-tab').length){ return ; }
+
+        var $tabListItem = $('<li for="' + this.fullName + '-tab">' + (this.demoName ? this.demoName : 'default') + '</li>');
+        this.$tabList.append($tabListItem);
+
+        var $tab = $('<div class="tab hidden" id="' + this.fullName + '-tab"></div>');
+
+        $tab.append(this.createTable('html'))
+            .append(this.createTable('js'))
+            .append( $('<textarea id="newhtml-' + this.fullName + '" class="hidden latest"></textarea>'))
+            .append($('<textarea id="oldhtml-' + this.fullName + '" class=hidden></textarea>'))
+            .append( $('<textarea id="newjs-' + this.fullName + '" class="hidden latest"></textarea>'))
+            .append($('<textarea id="oldjs-' + this.fullName + '" class=hidden></textarea>'));
+
+        this.$container.append($tab);
+    };
+
+    CompareCodeBase.prototype.saveCode = function(version){
+        $('#' + version + '-' + this.fullName).val(this[version]);
+    };
+
+    CompareCodeBase.prototype.changeTab = function(){
+        var $li = $(this);
+        $li.closest('.togglee').find('.tab-list > li').removeClass('medium');
+        $li.closest('.togglee').find('.tab').addClass('hidden');
+        $('#' + $li.attr('for')).removeClass('hidden');
+        $li.addClass('medium');
+    };
+
+    CompareCodeBase.prototype.bindEvents = function(){
+        this.$tabList.on('click', 'li', this.changeTab);
+        this.$tabList.find('li').first().click();
+    };
+
+    CompareCodeBase.prototype.compare = function(ext){
+        var oldCode = (this['old' + ext]) ? this['old' + ext].split('\n') : '' ;
+        var newCode = (this['new' + ext]) ? this['new' + ext].split('\n') : '' ;
+        var codeObj = prepareCode(this.fullName, ext, oldCode, newCode);
+        getDiff(this.fullName, ext, codeObj.matrix, oldCode, newCode, codeObj.xPosition, codeObj.yPosition);
+    };
 
     return findFiles;
 

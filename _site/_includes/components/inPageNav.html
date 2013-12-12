@@ -28,13 +28,7 @@
     </div>
     <script>
         saveHTMLForDemo('#demo-inpage-nav-tabs');
-        if (window.require){
-            require(['toolkit'], function(){
-                $('#demo-inpage-nav-tabs').inPageNav();
-            });
-        } else {
-            $('#demo-inpage-nav-tabs').inPageNav();
-        }
+        {% include components/inPageNav/sleekNav.html %}
     </script>
 </div>
 
@@ -56,12 +50,6 @@
     </div>
     <script>
         saveHTMLForDemo('#demo-classic-tabs');
-        if (window.require){
-            require(['toolkit'], function(){
-                $('#demo-classic-tabs').inPageNav();
-            });
-        } else {
-            $('#demo-classic-tabs').inPageNav();
-        }
+        {% include components/inPageNav/classicTabs.html %}
     </script>
 </div>

@@ -2,48 +2,88 @@
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.lightbox = (function ($, keyboardFocus, hash) {
     "use strict";
-	var scrollbarWidth = function() {
-        var scrollDiv = document.createElement("div"),
-            scrollbarWidth;
-        scrollDiv.className = "lightbox-scrollbar-measure";
-        document.body.appendChild(scrollDiv);
-        scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-        document.body.removeChild(scrollDiv);
-        return scrollbarWidth;
-    }();
+	var classes = {
+            main: 'lightbox',
+            closing: 'lightbox-closing',
+            content: 'lightbox-content',
+            closeButton: 'lightbox-close',
+            open: 'lightbox-open'
+        },
+        scrollbarWidth = function() {
+            var scrollDiv = document.createElement("div"),
+                scrollbarWidth;
+            scrollDiv.className = "lightbox-scrollbar-measure";
+            document.body.appendChild(scrollDiv);
+            scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+            document.body.removeChild(scrollDiv);
+            return scrollbarWidth;
+        }();
 
-	function hideTabIndex(index, element) {
+	function disableElementTabbing(index, element) {
 		var $element = $(element);
-		// Note that if tabindex is 'undefined', data-tabindex does not get set
 		$element.attr('data-tabindex', $element.attr('tabindex'));
 		$element.attr('tabindex', -1);
 	}
+    function enableElementTabIndex(index, element) {
+        var $element = $(element);
+        if ($element.attr('data-tabindex')) {
+            $element.attr('tabindex', $element.attr('data-tabindex'));
+            $element.removeAttr('data-tabindex');
+        } else {
+            $element.removeAttr('tabindex');
+        }
+    }
 
-	function restoreTabIndex(index, element) {
-		var $element = $(element);
-		if ($element.attr('data-tabindex')) {
-			$element.attr('tabindex', $element.attr('data-tabindex'));
-			$element.removeAttr('data-tabindex');
-		} else {
-			// if the element didn't have a data-tabindex, then it did not define a tabindex
-			$element.removeAttr('tabindex');
-		}
-	}
+    function disablePageTabbing(){
+        $('a, input, select, textarea, button, *[tabindex]').each(disableElementTabbing);
+    }
+    function enablePageTabbing($container){
+        $container.find('*[tabindex]').each(enableElementTabIndex);
+    }
 
-    function Lightbox(id, $originator, options){
+    function focusOnLightboxLink(link){
+        if (!link) { return; }
+        link.focus();
+    }
+    function focusOnCloseButton($lightboxLink, $closeIcon){
+        if ($lightboxLink.hasClass(keyboardFocus.className)) {
+            keyboardFocus.apply($closeIcon[0]);
+        }else{
+            $closeIcon[0].focus();
+        }
+    }
+
+    function hideBodyScrollBar(){
+        $('body').css( {
+            'overflow':		'hidden',
+            'padding-right': scrollbarWidth + 'px'
+        });
+    }
+    function showBodyScrollBar(){
+        $('body').removeAttr('style');
+    }
+
+    function pauseCarousels(){
+        $('[data-function=carousel]').trigger("pause");
+    }
+
+    function Lightbox(id, $lightboxLink, options){
         var $element = $('#' + id.replace('lightbox/',''));
 
         this.id = id;
-        this.$container = ($element.hasClass('lightbox')) ? $element : $element.parents('.lightbox');
-        this.$contents = (this.$container.length) ? this.$container.find('.lightbox-content') : $element ;
-        this.$closeIcon = this.$container.find('.lightbox-close');
-        this.$originator = $originator;
+        this.$container = ($element.hasClass(classes.main)) ? $element : $element.parents('.' + classes.main);
+        this.$contents = (this.$container.length) ? this.$container.find('.' + classes.content) : $element ;
+        this.$closeIcon = this.$container.find('.' + classes.closeButton);
+        this.$lightboxLink = $lightboxLink;
 
         if (!this.$container.length){
             this.create();
             this.bindEvents();
         }
-        this.onShowCallback = options.onShow;
+        if (options){
+            this.onShow = options.onShow;
+            this.onClose = options.onClose;
+        }
     }
 
 	Lightbox.prototype = {
@@ -56,78 +96,54 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
 		},
 
         create: function(){
-            var $contents = this.$contents;
-            var $parent = this.$contents.parent();
-            var lightboxDiv = document.createElement('div');
-            var container = document.createElement('div');
-            var $close = $('<a class="internal-link lightbox-close skycon-close" href="#!"><span class="speak">Close</span></a>');
+            var $contents = this.$contents,
+                $parent = this.$contents.parent(),
+                $lightboxDiv = $('<div class="' + classes.main + '"></div>'),
+                $container = $('<div class="skycom-container lightbox-container clearfix"></div>'),
+                $close = $('<a class="internal-link ' + classes.closeButton + ' skycon-close" href="#!"><span class="speak">Close</span></a>');
 
-            lightboxDiv.className = 'lightbox';
-            container.className = 'skycom-container lightbox-container clearfix';
-            $contents.addClass('lightbox-content skycom-10 skycom-offset1').attr('role','dialog');
+            $contents.addClass(classes.content + ' skycom-10 skycom-offset1').attr('role','dialog');
             $contents.prepend($close);
 
-            $(container).append($contents);
-            $(lightboxDiv).append($(container));
-            $parent.append($(lightboxDiv));
+            $container.append($contents);
+            $lightboxDiv.append($container);
+            $parent.append($lightboxDiv);
 
-            this.$container = $(lightboxDiv);
+            this.$container = $lightboxDiv;
             this.$closeIcon = $close;
         },
 
 		open: function() {
-            if (this.onShowCallback){
-                this.onShowCallback();
+            pauseCarousels();
+            if (this.onShow){
+                this.onShow();
             }
+            hideBodyScrollBar();
 
-			// hide the scrollbar on the body
-			$('body').css( {
-				'overflow':		'hidden',
-				'padding-right': scrollbarWidth + 'px'
-			});
+			this.$container.addClass(classes.open);
 
-			this.$container.addClass('lightbox-open');
-
-			// if we were navigated by the keybaord, propogate that focus class to the lightbox
-			if (this.$originator.hasClass(keyboardFocus.className)) {
-                keyboardFocus.apply(this.$closeIcon[0]);
-			}else{
-                this.$closeIcon[0].focus();
-            }
-
-			// remove tabbing for all elements and re-enable for elements in the lightbox
-			$('a, input, select, textarea, button, *[tabindex]').each(hideTabIndex);
-			this.$container.find('*[tabindex]').each(restoreTabIndex);
+            focusOnCloseButton(this.$lightboxLink, this.$closeIcon);
+            disablePageTabbing();
+            enablePageTabbing(this.$container);
 		},
 
 		close: function(event) {
+            var lightbox = this;
 			event.preventDefault();
-            if (this.$container.hasClass('lightbox-closing')) { return ; }
+            if (this.$container.hasClass(classes.closing)) { return ; }
 
-            this.$container.addClass('lightbox-closing');
-
-            // really really hode the lightbox once the 0.5 sec animation has finished
-            var cont = this.$container;
-            var orig = this.$originator;
+            this.$container.addClass(classes.closing);
+            hash.remove();
 
             window.setTimeout(function() {
-                cont.removeClass('lightbox-open');
-                cont.removeClass('lightbox-closing');
-
-                // move the focus back to the element that opened the lightbox
-                // defend against not passing in the 'originator' in the show() method
-                if (orig) {
-                    orig.focus();
+                lightbox.$container.removeClass(classes.open + ' ' + classes.closing);
+                focusOnLightboxLink(this.$lightboxLink);
+                showBodyScrollBar();
+                enablePageTabbing($('body'));
+                if (this.onClose){
+                    this.onClose();
                 }
-
-                // remove our inline stying for the scrollbar fudge
-                $('body').removeAttr('style');
-
-                // restore all tabbing
-                $('*[tabindex]').each(restoreTabIndex);
             }, 500);
-
-            hash.remove();
 		}
 	};
 
