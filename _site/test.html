@@ -99,35 +99,35 @@
             <li class="dropdown">
                 <a href="index.html#using-the-toolkit">Using the Toolkit</a>
                 <ul class=dropdown-menu>
-                    <li><a href="index.html#getting-started" data-diff="using-the-toolkit/getting-started">Getting Started</a></li>
-                    <li><a href="index.html#contributing" data-diff="using-the-toolkit/contributing">Contributing</a></li>
-                    <li><a href="index.html#accessibility" data-diff="using-the-toolkit/accessibility">Accessibility</a></li>
-                    <li><a href="index.html#coding-practices" data-diff="using-the-toolkit/coding-practices">Coding Practices</a></li>
+                    <li><a href="index.html#getting-started" data-diff="usingTheToolkit/gettingStarted">Getting Started</a></li>
+                    <li><a href="index.html#contributing" data-diff="usingTheToolkit/contributing">Contributing</a></li>
+                    <li><a href="index.html#accessibility" data-diff="usingTheToolkit/accessibility">Accessibility</a></li>
+                    <li><a href="index.html#coding-practices" data-diff="usingTheToolkit/codingPractices">Coding Practices</a></li>
                 </ul>
             </li>
             <li class="dropdown">
                 <a href="index.html#base-styles">Base Styles</a>
                 <ul class=dropdown-menu>
-                    <li><a href="index.html#grid" data-diff="base-styles/grid">Grid</a></li>
-                    <li><a href="index.html#colours" data-diff="base-styles/colours">Colours</a></li>
-                    <li><a href="index.html#typography" data-diff="base-styles/typography">Typography</a></li>
-                    <li><a href="index.html#icons" data-diff="base-styles/icons">Icons</a></li>
-                    <li><a href="index.html#skycons" data-diff="base-styles/skycons">Skycons</a></li>
-                    <li><a href="index.html#buttons" data-diff="base-styles/buttons">Buttons</a></li>
-                    <li><a href="index.html#spinner" data-diff="base-styles/spinner">Spinner</a></li>
+                    <li><a href="index.html#grid" data-diff="baseStyles/grid">Grid</a></li>
+                    <li><a href="index.html#colours" data-diff="baseStyles/colours">Colours</a></li>
+                    <li><a href="index.html#typography" data-diff="baseStyles/typography">Typography</a></li>
+                    <li><a href="index.html#icons" data-diff="baseStyles/icons">Icons</a></li>
+                    <li><a href="index.html#skycons" data-diff="baseStyles/skycons">Skycons</a></li>
+                    <li><a href="index.html#buttons" data-diff="baseStyles/buttons">Buttons</a></li>
+                    <li><a href="index.html#spinner" data-diff="baseStyles/spinner">Spinner</a></li>
                 </ul>
             </li>
             <li class="dropdown">
                 <a href="index.html#components">Components</a>
                 <ul class=dropdown-menu>
-                    <li><a href="index.html#breadcrumbs" data-diff="components/breadcrumbs">Breadcrumbs</a></li>
-                    <li><a href="index.html#form" data-diff="components/form">Form</a></li>
-                    <li><a href="index.html#inPageNav" data-diff="components/inPageNav">In-Page Nav</a></li>
-                    <li><a href="index.html#lightbox" data-diff="components/lightbox">Lightbox</a></li>
-                    <li><a href="index.html#accordion" data-diff="components/accordion">Accordion</a></li>
-                    <li><a href="index.html#carousel" data-diff="components/carousel">Carousel</a></li>
-                    <li><a href="index.html#share" data-diff="components/share">Share</a></li>
-                    <li><a href="index.html#video" data-diff="components/video">Video</a></li>
+                    <li><a href="index.html#breadcrumbs" data-diff="components/breadcrumbs" data-diff-demos=default>Breadcrumbs</a></li>
+                    <li><a href="index.html#form" data-diff="components/form" data-diff-demos=default>Form</a></li>
+                    <li><a href="index.html#inPageNav" data-diff="components/inPageNav" data-diff-demos="classicTabs,sleekNav">In-Page Nav</a></li>
+                    <li><a href="index.html#lightbox" data-diff="components/lightbox" data-diff-demos=default>Lightbox</a></li>
+                    <li><a href="index.html#accordion" data-diff="components/accordion" data-diff-demos=default>Accordion</a></li>
+                    <li><a href="index.html#carousel" data-diff="components/carousel" data-diff-demos=singleSlide,skinny,3-1>Carousel</a></li>
+                    <li><a href="index.html#share" data-diff="components/share" data-diff-demos=bar,popup>Share</a></li>
+                    <li><a href="index.html#video" data-diff="components/video" data-diff-demos=default>Video</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -140,7 +140,7 @@
             <li class="dropdown">
                 <a href="index.html#examples">Examples</a>
                 <ul class=dropdown-menu>
-                    <li><a href="index.html#error-page" data-diff="examples/error-page">Error Page</a></li>
+                    <li><a href="index.html#error-page" data-diff="examples/errorPage">Error Page</a></li>
                 </ul>
             </li>
             <li>
@@ -153,7 +153,7 @@
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
 				<h1 class="wiki-header">Sky Web Toolkit <small>v1.9.2 </small></h1>
-<div class="secondary">Last Updated: 11-12-2013</div>
+<div class="secondary">Last Updated: 12-12-2013</div>
 
 
 <a name="using-the-toolkit"></a>
@@ -247,8 +247,9 @@ https://github.com/skyglobal/web-toolkit/
    As a general rule we try to follow the following practices:
 </p>
 <dl class="clearfix wiki-dl">
-    <dt>CSS</dt><dd>Use hyphens '<code>-</code>' within all class names, never camel-case or underscores.</dd>
-    <dt>JS</dt><dd>Where possible, use camel-case '<code>camelCase</code>' for function/variable names</dd>
+    <dt>CSS</dt><dd>Use hyphens '<code>-</code>' within all class, ID and name attribute. Never camel-case or underscores.</dd>
+    <dt>JS</dt><dd>Where possible, use camel-case '<code>camelCase</code>' for function/variable names.</dd>
+    <dt>file/Directory Names</dt><dd>Where possible, use camel-case '<code>camelCase</code>'.</dd>
 </dl>
 
     </div>
@@ -769,7 +770,7 @@ https://github.com/skyglobal/web-toolkit/
         All these headers work with or without the corresponding <code>xxx-title</code> classes.
         You can optionally add a <code>smaller</code> class to the headers too.
     </p>
-    <div class="demo" data-selector="h1,h2,h3,p,small,strong,blockquote,.smash-img .white,.beckham-img .black, a">
+    <div class="demo">
 
         <h1 class="page-title">
             Page Title (Sky Text Regular <span class="pink">52px</span>)
@@ -1051,7 +1052,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <p class="developer-notes">
         Add the class <code>primary</code>.
     </p>
-    <div class="demo" data-selector="button,a">
+    <div class="demo">
         <button class="btn primary">Primary Button</button>
         <a href="#" class="btn primary">Primary Link</a>
         <button type="submit" class="btn primary">Primary Submit</button>
@@ -1064,7 +1065,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <p class="developer-notes">
         Add the class <code>secondary</code>
     </p>
-    <div class="demo" data-selector="button,a">
+    <div class="demo">
         <button href="#" class="btn secondary">Secondary Button</button>
         <a href="#" class="btn secondary">Secondary Link</a>
         <button type="submit" class="btn secondary">Secondary Submit</button>
@@ -1094,7 +1095,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="sub-section">
         <h3 class="wiki-h3">Breadcrumb</h3>
 <div class="example">
-    <div class="demo" data-selector="*">
+    <div class="demo" >
 
         <aside  id="skycom-breadcrumb" class="skycom-container">
     <h2 class=at>Navigational Trail</h2>
@@ -1127,7 +1128,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         For a grey background, add class <code>sky-well</code> to the <code>sky-form</code> container.
     </p>
 
-    <div class="demo" data-selector=".sky-form">
+    <div class="demo">
 
         <form class="sky-form">
     <div class="row">
@@ -1259,10 +1260,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="developer-notes">
         Add Class '<code>page-nav</code>'.
     </div>
-    <div class="init-notes">
-        <code>$('#demo-inpage-nav-tabs').inPageNav();</code>
-    </div>
-    <div class="demo" data-selector="#demo-inpage-nav-tabs">
+    <div class="demo">
 
         <section class="module clearfix tabs-container page-nav" data-function="tabs" id='demo-inpage-nav-tabs'>
 
@@ -1387,9 +1385,9 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="developer-notes">
         Add Class '<code>classic</code>'.
     </div>
-    <div class="demo" data-selector="#demo-classc-tabs">
+    <div class="demo">
 
-        <section class="module clearfix tabs-container classic" data-function="tabs" id='demo-classc-tabs'>
+        <section class="module clearfix tabs-container classic" data-function="tabs" id='demo-classic-tabs'>
 
     <h2 class="speak">This is a screenreader header for tabs</h2>
 
@@ -1490,13 +1488,13 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 
     </div>
     <script>
-        saveHTMLForDemo('#demo-classc-tabs');
+        saveHTMLForDemo('#demo-classic-tabs');
         if (window.require){
             require(['toolkit'], function(){
-                $('#demo-classc-tabs').inPageNav();
+                $('#demo-classic-tabs').inPageNav();
             });
         } else {
-            $('#demo-classc-tabs').inPageNav();
+            $('#demo-classic-tabs').inPageNav();
         }
     </script>
 </div>
@@ -1518,7 +1516,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 	To automatically bind lightboxes use the attribute <code>data-lightbox="#my-lightbox-id"</code>.
 </p>
 <div class="example">
-    <div class="demo" data-selector="#lightbox-demo">
+    <div class="demo" >
 
         <div id="lightbox-demo" class="lightbox">
     <div class="skycom-container lightbox-container clearfix">
@@ -1600,7 +1598,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     The accordion is fully responsive.
 </p>
 <div class="example">
-    <div class="demo" data-selector=".accordion">
+    <div class="demo" >
 
         <ul class="accordion">
     <li>
@@ -1672,7 +1670,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <p class="developer-notes">
         Add the class <code>hero-3-1</code>.
     </p>
-    <div class="demo" data-selector="#hero">
+    <div class="demo" >
 
         
 <section class="module clearfix skycom-carousel hero-3-1" data-function="carousel" data-tracking-module="hero"
@@ -1795,7 +1793,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <p class="developer-notes">
         Add the class <code>hero-skinny</code>.
     </p>
-    <div class="demo" data-selector="#hero-skinny">
+    <div class="demo" >
 
         <section class="module clearfix skycom-carousel hero-skinny" data-function="carousel" data-tracking-module="hero-skinny"
          id="hero-skinny">
@@ -1911,7 +1909,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="design-notes">
         This will behave like it isn't a carousel as there is only one slide.
     </div>
-    <div class="demo" data-selector="#empty-hero">
+    <div class="demo">
 
         
 <section class="module clearfix skycom-carousel hero-3-1" data-function="carousel" data-tracking-module="empty-hero"
@@ -1987,7 +1985,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
 </div>
 <div class="example">
-    <div class="demo" data-selector=".video-container">
+    <div class="demo" >
 
         <div id="demo-video" class="video-container" data-video-id="clip-00i9rvth">
     <img src="wiki_images/bling-ring.jpg"
@@ -2037,7 +2035,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="developer-notes">
         Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
     </div>
-    <div class="demo" data-selector="*">
+    <div class="demo" >
 
         <div class="share-popup clearfix">
     <a class="summary" href="#!" data-tracking-context="Shared article title" aria-label="Shared 146 times. Click to show share options">
@@ -2069,7 +2067,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="developer-notes">
         Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
     </div>
-    <div class="demo" data-selector="*">
+    <div class="demo" >
 
         <section id="share-this-page" class="share-bar">
     <h3>Share this page</h3>
@@ -2115,7 +2113,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <h4 class="medium">By Element</h4>
     <p class="developer-notes">
     </p>
-    <div class="demo" data-selector="#toggle-by-element">
+    <div class="demo" >
 
         <section id="toggle-by-element" data-mode=view>
     <a class="toggle-link" data-toggle='#toggle-by-element .edit-container' data-toggle-text="Show"
@@ -2147,7 +2145,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <h4 class="medium">By Container</h4>
     <p class="developer-notes">
     </p>
-    <div class="demo" data-selector="#toggle-by-container">
+    <div class="demo" >
 
         <section id="toggle-by-container" data-mode=view>
     <a class="toggle-link" data-toggle='#container-to-toggle' data-toggle-text="Show" data-tracking-label="Show"
@@ -2179,7 +2177,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <h4 class="medium">Complete</h4>
     <p class="developer-notes">
     </p>
-    <div class="demo" data-selector="#toggle-already-done">
+    <div class="demo" >
 
         <section id="toggle-already-done" data-mode=view>
     <a class="toggle-link" data-toggle='#container-to-toggle-done' data-toggle-text="Show"
@@ -2259,7 +2257,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
    Below you will see a number of pages that use the Toolkit to build the page
 </p>
 <div class="example">
-    <div class="demo" data-selector="*">
+    <div class="demo" >
         <div class=" error-page clearfix">
             <div class="skycom-7">
                 <h1>The page you're looking for could not be found</h1>

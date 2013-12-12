@@ -21,12 +21,9 @@
     <div class="developer-notes">
         Add Class '<code>page-nav</code>'.
     </div>
-    <div class="init-notes">
-        <code>$('#demo-inpage-nav-tabs').inPageNav();</code>
-    </div>
-    <div class="demo" data-selector="#demo-inpage-nav-tabs">
+    <div class="demo">
 
-        {% include components/in-page-nav/sleek-nav.html %}
+        {% include components/inPageNav/sleekNav.html %}
 
     </div>
     <script>
@@ -52,19 +49,19 @@
     <div class="developer-notes">
         Add Class '<code>classic</code>'.
     </div>
-    <div class="demo" data-selector="#demo-classc-tabs">
+    <div class="demo">
 
-        {% include components/in-page-nav/classic-tabs.html %}
+        {% include components/inPageNav/classicTabs.html %}
 
     </div>
     <script>
-        saveHTMLForDemo('#demo-classc-tabs');
+        saveHTMLForDemo('#demo-classic-tabs');
         if (window.require){
             require(['toolkit'], function(){
-                $('#demo-classc-tabs').inPageNav();
+                $('#demo-classic-tabs').inPageNav();
             });
         } else {
-            $('#demo-classc-tabs').inPageNav();
+            $('#demo-classic-tabs').inPageNav();
         }
     </script>
 </div>
