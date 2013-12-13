@@ -26,7 +26,13 @@
   }
 }
 
-#changes-page{
+.code-container{
+  &.lightbox-content{
+    padding: 12px;
+    .lightbox-close{
+      color: $primary;
+    }
+  }
   h3.add:after,
   h3.del:after{
     font-size: 0.5em;
