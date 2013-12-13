@@ -9,7 +9,10 @@
   border-bottom: 1px solid $key-line;
 }
 .run-test{
+  margin-left: 6px;
   float: right;
+  position: relative;
+  top: -2px;
   i{
     font-size: 20px;
   }
@@ -23,7 +26,40 @@
     color:$link;
   }
 }
+.result-summary{
+  border: 1px solid $success-icon;
+  color: $success-icon;
+}
+.dev-button {
+  cursor: pointer;
+  font-size: 12px;
+  background: #eee;
+  border-radius: 3px;
+  line-height: 20px;
+  display: inline-block;
+  padding: 0 4px;
+  position: relative;
+  top: -5px;
+  margin-left: 6px;
 
+  &.error {
+    color: $error;
+    border: 1px solid $error;
+  }
+
+  i{
+    font-size: 14px;
+  }
+}
+.code-download{
+  top: 6px;
+  float: right;
+  font-family: SkyTextRegular;
+  font-size: 12px;
+  color: #657B83;
+  border:1px solid #657B83;
+  background: #ECFAFF;
+}
 
 .block {
 	display: block;

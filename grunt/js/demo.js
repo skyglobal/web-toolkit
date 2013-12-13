@@ -1,6 +1,7 @@
-var demo = (function(logger, hash, lightbox) {
+var demo = (function(logger, hash, lightbox, displayCode) {
     function bindEvents() {
         $(document).on('click','.toggler', toggle);
+        $(document).on('click','.code-download', showCode);
         $('.sky-form').on('submit', checkDiff);
     }
 
@@ -25,6 +26,21 @@ var demo = (function(logger, hash, lightbox) {
             oldRoute: route + '/' + oldVersion + '/' + routeDir,
             newRoute: route + '/' + newVersion + '/' + newRouteDir
         });
+    }
+
+    function showCode(e){
+        var feature = $(this).attr('href').replace('#!lightbox/code-','');
+        var version = $('.wiki-header small').text().replace('v','').trim(),
+            host = 'http://web-toolkit.global.sky.com',
+            dir = '_site/_includes';
+        if (location.hostname.indexOf('local')===0){
+            host = 'http://' + location.host;
+            dir = '../_includes';
+        }
+        var featureFiles = $('a[href*="#' + feature + '"]').attr('data-diff-demos');
+        var codeBase = $('a[href*="#' + feature + '"]').attr('data-diff');
+        var route = host + '/' + version + '/' + dir + '/' + codeBase;
+        window.toolkit.displayCode(feature, route, featureFiles);
     }
 
     function sortSkyconsTable(){
@@ -64,9 +80,9 @@ var demo = (function(logger, hash, lightbox) {
         var findFailure = $mocha.find('.failures em').text();
 
         if(findFailure === '0'){
-            $runTestLink.append("<span class='colour result-summary'><i class='skycon-tick' aria-hidden='true'></i> Tests Passed</span>");
+            $runTestLink.append("<span class='dev-button result-summary'><i class='skycon-tick colour' aria-hidden='true'></i> Tests Passed</span>");
         } else {
-            $runTestLink.append("<span class='colour error result-summary'><i class='skycon-warning' aria-hidden='true'></i> Tests Failed</span>");
+            $runTestLink.append("<span class='dev-button result-summary error'><i class='skycon-warning colour' aria-hidden='true'></i> Tests Failed</span>");
         }
     }
 
@@ -151,9 +167,10 @@ var demo = (function(logger, hash, lightbox) {
 if (typeof window.define === "function" && window.define.amd){
     define('demo', ['utils/developer-notes-logger',
                     'utils/hashManager',
-                    'components/lightbox'], function(developerNotesLogger, hash,lightbox) {
-            return demo(developerNotesLogger, hash, lightbox);
+                    'components/lightbox',
+                    'utils/displayCode'], function(developerNotesLogger, hash,lightbox, displayCode) {
+            return demo(developerNotesLogger, hash, lightbox, displayCode);
  });
 } else {
-    demo(developerNotesLogger, toolkit.hashManager, toolkit.lightbox);
+    demo(developerNotesLogger, toolkit.hashManager, toolkit.lightbox, toolkit.displayCode);
 }

@@ -164,7 +164,7 @@ toolkit.diff = (function(){
     };
 
     CompareCodeBase.prototype.createTable = function(ext){
-        return $('<div class="codeContainer"><table id="' + ext + '-' + this.fullName + '-table"><thead><tr><th colspan="3">' + ext.toUpperCase() + '</th></tr></thead><tbody></tbody></table></div> ');
+        return $('<div class="code-container"><table id="' + ext + '-' + this.fullName + '-table"><thead><tr><th colspan="3">' + ext.toUpperCase() + '</th></tr></thead><tbody></tbody></table></div> ');
     };
 
     CompareCodeBase.prototype.addTab = function(){

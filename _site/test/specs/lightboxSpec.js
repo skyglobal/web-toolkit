@@ -1,9 +1,10 @@
-function lightboxSpec(lightbox, focus) {
+function lightboxSpec(lightbox, focus, hash) {
 
     var describeSpec = 'Lightbox';
 
-    if (!focus){ //needed for running test in demo page
+    if (!focus || !hash){ //needed for running test in demo page
         focus = toolkit.focus;
+        hash = toolkit.hashManager;
     }
 
     var $demo = $('#lightbox-demo-source').clone();
@@ -13,6 +14,10 @@ function lightboxSpec(lightbox, focus) {
 
     $("<style type='text/css'> body .lightbox.lightbox-open{ -webkit-animation-duration: 0s;animation-duration:0;} </style>").appendTo("head");
 
+    function openLightbox(){
+        hash.change($('#lightbox-demo-link').attr('href').replace('#','').replace('!',''));
+    }
+
     describe(describeSpec, function () {
 
         afterEach(function (done) {
@@ -20,8 +25,8 @@ function lightboxSpec(lightbox, focus) {
         });
 
         function givenTheLightBoxIsOpen() {
-            $('#lightbox-demo-link').click();
-            expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(true);
+            openLightbox();
+            expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(true);
         }
 
         function close(done) {
@@ -34,11 +39,11 @@ function lightboxSpec(lightbox, focus) {
 
         it('will be displayed when a user clicks a lightbox link', function () {
             // given
-            expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(false);
+            expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(false);
             // when
-            $('#lightbox-demo-link').click();
+            openLightbox();
             // then
-            expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(true);
+            expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(true);
 
         });
 
@@ -49,7 +54,7 @@ function lightboxSpec(lightbox, focus) {
             $('#lightbox-demo .lightbox-close').click();
             // then
             setTimeout(function () {
-                expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(false);
+                expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(false);
                 done();
             }, 501);
 
@@ -62,7 +67,7 @@ function lightboxSpec(lightbox, focus) {
             $('#lightbox-demo').click();
             // then
             setTimeout(function () {
-                expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(false);
+                expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(false);
                 done();
             }, 501);
         });
@@ -73,7 +78,7 @@ function lightboxSpec(lightbox, focus) {
             // when
             $('#lightbox-demo .lightbox-content').click();
             // then
-            expect($('#lightbox-demo').hasClass('lightbox-open')).to.equal(true);
+            expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(true);
         });
 
 
@@ -163,8 +168,9 @@ function lightboxSpec(lightbox, focus) {
 }
 
 if (window.define) {
-    define('specs/lightboxSpec', ['components/lightbox', 'utils/focus'], function (lightbox, focus) {
-            return lightboxSpec(lightbox, focus);
+    define('specs/lightboxSpec', ['components/lightbox', 'utils/focus', 'utils/hashManager'],
+        function (lightbox, focus, hash) {
+            return lightboxSpec(lightbox, focus, hash);
         }
     );
 }
