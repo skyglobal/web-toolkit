@@ -26,6 +26,16 @@
   }
 }
 
+.tab-list li{
+  float: left;
+  padding: 4px 8px;
+  cursor: pointer;
+  color: $link;
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
 .code-container{
   &.lightbox-content{
     padding: 12px;
@@ -39,16 +49,6 @@
     content: ' [changes]';
     padding-left: 8px;
     color: $inactive;
-  }
-
-  .tab-list li{
-    float: left;
-    padding: 4px 8px;
-    cursor: pointer;
-    color: $link;
-    &:hover{
-      text-decoration: underline;
-    }
   }
 
   table {
