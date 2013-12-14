@@ -1,5 +1,5 @@
-define('runner',[
-        'specs/accordionSpec'
+define('runner',[''
+        ,'specs/accordionSpec'
         ,'specs/carouselSpec'
         ,'specs/datePickerSpec'
         ,'specs/inPageNavSpec'

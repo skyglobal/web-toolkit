@@ -98,10 +98,10 @@
             <li class="dropdown">
                 <a href="index.html#using-the-toolkit">Using the Toolkit</a>
                 <ul class=dropdown-menu>
-                    <li><a href="index.html#getting-started" data-diff="usingTheToolkit/gettingStarted">Getting Started</a></li>
+                    <li><a href="index.html#gettingStarted" data-diff="usingTheToolkit/gettingStarted">Getting Started</a></li>
                     <li><a href="index.html#contributing" data-diff="usingTheToolkit/contributing">Contributing</a></li>
                     <li><a href="index.html#accessibility" data-diff="usingTheToolkit/accessibility">Accessibility</a></li>
-                    <li><a href="index.html#coding-practices" data-diff="usingTheToolkit/codingPractices">Coding Practices</a></li>
+                    <li><a href="index.html#codingPractices" data-diff="usingTheToolkit/codingPractices">Coding Practices</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -138,7 +138,7 @@
             <li class="dropdown">
                 <a href="index.html#examples">Examples</a>
                 <ul class=dropdown-menu>
-                    <li><a href="index.html#error-page" data-diff="examples/errorPage" data-diff-demos="default">Error Page</a></li>
+                    <li><a href="index.html#errorPage" data-diff="examples/errorPage" data-diff-demos="default">Error Page</a></li>
                 </ul>
             </li>
             <li>
@@ -151,7 +151,7 @@
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
 				<h1 class="wiki-header">Sky Web Toolkit <small>v1.9.2 </small></h1>
-<div class="secondary">Last Updated: 13-12-2013</div>
+<div class="secondary">Last Updated: 14-12-2013</div>
 
 
 <a name="using-the-toolkit"></a>
@@ -164,7 +164,7 @@
             &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.9.2/fonts/skycons.css"/&gt;
         </p>
     </div>
-    <a name="getting-started"></a>
+    <a name="gettingStarted"></a>
     <div class="sub-section">
         <h3 class="wiki-h3">Getting Started</h3>
 <p >
@@ -233,7 +233,7 @@ https://github.com/skyglobal/web-toolkit/
 </p>
 
     </div>
-    <a name="coding-practices"></a>
+    <a name="codingPractices"></a>
     <div class="sub-section">
         <h3 class="wiki-h3">Coding Practice</h3>
 <p >
@@ -1546,12 +1546,18 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     </div>
     <script>
         saveHTMLForDemo('#lightbox-demo');
-        if (window.require){
+        var lightboxConfig = {onShow: function(){
+    $('[data-function=carousel]').trigger("pause");
+    $('#lightbox-demo').trigger('my-lightbox-opened');
+}, onClose: function(){
+   $('#lightbox-demo').trigger('my-lightbox-closed');
+}};
+if (window.require){
     require(['toolkit'], function(toolkit){
-        $('#lightbox-demo-link').lightbox();
+        $('#lightbox-demo-link').lightbox(lightboxConfig);
     });
 } else {
-    $('#lightbox-demo-link').lightbox();
+    $('#lightbox-demo-link').lightbox(lightboxConfig);
 }
     </script>
 </div>
@@ -2232,7 +2238,7 @@ if (window.require){
 <a name="examples"></a>
 <section class="wiki-section">
     <h2>Examples</h2>
-    <a name="error-page"></a>
+    <a name="errorPage"></a>
     <div class="sub-section">
         <h3 class="wiki-h3">
     <a href="#!lightbox/code-errorPage" class="dev-button code-download">code</a>
