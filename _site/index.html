@@ -106,11 +106,11 @@
                 <a href="index.html#base-styles">Base Styles</a>
                 <ul class=dropdown-menu>
                     <li><a href="index.html#grid" data-diff="baseStyles/grid" data-diff-demos="974,1140,lightbox,tabletPortrait">Grid</a></li>
-                    <li><a href="index.html#colours" data-diff="baseStyles/colours">Colours</a></li>
+                    <li><a href="index.html#colours" data-diff="baseStyles/colours" data-diff-demos="backgrounds,buttonsIcons,channels,shop,typography,v3Brand">Colours</a></li>
                     <li><a href="index.html#typography" data-diff="baseStyles/typography" data-diff-demos="all">Typography</a></li>
                     <li><a href="index.html#icons" data-diff="baseStyles/icons" data-diff-demos="sprite,skycons">Icons</a></li>
                     <li><a href="index.html#buttons" data-diff="baseStyles/buttons" data-diff-demos="primary,secondary">Buttons</a></li>
-                    <li><a href="index.html#spinner" data-diff="baseStyles/spinner">Spinner</a></li>
+                    <li><a href="index.html#spinners" data-diff="baseStyles/spinners" data-diff-demos="default">Spinners</a></li>
                 </ul>
             </li>
             <li class="dropdown">
@@ -592,173 +592,200 @@ https://github.com/skyglobal/web-toolkit/
     </div>
     <a name="colours" ></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">Colours</h3>
+        <h3 class="wiki-h3">
+    <a href="#!lightbox/code-colours" class="dev-button code-download">code</a>
+    Colours
+</h3>
 <p class=design-notes>
     These colours are for designer reference only. For accessibility reasons, please also note the colour of the text being used.
 </p>
 <p class=developer-notes>
     The classes used here, starting with 'demo-' are NOT part of the toolkit.
 </p>
-<h4>Typography</h4>
-<div class="clearfix">
-    <div class="skycom-2 alpha demo-colour-block">
-        <div class="cushioned">
-            Primary
-            <small>Main page text</small>
-        </div>
-        <div class="demo-hex secondary">#333333</div>
+<div class="clearfix example">
+    <h4>Typography</h4>
+    <div class="demo">
+
+        <div class="skycom-2 alpha demo-colour-block">
+    <div class="cushioned">
+        Primary
+        <small>Main page text</small>
     </div>
-    <div class="skycom-2  demo-colour-block">
-        <div class="secondary cushioned">
-            Secondary
-            <small>Supporting text i.e. legal</small>
-        </div>
-        <div class="demo-hex secondary">#666666</div>
+    <div class="demo-hex secondary">#333333</div>
+</div>
+<div class="skycom-2  demo-colour-block">
+    <div class="secondary cushioned">
+        Secondary
+        <small>Supporting text i.e. legal</small>
     </div>
-    <div class="skycom-2 demo-colour-block ">
-        <div class="inactive cushioned">
-            Inactive
-        </div>
-        <div class="demo-hex secondary">#999999</div>
+    <div class="demo-hex secondary">#666666</div>
+</div>
+<div class="skycom-2 demo-colour-block ">
+    <div class="inactive cushioned">
+        Inactive
     </div>
-    <div class="skycom-2 demo-colour-block ">
-        <div class="error cushioned">
-            Error
-            <small>i.e. Warnings or form errors</small>
-        </div>
-        <div class="demo-hex secondary">#D21717</div>
+    <div class="demo-hex secondary">#999999</div>
+</div>
+<div class="skycom-2 demo-colour-block ">
+    <div class="error cushioned">
+        Error
+        <small>i.e. Warnings or form errors</small>
     </div>
-    <div class="skycom-2  demo-colour-block">
-        <a href="#!" class="cushioned">Links</a>
-        <div class="demo-hex secondary">#0070a5</div>
+    <div class="demo-hex secondary">#D21717</div>
+</div>
+<div class="skycom-2  demo-colour-block">
+    <a href="#!" class="cushioned">Links</a>
+    <div class="demo-hex secondary">#0070a5</div>
+</div>
+
     </div>
 </div>
 
-<h4>Buttons + Icons</h4>
-<div class="clearfix">
-    <div class="skycom-2 alpha demo-colour-block">
-        <div class="white demo-primary-button cushioned">Primary
-            <small>Buttons or icons</small>
-        </div>
-        <div class="demo-hex secondary">#0073c5</div>
+<div class="clearfix example">
+    <h4>Buttons + Icons</h4>
+    <div class="demo">
+
+        <div class="skycom-2 alpha demo-colour-block">
+    <div class="white demo-primary-button cushioned">Primary
+        <small>Buttons or icons</small>
     </div>
-    <div class="skycom-2 demo-colour-block ">
-        <div class=" demo-secondary-button cushioned">Secondary
-            <small>Buttons only</small></div>
-        <div class="demo-hex secondary">#eaeaea</div>
-    </div>
-    <div class="skycom-2 demo-colour-block ">
-        <div class="white demo-success-icon cushioned">Success
-            <small>Icons only</small></div>
-        <div class="demo-hex secondary">#6dbb00</div>
-    </div>
-    <div class="skycom-2 demo-colour-block ">
-        <div class="white demo-sky-go cushioned">Sky Go
-            <small>Icons only</small></div>
-        <div class="demo-hex secondary">#44ad3a</div>
-    </div>
-    <div class="skycom-2 demo-colour-block ">
-        <div class="white demo-remote-record cushioned">Remote Record
-            <small>Icons only</small></div>
-        <div class="demo-hex secondary">#ed1c24</div>
-    </div>
-    <div class="skycom-2  demo-colour-block ">
-        <div class="white demo-never-miss cushioned">Never Miss
-            <small>Icons only</small></div>
-        <div class="demo-hex secondary">#0077ae</div>
+    <div class="demo-hex secondary">#0073c5</div>
+</div>
+<div class="skycom-2 demo-colour-block ">
+    <div class=" demo-secondary-button cushioned">Secondary
+        <small>Buttons only</small></div>
+    <div class="demo-hex secondary">#eaeaea</div>
+</div>
+<div class="skycom-2 demo-colour-block ">
+    <div class="white demo-success-icon cushioned">Success
+        <small>Icons only</small></div>
+    <div class="demo-hex secondary">#6dbb00</div>
+</div>
+<div class="skycom-2 demo-colour-block ">
+    <div class="white demo-sky-go cushioned">Sky Go
+        <small>Icons only</small></div>
+    <div class="demo-hex secondary">#44ad3a</div>
+</div>
+<div class="skycom-2 demo-colour-block ">
+    <div class="white demo-remote-record cushioned">Remote Record
+        <small>Icons only</small></div>
+    <div class="demo-hex secondary">#ed1c24</div>
+</div>
+<div class="skycom-2  demo-colour-block ">
+    <div class="white demo-never-miss cushioned">Never Miss
+        <small>Icons only</small></div>
+    <div class="demo-hex secondary">#0077ae</div>
+</div>
+
     </div>
 </div>
 
-<h4>Backgrounds + Key Line</h4>
-<div class="clearfix">
-    <div class="skycom-2 demo-colour-block alpha">
-        <div class=" demo-background-dark cushioned">Dark Background</div>
-        <div class="demo-hex secondary">#eaeaea</div>
-    </div>
-    <div class="skycom-2 demo-colour-block ">
-        <div class=" demo-background-light cushioned">Light Background</div>
-        <div class="demo-hex secondary">#f4f4f4</div>
-    </div>
-    <div class="skycom-2 demo-colour-block">
-        <div class=" demo-key-line cushioned">Key Line</div>
-        <div class="demo-hex secondary">#dcdcdc</div>
+<div class="clearfix example">
+    <h4>Backgrounds + Key Line</h4>
+    <div class="demo">
+
+        <div class="skycom-2 demo-colour-block alpha">
+    <div class=" demo-background-dark cushioned">Dark Background</div>
+    <div class="demo-hex secondary">#eaeaea</div>
+</div>
+<div class="skycom-2 demo-colour-block ">
+    <div class=" demo-background-light cushioned">Light Background</div>
+    <div class="demo-hex secondary">#f4f4f4</div>
+</div>
+<div class="skycom-2 demo-colour-block">
+    <div class=" demo-key-line cushioned">Key Line</div>
+    <div class="demo-hex secondary">#dcdcdc</div>
+</div>
+
     </div>
 </div>
 
-<h4>Channel Colours</h4>
-<div class="clearfix">
-	<div class="skycom-2 alpha demo-colour-block">
-        <div class="white demo-sky-1 cushioned">Sky 1</div>
-        <div class="demo-hex secondary">#0076be</div>
-    </div>
-	<div class="skycom-2 demo-colour-block ">
-        <div class="white  demo-sky-atlantic cushioned">Sky Atlantic</div>
-        <div class="demo-hex secondary">#003663</div>
-    </div>
-	<div class="skycom-2 demo-colour-block ">
-        <div class="white  demo-sky-arts cushioned">Sky Arts</div>
-        <div class="demo-hex secondary">#734993</div>
-    </div>
-	<div class="skycom-2 demo-colour-block ">
-        <div class="white  demo-sky-living cushioned">Sky Living</div>
-        <div class="demo-hex secondary">#87a0af</div>
-    </div>
-	<div class="skycom-2 demo-colour-block ">
-        <div class="white  demo-sky-movies cushioned">Sky Movies</div>
-        <div class="demo-hex secondary">#a51d4d</div>
+<div class="clearfix demo">
+    <h4>Channels</h4>
+    <div class="demo">
+
+        <div class="skycom-2 alpha demo-colour-block">
+    <div class="white demo-sky-1 cushioned">Sky 1</div>
+    <div class="demo-hex secondary">#0076be</div>
+</div>
+<div class="skycom-2 demo-colour-block ">
+    <div class="white  demo-sky-atlantic cushioned">Sky Atlantic</div>
+    <div class="demo-hex secondary">#003663</div>
+</div>
+<div class="skycom-2 demo-colour-block ">
+    <div class="white  demo-sky-arts cushioned">Sky Arts</div>
+    <div class="demo-hex secondary">#734993</div>
+</div>
+<div class="skycom-2 demo-colour-block ">
+    <div class="white  demo-sky-living cushioned">Sky Living</div>
+    <div class="demo-hex secondary">#87a0af</div>
+</div>
+<div class="skycom-2 demo-colour-block ">
+    <div class="white  demo-sky-movies cushioned">Sky Movies</div>
+    <div class="demo-hex secondary">#a51d4d</div>
+</div>
+
     </div>
 </div>
 
-<h4>V3 Brand Colours</h4>
-<div class="clearfix">
-	<div class="skycom-2 alpha demo-colour-block">
-        <div class="white  demo-v3-red cushioned">Red</div>
-        <div class="demo-hex secondary">#ed1c24</div>
+<div class="clearfix demo">
+    <h4>V3 Brand</h4>
+    <div class="demo">
+
+        <div class="skycom-2 alpha demo-colour-block">
+    <div class="white  demo-v3-red cushioned">Red</div>
+    <div class="demo-hex secondary">#ed1c24</div>
+</div>
+<div class="skycom-2 demo-colour-block ">
+    <div class="white  demo-v3-pink cushioned">Pink</div>
+    <div class="demo-hex secondary">#ed0677</div>
+</div>
+<div class="skycom-2 demo-colour-block ">
+    <div class=" demo-v3-yellow cushioned">Yellow
+        <small>Use primary text colour</small>
     </div>
-	<div class="skycom-2 demo-colour-block ">
-        <div class="white  demo-v3-pink cushioned">Pink</div>
-        <div class="demo-hex secondary">#ed0677</div>
-    </div>
-	<div class="skycom-2 demo-colour-block ">
-        <div class=" demo-v3-yellow cushioned">Yellow
-            <small>Use primary text colour</small>
-        </div>
-        <div class="demo-hex secondary">#fdb913</div>
-    </div>
-	<div class="skycom-2 demo-colour-block ">
-        <div class=" demo-v3-green cushioned">Green
-            <small>Use primary text colour</small></div>
-        <div class="demo-hex secondary">#a6ce39</div>
-    </div>
-	<div class="skycom-2 demo-colour-block ">
-        <div class="white  demo-v3-blue cushioned">Blue
-            <small>Do not put text on top (it's not Accessible)</small></div>
-        <div class="demo-hex secondary">#00aeef</div>
+    <div class="demo-hex secondary">#fdb913</div>
+</div>
+<div class="skycom-2 demo-colour-block ">
+    <div class=" demo-v3-green cushioned">Green
+        <small>Use primary text colour</small></div>
+    <div class="demo-hex secondary">#a6ce39</div>
+</div>
+<div class="skycom-2 demo-colour-block ">
+    <div class="white  demo-v3-blue cushioned">Blue
+        <small>Do not put text on top (it's not Accessible)</small></div>
+    <div class="demo-hex secondary">#00aeef</div>
+</div>
+
     </div>
 </div>
 
-<h4>Shop Colours</h4>
-<p>All text to be above 18px</p>
-<div class="clearfix">
-	<div class="skycom-2 alpha demo-colour-block ">
-        <div class="white  demo-original cushioned">Original</div>
-        <div class="demo-hex secondary">#d92231</div>
-    </div>
-	<div class="skycom-2 demo-colour-block ">
-        <div class="white  demo-family cushioned">Family</div>
-        <div class="demo-hex secondary">#ff6000</div>
-    </div>
-	<div class="skycom-2 demo-colour-block ">
-        <div class="white  demo-movies cushioned">Movies</div>
-        <div class="demo-hex secondary">#78184c</div>
-    </div>
-	<div class="skycom-2 demo-colour-block">
-        <div class="white  demo-sports cushioned">Sports</div>
-        <div class="demo-hex secondary">#00549a</div>
-    </div>
-	<div class="skycom-2 demo-colour-block">
-        <div class=" demo-complete cushioned">Complete</div>
-        <div class="demo-hex secondary">#00549a</div>
+<div class="clearfix demo">
+    <h4>Shop</h4>
+    <p class="design-notes">All text to be above 18px</p>
+    <div class="demo">
+
+        <div class="skycom-2 alpha demo-colour-block ">
+    <div class="white  demo-original cushioned">Original</div>
+    <div class="demo-hex secondary">#d92231</div>
+</div>
+<div class="skycom-2 demo-colour-block ">
+    <div class="white  demo-family cushioned">Family</div>
+    <div class="demo-hex secondary">#ff6000</div>
+</div>
+<div class="skycom-2 demo-colour-block ">
+    <div class="white  demo-movies cushioned">Movies</div>
+    <div class="demo-hex secondary">#78184c</div>
+</div>
+<div class="skycom-2 demo-colour-block">
+    <div class="white  demo-sports cushioned">Sports</div>
+    <div class="demo-hex secondary">#00549a</div>
+</div>
+<div class="skycom-2 demo-colour-block">
+    <div class=" demo-complete cushioned">Complete</div>
+    <div class="demo-hex secondary">#00549a</div>
+</div>
+
     </div>
 </div>
     </div>
@@ -1053,18 +1080,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     </div>
     <a name="spinner" ></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
-    <a href="#!lightbox/code-spinner" class="dev-button code-download">code</a>
-    Spinner</h3>
-<p  class="developer-notes">
-    Add the class <code>sky-spinner</code> to get an ajax-style spinner icon.
-</p>
-
-<div class="example">
-    <div class="sky-spinner">
-        <h3>Please wait...</h3>
-    </div>
-</div>
+        Included file 'baseStyles/spinner.html' not found in _includes directory
     </div>
 </section>
 
