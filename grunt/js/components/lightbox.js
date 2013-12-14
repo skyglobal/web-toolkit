@@ -63,15 +63,11 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
         $('body').removeAttr('style');
     }
 
-    function pauseCarousels(){
-        $('[data-function=carousel]').trigger("pause");
-    }
-
     function Lightbox(id, $lightboxLink, options){
         var $element = $('#' + id.replace('lightbox/',''));
 
         this.id = id;
-        this.$container = ($element.hasClass(classes.main)) ? $element : $element.parents('.' + classes.main);
+        this.$container = ($element.hasClass(classes.main)) ? $element : $element.closest('.' + classes.main);
         this.$contents = (this.$container.length) ? this.$container.find('.' + classes.content) : $element ;
         this.$closeIcon = this.$container.find('.' + classes.closeButton);
         this.$lightboxLink = $lightboxLink;
@@ -90,6 +86,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
 		bindEvents: function() {
             hash.register([this.id],this.open.bind(this) );
 
+            this.$lightboxLink.on("click", this.open.bind(this));
             this.$container.on("click", this.close.bind(this));
 			this.$closeIcon.on("click", this.close.bind(this));
 			this.$contents.on("click", function(e) { return false; });
@@ -114,7 +111,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
         },
 
 		open: function() {
-            pauseCarousels();
+            if (this.$container.hasClass(classes.open)) { return ; }
             if (this.onShow){
                 this.onShow();
             }
@@ -137,11 +134,11 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
 
             window.setTimeout(function() {
                 lightbox.$container.removeClass(classes.open + ' ' + classes.closing);
-                focusOnLightboxLink(this.$lightboxLink);
+                focusOnLightboxLink(lightbox.$lightboxLink);
                 showBodyScrollBar();
                 enablePageTabbing($('body'));
-                if (this.onClose){
-                    this.onClose();
+                if (lightbox.onClose){
+                    lightbox.onClose();
                 }
             }, 500);
 		}

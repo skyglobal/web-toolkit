@@ -12,11 +12,7 @@ function lightboxSpec(lightbox, focus, hash) {
     $demo.attr('id', 'lightbox-demo');
     $links.attr('id', 'open-links');
 
-    $("<style type='text/css'> body .lightbox.lightbox-open{ -webkit-animation-duration: 0s;animation-duration:0;} </style>").appendTo("head");
-
-    function openLightbox(){
-        hash.change($('#lightbox-demo-link').attr('href').replace('#','').replace('!',''));
-    }
+    $("<style type='text/css'> body .lightbox{ -webkit-animation-duration: 0s!important;animation-duration:0!important;} </style>").appendTo("head");
 
     describe(describeSpec, function () {
 
@@ -24,14 +20,16 @@ function lightboxSpec(lightbox, focus, hash) {
             close(done);
         });
 
-        function givenTheLightBoxIsOpen() {
-            openLightbox();
-            expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(true);
+        function openLightboxWithHash(){
+            hash.change($('#lightbox-demo-link').attr('href').replace('#','').replace('!',''));
+        }
+
+        function openLightboxWithClick(){
+            $('#lightbox-demo-link').click();
         }
 
         function close(done) {
-
-            $('.lightbox-open').click();
+            $('#lightbox-demo').closest('.lightbox').click();
             setTimeout(function () {
                 done();
             }, 500);
@@ -41,30 +39,41 @@ function lightboxSpec(lightbox, focus, hash) {
             // given
             expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(false);
             // when
-            openLightbox();
+            openLightboxWithClick();
             // then
             expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(true);
+        });
 
+        it('will be displayed when a user loads a page with lightbox id in it', function (done) {
+            // given
+            expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(false);
+            // when
+            openLightboxWithHash();
+            // then
+            setTimeout(function(){
+                expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(true);
+                done()
+            },25)
         });
 
 
         it('closes when the close icon is clicked', function (done) {
-            givenTheLightBoxIsOpen();
+            openLightboxWithClick();
             // when
             $('#lightbox-demo .lightbox-close').click();
             // then
             setTimeout(function () {
                 expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(false);
                 done();
-            }, 501);
+            }, 500);
 
         });
 
 
         it('closes when the faded background is clicked', function (done) {
-            givenTheLightBoxIsOpen();
+            openLightboxWithClick();
             // when
-            $('#lightbox-demo').click();
+            $('#lightbox-demo').closest('.lightbox').click();
             // then
             setTimeout(function () {
                 expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(false);
@@ -74,16 +83,16 @@ function lightboxSpec(lightbox, focus, hash) {
 
 
         it('does NOT close when the lightbox itself is clicked', function () {
-            givenTheLightBoxIsOpen();
+            openLightboxWithClick();
             // when
-            $('#lightbox-demo .lightbox-content').click();
+            $('#lightbox-demo.lightbox-content').click();
             // then
             expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(true);
         });
 
 
         it('hides the double scrollbar from the body element', function (done) {
-            givenTheLightBoxIsOpen();
+            openLightboxWithClick();
             // then
             expect($('body').is('[style]')).to.equal(true);
             expect($('body').css('overflow')).to.equal('hidden');
@@ -96,28 +105,40 @@ function lightboxSpec(lightbox, focus, hash) {
             }, 501);
         });
 
-        it('automatically pauses carousels on the page', function () {
-            //todo
+        it('executes a given function before the lightbox is shown (onShow)', function (done) {
+            var onShowCount = 0;
+            var handler = function(){
+                onShowCount ++;
+                expect(onShowCount).to.equal(1);
+                done();
+            };
+            $('#lightbox-demo').one('my-lightbox-opened', handler);
+            openLightboxWithClick();
         });
-        it('executes a given function before the lightbox is shown (onShow)', function () {
-            //todo
-        });
-        it('executes a given function after the lightbox is closes (onClose)', function () {
-            //todo
+        it('executes a given function after the lightbox is closes (onClose)', function (done) {
+            var onCloseCount = 0;
+            var handler = function(){
+                onCloseCount ++;
+                expect(onCloseCount).to.equal(1);
+                done();
+            };
+            $('#lightbox-demo').one('my-lightbox-closed', handler);
+            openLightboxWithClick();
+            $('#lightbox-demo .lightbox-close').click();
         });
 
 
         context('accessibility features', function () {
 
             it('gives focus to the close icon when opened', function () {
-                givenTheLightBoxIsOpen();
+                openLightboxWithClick();
                 // then
                 expect($(document.activeElement).hasClass('lightbox-close')).to.equal(true);
             });
 
             it('gives focus back to the lightbox link when closed', function (done) {
                 // given
-                givenTheLightBoxIsOpen();
+                openLightboxWithClick();
                 // when
                 $('#lightbox-demo .lightbox-close').click();
                 // then
@@ -131,7 +152,7 @@ function lightboxSpec(lightbox, focus, hash) {
                 // given
                 expect($('#lightbox-demo .lightbox-close').hasClass(focus.className)).to.equal(false);
                 $('#lightbox-demo-link').addClass(focus.className);
-                givenTheLightBoxIsOpen();
+                openLightboxWithClick();
                 // then
                 expect($('#lightbox-demo .lightbox-close').hasClass(focus.className)).to.equal(true);
             });
@@ -149,9 +170,9 @@ function lightboxSpec(lightbox, focus, hash) {
 //                    expect(document.activeElement.id).to.equal('close-button');
 //				});
             it('disables tabbing of page elements', function (done) {
-                expect($('#lightbox-demo-link').attr('tabindex')).to.equal(undefined);
-                expect($('#lightbox-demo-tabbable-link').attr('tabindex')).to.equal('101');
-                givenTheLightBoxIsOpen();
+                $('#lightbox-demo-link').removeAttr('tabindex data-tabindex');
+                $('#lightbox-demo-tabbable-link').removeAttr('data-tabindex').attr('tabindex','101');
+                openLightboxWithClick();
                 expect($('#lightbox-demo-link').attr('tabindex')).to.equal('-1');
                 expect($('#lightbox-demo-tabbable-link').attr('tabindex')).to.equal('-1');
                 $('#lightbox-demo .lightbox-close').click();
