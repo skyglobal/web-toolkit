@@ -47,9 +47,10 @@ toolkit.detect = (function () {
 
     function removeClasses(){
         var arrClasses = document.documentElement.className.split(' ');
-        for (var i in arrClasses){
-            if (toolkitClasses.indexOf(arrClasses[i])){
-                arrClasses.pop(i);
+        for (var i in toolkitClasses){
+            var indexToRemove = arrClasses.indexOf(toolkitClasses[i]);
+            if (indexToRemove > -1) {
+                arrClasses.splice(indexToRemove,1);
             }
         }
         document.documentElement.className = arrClasses.join(' ');
