@@ -108,7 +108,7 @@ module.exports = function(grunt) {
             fonts: {                         // Target
                 files: [{                   // Dictionary of files
                     expand: true,           // Enable dynamic expansion.
-                    cwd: 'lib/font-svgs/',    // Src matches are relative to this path.
+                    cwd: 'font-svgs/',    // Src matches are relative to this path.
                     src: ['*.svg'],      // Actual pattern(s) to match.
                     dest: 'grunt/fonts/min/', // Destination path prefix.
                     ext: '.svg'         // Dest filepaths will have this extension.
