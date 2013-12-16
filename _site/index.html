@@ -12,9 +12,9 @@
 <link rel='stylesheet' href='//assets.sky.com/css/desktop-12grid.css' media='screen' />
 <![endif]-->
 <meta content='width=device-width, initial-scale=1.0' name='viewport'>
-<link rel='stylesheet' href='//assets.sky.com/css/responsive-12grid.css' class='skycom-responsive-css' media='screen and (min-width: 768px)' />
+<link rel='stylesheet' href='//assets.sky.com/dist/latest/css/responsive-12.css' class='skycom-responsive-css' media='screen and (min-width: 768px)' />
 <!--[mobilestart]-->
-<link rel='stylesheet' href='//assets.sky.com/css/mobile-12grid.css' class='skycom-mobile-css' media='screen and (max-width: 767px)' />
+<link rel='stylesheet' href='//assets.sky.com/dist/latest/css/mobile-12.css' class='skycom-mobile-css' media='screen and (max-width: 767px)' />
 <!--[mobileend]-->
 
 <link href='//assets.sky.com/images/favicon.png' rel='icon' type='image/png'>
@@ -22,23 +22,22 @@
 <link href='//assets.sky.com/fonts/sky_regular.svg' rel='prefetch'>
 <link href='//assets.sky.com/fonts/sky_medium.ttf' rel='prefetch'>
 <link href='//assets.sky.com/fonts/sky_medium.svg' rel='prefetch'>
-<link rel='stylesheet' href='//assets.sky.com/css/css-print.css' media='print' />
-<link rel='stylesheet' href='//assets.sky.com/css/app-fonts.css' />
-
+<link href='//assets.sky.com/dist/latest/css/fonts.css' rel='stylesheet'>
+<link href='//assets.sky.com/dist/latest/fonts/skyicons.css' rel='stylesheet'>
 <!--[if IE 6]>
-<link rel='stylesheet' href='//assets.sky.com/css/app-ie6.css' />
+<link href='//assets.sky.com/dist/latest/css/ie/ie6.css' rel='stylesheet'>
 <![endif]-->
 <!--[if IE 7]>
-<link rel='stylesheet' href='//assets.sky.com/css/app-ie7.css' />
+<link href='//assets.sky.com/dist/latest/css/ie/ie7.css' rel='stylesheet'>
 <![endif]-->
 <!--[if LT IE 9]>
-<link rel='stylesheet' href='//assets.sky.com/css/app-ielt9.css' />
+<link href='//assets.sky.com/dist/latest/css/ie/ielt9.css' rel='stylesheet'>
 <![endif]-->
 <!--[if IE 9]>
-<link rel='stylesheet' href='//assets.sky.com/css/app-ie9.css' />
+<link href='//assets.sky.com/dist/latest/css/ie/ie9.css' rel='stylesheet'>
 <![endif]-->
 <!--[if LT IE 10]>
-<link rel='stylesheet' href='//assets.sky.com/css/app-ielt10.css' />
+<link href='//assets.sky.com/dist/latest/css/ie/ielt10.css' rel='stylesheet'>
 <![endif]-->
 <script id='skycom-view-type'></script>
 <script id='skycom-orientation'></script>
@@ -46,7 +45,7 @@
   var globalskycom = globalskycom || {};
   globalskycom.serverHost = 'assets.sky.com';
 </script>
-<script src='//assets.sky.com/js/app.js'></script>
+<script src='//assets.sky.com/dist/latest/js/masthead.js'></script>
 <script>
   $(function() {
     var i, len,
@@ -128,17 +127,17 @@
         </div>
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
-				<h1 class="wiki-header">Sky Web Toolkit <small>v1.6.3 </small></h1>
-<div class="secondary">Last Updated: 25-11-2013</div>
+				<h1 class="wiki-header">Sky Web Toolkit <small>v1.8.3 </small></h1>
+<div class="secondary">Last Updated: 04-12-2013</div>
 
 <a name="using-the-toolkit"></a>
 <section class="wiki-section">
     <h2>Using the Toolkit</h2>
     <div class="sub-section">
         <p class="developer-notes">
-            &lt;script src='//web-toolkit.global.sky.com/1.6.3/scripts/toolkit.js'&gt;&lt;/script&gt;
-            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.6.3/stylesheets/toolkit.css"/&gt;
-            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.6.3/fonts/skycons.css"/&gt;
+            &lt;script src='//web-toolkit.global.sky.com/1.8.3/scripts/toolkit.js'&gt;&lt;/script&gt;
+            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.8.3/stylesheets/toolkit.css"/&gt;
+            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.8.3/fonts/skycons.css"/&gt;
         </p>
     </div>
     <a name="getting-started"></a>
@@ -616,7 +615,7 @@ https://github.com/skyglobal/web-toolkit/
     <div class="skycom-2 demo-colour-block ">
         <div class="white demo-success-icon cushioned">Success
             <small>Icons only</small></div>
-        <div class="demo-hex secondary">#167255</div>
+        <div class="demo-hex secondary">#6dbb00</div>
     </div>
     <div class="skycom-2 demo-colour-block ">
         <div class="white demo-sky-go cushioned">Sky Go
@@ -841,7 +840,7 @@ https://github.com/skyglobal/web-toolkit/
     #wiki-skycons tr:hover{
         background: #eee;
     }
-    #wiki-skycons tr:hover i[class^="skycon-"] {
+    #wiki-skycons tr:hover i[class*="skycon-"] {
         -moz-transform: scale(5);
         -webkit-transform: scale(5);
         transform: scale(5);
@@ -872,7 +871,7 @@ https://github.com/skyglobal/web-toolkit/
         for ie7 support execute <code>toolkit.skycons.init();</code> after the page has loaded.
     </p>
     <p class="developer-notes">
-    Dont forget to include <code>http://web-toolkit.global.sky.com/1.6.3/fonts/skycons.css</code>
+    Dont forget to include <code>http://web-toolkit.global.sky.com/1.8.3/fonts/skycons.css</code>
     </p>
     <p class="developer-notes">
     Ensure <code>aria-hidden</code> is used on your <code>skycon</code> tags.
@@ -889,7 +888,7 @@ https://github.com/skyglobal/web-toolkit/
     &bull; press ctrl+g to group the objects
     &bull; choose Path - simplify
     &bull; choose Path - union
-    &bull; save font into /grunt/fonts/ folder
+    &bull; save font into /lib/font-svgs folder
     &bull; Run `<code>grunt fonts</code>`
     &bull; copy the icons JS from the skycons.css over the icons var in skycons.js
     &bull; Run `<code>grunt</code>`
@@ -909,6 +908,12 @@ https://github.com/skyglobal/web-toolkit/
         <tr ><td> skycon-sky</td><td class="icon"><i class=" skycon-sky" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-sky" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-sky" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/sky.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
         <tr ><td> skycon-chevron-down</td><td class="icon"><i class=" skycon-chevron-down" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-chevron-down" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-chevron-down" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/chevron-down.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        
+        <tr ><td> skycon-info</td><td class="icon"><i class=" skycon-info" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-info" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-info" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/info.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        
+        <tr ><td> skycon-arrow-right</td><td class="icon"><i class=" skycon-arrow-right" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-arrow-right" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-arrow-right" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/arrow-right.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        
+        <tr ><td> skycon-plus-circle</td><td class="icon"><i class=" skycon-plus-circle" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-plus-circle" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-plus-circle" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/plus-circle.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
         <tr ><td> skycon-sky-plus</td><td class="icon"><i class=" skycon-sky-plus" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-sky-plus" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-sky-plus" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/sky-plus.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
@@ -943,6 +948,8 @@ https://github.com/skyglobal/web-toolkit/
         <tr ><td> skycon-search</td><td class="icon"><i class=" skycon-search" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-search" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-search" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/search.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
         <tr ><td> skycon-twitter-retweet</td><td class="icon"><i class=" skycon-twitter-retweet" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-twitter-retweet" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-retweet" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/twitter-retweet.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        
+        <tr ><td> skycon-at</td><td class="icon"><i class=" skycon-at" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-at" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-at" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/at.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
         <tr ><td> skycon-volume</td><td class="icon"><i class=" skycon-volume" aria-hidden=true></i></td><td class="icon colour"><i class=" skycon-volume" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-volume" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/volume.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         
@@ -1076,14 +1083,20 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 <p class="developer-notes">
     Add class <code>sky-form</code> to the container.
 </p>
+<p class="developer-notes">Add <code>required</code> attribute to field and a <code>required</code> class to the relevant label.</p>
+<p class="developer-notes">You can also use the attribute <code>pattern</code> for more detailed 'regex' validation.</p>
+<p class="developer-notes">You can customise error messages using a <code>span class=feedback</code>. see the date examples.</p>
 
 <div class="example">
     <h4>With Grey background</h4>
+
     <p class="design-notes">
         To be used for xxx types of forms</p>
+
     <p class="developer-notes">
         Add class <code>well</code> to the container.
     </p>
+
     <div class="demo" data-selector="*">
 
         <form class="sky-form sky-well">
@@ -1094,6 +1107,33 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
             <div class="row">
                 <label for="email">Email</label>
                 <input id="email" type="email" placeholder="eg. joe.bloggs@me.com"/>
+            </div>
+            <div class="row">
+                <label>Date of birth</label>
+                <input id="dob" type="text" placeholder="DD/MM/YYYY" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" maxlength="10" aria-labelledby=dob-feedback />
+                <span class="hidden form-error feedback" data-for="dob" id="dob-feedback" >Please use the format 'DD/MM/YYYY'</span>
+            </div>
+            <div class="row">
+                <label class="descriptor" for="date-one-day">Engineer visit</label>
+                <div class="date-picker">
+                    <input class="day" type="text" pattern="[0-9]{2}" placeholder="DD" maxlength="2" aria-label="day" id="date-one-day" aria-labelledby="date-one-day-feedback" />
+                    <span class="data-separator">-</span><input class="month" type="text" pattern="[0-9]{2}" placeholder="MM" maxlength="2" aria-label="month" id=date-one-month aria-labelledby="date-one-month-feedback" />
+                    <span class="data-separator">-</span><input class="year" type="text" pattern="[0-9]{4}" placeholder="YYYY" maxlength="4" aria-label="year" id=date-one-year aria-labelledby="date-one-year-feedback" />
+                </div>
+                <span class="hidden form-error feedback" data-for="date-one-day" id="date-one-day-feedback" >Day must 31 or less and 2 digits</span>
+                <span class="hidden form-error feedback" data-for="date-one-month" id="date-one-month-feedback">Month must be 12 or less and 2 digits</span>
+                <span class="hidden form-error feedback" data-for="date-one-year" id="date-one-year-feedback">Year must be 4 digits</span>
+            </div>
+            <div class="row">
+                <label>Another date</label>
+                <div class="date-picker">
+                    <input class="day" type="text" pattern="[0-9]{2}" placeholder="DD" maxlength="2" aria-label="day" id="date-two-day" aria-labelledby="date-two-day-feedback" />
+                    <span class="data-separator">-</span><input class="month" type="text" pattern="[0-9]{2}" placeholder="MM" maxlength="2" aria-label="month" id="date-two-month" aria-labelledby="date-two-month-feedback" />
+                    <span class="data-separator">-</span><input class="year" type="text" pattern="[0-9]{4}" placeholder="YYYY" maxlength="4" aria-label="year" id="date-two-year" aria-labelledby="date-two-year-feedback" />
+                </div>
+                <span class="hidden form-error feedback" data-for="date-two-day" id="date-two-day-feedback" >Day must 31 or less and 2 digits</span>
+                <span class="hidden form-error feedback" data-for="date-two-month" id="date-two-month-feedback">Month must be 12 or less and 2 digits</span>
+                <span class="hidden form-error feedback" data-for="date-two-year" id="date-two-year-feedback">Year must be 4 digits</span>
             </div>
             <div class="row">
                 <label for="telephone">Telephone</label>
@@ -1107,24 +1147,32 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
                 <label for="message">Message</label>
                 <textarea id="message" placeholder="eg. Please enter a message"></textarea>
             </div>
+            <div class="row no-label">
+                <button name="form-submit" type="submit" class="form-submit btn primary-cta">Submit</button>
+            </div>
         </form>
     </div>
 </div>
 
 <div class="example">
     <h4>Without Grey background</h4>
+
     <p class="design-notes">
         To be used for xxx types of forms</p>
+
     <p class="developer-notes">
 
     </p>
+
     <div class="demo" data-selector="*">
 
         <form class="sky-form ">
             <div class="row">
                 <label for="title" class="required">Title</label>
+
                 <div class="select">
-                    <select id="title" name="title"><option value="">Please select</option>
+                    <select id="title" name="title" required>
+                        <option value="">Please select</option>
                         <option value="Mr">Mr</option>
                         <option value="Mrs">Mrs</option>
                         <option value="Ms">Ms</option>
@@ -1138,34 +1186,37 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 
             <div class="row">
                 <label for="first_name">First name</label>
-                <input id="first_name" type="text" placeholder="eg. Joe Bloggs" />
+                <input id="first_name" type="text" placeholder="eg. Joe Bloggs"/>
             </div>
 
             <fieldset class="row">
                 <legend>Select a payment type</legend>
                 <div class="radiocheck">
-                    <input type="radio" name="payment_type" value="direct_debit" id="direct-debit" checked />
+                    <input type="radio" name="payment_type" value="direct_debit" id="direct-debit" checked/>
                     <label for="direct-debit">Direct debit</label>
                     <br>
-                    <input type="radio" name="payment_type" value="credit_card" id="credit-card" />
+                    <input type="radio" name="payment_type" value="credit_card" id="credit-card"/>
                     <label for="credit-card">Credit card</label>
                 </div>
             </fieldset>
 
             <div class="row">
                 <label class="required">Postcode</label>
-                <input type="text" placeholder="eg. TW8 1QW"/>
+                <input type="text" placeholder="eg. TW8 1QW" required/>
                 <button class="btn">Find address</button>
             </div>
-            
-             <div class="row">
+
+            <div class="row">
                 <label for="message2">Homepage</label>
                 <textarea id="message2" placeholder="eg. Please enter a message"></textarea>
             </div>
 
             <div class="row no-label">
-                <input type="checkbox" name="confirm_terms" value="true" id="confirm-terms" />
+                <input type="checkbox" name="confirm_terms" value="true" id="confirm-terms"/>
                 <label for="confirm-terms">I agree to the <a href="#">Terms &amp; Conditions</a></label>
+            </div>
+            <div class="row no-label">
+                <button name="form-submit" type="submit" class="form-submit btn primary-cta">Submit</button>
             </div>
         </form>
 
@@ -1181,15 +1232,16 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         <span class="error">This module is not yet complete.</span>  If you need it, please complete 'accessibility' checks an re-submit.
     </p>
     <div class="design-notes">
-        This module should be used when all of, or the majority of, the page changes after an item click.
+        This module should be used when only a small section of the page changes after an item click.
     </div>
     <div class="design-notes">
-        If only a small section of the page changes please use '<code>Classic Tabs</code>'.
+        If all of, or the majority of, the page changes please use '<code>classic navigation</code>'.
     </div>
+
     <div class="developer-notes">
         Add Class '<code>page-nav</code>'.
     </div>
-    <div class="init">
+    <div class="init-notes">
         <code>$('#demo-inpage-nav-tabs').inPageNav();</code>
     </div>
     <div class="demo" data-selector="*">
@@ -1306,7 +1358,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         This module should be used when only a small section of the page changes after an item click.
     </div>
     <div class="design-notes">
-        If the all of, or the majority of, the page changes please use '<code>in-page navigation</code>'.
+        If all of, or the majority of the page changes please use '<code>In-Page Navigation</code>'.
     </div>
     <div class="developer-notes">
         Add Class '<code>classic</code>'.
@@ -1314,6 +1366,10 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="init-notes">
         <code>$('#demo-classc-tabs').inPageNav();</code>
     </div>
+    <div class="developer-notes">
+        If reinitialising tabs (e.g. after transition in a single-page app), call '<code>toolkit.hashmanager.resetHash()</code>' first.
+    </div>
+
     <div class="demo" data-selector="*">
         <section class="module clearfix tabs-container classic" data-function="tabs" id='demo-classc-tabs'>
 
@@ -1474,7 +1530,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
     <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
 </div>
-<div class="init">
+<div class="init-notes">
     <code>$('#hero').skycom_carousel({
         carousel: {
             autoplay: true,
@@ -1724,7 +1780,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <h4>Sky Video Player Wrapper</h4>
 
     <div class="demo" data-selector="*" id="demo-video">
-        <div class="video" data-video-id="clip-00i9rvth">
+        <div class="video-container" data-video-id="clip-00i9rvth">
             <img src="wiki_images/bling-ring.jpg"
                  alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
 

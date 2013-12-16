@@ -1,12 +1,16 @@
+$form-offset: 34%;
+
 .sky-form {
 
   .row {
     margin: 0 0 24px 0;
   }
 
-  .required:after {
+  label.required:after {
     content: "*";
     color: $error;
+    position: absolute;
+    margin-left: 4px;
   }
 
   select {
@@ -22,29 +26,24 @@
     font: 16px/1em $font-family;
   }
 
-  .row > label,
-  .row > .field_with_errors label {
-    line-height: 32px;
-  }
-
   .row> .field_with_errors label,
   .row > label,
   legend {
-    color: #3c3c3c;
     @include box-sizing(border-box);
     float: left;
     text-align: right;
-    width: 24%;
+    width: $form-offset;
     padding-right: 20px;
   }
 
   .no-label {
-    margin-left: 24%;
+    margin-left: $form-offset;
     label {
       float: none !important;
     }
   }
 
+  input[type="number"],
   input[type="text"],
   input[type="password"],
   input[type="email"],
@@ -53,10 +52,10 @@
   textarea {
     @include box-sizing(border-box);
     @include box-shadow(1px 1px 3px 0px rgba(0, 0, 0, 0.06) inset);
-    height: 2em;
     font-family: SkyTextRegular;
     font-size: 16px;
     width: 221px;
+    height: 2em;
     margin: 0;
     border-radius: 5px;
     padding: 0 10px;
@@ -68,14 +67,107 @@
       border: 1px solid #0094ff;
     }
   }
+  .date-picker {
+    display: inline-block;
+    position: relative;
+
+    &:after {
+      clear: both;
+    }
+    .day,
+    .month,
+    .year {
+      text-align:center;
+      width: 35px;
+      margin-right: 0;
+      @include box-sizing(content-box);
+    }
+    .year {
+      width: 55px;
+    }
+    .data-separator{
+      margin: 0 5px 0 2px;
+    }
+  }
+
+  .calendar {
+    position: absolute;
+    top: 29px;
+    left: 0;
+    z-index: 10;
+    background-color: #fff;
+    padding: 16px 9px;
+    width: 201px;
+    border: 1px solid #dcdcdc;
+    font-size: 20px;
+    color: #666;
+    text-align: center;
+
+    i {
+      color: #0073c5;
+    }
+
+    .header {
+      margin-bottom: 16px;
+
+      .prev,
+      .next {
+        color: #0073c5;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .prev {
+        float: left;
+      }
+      .next {
+        float: right;
+      }
+    }
+    .days,
+    .day-container {
+      span {
+        display: inline-block;
+        width: 18px;
+        margin: 3px;
+        padding: 2px;
+        text-align: center;
+      }
+    }
+    .days {
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      border-bottom: solid 1px #dcdcdc;
+      font-size: 16px;
+    }
+    .day-container {
+      font-family: "Helvetica", Arial, sans-serif;
+      font-size: 14px;
+      color: #333;
+      text-align: left;
+
+      .date:hover {
+        background-color: #0073c5;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      .past {
+        color: #a5a5a5;
+      }
+
+      .selected {
+        font-weight: bold;
+        color: #0073c5;
+      }
+      .today{
+        font-weight: bold;
+      }
+    }
+  }
 
   textarea {
     height: 5em;
     padding: 5px 10px;
-  }
-
-  .date-picker input[type="text"] {
-    background-color: red;
   }
 
   fieldset {
@@ -94,7 +186,44 @@
   }
 
   .error {
-    margin-left: 24%;
+    margin-left: $form-offset;
+  }
+
+
+  .form-error {
+    color: $error;
+  }
+
+  input.form-error {
+    border-color: $error;
+    color: #000;
+  }
+
+
+  .feedback.hidden {
+    display: none;
+  }
+
+  .feedback {
+    margin-left: $form-offset;
+    margin-top: 8px;
+    text-align: left;
+    width: auto;
+    float: none;
+    display: block;
+  }
+
+  .skycon-warning {
+    margin-right: 8px;
+    font-size: 20px;
+    margin-bottom: 4px;
+    .lt-ie9 & {
+      margin-bottom: -4px;
+    }
+  }
+
+  .feedback-list .form-error {
+    margin-left: 24px;
   }
 }
 
@@ -102,12 +231,12 @@
 .sky-form {
   .radiocheck {
     *margin-top: -1em;
-    *margin-left: 24%;
+    *margin-left: $form-offset;
     *padding-left: 20px;
   }
 }
 
-@media (max-width: $mobile-width) {
+@media (max-width: 600px) {
   .sky-form {
     input[type="text"],
     input[type="password"],
@@ -116,6 +245,9 @@
     input[type="url"],
     textarea {
       width: 100%;
+    }
+    .feedback {
+      margin-left: 0;
     }
   }
 
@@ -133,6 +265,12 @@
     margin: 16px 0 0 0;
   }
   .no-label label {
-     display: inline;
+    display: inline;
+  }
+}
+
+.lt-ie9 {
+  input{
+    line-height: 2em;
   }
 }

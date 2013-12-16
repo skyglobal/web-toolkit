@@ -12,11 +12,7 @@ toolkit.hashmanager = (function() {
         hasLoaded: false,
         windowLoaded: false,
         lastExecutor: null,
-        hash: null,
-        fallback: {
-            callback: null,
-            undo: null
-        }
+        hash: null
     };
 
     function bindEvents() {
@@ -47,10 +43,6 @@ toolkit.hashmanager = (function() {
         }
         if (evt && typeof evt[fn] === 'function') {
             evt[fn](hash);
-        } else if (fn === 'callback' && vars.fallback.callback) {
-            vars.fallback.callback(hash);
-        } else if (fn === 'undo' && vars.fallback.undo) {
-            vars.fallback.undo(hash);
         }
     }
 
@@ -87,9 +79,8 @@ toolkit.hashmanager = (function() {
         });
     }
 
-    function registerFallback(callback, undo){
-        vars.fallback.callback = callback;
-        vars.fallback.undo = undo;
+    function resetHash() {
+        vars.globalHashList = [];
     }
 
     function cleanHash(hash) {
@@ -100,10 +91,10 @@ toolkit.hashmanager = (function() {
 
     return {
         register: register,
-        registerFallback: registerFallback,
         change: change,
         remove: remove,
         onHashChange: onHashChange,
+        resetHash: resetHash,
         cleanHash: cleanHash
     };
 }());

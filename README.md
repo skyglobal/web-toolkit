@@ -1,5 +1,6 @@
 Web Toolkit
 ========================
+[![Build Status](https://circleci.com/gh/skyglobal/web-toolkit.png?circle-token=24eeba25d7352dec038ea9fa25b22671ba28be5e)](https://circleci.com/gh/skyglobal/web-toolkit)
 
 Look and feel for sky.com
 
@@ -64,6 +65,8 @@ See the [reference page](http://skyglobal.github.io/web-toolkit/) for a descript
 ### Testing
 These tests are automatically run on the CircleCI server upon pushing to Github
   - `grunt test` for unit (using [mocha](http://visionmedia.github.io/mocha/) and [chai](http://chaijs.com/‎))
+
+*Please note: jQuery 'show' and 'hide' dont work well, please add and remove the class 'hidden' instead.*
 
 ### Running
 
