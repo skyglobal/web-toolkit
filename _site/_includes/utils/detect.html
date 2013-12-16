@@ -1,0 +1,50 @@
+<h3 class="wiki-h3">
+    <a href="#!lightbox/code-detect" class="dev-button code-download">code</a>
+    <a href="#test/detectSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+    Detect
+</h3>
+
+<p class="design-notes">
+</p>
+<p class="developer-notes">
+    the <code>.detect</code> object allows you to check for a number of browser features and states.
+</p>
+
+<div class="example">
+    <h4>View</h4>
+    <p class="developer-notes">
+        Detect the device/window current view: <code>mobile</code> or <code>desktop</code>.
+    </p>
+    <div class="demo">
+        {% include utils/detect/view.html %}
+    </div>
+    <script>
+        {% include utils/detect/view.js %}
+    </script>
+</div>
+
+<div class="example">
+    <h4>Touch</h4>
+    <p class="developer-notes">
+        Detect if the device supports touch: <code>true</code> or <code>false</code>.
+    </p>
+    <div class="demo">
+        {% include utils/detect/touch.html %}
+    </div>
+    <script>
+        {% include utils/detect/touch.js %}
+    </script>
+</div>
+
+<div class="example">
+    <h4>Orientation</h4>
+    <p class="developer-notes">
+        Detect the device/window current orientation: <code>landscape</code> or <code>portrait</code>.
+    </p>
+    <div class="demo">
+        {% include utils/detect/orientation.html %}
+    </div>
+    <script>
+        {% include utils/detect/orientation.js %}
+    </script>
+</div>
