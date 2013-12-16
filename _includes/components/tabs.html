@@ -1,9 +1,5 @@
-<h3 class="wiki-h3">Classic Tabs</h3>
-
 <div class="example">
-    <p class="design-notes">
-        <span class="error">This module is not yet complete.</span>  If you need it, please complete 'accessibility' checks an re-submit.
-    </p>
+    <h4 class="medium">Classic Tabs</h4>
     <div class="design-notes">
         This module should be used when only a small section of the page changes after an item click.
     </div>
@@ -13,14 +9,7 @@
     <div class="developer-notes">
         Add Class '<code>classic</code>'.
     </div>
-    <div class="init-notes">
-        <code>$('#demo-classc-tabs').inPageNav();</code>
-    </div>
-    <div class="developer-notes">
-        If reinitialising tabs (e.g. after transition in a single-page app), call '<code>toolkit.hashmanager.resetHash()</code>' first.
-    </div>
-
-    <div class="demo" data-selector="*">
+    <div class="demo" data-selector="#demo-classc-tabs">
         <section class="module clearfix tabs-container classic" data-function="tabs" id='demo-classc-tabs'>
 
             <h2 class="speak">This is a screenreader header for tabs</h2>
@@ -120,4 +109,8 @@
 
         </section>
     </div>
+    <script>
+        saveHTMLForDemo('#demo-classc-tabs');
+        $('#demo-classc-tabs').inPageNav();
+    </script>
 </div>

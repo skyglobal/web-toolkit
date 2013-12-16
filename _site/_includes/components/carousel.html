@@ -8,14 +8,6 @@
     <link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
     <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
 </div>
-<div class="init-notes">
-    <code>$('#hero').skycom_carousel({
-        carousel: {
-            autoplay: true,
-            videoAds: true
-        }
-    });</code>
-</div>
 
 <div class="example">
     <h4 class="medium">3:1 Carousel</h4>
@@ -25,7 +17,7 @@
     <p class="developer-notes">
         Add the class <code>hero-3-1</code>.
     </p>
-    <div class="demo" data-selector="*">
+    <div class="demo" data-selector="#hero">
         <section class="module clearfix skycom-carousel hero-3-1" data-function="carousel" data-tracking-module="hero"
                  id="hero">
             <h2 class="speak">Featured News, shows or Products from around Sky</h2>
@@ -122,6 +114,17 @@
             </div>
         </section>
     </div>
+    <script>
+        saveHTMLForDemo('#hero');
+        $('#hero').skycom_carousel({
+            carousel: {
+                autoplay: true,
+                videoAds: false
+            }
+        });
+    </script>
+</div>
+<div class="example">
     <h4 class="medium">Skinny Carousel</h4>
     <div class="design-notes">
         Use a maximum of 2 lines of text in total (or 1 line plus channel logo).
@@ -129,7 +132,7 @@
     <p class="developer-notes">
         Add the class <code>hero-skinny</code>.
     </p>
-    <div class="demo" data-selector="*">
+    <div class="demo" data-selector="#hero-skinny">
         <section class="module clearfix skycom-carousel hero-skinny" data-function="carousel" data-tracking-module="hero-169"
                  id="hero-skinny">
             <h2 class="speak">Featured News, shows or Products from around Sky</h2>
@@ -222,4 +225,13 @@
             </div>
         </section>
     </div>
+    <script>
+        saveHTMLForDemo('#hero-skinny');
+        $('#hero-skinny').skycom_carousel({
+            carousel: {
+                autoplay: true,
+                videoAds: false
+            }
+        });
+    </script>
 </div>

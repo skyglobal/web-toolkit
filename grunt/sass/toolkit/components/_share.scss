@@ -3,8 +3,10 @@
   margin-top: 10px;
   z-index: 2;
 
-  .share-word {
+  a{
     color: #666;
+  }
+  .share-word {
     margin-right: 8px;
   }
 
@@ -74,12 +76,12 @@
       margin-top: -1px;
     }
     li {
-      .lt-ie8 & {
-        display: inline;
-      }
       display: inline-block;
       margin: 6px 16px 0 0;
       padding-top: 7px;
+      .lt-ie8 & {
+        display: inline;
+      }
       a {
         cursor: pointer;
         padding: 8px;
@@ -109,7 +111,9 @@
     }
   }
 }
-
+.share-popup .has-focus .share-count{
+  color: $white;
+}
 
 .share-bar {
   border-top: 1px solid #C0C0C0;
@@ -118,14 +122,16 @@
   h3 {
     display: inline;
   }
-  .display-name {
+  a {
     color: #333;
-    display: inline;
-    position: static !important;
-    clip: auto;
-    height: auto;
-    width: auto;
-    padding-left: 10px;
+    span{
+      display: inline;
+      position: static !important;
+      clip: auto;
+      height: auto;
+      width: auto;
+      padding-left: 10px;
+    }
   }
 
   ul {

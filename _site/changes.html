@@ -4,7 +4,7 @@
 <!--[if IE 9]>         <html class="lt-ie10" > <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 	<head>
-        <!--[if lt IE 9]> <script src="lib/jquery-1.10.2.js" ></script> <![endif]-->
+		<!--[if lt IE 9]> <script src="lib/jquery-1.10.2.js" ></script> <![endif]-->
         <!--[if gte IE 9]><!--> <script src="lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
         <script src="lib/jquery.scrollspy.js" ></script>
 
@@ -76,6 +76,13 @@
 
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target=".nav-container">
+        <script>
+            window.demoCode = {};
+            window.saveHTMLForDemo = function(selector){
+                demoCode[selector] = $(selector)[0].outerHTML;
+            };
+        </script>
+        <script src="dist/scripts/toolkit.js" ></script>
         <div class="nav-container">
             <div class="skycom-container nav">
                 <ul class="alpha skycom-12 primary-menu">
@@ -106,7 +113,7 @@
                             <li><a href="index.html#breadcrumbs" data-diff="components/breadcrumbs">Breadcrumbs</a></li>
                             <li><a href="index.html#form" data-diff="components/form">Form</a></li>
                             <li><a href="index.html#inPageNav" data-diff="components/inPageNav">In-Page Nav</a></li>
-                            <li><a href="index.html#tabs" data-diff="components/tabs">Classic Tabs</a></li>
+                            <li><a href="index.html#lightbox" data-diff="components/lightbox">Lightbox</a></li>
                             <li><a href="index.html#accordion" data-diff="components/accordion">Accordion</a></li>
                             <li><a href="index.html#carousel" data-diff="components/carousel">Carousel</a></li>
                             <li><a href="index.html#share" data-diff="components/share">Share</a></li>
@@ -127,8 +134,8 @@
         </div>
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
-				<h1 class="wiki-header">Sky Web Toolkit <small>v1.8.3</small></h1>
-<div class="secondary">Last Updated: 04-12-2013</div>
+				<h1 class="wiki-header">Sky Web Toolkit <small>v1.9.4</small></h1>
+<div class="secondary">Last Updated: 16-12-2013</div>
 
 <a name="using-me"></a>
 <section class="wiki-section" id=changes-page>
@@ -153,7 +160,7 @@
         </form>
         <div class="warning error sky-well hidden" >
             To workout changes we must go to
-            <a href="http://web-toolkit.global.sky.com/1.8.3/_site/changes.html">here</a>.
+            <a href="http://web-toolkit.global.sky.com/1.9.4/_site/changes.html">here</a>.
         </div>
     </div>
 </section>
@@ -166,7 +173,7 @@
 </script>	
 			</div>
 		</div>
-	    <script src="lib/require.js" data-main='dist/scripts/wiki'></script>
+	    <script src="lib/require.js" data-main='dist/scripts/demo'></script>
         <div></div>
 	</body>
 </html>

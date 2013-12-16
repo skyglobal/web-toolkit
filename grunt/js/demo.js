@@ -1,11 +1,11 @@
-define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, toolkit) {
+define('demo', ['utils/developer-notes-logger'], function(logger) {
 
-    function bindEvents(){
+    function bindEvents() {
         $(document).on('click','.toggler', toggle);
         $('#check').on('click', checkDiff);
     }
 
-    function checkDiff(e){
+    function checkDiff(e) {
         e.preventDefault();
         var oldVersion = $('#version').val(),
             newVersion = $('.wiki-header small').text().replace('v',''),
@@ -16,33 +16,31 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
         if (parseFloat(oldVersion,10)===1 || (oldVersion.split('.')[0]==='0')){
             oldVersion = '0.6.9';//get lowest version available
         }
-        toolkit.diff({
+        window.toolkit.diff({
             oldRoute: route + '/' + oldVersion + '/_site/_includes/',
             newRoute: route + '/' + newVersion + '/_site/_includes/'
         });
     }
 
-    function initModuleDemos(){
-        $('#hero').skycom_carousel({
-            carousel: {
-                autoplay: true,
-                videoAds: false
+    function sortSkyconsTable(){
+        var skycons = [];
+        var rows = $('#wiki-skycons tbody tr');
+        rows.each(function(i){
+            skycons.push({i:i, skycon:$(this).find('td').first().text().trim()});
+        });
+        skycons.sort(function (a, b) {
+            if (a.skycon > b.skycon) {
+                return 1;
+            } else if (a.skycon < b.skycon) {
+                return -1;
+            } else {
+                return 0;
             }
         });
-        $('#hero-skinny').skycom_carousel({
-            carousel: {
-                autoplay: true,
-                videoAds: false
-            }
-        });
-        $('#demo-classc-tabs').inPageNav();
-        $('#demo-inpage-nav-tabs').inPageNav();
-        $('#demo-video .video-container').video({
-            token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-            freewheel:false //disable ads
-        });
-        $('.accordion').accordion();
-        toolkit.modules.init();
+        $('#wiki-skycons tbody tr').remove();
+        for (var i=0; i<skycons.length; i++){
+            $('#wiki-skycons tbody').append($(rows[skycons[i].i]));
+        }
     }
 
     function toggle(){
@@ -58,7 +56,8 @@ define('wiki', ['utils/developer-notes-logger', 'toolkit'], function(logger, too
     }
 
     logger();
-    initModuleDemos();
+    window.toolkit.modules.init();
     bindEvents();
+    sortSkyconsTable();
 
 });
