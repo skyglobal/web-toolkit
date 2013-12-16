@@ -14,7 +14,7 @@ baseClass=''
     </thead>
     <tbody>
     <% for (var glyphIdx = 0; glyphIdx < glyphs.length; glyphIdx++) { var glyph = glyphs[glyphIdx] %>
-    <tr ><td><%= baseClass %> <%= classPrefix %><%= glyph %></td><td class="icon"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td><td class="icon"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %> colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/<%= glyph %>.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    <tr ><td><%= baseClass %> <%= classPrefix %><%= glyph %></td><td class="icon"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td><td class="icon"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %> colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td><td class="icon"><a href="font-svgs/<%= glyph %>.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     <% } %>
     </tbody>
 </table>

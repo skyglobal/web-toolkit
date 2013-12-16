@@ -22,8 +22,8 @@ def version_is_release_candidate?
 end
 
 
-def deprecated_to_upload
-  Dir.glob("deprecated/**/*.*")
+def static_to_upload
+  Dir.glob("static/**/*.*")
 end
 
 def assets_to_upload
@@ -103,8 +103,8 @@ task :deploy_new_version do
   templates_to_upload.each do |file|
     doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
-  deprecated_to_upload.each do |file|
-    doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+  static_to_upload.each do |file|
+    doc_resources << bucket.objects["static/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
 
 end
