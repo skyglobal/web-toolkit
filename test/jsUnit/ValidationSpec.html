@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="../../lib/jquery-2.0.3.js"></script>
+    <script src="vendor/mocha.js"></script>
+    <script src="vendor/require.js"></script>
+    <script src="config.js"></script>
+
+</head>
+<body>
+<!--PLACEHOLDER FOR MOCHA TEST RESULTS-->
+<div id="mocha"></div>
+
+<!--FIXTURE HTML FOR TESTS-->
+
+
+<div id="spec-markup">
+
+	<form class="sky-form sky-well">
+		<div class="row">
+			<label class="required descriptor" for="input-one">Mandatory Input with Feedback</label>
+			<input id="input-one" type="text" placeholder="Text goes here" aria-required="true" aria-labelledby="input-one-feedback" required/>
+			<span id="input-one-feedback" data-for="input-one" class="hidden form-error feedback">Please enter something into the first input</span>
+		</div>
+		<div class="row">
+			<label for="input-two">Non Mandatory Input</label>
+			<input id="input-two" type="text" placeholder="Text goes here"/>
+			<span id="input-two-feedback" data-for="input-two" class="hidden form-error feedback">Please enter something into the second input</span>
+		</div>
+		<div class="row">
+			<label class="required descriptor" for="input-three" aria-required="true">Mandatory Input with no Feedback</label>
+			<input id="input-three" class="required" type="text" placeholder="Text goes here" required/>
+		</div>
+
+		<div class="row no-label">
+			<button name="form-submit" type="submit" class="form-submit btn primary-cta">Submit</button>
+		</div>
+	</form>
+
+</div>
+
+<!--TEST-->
+<script>
+
+    function isSafari() {
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.indexOf('safari')!=-1){
+            if(ua.indexOf('chrome')  > -1){
+                return false;
+            }else{
+                return true;
+            }
+        }
+        return false;
+    }
+
+    require(['modules/validation', '../../test/jsUnit/setup'], function () {
+
+        describe('Validation module', function () {
+
+            beforeEach(function () {
+                $('#input-one').val('');
+                $('#input-two').val('');
+                $('#input-three').val('');
+                $('input.required').removeClass('form-error');
+                $('.feedback').addClass('hidden');
+                $('#feedback-list-container').remove();
+            });
+
+            //    TEST WILL ONLY RUN IN A BROWSER THAT DOES NOT SUPPORT THE REQUIRED ATTRIBUTE
+            //    Try IE9 or IE8 or Safari
+
+            if (!('required' in document.createElement('input')) || isSafari()) {
+
+                it('should display error message if a user does not fill in a mandatory input', function () {
+                    expect($("#input-one").hasClass("form-error")).to.equal(false);
+                    expect($("#input-one-feedback").first().hasClass("hidden")).to.equal(true);
+                    expect($(".feedback-list li").length).to.equal(0);
+
+                    $('.form-submit').click();
+
+                    expect($("#input-one").hasClass("form-error")).to.equal(true);
+                    expect($("#input-one-feedback").first().hasClass("hidden")).to.equal(false);
+                    expect($(".feedback-list li").length).to.equal(2);
+                    expect($(".feedback-list li").first().text()).to.equal('Please enter something into the first input');
+
+                    $('#input-one').val('something');
+                    $('.form-submit').click();
+
+                    expect($("#input-one").hasClass("form-error")).to.equal(false);
+                    expect($("#input-one-feedback").first().hasClass("hidden")).to.equal(true);
+                    expect($(".feedback-list li").length).to.equal(1);
+                    expect($(".feedback-list li").first().text()).to.not.equal('Please enter something into the first input');
+                });
+
+                it('should not display an error message if a user does not fill in a non mandatory input', function () {
+                    expect($("#input-two").hasClass("form-error")).to.equal(false);
+                    expect($("#input-two-feedback").hasClass("hidden")).to.equal(true);
+                    expect($(".feedback-list li").length).to.equal(0);
+
+                    $('.form-submit').click();
+
+                    expect($("#input-two").hasClass("form-error")).to.equal(false);
+                    expect($("#input-two-feedback").hasClass("hidden")).to.equal(true);
+                    expect($(".feedback-list li").length).to.equal(2);
+                    expect($(".feedback-list li").eq(1).text()).to.not.equal('Please enter something into the second input');
+                });
+
+                it('should display a generic error message if no feedback label is provided', function () {
+                    expect($("#input-two").hasClass("form-error")).to.equal(false);
+                    expect($("#input-two-feedback").hasClass("hidden")).to.equal(true);
+                    expect($(".feedback-list li").length).to.equal(0);
+
+                    $('.form-submit').click();
+
+                    expect($("#input-two").hasClass("form-error")).to.equal(false);
+                    expect($("#input-two-feedback").hasClass("hidden")).to.equal(true);
+                    expect($(".feedback-list li").length).to.equal(2);
+                    expect($(".feedback-list li").eq(1).text()).to.equal('Mandatory Input with no Feedback is required');
+                });
+            }
+
+        });
+        mocha.run();
+    });
+</script>
+
+</body>
+</html>
