@@ -431,13 +431,13 @@ toolkit.displayCode = (function(lightbox){
         });
     }
 
-    function addRow(name, ext, x, rij){
+    function addRow(name, ext, lineNumber, code){
         var tableBody = $(document.getElementById(name + ext + '-table')).find('tbody')[0],
             tr = document.createElement('tr'),
             td2 = document.createElement('td'),
             td3 = document.createElement('td'),
-            txt2 = document.createTextNode(x),
-            txt3 = document.createTextNode( rij);
+            txt2 = document.createTextNode(lineNumber),
+            txt3 = document.createTextNode(code);
 
         td2.className = 'codekolom';
         td3.className = 'bredecode';

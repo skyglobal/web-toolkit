@@ -30,17 +30,6 @@
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target=".nav-container">
         <script src="dist/scripts/toolkit.js"></script>
-        <script>
-            window.demoCode = {};
-            window.componentConfig = '';
-            window.saveHTMLForDemo = function(selector){
-                if (!$(selector)[0]){
-                    console.log(selector + ' not found');
-                } else {
-                    demoCode[selector] = $(selector)[0].outerHTML;
-                }
-            };
-        </script>
 
         {% include menu.html %}
 

@@ -81,16 +81,6 @@
 
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target=".nav-container">
-        <script>
-            window.demoCode = {};
-            window.saveHTMLForDemo = function(selector){
-                if (!$(selector)[0]){
-                    console.log(selector + ' not found');
-                } else {
-                    demoCode[selector] = $(selector)[0].outerHTML;
-                }
-            };
-        </script>
 
         <div class="nav-container">
     <div class="skycom-container nav">
@@ -151,7 +141,7 @@
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
 				<h1 class="wiki-header">Sky Web Toolkit <small>v1.9.2 </small></h1>
-<div class="secondary">Last Updated: 14-12-2013</div>
+<div class="secondary">Last Updated: 16-12-2013</div>
 
 
 <a name="using-the-toolkit"></a>
@@ -1131,7 +1121,6 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     </p>
 
     <div class="demo">
-
         <form class="sky-form">
     <div class="row">
         <label for="title" class="required">Title</label>
@@ -1221,10 +1210,8 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         <button name="form-submit" type="submit" class="form-submit btn primary-cta">Submit</button>
     </div>
 </form>
-
     </div>
     <script>
-        saveHTMLForDemo('.sky-form');
         if (window.require){
     require(['toolkit'], function(){
         $('.date-picker').datePicker();
@@ -1264,7 +1251,6 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         Add Class '<code>page-nav</code>'.
     </div>
     <div class="demo">
-
         <section class="module clearfix tabs-container page-nav" data-function="tabs" id='demo-inpage-nav-tabs'>
 
     <h2 class="speak">This is a screenreader header for tabs</h2>
@@ -1363,10 +1349,8 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     </div>
 
 </section>
-
     </div>
     <script>
-        saveHTMLForDemo('#demo-inpage-nav-tabs');
         if (window.require){
     require(['toolkit'], function(){
         $('#demo-inpage-nav-tabs').inPageNav();
@@ -1389,7 +1373,6 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         Add Class '<code>classic</code>'.
     </div>
     <div class="demo">
-
         <section class="module clearfix tabs-container classic" data-function="tabs" id='demo-classic-tabs'>
 
     <h2 class="speak">This is a screenreader header for tabs</h2>
@@ -1488,10 +1471,8 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     </div>
 
 </section>
-
     </div>
     <script>
-        saveHTMLForDemo('#demo-classic-tabs');
         if (window.require){
     require(['toolkit'], function(){
         $('#demo-classic-tabs').inPageNav();
@@ -1518,7 +1499,6 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 </p>
 <div class="example">
     <div class="demo" >
-
         <article id="lightbox-demo" class='lightbox-content' aria-labelledby="lightbox-demo-link">
     <img src="wiki_images/bling-ring.jpg" height="380" width="1140" style="width:100%;height:auto;" />
 
@@ -1558,10 +1538,8 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         </div>
     </div>
 </article>
-
     </div>
     <script>
-        saveHTMLForDemo('#lightbox-demo');
         var lightboxConfig = {onShow: function(){
     $('[data-function=carousel]').trigger("pause");
     $('#lightbox-demo').trigger('my-lightbox-opened');
@@ -1591,7 +1569,6 @@ if (window.require){
 </p>
 <div class="example">
     <div class="demo" >
-
         <ul class="accordion">
     <li>
         <a class="accordion-heading" data-toggle-state="hidden"  data-toggle="#first-accordion-content" href="#first-accordion-content">
@@ -1624,10 +1601,8 @@ if (window.require){
         </div>
     </li>
 </ul>
-
     </div>
     <script>
-        saveHTMLForDemo('.accordion');
         if (window.require){
     require(['toolkit'], function(){
         $('.accordion').accordion();
@@ -1664,7 +1639,6 @@ if (window.require){
         Add the class <code>hero-3-1</code>.
     </p>
     <div class="demo" >
-
         <section class="module clearfix skycom-carousel hero-3-1" data-function="carousel" data-tracking-module="hero"
          id="hero">
     <h2 class="speak">Featured News, shows or Products from around Sky</h2>
@@ -1758,11 +1732,8 @@ if (window.require){
         </div>
     </div>
 </section>
-
     </div>
-
     <script>
-        saveHTMLForDemo('#hero');
         var defaultCarouselConfig =  {
     autoplay: true,
     videoAds: false
@@ -1788,7 +1759,6 @@ if (window.require){
         Add the class <code>hero-skinny</code>.
     </p>
     <div class="demo" >
-
         <section class="module clearfix skycom-carousel hero-skinny" data-function="carousel" data-tracking-module="hero-skinny"
          id="hero-skinny">
     <h2 class="speak">Featured News, shows or Products from around Sky</h2>
@@ -1880,11 +1850,8 @@ if (window.require){
         </div>
     </div>
 </section>
-
     </div>
-
     <script>
-        saveHTMLForDemo('#hero-skinny');
         var skinnyCarouselConfig =  {
     autoplay: true,
     videoAds: false
@@ -1909,7 +1876,6 @@ if (window.require){
         This will behave like it isn't a carousel as there is only one slide.
     </div>
     <div class="demo">
-
         <section class="module clearfix skycom-carousel hero-3-1" data-function="carousel" data-tracking-module="empty-hero"
          id="empty-hero">
     <h2 class="speak">Featured News, shows or Products from around Sky</h2>
@@ -1948,11 +1914,8 @@ if (window.require){
         </div>
     </div>
 </section>
-
     </div>
-
     <script>
-        saveHTMLForDemo('#empty-hero');
         var singleSlideCarouselConfig =  {
     autoplay: true,
     videoAds: false
@@ -1986,7 +1949,6 @@ if (window.require){
 </div>
 <div class="example">
     <div class="demo" >
-
         <div id="demo-video" class="video-container" data-video-id="clip-00i9rvth">
     <img src="wiki_images/bling-ring.jpg"
          alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
@@ -1997,10 +1959,8 @@ if (window.require){
         <span class="speak">Play Trailer</span>
     </a>
 </div>
-
     </div>
     <script>
-        saveHTMLForDemo('.video-container');
         var videoConfig = {
     token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85", //this token should be unique to your team
     displayAdverts:false ,
@@ -2116,7 +2076,6 @@ if (window.require){
     <p class="developer-notes">
     </p>
     <div class="demo" >
-
         <section id="toggle-by-element" data-mode=view>
     <a class="toggle-link" data-toggle='#toggle-by-element .edit-container' data-toggle-text="Show"
        data-tracking-label="Show" data-toggle-state='shown'>Hide</a>
@@ -2125,10 +2084,8 @@ if (window.require){
         <h3>Some content</h3>
     </div>
 </section>
-
     </div>
     <script>
-        saveHTMLForDemo('#toggle-by-element');
         if (window.require){
     require(['toolkit'], function(toolkit){
         $('#toggle-by-element .toggle-link').on('click', function() {
@@ -2148,7 +2105,6 @@ if (window.require){
     <p class="developer-notes">
     </p>
     <div class="demo" >
-
         <section id="toggle-by-container" data-mode=view>
     <a class="toggle-link" data-toggle='#container-to-toggle' data-toggle-text="Show" data-tracking-label="Show"
        data-toggle-state='shown'><span>Hide</span><i class="icon"></i></a>
@@ -2157,10 +2113,8 @@ if (window.require){
         <h3>Some content</h3>
     </div>
 </section>
-
     </div>
     <script>
-        saveHTMLForDemo('#toggle-by-container');
         if (window.require){
     require(['toolkit'], function(toolkit){
         $('#toggle-by-container .toggle-link').on('click', function() {
@@ -2180,7 +2134,6 @@ if (window.require){
     <p class="developer-notes">
     </p>
     <div class="demo" >
-
         <section id="toggle-already-done" data-mode=view>
     <a class="toggle-link" data-toggle='#container-to-toggle-done' data-toggle-text="Show"
        data-tracking-label="Show" data-toggle-state='shown'>Hide</a>
@@ -2189,10 +2142,8 @@ if (window.require){
         <h3>Some content</h3>
     </div>
 </section>
-
     </div>
     <script>
-        saveHTMLForDemo('#toggle-already-done');
         if (window.require){
     require(['toolkit'], function(toolkit){
         $('#toggle-already-done .toggle-link').on('click', function() {
@@ -2225,15 +2176,12 @@ if (window.require){
     <p class="developer-notes">
     </p>
     <div class="demo">
-
         <a href='#hash' id='hash-link'>Change Hash</a> |
 <a href='#anotherHash' id='another-hash-link'>Change another Hash</a> |
 <a href='#unregisteredHash' id='unregistered-hash-link'>unregistered Hash</a> |
 <span id="currentHash"></span>
-
     </div>
     <script>
-        saveHTMLForDemo('#toggle-by-element');
         function myHashCallback() {
     $('#currentHash').text(location.hash);
 }
