@@ -1,10 +1,11 @@
-version: 1.8.3
+version: 1.9.4
 destination: _site
 source: .
 exclude: [
   grunt,
   node_modules, test, README.md,
   Gemfile, Gemfile.lock, rakefile,
-  Web-toolkit.iml, circle.yml, Gruntfile.js,package.json]
+  Web-toolkit.iml, circle.yml, Gruntfile.js,package.json,
+  build.txt]
 include: [_includes, lib]
 port: 4000

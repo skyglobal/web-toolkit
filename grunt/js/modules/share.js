@@ -1,13 +1,10 @@
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.share = (function() {
 
-    var $el = {
-        document: $(document),
-        shareCount: $('.share-popup .summary')
-    };
+    var $document = $(document);
 
     function bindEvents() {
-        $el.shareCount.on('click keypress', toggleSharePopover);
+        $document.on('click keypress', '.share-popup .summary', toggleSharePopover);
     }
 
     function toggleSharePopover(e) {
@@ -16,21 +13,18 @@ toolkit.share = (function() {
             triggerEvents = 'keypress ' + ('ontouchend' in document.documentElement ? 'touchend' : 'click');
         if(e.type === 'click' || e.type === 'touchend' || (e.type === 'keypress' && e.which === 13)) {
             $section.toggleClass('active');
-            $el.document.on(triggerEvents, function hidePopover(e) {
+            $document.on(triggerEvents, function hidePopover(e) {
                 if(!$.contains($section[0], e.target)) {
                     $section.removeClass('active');
-                    $el.document.off(triggerEvents, hidePopover);
+                    $document.off(triggerEvents, hidePopover);
                 }
             });
         }
     }
 
-    function init() {
-        bindEvents();
-    }
+    bindEvents();
 
     return {
-        init: init,
         toggleSharePopover: toggleSharePopover
     };
 }());

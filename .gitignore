@@ -9,3 +9,4 @@ web-toolkit.ipr
 *iml
 node_modules/
 grunt/fonts/min
+dist/scripts/build.txt

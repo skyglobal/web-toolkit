@@ -1,3 +1,11 @@
-a:fous{
-  background-color:
+a.has-focus,
+a.has-focus:focus,
+.has-focus,
+.has-focus:focus{
+  background-color: $background-focus;
+  color: $white!important;
+  box-shadow: 0px 0px 0px 2px  $background-focus;
+  i{
+    color: $white;
+  }
 }

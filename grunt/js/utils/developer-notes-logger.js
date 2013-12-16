@@ -35,13 +35,18 @@ define('utils/developer-notes-logger', function() {
     function logNotes($section){
         var notes = $section.find('> .developer-notes'),
             dependencies = $section.find('> .dependencies').html(),
-            init = $section.find('> .init').html();
+            init = $section.find('> script').html();
+        if (init){
+            init = init.split(';');
+            init.shift();
+            init = init.join(';');
+        }
 
         notes.each(function(){
             log($(this).html());
         });
         log(dependencies,'Dependencies');
-        log(init,'Initialisation');
+        log(init,'Javascript');
         logDemoCode($section);
     }
 
@@ -50,7 +55,8 @@ define('utils/developer-notes-logger', function() {
             $examples = $this.find('> .demo > ' + selector).not('.developer-notes');
 
         $examples.each(function(){
-            log(this.outerHTML, '\'' + this.tagName + '\' html');
+            var html = window.demoCode[selector] || this.outerHTML;
+            log(html, '\'' + this.tagName + '\' html');
         });
 
     }
@@ -70,7 +76,7 @@ define('utils/developer-notes-logger', function() {
         if (strWithColourCodes.indexOf('%c')>-1){
             for (var x=0; x<codeCount; x++){
                 returnArr.push('background: #FDF6E3; color: #777;');
-                returnArr.push('background:white; color:black;');
+                returnArr.push('background: white; color:black;');
             }
         }
         return returnArr;
