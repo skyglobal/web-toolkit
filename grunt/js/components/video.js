@@ -93,13 +93,12 @@ toolkit.video = (function (window, $) {
             $wrapper.addClass('playing-video');
             $overlay.fadeIn(animationSpeed, function () {
                 $play.fadeOut(animationSpeed);
+                $close.addClass('active');
                 height = video.calculateHeight();
                 $container.animate({ height:height }, animationSpeed, function () {
                     $(window).on('skycom.resizeend', $.proxy(video.resizeContainer, video));
                     $wrapper.show();
-                    $overlay.fadeOut(animationSpeed, function () {
-                        $close.addClass('active');
-                    });
+                    $overlay.fadeOut(animationSpeed);
                     callback();
                 });
             });
@@ -141,10 +140,12 @@ toolkit.video = (function (window, $) {
         });
     };
     return Video;
-}(window, jQuery));
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('components/video', [], function () {
-        return toolkit.video;
+        return toolkit.video(window, jQuery);
     });
+} else {
+    toolkit.video =  toolkit.video(window, jQuery);
 }

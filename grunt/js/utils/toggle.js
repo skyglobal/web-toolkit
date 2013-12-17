@@ -31,6 +31,20 @@ toolkit.toggle = (function() {
         return $el;
     }
 
+    function setOpenHeight($el){
+        var hasHeight = false;
+        if ($el.attr('style')){
+            var styles = ($el.attr('style').split(';'));
+            for (var i in styles){
+                if (styles[i].trim().indexOf('height')===0){
+                    hasHeight = true;
+                }
+            }
+            if (hasHeight){ return; }
+        }
+        $el.css({'height':getOpenHeight($el)});
+    }
+
     function getOpenHeight($el) {
         if ($el.data('openHeight') !== undefined && !hasResized && !hasContentChanged) {
             return $el.data('openHeight');
@@ -54,16 +68,13 @@ toolkit.toggle = (function() {
             .attr('data-tracking-label', oldText);
     }
 
-    function rotateIcon($elClicked) {
-        $elClicked.find('i').toggleClass('rotate-180');
-    }
-
     function show($elToToggle) {
         var openHeight = getOpenHeight($elToToggle);
         animate($elToToggle, openHeight);
     }
 
     function hide($elToToggle) {
+        setOpenHeight($elToToggle);
         animate($elToToggle, 0);
     }
 
@@ -94,7 +105,6 @@ toolkit.toggle = (function() {
         }
         if ($elClicked && state !== $elClicked.attr('data-toggle-state')) {
             updateText($elClicked, state);
-            rotateIcon($elClicked);
             $elClicked.attr('data-toggle-state', state);
         }
 
@@ -115,10 +125,12 @@ toolkit.toggle = (function() {
 
     return toggle;
 
-    })();
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/toggle', [], function() {
-        return toolkit.toggle;
+        return toolkit.toggle();
     });
+} else {
+    toolkit.toggle = toolkit.toggle();
 }

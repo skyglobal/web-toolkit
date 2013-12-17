@@ -32,14 +32,14 @@
 <!--TEST-->
 <script>
 
-    require(['components/video', '../../test/jsUnit/setup'],function(){
+    require(['components/video', '../../test/jsUnit/setup'],function(Video){
         var options = {
             token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
             animationSpeed: 0,
             freewheel:false //disable ads
         };
         $('#spec-markup').show();
-        var video = new toolkit.video($('.video'), options);
+        var video = new Video($('.video'), options);
         video.createWrapper();
 
         describe('Video module', function() {
@@ -106,7 +106,7 @@
                     }
                 }
                 $.fn.sky_html5player = function(blah) {};
-                toolkit.video.prototype.showCanvas = function(callback) { callback(); callbackCalled = true}
+                Video.prototype.showCanvas = function(callback) { callback(); callbackCalled = true}
                 video.play();
                 expect(callbackCalled).to.be.true;
                 setTimeout(function() {

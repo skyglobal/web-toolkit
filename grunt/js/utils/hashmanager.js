@@ -111,10 +111,12 @@ toolkit.hashmanager = (function() {
         resetHash: resetHash,
         cleanHash: cleanHash
     };
-}());
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/hashmanager', [], function() {
-        return toolkit.hashmanager;
+        return toolkit.hashmanager();
     });
+} else {
+    toolkit.hashmanager =  toolkit.hashmanager();
 }

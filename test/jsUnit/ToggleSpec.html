@@ -47,7 +47,14 @@
     require(['utils/toggle',
         '../../test/jsUnit/setup'], function (toggle) {
 
-        describe('Toggling elements visibility', function () {
+
+        var describeSpec = 'Toggling elements visibility';
+
+        if(!toggle) { //needed for running tests in demo page
+            toggle = toolkit.toggle;
+        }
+
+        describe(describeSpec, function () {
 
             it('can toggle based on the element that was clicked on', function () {
                 var container = $('#toggle-by-element .edit-container');
@@ -68,7 +75,6 @@
                 expect(toggleLink.attr("data-tracking-label")).to.equal("Show");
                 expect(toggleLink.text()).to.equal("Hide");
                 expect(container.hasClass('toggle-hidden')).to.be.false;
-                ;
 
             });
 
@@ -96,16 +102,14 @@
 
             });
 
-            it("only changes the text inside a span if a span exists, and rotates the icon", function () {
+            it("only changes the text inside a span if a span exists", function () {
                 var container = $('#toggle-by-container .edit-container');
                 var toggleLink = $("#toggle-by-container .toggle-link");
                 toggle({$container:container, action:'hide'});
                 expect(toggleLink.text()).to.equal("Show");
-                expect(toggleLink.find('i').hasClass('rotate-180')).to.be.true;
                 toggle({$container:container, action:'show'});
                 expect(toggleLink.text()).to.equal("Hide");
                 expect(toggleLink.find('i').length).to.equal(1);
-                expect(toggleLink.find('i').hasClass('rotate-180')).to.be.false;
             });
 
             it('doesnt do anything if the container is already toggled to the state you are trying to change to', function () {
@@ -129,6 +133,7 @@
             });
 
         });
+
         mocha.run();
     });
 </script>
