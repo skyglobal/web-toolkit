@@ -234,6 +234,10 @@ body {
   background: #ECFAFF;
 }
 
+.secondary .code-download {
+  top: -5px;
+}
+
 .block {
   display: block;
 }
@@ -243,6 +247,10 @@ a[name]:not([href]) {
   display: block;
 }
 
+body a[name=base-styles] {
+  padding-top: 6px !important;
+}
+
 .wiki-header small {
   color: #999;
 }
@@ -250,13 +258,17 @@ a[name]:not([href]) {
 .wiki-dl dt {
   font-family: SkyTextMedium;
   float: left;
-  min-width: 200px;
+  min-width: 150px;
 }
 
 .init-notes,
 .dependencies,
 .developer-notes {
   display: none;
+}
+
+h2:not(.section-title) {
+  margin: 16px 0 0 0;
 }
 
 .mocha-container {
@@ -433,12 +445,8 @@ h4 {
   margin-bottom: 10px;
 }
 
-.pink {
+.demo-pink {
   color: #ed0677;
-}
-
-.leading {
-  color: #999999;
 }
 
 .grid-example {
@@ -646,4 +654,11 @@ h4 {
 }
 .code-container tr.del {
   background: #FDD;
+}
+.code-container .styled {
+  padding: 8px;
+  border: 1px solid #CCC;
+}
+.code-container .styled.js {
+  display: none;
 }

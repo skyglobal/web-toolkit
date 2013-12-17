@@ -60,6 +60,9 @@
   border:1px solid #657B83;
   background: #ECFAFF;
 }
+.secondary .code-download{
+  top:-5px;
+}
 
 .block {
 	display: block;
@@ -68,6 +71,9 @@
 a[name]:not([href]){
   padding-top: 1em;
   display: block;
+}
+body a[name=base-styles]{
+  padding-top: 6px!important;
 }
 
 .wiki-header {
@@ -79,7 +85,7 @@ a[name]:not([href]){
 .wiki-dl dt{
   font-family:SkyTextMedium;
   float: left;
-  min-width: 200px;
+  min-width: 150px;
 }
 
 .init-notes,
@@ -88,3 +94,6 @@ a[name]:not([href]){
   display: none;
 }
 
+h2:not(.section-title){
+  margin: 16px 0 0 0;
+}

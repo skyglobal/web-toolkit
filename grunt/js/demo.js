@@ -29,6 +29,7 @@ var demo = (function(logger, hash, lightbox, displayCode) {
     }
 
     function showCode(e){
+        var styled = false;
         var feature = $(this).attr('href').replace('#!lightbox/code-','');
         var version = $('.wiki-header small').text().replace('v','').trim(),
             host = 'http://web-toolkit.global.sky.com',
@@ -37,10 +38,23 @@ var demo = (function(logger, hash, lightbox, displayCode) {
             host = 'http://' + location.host;
             dir = '../_includes';
         }
-        var featureFiles = $('a[href*="#' + feature + '"]').attr('data-diff-demos');
-        var codeBase = $('a[href*="#' + feature + '"]').attr('data-diff');
-        var route = host + '/' + version + '/' + dir + '/' + codeBase;
-        window.toolkit.displayCode(feature, route, featureFiles);
+        var featureFiles, codeBase, route;
+        if ($(this).attr('data-docs')){
+            featureFiles = $(this).attr('data-docs');
+            codeBase = feature;
+            route = host + '/' + version + '/' + dir + '/' + codeBase;
+            styled = true;
+        } else {
+            featureFiles = $('a[href*="#' + feature + '"]').attr('data-diff-demos');
+            codeBase = $('a[href*="#' + feature + '"]').attr('data-diff');
+            route = host + '/' + version + '/' + dir + '/' + codeBase;
+        }
+        window.toolkit.displayCode({
+            feature: feature,
+            dir: route,
+            fileNames: featureFiles,
+            styled: styled
+        });
     }
 
     function sortSkyconsTable(){

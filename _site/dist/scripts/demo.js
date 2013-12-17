@@ -437,16 +437,25 @@ if (typeof window.define === "function" && window.define.amd) {
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.displayCode = (function(lightbox){
 
-    function displayCode(feature, dir, demos){
+    function displayCode(options){
+        var feature = options.feature;
+        var fileNames = options.fileNames;
+        var dir = options.dir;
+        var styled = options.styled;
         new DisplayCode({
             feature: feature,
-            fileNames: demos.split(','),
-            dir: dir
+            fileNames: fileNames.split(','),
+            dir: dir,
+            styled: styled
         });
     }
 
+    function addStyledCode(name, ext, code){
+        var $code = $(code.replace(/{{ site.version }}/g,$('h1.wiki-header small').text().replace('v','').trim()));
+        $(document.getElementById(name + ext + '-table')).append($code);
+    }
     function addRow(name, ext, lineNumber, code){
-        var tableBody = $(document.getElementById(name + ext + '-table')).find('tbody')[0],
+        var tableBody = document.getElementById(name + ext + '-table'),
             tr = document.createElement('tr'),
             td2 = document.createElement('td'),
             td3 = document.createElement('td'),
@@ -466,6 +475,7 @@ toolkit.displayCode = (function(lightbox){
         this.feature = options.feature;
         this.dir = options.dir;
         this.fileNames = options.fileNames;
+        this.styled = options.styled;
         this.$lightboxLink = $('a[href*="#!lightbox/code-' + this.feature + '"]');
 
         if (!$('#code-' + this.feature).length){
@@ -511,7 +521,12 @@ toolkit.displayCode = (function(lightbox){
 
     DisplayCode.prototype.createTable = function(featureFile, ext){
         var id = this.feature + '-' + featureFile + ext + '-table';
-        return $('<table id="' + id + '"><thead><tr><th colspan="3">' + ext.toUpperCase() + '</th></tr></thead><tbody></tbody></table> ');
+        if (this.styled){
+            return $('<div id="' + id + '" class="styled ' + ext + '"></div> ');
+        } else {
+            return $('<table class=' + ext + '><thead><tr><th colspan="3">' + ext.toUpperCase() + '</th></tr></thead><tbody id="' + id + '"></tbody></table> ');
+        }
+
     };
 
     DisplayCode.prototype.addTab = function(featureFile){
@@ -544,10 +559,14 @@ toolkit.displayCode = (function(lightbox){
 
     DisplayCode.prototype.show = function(featureFile, ext){
         var id = this.feature + '-' + featureFile;
-        var code = (this[id + ext]) ? this[id + ext].split('\n') : '' ;
-        for (var i in code){
-            var line = code[i];
-            addRow(id, ext, parseInt(i,10) + 1, line);
+        if (this.styled){
+            addStyledCode(id, ext, this[id + ext]);
+        } else {
+            var code = (this[id + ext]) ? this[id + ext].split('\n') : '' ;
+            for (var i in code){
+                var line = code[i];
+                addRow(id, ext, parseInt(i,10) + 1, line);
+            }
         }
     };
 
@@ -593,6 +612,7 @@ var demo = (function(logger, hash, lightbox, displayCode) {
     }
 
     function showCode(e){
+        var styled = false;
         var feature = $(this).attr('href').replace('#!lightbox/code-','');
         var version = $('.wiki-header small').text().replace('v','').trim(),
             host = 'http://web-toolkit.global.sky.com',
@@ -601,10 +621,23 @@ var demo = (function(logger, hash, lightbox, displayCode) {
             host = 'http://' + location.host;
             dir = '../_includes';
         }
-        var featureFiles = $('a[href*="#' + feature + '"]').attr('data-diff-demos');
-        var codeBase = $('a[href*="#' + feature + '"]').attr('data-diff');
-        var route = host + '/' + version + '/' + dir + '/' + codeBase;
-        window.toolkit.displayCode(feature, route, featureFiles);
+        var featureFiles, codeBase, route;
+        if ($(this).attr('data-docs')){
+            featureFiles = $(this).attr('data-docs');
+            codeBase = feature;
+            route = host + '/' + version + '/' + dir + '/' + codeBase;
+            styled = true;
+        } else {
+            featureFiles = $('a[href*="#' + feature + '"]').attr('data-diff-demos');
+            codeBase = $('a[href*="#' + feature + '"]').attr('data-diff');
+            route = host + '/' + version + '/' + dir + '/' + codeBase;
+        }
+        window.toolkit.displayCode({
+            feature: feature,
+            dir: route,
+            fileNames: featureFiles,
+            styled: styled
+        });
     }
 
     function sortSkyconsTable(){
