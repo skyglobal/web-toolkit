@@ -301,10 +301,12 @@ toolkit.carousel = (function(window, $, video) {
                     onclick = options.onclick,
                     html = '<div class="indicators"><div class="container">',
                     className = ' class="active"';
-                if (count <= 1) return this;
-                for (i = count; i--;) {
-                    html += '<span' + className + ' data-tracking data-tracking-label="indicator"></span>';
-                    className = '';
+//                if (count <= 1) return this;
+                if (count>1){
+                    for (i = count; i--;) {
+                        html += '<span' + className + ' data-tracking data-tracking-label="indicator"></span>';
+                        className = '';
+                    }
                 }
                 $indicators = $(html + '</div></div>').on('click', 'span', function(e) {
                     onclick($(e.currentTarget).index());
@@ -365,26 +367,19 @@ toolkit.carousel = (function(window, $, video) {
                 carousel.pause();
             }).on('play',function() {
                 carousel.play();
-            }).on('refresh',function(e, index) {
+            }).on('goto',function(e, slideIndex) {
+                carousel.goto(slideIndex, true);
+            }).on('refresh',function(e, slideIndex) {
                 carousel.$slides = carousel.$slideContainer.find('>');
                 carousel.slideCount = carousel.$slides.length;
                 $this.find('.indicators').remove();
                 $this.find('.actions').remove();
                 $this.find('.video-overlay').remove();
-
+                slideIndex = parseInt(slideIndex, 10);
+                slideIndex = (isNaN(slideIndex) || slideIndex < 0) ? 0 : slideIndex;
+                slideIndex = (slideIndex > (carousel.slideCount - 1)) ?  carousel.slideCount - 1 : slideIndex;
+                carousel.goto(slideIndex, true);
                 createMarkup(carousel);
-
-                index = parseInt(index, 10);
-                if (isNaN(index) || index < 0) {
-                    index = 0;
-                } else if (index > (carousel.slideCount - 1)){
-                    index = carousel.slideCount - 1;
-                }
-                if (index > carousel.currentIndex) {
-                    carousel.moveSlide({index: index, start:0, end:-50});
-                } else {
-                    carousel.moveSlide({index: index, start:-50, end: 0});
-                }
             }).on('keyup',function(e){
                 switch(e.keyCode){
                     case 9: carousel.pause(); break; //tab
@@ -400,14 +395,17 @@ toolkit.carousel = (function(window, $, video) {
                 carousel.showTermsLink(0);
                 $this.trigger('change');
             } else {
+                carousel.showTermsLink(0);
                 carousel.unbindTouchEvents();
             }
         });
     };
-}(window, jQuery, toolkit.video));
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('components/carousel', ['components/video'], function(video) {
-        return toolkit.carousel;
+        return toolkit.carousel(window, jQuery, video);
     });
+} else {
+    toolkit.carousel = toolkit.carousel(window, jQuery, toolkit.video);
 }

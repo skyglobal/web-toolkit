@@ -180,10 +180,12 @@ toolkit.datePicker = (function () {
         });
     };
 
-}());
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('components/datePicker', [], function() {
-        return toolkit.datePicker;
+        return toolkit.datePicker();
     });
+} else {
+    toolkit.datePicker = toolkit.datePicker();
 }

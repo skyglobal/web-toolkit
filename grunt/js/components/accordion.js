@@ -1,12 +1,16 @@
 /*global jQuery:false */
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.accordion = (function ($, toggle) {
+toolkit.accordion = (function (toggle) {
     "use strict";
 
     function Accordion($element){
         this.$container = $element;
         this.$headings = $element.find('.accordion-heading');
         this.bindEvents();
+    }
+
+    function rotateIcon($elClicked) {
+        $elClicked.find('i').toggleClass('rotate-180');
     }
 
     Accordion.prototype = {
@@ -16,7 +20,8 @@ toolkit.accordion = (function ($, toggle) {
         toggleContent:function(e){
             e.preventDefault();
             var $heading = $(e.currentTarget);
-            toolkit.toggle({$elClicked:$heading});
+            toggle({$elClicked:$heading});
+            rotateIcon($heading);
         }
     };
 
@@ -27,10 +32,12 @@ toolkit.accordion = (function ($, toggle) {
     };
 
     return Accordion;
-})(jQuery, toolkit.toggle);
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('components/accordion', ['utils/toggle'], function(toggle) {
-        return toolkit.accordion;
+        return toolkit.accordion(toggle);
     });
+} else {
+    toolkit.accordion = toolkit.accordion(toolkit.toggle);
 }

@@ -130,7 +130,7 @@
             });
 
             it('Doesnt create controls if there is only one slide', function(done) {
-                expect($('.skycom-empty-carousel').children('.indicators').length).to.equal(0);
+                expect($('.skycom-empty-carousel').children('.indicators span').length).to.equal(0);
                 expect($('.skycom-empty-carousel').children('.actions').find('a.previous').length).to.equal(0);
                 expect($('.skycom-empty-carousel').children('.actions').find('a.next').length).to.equal(0);
                 expect($('.skycom-empty-carousel').children('.actions').find('a.play').length).to.equal(0);

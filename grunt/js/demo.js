@@ -1,8 +1,7 @@
-define('demo', ['utils/developer-notes-logger'], function(logger) {
-
+var demo = (function(logger) {
     function bindEvents() {
         $(document).on('click','.toggler', toggle);
-        $('#check').on('click', checkDiff);
+        $('.sky-form').on('submit', checkDiff);
     }
 
     function checkDiff(e) {
@@ -59,5 +58,12 @@ define('demo', ['utils/developer-notes-logger'], function(logger) {
     window.toolkit.modules.init();
     bindEvents();
     sortSkyconsTable();
-
 });
+
+if (typeof window.define === "function" && window.define.amd){
+    define('demo', ['utils/developer-notes-logger'], function(developerNotesLogger) {
+            return demo(developerNotesLogger);
+ });
+} else {
+    demo(developerNotesLogger);
+}

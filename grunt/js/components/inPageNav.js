@@ -122,16 +122,18 @@ toolkit.inPageNav = (function(hash) {
         });
     }
 
-    $.fn.inPageNav = function(params) {
+    $.fn.inPageNav = function() {
         return this.each(function() {
-            var inPageNav = new InPageNav($(this), params);
+            var inPageNav = new InPageNav($(this));
         });
     };
 
-}(toolkit.hashmanager));
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('components/inPageNav', ['utils/hashmanager'], function(hash) {
-        return toolkit.inPageNav;
+        return toolkit.inPageNav(hash);
     });
+} else {
+    toolkit.inPageNav = toolkit.inPageNav(toolkit.hashmanager);
 }
