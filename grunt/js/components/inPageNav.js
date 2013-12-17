@@ -131,7 +131,7 @@ toolkit.inPageNav = (function(hash) {
 }(toolkit.hashmanager));
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('modules/inPageNav', ['utils/hashmanager'], function(hash) {
+    define('components/inPageNav', ['utils/hashmanager'], function(hash) {
         return toolkit.inPageNav;
     });
 }

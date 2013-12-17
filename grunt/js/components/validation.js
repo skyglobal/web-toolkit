@@ -192,7 +192,7 @@ toolkit.form = (function ($) {
 })(jQuery);
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('modules/validation', [], function() {
+    define('components/validation', [], function() {
         'use strict';
         return toolkit.validation;
     });

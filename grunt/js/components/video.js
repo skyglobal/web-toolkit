@@ -144,7 +144,7 @@ toolkit.video = (function (window, $) {
 }(window, jQuery));
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('modules/video', [], function () {
+    define('components/video', [], function () {
         return toolkit.video;
     });
 }

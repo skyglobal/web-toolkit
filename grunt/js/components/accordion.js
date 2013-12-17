@@ -30,7 +30,7 @@ toolkit.accordion = (function ($, toggle) {
 })(jQuery, toolkit.toggle);
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('modules/accordion', ['utils/toggle'], function(toggle) {
+    define('components/accordion', ['utils/toggle'], function(toggle) {
         return toolkit.accordion;
     });
 }

@@ -407,7 +407,7 @@ toolkit.carousel = (function(window, $, video) {
 }(window, jQuery, toolkit.video));
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('modules/carousel', ['modules/video'], function(video) {
+    define('components/carousel', ['components/video'], function(video) {
         return toolkit.carousel;
     });
 }

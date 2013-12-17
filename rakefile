@@ -22,44 +22,45 @@ def version_is_release_candidate?
 end
 
 
+def static_to_upload
+  Dir.glob("static/**/*.*")
+end
+
 def assets_to_upload
   ["stylesheets/toolkit.css",
-    "fonts/skycons.css", "fonts/skycons.eot", "fonts/skycons.svg", "fonts/skycons.ttf",
-    "scripts/toolkit.js",  "images/icon.png"]
+   "fonts/skycons.css", "fonts/skycons.eot", "fonts/skycons.svg", "fonts/skycons.ttf",
+   "scripts/toolkit.js",
+   "images/icon.png"]
 end
 
 def templates_to_upload
   Dir.glob("_site/**/*.*")
 end
 
-def deprecated_to_upload
-  Dir.glob("deprecated/**/*.*")
-end
-
 def content_type(file)
-    case File.extname(file)
-      when '.svg'
-        content_type = 'image/svg+xml'
-      when '.eot'
-        content_type = 'application/vnd.ms-fontobject'
-      when '.ttf'
-        content_type = 'font/ttf'
-      when '.woff'
-        content_type = 'application/x-font-woff'
-      when '.map'
-        content_type = 'text/javascript'
-      when '.js'
-        content_type = 'text/javascript'
-      when '.css'
-        content_type = 'text/css'
-      when '.png'
-        content_type = 'image/png'
-      when '.html'
-        content_type = 'text/html'
-      else
-        content_type = 'image/jpeg'
-    end
-    content_type
+  case File.extname(file)
+    when '.svg'
+      content_type = 'image/svg+xml'
+    when '.eot'
+      content_type = 'application/vnd.ms-fontobject'
+    when '.ttf'
+      content_type = 'font/ttf'
+    when '.woff'
+      content_type = 'application/x-font-woff'
+    when '.map'
+      content_type = 'text/javascript'
+    when '.js'
+      content_type = 'text/javascript'
+    when '.css'
+      content_type = 'text/css'
+    when '.png'
+      content_type = 'image/png'
+    when '.html'
+      content_type = 'text/html'
+    else
+      content_type = 'image/jpeg'
+  end
+  content_type
 end
 
 def getDate
@@ -75,7 +76,7 @@ task :deploy_new_version do
   system "git commit -m 'Rake deploy - adding grunted files'"
   if version_already_exists?
     system "git tag release-#{latest_version_number} -m \"Release Date:#{getDate}\""
-    system "git push --tag"
+    system "git push --tags release-#{latest_version_number}"
   end
   system "git push origin HEAD:master"
 
@@ -102,8 +103,8 @@ task :deploy_new_version do
   templates_to_upload.each do |file|
     doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
-  deprecated_to_upload.each do |file|
-    doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+  static_to_upload.each do |file|
+    doc_resources << bucket.objects["static/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
 
 end

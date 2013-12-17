@@ -4,8 +4,9 @@
 <!--[if IE 9]>         <html class="lt-ie10" > <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 	<head>
-		<!--[if lt IE 9]> <script src="lib/jquery-1.10.2.js" ></script> <![endif]-->
-        <!--[if gte IE 9]><!--> <script src="lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
+        <meta charset="UTF-8"/>
+		<!--[if lt IE 9]> <script src="//assets.sky.com/js/lib/jquery-1.10.2.js" ></script> <![endif]-->
+        <!--[if gte IE 9]><!--> <script src="//assets.sky.com/js/lib/jquery.2.0.3.min.js" ></script> <!--<![endif]-->
         <script src="lib/jquery.scrollspy.js" ></script>
 
 		<!--[if LT IE 9]>
@@ -58,7 +59,7 @@
   });
 </script>
 
-        <link rel="stylesheet" href="dist/stylesheets/wiki.css">
+        <link rel="stylesheet" href="dist/stylesheets/demo.css">
         <link rel="stylesheet" href="dist/stylesheets/toolkit.css">
         <link rel="stylesheet" href="dist/fonts/skycons.css">
 
@@ -82,56 +83,58 @@
                 demoCode[selector] = $(selector)[0].outerHTML;
             };
         </script>
-        <script src="dist/scripts/toolkit.js" ></script>
+        <script src="dist/scripts/toolkit.js"></script>
+
         <div class="nav-container">
-            <div class="skycom-container nav">
-                <ul class="alpha skycom-12 primary-menu">
-                    <li class="dropdown">
-                        <a href="index.html#using-the-toolkit">Using the Toolkit</a>
-                        <ul class=dropdown-menu>
-                            <li><a href="index.html#getting-started" data-diff="using-the-toolkit/getting-started">Getting Started</a></li>
-                            <li><a href="index.html#contributing" data-diff="using-the-toolkit/contributing">Contributing</a></li>
-                            <li><a href="index.html#accessibility" data-diff="using-the-toolkit/accessibility">Accessibility</a></li>
-                            <li><a href="index.html#coding-practices" data-diff="using-the-toolkit/coding-practices">Coding Practices</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="index.html#base-styles">Base Styles</a>
-                        <ul class=dropdown-menu>
-                            <li><a href="index.html#grid" data-diff="base-styles/grid">Grid</a></li>
-                            <li><a href="index.html#colours" data-diff="base-styles/colours">Colours</a></li>
-                            <li><a href="index.html#typography" data-diff="base-styles/typography">Typography</a></li>
-                            <li><a href="index.html#icons" data-diff="base-styles/icons">Icons</a></li>
-                            <li><a href="index.html#skycons" data-diff="base-styles/skycons">Skycons</a></li>
-                            <li><a href="index.html#buttons" data-diff="base-styles/buttons">Buttons</a></li>
-                            <li><a href="index.html#spinner" data-diff="base-styles/spinner">Spinner</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="index.html#components">Components</a>
-                        <ul class=dropdown-menu>
-                            <li><a href="index.html#breadcrumbs" data-diff="components/breadcrumbs">Breadcrumbs</a></li>
-                            <li><a href="index.html#form" data-diff="components/form">Form</a></li>
-                            <li><a href="index.html#inPageNav" data-diff="components/inPageNav">In-Page Nav</a></li>
-                            <li><a href="index.html#lightbox" data-diff="components/lightbox">Lightbox</a></li>
-                            <li><a href="index.html#accordion" data-diff="components/accordion">Accordion</a></li>
-                            <li><a href="index.html#carousel" data-diff="components/carousel">Carousel</a></li>
-                            <li><a href="index.html#share" data-diff="components/share">Share</a></li>
-                            <li><a href="index.html#video" data-diff="components/video">Video</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="index.html#examples">Examples</a>
-                        <ul class=dropdown-menu>
-                            <li><a href="index.html#error-page" data-diff="examples/error-page">Error Page</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="changes.html">Changes</a>
-                    </li>
+    <div class="skycom-container nav">
+        <ul class="alpha skycom-12 primary-menu">
+            <li class="dropdown">
+                <a href="index.html#using-the-toolkit">Using the Toolkit</a>
+                <ul class=dropdown-menu>
+                    <li><a href="index.html#getting-started" data-diff="using-the-toolkit/getting-started">Getting Started</a></li>
+                    <li><a href="index.html#contributing" data-diff="using-the-toolkit/contributing">Contributing</a></li>
+                    <li><a href="index.html#accessibility" data-diff="using-the-toolkit/accessibility">Accessibility</a></li>
+                    <li><a href="index.html#coding-practices" data-diff="using-the-toolkit/coding-practices">Coding Practices</a></li>
                 </ul>
-            </div>
-        </div>
+            </li>
+            <li class="dropdown">
+                <a href="index.html#base-styles">Base Styles</a>
+                <ul class=dropdown-menu>
+                    <li><a href="index.html#grid" data-diff="base-styles/grid">Grid</a></li>
+                    <li><a href="index.html#colours" data-diff="base-styles/colours">Colours</a></li>
+                    <li><a href="index.html#typography" data-diff="base-styles/typography">Typography</a></li>
+                    <li><a href="index.html#icons" data-diff="base-styles/icons">Icons</a></li>
+                    <li><a href="index.html#skycons" data-diff="base-styles/skycons">Skycons</a></li>
+                    <li><a href="index.html#buttons" data-diff="base-styles/buttons">Buttons</a></li>
+                    <li><a href="index.html#spinner" data-diff="base-styles/spinner">Spinner</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="index.html#components">Components</a>
+                <ul class=dropdown-menu>
+                    <li><a href="index.html#breadcrumbs" data-diff="components/breadcrumbs">Breadcrumbs</a></li>
+                    <li><a href="index.html#form" data-diff="components/form">Form</a></li>
+                    <li><a href="index.html#inPageNav" data-diff="components/inPageNav">In-Page Nav</a></li>
+                    <li><a href="index.html#lightbox" data-diff="components/lightbox">Lightbox</a></li>
+                    <li><a href="index.html#accordion" data-diff="components/accordion">Accordion</a></li>
+                    <li><a href="index.html#carousel" data-diff="components/carousel">Carousel</a></li>
+                    <li><a href="index.html#share" data-diff="components/share">Share</a></li>
+                    <li><a href="index.html#video" data-diff="components/video">Video</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="index.html#examples">Examples</a>
+                <ul class=dropdown-menu>
+                    <li><a href="index.html#error-page" data-diff="examples/error-page">Error Page</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="changes.html">Changes</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
 				<h1 class="wiki-header">Sky Web Toolkit <small>v1.9.4</small></h1>
@@ -174,6 +177,8 @@
 			</div>
 		</div>
 	    <script src="lib/require.js" data-main='dist/scripts/demo'></script>
+
+
         <div></div>
 	</body>
 </html>
