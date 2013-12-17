@@ -30,7 +30,7 @@ toolkit.share = (function() {
 }());
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('modules/share', [], function() {
+    define('components/share', [], function() {
         return toolkit.share;
     });
 }

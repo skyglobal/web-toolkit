@@ -56,14 +56,14 @@ if (typeof window.define === "function" && window.define.amd) {
         'utils/diff',
         'utils/focus',
         'modules',
-        'modules/inPageNav',
-        'modules/accordion',
-        'modules/datePicker',
-        'modules/validation',
-        'modules/lightbox',
-        'modules/share',
-        'modules/video',
-        'modules/carousel'], function(skycons, hashmanager, popup,toggle, diff, focus, modules, inPageNav, accordion, datePicker, validation, lightbox, share, video, carousel){
+        'components/inPageNav',
+        'components/accordion',
+        'components/datePicker',
+        'components/validation',
+        'components/lightbox',
+        'components/share',
+        'components/video',
+        'components/carousel'], function(skycons, hashmanager, popup,toggle, diff, focus, modules, inPageNav, accordion, datePicker, validation, lightbox, share, video, carousel){
 
         return {
             modules: modules,
