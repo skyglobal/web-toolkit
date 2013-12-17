@@ -79,9 +79,9 @@
 	<body class="grid-1140" data-spy="scroll" data-target=".nav-container">
         <script src="dist/scripts/toolkit.js"></script>
 
-        <div class="nav-container">
+        <div class="nav-container primary-menu">
     <div class="skycom-container nav">
-        <ul class="alpha skycom-12 primary-menu">
+        <ul class="alpha skycom-12 main-menu">
             <li class="dropdown">
                 <a href="index.html#using-the-toolkit">Using the Toolkit</a>
                 <ul class=dropdown-menu>
@@ -148,32 +148,28 @@
 				<h1 class="wiki-header">Sky Web Toolkit <small>v1.9.3 </small></h1>
 <div class="secondary">Last Updated: 17-12-2013</div>
 
-
 <a name="using-the-toolkit"></a>
 <section class="wiki-section">
     <h2>Using the Toolkit</h2>
     <div class="sub-section">
-        <p class="developer-notes">
+        <code class=block >
             &lt;script src='//web-toolkit.global.sky.com/1.9.3/scripts/toolkit.js'&gt;&lt;/script&gt;
+        </code>
+        <code class=block >
             &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.9.3/stylesheets/toolkit.css"/&gt;
+        </code>
+        <code class=block >
             &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.9.3/fonts/skycons.css"/&gt;
-        </p>
+        </code>
     </div>
     <a name="gettingStarted"></a>
     <div class="sub-section">
         <h3 class="wiki-h3">Getting Started</h3>
 <p >
-    Please look in the console for full developer notes
-</p>
-<p>
-    Please take a look here for anything that is not documented below. <a href="http://storage.sky.com/other/GlobalGuides.pdf">Global Guidelines</a>
-</p>
-
-<p class="developer-notes">
     Please add the following classes to the <code>html</code> tag:
     <code>lt-ie10</code>, <code>lt-ie9</code> and <code>lt-ie8</code>
 </p>
-<p class="developer-notes">
+<p >
     Please add the following into you <code>head</code> tag:
     <!--[if lt IE 10]><script type="text/javascript">
     document.createElement('header');
@@ -192,15 +188,8 @@
     <a name="contributing"></a>
     <div class="sub-section">
         <h3 class="wiki-h3">Contributing</h3>
-<p class="developer-notes">
+<p >
     The source code is available in a private repository on Github, along with instructions for building/running the project locally.
-https://github.com/skyglobal/web-toolkit/
-</p>
-<p class="developer-notes">
-    When adding comments to be seen by developers only you can use the following classes:
-    <code>developer-notes</code> for hints and tips
-    <code>dependencies</code> for external files required
-    <code>init</code> for javascript
 </p>
 <dl class="clearfix wiki-dl">
     <dt>Feature Requests</dt>
@@ -214,19 +203,15 @@ https://github.com/skyglobal/web-toolkit/
     <a name="accessibility"></a>
     <div class="sub-section">
         <h3 class="wiki-h3">Accessibility</h3>
-<p class="designer-notes">
+<p >
     'Tabbing 'will make the elements background blue and text and icons white.
 </p>
-<p class="developer-notes">
+<p >
     For page text that is needed only for screen readers, add the class '<code>speak</code>'.
 </p>
-<p class="developer-notes">
+<p >
     Don't forget to add about half a day to each client-side card to give you time to use VoiceOVer on your page, check colour contrast and 'tabbing'!
 </p>
-<p >
-   Please go to the <a target="_accessibility" href="http://assets.nb.sky.com/accessibility/index.html">Nomensa Accessibility Page &hellip;</a>
-</p>
-
     </div>
     <a name="codingPractices"></a>
     <div class="sub-section">
@@ -235,9 +220,9 @@ https://github.com/skyglobal/web-toolkit/
    As a general rule we try to follow the following practices:
 </p>
 <dl class="clearfix wiki-dl">
-    <dt>CSS</dt><dd>Use hyphens '<code>-</code>' within all class, ID and name attribute. Never camel-case or underscores.</dd>
-    <dt>JS</dt><dd>Where possible, use camel-case '<code>camelCase</code>' for function/variable names.</dd>
-    <dt>file/Directory Names</dt><dd>Where possible, use camel-case '<code>camelCase</code>'.</dd>
+    <dt>CSS</dt><dd>Use hyphens '<code>-</code>' within all class, ID and name attribute. Never camelCase or underscore.</dd>
+    <dt>JS</dt><dd>Where possible, use '<code>camelCase</code>' for function/variable names.</dd>
+    <dt>file/Directory Names</dt><dd>Where possible, use '<code>camelCase</code>'.</dd>
 </dl>
 
     </div>
@@ -814,35 +799,35 @@ https://github.com/skyglobal/web-toolkit/
     <div class="demo">
 
         <h1 class="page-title">
-    Page Title (Sky Text Regular <span class="demo-pink">52px</span>)
-    <br/><span class="inactive">Line-height 56px</span>
+    Page Title (Sky Text Regular <span class="pink">52px</span>)
+    <br/><span class="leading">Line-height 56px</span>
 </h1>
-<h2 class="section-title">Section Title (Sky Text Regular <span class="demo-pink">44px</span>)
-    <br/><span class="inactive">Line-height 48px</span>
+<h2 class="section-title">Section Title (Sky Text Regular <span class="pink">44px</span>)
+    <br/><span class="leading">Line-height 48px</span>
 </h2>
-<h2 class="section-title smaller">Smaller Section Title (Sky Text Regular/<span class="medium">Medium</span> <span class="demo-pink">36px</span>)
-    <br/><span class="inactive">Line-height 40px</span>
+<h2 class="section-title smaller">Smaller Section Title (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">36px</span>)
+    <br/><span class="leading">Line-height 40px</span>
 </h2>
-<h3 class="pod-title">Pod Title (Sky Text Regular/<span class="medium">Medium</span> <span class="demo-pink">32px</span>)
-    <br/><span class="inactive">Line-height 36px</span>
+<h3 class="pod-title">Pod Title (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">32px</span>)
+    <br/><span class="leading">Line-height 36px</span>
 </h3>
-<h3 class="pod-title smaller">Smaller Pod Title (Sky Text Regular/<span class="medium">Medium</span> <span class="demo-pink">28px</span>)
-    <br/><span class="inactive">Line-height 32px</span>
+<h3 class="pod-title smaller">Smaller Pod Title (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">28px</span>)
+    <br/><span class="leading">Line-height 32px</span>
 </h3>
-<p class="intro">Intro Copy (Sky Text Regular/<span class="medium">Medium</span> <span class="demo-pink">24px</span>)
-    <br/><span class="inactive">Line-height 28px</span>
+<p class="intro">Intro Copy (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">24px</span>)
+    <br/><span class="leading">Line-height 28px</span>
 </p>
-<p class="intro smaller">Smaller Intro Copy (Sky Text Regular/<span class="medium">Medium</span> <span class="demo-pink">20px</span>)
-    <br/><span class="inactive">Line-height 24px</span>
+<p class="intro smaller">Smaller Intro Copy (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">20px</span>)
+    <br/><span class="leading">Line-height 24px</span>
 </p>
-<p>Body text (Sky Text Regular/<span class="medium">Medium</span> <span class="demo-pink">16px</span>)
-    <br/><span class="inactive">Line-height 20px</span>
+<p>Body text (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">16px</span>)
+    <br/><span class="leading">Line-height 20px</span>
 </p>
 <small class="block">Smaller text (relative to container)</small>
 <span class="supportive block">Supportive text (fixed size)</span>
 <small class="block legal">Legal copy</small>
-<p class="instructions">Instructional copy (Luna <span class="demo-pink">24px</span>)
-    <br/><span class="inactive">Line-height 40px</span>
+<p class="instructions">Instructional copy (Luna <span class="pink">24px</span>)
+    <br/><span class="leading">Line-height 40px</span>
 </p>
 <p class="error">Error</p>
 <p class="secondary">Secondary</p>
@@ -2411,7 +2396,24 @@ if (window.require){
 	
 			</div>
 		</div>
-	    <script src="dist/scripts/demo.js"></script>
+
+        <div class="nav-container secondary-menu">
+    <div class="skycom-container nav">
+        <ul class="alpha skycom-12 main-menu">
+            <li >
+                <a target="_guidelines"  href="http://storage.sky.com/other/GlobalGuides.pdf">Global Guidelines </a>
+            </li>
+            <li >
+                <a target="_accessibility" href="http://assets.nb.sky.com/accessibility/index.html">Nomensa Accessibility</a>
+            </li>
+            <li >
+                <a target="_github" href="https://github.com/skyglobal/web-toolkit/">Toolkit Github</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+        <script src="dist/scripts/demo.js"></script>
 
 
         <script src="test/vendor/mocha.js"></script>

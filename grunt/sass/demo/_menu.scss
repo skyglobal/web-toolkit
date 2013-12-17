@@ -12,7 +12,7 @@ body{
   background-color: $background-dark;
 }
 
-ul.primary-menu{
+.nav-container .main-menu{
   li{
     float: left;
     padding: 0 12px;
@@ -55,4 +55,9 @@ ul.primary-menu{
   &.primary-menu > li > a {
     font-size:1.15em;
   }
+}
+
+.nav-container.secondary-menu{
+  top:auto;
+  bottom:0;
 }
