@@ -86,15 +86,6 @@
     <div class="skycom-container nav">
         <ul class="alpha skycom-12 main-menu">
             <li class="dropdown">
-                <a href="index.html#using-the-toolkit">Using the Toolkit</a>
-                <ul class=dropdown-menu>
-                    <li><a href="index.html#gettingStarted" data-diff="usingTheToolkit/gettingStarted">Getting Started</a></li>
-                    <li><a href="index.html#contributing" data-diff="usingTheToolkit/contributing">Contributing</a></li>
-                    <li><a href="index.html#accessibility" data-diff="usingTheToolkit/accessibility">Accessibility</a></li>
-                    <li><a href="index.html#codingPractices" data-diff="usingTheToolkit/codingPractices">Coding Practices</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
                 <a href="index.html#base-styles">Base Styles</a>
                 <ul class=dropdown-menu>
                     <li><a href="index.html#grid" data-diff="baseStyles/grid" data-diff-demos="974,1140,lightbox,tabletPortrait">Grid</a></li>
@@ -150,86 +141,6 @@
 			<div class="alpha skycom-12">
 				<h1 class="wiki-header">Sky Web Toolkit <small>v1.9.3 </small></h1>
 <div class="secondary">Last Updated: 17-12-2013</div>
-
-<a name="using-the-toolkit"></a>
-<section class="wiki-section">
-    <h2>Using the Toolkit</h2>
-    <div class="sub-section">
-        <code class=block >
-            &lt;script src='//web-toolkit.global.sky.com/1.9.3/scripts/toolkit.js'&gt;&lt;/script&gt;
-        </code>
-        <code class=block >
-            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.9.3/stylesheets/toolkit.css"/&gt;
-        </code>
-        <code class=block >
-            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.9.3/fonts/skycons.css"/&gt;
-        </code>
-    </div>
-    <a name="gettingStarted"></a>
-    <div class="sub-section">
-        <h3 class="wiki-h3">Getting Started</h3>
-<p >
-    Please add the following classes to the <code>html</code> tag:
-    <code>lt-ie10</code>, <code>lt-ie9</code> and <code>lt-ie8</code>
-</p>
-<p >
-    Please add the following into you <code>head</code> tag:
-    <!--[if lt IE 10]><script type="text/javascript">
-    document.createElement('header');
-    document.createElement('section');
-    document.createElement('footer');
-    document.createElement('article');
-    document.createElement('aside');
-    document.createElement('hgroup');
-    document.createElement('nav');
-    document.createElement('figure');
-    document.createElement('figcaption');
-</script><![endif]-->
-</p>
-
-    </div>
-    <a name="contributing"></a>
-    <div class="sub-section">
-        <h3 class="wiki-h3">Contributing</h3>
-<p >
-    The source code is available in a private repository on Github, along with instructions for building/running the project locally.
-</p>
-<dl class="clearfix wiki-dl">
-    <dt>Feature Requests</dt>
-    <dd>Please check <a href="https://github.com/skyglobal/web-toolkit/issues">here</a> to see if there is already a similar request. If not, create a New
-       Issue and flag it as an '<code>enhancement</code>'</dd>
-    <dt>Bug Reporting</dt>
-    <dd>Please check <a href="https://github.com/skyglobal/web-toolkit/issues">here</a> to see if there is already a similar request. If not, create a New
-    Issue and flag it as a '<code>bug</code>'</dd>
-</dl>
-    </div>
-    <a name="accessibility"></a>
-    <div class="sub-section">
-        <h3 class="wiki-h3">Accessibility</h3>
-<p >
-    'Tabbing 'will make the elements background blue and text and icons white.
-</p>
-<p >
-    For page text that is needed only for screen readers, add the class '<code>speak</code>'.
-</p>
-<p >
-    Don't forget to add about half a day to each client-side card to give you time to use VoiceOVer on your page, check colour contrast and 'tabbing'!
-</p>
-    </div>
-    <a name="codingPractices"></a>
-    <div class="sub-section">
-        <h3 class="wiki-h3">Coding Practice</h3>
-<p >
-   As a general rule we try to follow the following practices:
-</p>
-<dl class="clearfix wiki-dl">
-    <dt>CSS</dt><dd>Use hyphens '<code>-</code>' within all class, ID and name attribute. Never camelCase or underscore.</dd>
-    <dt>JS</dt><dd>Where possible, use '<code>camelCase</code>' for function/variable names.</dd>
-    <dt>file/Directory Names</dt><dd>Where possible, use '<code>camelCase</code>'.</dd>
-</dl>
-
-    </div>
-</section>
 
 <a name="base-styles"></a>
 <section class="wiki-section">
@@ -802,35 +713,35 @@
     <div class="demo">
 
         <h1 class="page-title">
-    Page Title (Sky Text Regular <span class="pink">52px</span>)
-    <br/><span class="leading">Line-height 56px</span>
+    Page Title (Sky Text Regular <span class="demo-pink">52px</span>)
+    <br/><span class="inactive">Line-height 56px</span>
 </h1>
-<h2 class="section-title">Section Title (Sky Text Regular <span class="pink">44px</span>)
-    <br/><span class="leading">Line-height 48px</span>
+<h2 class="section-title">Section Title (Sky Text Regular <span class="demo-pink">44px</span>)
+    <br/><span class="inactive">Line-height 48px</span>
 </h2>
-<h2 class="section-title smaller">Smaller Section Title (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">36px</span>)
-    <br/><span class="leading">Line-height 40px</span>
+<h2 class="section-title smaller">Smaller Section Title (Sky Text Regular/<span class="medium">Medium</span> <span class="demo-pink">36px</span>)
+    <br/><span class="inactive">Line-height 40px</span>
 </h2>
-<h3 class="pod-title">Pod Title (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">32px</span>)
-    <br/><span class="leading">Line-height 36px</span>
+<h3 class="pod-title">Pod Title (Sky Text Regular/<span class="medium">Medium</span> <span class="demo-pink">32px</span>)
+    <br/><span class="inactive">Line-height 36px</span>
 </h3>
-<h3 class="pod-title smaller">Smaller Pod Title (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">28px</span>)
-    <br/><span class="leading">Line-height 32px</span>
+<h3 class="pod-title smaller">Smaller Pod Title (Sky Text Regular/<span class="medium">Medium</span> <span class="demo-pink">28px</span>)
+    <br/><span class="inactive">Line-height 32px</span>
 </h3>
-<p class="intro">Intro Copy (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">24px</span>)
-    <br/><span class="leading">Line-height 28px</span>
+<p class="intro">Intro Copy (Sky Text Regular/<span class="medium">Medium</span> <span class="demo-pink">24px</span>)
+    <br/><span class="inactive">Line-height 28px</span>
 </p>
-<p class="intro smaller">Smaller Intro Copy (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">20px</span>)
-    <br/><span class="leading">Line-height 24px</span>
+<p class="intro smaller">Smaller Intro Copy (Sky Text Regular/<span class="medium">Medium</span> <span class="demo-pink">20px</span>)
+    <br/><span class="inactive">Line-height 24px</span>
 </p>
-<p>Body text (Sky Text Regular/<span class="medium">Medium</span> <span class="pink">16px</span>)
-    <br/><span class="leading">Line-height 20px</span>
+<p>Body text (Sky Text Regular/<span class="medium">Medium</span> <span class="demo-pink">16px</span>)
+    <br/><span class="inactive">Line-height 20px</span>
 </p>
 <small class="block">Smaller text (relative to container)</small>
 <span class="supportive block">Supportive text (fixed size)</span>
 <small class="block legal">Legal copy</small>
-<p class="instructions">Instructional copy (Luna <span class="pink">24px</span>)
-    <br/><span class="leading">Line-height 40px</span>
+<p class="instructions">Instructional copy (Luna <span class="demo-pink">24px</span>)
+    <br/><span class="inactive">Line-height 40px</span>
 </p>
 <p class="error">Error</p>
 <p class="secondary">Secondary</p>

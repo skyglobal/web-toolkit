@@ -113,4 +113,13 @@
   tr.del {
     background: #FDD;
   }
+  .styled {
+    padding: 8px;
+    border: 1px solid #CCC;
+
+    &.js {
+      display: none;
+    }
+  }
+
 }
