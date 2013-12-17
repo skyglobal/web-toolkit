@@ -53,11 +53,7 @@
     </p>
     <p class="developer-notes">
     To Create Fonts:
-    &bull; Open svg in inkscape, press ctrl+a to select all.
-    &bull; press ctrl+g to group the objects
-    &bull; choose Path - simplify
-    &bull; choose Path - union
-    &bull; save font into /lib/font-svgs folder
+    &bull; save font into /static/font-svgs folder
     &bull; Run `<code>grunt fonts</code>`
     &bull; copy the icons JS from the skycons.css over the icons var in skycons.js
     &bull; Run `<code>grunt</code>`
@@ -74,7 +70,7 @@
         </thead>
         <tbody>
         <% for (var glyphIdx = 0; glyphIdx < glyphs.length; glyphIdx++) { var glyph = glyphs[glyphIdx] %>
-        <tr ><td><%= baseClass %> <%= classPrefix %><%= glyph %></td><td class="icon"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td><td class="icon colour"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td><td class="icon hover-colour"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td><td class="icon"><a href="lib/font-svgs/<%= glyph %>.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        <tr ><td><%= baseClass %> <%= classPrefix %><%= glyph %></td><td class="icon"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td><td class="icon colour"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td><td class="icon hover-colour"><i class="<%= baseClass %> <%= classPrefix %><%= glyph %>" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/<%= glyph %>.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
         <% } %>
         </tbody>
     </table>
