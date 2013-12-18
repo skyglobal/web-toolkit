@@ -1,7 +1,7 @@
 define(['chai', 'smoax'], function(chai) {
 
     function uiSetup(headElement) {
-        var styles = ['vendor/mocha.css', 'main.css'];
+        var styles = ['../vendor/mocha.css', 'main.css'];
         var body = document.getElementsByTagName('body').item(0);
         var div = document.createElement('div');
         var linkElement, i;
