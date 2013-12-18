@@ -49,6 +49,8 @@ if (typeof window.define === "function" && window.define.amd) {
 if (typeof window.define === "function" && window.define.amd) {
 //    explicitly call all js files here to ensure all files are available
     define('toolkit',[
+        'utils/detect',
+        'utils/polyfill',
         'utils/skycons',
         'utils/hashmanager',
         'utils/popup',
