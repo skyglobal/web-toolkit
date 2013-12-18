@@ -1,0 +1,49 @@
+<!--[if LT IE 9]>
+<link rel='stylesheet' href='//assets.sky.com/css/desktop-12grid.css' media='screen' />
+<![endif]-->
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<link rel='stylesheet' href='//assets.sky.com/dist/latest/css/responsive-12.css' class='skycom-responsive-css' media='screen and (min-width: 768px)' />
+<!--[mobilestart]-->
+<link rel='stylesheet' href='//assets.sky.com/dist/latest/css/mobile-12.css' class='skycom-mobile-css' media='screen and (max-width: 767px)' />
+<!--[mobileend]-->
+
+<link href='//assets.sky.com/images/favicon.png' rel='icon' type='image/png'>
+<link href='//assets.sky.com/fonts/sky_regular.ttf' rel='prefetch'>
+<link href='//assets.sky.com/fonts/sky_regular.svg' rel='prefetch'>
+<link href='//assets.sky.com/fonts/sky_medium.ttf' rel='prefetch'>
+<link href='//assets.sky.com/fonts/sky_medium.svg' rel='prefetch'>
+<link href='//assets.sky.com/dist/latest/css/fonts.css' rel='stylesheet'>
+<link href='//assets.sky.com/dist/latest/fonts/skyicons.css' rel='stylesheet'>
+<!--[if IE 6]>
+<link href='//assets.sky.com/dist/latest/css/ie/ie6.css' rel='stylesheet'>
+<![endif]-->
+<!--[if IE 7]>
+<link href='//assets.sky.com/dist/latest/css/ie/ie7.css' rel='stylesheet'>
+<![endif]-->
+<!--[if LT IE 9]>
+<link href='//assets.sky.com/dist/latest/css/ie/ielt9.css' rel='stylesheet'>
+<![endif]-->
+<!--[if IE 9]>
+<link href='//assets.sky.com/dist/latest/css/ie/ie9.css' rel='stylesheet'>
+<![endif]-->
+<!--[if LT IE 10]>
+<link href='//assets.sky.com/dist/latest/css/ie/ielt10.css' rel='stylesheet'>
+<![endif]-->
+<script id='skycom-view-type'></script>
+<script id='skycom-orientation'></script>
+<script>
+  var globalskycom = globalskycom || {};
+  globalskycom.serverHost = 'assets.sky.com';
+</script>
+<script src='//assets.sky.com/dist/latest/js/masthead.js'></script>
+<script>
+  $(function() {
+    var i, len,
+      messages = globalskycom.emergencyMessages;
+    if(messages) {
+      for(i = 0, len = messages.length; i < len; i++) {
+        new globalskycom.message(messages[i]);
+      }
+    }
+  });
+</script>
