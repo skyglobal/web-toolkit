@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="../../static/lib/jquery-2.0.3.js"></script>
+    <script src="../vendor/mocha.js"></script>
+    <script src="../vendor/require.js"></script>
+    <script src="../config.js"></script>
+</head>
+<body>
+<!--PLACEHOLDER FOR MOCHA TEST RESULTS-->
+<div id="mocha"></div>
+
+<!--FIXTURE HTML FOR TESTS-->
+<div class="skycom-container main">
+    <section id="toggle-by-element" data-mode=view>
+        <a class="toggle-link" data-toggle='#toggle-by-element .edit-container' data-toggle-text="Show"
+           data-tracking-label="Show" data-toggle-state='shown'>Hide</a>
+
+        <div class="edit-container">
+            <h3>Some content</h3>
+        </div>
+    </section>
+
+    <section id="toggle-by-container" data-mode=view>
+        <a class="toggle-link" data-toggle='#container-to-toggle' data-toggle-text="Show" data-tracking-label="Show"
+           data-toggle-state='shown'><span>Hide</span><i class="icon"></i></a>
+
+        <div class="edit-container" id="container-to-toggle">
+            <h3>Some content</h3>
+        </div>
+    </section>
+
+
+    <section id="toggle-already-done" data-mode=view>
+        <a class="toggle-link" data-toggle='#container-to-toggle-done' data-toggle-text="Show"
+           data-tracking-label="Show" data-toggle-state='shown'>Hide</a>
+
+        <div class="edit-container" id="container-to-toggle-done" data-toggle-state="shown">
+            <h3>Some content</h3>
+        </div>
+    </section>
+</div>
+
+<!--TEST-->
+<script>
+    require(['specs/toggleSpec']);
+</script>
+
+</body>
+</html>

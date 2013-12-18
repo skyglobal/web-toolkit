@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="../../static/lib/jquery-2.0.3.js"></script>
+    <script src="../vendor/mocha.js"></script>
+    <script src="../vendor/require.js"></script>
+    <script src="../config.js" ></script>
+    <link href="../../dist/stylesheets/toolkit.css" rel="stylesheet"/>
+
+
+</head>
+<body class='grid-1140'>
+<!--PLACEHOLDER FOR MOCHA TEST RESULTS-->
+<div id="mocha"></div>
+<style>.to</style>
+<!--FIXTURE HTML FOR TESTS-->
+<div id="spec-markup">
+    <div class="skycom-container">
+        <div class="video" data-video-id="clip-00cwoia5">
+            <img src="../../wiki_images/bling-ring.jpg"
+                 alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
+            <a href="#" class="play-video"
+               data-tracking-context="David Beckham And Sky Team Up">
+                <i class="icon-video-play"></i>
+                <span class="speak">Play Trailer</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!--TEST-->
+<script>
+    require(['specs/videoSpec']);
+</script>
+
+</body>
+</html>
