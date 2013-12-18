@@ -1,9 +1,25 @@
-define(['chai', 'smoax'], function(chai) {
+requirejs.config({
+    baseUrl: '../../grunt/js/',
+    paths: {
+        mocha: '../../test/vendor/mocha',
+        chai: '../../test/vendor/chai',
+        smoax: '../../test/vendor/smoax',
+        runner: '../../test/runner',
+        specs: '../../test/specs/'
+    },
+    shim: {
+        smoax: {
+            exports: 'Smoax'
+        }
+    },
+    urlArgs: 'v=' + new Date().getTime()
+});
+
+define('setup',['chai', 'smoax'], function(chai, smoax) {
 
     function uiSetup(headElement) {
-        var styles = ['../vendor/mocha.css', 'main.css'];
+        var styles = ['../vendor/mocha.css'];
         var body = document.getElementsByTagName('body').item(0);
-        var div = document.createElement('div');
         var linkElement, i;
 
         for (i in styles) {
@@ -12,16 +28,6 @@ define(['chai', 'smoax'], function(chai) {
             linkElement.setAttribute('href', styles[i]);
             headElement.appendChild(linkElement);
         }
-
-        div.setAttribute('id', 'mocha');
-        body.appendChild(div);
-
-        $(body).prepend(
-            $('<a href="#" id="toggleView">Toggle view</div>').click(function(e) {
-                e.preventDefault();
-                $('#spec-markup').toggle();
-            })
-        );
     }
     //phantomjs doesnt support .bind, so need to polyfill
     if (!Function.prototype.bind) {
@@ -60,3 +66,6 @@ define(['chai', 'smoax'], function(chai) {
     mocha.setup('bdd');
     mocha.setup({ignoreLeaks: true}); //otherwise mocha complains about jquery and moment being globals
 });
+
+
+require(['setup']);

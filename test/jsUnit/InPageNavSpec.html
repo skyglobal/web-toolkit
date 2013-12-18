@@ -5,7 +5,7 @@
     <script src="../../static/lib/jquery-2.0.3.js"></script>
     <script src="../vendor/mocha.js"></script>
     <script src="../vendor/require.js"></script>
-    <script src="config.js" ></script>
+    <script src="../config.js" ></script>
     <!--<link rel="stylesheet" href="../../_site/dist/stylesheets/toolkit.css">-->
 </head>
 <body>
@@ -121,26 +121,7 @@
 </div>
 <!--TEST-->
 <script>
-    require(['utils/hashmanager', 'components/inPageNav', '../../test/jsUnit/setup'],function(hash, tabs){
-
-        $('.tabs-container').inPageNav();
-
-        describe('Test responsive tabs', function() {
-
-            it('check change tab removes class and adds classes for the correct controlID', function(){
-                expect($('#first-tab').hasClass('selected')).to.equal(true);
-                $('#first-tab').click();
-                expect($('#first-tab').hasClass('selected')).to.equal(true);
-                expect($('#second-tab').hasClass('selected')).to.equal(false);
-                $('#fourth-tab').click();
-                expect($('#first-tab').hasClass('selected')).to.equal(false);
-                expect($('#third-tab').hasClass('selected')).to.equal(false);
-                expect($('#fourth-tab').hasClass('selected')).to.equal(true);
-            });
-
-        });
-        mocha.run();
-    });
+    require(['specs/inPageNavSpec']);
 </script>
 
 </body>
