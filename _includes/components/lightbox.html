@@ -57,6 +57,12 @@
         }, onClose: function(){
             $('#lightbox-demo').trigger('my-lightbox-closed');
         }};
-        $('#lightbox-demo-link').lightbox(lightboxConfig);
+        if (window.require){
+            require(['toolkit'], function(toolkit){
+                $('#lightbox-demo-link').lightbox(lightboxConfig);
+            });
+        } else {
+            $('#lightbox-demo-link').lightbox(lightboxConfig);
+        }
     </script>
 </div>
