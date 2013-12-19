@@ -131,7 +131,7 @@
 
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
-				<h1 class="wiki-header">Sky Web Toolkit <small>v1.9.5 </small></h1>
+				<h1 class="wiki-header">Sky Web Toolkit <small>v2.0.0alpha.rc1 </small></h1>
 <div class="secondary">Last Updated: 19-12-2013</div>
 
 <a name="using-the-toolkit"></a>
@@ -139,9 +139,9 @@
     <h2>Using the Toolkit</h2>
     <div class="sub-section">
         <p class="developer-notes">
-            &lt;script src='//web-toolkit.global.sky.com/1.9.5/scripts/toolkit.js'&gt;&lt;/script&gt;
-            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.9.5/stylesheets/toolkit.css"/&gt;
-            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/1.9.5/fonts/skycons.css"/&gt;
+            &lt;script src='//web-toolkit.global.sky.com/2.0.0alpha.rc1/scripts/toolkit.js'&gt;&lt;/script&gt;
+            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/2.0.0alpha.rc1/stylesheets/toolkit.css"/&gt;
+            &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/2.0.0alpha.rc1/fonts/skycons.css"/&gt;
         </p>
     </div>
     <a name="getting-started"></a>
@@ -879,7 +879,7 @@ https://github.com/skyglobal/web-toolkit/
         for ie7 support execute <code>toolkit.skycons.init();</code> after the page has loaded.
     </p>
     <p class="developer-notes">
-    Dont forget to include <code>http://web-toolkit.global.sky.com/1.9.5/fonts/skycons.css</code>
+    Dont forget to include <code>http://web-toolkit.global.sky.com/2.0.0alpha.rc1/fonts/skycons.css</code>
     </p>
     <p class="developer-notes">
     Ensure <code>aria-hidden</code> is used on your <code>skycon</code> tags.
@@ -1339,7 +1339,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <div class="developer-notes">
         Add Class '<code>classic</code>'.
     </div>
-    <div class="demo" data-selector="#demo-classc-tabs">
+    <div class="demo" data-selector="#demo-classic-tabs">
         <section class="module clearfix tabs-container classic" data-function="tabs" id='demo-classic-tabs'>
 
             <h2 class="speak">This is a screenreader header for tabs</h2>
@@ -1440,7 +1440,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         </section>
     </div>
     <script>
-        $('#demo-classc-tabs').inPageNav();
+        $('#demo-classic-tabs').inPageNav();
     </script>
 </div>
     </div>
@@ -1505,7 +1505,13 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         }, onClose: function(){
             $('#lightbox-demo').trigger('my-lightbox-closed');
         }};
-        $('#lightbox-demo-link').lightbox(lightboxConfig);
+        if (window.require){
+            require(['toolkit'], function(toolkit){
+                $('#lightbox-demo-link').lightbox(lightboxConfig);
+            });
+        } else {
+            $('#lightbox-demo-link').lightbox(lightboxConfig);
+        }
     </script>
 </div>
 
@@ -1819,7 +1825,7 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         </div>
     </div>
     <script>
-        $('#demo-video .video-container').video({
+        $('#demo-video').video({
             token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85", //this token should be unique to your team
             displayAdverts:false ,
             onPlay: function() { //optional
@@ -1842,10 +1848,6 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <h4 class="medium">Popup</h4>
     <div class="developer-notes">
         Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
-    </div>
-    <div class="init-notes">
-        standard: <code>toolkit.modules.init();</code>
-        explicit: <code>toolkit.modules.init({share:true, popup: true, skycons: true });</code>
     </div>
     <div class="demo" data-selector="*">
         <div class="share-popup clearfix">
@@ -1876,10 +1878,6 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
     <h4 class="medium">Bar</h4>
     <div class="developer-notes">
         Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
-    </div>
-    <div class="init-notes">
-        standard: <code>toolkit.modules.init({popup: true});</code>
-        with ie7 support: <code>toolkit.modules.init({popup: true, skycons:true});</code>
     </div>
     <div class="demo" data-selector="*">
         <section id="share-this-page" class="share-bar">
