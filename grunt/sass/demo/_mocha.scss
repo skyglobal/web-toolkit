@@ -1,0 +1,17 @@
+
+.mocha-container {
+  margin:0!important;
+  h1, h2{
+    line-height: 1em;
+  }
+
+  #mocha-stats li {
+    margin-left: 15px;
+  }
+  .lightbox-content{
+    padding: 16px;
+  }
+}
+.sub-section  #mocha-stats {
+  position: inherit;
+}
