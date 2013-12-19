@@ -9,3 +9,7 @@
   height:0;
   overflow:hidden;
 }
+
+.transition{
+  @include transition('height 0.5s ease-in-out');
+}

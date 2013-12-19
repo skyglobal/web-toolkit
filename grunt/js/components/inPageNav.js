@@ -131,9 +131,9 @@ toolkit.inPageNav = (function(hash) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/inPageNav', ['utils/hashmanager'], function(hash) {
+    define('components/inPageNav', ['utils/hashManager'], function(hash) {
         return toolkit.inPageNav(hash);
     });
 } else {
-    toolkit.inPageNav = toolkit.inPageNav(toolkit.hashmanager);
+    toolkit.inPageNav = toolkit.inPageNav(toolkit.hashManager);
 }

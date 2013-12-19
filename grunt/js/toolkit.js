@@ -1,83 +1,36 @@
-if (typeof toolkit==='undefined') toolkit={};
-toolkit.main = (function() {
-
-    function bindEvents() {
-        var addWindowLoadClass = function() { $(document.body).addClass('window-loaded');},
-            windowLoadTimeout = setTimeout(addWindowLoadClass, 5000);
-
-        $(window).load(function() {
-            clearTimeout(windowLoadTimeout);
-            addWindowLoadClass();
-        });
-    }
-
-    bindEvents();
-
-}());
-
-toolkit.modules = (function(){
-
-    var init =function(options) {
-        var module;
-        var modulesToInitialize = $.extend({
-            skycons : false,
-            share : false,
-            popup : false,
-            inPageNav : false,
-            accordion : false,
-            lightbox : false,
-            datePicker : false
-        }, options);
-        for (module in modulesToInitialize) {
-            if ((modulesToInitialize[module] || !options ) && toolkit[module] && toolkit[module].init) {
-                toolkit[module].init();
-            }
-        }
-    };
-
-    return {
-        init: init
-    };
-})();
-
-if (typeof window.define === "function" && window.define.amd) {
-    define('modules', [], function() {
-        return toolkit.modules;
-    });
-}
-
 if (typeof window.define === "function" && window.define.amd) {
 //    explicitly call all js files here to ensure all files are available
     define('toolkit',[
-        'utils/detect',
         'utils/polyfill',
+        'utils/detect',
         'utils/skycons',
-        'utils/hashmanager',
+        'utils/hashManager',
         'utils/popup',
         'utils/toggle',
         'utils/diff',
         'utils/focus',
         'utils/validation',
-        'modules',
         'components/inPageNav',
         'components/accordion',
         'components/datePicker',
         'components/lightbox',
         'components/share',
         'components/video',
-        'components/carousel'], function(skycons, hashmanager, popup,toggle, diff, focus, modules, inPageNav, accordion, datePicker, validation, lightbox, share, video, carousel){
+        'components/carousel'], function(polyfill, detect, skycons, hashManager, popup,toggle, diff, focus, validation, inPageNav, accordion, datePicker, lightbox, share, video, carousel){
 
         return {
-            modules: modules,
+            polyfill: polyfill,
+            detect: detect,
             skycons: skycons,
-            hashmanager: hashmanager,
+            hashManager: hashManager,
             popup: popup,
+            toggle: toggle,
             diff: diff,
             focus: focus,
+            validation: validation,
             inPageNav: inPageNav,
             accordion: accordion,
             datePicker: datePicker,
-            validation: validation,
             lightbox: lightbox,
             share: share,
             video: video,
