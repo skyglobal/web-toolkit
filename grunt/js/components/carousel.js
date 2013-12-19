@@ -254,18 +254,16 @@ toolkit.carousel = (function(window, $, video) {
     // jquerify
     $.fn.skycom_carousel = function(params) {
         var options = $.extend(true, {
-            carousel: {
-                actions: [
-                    { id: 'play', label: 'Play Carousel', icon: 'carousel-play' },
-                    { id: 'pause', label: 'Pause Carousel', icon: 'carousel-pause' },
-                    { id: 'previous', label: 'Previous', icon: 'chevron-left',speak:true },
-                    { id: 'next', label: 'Next', icon: 'chevron',speak:true }
-                ],
-                autoplay: true,
-                startSlideIndex: 0,
-                onPlayDelay: 500,
-                interval: 6000
-            }
+            actions: [
+                { id: 'play', label: 'Play Carousel', icon: 'carousel-play' },
+                { id: 'pause', label: 'Pause Carousel', icon: 'carousel-pause' },
+                { id: 'previous', label: 'Previous', icon: 'chevron-left',speak:true },
+                { id: 'next', label: 'Next', icon: 'chevron',speak:true }
+            ],
+            autoplay: true,
+            startSlideIndex: 0,
+            onPlayDelay: 500,
+            interval: 6000
         }, params);
 
         // generating default markup
@@ -332,7 +330,7 @@ toolkit.carousel = (function(window, $, video) {
 
         return this.each(function() {
             var $this = $(this);
-            var carousel = new Carousel($this, options.carousel);
+            var carousel = new Carousel($this, options);
             var createMarkup = function(carousel) {
                 markup.indicators($this, {
                     count: carousel.slideCount,
@@ -343,7 +341,7 @@ toolkit.carousel = (function(window, $, video) {
                 .terms($this)
                 .actions($this, {
                     count: carousel.slideCount,
-                    actions: options.carousel.actions,
+                    actions: options.actions,
                     onclick: function(action) {
                         carousel[action]();
                     }
@@ -390,8 +388,8 @@ toolkit.carousel = (function(window, $, video) {
                 carousel.$viewport.toggleClass('showing-tandcs');
             });
             if(carousel.slideCount > 1) {
-                carousel[options.carousel.autoplay === true ? 'play' : 'pause'](false, options.carousel.interval);
-                carousel.goto(options.carousel.startSlideIndex, false);
+                carousel[options.autoplay === true ? 'play' : 'pause'](false, options.interval);
+                carousel.goto(options.startSlideIndex, false);
                 carousel.showTermsLink(0);
                 $this.trigger('change');
             } else {

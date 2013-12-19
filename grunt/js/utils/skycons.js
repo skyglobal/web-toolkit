@@ -102,6 +102,8 @@ toolkit.skycons = (function() {
         }
     }
 
+    $(document).ready(init);
+
     return {
         add: addSkycon,
         init: init

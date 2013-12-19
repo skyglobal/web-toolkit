@@ -5,8 +5,8 @@
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 	<head>
         <meta charset="UTF-8"/>
-		<!--[if lt IE 9]> <script src="//assets.sky.com/js/lib/jquery-1.10.2.js" ></script> <![endif]-->
-        <!--[if gte IE 9]><!--> <script src="//assets.sky.com/js/lib/jquery.2.0.3.min.js" ></script> <!--<![endif]-->
+		<!--[if lt IE 9]> <script src="http://assets.sky.com/js/lib/jquery-1.10.2.js" ></script> <![endif]-->
+        <!--[if gte IE 9]><!--> <script src="http://assets.sky.com/js/lib/jquery.2.0.3.min.js" ></script> <!--<![endif]-->
         <script src="test/vendor/jquery.scrollspy.js" ></script>
 
 		{% include skycomResources.html %}
@@ -29,12 +29,6 @@
 
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target=".nav-container">
-        <script>
-            window.demoCode = {};
-            window.saveHTMLForDemo = function(selector){
-                demoCode[selector] = $(selector)[0].outerHTML;
-            };
-        </script>
         <script src="dist/scripts/toolkit.js"></script>
 
         {% include menu.html %}
@@ -44,9 +38,14 @@
 				{{ content }}	
 			</div>
 		</div>
-	    <script src="test/vendor/require.js" data-main='dist/scripts/demo'></script>
+
+        {% include footer.html %}
+
+        <script src="dist/scripts/demo.js"></script>
 
 
-        <div></div>
+        <script src="test/vendor/mocha.js"></script>
+        <script src="test/vendor/require.js"></script>
+        <script src="test/config.js" ></script>
 	</body>
 </html>

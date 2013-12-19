@@ -1,6 +1,6 @@
 function inPageNavSpec(hash, tabs){
 
-    require(['utils/hashmanager', 'components/inPageNav'],function(hash, tabs){
+    require(['utils/hashManager', 'components/inPageNav'],function(hash, tabs){
 
         $('.tabs-container').inPageNav();
 
@@ -24,7 +24,7 @@ function inPageNavSpec(hash, tabs){
 }
 
 if (window.define) {
-    define('specs/inPageNavSpec', ['utils/hashmanager', 'components/inPageNav'], function (hash, tabs) {
+    define('specs/inPageNavSpec', ['utils/hashManager', 'components/inPageNav'], function (hash, tabs) {
         return inPageNavSpec(hash, tabs);
     })
 }

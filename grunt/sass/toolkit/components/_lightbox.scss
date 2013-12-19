@@ -6,6 +6,9 @@
   top: 		-200px;
 }
 
+.lightbox-content {
+  display:			none;
+}
 .lightbox {
 	display:			none;
 	width:				100%;
@@ -25,6 +28,9 @@
 		display:			block;
 	    -webkit-animation: lightbox-fade-in 0.5s;
 	  	animation: lightbox-fade-in 0.5s;
+      .lightbox-content {
+        display:			block;
+      }
 	}
 
     &.lightbox-closing {

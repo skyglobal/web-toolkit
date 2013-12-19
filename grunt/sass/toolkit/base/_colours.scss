@@ -12,7 +12,7 @@ body {
     $this-color: nth($skyconColours, $i);
 
     .hover-colour:hover .skycon-#{nth($skycons, $i)},
-    .colour .skycon-#{nth($skycons, $i)} {
+    .colour.skycon-#{nth($skycons, $i)} {
       color: $this-color;
     }
   }

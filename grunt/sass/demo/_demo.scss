@@ -1,0 +1,99 @@
+.wiki-header{
+  margin-bottom: 0;
+}
+.wiki-section {
+  border-top: 2px solid #333;
+  margin-bottom:25px;
+}
+.wiki-h3{
+  border-bottom: 1px solid $key-line;
+}
+.run-test{
+  margin-left: 6px;
+  float: right;
+  position: relative;
+  top: -2px;
+  i{
+    font-size: 20px;
+  }
+  &.failed{
+    color:$error;
+  }
+  &.success{
+    color:$success-icon;
+  }
+  &:hover i{
+    color:$link;
+  }
+}
+.result-summary{
+  border: 1px solid $success-icon;
+  color: $success-icon;
+}
+.dev-button {
+  cursor: pointer;
+  font-size: 12px;
+  background: #eee;
+  border-radius: 3px;
+  line-height: 20px;
+  display: inline-block;
+  padding: 0 4px;
+  position: relative;
+  top: -5px;
+  margin-left: 6px;
+
+  &.error {
+    color: $error;
+    border: 1px solid $error;
+  }
+
+  i{
+    font-size: 14px;
+  }
+}
+.code-download{
+  top: 6px;
+  float: right;
+  font-family: SkyTextRegular;
+  font-size: 12px;
+  color: #657B83;
+  border:1px solid #657B83;
+  background: #ECFAFF;
+}
+.secondary .code-download{
+  top:-5px;
+}
+
+.block {
+  display: block;
+}
+
+a[name]:not([href]){
+  padding-top: 1em;
+  display: block;
+}
+body a[name=base-styles]{
+  padding-top: 6px!important;
+}
+
+.wiki-header {
+  small {
+    color: #999;
+  }
+}
+
+.wiki-dl dt{
+  font-family:SkyTextMedium;
+  float: left;
+  min-width: 150px;
+}
+
+.init-notes,
+.dependencies,
+.developer-notes{
+  display: none;
+}
+
+h2:not(.section-title){
+  margin: 16px 0 0 0;
+}
