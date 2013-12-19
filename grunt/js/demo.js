@@ -55,7 +55,6 @@ var demo = (function(logger) {
     }
 
     logger();
-    window.toolkit.modules.init();
     bindEvents();
     sortSkyconsTable();
 });

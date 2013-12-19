@@ -5,8 +5,8 @@
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 	<head>
         <meta charset="UTF-8"/>
-		<!--[if lt IE 9]> <script src="//assets.sky.com/js/lib/jquery-1.10.2.js" ></script> <![endif]-->
-        <!--[if gte IE 9]><!--> <script src="//assets.sky.com/js/lib/jquery.2.0.3.min.js" ></script> <!--<![endif]-->
+		<!--[if lt IE 9]> <script src="http://assets.sky.com/js/lib/jquery-1.10.2.js" ></script> <![endif]-->
+        <!--[if gte IE 9]><!--> <script src="http://assets.sky.com/js/lib/jquery.2.0.3.min.js" ></script> <!--<![endif]-->
         <script src="test/vendor/jquery.scrollspy.js" ></script>
 
 		<!--[if LT IE 9]>
@@ -77,17 +77,11 @@
 
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target=".nav-container">
-        <script>
-            window.demoCode = {};
-            window.saveHTMLForDemo = function(selector){
-                demoCode[selector] = $(selector)[0].outerHTML;
-            };
-        </script>
         <script src="dist/scripts/toolkit.js"></script>
 
-        <div class="nav-container">
+        <div class="nav-container primary-menu">
     <div class="skycom-container nav">
-        <ul class="alpha skycom-12 primary-menu">
+        <ul class="alpha skycom-12 main-menu">
             <li class="dropdown">
                 <a href="index.html#using-the-toolkit">Using the Toolkit</a>
                 <ul class=dropdown-menu>
@@ -138,7 +132,7 @@
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
 				<h1 class="wiki-header">Sky Web Toolkit <small>v1.9.5</small></h1>
-<div class="secondary">Last Updated: 18-12-2013</div>
+<div class="secondary">Last Updated: 19-12-2013</div>
 
 <a name="using-me"></a>
 <section class="wiki-section" id=changes-page>
@@ -176,9 +170,14 @@
 </script>	
 			</div>
 		</div>
-	    <script src="test/vendor/require.js" data-main='dist/scripts/demo'></script>
+
+        Included file 'footer.html' not found in _includes directory
+
+        <script src="dist/scripts/demo.js"></script>
 
 
-        <div></div>
+        <script src="test/vendor/mocha.js"></script>
+        <script src="test/vendor/require.js"></script>
+        <script src="test/config.js" ></script>
 	</body>
 </html>
