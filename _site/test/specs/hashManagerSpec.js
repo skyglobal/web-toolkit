@@ -6,6 +6,12 @@ function hashManagerSpec(hash) {
         hash = toolkit.hashManager;
     }
 
+
+    function myHashCallback() {
+        $('#currentHash').text(location.hash);
+    }
+    hash.register(['hash', 'anotherHash'], myHashCallback);
+
     describe(describeSpec, function () {
 
         it('cleans up any occurence of the # character in the hash', function () {
