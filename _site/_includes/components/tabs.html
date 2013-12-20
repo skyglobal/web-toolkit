@@ -15,7 +15,10 @@
             <h2 class="speak">This is a screenreader header for tabs</h2>
 
             <ul class="tabs clearfix" role="tablist">
-                <li id="first-classic-tab" aria-controls="first-classic" aria-label="first" role="tab" class="tab selected">
+                <li id="very-long-classic-tab" aria-controls="very-long-classic" aria-label="ver-long" role="tab" class="tab selected">
+                    <a href="#!very-long-classic" class="skycom-ellipsis internal-link"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</span></a>
+                </li>
+                <li id="first-classic-tab" aria-controls="first-classic" aria-label="first" role="tab" class="tab">
                     <a href="#!first-classic" class="skycom-ellipsis internal-link"><span>First</span></a>
                 </li>
                 <li id="second-classic-tab" aria-controls="second-classic" aria-label="second" role="tab" class="tab" >
@@ -44,7 +47,16 @@
                 </div>
             </ul>
 
-            <div id="first-classic" class="tabpanel selected" aria-labeledby="first-classic-tab" role="tabpanel">
+            <div id="very-long-classic" class="tabpanel selected" aria-labeledby="very-long-classic-tab" role="tabpanel">
+                <section class="tabcontents clearfix">
+                    <h2 class="speak">Screen reader header for First tab contents</h2>
+                    <div class="skycom-12 alpha">
+                        <img src="wiki_images/beckham.jpg" alt="beckham looking for help">
+                    </div>
+                </section>
+            </div>
+
+            <div id="first-classic" class="tabpanel" aria-labeledby="first-classic-tab" role="tabpanel">
                 <section class="tabcontents clearfix">
                     <h2 class="speak">Screen reader header for First tab contents</h2>
                     <div class="skycom-12 alpha">

@@ -163,8 +163,11 @@
       a {
         text-decoration: none;
         cursor: default;
-        height: 44px;
-        line-height: 44px;
+
+        height: auto;
+        white-space: normal;
+        line-height: 28px;
+        padding: 12px 40px 4px;
       }
     }
   }
