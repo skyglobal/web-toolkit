@@ -72,8 +72,8 @@ module.exports = function(grunt) {
         mocha: {
             all: {
                 src: (function() {
-                    var pattern = grunt.option('pattern') || '[A-Z]*';
-                    return ['test/jsUnit/A' + pattern + '.html'];
+                    var pattern = grunt.option('pattern') || '[A-D]*';
+                    return ['test/jsUnit/' + pattern + '.html'];
                 }()),
                 options: {
                     run: false,
