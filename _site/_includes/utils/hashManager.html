@@ -1,0 +1,37 @@
+<h3 class="wiki-h3">
+    <a href="#!lightbox/code-hashManager" class="dev-button code-download">code</a>
+    <a href="#test/hashManagerSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+    Hash Manager
+</h3>
+
+<p class="design-notes">
+</p>
+<p class="developer-notes">
+    The Hash Manager util to bind function calls to a specific URL hash without having to bind any events.
+</p>
+
+<div class="example">
+    <p class="developer-notes">
+    </p>
+    <div class="demo">
+
+        <a href='#hash' id='hash-link'>Change Hash</a> |
+        <a href='#anotherHash' id='another-hash-link'>Change another Hash</a> |
+        <a href='#unregisteredHash' id='unregistered-hash-link'>unregistered Hash</a> |
+        <span id="currentHash"></span>
+    </div>
+    <script>
+
+        function myHashCallback() {
+            $('#currentHash').text(location.hash);
+        }
+
+        if (window.require){
+            require(['toolkit'], function(toolkit){
+                toolkit.hashManager.register(['hash', 'anotherHash'], myHashCallback);
+            });
+        } else {
+            toolkit.hashManager.register(['hash', 'anotherHash'], myHashCallback);
+        }
+    </script>
+</div>
