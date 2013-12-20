@@ -73,7 +73,7 @@ module.exports = function(grunt) {
             all: {
                 src: (function() {
                     var pattern = grunt.option('pattern') || '[A-Z]*';
-                    return ['test/jsUnit/' + pattern + '.html'];
+                    return ['test/jsUnit/A' + pattern + '.html'];
                 }()),
                 options: {
                     run: false,
