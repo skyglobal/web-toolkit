@@ -1408,12 +1408,12 @@ if (window.require){
     </div>
     <script>
         if (window.require){
-    require(['toolkit'], function(){
-        $('.accordion').accordion();
-    });
-} else {
+            require(['toolkit'], function(){
     $('.accordion').accordion();
-}
+});
+        } else {
+                $('.accordion').accordion();
+        }
     </script>
 </div>
     </div>
@@ -1529,18 +1529,10 @@ if (window.require){
 </section>
     </div>
     <script>
-        var defaultCarouselConfig =  {
+        $('#hero').skycom_carousel({
     autoplay: true,
     videoAds: false
-};
-
-if (window.require){
-    require(['toolkit'], function(){
-        $('#hero').skycom_carousel(defaultCarouselConfig);
-    });
-} else {
-    $('#hero').skycom_carousel(defaultCarouselConfig);
-}
+});
     </script>
 
 </div>
@@ -1644,18 +1636,10 @@ if (window.require){
 </section>
     </div>
     <script>
-        var skinnyCarouselConfig =  {
+        $('#hero-skinny').skycom_carousel({
     autoplay: true,
     videoAds: false
-};
-
-if (window.require){
-    require(['toolkit'], function(){
-        $('#hero-skinny').skycom_carousel(skinnyCarouselConfig);
-    });
-} else {
-    $('#hero-skinny').skycom_carousel(skinnyCarouselConfig);
-}
+});
     </script>
 
 
@@ -1708,17 +1692,10 @@ if (window.require){
 </section>
     </div>
     <script>
-        var singleSlideCarouselConfig =  {
+        $('#empty-hero').skycom_carousel({
     autoplay: true,
     videoAds: false
-};
-if (window.require){
-    require(['toolkit'], function(){
-        $('#empty-hero').skycom_carousel(singleSlideCarouselConfig);
-    });
-} else {
-    $('#empty-hero').skycom_carousel(singleSlideCarouselConfig);
-}
+});
     </script>
 
 </div>

@@ -53,6 +53,7 @@ toolkit.displayCode = (function(lightbox){
             this.getFile(this.dir, this.fileNames[i], 'html');
             this.getFile(this.dir, this.fileNames[i], 'notes.html', true);
             this.getFile(this.dir, this.fileNames[i], 'js');
+            this.getFile(this.dir, this.fileNames[i], 'require.js');
         }
     };
 
@@ -106,6 +107,7 @@ toolkit.displayCode = (function(lightbox){
         var $tab = $('<div class="tab hidden" id="' + tabName + '-tab"></div>');
         $tab.append(this.createTable(featureFile, 'notes.html', styled))
             .append(this.createTable(featureFile, 'html'))
+            .append(this.createTable(featureFile, 'require.js'))
             .append(this.createTable(featureFile, 'js'));
 
         this.$container.append($tab);

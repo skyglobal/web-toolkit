@@ -11,6 +11,10 @@
         {% include components/accordion/default.html %}
     </div>
     <script>
-        {% include components/accordion/default.js %}
+        if (window.require){
+            {% include components/accordion/default.require.js %}
+        } else {
+            {% include components/accordion/default.js %}
+        }
     </script>
 </div>
