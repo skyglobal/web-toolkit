@@ -27,10 +27,14 @@
 }
 
 .tab-list li{
+  margin: 12px 0;
   float: left;
   padding: 4px 8px;
   cursor: pointer;
   color: $link;
+  &:first-child{
+    padding-left: 0;
+  }
   &:hover{
     text-decoration: underline;
   }

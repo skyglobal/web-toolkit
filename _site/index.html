@@ -147,56 +147,6 @@
         <h3 class="wiki-h3">
     <a href="#!lightbox/code-grid" class="dev-button code-download">code</a>
     12 Column Grid</h3>
-<div class="developer-notes">
-    <p >
-        Note how classes now never have underscores '<code>_</code>' but only hyphens '<code>-</code>' instead.
-    </p>
-    <p>
-        To get any of the following classses to work on <code>mobile</code> only, add <code>-mobile</code> to the end of the class name.
-    </p>
-    <p>
-        The grid is wrapped with '<code>skycom-container</code>' which should be used to contain all your contents, or to contain modules individually .
-    </p>
-    <p>
-        The container is made up of up 12 columns '<code>skycom-1</code>' through to '<code>skycom-12</code>'.  By default these float on the left.
-    </p>
-    <p>
-        To float a column on the right, add the class '<code>right</code>'.
-    </p>
-    <p>
-        If too many floats have caused you container to have zero height, add the class '<code>clearfix</code>'.
-    </p>
-    <p>
-        For older browsers, the first column in a row should also have the class '<code>alpha</code>'.
-    </p>
-    <p>
-        To 'stick' headers to the top of the page when scrolling, use the class '<code>sticky</code>'.
-    </p>
-    <p>
-        When links don't go to a new page, i.e. changing tabs please, use the class '<code>internal-link</code>'.
-    </p>
-    <p>
-        To make some text for screen readers only, use the class '<code>speak</code>'.
-    </p>
-    <p>
-        To hide an element, use the class '<code>hidden</code>'.
-    </p>
-    <p>
-        To show an element, use the class '<code>visible</code>'.
-    </p>
-    <p>
-        If orientation is important for you there are the classes '<code>landscape</code>' and '<code>portrait</code>'.
-    </p>
-    <p>
-        If view type is important for you there are the classes '<code>desktop-view</code>' and '<code>mobile-view</code>'.
-    </p>
-    <p>
-        If 'touch ability' is important for you there are the classes '<code>touch-device</code>' and '<code>no-touch</code>'.
-    </p>
-    <p>
-        When the text shouldn't touch the edges of the columns (i.e. when they have a distinct background colour) use '<code>cushioned</code>' class for padding.
-    </p>
-</div>
 <div class="example">
     <h4>Grid (974)</h4>
     <p class="developer-notes">
@@ -272,9 +222,6 @@
 
 <div class="example">
     <h4>Wide Grid (1140)</h4>
-    <p class="developer-notes">
-        Add class <code>grid-1140</code> to the parent of your containers i.e. to the <code>body</code>.
-    </p>
     <div class="demo">
 
         <div class="example clearfix demo" id="grid12-actual">
@@ -346,12 +293,6 @@
 
 <div class="example">
     <h4>lightbox Grid</h4>
-    <p class="developer-notes">
-        the '<code>skycom-offset1</code>' class is used to centre the lightbox.
-    </p>
-    <p class="developer-notes">
-        We also use another '<code>skycom-container</code>' to create a new 12 column grid.
-    </p>
     <div class="grid-example demo">
 
         <div class="example skycom-container clearfix" id="grid12-lightbox">
@@ -501,9 +442,6 @@
 </h3>
 <p class=design-notes>
     These colours are for designer reference only. For accessibility reasons, please also note the colour of the text being used.
-</p>
-<p class=developer-notes>
-    The classes used here, starting with 'demo-' are NOT part of the toolkit.
 </p>
 <div class="clearfix example">
     <h4>Typography</h4>
@@ -703,10 +641,6 @@
 </p>
 
 <div class="example">
-    <p class="developer-notes">
-        All these headers work with or without the corresponding <code>xxx-title</code> classes.
-        You can optionally add a <code>smaller</code> class to the headers too.
-    </p>
     <div class="demo">
 
         <h1 class="page-title">
@@ -807,28 +741,6 @@
     <h4>Skycons</h4>
     <p class="designer-notes">
         These icons will look good on Retina devices and can be any size or (single) colour.
-    </p>
-    <p class="developer-notes">
-        for ie7 support execute <code>toolkit.skycons.init();</code> after the page has loaded.
-    </p>
-    <p class="developer-notes">
-        Dont forget to include <code>http://web-toolkit.global.sky.com/1.9.4/fonts/skycons.css</code>
-    </p>
-    <p class="developer-notes">
-        Ensure <code>aria-hidden</code> is used on your <code>skycon</code> tags.
-    </p>
-    <p class="developer-notes">
-        To make the icon have a colour, add the class <code>colour</code> to the parent.
-    </p>
-    <p class="developer-notes">
-        To make the icon have a colour on hover, add the class <code>colour-hover</code> to the parent.
-    </p>
-    <p class="developer-notes">
-        To Create Fonts:
-        &bull; save font into <code>static/font-svgs</code> folder
-        &bull; Run `<code>grunt fonts</code>`
-        &bull; copy the icons JS from the skycons.css over the icons var in skycons.js
-        &bull; Run `<code>grunt</code>`
     </p>
     <div class="demo">
 
@@ -948,16 +860,10 @@
         <h3 class="wiki-h3">
     <a href="#!lightbox/code-buttons" class="dev-button code-download">code</a>
     Buttons </h3>
-<p  class="developer-notes">
-    All buttons need the class <code>btn</code>.
-Submit buttons should be coded as <code>button type=submit</code> (not <code>input type=submit</code>)
-</p>
 
 <div class="example">
     <h4>Primary </h4>
-    <p class="developer-notes">
-        Add the class <code>primary</code>.
-    </p>
+
     <div class="demo">
 
         <button class="btn primary">Primary Button</button>
@@ -970,9 +876,6 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
 
 <div class="example">
     <h4>Secondary</h4>
-    <p class="developer-notes">
-        Add the class <code>secondary</code>
-    </p>
     <div class="demo">
 
         <button href="#" class="btn secondary">Secondary Button</button>
@@ -988,9 +891,6 @@ Submit buttons should be coded as <code>button type=submit</code> (not <code>inp
         <h3 class="wiki-h3">
     <a href="#!lightbox/code-spinner" class="dev-button code-download">code</a>
     Spinner</h3>
-<p  class="developer-notes">
-    Add the class <code>spinner-blue</code> to get an ajax-style spinner icon.
-</p>
 
 <div class="example">
     <div class="demo">
@@ -2323,7 +2223,7 @@ if (window.require){
                 <a target="_github" href="https://github.com/skyglobal/web-toolkit/">Toolkit Github</a>
             </li>
             <li class="right secondary" >
-                Last Updated: 19-12-2013
+                Last Updated: 23-12-2013
             </li>
         </ul>
     </div>

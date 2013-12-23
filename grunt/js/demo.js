@@ -1,4 +1,4 @@
-var demo = (function(logger, hash, lightbox, displayCode) {
+var demo = (function(hash, lightbox, displayCode) {
     function bindEvents() {
         $(document).on('click','.toggler', toggle);
         $(document).on('click','.code-download', showCode);
@@ -172,19 +172,17 @@ var demo = (function(logger, hash, lightbox, displayCode) {
         hash.register(hashes, runTest);
     }
 
-    logger();
     bindEvents();
     sortSkyconsTable();
     registerTests();
 });
 
 if (typeof window.define === "function" && window.define.amd){
-    define('demo', ['utils/developer-notes-logger',
-                    'utils/hashManager',
+    define('demo', ['utils/hashManager',
                     'components/lightbox',
-                    'utils/displayCode'], function(developerNotesLogger, hash,lightbox, displayCode) {
-            return demo(developerNotesLogger, hash, lightbox, displayCode);
+                    'utils/displayCode'], function(hash,lightbox, displayCode) {
+            return demo(hash, lightbox, displayCode);
  });
 } else {
-    demo(developerNotesLogger, toolkit.hashManager, toolkit.lightbox, toolkit.displayCode);
+    demo(toolkit.hashManager, toolkit.lightbox, toolkit.displayCode);
 }
