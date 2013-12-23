@@ -16,7 +16,11 @@
         {% include components/carousel/default.html %}
     </div>
     <script>
-        {% include components/carousel/default.js %}
+        if (window.require){
+            {% include components/carousel/default.require.js %}
+        } else {
+            {% include components/carousel/default.js %}
+        }
     </script>
 
 </div>
@@ -30,7 +34,11 @@
         {% include components/carousel/skinny.html %}
     </div>
     <script>
-        {% include components/carousel/skinny.js %}
+        if (window.require){
+            {% include components/carousel/skinny.require.js %}
+        } else {
+            {% include components/carousel/skinny.js %}
+        }
     </script>
 
 
@@ -46,7 +54,11 @@
         {% include components/carousel/singleSlide.html %}
     </div>
     <script>
-        {% include components/carousel/singleSlide.js %}
+        if (window.require){
+            {% include components/carousel/singleSlide.require.js %}
+        } else {
+            {% include components/carousel/singleSlide.js %}
+        }
     </script>
 
 </div>

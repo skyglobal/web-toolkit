@@ -10,7 +10,11 @@
         {% include utils/detect/view.html %}
     </div>
     <script>
-        {% include utils/detect/view.js %}
+        if (window.require){
+            {% include components/detect/view.require.js %}
+        } else {
+            {% include components/detect/view.js %}
+        }
     </script>
 </div>
 
@@ -20,7 +24,11 @@
         {% include utils/detect/touch.html %}
     </div>
     <script>
-        {% include utils/detect/touch.js %}
+        if (window.require){
+            {% include components/detect/touch.require.js %}
+        } else {
+            {% include components/detect/touch.js %}
+        }
     </script>
 </div>
 
@@ -30,6 +38,10 @@
         {% include utils/detect/orientation.html %}
     </div>
     <script>
-        {% include utils/detect/orientation.js %}
+        if (window.require){
+            {% include components/detect/orientation.require.js %}
+        } else {
+            {% include components/detect/orientation.js %}
+        }
     </script>
 </div>

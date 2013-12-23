@@ -11,7 +11,11 @@
         {% include utils/toggle/element.html %}
     </div>
     <script>
-        {% include utils/toggle/element.js %}
+        if (window.require){
+            {% include components/toggle/element.require.js %}
+        } else {
+            {% include components/toggle/element.js %}
+        }
     </script>
 </div>
 
@@ -21,7 +25,11 @@
         {% include utils/toggle/container.html %}
     </div>
     <script>
-        {% include utils/toggle/container.js %}
+        if (window.require){
+            {% include components/toggle/container.require.js %}
+        } else {
+            {% include components/toggle/container.js %}
+        }
     </script>
 </div>
 
@@ -31,6 +39,10 @@
         {% include utils/toggle/complete.html %}
     </div>
     <script>
-        {% include utils/toggle/complete.js %}
+        if (window.require){
+            {% include components/toggle/complete.require.js %}
+        } else {
+            {% include components/toggle/complete.js %}
+        }
     </script>
 </div>
