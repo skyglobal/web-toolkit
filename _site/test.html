@@ -1887,9 +1887,15 @@ $('.sky-form').validation();
     </div>
     <script>
         if (window.require){
-            Included file 'components/toggle/element.require.js' not found in _includes directory
+            require(['toolkit'], function(toolkit){
+    $('#toggle-by-element .toggle-link').on('click', function() {
+        toolkit.toggle({$elClicked:$(this)});
+    });
+});
         } else {
-            Included file 'components/toggle/element.js' not found in _includes directory
+            $('#toggle-by-element .toggle-link').on('click', function() {
+    toolkit.toggle({$elClicked:$(this)});
+});
         }
     </script>
 </div>
@@ -1909,9 +1915,23 @@ $('.sky-form').validation();
     </div>
     <script>
         if (window.require){
-            Included file 'components/toggle/container.require.js' not found in _includes directory
+            require(['toolkit'], function(toolkit){
+    $('#toggle-by-container .toggle-link').on('click', function() {
+        toolkit.toggle({$elClicked:$(this)});
+    });
+});
         } else {
-            Included file 'components/toggle/container.js' not found in _includes directory
+            if (window.require){
+    require(['toolkit'], function(toolkit){
+        $('#toggle-by-container .toggle-link').on('click', function() {
+            toolkit.toggle({$elClicked:$(this)});
+        });
+    });
+} else {
+    $('#toggle-by-container .toggle-link').on('click', function() {
+        toolkit.toggle({$elClicked:$(this)});
+    });
+}
         }
     </script>
 </div>
@@ -1931,9 +1951,15 @@ $('.sky-form').validation();
     </div>
     <script>
         if (window.require){
-            Included file 'components/toggle/complete.require.js' not found in _includes directory
+            require(['toolkit'], function(toolkit){
+    $('#toggle-already-done .toggle-link').on('click', function() {
+        toolkit.toggle({$elClicked:$(this)});
+    });
+});
         } else {
-            Included file 'components/toggle/complete.js' not found in _includes directory
+            $('#toggle-already-done .toggle-link').on('click', function() {
+    toolkit.toggle({$elClicked:$(this)});
+});
         }
     </script>
 </div>
@@ -1955,9 +1981,18 @@ $('.sky-form').validation();
     </div>
     <script>
         if (window.require){
-            Included file 'components/hashManager/default.require.js' not found in _includes directory
+            require(['toolkit'], function(toolkit){
+    function myHashCallback() {
+        $('#currentHash').text(location.hash);
+    }
+    toolkit.hashManager.register(['hash', 'anotherHash'], myHashCallback);
+});
         } else {
-            Included file 'components/hashManager/default.js' not found in _includes directory
+            function myHashCallback() {
+    $('#currentHash').text(location.hash);
+}
+
+toolkit.hashManager.register(['hash', 'anotherHash'], myHashCallback);
         }
     </script>
 </div>
@@ -1986,9 +2021,32 @@ $('.sky-form').validation();
     </div>
     <script>
         if (window.require){
-            Included file 'components/detect/view.require.js' not found in _includes directory
+            require(['toolkit'], function(toolkit){
+
+    function updateView(toolkit){
+        var view = toolkit.detect.view();
+        var desktop = toolkit.detect.view('desktop');
+        var mobile = toolkit.detect.view('mobile');
+        $('#view-demo').text(view);
+        $('#view-demo-is-desktop').text(desktop);
+        $('#view-demo-is-mobile').text(mobile);
+    }
+
+    $(window).on('resize',function(){updateView(toolkit);});
+    updateView(toolkit);
+});
         } else {
-            Included file 'components/detect/view.js' not found in _includes directory
+            function updateView(toolkit){
+    var view = toolkit.detect.view();
+    var desktop = toolkit.detect.view('desktop');
+    var mobile = toolkit.detect.view('mobile');
+    $('#view-demo').text(view);
+    $('#view-demo-is-desktop').text(desktop);
+    $('#view-demo-is-mobile').text(mobile);
+}
+
+$(window).on('resize',function(){updateView(toolkit);});
+updateView(toolkit);
         }
     </script>
 </div>
@@ -2002,9 +2060,13 @@ $('.sky-form').validation();
     </div>
     <script>
         if (window.require){
-            Included file 'components/detect/touch.require.js' not found in _includes directory
+            require(['toolkit'], function(toolkit){
+    var touch = toolkit.detect.touch();
+    $('#touch-demo').text(touch);
+});
         } else {
-            Included file 'components/detect/touch.js' not found in _includes directory
+            var touch = toolkit.detect.touch();
+$('#touch-demo').text(touch);
         }
     </script>
 </div>
@@ -2024,9 +2086,32 @@ $('.sky-form').validation();
     </div>
     <script>
         if (window.require){
-            Included file 'components/detect/orientation.require.js' not found in _includes directory
+            require(['toolkit'], function(toolkit){
+
+    function updateOrientation(toolkit){
+        var orientation = toolkit.detect.orientation();
+        var isPortrait = toolkit.detect.orientation('portrait');
+        var isLandscape = toolkit.detect.orientation('landscape');
+        $('#orientation-demo').text(orientation);
+        $('#orientation-demo-is-landscape').text(isLandscape);
+        $('#orientation-demo-is-portrait').text(isPortrait);
+    }
+
+    $(window).on('resize',function(){updateOrientation(toolkit);});
+    updateOrientation(toolkit);
+});
         } else {
-            Included file 'components/detect/orientation.js' not found in _includes directory
+            function updateOrientation(toolkit){
+    var orientation = toolkit.detect.orientation();
+    var isPortrait = toolkit.detect.orientation('portrait');
+    var isLandscape = toolkit.detect.orientation('landscape');
+    $('#orientation-demo').text(orientation);
+    $('#orientation-demo-is-landscape').text(isLandscape);
+    $('#orientation-demo-is-portrait').text(isPortrait);
+}
+
+$(window).on('resize',function(){updateOrientation(toolkit);});
+updateOrientation(toolkit);
         }
     </script>
 </div>

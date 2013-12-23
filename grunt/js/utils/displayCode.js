@@ -48,6 +48,8 @@ toolkit.displayCode = (function(lightbox){
     }
 
     DisplayCode.prototype.getCode = function(){
+        this.fileCount = 0;
+        this.filesReceived = 0;
         this.getFile(this.dir, 'notes', 'html', true);
         for (var i in this.fileNames){
             this.getFile(this.dir, this.fileNames[i], 'html');
@@ -58,9 +60,11 @@ toolkit.displayCode = (function(lightbox){
     };
 
     DisplayCode.prototype.getFile = function(dir, featureFile, ext, styled){
+        this.fileCount++;
         var self = this;
         var dfd = $.ajax({ crossDomain: true, cache: false, url: dir + '/' + featureFile + '.' + ext});
         dfd.always(function(data){
+            self.filesReceived++;
             self[self.feature + '-' + featureFile + ext] = (typeof data === 'string') ? data : '';
             self.addToPage(featureFile, ext, styled);
         });
@@ -68,20 +72,22 @@ toolkit.displayCode = (function(lightbox){
 
     DisplayCode.prototype.addToPage = function(featureFile, ext, styled){
         this.$container = this.$lightboxLink.parent().parent().find('.code-container');
-        this.$tabList = this.$container.find('.tab-list');
+        this.$tabList = this.$container.find('.tabs');
 
         this.addContainer();
         this.addTab(featureFile,ext, styled);
         this.show(featureFile,ext, styled);
-        this.bindEvents();
-        this.$lightboxLink.lightbox();
+        if (this.fileCount === this.filesReceived){
+            $('#code-' + this.feature).inPageNav();
+            this.$lightboxLink.lightbox();
+        }
     };
 
     DisplayCode.prototype.addContainer = function(){
         if (this.$container.length){ return ; }
 
-        this.$container = $('<div class="code-container" id="code-' + this.feature + '"><h3 class="code-h3">' + this.feature + '</h3><div id="' + this.feature + '-noteshtml-table" class="feature-notes"></div></div>');
-        this.$tabList = $('<ul class="tab-list clearfix" ></ul>');
+        this.$container = $('<div class="code-container clearfix tabs-container page-nav" data-function="tabs" id="code-' + this.feature + '"><h3 class="code-h3">' + this.feature + '</h3><div id="' + this.feature + '-noteshtml-table" class="feature-notes"></div></div>');
+        this.$tabList = $('<ul class="tabs clearfix" role="tablist" ></ul>');
         this.$container.append(this.$tabList);
         this.$lightboxLink.parent().parent().append(this.$container);
     };
@@ -101,30 +107,19 @@ toolkit.displayCode = (function(lightbox){
         if (this.$container.find('#' + tabName + '-tab').length){ return ; }
         if(featureFile==='notes'){ return; }
 
-        var $tabListItem = $('<li for="' + tabName + '-tab">' + (featureFile ? featureFile : 'default') + '</li>');
+        var $tabListItem = $('<li id="' + tabName + '-tab" aria-controls="' + tabName + '-tab-contents" role="tab" class="tab"><a href="#!' + tabName + '-tab-contents" class="skycom-ellipsis internal-link"><span>' + (featureFile ? featureFile : 'default') + '</span></a></li>');
         this.$tabList.append($tabListItem);
 
-        var $tab = $('<div class="tab hidden" id="' + tabName + '-tab"></div>');
-        $tab.append(this.createTable(featureFile, 'notes.html', styled))
+        var $tab = $('<div class="tabpanel" id="' + tabName + '-tab-contents" class="tabpanel selected" aria-labeledby="' + tabName + '-tab" role="tabpanel"></div>');
+        var $tabContents = $('<section class="tabcontents clearfix"></section>');
+        $tabContents.append(this.createTable(featureFile, 'notes.html', styled))
             .append(this.createTable(featureFile, 'html'))
             .append(this.createTable(featureFile, 'require.js'))
             .append(this.createTable(featureFile, 'js'));
 
+        $tab.append($tabContents);
         this.$container.append($tab);
 
-    };
-
-    DisplayCode.prototype.changeTab = function(){
-        var $li = $(this);
-        $li.closest('.code-container').find('.tab-list > li').removeClass('medium');
-        $li.closest('.code-container').find('.tab').addClass('hidden');
-        $('#' + $li.attr('for')).removeClass('hidden');
-        $li.addClass('medium');
-    };
-
-    DisplayCode.prototype.bindEvents = function(){
-        this.$tabList.on('click', 'li', this.changeTab);
-        this.$tabList.find('li').first().click();
     };
 
     DisplayCode.prototype.show = function(featureFile, ext, styled){

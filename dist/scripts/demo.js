@@ -1,1 +1,679 @@
-"undefined"==typeof toolkit&&(toolkit={}),toolkit.hashManager=function(){function t(){$(window).on("hashchange",e);var t=document.documentMode,n="onhashchange"in window&&(void 0===t||t>7);n||(c.hash=document.location.hash,setInterval(function(){document.location.hash!==c.hash&&$(window).trigger("hashchange")},200)),c.windowLoaded=!0}function e(t){var e,n;t=l("string"==typeof t?t:location.hash),t?(e=c.globalHashList[t],n="callback",c.lastExecutor=t):c.lastExecutor&&(e=c.globalHashList[c.lastExecutor],n="undo"),e&&"function"==typeof e[n]?e[n](t):"callback"===n&&c.fallback.callback?c.fallback.callback(t):"undo"===n&&c.fallback.undo&&c.fallback.undo(t)}function n(){var t=window.location;"pushState"in history?(location.hash="!",history.pushState("",document.title,t.pathname+t.search)):location.hash="!"}function o(t){location.hash="!"+t}function i(t,n,o){var i=c.globalHashList;$(t).each(function(t,a){if(a=l(a),i[a]){var s="hashManager: hash ("+a+") already exists";throw new Error(s)}i[a]={callback:n,undo:o},c.windowLoaded&&a===l(location.hash)&&e(a)})}function a(){c.globalHashList=[]}function s(t,e){c.fallback.callback=t,c.fallback.undo=e}function l(t){return t.replace(/[#!]/g,"")}var c={globalHashList:{},hasLoaded:!1,windowLoaded:!1,lastExecutor:null,hash:null,fallback:{callback:null,undo:null}};return t(),{register:i,registerFallback:s,change:o,remove:n,onHashChange:e,resetHash:a,cleanHash:l}},"function"==typeof window.define&&window.define.amd?define("utils/hashManager",[],function(){return toolkit.hashManager()}):toolkit.hashManager=toolkit.hashManager(),"undefined"==typeof toolkit&&(toolkit={}),toolkit.focus=function(){function t(){$(document).on("click keyup",i).on("keydown",o).on("focus","a, input, button, select, *[tabindex]",e).on("blur","a, input, button, select, *[tabindex]",n)}function e(t){s&&$(t.currentTarget).addClass(l)}function n(t){$(t.currentTarget).removeClass(l)}function o(t){var e=window.event?event.keyCode:t.keyCode;9==e&&(s=!0)}function i(t){var e=window.event?event.keyCode:t.keyCode;9==e&&(s=!1)}function a(t){$(t).addClass(l),t.focus()}var s=!1,l="has-focus";return t(),{apply:a,className:l}},"function"==typeof window.define&&window.define.amd?define("utils/focus",[],function(){return toolkit.focus()}):toolkit.focus=toolkit.focus(),"undefined"==typeof toolkit&&(toolkit={}),toolkit.lightbox=function(t,e,n){function o(e,n){var o=t(n);o.attr("data-tabindex",o.attr("tabindex")),o.attr("tabindex",-1)}function i(e,n){var o=t(n);o.attr("data-tabindex")?(o.attr("tabindex",o.attr("data-tabindex")),o.removeAttr("data-tabindex")):o.removeAttr("tabindex")}function a(){t("a, input, select, textarea, button, *[tabindex]").each(o)}function s(t){t.find("*[tabindex]").each(i)}function l(t){t&&t.focus()}function c(t,n){t.hasClass(e.className)?e.apply(n[0]):n[0].focus()}function d(){t("body").css({overflow:"hidden","padding-right":f+"px"})}function r(){t("body").removeAttr("style")}function h(e,n,o){var i=t("#"+e.replace("lightbox/",""));this.id=e,this.$container=i.hasClass(u.main)?i:i.closest("."+u.main),this.$contents=this.$container.length?this.$container.find("."+u.content):i,this.$closeIcon=this.$container.find("."+u.closeButton),this.$lightboxLink=n,this.$container.length||(this.create(),this.bindEvents()),o&&(this.onShow=o.onShow,this.onClose=o.onClose)}var u={main:"lightbox",closing:"lightbox-closing",content:"lightbox-content",closeButton:"lightbox-close",open:"lightbox-open"},f=function(){var t,e=document.createElement("div");return e.className="lightbox-scrollbar-measure",document.body.appendChild(e),t=e.offsetWidth-e.clientWidth,document.body.removeChild(e),t}();h.prototype={bindEvents:function(){n.register([this.id],this.open.bind(this)),this.$lightboxLink.on("click",this.open.bind(this)),this.$container.on("click",this.close.bind(this)),this.$closeIcon.on("click",this.close.bind(this)),this.$contents.on("click",function(){return!1})},create:function(){var e=this.$contents,n=this.$contents.parent(),o=t('<div class="'+u.main+'"></div>'),i=t('<div class="skycom-container lightbox-container clearfix"></div>'),a=t('<a class="internal-link '+u.closeButton+' skycon-close" href="#!"><span class="speak">Close</span></a>');e.addClass(u.content+" skycom-10 skycom-offset1").attr("role","dialog"),e.prepend(a),i.append(e),o.append(i),n.append(o),this.$container=o,this.$closeIcon=a},open:function(){this.$container.hasClass(u.open)||(this.onShow&&this.onShow(),d(),this.$container.addClass(u.open),c(this.$lightboxLink,this.$closeIcon),a(),s(this.$container))},close:function(e){var o=this;e.preventDefault(),this.$container.hasClass(u.closing)||(this.$container.addClass(u.closing),n.remove(),window.setTimeout(function(){o.$container.removeClass(u.open+" "+u.closing),l(o.$lightboxLink),r(),s(t("body")),o.onClose&&o.onClose()},500))}},t.fn.lightbox=function(e){return this.each(function(){new h(t(this).attr("href").replace("#!",""),t(this),e)})}},"function"==typeof window.define&&window.define.amd?define("components/lightbox",["utils/focus","utils/hashManager"],function(t,e){return toolkit.lightbox(jQuery,t,e)}):toolkit.lightbox=toolkit.lightbox(jQuery,toolkit.focus,toolkit.hashManager),"undefined"==typeof toolkit&&(toolkit={}),toolkit.displayCode=function(){function t(t){var e=t.feature,n=t.fileNames,i=t.dir,a=t.styled;new o({feature:e,fileNames:n.split(","),dir:i,styled:a})}function e(t,e,n){var o=$(n.replace(/{{ site.version }}/g,$("h1.wiki-header small").text().replace("v","").trim()));$(document.getElementById(t+e+"-table")).append(o)}function n(t,e,n,o){var i=document.getElementById(t+e+"-table"),a=document.createElement("tr"),s=document.createElement("td"),l=document.createElement("td"),c=document.createTextNode(n),d=document.createTextNode(o);s.className="codekolom",l.className="bredecode",s.appendChild(c),l.appendChild(d),a.appendChild(s),a.appendChild(l),i.appendChild(a)}function o(t){this.feature=t.feature,this.dir=t.dir,this.fileNames=t.fileNames,this.styled=t.styled,this.$lightboxLink=$('a[href*="#!lightbox/code-'+this.feature+'"]'),$("#code-"+this.feature).length||this.getCode()}return o.prototype.getCode=function(){this.getFile(this.dir,"notes","html",!0);for(var t in this.fileNames)this.getFile(this.dir,this.fileNames[t],"html"),this.getFile(this.dir,this.fileNames[t],"notes.html",!0),this.getFile(this.dir,this.fileNames[t],"js"),this.getFile(this.dir,this.fileNames[t],"require.js")},o.prototype.getFile=function(t,e,n,o){var i=this,a=$.ajax({crossDomain:!0,cache:!1,url:t+"/"+e+"."+n});a.always(function(t){i[i.feature+"-"+e+n]="string"==typeof t?t:"",i.addToPage(e,n,o)})},o.prototype.addToPage=function(t,e,n){this.$container=this.$lightboxLink.parent().parent().find(".code-container"),this.$tabList=this.$container.find(".tab-list"),this.addContainer(),this.addTab(t,e,n),this.show(t,e,n),this.bindEvents(),this.$lightboxLink.lightbox()},o.prototype.addContainer=function(){this.$container.length||(this.$container=$('<div class="code-container" id="code-'+this.feature+'"><h3 class="code-h3">'+this.feature+'</h3><div id="'+this.feature+'-noteshtml-table" class="feature-notes"></div></div>'),this.$tabList=$('<ul class="tab-list clearfix" ></ul>'),this.$container.append(this.$tabList),this.$lightboxLink.parent().parent().append(this.$container))},o.prototype.createTable=function(t,e,n){var o=this.feature+"-"+t+e+"-table";return this.styled||n?$('<div id="'+o+'" class="styled '+e+'"></div> '):$("<table class="+e+'><thead><tr><th colspan="3">'+e.toUpperCase()+'</th></tr></thead><tbody id="'+o+'"></tbody></table> ')},o.prototype.addTab=function(t,e){var n=this.feature+"-"+t;if(!this.$container.find("#"+n+"-tab").length&&"notes"!==t){var o=$('<li for="'+n+'-tab">'+(t?t:"default")+"</li>");this.$tabList.append(o);var i=$('<div class="tab hidden" id="'+n+'-tab"></div>');i.append(this.createTable(t,"notes.html",e)).append(this.createTable(t,"html")).append(this.createTable(t,"require.js")).append(this.createTable(t,"js")),this.$container.append(i)}},o.prototype.changeTab=function(){var t=$(this);t.closest(".code-container").find(".tab-list > li").removeClass("medium"),t.closest(".code-container").find(".tab").addClass("hidden"),$("#"+t.attr("for")).removeClass("hidden"),t.addClass("medium")},o.prototype.bindEvents=function(){this.$tabList.on("click","li",this.changeTab),this.$tabList.find("li").first().click()},o.prototype.show=function(t,o,i){var a=this.feature+"-"+t;if(this.styled||i)e(a,o,this[a+o]);else{var s=this[a+o]?this[a+o].split("\n"):"";for(var l in s){var c=s[l];n(a,o,parseInt(l,10)+1,c)}}},t},"function"==typeof window.define&&window.define.amd?define("utils/displayCode",["components/lightbox"],function(t){return toolkit.displayCode(t)}):toolkit.displayCode=toolkit.displayCode(toolkit.lightbox);var demo=function(t){function e(){$(document).on("click",".toggler",a),$(document).on("click",".code-download",o),$(".sky-form").on("submit",n)}function n(t){t.preventDefault();var e,n=$("#version").val(),o=$(".wiki-header small").text().replace("v",""),i="http://web-toolkit.global.sky.com",a=e="_site/_includes";0===location.hostname.indexOf("local")&&(i="http://"+location.host,e="../_includes"),(n.split(".").length<3||n.split(".")[0]<1)&&$(".sky-form .error").text("The version number is required, and must be '1.0.0' or higher"),(1===parseFloat(n,10)||"0"===n.split(".")[0])&&(n="0.6.9"),window.toolkit.diff({oldRoute:i+"/"+n+"/"+a,newRoute:i+"/"+o+"/"+e})}function o(){var t=!1,e=$(this).attr("href").replace("#!lightbox/code-",""),n=$(".wiki-header small").text().replace("v","").trim(),o="http://web-toolkit.global.sky.com",i="_site/_includes";0===location.hostname.indexOf("local")&&(o="http://"+location.host,i="../_includes");var a,s,l;$(this).attr("data-docs")?(a=$(this).attr("data-docs"),s=e,l=o+"/"+n+"/"+i+"/"+s,t=!0):(a=$('a[href*="#'+e+'"]').attr("data-diff-demos"),s=$('a[href*="#'+e+'"]').attr("data-diff"),l=o+"/"+n+"/"+i+"/"+s),window.toolkit.displayCode({feature:e,dir:l,fileNames:a,styled:t})}function i(){var t=[],e=$("#wiki-skycons tbody tr");e.each(function(e){t.push({i:e,skycon:$(this).find("td").first().text().trim()})}),t.sort(function(t,e){return t.skycon>e.skycon?1:t.skycon<e.skycon?-1:0}),$("#wiki-skycons tbody tr").remove();for(var n=0;n<t.length;n++)$("#wiki-skycons tbody").append($(e[t[n].i]))}function a(){var t=$(this),e=$("div[data-toggle="+t.attr("for")+"]");e.hasClass("open")?(t.removeClass("open"),e.removeClass("open")):(t.addClass("open"),e.addClass("open"))}function s(t,e){var n=e.find(".failures em").text();"0"===n?t.append("<span class='dev-button result-summary'><i class='skycon-tick colour' aria-hidden='true'></i> Tests Passed</span>"):t.append("<span class='dev-button result-summary error'><i class='skycon-warning colour' aria-hidden='true'></i> Tests Failed</span>")}function l(t,e){t.preventDefault();var n=$(t.target).hasClass("lightbox-close")||!$(t.target).hasClass("lightbox-content")&&!$(t.target).parents(".lightbox-content").length;n&&e.hide().removeClass("lightbox-open")}function c(t){t.show().addClass("lightbox-open")}function d(t,e){var n=document.createElement("div"),o=document.createElement("div"),i=document.createElement("article"),a=$('<a class="internal-link lightbox-close skycon-close black" href="#"><span class="speak">Close</span></a>');n.className="lightbox",n.id=e+"-lightbox",o.className="skycom-container lightbox-container clearfix",i.className="lightbox-content skycom-10 skycom-offset1",$(i).append(a),$(i).append(t.find("#mocha-stats")),$(i).append(t.find("#mocha-report")),$(o).append($(i)),$(n).append($(o)),t.append($(n)),c($("#"+e+"-lightbox")),a.add($(n)).on("click",function(t){l(t,$("#"+e+"-lightbox"))})}function r(t){var e=t.replace("test/",""),n=document.createElement("script");n.src="/test/specs/"+e+".js",n.onload=function(){var n=$('a[href*="#'+t+'"]'),o=$('<div id="mocha" class="mocha-container"></div>');n.parent().after(o);var i=window[e]();mocha.grep(i),mocha.run(function(){s(n,o),o.attr("id","mocha-"+e)}),n.removeAttr("href"),$("html, body").animate({scrollTop:o.parent().prev().offset().top},200),d(o,e),n.on("click",function(){c($("#"+e+"-lightbox"))})},document.head.appendChild(n)}function h(){if(!window.require||!window.describe)return setTimeout(h,250),void 0;var e=[];$(".run-test").each(function(){e.push($(this).attr("href").split("#")[1])}),t.register(e,r)}e(),i(),h()};"function"==typeof window.define&&window.define.amd?define("demo",["utils/hashManager","components/lightbox","utils/displayCode"],function(t,e,n){return demo(t,e,n)}):demo(toolkit.hashManager,toolkit.lightbox,toolkit.displayCode);
+
+/**
+ purpose:
+ to let 'anchor' tags do their job and change the hash in the url for internal links.
+ this will execute the associated callback with that hash.
+ no onclick events needed.
+ **/
+if (typeof toolkit==='undefined') toolkit={};
+toolkit.hashManager = (function() {
+
+    var vars = {
+        globalHashList: {},
+        hasLoaded: false,
+        windowLoaded: false,
+        lastExecutor: null,
+        hash: null,
+        fallback: {
+            callback: null,
+            undo: null
+        }
+    };
+
+    function bindEvents() {
+        $(window).on('hashchange', onHashChange);
+        var doc_mode = document.documentMode,
+        hashChangeSupport = 'onhashchange' in window && ( doc_mode === undefined || doc_mode > 7 );
+        if (!hashChangeSupport){ //IE7 support
+            vars.hash = document.location.hash;
+            setInterval(function(){
+                if (document.location.hash !== vars.hash){
+                    $(window).trigger( 'hashchange' );
+                }
+            },200);
+        }
+        vars.windowLoaded = true;
+    }
+
+    function onHashChange(hash) {
+        var evt, fn;
+        hash = cleanHash((typeof hash === 'string') ? hash : location.hash);
+        if (hash) {
+            evt = vars.globalHashList[hash];
+            fn = 'callback';
+            vars.lastExecutor = hash;
+        } else if (vars.lastExecutor) {
+            evt = vars.globalHashList[vars.lastExecutor];
+            fn = 'undo';
+        }
+        if (evt && typeof evt[fn] === 'function') {
+            evt[fn](hash);
+        } else if (fn === 'callback' && vars.fallback.callback) {
+            vars.fallback.callback(hash);
+        } else if (fn === 'undo' && vars.fallback.undo) {
+            vars.fallback.undo(hash);
+        }
+    }
+
+    function remove() {
+        var loc = window.location;
+        if ("pushState" in history) {
+            location.hash = '!';
+            history.pushState("", document.title, loc.pathname + loc.search);
+        } else {
+            location.hash = '!';
+        }
+    }
+
+    function change(hash){
+        location.hash = '!' + hash;
+    }
+
+    function register(hashList, callback, undo){
+        var globalHashList = vars.globalHashList;
+        $(hashList).each(function(i, hash) {
+            hash = cleanHash(hash);
+            if (globalHashList[hash]){
+                var err = 'hashManager: hash (' + hash + ') already exists';
+                throw new Error(err);
+            }
+            globalHashList[hash] = {
+                callback: callback,
+                undo: undo
+            };
+
+            if (vars.windowLoaded && hash === cleanHash(location.hash)) {
+                onHashChange(hash);
+            }
+        });
+    }
+
+    function resetHash() {
+        vars.globalHashList = [];
+    }
+
+    function registerFallback(callback, undo){
+        vars.fallback.callback = callback;
+        vars.fallback.undo = undo;
+    }
+
+    function cleanHash(hash) {
+        return hash.replace(/[#!]/g, '');
+    }
+
+    bindEvents();
+
+    return {
+        register: register,
+        registerFallback: registerFallback,
+        change: change,
+        remove: remove,
+        onHashChange: onHashChange,
+        resetHash: resetHash,
+        cleanHash: cleanHash
+    };
+});
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('utils/hashManager', [], function() {
+        return toolkit.hashManager();
+    });
+} else {
+    toolkit.hashManager =  toolkit.hashManager();
+};
+if (typeof toolkit==='undefined') toolkit={};
+toolkit.focus = (function () {
+    
+
+    var tabKey = false;
+    var focusClass = 'has-focus';
+
+    function bindEvents(){
+        $(document)
+            .on('click keyup',keyUp)
+            .on('keydown', keyDown)
+            .on('focus', "a, input, button, select, *[tabindex]", addClass)
+            .on('blur', "a, input, button, select, *[tabindex]", removeClass);
+    }
+
+    function addClass(e) {
+        if (tabKey) {
+            $(e.currentTarget).addClass(focusClass);
+        }
+    }
+
+    function removeClass(e) {
+        $(e.currentTarget).removeClass(focusClass);
+    }
+
+    function keyDown(e){
+        var KeyID = (window.event) ? event.keyCode : e.keyCode;
+        if (KeyID == 9) {tabKey = true;}
+    }
+
+    function keyUp(e){
+        var KeyID = (window.event) ? event.keyCode : e.keyCode;
+        if (KeyID == 9) {tabKey = false;}
+    }
+
+    function apply(el){
+        $(el).addClass(focusClass);
+        el.focus();
+    }
+
+    bindEvents();
+
+    return {
+        apply: apply,
+        className: focusClass
+    };
+
+});
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('utils/focus', [], function() {
+        
+        return toolkit.focus();
+    });
+} else {
+    toolkit.focus = toolkit.focus();
+};
+/*global jQuery:false */
+if (typeof toolkit==='undefined') toolkit={};
+toolkit.lightbox = (function ($, keyboardFocus, hash) {
+    
+	var classes = {
+            main: 'lightbox',
+            closing: 'lightbox-closing',
+            content: 'lightbox-content',
+            closeButton: 'lightbox-close',
+            open: 'lightbox-open'
+        },
+        scrollbarWidth = function() {
+            var scrollDiv = document.createElement("div"),
+                scrollbarWidth;
+            scrollDiv.className = "lightbox-scrollbar-measure";
+            document.body.appendChild(scrollDiv);
+            scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+            document.body.removeChild(scrollDiv);
+            return scrollbarWidth;
+        }();
+
+	function disableElementTabbing(index, element) {
+		var $element = $(element);
+		$element.attr('data-tabindex', $element.attr('tabindex'));
+		$element.attr('tabindex', -1);
+	}
+    function enableElementTabIndex(index, element) {
+        var $element = $(element);
+        if ($element.attr('data-tabindex')) {
+            $element.attr('tabindex', $element.attr('data-tabindex'));
+            $element.removeAttr('data-tabindex');
+        } else {
+            $element.removeAttr('tabindex');
+        }
+    }
+
+    function disablePageTabbing(){
+        $('a, input, select, textarea, button, *[tabindex]').each(disableElementTabbing);
+    }
+    function enablePageTabbing($container){
+        $container.find('*[tabindex]').each(enableElementTabIndex);
+    }
+
+    function focusOnLightboxLink(link){
+        if (!link) { return; }
+        link.focus();
+    }
+    function focusOnCloseButton($lightboxLink, $closeIcon){
+        if ($lightboxLink.hasClass(keyboardFocus.className)) {
+            keyboardFocus.apply($closeIcon[0]);
+        }else{
+            $closeIcon[0].focus();
+        }
+    }
+
+    function hideBodyScrollBar(){
+        $('body').css( {
+            'overflow':		'hidden',
+            'padding-right': scrollbarWidth + 'px'
+        });
+    }
+    function showBodyScrollBar(){
+        $('body').removeAttr('style');
+    }
+
+    function Lightbox(id, $lightboxLink, options){
+        var $element = $('#' + id.replace('lightbox/',''));
+
+        this.id = id;
+        this.$container = ($element.hasClass(classes.main)) ? $element : $element.closest('.' + classes.main);
+        this.$contents = (this.$container.length) ? this.$container.find('.' + classes.content) : $element ;
+        this.$closeIcon = this.$container.find('.' + classes.closeButton);
+        this.$lightboxLink = $lightboxLink;
+
+        if (!this.$container.length){
+            this.create();
+            this.bindEvents();
+        }
+        if (options){
+            this.onShow = options.onShow;
+            this.onClose = options.onClose;
+        }
+    }
+
+	Lightbox.prototype = {
+		bindEvents: function() {
+            hash.register([this.id],this.open.bind(this) );
+
+            this.$lightboxLink.on("click", this.open.bind(this));
+            this.$container.on("click", this.close.bind(this));
+			this.$closeIcon.on("click", this.close.bind(this));
+			this.$contents.on("click", function(e) { return false; });
+		},
+
+        create: function(){
+            var $contents = this.$contents,
+                $parent = this.$contents.parent(),
+                $lightboxDiv = $('<div class="' + classes.main + '"></div>'),
+                $container = $('<div class="skycom-container lightbox-container clearfix"></div>'),
+                $close = $('<a class="internal-link ' + classes.closeButton + ' skycon-close" href="#!"><span class="speak">Close</span></a>');
+
+            $contents.addClass(classes.content + ' skycom-10 skycom-offset1').attr('role','dialog');
+            $contents.prepend($close);
+
+            $container.append($contents);
+            $lightboxDiv.append($container);
+            $parent.append($lightboxDiv);
+
+            this.$container = $lightboxDiv;
+            this.$closeIcon = $close;
+        },
+
+		open: function() {
+            if (this.$container.hasClass(classes.open)) { return ; }
+            if (this.onShow){
+                this.onShow();
+            }
+            hideBodyScrollBar();
+
+			this.$container.addClass(classes.open);
+
+            focusOnCloseButton(this.$lightboxLink, this.$closeIcon);
+            disablePageTabbing();
+            enablePageTabbing(this.$container);
+		},
+
+		close: function(event) {
+            var lightbox = this;
+			event.preventDefault();
+            if (this.$container.hasClass(classes.closing)) { return ; }
+
+            this.$container.addClass(classes.closing);
+            hash.remove();
+
+            window.setTimeout(function() {
+                lightbox.$container.removeClass(classes.open + ' ' + classes.closing);
+                focusOnLightboxLink(lightbox.$lightboxLink);
+                showBodyScrollBar();
+                enablePageTabbing($('body'));
+                if (lightbox.onClose){
+                    lightbox.onClose();
+                }
+            }, 500);
+		}
+	};
+
+	$.fn.lightbox = function(options) {
+		return this.each(function() {
+			var lb = new Lightbox($(this).attr('href').replace('#!',''),$(this), options);
+		});
+	};
+
+});
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('components/lightbox', ['utils/focus', 'utils/hashManager'], function(focus, hash) {
+        
+        return toolkit.lightbox(jQuery, focus, hash);
+    });
+} else {
+    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager);
+};
+if (typeof toolkit==='undefined') toolkit={};
+toolkit.displayCode = (function(lightbox){
+
+    function displayCode(options){
+        var feature = options.feature;
+        var fileNames = options.fileNames;
+        var dir = options.dir;
+        var styled = options.styled;
+        new DisplayCode({
+            feature: feature,
+            fileNames: fileNames.split(','),
+            dir: dir,
+            styled: styled
+        });
+    }
+
+    function addStyledCode(name, ext, code){
+        var $code = $(code.replace(/{{ site.version }}/g,$('h1.wiki-header small').text().replace('v','').trim()));
+        $(document.getElementById(name + ext + '-table')).append($code);
+    }
+    function addRow(name, ext, lineNumber, code){
+        var tableBody = document.getElementById(name + ext + '-table'),
+            tr = document.createElement('tr'),
+            td2 = document.createElement('td'),
+            td3 = document.createElement('td'),
+            txt2 = document.createTextNode(lineNumber),
+            txt3 = document.createTextNode(code);
+
+        td2.className = 'codekolom';
+        td3.className = 'bredecode';
+        td2.appendChild(txt2);
+        td3.appendChild(txt3);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tableBody.appendChild(tr);
+    }
+
+    function DisplayCode(options){
+        this.feature = options.feature;
+        this.dir = options.dir;
+        this.fileNames = options.fileNames;
+        this.styled = options.styled;
+        this.$lightboxLink = $('a[href*="#!lightbox/code-' + this.feature + '"]');
+
+        if (!$('#code-' + this.feature).length){
+            this.getCode();
+        }
+    }
+
+    DisplayCode.prototype.getCode = function(){
+        this.fileCount = 0;
+        this.filesReceived = 0;
+        this.getFile(this.dir, 'notes', 'html', true);
+        for (var i in this.fileNames){
+            this.getFile(this.dir, this.fileNames[i], 'html');
+            this.getFile(this.dir, this.fileNames[i], 'notes.html', true);
+            this.getFile(this.dir, this.fileNames[i], 'js');
+            this.getFile(this.dir, this.fileNames[i], 'require.js');
+        }
+    };
+
+    DisplayCode.prototype.getFile = function(dir, featureFile, ext, styled){
+        this.fileCount++;
+        var self = this;
+        var dfd = $.ajax({ crossDomain: true, cache: false, url: dir + '/' + featureFile + '.' + ext});
+        dfd.always(function(data){
+            self.filesReceived++;
+            self[self.feature + '-' + featureFile + ext] = (typeof data === 'string') ? data : '';
+            self.addToPage(featureFile, ext, styled);
+        });
+    };
+
+    DisplayCode.prototype.addToPage = function(featureFile, ext, styled){
+        this.$container = this.$lightboxLink.parent().parent().find('.code-container');
+        this.$tabList = this.$container.find('.tabs');
+
+        this.addContainer();
+        this.addTab(featureFile,ext, styled);
+        this.show(featureFile,ext, styled);
+        if (this.fileCount === this.filesReceived){
+            $('#code-' + this.feature).inPageNav();
+            this.$lightboxLink.lightbox();
+        }
+    };
+
+    DisplayCode.prototype.addContainer = function(){
+        if (this.$container.length){ return ; }
+
+        this.$container = $('<div class="code-container clearfix tabs-container page-nav" data-function="tabs" id="code-' + this.feature + '"><h3 class="code-h3">' + this.feature + '</h3><div id="' + this.feature + '-noteshtml-table" class="feature-notes"></div></div>');
+        this.$tabList = $('<ul class="tabs clearfix" role="tablist" ></ul>');
+        this.$container.append(this.$tabList);
+        this.$lightboxLink.parent().parent().append(this.$container);
+    };
+
+    DisplayCode.prototype.createTable = function(featureFile, ext, styled){
+        var id = this.feature + '-' + featureFile + ext + '-table';
+        if (this.styled || styled){
+            return $('<div id="' + id + '" class="styled ' + ext + '"></div> ');
+        } else {
+            return $('<table class=' + ext + '><thead><tr><th colspan="3">' + ext.toUpperCase() + '</th></tr></thead><tbody id="' + id + '"></tbody></table> ');
+        }
+
+    };
+
+    DisplayCode.prototype.addTab = function(featureFile, styled){
+        var tabName =  this.feature + '-' + featureFile;
+        if (this.$container.find('#' + tabName + '-tab').length){ return ; }
+        if(featureFile==='notes'){ return; }
+
+        var $tabListItem = $('<li id="' + tabName + '-tab" aria-controls="' + tabName + '-tab-contents" role="tab" class="tab"><a href="#!' + tabName + '-tab-contents" class="skycom-ellipsis internal-link"><span>' + (featureFile ? featureFile : 'default') + '</span></a></li>');
+        this.$tabList.append($tabListItem);
+
+        var $tab = $('<div class="tabpanel" id="' + tabName + '-tab-contents" class="tabpanel selected" aria-labeledby="' + tabName + '-tab" role="tabpanel"></div>');
+        var $tabContents = $('<section class="tabcontents clearfix"></section>');
+        $tabContents.append(this.createTable(featureFile, 'notes.html', styled))
+            .append(this.createTable(featureFile, 'html'))
+            .append(this.createTable(featureFile, 'require.js'))
+            .append(this.createTable(featureFile, 'js'));
+
+        $tab.append($tabContents);
+        this.$container.append($tab);
+
+    };
+
+    DisplayCode.prototype.show = function(featureFile, ext, styled){
+        var id = this.feature + '-' + featureFile;
+        if (this.styled || styled){
+            addStyledCode(id, ext, this[id + ext]);
+        } else {
+            var code = (this[id + ext]) ? this[id + ext].split('\n') : '' ;
+            for (var i in code){
+                var line = code[i];
+                addRow(id, ext, parseInt(i,10) + 1, line);
+            }
+        }
+    };
+
+    return displayCode;
+
+});
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('utils/displayCode', ['components/lightbox'],function(lightbox) {
+        return toolkit.displayCode(lightbox);
+    });
+} else {
+    toolkit.displayCode = toolkit.displayCode(toolkit.lightbox);
+};
+var demo = (function(hash, lightbox, displayCode) {
+    function bindEvents() {
+        $(document).on('click','.toggler', toggle);
+        $(document).on('click','.code-download', showCode);
+        $('.sky-form').on('submit', checkDiff);
+    }
+
+    function checkDiff(e) {
+        e.preventDefault();
+        var newRouteDir,
+            oldVersion = $('#version').val(),
+            newVersion = $('.wiki-header small').text().replace('v',''),
+            route = 'http://web-toolkit.global.sky.com',
+            routeDir = newRouteDir = '_site/_includes';
+        if (location.hostname.indexOf('local')===0){
+            route = 'http://'+location.host;
+            newRouteDir = '../_includes';
+        }
+        if (oldVersion.split('.').length<3 || (oldVersion.split('.')[0]<1)){
+            $('.sky-form .error').text("The version number is required, and must be '1.0.0' or higher");
+        }
+        if (parseFloat(oldVersion,10)===1 || (oldVersion.split('.')[0]==='0')){
+            oldVersion = '0.6.9';//get lowest version available
+        }
+        window.toolkit.diff({
+            oldRoute: route + '/' + oldVersion + '/' + routeDir,
+            newRoute: route + '/' + newVersion + '/' + newRouteDir
+        });
+    }
+
+    function showCode(e){
+        var styled = false;
+        var feature = $(this).attr('href').replace('#!lightbox/code-','');
+        var version = $('.wiki-header small').text().replace('v','').trim(),
+            host = 'http://web-toolkit.global.sky.com',
+            dir = '_site/_includes';
+        if (location.hostname.indexOf('local')===0){
+            host = 'http://' + location.host;
+            dir = '../_includes';
+        }
+        var featureFiles, codeBase, route;
+        if ($(this).attr('data-docs')){
+            featureFiles = $(this).attr('data-docs');
+            codeBase = feature;
+            route = host + '/' + version + '/' + dir + '/' + codeBase;
+            styled = true;
+        } else {
+            featureFiles = $('a[href*="#' + feature + '"]').attr('data-diff-demos');
+            codeBase = $('a[href*="#' + feature + '"]').attr('data-diff');
+            route = host + '/' + version + '/' + dir + '/' + codeBase;
+        }
+        window.toolkit.displayCode({
+            feature: feature,
+            dir: route,
+            fileNames: featureFiles,
+            styled: styled
+        });
+    }
+
+    function sortSkyconsTable(){
+        var skycons = [];
+        var rows = $('#wiki-skycons tbody tr');
+        rows.each(function(i){
+            skycons.push({i:i, skycon:$(this).find('td').first().text().trim()});
+        });
+        skycons.sort(function (a, b) {
+            if (a.skycon > b.skycon) {
+                return 1;
+            } else if (a.skycon < b.skycon) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+        $('#wiki-skycons tbody tr').remove();
+        for (var i=0; i<skycons.length; i++){
+            $('#wiki-skycons tbody').append($(rows[skycons[i].i]));
+        }
+    }
+
+    function toggle(){
+        var $toggler = $(this);
+        var $example = $('div[data-toggle=' + $toggler.attr('for') + ']');
+        if ($example.hasClass('open')){
+            $toggler.removeClass('open');
+            $example.removeClass('open');
+        } else {
+            $toggler.addClass('open');
+            $example.addClass('open');
+        }
+    }
+
+    function updateTestsResults($runTestLink, $mocha){
+        var findFailure = $mocha.find('.failures em').text();
+
+        if(findFailure === '0'){
+            $runTestLink.append("<span class='dev-button result-summary'><i class='skycon-tick colour' aria-hidden='true'></i> Tests Passed</span>");
+        } else {
+            $runTestLink.append("<span class='dev-button result-summary error'><i class='skycon-warning colour' aria-hidden='true'></i> Tests Failed</span>");
+        }
+    }
+
+    function hideLightbox(e,$box){
+        e.preventDefault();
+        var hide =  $(e.target).hasClass('lightbox-close') ||
+            (!$(e.target).hasClass('lightbox-content') && !$(e.target).parents('.lightbox-content').length);
+        if ( hide){
+            $box.hide().removeClass('lightbox-open');
+        }
+    }
+    function showLightbox($box){
+        $box.show().addClass('lightbox-open');
+    }
+
+    function createLightbox($mocha, spec){
+        //todo: make lightbox do this automatically
+        var lightboxDiv = document.createElement('div');
+        var container = document.createElement('div');
+        var article = document.createElement('article');
+        var $close = $('<a class="internal-link lightbox-close skycon-close black" href="#"><span class="speak">Close</span></a>');
+        lightboxDiv.className = 'lightbox';
+        lightboxDiv.id = spec + '-lightbox';
+        container.className = 'skycom-container lightbox-container clearfix';
+        article.className = 'lightbox-content skycom-10 skycom-offset1';
+        $(article).append($close);
+        $(article).append($mocha.find('#mocha-stats'));
+        $(article).append($mocha.find('#mocha-report'));
+        $(container).append($(article));
+        $(lightboxDiv).append($(container));
+        $mocha.append($(lightboxDiv));
+        showLightbox($('#' +  spec + '-lightbox'));
+        $close.add($(lightboxDiv)).on('click', function(e){
+            hideLightbox(e, $('#' +  spec + '-lightbox'));
+        });
+    }
+
+    function runTest(hash){
+        var spec = hash.replace('test/','');
+        var script = document.createElement('script');
+        script.src = "/test/specs/" + spec + ".js";
+        script.onload =  function(){
+            var $runTestLink = $('a[href*="#' + hash + '"]'),
+                $mocha = $('<div id="mocha" class="mocha-container"></div>');
+            $runTestLink.parent().after($mocha);
+            var grep = window[spec]();
+            mocha.grep(grep);
+            mocha.run(function(){
+                updateTestsResults($runTestLink, $mocha);
+                $mocha.attr('id','mocha-' + spec)
+            });
+            $runTestLink.removeAttr('href');
+            $('html, body').animate({
+                scrollTop: $mocha.parent().prev().offset().top
+            }, 200);
+            createLightbox($mocha, spec);
+            $runTestLink.on('click', function(){
+                showLightbox($('#' +  spec + '-lightbox'));
+            })
+        };
+        document.head.appendChild(script);
+    }
+
+    function registerTests(){
+        if (!window.require || !window.describe){
+            setTimeout(registerTests,250);
+            return;
+        }
+        var hashes = [];
+        $('.run-test').each(function(){
+            hashes.push($(this).attr('href').split('#')[1]);
+        });
+        hash.register(hashes, runTest);
+    }
+
+    bindEvents();
+    sortSkyconsTable();
+    registerTests();
+});
+
+if (typeof window.define === "function" && window.define.amd){
+    define('demo', ['utils/hashManager',
+                    'components/lightbox',
+                    'utils/displayCode'], function(hash,lightbox, displayCode) {
+            return demo(hash, lightbox, displayCode);
+ });
+} else {
+    demo(toolkit.hashManager, toolkit.lightbox, toolkit.displayCode);
+}
+;
