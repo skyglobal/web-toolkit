@@ -7,12 +7,5 @@ function updateView(toolkit){
     $('#view-demo-is-mobile').text(mobile);
 }
 
-if (window.require){
-    require(['toolkit'], function(toolkit){
-        $(window).on('resize',function(){updateView(toolkit);});
-        updateView(toolkit);
-    });
-} else {
-    $(window).on('resize',function(){updateView(toolkit);});
-    updateView(toolkit);
-}
+$(window).on('resize',function(){updateView(toolkit);});
+updateView(toolkit);

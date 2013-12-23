@@ -1029,14 +1029,14 @@
     </div>
     <script>
         if (window.require){
-    require(['toolkit'], function(){
-        $('.date-picker').datePicker();
-        $('.sky-form').validation();
-    });
-} else {
+            require(['toolkit'], function(){
     $('.date-picker').datePicker();
     $('.sky-form').validation();
-}
+});
+        } else {
+            $('.date-picker').datePicker();
+$('.sky-form').validation();
+        }
     </script>
 </div>
     </div>
@@ -1161,12 +1161,12 @@
     </div>
     <script>
         if (window.require){
-    require(['toolkit'], function(){
-        $('#demo-inpage-nav-tabs').inPageNav();
-    });
-} else {
+            require(['toolkit'], function(){
     $('#demo-inpage-nav-tabs').inPageNav();
-}
+});
+        } else {
+            $('#demo-inpage-nav-tabs').inPageNav();
+        }
     </script>
 </div>
 
@@ -1280,12 +1280,12 @@
     </div>
     <script>
         if (window.require){
-    require(['toolkit'], function(){
-        $('#demo-classic-tabs').inPageNav();
-    });
-} else {
+            require(['toolkit'], function(){
     $('#demo-classic-tabs').inPageNav();
-}
+});
+        } else {
+            $('#demo-classic-tabs').inPageNav();
+        }
     </script>
 </div>
 
@@ -1343,19 +1343,27 @@
 </article>
     </div>
     <script>
-        var lightboxConfig = {onShow: function(){
-    $('[data-function=carousel]').trigger("pause");
-    $('#lightbox-demo').trigger('my-lightbox-opened');
-}, onClose: function(){
-   $('#lightbox-demo').trigger('my-lightbox-closed');
-}};
-if (window.require){
-    require(['toolkit'], function(toolkit){
-        $('#lightbox-demo-link').lightbox(lightboxConfig);
+        if (window.require){
+            require(['toolkit'], function(toolkit){
+    $('#lightbox-demo-link').lightbox({
+        onShow: function(){
+            $('[data-function=carousel]').trigger("pause");
+            $('#lightbox-demo').trigger('my-lightbox-opened');
+        }, onClose: function(){
+            $('#lightbox-demo').trigger('my-lightbox-closed');
+        }
     });
-} else {
-    $('#lightbox-demo-link').lightbox(lightboxConfig);
-}
+});
+        } else {
+            $('#lightbox-demo-link').lightbox({
+    onShow: function(){
+        $('[data-function=carousel]').trigger("pause");
+        $('#lightbox-demo').trigger('my-lightbox-opened');
+    }, onClose: function(){
+        $('#lightbox-demo').trigger('my-lightbox-closed');
+    }
+});
+        }
     </script>
 </div>
 
@@ -1528,10 +1536,19 @@ if (window.require){
 </section>
     </div>
     <script>
-        $('#hero').skycom_carousel({
+        if (window.require){
+            require(['toolkit'], function(){
+    $('#hero').skycom_carousel({
+        autoplay: true,
+        videoAds: false
+    });
+});
+        } else {
+            $('#hero').skycom_carousel({
     autoplay: true,
     videoAds: false
 });
+        }
     </script>
 
 </div>
@@ -1635,10 +1652,19 @@ if (window.require){
 </section>
     </div>
     <script>
-        $('#hero-skinny').skycom_carousel({
+        if (window.require){
+            require(['toolkit'], function(){
+    $('#hero-skinny').skycom_carousel({
+        autoplay: true,
+        videoAds: false
+    });
+});
+        } else {
+            $('#hero-skinny').skycom_carousel({
     autoplay: true,
     videoAds: false
 });
+        }
     </script>
 
 
@@ -1691,10 +1717,19 @@ if (window.require){
 </section>
     </div>
     <script>
-        $('#empty-hero').skycom_carousel({
+        if (window.require){
+            require(['toolkit'], function(){
+    $('#empty-hero').skycom_carousel({
+        autoplay: true,
+        videoAds: false
+    });
+});
+        } else {
+            $('#empty-hero').skycom_carousel({
     autoplay: true,
     videoAds: false
 });
+        }
     </script>
 
 </div>
@@ -1729,7 +1764,21 @@ if (window.require){
 </div>
     </div>
     <script>
-        var videoConfig = {
+        if (window.require){
+            require(['toolkit'], function(){
+    $('#demo-video.video-container').video({
+        token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85", //this token should be unique to your team
+        displayAdverts:false ,
+        onPlay: function() { //optional
+            //stuff to do before video plays
+        },
+        closeCallback: function() { //optional
+            //stuff to do after video closes
+        }
+    });
+});
+        } else {
+            $('#demo-video.video-container').video({
     token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85", //this token should be unique to your team
     displayAdverts:false ,
     onPlay: function() { //optional
@@ -1738,14 +1787,8 @@ if (window.require){
     closeCallback: function() { //optional
         //stuff to do after video closes
     }
-};
-if (window.require){
-    require(['toolkit'], function(){
-        $('#demo-video.video-container').video(videoConfig);
-    });
-} else {
-    $('#demo-video.video-container').video(videoConfig);
-}
+});
+        }
     </script>
 </div>
     </div>
@@ -1843,16 +1886,10 @@ if (window.require){
     </div>
     <script>
         if (window.require){
-    require(['toolkit'], function(toolkit){
-        $('#toggle-by-element .toggle-link').on('click', function() {
-            toolkit.toggle({$elClicked:$(this)});
-        });
-    });
-} else {
-    $('#toggle-by-element .toggle-link').on('click', function() {
-        toolkit.toggle({$elClicked:$(this)});
-    });
-}
+            Included file 'components/toggle/element.require.js' not found in _includes directory
+        } else {
+            Included file 'components/toggle/element.js' not found in _includes directory
+        }
     </script>
 </div>
 
@@ -1871,16 +1908,10 @@ if (window.require){
     </div>
     <script>
         if (window.require){
-    require(['toolkit'], function(toolkit){
-        $('#toggle-by-container .toggle-link').on('click', function() {
-            toolkit.toggle({$elClicked:$(this)});
-        });
-    });
-} else {
-    $('#toggle-by-container .toggle-link').on('click', function() {
-        toolkit.toggle({$elClicked:$(this)});
-    });
-}
+            Included file 'components/toggle/container.require.js' not found in _includes directory
+        } else {
+            Included file 'components/toggle/container.js' not found in _includes directory
+        }
     </script>
 </div>
 
@@ -1899,16 +1930,10 @@ if (window.require){
     </div>
     <script>
         if (window.require){
-    require(['toolkit'], function(toolkit){
-        $('#toggle-already-done .toggle-link').on('click', function() {
-            toolkit.toggle({$elClicked:$(this)});
-        });
-    });
-} else {
-    $('#toggle-already-done .toggle-link').on('click', function() {
-        toolkit.toggle({$elClicked:$(this)});
-    });
-}
+            Included file 'components/toggle/complete.require.js' not found in _includes directory
+        } else {
+            Included file 'components/toggle/complete.js' not found in _includes directory
+        }
     </script>
 </div>
     </div>
@@ -1928,17 +1953,11 @@ if (window.require){
 <span id="currentHash"></span>
     </div>
     <script>
-        function myHashCallback() {
-    $('#currentHash').text(location.hash);
-}
-
-if (window.require){
-    require(['toolkit'], function(toolkit){
-        toolkit.hashManager.register(['hash', 'anotherHash'], myHashCallback);
-    });
-} else {
-    toolkit.hashManager.register(['hash', 'anotherHash'], myHashCallback);
-}
+        if (window.require){
+            Included file 'components/hashManager/default.require.js' not found in _includes directory
+        } else {
+            Included file 'components/hashManager/default.js' not found in _includes directory
+        }
     </script>
 </div>
 
@@ -1965,24 +1984,11 @@ if (window.require){
 </div>
     </div>
     <script>
-        function updateView(toolkit){
-    var view = toolkit.detect.view();
-    var desktop = toolkit.detect.view('desktop');
-    var mobile = toolkit.detect.view('mobile');
-    $('#view-demo').text(view);
-    $('#view-demo-is-desktop').text(desktop);
-    $('#view-demo-is-mobile').text(mobile);
-}
-
-if (window.require){
-    require(['toolkit'], function(toolkit){
-        $(window).on('resize',function(){updateView(toolkit);});
-        updateView(toolkit);
-    });
-} else {
-    $(window).on('resize',function(){updateView(toolkit);});
-    updateView(toolkit);
-}
+        if (window.require){
+            Included file 'components/detect/view.require.js' not found in _includes directory
+        } else {
+            Included file 'components/detect/view.js' not found in _includes directory
+        }
     </script>
 </div>
 
@@ -1995,14 +2001,10 @@ if (window.require){
     </div>
     <script>
         if (window.require){
-    require(['toolkit'], function(toolkit){
-        var touch = toolkit.detect.touch();
-        $('#touch-demo').text(touch);
-    });
-} else {
-    var touch = toolkit.detect.touch();
-    $('#touch-demo').text(touch);
-}
+            Included file 'components/detect/touch.require.js' not found in _includes directory
+        } else {
+            Included file 'components/detect/touch.js' not found in _includes directory
+        }
     </script>
 </div>
 
@@ -2020,25 +2022,11 @@ if (window.require){
 </div>
     </div>
     <script>
-        function updateOrientation(toolkit){
-    var orientation = toolkit.detect.orientation();
-    var isPortrait = toolkit.detect.orientation('portrait');
-    var isLandscape = toolkit.detect.orientation('landscape');
-    $('#orientation-demo').text(orientation);
-    $('#orientation-demo-is-landscape').text(isLandscape);
-    $('#orientation-demo-is-portrait').text(isPortrait);
-}
-
-
-if (window.require){
-    require(['toolkit'], function(toolkit){
-        $(window).on('resize',function(){updateOrientation(toolkit);});
-        updateOrientation(toolkit);
-    });
-} else {
-    $(window).on('resize',function(){updateOrientation(toolkit);});
-    updateOrientation(toolkit);
-}
+        if (window.require){
+            Included file 'components/detect/orientation.require.js' not found in _includes directory
+        } else {
+            Included file 'components/detect/orientation.js' not found in _includes directory
+        }
     </script>
 </div>
 

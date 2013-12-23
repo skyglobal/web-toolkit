@@ -19,7 +19,11 @@
         {% include components/inPageNav/sleekNav.html %}
     </div>
     <script>
-        {% include components/inPageNav/sleekNav.js %}
+        if (window.require){
+            {% include components/inPageNav/sleekNav.require.js %}
+        } else {
+            {% include components/inPageNav/sleekNav.js %}
+        }
     </script>
 </div>
 
@@ -35,6 +39,10 @@
         {% include components/inPageNav/classicTabs.html %}
     </div>
     <script>
-        {% include components/inPageNav/classicTabs.js %}
+        if (window.require){
+            {% include components/inPageNav/classicTabs.require.js %}
+        } else {
+            {% include components/inPageNav/classicTabs.js %}
+        }
     </script>
 </div>

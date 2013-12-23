@@ -8,6 +8,10 @@
         {% include components/form/default.html %}
     </div>
     <script>
-        {% include components/form/default.js %}
+        if (window.require){
+            {% include components/form/default.require.js %}
+        } else {
+            {% include components/form/default.js %}
+        }
     </script>
 </div>

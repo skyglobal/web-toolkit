@@ -7,13 +7,5 @@ function updateOrientation(toolkit){
     $('#orientation-demo-is-portrait').text(isPortrait);
 }
 
-
-if (window.require){
-    require(['toolkit'], function(toolkit){
-        $(window).on('resize',function(){updateOrientation(toolkit);});
-        updateOrientation(toolkit);
-    });
-} else {
-    $(window).on('resize',function(){updateOrientation(toolkit);});
-    updateOrientation(toolkit);
-}
+$(window).on('resize',function(){updateOrientation(toolkit);});
+updateOrientation(toolkit);

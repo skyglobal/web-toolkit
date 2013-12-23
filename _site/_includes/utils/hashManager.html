@@ -9,6 +9,10 @@
         {% include utils/hashManager/default.html %}
     </div>
     <script>
-        {% include utils/hashManager/default.js %}
+        if (window.require){
+            {% include components/hashManager/default.require.js %}
+        } else {
+            {% include components/hashManager/default.js %}
+        }
     </script>
 </div>

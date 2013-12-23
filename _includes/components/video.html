@@ -17,6 +17,10 @@
         {% include components/video/default.html %}
     </div>
     <script>
-        {% include components/video/default.js %}
+        if (window.require){
+            {% include components/video/default.require.js %}
+        } else {
+            {% include components/video/default.js %}
+        }
     </script>
 </div>

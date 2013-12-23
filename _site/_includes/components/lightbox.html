@@ -10,6 +10,10 @@
         {% include components/lightbox/default.html %}
     </div>
     <script>
-        {% include components/lightbox/default.js %}
+        if (window.require){
+            {% include components/lightbox/default.require.js %}
+        } else {
+            {% include components/lightbox/default.js %}
+        }
     </script>
 </div>
