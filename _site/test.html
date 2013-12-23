@@ -936,19 +936,7 @@
     <a href="#test/datePickerSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
     Forms
 </h3>
-<p class="developer-notes">
-    Add class <code>sky-form</code> to the container.
-</p>
-<p class="developer-notes">Add <code>required</code> attribute to field and a <code>required</code> class to the relevant label.</p>
-<p class="developer-notes">You can also use the attribute <code>pattern</code> for more detailed 'regex' validation.</p>
-<p class="developer-notes">You can customise error messages using a <code>span class=feedback</code>. see the date examples.</p>
-<p class="developer-notes">Dates only need the class '<code>date-picker</code>' for the calendar to work. Optionally you can call <code>$(selector).datePicker()</code>.</p>
-
 <div class="example">
-    <p class="developer-notes">
-        For a grey background, add class <code>sky-well</code> to the <code>sky-form</code> container.
-    </p>
-
     <div class="demo">
         <form class="sky-form">
     <div class="row">
@@ -1063,9 +1051,6 @@
 <p class="design-notes">
     <span class="error">These modules are not yet complete.</span>  If you need them, please complete 'accessibility' checks an re-submit.
 </p>
-<div class="developer-notes">
-    If reinitialising tabs (e.g. after transition in a single-page app), call '<code>toolkit.hashManager.resetHash()</code>' first.
-</div>
 
 <div class="example">
     <h4 class="medium">Sleek Nav</h4>
@@ -1074,10 +1059,6 @@
     </div>
     <div class="design-notes">
         If all of, or the majority of, the page changes please use '<code>classic navigation</code>'.
-    </div>
-
-    <div class="developer-notes">
-        Add Class '<code>page-nav</code>'.
     </div>
     <div class="demo">
         <section class="module clearfix tabs-container page-nav" data-function="tabs" id='demo-inpage-nav-tabs'>
@@ -1197,9 +1178,6 @@
     </div>
     <div class="design-notes">
         If all of, or the majority of the page changes please use '<code>In-Page Navigation</code>'.
-    </div>
-    <div class="developer-notes">
-        Add Class '<code>classic</code>'.
     </div>
     <div class="demo">
         <section class="module clearfix tabs-container classic" data-function="tabs" id='demo-classic-tabs'>
@@ -1323,9 +1301,6 @@
 <a id="lightbox-demo-link" href="#!lightbox/lightbox-demo" >Show Lightbox</a> |
 <a id="lightbox-demo-tabbable-link" tabindex="101" href="#!">link that cant be tabbed to if lightbox is open</a>
 
-<p class="developer-notes">
-	Bind lightboxes to links using the <code>href=#!lightbox/</code> then the ID of the element to be shown.
-</p>
 <div class="example">
     <div class="demo" >
         <article id="lightbox-demo" class='lightbox-content' aria-labelledby="lightbox-demo-link">
@@ -1453,20 +1428,11 @@ if (window.require){
     The carousel is fully responsive, incorporates the video player and works on touch devices (not microsoft).
 </p>
 
-<div class="dependencies">
-    for videos: you also need RequireJS.
-    <link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
-    <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
-</div>
-
 <div class="example">
     <h4 class="medium">Default</h4>
     <div class="design-notes">
         Use a maximum of 4 lines of text in total (or 3 lines plus channel logo).
     </div>
-    <p class="developer-notes">
-        Add the class <code>hero-3-1</code>.
-    </p>
     <div class="demo" >
         <section class="module clearfix skycom-carousel hero-3-1" data-function="carousel" data-tracking-module="hero"
          id="hero">
@@ -1584,9 +1550,6 @@ if (window.require){
     <div class="design-notes">
         Use a maximum of 2 lines of text in total (or 1 line plus channel logo).
     </div>
-    <p class="developer-notes">
-        Add the class <code>hero-skinny</code>.
-    </p>
     <div class="demo" >
         <section class="module clearfix skycom-carousel hero-skinny" data-function="carousel" data-tracking-module="hero-skinny"
          id="hero-skinny">
@@ -1822,9 +1785,6 @@ if (window.require){
 </div>
 <div class="example">
     <h4 class="medium">Popup</h4>
-    <div class="developer-notes">
-        Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
-    </div>
     <div class="demo" >
 
         <div class="share-popup clearfix">
@@ -1854,9 +1814,6 @@ if (window.require){
 
 <div class="example">
     <h4 class="medium">Bar</h4>
-    <div class="developer-notes">
-        Ensure that href for all the social links match the 'share' urls as per the example e.g. <code>https://twitter.com/intent/tweet?url=</code>
-    </div>
     <div class="demo" >
 
         <section id="share-this-page" class="share-bar">
@@ -1894,16 +1851,9 @@ if (window.require){
     Toggle
 </h3>
 
-<p class="design-notes">
-</p>
-<p class="developer-notes">
-    Make sure the containers height is correct. i.e. elements with margin don't count towards the height!!
-</p>
 
 <div class="example">
     <h4 class="medium">By Element</h4>
-    <p class="developer-notes">
-    </p>
     <div class="demo" >
         <section id="toggle-by-element" data-mode=view>
     <a class="toggle-link" data-toggle='#toggle-by-element .edit-container' data-toggle-text="Show"
@@ -1932,8 +1882,6 @@ if (window.require){
 
 <div class="example">
     <h4 class="medium">By Container</h4>
-    <p class="developer-notes">
-    </p>
     <div class="demo" >
         <section id="toggle-by-container" data-mode=view>
     <a class="toggle-link" data-toggle='#container-to-toggle' data-toggle-text="Show" data-tracking-label="Show"
@@ -1962,8 +1910,6 @@ if (window.require){
 
 <div class="example">
     <h4 class="medium">Complete</h4>
-    <p class="developer-notes">
-    </p>
     <div class="demo" >
         <section id="toggle-already-done" data-mode=view>
     <a class="toggle-link" data-toggle='#container-to-toggle-done' data-toggle-text="Show"
@@ -1998,15 +1944,7 @@ if (window.require){
     Hash Manager
 </h3>
 
-<p class="design-notes">
-</p>
-<p class="developer-notes">
-    The Hash Manager util to bind function calls to a specific URL hash without having to bind any events.
-</p>
-
 <div class="example">
-    <p class="developer-notes">
-    </p>
     <div class="demo">
         <a href='#hash' id='hash-link'>Change Hash</a> |
 <a href='#anotherHash' id='another-hash-link'>Change another Hash</a> |
@@ -2037,17 +1975,8 @@ if (window.require){
     Detect
 </h3>
 
-<p class="design-notes">
-</p>
-<p class="developer-notes">
-    the <code>.detect</code> object allows you to check for a number of browser features and states.
-</p>
-
 <div class="example">
     <h4>View</h4>
-    <p class="developer-notes">
-        Detect the device/window current view: <code>mobile</code> or <code>desktop</code>.
-    </p>
     <div class="demo">
         <div>
     current view: <span id="view-demo"></span>
@@ -2083,9 +2012,6 @@ if (window.require){
 
 <div class="example">
     <h4>Touch</h4>
-    <p class="developer-notes">
-        Detect if the device supports touch: <code>true</code> or <code>false</code>.
-    </p>
     <div class="demo">
         <div>
     Is touch supported: <span id="touch-demo"></span>
@@ -2106,9 +2032,6 @@ if (window.require){
 
 <div class="example">
     <h4>Orientation</h4>
-    <p class="developer-notes">
-        Detect the device/window current orientation: <code>landscape</code> or <code>portrait</code>.
-    </p>
     <div class="demo">
         <div>
     current orientation: <span id="orientation-demo"></span>
