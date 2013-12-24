@@ -154,7 +154,7 @@ toolkit.diff = (function(){
     CompareCodeBase.prototype.addContainer = function(){
         if (this.$container.length){ return ; }
 
-        this.$header = $('<h3 class="has-toggle wiki-h3 smaller" id="' + this.name + '-header"><span class="toggler" for="' + this.name + '"></span>' + this.name + '</h3>');
+        this.$header = $('<h3 class="has-toggle demo-h3 section-title smaller smaller" id="' + this.name + '-header"><span class="toggler" for="' + this.name + '"></span>' + this.name + '</h3>');
         this.$container = $('<div class="togglee" data-toggle="' + this.name + '"></div>');
         this.$tabList = $('<ul class="tab-list clearfix" ></ul>');
         this.$container.append(this.$tabList);

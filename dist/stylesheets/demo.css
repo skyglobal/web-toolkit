@@ -167,17 +167,38 @@ body {
   bottom: 0;
 }
 
-.wiki-header {
+.demo-header {
   margin-bottom: 0;
 }
+.demo-header img {
+  margin-right: 20px;
+  float: left;
+}
+.demo-header span {
+  float: left;
+  line-height: 1.25em;
+}
 
-.wiki-section {
-  border-top: 2px solid #333;
+.demo-section {
   margin-bottom: 25px;
 }
 
-.wiki-h3 {
-  border-bottom: 1px solid gainsboro;
+.demo {
+  margin-bottom: 40px;
+}
+
+.demo-section > h2 {
+  margin-top: 40px;
+  margin-bottom: 0px;
+}
+
+.demo-h4,
+.demo-h3 {
+  margin: 0 0 16px;
+}
+
+.designer-notes {
+  margin-top: 0;
 }
 
 .code-h3 {
@@ -255,18 +276,10 @@ body a[name=base-styles] {
   padding-top: 6px !important;
 }
 
-.wiki-header small {
-  color: #999;
-}
-
-.wiki-dl dt {
+.demo-dl dt {
   font-family: SkyTextMedium;
   float: left;
   min-width: 150px;
-}
-
-h2:not(.section-title) {
-  margin: 16px 0 0 0;
 }
 
 ul.notes {
@@ -332,10 +345,6 @@ ul.notes ul.notes {
 #toggle-by-container h3,
 #toggle-already-done h3 {
   margin: 0;
-}
-
-h4 {
-  font-family: SkyTextMedium;
 }
 
 .smash-img {
