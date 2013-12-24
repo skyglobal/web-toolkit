@@ -99,18 +99,15 @@
             + this.selector + '[href="' + target + '"]'
 
         $(this.selector)
-            .parents('.active')
-            .removeClass('active')
+            .parents('.selected')
+            .removeClass('selected')
 
         var active = $(selector)
             .parents('li')
-            .addClass('active')
+            .addClass('selected')
 
-        if (active.parent('.dropdown-menu').length)  {
-            active = active
-                .closest('li.dropdown')
-                .addClass('active');
-        }
+        $('#toolkit-menu-tabs').find('[role=tablist] .selected').removeClass('selected');
+        active = $('#' + active.parent().parent().parent().addClass('selected').attr('aria-labeledby')).addClass('selected');
 
         active.trigger('activate')
     }

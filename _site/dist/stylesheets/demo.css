@@ -102,48 +102,26 @@ code .variable.global, code .variable.class, code .variable.instance {
   /* base00 */
 }
 
-body .tabs-container.page-nav .tabs {
+.main-menu.tabs-container.page-nav [role=tablist] {
+  margin-bottom: 0;
+}
+.main-menu.tabs-container.page-nav [role=tablist] > li.selected a,
+.main-menu.tabs-container.page-nav [role=tablist] > li:hover a {
+  border: 0;
+}
+
+.main-menu.tabs-container.page-nav .tabs {
   margin-top: 0;
+  margin-bottom: 0;
+  border: 0;
 }
 
-.nav-container .main-menu li {
-  float: left;
-  padding: 0 12px;
-  margin: 0;
-}
-.nav-container .main-menu li a {
-  padding: 0 8px;
-  color: #333333;
-}
-.nav-container .main-menu li.active > a {
-  font-family: SkyTextMedium;
-}
-.nav-container .main-menu li:first-child {
-  margin-left: -20px;
-}
-.nav-container .main-menu .dropdown:hover .dropdown-menu,
-.nav-container .main-menu .active .dropdown-menu {
-  opacity: 1;
-  padding: 0 2em;
-  margin-top: 2em;
-  margin-left: -2em;
-}
-.nav-container .main-menu:hover li .dropdown-menu,
-.nav-container .main-menu .dropdown-menu {
-  overflow: hidden;
-  transition: all 0.35s;
-  opacity: 0;
+#toolkit-menu-tabs.stick {
+  position: fixed;
   top: 0;
-  margin-top: 0em;
-  z-index: -1;
-}
-.nav-container .main-menu.primary-menu > li > a {
-  font-size: 1.15em;
-}
-
-.nav-container.secondary-menu {
-  top: auto;
-  bottom: 0;
+  background: white;
+  width: 100%;
+  z-index: 5;
 }
 
 .demo-header {

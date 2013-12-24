@@ -497,10 +497,29 @@ if (typeof window.define === "function" && window.define.amd) {
     toolkit.displayCode = toolkit.displayCode(toolkit.lightbox);
 };
 var demo = (function(hash, lightbox, displayCode) {
+
+    var menuIsSticky = false;
+    var offset = $('#toolkit-menu-tabs').offset().top
+
     function bindEvents() {
         $(document).on('click','.toggler', toggle);
         $(document).on('click','.code-download', showCode);
         $('.sky-form').on('submit', checkDiff);
+        $(window).on('scroll', stickMenuToTop);
+    }
+
+    function stickMenuToTop(){
+//        todo: if position:sticky is not supported
+        var top = window.scrollY;
+        if (menuIsSticky && top<offset){
+            menuIsSticky = false;
+            $('#toolkit-menu-tabs').removeClass('stick');
+            $('h1.demo-header').removeAttr('style');
+        } else if (!menuIsSticky && top>offset) {
+            menuIsSticky = true;
+            $('#toolkit-menu-tabs').addClass('stick');
+            $('h1.demo-header').attr('style','padding-bottom:' + $('#toolkit-menu-tabs').height() + 'px');
+        }
     }
 
     function checkDiff(e) {
