@@ -358,6 +358,9 @@ toolkit.displayCode = (function(lightbox){
 
     function addStyledCode(name, ext, code){
         var $code = $(code.replace(/{{ site.version }}/g,$('h1.wiki-header small').text().replace('v','').trim()));
+        if (ext.indexOf('js')>-1){
+            $code = $.parseHTML($code);
+        }
         $(document.getElementById(name + ext + '-table')).append($code);
     }
     function addRow(name, ext, lineNumber, code){
@@ -404,7 +407,12 @@ toolkit.displayCode = (function(lightbox){
     DisplayCode.prototype.getFile = function(dir, featureFile, ext, styled){
         this.fileCount++;
         var self = this;
-        var dfd = $.ajax({ crossDomain: true, cache: false, url: dir + '/' + featureFile + '.' + ext});
+        var dfd = $.ajax({
+            crossDomain: true,
+            cache: false,
+            dataType: 'html',
+            url: dir + '/' + featureFile + '.' + ext
+        });
         dfd.always(function(data){
             self.filesReceived++;
             self[self.feature + '-' + featureFile + ext] = (typeof data === 'string') ? data : '';
@@ -429,7 +437,7 @@ toolkit.displayCode = (function(lightbox){
         if (this.$container.length){ return ; }
 
         this.$container = $('<div class="code-container clearfix tabs-container page-nav" data-function="tabs" id="code-' + this.feature + '"><h3 class="code-h3">' + this.feature + '</h3><div id="' + this.feature + '-noteshtml-table" class="feature-notes"></div></div>');
-        this.$tabList = $('<ul class="tabs clearfix" role="tablist" ></ul>');
+        this.$tabList = $('<ul class="tabs clearfix" role="tablist" ><div class="dropdown-tab-select"><a href="#!" aria-controls="dropdown" aria-label="more tabs" class="medium">&hellip;</a><ul class="more-tabs"></ul></div></ul>');
         this.$container.append(this.$tabList);
         this.$lightboxLink.parent().parent().append(this.$container);
     };
@@ -450,7 +458,7 @@ toolkit.displayCode = (function(lightbox){
         if(featureFile==='notes'){ return; }
 
         var $tabListItem = $('<li id="' + tabName + '-tab" aria-controls="' + tabName + '-tab-contents" role="tab" class="tab"><a href="#!' + tabName + '-tab-contents" class="skycom-ellipsis internal-link"><span>' + (featureFile ? featureFile : 'default') + '</span></a></li>');
-        this.$tabList.append($tabListItem);
+        this.$tabList.prepend($tabListItem);
 
         var $tab = $('<div class="tabpanel" id="' + tabName + '-tab-contents" class="tabpanel selected" aria-labeledby="' + tabName + '-tab" role="tabpanel"></div>');
         var $tabContents = $('<section class="tabcontents clearfix"></section>');
