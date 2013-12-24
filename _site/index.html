@@ -8,7 +8,8 @@
 		<!--[if lt IE 9]> <script src="http://assets.sky.com/js/lib/jquery-1.10.2.js" ></script> <![endif]-->
         <!--[if gte IE 9]><!--> <script src="http://assets.sky.com/js/lib/jquery.2.0.3.min.js" ></script> <!--<![endif]-->
         <script src="test/vendor/jquery.scrollspy.js" ></script>
-
+        <link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
+        <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
 		<!--[if LT IE 9]>
 <link href='http://assets.sky.com/dist/759/css/non-responsive-12.css' rel='stylesheet'>
 <![endif]-->
@@ -1162,6 +1163,7 @@ $('.sky-form').validation();
     <script>
         if (window.require){
             require(['toolkit'], function(){
+    alert('im executed!');
     $('#demo-inpage-nav-tabs').inPageNav();
 });
         } else {
@@ -2196,7 +2198,7 @@ updateOrientation(toolkit);
                 <a target="_github" href="https://github.com/skyglobal/web-toolkit/">Toolkit Github</a>
             </li>
             <li class="right secondary" >
-                Last Updated: 23-12-2013
+                Last Updated: 24-12-2013
             </li>
         </ul>
     </div>

@@ -1092,11 +1092,14 @@ toolkit.inPageNav = (function(hash) {
         initTabs: function(){
             this.moveTabsToList();
             this.moveTabsToDropdown();
+            if (!this.$tabTargets.filter('.selected').length){
+                this.changeTab(this.$tabTargets.first()[0].id);
+            }
         },
 
         changeTab: function(controlId){
             controlId = controlId.replace('#!','');
-            var $thisTab = $("#" + controlId + "-tab"),
+            var $thisTab = $("#" + controlId.replace('-tab-contents','') + "-tab"),
                 $thisTabTarget = $("#" + controlId);
             this.$tabTargets.add(this.$tabs).removeClass("selected");
             $thisTab.add($thisTabTarget).addClass('selected');
