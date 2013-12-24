@@ -102,6 +102,10 @@ code .variable.global, code .variable.class, code .variable.instance {
   /* base00 */
 }
 
+body .tabs-container.page-nav .tabs {
+  margin-top: 0;
+}
+
 .nav-container .main-menu li {
   float: left;
   padding: 0 12px;
@@ -167,8 +171,11 @@ code .variable.global, code .variable.class, code .variable.instance {
   margin-bottom: 0px;
 }
 
-.demo-h4,
 .demo-h3 {
+  margin-bottom: 0;
+}
+
+.demo-h4 {
   margin: 0 0 16px;
 }
 
@@ -228,6 +235,7 @@ code .variable.global, code .variable.class, code .variable.instance {
   font-family: SkyTextRegular;
   font-size: 24px;
   margin-left: 16px;
+  line-height: 3em;
 }
 
 .block {
