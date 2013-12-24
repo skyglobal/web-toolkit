@@ -1,13 +1,14 @@
 var demo = (function(hash, lightbox, displayCode) {
 
     var menuIsSticky = false;
-    var offset = $('#toolkit-menu-tabs').offset().top
+    var offset = $('#toolkit-menu-tabs').offset().top;
 
     function bindEvents() {
         $(document).on('click','.toggler', toggle);
         $(document).on('click','.code-download', showCode);
         $('.sky-form').on('submit', checkDiff);
         $(window).on('scroll', stickMenuToTop);
+        $('#toolkit-menu-tabs [role=tablist] li').on('mouseenter mouseleave', showSubMenu);
     }
 
     function stickMenuToTop(){
@@ -21,6 +22,15 @@ var demo = (function(hash, lightbox, displayCode) {
             menuIsSticky = true;
             $('#toolkit-menu-tabs').addClass('stick');
             $('h1.demo-header').attr('style','padding-bottom:' + $('#toolkit-menu-tabs').height() + 'px');
+        }
+    }
+
+    function showSubMenu(e){
+        $('#toolkit-menu-tabs .tabpanel').removeClass('selected');
+        if (e.type==='mouseleave'){
+            $('#toolkit-menu-tabs .tabpanel li.selected').closest('.tabpanel').addClass('selected');
+        } else {
+            $('#' + $(this).attr('aria-controls')).addClass('selected');
         }
     }
 
