@@ -1108,6 +1108,7 @@ button.btn {
   position: relative;
 }
 .tabs-container.page-nav .tabs {
+  position: relative;
   margin: 20px 0;
   border-bottom: solid 1px #dcdcdc;
   border-top: solid 1px #dcdcdc;
