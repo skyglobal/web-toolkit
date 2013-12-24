@@ -135,25 +135,34 @@
 
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
-				<h1 class="wiki-header">Sky Web Toolkit <small>v1.9.4 </small></h1>
+				<h1 class="demo-header section-title clearfix">
+    <img src="static/images/sky-logo.png" alt="" height="52" width="82">
+    <span>Toolkit</span>
+</h1>
 <div class="secondary">
     <a href="#!lightbox/code-usingTheToolkit" class="dev-button code-download" data-docs="accessibility,codingPractices,contributing,gettingStarted">how to &hellip;</a>
 </div>
 
 <a name="base-styles"></a>
-<section class="wiki-section">
+<section class="demo-section">
     <h2>Base Styles</h2>
     <a name="grid"></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-grid" class="dev-button code-download">code</a>
     12 Column Grid</h3>
-<div class="example">
-    <h4>Grid (974)</h4>
-    <p class="developer-notes">
-        By default the grid is <code>974px</code> wide.
+<p class="designer-notes skycom-7 alpha">
+    Your starting point is a universal grid, divided into equal parts.
+    It should be applied across all devices.
+    This grid show is fluid and proportionally scales to fit any screen size.
+</p>
+<div class="example clear">
+    <h4 class="demo-h4 pod-title smaller">Grid 974px</h4>
+    <p class="designer-notes skycom-7 alpha">
+        Use this grid if your website is not ready to move onto the new 1140px width,
+        that is if most sites in your vertical are not using the this 'toolkit' version of the grid.
     </p>
-    <div class="demo grid-example">
+    <div class="demo grid-example clearfix">
 
         <div class="example skycom-container clearfix" id="grid12">
     <div class="alpha skycom-1">
@@ -222,8 +231,8 @@
 </div>
 
 <div class="example">
-    <h4>Wide Grid (1140)</h4>
-    <div class="demo">
+    <h4 class="demo-h4 pod-title smaller">Wide Grid 1140px</h4>
+    <div class="demo clearfix">
 
         <div class="example clearfix demo" id="grid12-actual">
 
@@ -293,8 +302,8 @@
 </div>
 
 <div class="example">
-    <h4>lightbox Grid</h4>
-    <div class="grid-example demo">
+    <h4 class="demo-h4 pod-title smaller">lightbox Grid</h4>
+    <div class="grid-example demo clearfix">
 
         <div class="example skycom-container clearfix" id="grid12-lightbox">
     <div class="skycom-10 skycom-offset1 ">
@@ -366,8 +375,8 @@
     </div>
 </div>
 <div class="example">
-    <h4>Grid on a Tablet (Portrait: 696)</h4>
-    <div class="grid-example demo">
+    <h4 class="demo-h4 pod-title smaller">Grid on a Portrait Tablet 696px</h4>
+    <div class="grid-example demo clearfix">
 
         <div class="example skycom-container clearfix" id="grid12-tablet">
     <div class="alpha skycom-1">
@@ -437,7 +446,7 @@
     </div>
     <a name="colours" ></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-colours" class="dev-button code-download">code</a>
     Colours
 </h3>
@@ -445,8 +454,8 @@
     These colours are for designer reference only. For accessibility reasons, please also note the colour of the text being used.
 </p>
 <div class="clearfix example">
-    <h4>Typography</h4>
-    <div class="demo">
+    <h4 class="demo-h4 pod-title smaller">Typography</h4>
+    <div class="demo clearfix">
 
         <div class="skycom-2 alpha demo-colour-block">
     <div class="cushioned">
@@ -484,8 +493,8 @@
 </div>
 
 <div class="clearfix example">
-    <h4>Buttons + Icons</h4>
-    <div class="demo">
+    <h4 class="demo-h4 pod-title smaller">Buttons + Icons</h4>
+    <div class="demo clearfix">
 
         <div class="skycom-2 alpha demo-colour-block">
     <div class="white demo-primary-button cushioned">Primary
@@ -523,8 +532,8 @@
 </div>
 
 <div class="clearfix example">
-    <h4>Backgrounds + Key Line</h4>
-    <div class="demo">
+    <h4 class="demo-h4 pod-title smaller">Backgrounds + Key Line</h4>
+    <div class="demo clearfix">
 
         <div class="skycom-2 demo-colour-block alpha">
     <div class=" demo-background-dark cushioned">Dark Background</div>
@@ -542,9 +551,9 @@
     </div>
 </div>
 
-<div class="clearfix demo">
-    <h4>Channels</h4>
-    <div class="demo">
+<div class="clearfix example">
+    <h4 class="demo-h4 pod-title smaller">Channels</h4>
+    <div class="demo clearfix">
 
         <div class="skycom-2 alpha demo-colour-block">
     <div class="white demo-sky-1 cushioned">Sky 1</div>
@@ -570,9 +579,9 @@
     </div>
 </div>
 
-<div class="clearfix demo">
-    <h4>V3 Brand</h4>
-    <div class="demo">
+<div class="clearfix example">
+    <h4 class="demo-h4 pod-title smaller">V3 Brand</h4>
+    <div class="demo clearfix">
 
         <div class="skycom-2 alpha demo-colour-block">
     <div class="white  demo-v3-red cushioned">Red</div>
@@ -602,10 +611,10 @@
     </div>
 </div>
 
-<div class="clearfix demo">
-    <h4>Shop</h4>
+<div class="clearfix example">
+    <h4 class="demo-h4 pod-title smaller">Shop</h4>
     <p class="design-notes">All text to be above 18px</p>
-    <div class="demo">
+    <div class="demo clearfix">
 
         <div class="skycom-2 alpha demo-colour-block ">
     <div class="white  demo-original cushioned">Original</div>
@@ -633,7 +642,7 @@
     </div>
     <a name="typography"></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-typography" class="dev-button code-download">code</a>
     Typography</h3>
 
@@ -642,7 +651,7 @@
 </p>
 
 <div class="example">
-    <div class="demo">
+    <div class="demo clearfix">
 
         <h1 class="page-title">
     Page Title (Sky Text Regular <span class="demo-pink">52px</span>)
@@ -705,15 +714,15 @@
     </div>
     <a name="icons"></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-icons" class="dev-button code-download">code</a>
     Icons</h3>
 <div class="example">
-    <h4>Sprite</h4>
+    <h4 class="demo-h4 pod-title smaller">Sprite</h4>
     <p class="designer-notes">
         These are not likely to look good on Retina devices
     </p>
-    <div class="demo">
+    <div class="demo clearfix">
 
         <table id=wiki-icons class="icons-table">
     <thead>
@@ -739,11 +748,11 @@
 </div>
 
 <div class="example">
-    <h4>Skycons</h4>
+    <h4 class="demo-h4 pod-title smaller">Skycons</h4>
     <p class="designer-notes">
         These icons will look good on Retina devices and can be any size or (single) colour.
     </p>
-    <div class="demo">
+    <div class="demo clearfix">
 
         <table id=wiki-skycons class="icons-table">
     <thead>
@@ -849,8 +858,8 @@
 </div>
 
 <div class="example">
-    <h4>Multi-Coloured SVGs</h4>
-    <p class="develop-notes">
+    <h4 class="demo-h4 pod-title smaller">Multi-Coloured SVGs</h4>
+    <p class="designer-notes">
         While there are only a few separate SVGs, we will serve these up separately
     </p>
     TBC
@@ -858,14 +867,14 @@
     </div>
     <a name="buttons" ></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-buttons" class="dev-button code-download">code</a>
     Buttons </h3>
 
 <div class="example">
-    <h4>Primary </h4>
+    <h4 class="demo-h4 pod-title smaller">Primary </h4>
 
-    <div class="demo">
+    <div class="demo clearfix">
 
         <button class="btn primary">Primary Button</button>
 <a href="#" class="btn primary">Primary Link</a>
@@ -876,8 +885,8 @@
 </div>
 
 <div class="example">
-    <h4>Secondary</h4>
-    <div class="demo">
+    <h4 class="demo-h4 pod-title smaller">Secondary</h4>
+    <div class="demo clearfix">
 
         <button href="#" class="btn secondary">Secondary Button</button>
 <a href="#" class="btn secondary">Secondary Link</a>
@@ -889,12 +898,12 @@
     </div>
     <a name="spinner" ></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-spinner" class="dev-button code-download">code</a>
     Spinner</h3>
 
 <div class="example">
-    <div class="demo">
+    <div class="demo clearfix">
 
         <div class="spinner-blue">
     <p>Please wait...</p>
@@ -906,16 +915,16 @@
 </section>
 
 <a name="components"></a>
-<section class="wiki-section">
+<section class="demo-section">
     <h2>Components</h2>
     <a name="breadcrumbs"></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-breadcrumbs" class="dev-button code-download">code</a>
     Breadcrumbs
 </h3>
 <div class="example">
-    <div class="demo" >
+    <div class="demo clearfix" >
 
         <aside  id="skycom-breadcrumb" class="skycom-container">
     <h2 class=at>Navigational Trail</h2>
@@ -931,13 +940,13 @@
     </div>
     <a name="form"></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-form" class="dev-button code-download">code</a>
     <a href="#test/datePickerSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
     Forms
 </h3>
 <div class="example">
-    <div class="demo">
+    <div class="demo clearfix">
         <form class="sky-form">
     <div class="row">
         <label for="title" class="required">Title</label>
@@ -1043,7 +1052,7 @@ $('.sky-form').validation();
     </div>
     <a name="inPageNav" ></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-inPageNav" class="dev-button code-download">code</a>
     <a href="#test/inPageNavSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
     In-Page Navigation
@@ -1060,7 +1069,7 @@ $('.sky-form').validation();
     <div class="design-notes">
         If all of, or the majority of, the page changes please use '<code>classic navigation</code>'.
     </div>
-    <div class="demo">
+    <div class="demo clearfix">
         <section class="module clearfix tabs-container page-nav" data-function="tabs" id='demo-inpage-nav-tabs'>
 
     <h2 class="speak">This is a screenreader header for tabs</h2>
@@ -1180,7 +1189,7 @@ $('.sky-form').validation();
     <div class="design-notes">
         If all of, or the majority of the page changes please use '<code>In-Page Navigation</code>'.
     </div>
-    <div class="demo">
+    <div class="demo clearfix">
         <section class="module clearfix tabs-container classic" data-function="tabs" id='demo-classic-tabs'>
 
     <h2 class="speak">This is a screenreader header for tabs</h2>
@@ -1295,7 +1304,7 @@ $('.sky-form').validation();
     </div>
     <a name="lightbox"></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-lightbox" class="dev-button code-download">code</a>
     <a href="#test/lightboxSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
     Lightbox</h3>
@@ -1303,7 +1312,7 @@ $('.sky-form').validation();
 <a id="lightbox-demo-tabbable-link" tabindex="101" href="#!">link that cant be tabbed to if lightbox is open</a>
 
 <div class="example">
-    <div class="demo" >
+    <div class="demo clearfix" >
         <article id="lightbox-demo" class='lightbox-content' aria-labelledby="lightbox-demo-link">
     <img src="wiki_images/bling-ring.jpg" height="380" width="1140" style="width:100%;height:auto;" />
 
@@ -1372,7 +1381,7 @@ $('.sky-form').validation();
     </div>
     <a name="accordion"></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-accordion" class="dev-button code-download">code</a>
     <a href="#test/accordionSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
     Accordion
@@ -1381,7 +1390,7 @@ $('.sky-form').validation();
     The accordion is fully responsive.
 </p>
 <div class="example">
-    <div class="demo" >
+    <div class="demo clearfix" >
         <ul class="accordion">
     <li>
         <a class="accordion-heading" data-toggle-state="hidden"  data-toggle="#first-accordion-content" href="#first-accordion-content">
@@ -1428,7 +1437,7 @@ $('.sky-form').validation();
     </div>
     <a name="carousel"></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-carousel" class="dev-button code-download">code</a>
     <a href="#test/carouselSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
     Carousel
@@ -1442,7 +1451,7 @@ $('.sky-form').validation();
     <div class="design-notes">
         Use a maximum of 4 lines of text in total (or 3 lines plus channel logo).
     </div>
-    <div class="demo" >
+    <div class="demo clearfix" >
         <section class="module clearfix skycom-carousel hero-3-1" data-function="carousel" data-tracking-module="hero"
          id="hero">
     <h2 class="speak">Featured News, shows or Products from around Sky</h2>
@@ -1560,7 +1569,7 @@ $('.sky-form').validation();
     <div class="design-notes">
         Use a maximum of 2 lines of text in total (or 1 line plus channel logo).
     </div>
-    <div class="demo" >
+    <div class="demo clearfix" >
         <section class="module clearfix skycom-carousel hero-skinny" data-function="carousel" data-tracking-module="hero-skinny"
          id="hero-skinny">
     <h2 class="speak">Featured News, shows or Products from around Sky</h2>
@@ -1678,7 +1687,7 @@ $('.sky-form').validation();
     <div class="design-notes">
         This will behave like it isn't a carousel as there is only one slide.
     </div>
-    <div class="demo">
+    <div class="demo clearfix">
         <section class="module clearfix skycom-carousel hero-3-1" data-function="carousel" data-tracking-module="empty-hero"
          id="empty-hero">
     <h2 class="speak">Featured News, shows or Products from around Sky</h2>
@@ -1738,7 +1747,7 @@ $('.sky-form').validation();
     </div>
     <a name="video" ></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-video" class="dev-button code-download">code</a>
     <a href="#test/videoSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
     Video
@@ -1753,7 +1762,7 @@ $('.sky-form').validation();
     <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
 </div>
 <div class="example">
-    <div class="demo" >
+    <div class="demo clearfix" >
         <div id="demo-video" class="video-container" data-video-id="clip-00i9rvth">
     <img src="wiki_images/bling-ring.jpg"
          alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
@@ -1796,7 +1805,7 @@ $('.sky-form').validation();
     </div>
     <a name="share" ></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-share" class="dev-button code-download">code</a>
     <a href="#test/shareSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
     Share
@@ -1806,7 +1815,7 @@ $('.sky-form').validation();
 </div>
 <div class="example">
     <h4 class="medium">Popup</h4>
-    <div class="demo" >
+    <div class="demo clearfix" >
 
         <div class="share-popup clearfix">
     <a class="summary" href="#!" data-tracking-context="Shared article title" aria-label="Shared 146 times. Click to show share options">
@@ -1835,7 +1844,7 @@ $('.sky-form').validation();
 
 <div class="example">
     <h4 class="medium">Bar</h4>
-    <div class="demo" >
+    <div class="demo clearfix" >
 
         <section id="share-this-page" class="share-bar">
     <h3>Share this page</h3>
@@ -1862,11 +1871,11 @@ $('.sky-form').validation();
 </section>
 
 <a name="utils"></a>
-<section class="wiki-section">
+<section class="demo-section">
     <h2>Utils</h2>
     <a name="toggle"></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-toggle" class="dev-button code-download">code</a>
     <a href="#test/toggleSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
     Toggle
@@ -1875,7 +1884,7 @@ $('.sky-form').validation();
 
 <div class="example">
     <h4 class="medium">By Element</h4>
-    <div class="demo" >
+    <div class="demo clearfix" >
         <section id="toggle-by-element" data-mode=view>
     <a class="toggle-link" data-toggle='#toggle-by-element .edit-container' data-toggle-text="Show"
        data-tracking-label="Show" data-toggle-state='shown'>Hide</a>
@@ -1903,7 +1912,7 @@ $('.sky-form').validation();
 
 <div class="example">
     <h4 class="medium">By Container</h4>
-    <div class="demo" >
+    <div class="demo clearfix" >
         <section id="toggle-by-container" data-mode=view>
     <a class="toggle-link" data-toggle='#container-to-toggle' data-toggle-text="Show" data-tracking-label="Show"
        data-toggle-state='shown'><span>Hide</span><i class="icon"></i></a>
@@ -1939,7 +1948,7 @@ $('.sky-form').validation();
 
 <div class="example">
     <h4 class="medium">Complete</h4>
-    <div class="demo" >
+    <div class="demo clearfix" >
         <section id="toggle-already-done" data-mode=view>
     <a class="toggle-link" data-toggle='#container-to-toggle-done' data-toggle-text="Show"
        data-tracking-label="Show" data-toggle-state='shown'>Hide</a>
@@ -1967,14 +1976,14 @@ $('.sky-form').validation();
     </div>
     <a name="hashManager"></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-hashManager" class="dev-button code-download">code</a>
     <a href="#test/hashManagerSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
     Hash Manager
 </h3>
 
 <div class="example">
-    <div class="demo">
+    <div class="demo clearfix">
         <a href='#hash' id='hash-link'>Change Hash</a> |
 <a href='#anotherHash' id='another-hash-link'>Change another Hash</a> |
 <a href='#unregisteredHash' id='unregistered-hash-link'>unregistered Hash</a> |
@@ -2001,15 +2010,15 @@ toolkit.hashManager.register(['hash', 'anotherHash'], myHashCallback);
     </div>
     <a name="detect"></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-detect" class="dev-button code-download">code</a>
     <a href="#test/detectSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
     Detect
 </h3>
 
 <div class="example">
-    <h4>View</h4>
-    <div class="demo">
+    <h4 class="demo-h4 pod-title smaller">View</h4>
+    <div class="demo clearfix">
         <div>
     current view: <span id="view-demo"></span>
 </div>
@@ -2053,8 +2062,8 @@ updateView(toolkit);
 </div>
 
 <div class="example">
-    <h4>Touch</h4>
-    <div class="demo">
+    <h4 class="demo-h4 pod-title smaller">Touch</h4>
+    <div class="demo clearfix">
         <div>
     Is touch supported: <span id="touch-demo"></span>
 </div>
@@ -2073,8 +2082,8 @@ $('#touch-demo').text(touch);
 </div>
 
 <div class="example">
-    <h4>Orientation</h4>
-    <div class="demo">
+    <h4 class="demo-h4 pod-title smaller">Orientation</h4>
+    <div class="demo clearfix">
         <div>
     current orientation: <span id="orientation-demo"></span>
 </div>
@@ -2121,11 +2130,11 @@ updateOrientation(toolkit);
 </section>
 
 <a name="examples"></a>
-<section class="wiki-section">
+<section class="demo-section">
     <h2>Examples</h2>
     <a name="errorPage"></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-errorPage" class="dev-button code-download">code</a>
     Error Page
 </h3>
@@ -2133,7 +2142,7 @@ updateOrientation(toolkit);
    Below you will see a number of pages that use the Toolkit to build the page
 </p>
 <div class="example">
-    <div class="demo" >
+    <div class="demo clearfix" >
 
         <div class=" error-page clearfix">
     <div class="skycom-7">
@@ -2155,11 +2164,11 @@ updateOrientation(toolkit);
 </section>
 
 <a name="external-libraries"></a>
-<section class="wiki-section">
+<section class="demo-section">
     <h2>External Libraries</h2>
     <a name="jquery"></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-jquery" class="dev-button code-download">versions</a>
     JQuery
 </h3>
@@ -2170,7 +2179,7 @@ updateOrientation(toolkit);
     </div>
     <a name="requirejs"></a>
     <div class="sub-section">
-        <h3 class="wiki-h3">
+        <h3 class="demo-h3 section-title smaller">
     <a href="#!lightbox/code-requirejs" class="dev-button code-download">versions</a>
     RequireJS
 </h3>
