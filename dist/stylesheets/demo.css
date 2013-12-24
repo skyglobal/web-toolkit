@@ -265,14 +265,18 @@ body a[name=base-styles] {
   min-width: 150px;
 }
 
-.init-notes,
-.dependencies,
-.developer-notes {
-  display: none;
-}
-
 h2:not(.section-title) {
   margin: 16px 0 0 0;
+}
+
+ul.notes {
+  list-style: initial;
+  padding-left: 20px;
+  margin-left: 20px;
+}
+ul.notes ul.notes {
+  list-style-type: circle;
+  font-size: 0.9em;
 }
 
 .mocha-container {
@@ -662,10 +666,6 @@ h4 {
 }
 .code-container tr.del {
   background: #FDD;
-}
-.code-container .styled {
-  padding: 8px;
-  border: 1px solid #CCC;
 }
 .code-container .styled.js {
   display: none;
