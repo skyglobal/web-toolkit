@@ -102,29 +102,14 @@ code .variable.global, code .variable.class, code .variable.instance {
   /* base00 */
 }
 
-body {
-  padding-top: 2em !important;
-}
-
-.nav-container {
-  z-index: 10;
-  min-height: 2em;
-  line-height: 2em;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #eaeaea;
-}
-
 .nav-container .main-menu li {
   float: left;
   padding: 0 12px;
   margin: 0;
-  background-color: #eaeaea;
 }
 .nav-container .main-menu li a {
   padding: 0 8px;
+  color: #333333;
 }
 .nav-container .main-menu li.active > a {
   font-family: SkyTextMedium;
@@ -132,27 +117,17 @@ body {
 .nav-container .main-menu li:first-child {
   margin-left: -20px;
 }
-.nav-container .main-menu .dropdown:hover,
-.nav-container .main-menu .active {
-  background-color: #f4f4f4;
-}
 .nav-container .main-menu .dropdown:hover .dropdown-menu,
 .nav-container .main-menu .active .dropdown-menu {
   opacity: 1;
   padding: 0 2em;
   margin-top: 2em;
   margin-left: -2em;
-  background-color: #f4f4f4;
-}
-.nav-container .main-menu .dropdown:hover .dropdown-menu li,
-.nav-container .main-menu .active .dropdown-menu li {
-  background-color: #f4f4f4;
 }
 .nav-container .main-menu:hover li .dropdown-menu,
 .nav-container .main-menu .dropdown-menu {
   overflow: hidden;
   transition: all 0.35s;
-  position: absolute;
   opacity: 0;
   top: 0;
   margin-top: 0em;
@@ -250,17 +225,9 @@ body {
 }
 
 .code-download {
-  top: 6px;
-  float: right;
   font-family: SkyTextRegular;
-  font-size: 12px;
-  color: #657B83;
-  border: 1px solid #657B83;
-  background: #ECFAFF;
-}
-
-.secondary .code-download {
-  top: -5px;
+  font-size: 24px;
+  margin-left: 16px;
 }
 
 .block {
