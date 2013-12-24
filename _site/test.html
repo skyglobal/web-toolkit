@@ -82,60 +82,85 @@
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target=".nav-container">
 
-        <div class="nav-container primary-menu">
-    <div class="skycom-container nav">
-        <ul class="alpha skycom-12 main-menu">
-            <li class="dropdown active">
+        <section class="clearfix tabs-container page-nav" data-function="tabs" id='toolkit-menu-tabs'>
+    <h2 class="speak">Main Navigation</h2>
+        <ul class="tabs clearfix" role="tablist">
+            <li id='base-styles-tab' aria-controls="base-styles-tab-contents" role="tab" class="tab selected">
                 <a href="index.html#base-styles" class="intro">Base Styles</a>
-                <ul class=dropdown-menu>
-                    <li><a href="index.html#grid" data-diff="baseStyles/grid" data-diff-demos="974,1140,lightbox,tabletPortrait">Grid</a></li>
-                    <li><a href="index.html#colours" data-diff="baseStyles/colours" data-diff-demos="backgrounds,buttonsIcons,channels,shop,typography,v3Brand">Colours</a></li>
-                    <li><a href="index.html#typography" data-diff="baseStyles/typography" data-diff-demos="all">Typography</a></li>
-                    <li><a href="index.html#icons" data-diff="baseStyles/icons" data-diff-demos="sprite,skycons">Icons</a></li>
-                    <li><a href="index.html#buttons" data-diff="baseStyles/buttons" data-diff-demos="primary,secondary">Buttons</a></li>
-                    <li><a href="index.html#spinners" data-diff="baseStyles/spinners" data-diff-demos="default">Spinners</a></li>
-                </ul>
             </li>
-            <li class="dropdown">
+            <li id='components-tab' aria-controls="components-tab-contents" role="tab" class="tab">
                 <a href="index.html#components" class="intro">Components</a>
-                <ul class=dropdown-menu>
-                    <li><a href="index.html#breadcrumbs" data-diff="components/breadcrumbs" data-diff-demos=default>Breadcrumbs</a></li>
-                    <li><a href="index.html#form" data-diff="components/form" data-diff-demos=default>Form</a></li>
-                    <li><a href="index.html#inPageNav" data-diff="components/inPageNav" data-diff-demos="classicTabs,sleekNav">In-Page Nav</a></li>
-                    <li><a href="index.html#lightbox" data-diff="components/lightbox" data-diff-demos=default>Lightbox</a></li>
-                    <li><a href="index.html#accordion" data-diff="components/accordion" data-diff-demos=default>Accordion</a></li>
-                    <li><a href="index.html#carousel" data-diff="components/carousel" data-diff-demos="singleSlide,skinny,default">Carousel</a></li>
-                    <li><a href="index.html#share" data-diff="components/share" data-diff-demos="bar,popup">Share</a></li>
-                    <li><a href="index.html#video" data-diff="components/video" data-diff-demos="default">Video</a></li>
-                </ul>
             </li>
-            <li class="dropdown">
+            <li id='utils-tab' aria-controls="utils-tab-contents" role="tab" class="tab">
                 <a href="index.html#utils" class="intro">Utils</a>
-                <ul class=dropdown-menu>
-                    <li><a href="index.html#toggle" data-diff="utils/toggle" data-diff-demos="complete,container,element">Toggle</a></li>
-                    <li><a href="index.html#hashManager" data-diff="utils/hashManager" data-diff-demos="default">Hash Manager</a></li>
-                    <li><a href="index.html#detect" data-diff="utils/detect" data-diff-demos="orientation,touch,view">Detect</a></li>
-                </ul>
             </li>
-            <li class="dropdown">
+            <li id='external-libraries-tab' aria-controls="external-libraries-tab-contents" role="tab" class="tab">
                 <a href="index.html#external-libraries"  class="intro">External Libraries</a>
-                <ul class=dropdown-menu>
-                    <li><a href="index.html#jquery" data-diff="externalLibraries/jquery" data-diff-demos="available">JQuery</a></li>
-                    <li><a href="index.html#requirejs" data-diff="externalLibraries/requirejs" data-diff-demos="available">RequireJS</a></li>
-                </ul>
             </li>
-            <li class="dropdown">
+            <li id='examples-tab' aria-controls="examples-tab-contents" role="tab" class="tab">
                 <a href="index.html#examples" class="intro">Examples</a>
-                <ul class=dropdown-menu>
-                    <li><a href="index.html#errorPage" data-diff="examples/errorPage" data-diff-demos="default">Error Page</a></li>
-                </ul>
             </li>
-            <li>
+            <li id='changes-tab' aria-controls="changes-tab-contents" role="tab" class="tab">
                 <a href="changes.html" class="intro">Changes</a>
             </li>
         </ul>
+    <div id="base-styles-tab-contents" class="tabpanel selected" aria-labeledby="base-styles-tab" role="tabpanel">
+        <section class="tabcontents">
+            <ul>
+                <li><a href="index.html#grid" data-diff="baseStyles/grid" data-diff-demos="974,1140,lightbox,tabletPortrait">Grid</a></li>
+                <li><a href="index.html#colours" data-diff="baseStyles/colours" data-diff-demos="backgrounds,buttonsIcons,channels,shop,typography,v3Brand">Colours</a></li>
+                <li><a href="index.html#typography" data-diff="baseStyles/typography" data-diff-demos="all">Typography</a></li>
+                <li><a href="index.html#icons" data-diff="baseStyles/icons" data-diff-demos="sprite,skycons">Icons</a></li>
+                <li><a href="index.html#buttons" data-diff="baseStyles/buttons" data-diff-demos="primary,secondary">Buttons</a></li>
+                <li><a href="index.html#spinners" data-diff="baseStyles/spinners" data-diff-demos="default">Spinners</a></li>
+            </ul>
+        </section>
     </div>
-</div>
+
+    <div id="components-tab-contents" class="tabpanel selected" aria-labeledby="components-tab" role="tabpanel">
+        <section class="tabcontents">
+            <ul>
+                <li><a href="index.html#breadcrumbs" data-diff="components/breadcrumbs" data-diff-demos=default>Breadcrumbs</a></li>
+                <li><a href="index.html#form" data-diff="components/form" data-diff-demos=default>Form</a></li>
+                <li><a href="index.html#inPageNav" data-diff="components/inPageNav" data-diff-demos="classicTabs,sleekNav">In-Page Nav</a></li>
+                <li><a href="index.html#lightbox" data-diff="components/lightbox" data-diff-demos=default>Lightbox</a></li>
+                <li><a href="index.html#accordion" data-diff="components/accordion" data-diff-demos=default>Accordion</a></li>
+                <li><a href="index.html#carousel" data-diff="components/carousel" data-diff-demos="singleSlide,skinny,default">Carousel</a></li>
+                <li><a href="index.html#share" data-diff="components/share" data-diff-demos="bar,popup">Share</a></li>
+                <li><a href="index.html#video" data-diff="components/video" data-diff-demos="default">Video</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <div id="utils-tab-contents" class="tabpanel selected" aria-labeledby="utils-tab" role="tabpanel">
+        <section class="tabcontents">
+            <ul>
+                <li><a href="index.html#toggle" data-diff="utils/toggle" data-diff-demos="complete,container,element">Toggle</a></li>
+                <li><a href="index.html#hashManager" data-diff="utils/hashManager" data-diff-demos="default">Hash Manager</a></li>
+                <li><a href="index.html#detect" data-diff="utils/detect" data-diff-demos="orientation,touch,view">Detect</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <div id="external-libraries-tab-contents" class="tabpanel selected" aria-labeledby="external-libraries-tab" role="tabpanel">
+        <section class="tabcontents">
+            <ul>
+                <li><a href="index.html#jquery" data-diff="externalLibraries/jquery" data-diff-demos="available">JQuery</a></li>
+                <li><a href="index.html#requirejs" data-diff="externalLibraries/requirejs" data-diff-demos="available">RequireJS</a></li>
+            </ul>
+
+        </section>
+    </div>
+
+    <div id="examples-tab-contents" class="tabpanel selected" aria-labeledby="examples-tab" role="tabpanel">
+        <section class="tabcontents">
+            <ul>
+                <li><a href="index.html#errorPage" data-diff="examples/errorPage" data-diff-demos="default">Error Page</a></li>
+        </ul>
+        </section>
+    </div>
+
+</section>
 
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
