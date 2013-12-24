@@ -42,7 +42,7 @@
     }
 
     ScrollSpy.DEFAULTS = {
-        offset: 10
+        offset: 125
     }
 
     ScrollSpy.prototype.refresh = function () {
