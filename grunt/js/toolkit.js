@@ -62,8 +62,9 @@ if (typeof window.define === "function" && window.define.amd) {
         'modules/validation',
         'modules/lightbox',
         'modules/share',
+        'modules/tooltip',
         'modules/video',
-        'modules/carousel'], function(skycons, hashmanager, popup,toggle, diff, focus, modules, inPageNav, accordion, datePicker, validation, lightbox, share, video, carousel){
+        'modules/carousel'], function(skycons, hashmanager, popup,toggle, diff, focus, modules, inPageNav, accordion, datePicker, validation, lightbox, share, tooltip, video, carousel){
 
         return {
             modules: modules,
@@ -78,6 +79,7 @@ if (typeof window.define === "function" && window.define.amd) {
             validation: validation,
             lightbox: lightbox,
             share: share,
+            tooltip: tooltip,
             video: video,
             carousel: carousel
         };
