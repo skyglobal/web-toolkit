@@ -1120,6 +1120,7 @@ button.btn {
 .tabs-container.page-nav .tabs > .tab a {
   line-height: 44px;
   text-decoration: none;
+  border-bottom: 2px solid transparent;
 }
 .tabs-container.page-nav .tabs > .tab:hover {
   margin-bottom: -1px;
