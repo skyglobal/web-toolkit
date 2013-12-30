@@ -1,4 +1,61 @@
 
+if (typeof toolkit==='undefined') toolkit={};
+toolkit.focus = (function () {
+    
+
+    var tabKey = false;
+    var focusClass = 'has-focus';
+
+    function bindEvents(){
+        $(document)
+            .on('click keyup',keyUp)
+            .on('keydown', keyDown)
+            .on('focus', "a, input, button, select, *[tabindex]", addClass)
+            .on('blur', "a, input, button, select, *[tabindex]", removeClass);
+    }
+
+    function addClass(e) {
+        if (tabKey) {
+            $(e.currentTarget).addClass(focusClass);
+        }
+    }
+
+    function removeClass(e) {
+        $(e.currentTarget).removeClass(focusClass);
+    }
+
+    function keyDown(e){
+        var KeyID = (window.event) ? event.keyCode : e.keyCode;
+        if (KeyID == 9) {tabKey = true;}
+    }
+
+    function keyUp(e){
+        var KeyID = (window.event) ? event.keyCode : e.keyCode;
+        if (KeyID == 9) {tabKey = false;}
+    }
+
+    function apply(el){
+        $(el).addClass(focusClass);
+        el.focus();
+    }
+
+    bindEvents();
+
+    return {
+        apply: apply,
+        className: focusClass
+    };
+
+});
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('utils/focus', [], function() {
+        
+        return toolkit.focus();
+    });
+} else {
+    toolkit.focus = toolkit.focus();
+};
 /**
  purpose:
  to let 'anchor' tags do their job and change the hash in the url for internal links.
@@ -120,63 +177,6 @@ if (typeof window.define === "function" && window.define.amd) {
     });
 } else {
     toolkit.hashManager =  toolkit.hashManager();
-};
-if (typeof toolkit==='undefined') toolkit={};
-toolkit.focus = (function () {
-    
-
-    var tabKey = false;
-    var focusClass = 'has-focus';
-
-    function bindEvents(){
-        $(document)
-            .on('click keyup',keyUp)
-            .on('keydown', keyDown)
-            .on('focus', "a, input, button, select, *[tabindex]", addClass)
-            .on('blur', "a, input, button, select, *[tabindex]", removeClass);
-    }
-
-    function addClass(e) {
-        if (tabKey) {
-            $(e.currentTarget).addClass(focusClass);
-        }
-    }
-
-    function removeClass(e) {
-        $(e.currentTarget).removeClass(focusClass);
-    }
-
-    function keyDown(e){
-        var KeyID = (window.event) ? event.keyCode : e.keyCode;
-        if (KeyID == 9) {tabKey = true;}
-    }
-
-    function keyUp(e){
-        var KeyID = (window.event) ? event.keyCode : e.keyCode;
-        if (KeyID == 9) {tabKey = false;}
-    }
-
-    function apply(el){
-        $(el).addClass(focusClass);
-        el.focus();
-    }
-
-    bindEvents();
-
-    return {
-        apply: apply,
-        className: focusClass
-    };
-
-});
-
-if (typeof window.define === "function" && window.define.amd) {
-    define('utils/focus', [], function() {
-        
-        return toolkit.focus();
-    });
-} else {
-    toolkit.focus = toolkit.focus();
 };
 /*global jQuery:false */
 if (typeof toolkit==='undefined') toolkit={};
@@ -340,8 +340,8 @@ if (typeof window.define === "function" && window.define.amd) {
 } else {
     toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager);
 };
-if (typeof toolkit==='undefined') toolkit={};
-toolkit.displayCode = (function(lightbox){
+if (typeof demo==='undefined') demo={};
+demo.displayCode = (function(lightbox){
 
     function displayCode(options){
         var feature = options.feature;
@@ -490,23 +490,50 @@ toolkit.displayCode = (function(lightbox){
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/displayCode', ['components/lightbox'],function(lightbox) {
-        return toolkit.displayCode(lightbox);
+    define('demo/displayCode', ['components/lightbox'],function(lightbox) {
+        return demo.displayCode(lightbox);
     });
 } else {
-    toolkit.displayCode = toolkit.displayCode(toolkit.lightbox);
+    demo.displayCode = demo.displayCode(toolkit.lightbox);
 };
-var demo = (function(hash, lightbox, displayCode) {
+if (typeof demo==='undefined') demo={};
+demo.menu = (function(){
 
     var menuIsSticky = false;
     var offset = $('#toolkit-menu-tabs').offset().top;
+    var hideSubMenuTimeout;
 
     function bindEvents() {
-        $(document).on('click','.toggler', toggle);
-        $(document).on('click','.code-download', showCode);
-        $('.sky-form').on('submit', checkDiff);
         $(window).on('scroll', stickMenuToTop);
-        $('#toolkit-menu-tabs [role=tablist] li').on('mouseenter mouseleave', showSubMenu);
+        $('#toolkit-menu-tabs [role=tablist] li').on('mouseenter mouseleave', toggleSubMenu);
+        $('#toolkit-menu-tabs .tabpanel').on('mouseenter mouseleave', toggleSubMenu);
+    }
+
+    function toggleSubMenu(e){
+
+        if (e.type==='mouseleave'){
+            hideSubMenuTimeout = setTimeout(function(){
+                hideAllSubMenus();
+                showSeletcedSubMenu();
+            },250);
+        } else {
+            clearTimeout(hideSubMenuTimeout);
+            showHoveredSubMenu($('#' + $(this).attr('aria-controls')));
+        }
+    }
+
+    function hideAllSubMenus(){
+        $('#toolkit-menu-tabs .tabpanel').removeClass('selected');
+    }
+
+    function showHoveredSubMenu($el){
+        if (!$el.length){ return; }
+        hideAllSubMenus();
+        $el.addClass('selected');
+    }
+
+    function showSeletcedSubMenu(){
+        $('#toolkit-menu-tabs .tabpanel li.selected').closest('.tabpanel').addClass('selected');
     }
 
     function stickMenuToTop(){
@@ -523,13 +550,160 @@ var demo = (function(hash, lightbox, displayCode) {
         }
     }
 
-    function showSubMenu(e){
-        $('#toolkit-menu-tabs .tabpanel').removeClass('selected');
-        if (e.type==='mouseleave'){
-            $('#toolkit-menu-tabs .tabpanel li.selected').closest('.tabpanel').addClass('selected');
+    bindEvents();
+
+});
+
+if (typeof window.define === "function" && window.define.amd){
+    define('demo/menu', [], function() {
+        return demo.menu();
+    });
+} else {
+    demo.menu();
+}
+;
+if (typeof demo==='undefined') demo={};
+demo.tests = (function(hash, lightbox){
+
+    function runTest(hash){
+        var spec = hash.replace('test/','');
+        var script = document.createElement('script');
+        script.src = "/test/specs/" + spec + ".js";
+        script.onload =  function(){
+            var $runTestLink = $('a[href*="#' + hash + '"]'),
+                $mocha = $('<div id="mocha" class="mocha-container"></div>');
+            $runTestLink.parent().after($mocha);
+            var grep = window[spec]();
+            mocha.grep(grep);
+            mocha.run(function(){
+                updateTestsResults($runTestLink, $mocha);
+                $mocha.attr('id','mocha-' + spec)
+            });
+            $runTestLink.removeAttr('href');
+            $('html, body').animate({
+                scrollTop: $mocha.parent().prev().offset().top
+            }, 200);
+            createLightbox($mocha, spec);
+            $runTestLink.on('click', function(){
+                showLightbox($('#' +  spec + '-lightbox'));
+            })
+        };
+        document.head.appendChild(script);
+    }
+
+    function updateTestsResults($runTestLink, $mocha){
+        var findFailure = $mocha.find('.failures em').text();
+
+        if(findFailure === '0'){
+            $runTestLink.append("<span class='dev-button result-summary'><i class='skycon-tick colour' aria-hidden='true'></i> Tests Passed</span>");
         } else {
-            $('#' + $(this).attr('aria-controls')).addClass('selected');
+            $runTestLink.append("<span class='dev-button result-summary error'><i class='skycon-warning colour' aria-hidden='true'></i> Tests Failed</span>");
         }
+    }
+
+    function hideLightbox(e,$box){
+        e.preventDefault();
+        var hide =  $(e.target).hasClass('lightbox-close') ||
+            (!$(e.target).hasClass('lightbox-content') && !$(e.target).parents('.lightbox-content').length);
+        if ( hide){
+            $box.hide().removeClass('lightbox-open');
+        }
+    }
+
+    function showLightbox($box){
+        $box.show().addClass('lightbox-open');
+    }
+
+    function createLightbox($mocha, spec){
+        //todo: make lightbox do this automatically
+        var lightboxDiv = document.createElement('div');
+        var container = document.createElement('div');
+        var article = document.createElement('article');
+        var $close = $('<a class="internal-link lightbox-close skycon-close black" href="#"><span class="speak">Close</span></a>');
+        lightboxDiv.className = 'lightbox';
+        lightboxDiv.id = spec + '-lightbox';
+        container.className = 'skycom-container lightbox-container clearfix';
+        article.className = 'lightbox-content skycom-10 skycom-offset1';
+        $(article).append($close);
+        $(article).append($mocha.find('#mocha-stats'));
+        $(article).append($mocha.find('#mocha-report'));
+        $(container).append($(article));
+        $(lightboxDiv).append($(container));
+        $mocha.append($(lightboxDiv));
+        showLightbox($('#' +  spec + '-lightbox'));
+        $close.add($(lightboxDiv)).on('click', function(e){
+            hideLightbox(e, $('#' +  spec + '-lightbox'));
+        });
+    }
+
+    function registerTests(){
+        if (!window.require || !window.describe){
+            setTimeout(registerTests,250);
+            return;
+        }
+        var hashes = [];
+        $('.run-test').each(function(){
+            hashes.push($(this).attr('href').split('#')[1]);
+        });
+        hash.register(hashes, runTest);
+    }
+
+    registerTests();
+
+});
+
+if (typeof window.define === "function" && window.define.amd){
+    define('demo/tests', ['utils/hashManager', 'components/lightbox'], function(hash, lightbox) {
+        return demo.tests(hash, lightbox);
+    });
+} else {
+    demo.tests(toolkit.hash, toolkit.lightbox);
+}
+;
+if (typeof demo==='undefined') demo={};
+demo.skycons = (function() {
+
+
+    function sortSkyconsTable(){
+        var skycons = [];
+        var rows = $('#wiki-skycons tbody tr');
+        rows.each(function(i){
+            skycons.push({i:i, skycon:$(this).find('td').first().text().trim()});
+        });
+        skycons.sort(function (a, b) {
+            if (a.skycon > b.skycon) {
+                return 1;
+            } else if (a.skycon < b.skycon) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+        $('#wiki-skycons tbody tr').remove();
+        for (var i=0; i<skycons.length; i++){
+            $('#wiki-skycons tbody').append($(rows[skycons[i].i]));
+        }
+    }
+
+    sortSkyconsTable();
+
+});
+
+if (typeof window.define === "function" && window.define.amd){
+    define('demo/skycons',  [],function() {
+        return demo.skycons();
+    });
+} else {
+    demo.skycons();
+}
+;
+if (typeof demo==='undefined') demo={};
+demo.main = (function(displayCode) {
+
+    function bindEvents() {
+        $(document).on('click','.toggler', toggle);
+        $(document).on('click','.code-download', showCode);
+        $('.sky-form').on('submit', checkDiff);
     }
 
     function checkDiff(e) {
@@ -576,33 +750,12 @@ var demo = (function(hash, lightbox, displayCode) {
             codeBase = $('a[href*="#' + feature + '"]').attr('data-diff');
             route = host + '/' + version + '/' + dir + '/' + codeBase;
         }
-        window.toolkit.displayCode({
+        displayCode({
             feature: feature,
             dir: route,
             fileNames: featureFiles,
             styled: styled
         });
-    }
-
-    function sortSkyconsTable(){
-        var skycons = [];
-        var rows = $('#wiki-skycons tbody tr');
-        rows.each(function(i){
-            skycons.push({i:i, skycon:$(this).find('td').first().text().trim()});
-        });
-        skycons.sort(function (a, b) {
-            if (a.skycon > b.skycon) {
-                return 1;
-            } else if (a.skycon < b.skycon) {
-                return -1;
-            } else {
-                return 0;
-            }
-        });
-        $('#wiki-skycons tbody tr').remove();
-        for (var i=0; i<skycons.length; i++){
-            $('#wiki-skycons tbody').append($(rows[skycons[i].i]));
-        }
     }
 
     function toggle(){
@@ -617,100 +770,18 @@ var demo = (function(hash, lightbox, displayCode) {
         }
     }
 
-    function updateTestsResults($runTestLink, $mocha){
-        var findFailure = $mocha.find('.failures em').text();
-
-        if(findFailure === '0'){
-            $runTestLink.append("<span class='dev-button result-summary'><i class='skycon-tick colour' aria-hidden='true'></i> Tests Passed</span>");
-        } else {
-            $runTestLink.append("<span class='dev-button result-summary error'><i class='skycon-warning colour' aria-hidden='true'></i> Tests Failed</span>");
-        }
-    }
-
-    function hideLightbox(e,$box){
-        e.preventDefault();
-        var hide =  $(e.target).hasClass('lightbox-close') ||
-            (!$(e.target).hasClass('lightbox-content') && !$(e.target).parents('.lightbox-content').length);
-        if ( hide){
-            $box.hide().removeClass('lightbox-open');
-        }
-    }
-    function showLightbox($box){
-        $box.show().addClass('lightbox-open');
-    }
-
-    function createLightbox($mocha, spec){
-        //todo: make lightbox do this automatically
-        var lightboxDiv = document.createElement('div');
-        var container = document.createElement('div');
-        var article = document.createElement('article');
-        var $close = $('<a class="internal-link lightbox-close skycon-close black" href="#"><span class="speak">Close</span></a>');
-        lightboxDiv.className = 'lightbox';
-        lightboxDiv.id = spec + '-lightbox';
-        container.className = 'skycom-container lightbox-container clearfix';
-        article.className = 'lightbox-content skycom-10 skycom-offset1';
-        $(article).append($close);
-        $(article).append($mocha.find('#mocha-stats'));
-        $(article).append($mocha.find('#mocha-report'));
-        $(container).append($(article));
-        $(lightboxDiv).append($(container));
-        $mocha.append($(lightboxDiv));
-        showLightbox($('#' +  spec + '-lightbox'));
-        $close.add($(lightboxDiv)).on('click', function(e){
-            hideLightbox(e, $('#' +  spec + '-lightbox'));
-        });
-    }
-
-    function runTest(hash){
-        var spec = hash.replace('test/','');
-        var script = document.createElement('script');
-        script.src = "/test/specs/" + spec + ".js";
-        script.onload =  function(){
-            var $runTestLink = $('a[href*="#' + hash + '"]'),
-                $mocha = $('<div id="mocha" class="mocha-container"></div>');
-            $runTestLink.parent().after($mocha);
-            var grep = window[spec]();
-            mocha.grep(grep);
-            mocha.run(function(){
-                updateTestsResults($runTestLink, $mocha);
-                $mocha.attr('id','mocha-' + spec)
-            });
-            $runTestLink.removeAttr('href');
-            $('html, body').animate({
-                scrollTop: $mocha.parent().prev().offset().top
-            }, 200);
-            createLightbox($mocha, spec);
-            $runTestLink.on('click', function(){
-                showLightbox($('#' +  spec + '-lightbox'));
-            })
-        };
-        document.head.appendChild(script);
-    }
-
-    function registerTests(){
-        if (!window.require || !window.describe){
-            setTimeout(registerTests,250);
-            return;
-        }
-        var hashes = [];
-        $('.run-test').each(function(){
-            hashes.push($(this).attr('href').split('#')[1]);
-        });
-        hash.register(hashes, runTest);
-    }
-
     bindEvents();
-    sortSkyconsTable();
-    registerTests();
+
 });
 
 if (typeof window.define === "function" && window.define.amd){
-    define('demo', ['utils/hashManager',
-                    'components/lightbox',
-                    'utils/displayCode'], function(hash,lightbox, displayCode) {
-            return demo(hash, lightbox, displayCode);
+    define('demo', ['demo/displayCode',
+                    'demo/menu',
+                    'demo/tests',
+                    'demo/skycons'], function(displayCode, menu, tests, skycons) {
+            return demo.main(displayCode, menu, tests, skycons);
  });
 } else {
-    demo(toolkit.hashManager, toolkit.lightbox, toolkit.displayCode);
+    demo.main(demo.displayCode, demo.menu, demo.tests, demo.skycons);
 }
 ;
