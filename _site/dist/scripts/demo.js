@@ -563,7 +563,7 @@ if (typeof window.define === "function" && window.define.amd){
 }
 ;
 if (typeof demo==='undefined') demo={};
-demo.tests = (function(hash, lightbox){
+demo.tests = (function(hashManager, lightbox){
 
     function runTest(hash){
         var spec = hash.replace('test/','');
@@ -645,7 +645,7 @@ demo.tests = (function(hash, lightbox){
         $('.run-test').each(function(){
             hashes.push($(this).attr('href').split('#')[1]);
         });
-        hash.register(hashes, runTest);
+        window.toolkit.hashManager.register(hashes, runTest); //todo: this should be just 'hashManager'
     }
 
     registerTests();
