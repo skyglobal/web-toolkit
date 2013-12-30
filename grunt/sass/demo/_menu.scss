@@ -24,6 +24,11 @@
 #toolkit-menu-tabs.stick{
   top:0;
 }
+
+
+
+
+
 .secondary-menu{
   bottom: 0;
   ul{
@@ -32,11 +37,10 @@
   li{
     display: inline;
     line-height: 2.5em;
-    padding: 0 16px;
-    &:first-child{
-      padding-left: 0;
-    }
+    padding-right:32px;
+
     a {
+      white-space: nowrap;
       color: #666666;
     }
   }
@@ -47,4 +51,18 @@
     padding-bottom: 8px;
   }
 
+}
+
+body {
+
+  @media (max-width:768px){
+    .tabs-container.page-nav .tabs > .tab a{
+      font-size: 20px;
+      line-height:36px;
+    }
+    .tabs-container.page-nav .tabcontents .tabs > .tab a{
+      font-size: 14px;
+      line-height:30px;
+    }
+  }
 }

@@ -141,12 +141,10 @@ code .variable.global, code .variable.class, code .variable.instance {
 .secondary-menu li {
   display: inline;
   line-height: 2.5em;
-  padding: 0 16px;
-}
-.secondary-menu li:first-child {
-  padding-left: 0;
+  padding-right: 32px;
 }
 .secondary-menu li a {
+  white-space: nowrap;
   color: #666666;
 }
 .secondary-menu .meta-data {
@@ -154,6 +152,17 @@ code .variable.global, code .variable.class, code .variable.instance {
   line-height: 1em;
   padding-top: 8px;
   padding-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+  body .tabs-container.page-nav .tabs > .tab a {
+    font-size: 20px;
+    line-height: 36px;
+  }
+  body .tabs-container.page-nav .tabcontents .tabs > .tab a {
+    font-size: 14px;
+    line-height: 30px;
+  }
 }
 
 .demo-header {
@@ -250,6 +259,7 @@ code .variable.global, code .variable.class, code .variable.instance {
   font-size: 24px;
   margin-left: 16px;
   line-height: 3em;
+  white-space: nowrap;
 }
 
 .block {
