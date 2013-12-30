@@ -150,6 +150,7 @@ code .variable.global, code .variable.class, code .variable.instance {
   color: #666666;
 }
 .secondary-menu .meta-data {
+  padding-right: 0;
   line-height: 1em;
   padding-top: 8px;
   padding-bottom: 8px;
