@@ -1,5 +1,5 @@
-if (typeof toolkit==='undefined') toolkit={};
-toolkit.displayCode = (function(lightbox){
+if (typeof demo==='undefined') demo={};
+demo.displayCode = (function(lightbox){
 
     function displayCode(options){
         var feature = options.feature;
@@ -148,9 +148,9 @@ toolkit.displayCode = (function(lightbox){
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/displayCode', ['components/lightbox'],function(lightbox) {
-        return toolkit.displayCode(lightbox);
+    define('demo/displayCode', ['components/lightbox'],function(lightbox) {
+        return demo.displayCode(lightbox);
     });
 } else {
-    toolkit.displayCode = toolkit.displayCode(toolkit.lightbox);
+    demo.displayCode = demo.displayCode(toolkit.lightbox);
 }
