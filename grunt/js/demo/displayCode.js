@@ -15,7 +15,7 @@ demo.displayCode = (function(lightbox){
     }
 
     function addStyledCode(name, ext, code){
-        var $code = $(code.replace(/{{ site.version }}/g,$('h1.wiki-header small').text().replace('v','').trim()));
+        var $code = $(code.replace(/{{ site.version }}/g,$('#current-version').text()));
         if (ext.indexOf('js')>-1){
             $code = $.parseHTML($code);
         }
