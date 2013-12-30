@@ -357,7 +357,7 @@ demo.displayCode = (function(lightbox){
     }
 
     function addStyledCode(name, ext, code){
-        var $code = $(code.replace(/{{ site.version }}/g,$('h1.wiki-header small').text().replace('v','').trim()));
+        var $code = $(code.replace(/{{ site.version }}/g,$('#current-version').text()));
         if (ext.indexOf('js')>-1){
             $code = $.parseHTML($code);
         }
@@ -595,9 +595,9 @@ demo.tests = (function(hashManager, lightbox){
         var findFailure = $mocha.find('.failures em').text();
 
         if(findFailure === '0'){
-            $runTestLink.append("<span class='dev-button result-summary'><i class='skycon-tick colour' aria-hidden='true'></i> Tests Passed</span>");
+            $runTestLink.prepend("<span class='dev-button result-summary'><i class='skycon-tick colour' aria-hidden='true'></i> Tests Passed</span>");
         } else {
-            $runTestLink.append("<span class='dev-button result-summary error'><i class='skycon-warning colour' aria-hidden='true'></i> Tests Failed</span>");
+            $runTestLink.prepend("<span class='dev-button result-summary error'><i class='skycon-warning colour' aria-hidden='true'></i> Tests Failed</span>");
         }
     }
 
@@ -710,7 +710,7 @@ demo.main = (function(displayCode) {
         e.preventDefault();
         var newRouteDir,
             oldVersion = $('#version').val(),
-            newVersion = $('.wiki-header small').text().replace('v',''),
+            newVersion = $('#current-version').text(),
             route = 'http://web-toolkit.global.sky.com',
             routeDir = newRouteDir = '_site/_includes';
         if (location.hostname.indexOf('local')===0){
@@ -732,7 +732,7 @@ demo.main = (function(displayCode) {
     function showCode(e){
         var styled = false;
         var feature = $(this).attr('href').replace('#!lightbox/code-','');
-        var version = $('.wiki-header small').text().replace('v','').trim(),
+        var version = $('#current-version').text(),
             host = 'http://web-toolkit.global.sky.com',
             dir = '_site/_includes';
         if (location.hostname.indexOf('local')===0){

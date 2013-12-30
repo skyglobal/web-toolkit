@@ -11,10 +11,25 @@
   border:0;
 }
 
+.secondary-menu,
 #toolkit-menu-tabs.stick{
   position: fixed;
-  top:0;
   background: white;
   width: 100%;
   z-index: 5;
+}
+
+#toolkit-menu-tabs.stick{
+  top:0;
+}
+.secondary-menu{
+  bottom: 0;
+  li{
+    display: inline;
+    line-height: 2em;
+    padding: 0 8px;
+    &:first-child{
+      padding-left: 0;
+    }
+  }
 }

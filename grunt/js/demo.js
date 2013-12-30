@@ -11,7 +11,7 @@ demo.main = (function(displayCode) {
         e.preventDefault();
         var newRouteDir,
             oldVersion = $('#version').val(),
-            newVersion = $('.wiki-header small').text().replace('v',''),
+            newVersion = $('#current-version').text(),
             route = 'http://web-toolkit.global.sky.com',
             routeDir = newRouteDir = '_site/_includes';
         if (location.hostname.indexOf('local')===0){
@@ -33,7 +33,7 @@ demo.main = (function(displayCode) {
     function showCode(e){
         var styled = false;
         var feature = $(this).attr('href').replace('#!lightbox/code-','');
-        var version = $('.wiki-header small').text().replace('v','').trim(),
+        var version = $('#current-version').text(),
             host = 'http://web-toolkit.global.sky.com',
             dir = '_site/_includes';
         if (location.hostname.indexOf('local')===0){
