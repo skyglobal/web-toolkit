@@ -1341,8 +1341,6 @@ $('.sky-form').validation();
         }
     </script>
 </div>
-
-        Included file 'components/tabs.html' not found in _includes directory
     </div>
     <a name="lightbox"></a>
     <div class="sub-section">
@@ -1974,17 +1972,9 @@ $('.sky-form').validation();
     });
 });
         } else {
-            if (window.require){
-    require(['toolkit'], function(toolkit){
-        $('#toggle-by-container .toggle-link').on('click', function() {
-            toolkit.toggle({$elClicked:$(this)});
-        });
-    });
-} else {
-    $('#toggle-by-container .toggle-link').on('click', function() {
-        toolkit.toggle({$elClicked:$(this)});
-    });
-}
+            $('#toggle-by-container .toggle-link').on('click', function() {
+    toolkit.toggle({$elClicked:$(this)});
+});
         }
     </script>
 </div>
