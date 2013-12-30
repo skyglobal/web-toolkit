@@ -173,6 +173,10 @@ code .variable.global, code .variable.class, code .variable.instance {
   margin: 0 0 16px;
 }
 
+.sub-section {
+  margin-top: 52px;
+}
+
 .designer-notes {
   margin-top: 0;
 }
@@ -237,8 +241,9 @@ code .variable.global, code .variable.class, code .variable.instance {
 }
 
 a[name]:not([href]) {
-  padding-top: 1em;
+  top: -5em;
   display: block;
+  position: relative;
 }
 
 body a[name=base-styles] {
