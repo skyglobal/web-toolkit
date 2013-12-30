@@ -116,6 +116,10 @@ code .variable.global, code .variable.class, code .variable.instance {
   border: 0;
 }
 
+.page-nav .tabpanel {
+  border-bottom: 1px solid #ccc;
+}
+
 .secondary-menu,
 #toolkit-menu-tabs.stick {
   position: fixed;
@@ -131,13 +135,24 @@ code .variable.global, code .variable.class, code .variable.instance {
 .secondary-menu {
   bottom: 0;
 }
+.secondary-menu ul {
+  border-top: 1px solid #ccc;
+}
 .secondary-menu li {
   display: inline;
-  line-height: 2em;
-  padding: 0 8px;
+  line-height: 2.5em;
+  padding: 0 16px;
 }
 .secondary-menu li:first-child {
   padding-left: 0;
+}
+.secondary-menu li a {
+  color: #666666;
+}
+.secondary-menu .meta-data {
+  line-height: 1em;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .demo-header {
