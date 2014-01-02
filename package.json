@@ -18,11 +18,6 @@
 	    ,"grunt-webfont": "0.1.12"
 	    ,"grunt-svgmin": "latest"
 	    ,"grunt-grunticon": "latest"
-//        ,"grunt-blanket-mocha": "latest",
-//        ,"grunt-mocha-cov": "latest",
-//        ,"grunt-istanbul": "latest",
-//        ,"grunt-istanbul-coverage": "latest",
-//        ,"grunt-jscoverage": "latest"
     },
     "scripts": {
         "test": "grunt test"
