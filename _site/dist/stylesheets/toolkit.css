@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body .visible-touch,
 body .hidden {
   display: none;
@@ -697,6 +698,23 @@ small {
   font-size: 13px;
   line-height: 1em;
   color: #666666;
+}
+
+ul.grey-bullets {
+  list-style: none;
+}
+ul.grey-bullets li {
+  position: relative;
+  margin: 0 0 0.5em 1.2em;
+}
+ul.grey-bullets li:before {
+  content: '•';
+  display: block;
+  position: absolute;
+  text-align: center;
+  margin-left: -1.2em;
+  width: 1em;
+  color: #999;
 }
 
 .instructions {
