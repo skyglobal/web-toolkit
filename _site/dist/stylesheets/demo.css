@@ -153,6 +153,9 @@ code .variable.global, code .variable.class, code .variable.instance {
   padding-top: 8px;
   padding-bottom: 8px;
 }
+.secondary-menu .meta-data .intro {
+  margin: 0;
+}
 
 @media (max-width: 768px) {
   body .tabs-container.page-nav .tabs > .tab a {
