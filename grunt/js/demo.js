@@ -1,5 +1,5 @@
 if (typeof demo==='undefined') demo={};
-demo.main = (function(DisplayCode) {
+demo.main = (function(DisplayCode, menu, tests, skycons) {
 
     function bindEvents() {
         $(document).on('click','.toggler', toggle);
