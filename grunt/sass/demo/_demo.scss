@@ -40,6 +40,17 @@ html{
 .code-h3{
   margin: 0;
 }
+code {
+  font-family: 'Monaco', courier, monospace;
+  background: #fdf6e3; /* base3 */
+  word-wrap: break-word;
+  margin: 0px;
+  padding: 2px;
+  color: #657b83; /* base00 */
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
 code.block{
   white-space: pre;
 }

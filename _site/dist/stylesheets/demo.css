@@ -1,107 +1,3 @@
-/**
- * Solarized Light theme
- *
- * Adaptation of Solarized Light from ethanschoonover.com/solarized
- *
- * @author Ethan Schoonover
- * @author David Litmark
- * @version 1.0.0
- */
-code {
-  background: #fdf6e3;
-  /* base3 */
-  word-wrap: break-word;
-  margin: 0px;
-  padding: 2px;
-  color: #657b83;
-  /* base00 */
-  font-size: 14px;
-  margin-bottom: 5px;
-}
-
-code {
-  font-family: 'Monaco', courier, monospace;
-}
-
-code .comment {
-  color: #93a1a1;
-  /* base1 */
-}
-
-code .constant {
-  color: #657b83;
-  /* base00 */
-}
-
-code .constant.language {
-  color: #268bd2;
-  /* blue */
-}
-
-code .constant.regexp {
-  color: #2aa198;
-  /* cyan */
-}
-
-code .storage {
-  color: #268bd2;
-  /* blue */
-}
-
-code .string, code .comment.docstring {
-  color: #2aa198;
-  /* cyan */
-}
-
-code .support.tag.script, code .support.tag.style {
-  color: #2aa198;
-  /* cyan */
-}
-
-code .string.regexp {
-  color: #2aa198;
-  /* cyan */
-}
-
-code .string.regexp.open, code .string.regexp.close {
-  color: #2aa198;
-  /* cyan */
-}
-
-code .keyword, code .selector {
-  color: #859900;
-  /* green */
-}
-
-code .inherited-class {
-  font-style: italic;
-}
-
-code .entity {
-  color: #b58900;
-  /* yellow */
-}
-
-code .support, *[data-language="c"] .function.call {
-  color: #859900;
-  /* green */
-}
-
-code .support.method {
-  color: #657b83;
-  /* base00 */
-}
-
-code .support.property {
-  color: #657b83;
-  /* base00 */
-}
-
-code .variable.global, code .variable.class, code .variable.instance {
-  color: #657b83;
-  /* base00 */
-}
-
 .main-menu.tabs-container.page-nav [role=tablist] {
   margin-bottom: 0;
 }
@@ -212,6 +108,19 @@ html {
 
 .code-h3 {
   margin: 0;
+}
+
+code {
+  font-family: 'Monaco', courier, monospace;
+  background: #fdf6e3;
+  /* base3 */
+  word-wrap: break-word;
+  margin: 0px;
+  padding: 2px;
+  color: #657b83;
+  /* base00 */
+  font-size: 14px;
+  margin-bottom: 5px;
 }
 
 code.block {
@@ -694,4 +603,135 @@ ul.notes ul.notes {
 }
 .code-container .styled.js {
   display: none;
+}
+
+/*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+pre code {
+  display: block;
+  padding: 0.5em;
+  color: #333;
+  background: ghostwhite;
+}
+
+pre .comment,
+pre .template_comment,
+pre .diff .header,
+pre .javadoc {
+  color: #998;
+  font-style: italic;
+}
+
+pre .keyword,
+pre .css .rule .keyword,
+pre .winutils,
+pre .javascript .title,
+pre .nginx .title,
+pre .subst,
+pre .request,
+pre .status {
+  color: #333;
+  font-weight: bold;
+}
+
+pre .number,
+pre .hexcolor,
+pre .ruby .constant {
+  color: #099;
+}
+
+pre .string,
+pre .tag .value,
+pre .phpdoc,
+pre .tex .formula {
+  color: #dd1144;
+}
+
+pre .title,
+pre .id,
+pre .coffeescript .params,
+pre .scss .preprocessor {
+  color: #900;
+  font-weight: bold;
+}
+
+pre .javascript .title,
+pre .lisp .title,
+pre .clojure .title,
+pre .subst {
+  font-weight: normal;
+}
+
+pre .class .title,
+pre .haskell .type,
+pre .vhdl .literal,
+pre .tex .command {
+  color: #458;
+  font-weight: bold;
+}
+
+pre .tag,
+pre .tag .title,
+pre .rules .property,
+pre .django .tag .keyword {
+  color: #000080;
+  font-weight: normal;
+}
+
+pre .attribute,
+pre .variable,
+pre .lisp .body {
+  color: teal;
+}
+
+pre .regexp {
+  color: #009926;
+}
+
+pre .class {
+  color: #458;
+  font-weight: bold;
+}
+
+pre .symbol,
+pre .ruby .symbol .string,
+pre .lisp .keyword,
+pre .tex .special,
+pre .prompt {
+  color: #990073;
+}
+
+pre .built_in,
+pre .lisp .title,
+pre .clojure .built_in {
+  color: #0086b3;
+}
+
+pre .preprocessor,
+pre .pragma,
+pre .pi,
+pre .doctype,
+pre .shebang,
+pre .cdata {
+  color: #999;
+  font-weight: bold;
+}
+
+pre .deletion {
+  background: #ffdddd;
+}
+
+pre .addition {
+  background: #ddffdd;
+}
+
+pre .diff .change {
+  background: #0086b3;
+}
+
+pre .chunk {
+  color: #aaaaaa;
 }

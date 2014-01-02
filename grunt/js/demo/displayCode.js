@@ -1,5 +1,5 @@
 if (typeof demo==='undefined') demo={};
-demo.displayCode = (function(lightbox){
+demo.displayCode = (function(lightbox, hljs){
 
     function addStyledCode(name, ext, code){
         var $code = $(code.replace(/{{ site.version }}/g,$('#current-version').text()));
@@ -23,6 +23,7 @@ demo.displayCode = (function(lightbox){
         tr.appendChild(td2);
         tr.appendChild(td3);
         tableBody.appendChild(tr);
+        hljs.highlightBlock(tr);
     }
 
     function DisplayCode(options){
@@ -93,7 +94,7 @@ demo.displayCode = (function(lightbox){
         if (this.styled || styled){
             return $('<div id="' + id + '" class="styled ' + ext + '"></div> ');
         } else {
-            return $('<table class=' + ext + '><thead><tr><th colspan="3">' + ext.toUpperCase() + '</th></tr></thead><tbody id="' + id + '"></tbody></table> ');
+            return $('<pre><table class=language-' + ext.replace('require.','') + '><thead><tr><th colspan="3">' + ext.toUpperCase() + '</th></tr></thead><tbody id="' + id + '"></tbody></table></pre>');
         }
 
     };
@@ -136,9 +137,10 @@ demo.displayCode = (function(lightbox){
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('demo/displayCode', ['components/lightbox'],function(lightbox) {
-        return demo.displayCode(lightbox);
+    define('demo/displayCode', ['components/lightbox',
+        'demo/highlight'],function(lightbox, hljs) {
+        return demo.displayCode(lightbox, hljs);
     });
 } else {
-    demo.displayCode = demo.displayCode(toolkit.lightbox);
+    demo.displayCode = demo.displayCode(toolkit.lightbox, hljs);
 }

@@ -1,5 +1,5 @@
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.diff = (function(){
+toolkit.diff = (function(hljs){
 
     function findFiles(opts){
         var oldRoute = opts.oldRoute,
@@ -100,6 +100,7 @@ toolkit.diff = (function(){
         tr.appendChild(td2);
         tr.appendChild(td3);
         tableBody.appendChild(tr);
+        hljs.highlightBlock(tr);
     }
 
     function clear(){
@@ -166,7 +167,7 @@ toolkit.diff = (function(){
     };
 
     CompareCodeBase.prototype.createTable = function(ext){
-        return $('<div class="code-container"><table id="' + ext + '-' + this.fullName + '-table"><thead><tr><th colspan="3">' + ext.toUpperCase() + '</th></tr></thead><tbody></tbody></table></div> ');
+        return $('<div class="code-container"><pre><table id="' + ext + '-' + this.fullName + '-table"><thead><tr><th colspan="3">' + ext.toUpperCase() + '</th></tr></thead><tbody></tbody></table></pre></div> ');
     };
 
     CompareCodeBase.prototype.addTab = function(){
@@ -216,9 +217,9 @@ toolkit.diff = (function(){
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/diff', function() {
-        return toolkit.diff();
+    define('utils/diff', ['demo/highlight'], function(hljs) {
+        return toolkit.diff(hljs);
     });
 } else {
-    toolkit.diff = toolkit.diff();
+    toolkit.diff = toolkit.diff(hljs);
 }
