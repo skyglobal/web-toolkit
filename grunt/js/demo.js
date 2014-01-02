@@ -78,11 +78,11 @@ demo.main = (function(DisplayCode) {
 
 if (typeof window.define === "function" && window.define.amd){
     define('demo', ['demo/displayCode',
-                    'demo/menu',
-                    'demo/tests',
-                    'demo/skycons'], function(displayCode, menu, tests, skycons) {
-            return demo.main(displayCode, menu, tests, skycons);
- });
+        'demo/menu',
+        'demo/tests',
+        'demo/skycons'], function(displayCode, menu, tests, skycons) {
+        return demo.main(displayCode, menu, tests, skycons);
+    });
 } else {
-    demo.main(demo.displayCode, demo.menu, demo.tests, demo.skycons);
+    demo.main(demo.displayCode, demo.menu, demo.tests, demo.skycons    demo.main(demo.displayCode, demo.menu, demo.tests, demo.skycons);
 }
