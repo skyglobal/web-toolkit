@@ -446,7 +446,10 @@ toolkit.toggle = (function() {
 
     function animate($el, to) {
         if (supportTransition) {
-            $el.css({'height':to, overflow:'hidden', 'transition':'height 0.5s ease-in-out'});
+            setTimeout(function(){
+                $el.css({'height':to, overflow:'hidden', 'transition':'height 0.5s ease-in-out'});
+            }, 25);
+
         }
         $el.toggleClass('toggle-hidden', (to === 0));
         return $el;
