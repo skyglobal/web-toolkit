@@ -379,6 +379,14 @@ ul.notes ul.notes {
   margin-bottom: 10px;
 }
 
+.mobile-size {
+  color: #5cacb6;
+}
+
+.inactive .mobile-size {
+  color: #A9C7CA;
+}
+
 .demo-pink {
   color: #ed0677;
 }
