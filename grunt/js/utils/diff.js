@@ -100,7 +100,7 @@ toolkit.diff = (function(hljs){
         tr.appendChild(td2);
         tr.appendChild(td3);
         tableBody.appendChild(tr);
-        hljs.highlightBlock(tr);
+        hljs.highlightBlock(td3);
     }
 
     function clear(){
