@@ -343,19 +343,6 @@ if (typeof window.define === "function" && window.define.amd) {
 if (typeof demo==='undefined') demo={};
 demo.displayCode = (function(lightbox){
 
-    function displayCode(options){
-        var feature = options.feature;
-        var fileNames = options.fileNames;
-        var dir = options.dir;
-        var styled = options.styled;
-        new DisplayCode({
-            feature: feature,
-            fileNames: fileNames.split(','),
-            dir: dir,
-            styled: styled
-        });
-    }
-
     function addStyledCode(name, ext, code){
         var $code = $(code.replace(/{{ site.version }}/g,$('#current-version').text()));
         if (ext.indexOf('js')>-1){
@@ -381,6 +368,7 @@ demo.displayCode = (function(lightbox){
     }
 
     function DisplayCode(options){
+        this.header = options.header;
         this.feature = options.feature;
         this.dir = options.dir;
         this.fileNames = options.fileNames;
@@ -436,7 +424,7 @@ demo.displayCode = (function(lightbox){
     DisplayCode.prototype.addContainer = function(){
         if (this.$container.length){ return ; }
 
-        this.$container = $('<div class="code-container clearfix tabs-container page-nav" data-function="tabs" id="code-' + this.feature + '"><h3 class="code-h3">' + this.feature + '</h3><div id="' + this.feature + '-noteshtml-table" class="feature-notes"></div></div>');
+        this.$container = $('<div class="code-container clearfix tabs-container page-nav" data-function="tabs" id="code-' + this.feature + '"><h3 class="code-h3">' + this.header + '</h3><div id="' + this.feature + '-noteshtml-table" class="feature-notes"></div></div>');
         this.$tabList = $('<ul class="tabs clearfix" role="tablist" ><div class="dropdown-tab-select"><a href="#!" aria-controls="dropdown" aria-label="more tabs" class="medium">&hellip;</a><ul class="more-tabs"></ul></div></ul>');
         this.$container.append(this.$tabList);
         this.$lightboxLink.parent().parent().append(this.$container);
@@ -485,7 +473,7 @@ demo.displayCode = (function(lightbox){
         }
     };
 
-    return displayCode;
+    return DisplayCode;
 
 });
 
@@ -698,7 +686,7 @@ if (typeof window.define === "function" && window.define.amd){
 }
 ;
 if (typeof demo==='undefined') demo={};
-demo.main = (function(displayCode) {
+demo.main = (function(DisplayCode) {
 
     function bindEvents() {
         $(document).on('click','.toggler', toggle);
@@ -750,10 +738,11 @@ demo.main = (function(displayCode) {
             codeBase = $('a[href*="#' + feature + '"]').attr('data-diff');
             route = host + '/' + version + '/' + dir + '/' + codeBase;
         }
-        displayCode({
+        new DisplayCode({
+            header: $(this).parent().text().replace($(this).text(),'').trim(),
             feature: feature,
             dir: route,
-            fileNames: featureFiles,
+            fileNames: featureFiles.split(','),
             styled: styled
         });
     }

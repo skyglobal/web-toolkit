@@ -1,3 +1,7 @@
+html{
+  padding-bottom: 5em;
+}
+
 .demo-header{
   margin-bottom: 0;
   img{
@@ -35,6 +39,9 @@
 }
 .code-h3{
   margin: 0;
+}
+code.block{
+  white-space: pre;
 }
 .run-test{
   margin-left: 6px;
