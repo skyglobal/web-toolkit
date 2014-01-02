@@ -138,7 +138,7 @@
             <div id="utils-tab-contents" class="tabpanel" aria-labeledby="utils-tab" role="tabpanel">
                 <section class="tabcontents tabs-container page-nav">
                     <ul class="nav tabs clearfix">
-                        <li class="tab"><a href="index.html#toggle" class="skycom-ellipsis internal-link" data-diff="utils/toggle" data-diff-demos="complete,container,element">Toggle</a></li>
+                        <li class="tab"><a href="index.html#toggle" class="skycom-ellipsis internal-link" data-diff="utils/toggle" data-diff-demos="element">Toggle</a></li>
                         <li class="tab"><a href="index.html#hashManager" class="skycom-ellipsis internal-link" data-diff="utils/hashManager" data-diff-demos="default">Hash Manager</a></li>
                         <li class="tab"><a href="index.html#detect" class="skycom-ellipsis internal-link" data-diff="utils/detect" data-diff-demos="orientation,touch,view">Detect</a></li>
                     </ul>
@@ -148,8 +148,8 @@
             <div id="external-libraries-tab-contents" class="tabpanel" aria-labeledby="external-libraries-tab" role="tabpanel">
                 <section class="tabcontents tabs-container page-nav">
                     <ul class="nav tabs clearfix">
-                        <li class="tab"><a href="index.html#jquery" class="skycom-ellipsis internal-link" data-diff="externalLibraries/jquery" data-diff-demos="available">JQuery</a></li>
-                        <li class="tab"><a href="index.html#requirejs" class="skycom-ellipsis internal-link" data-diff="externalLibraries/requirejs" data-diff-demos="available">RequireJS</a></li>
+                        <li class="tab"><a href="index.html#jquery" class="skycom-ellipsis internal-link" data-diff="libraries/jquery" data-diff-demos="available">JQuery</a></li>
+                        <li class="tab"><a href="index.html#requirejs" class="skycom-ellipsis internal-link" data-diff="lLibraries/requirejs" data-diff-demos="available">RequireJS</a></li>
                     </ul>
 
                 </section>
@@ -1920,11 +1920,11 @@ $('.sky-form').validation();
 <div class="example">
     <h4 class="medium">By Element</h4>
     <div class="demo clearfix" >
-        <section id="toggle-by-element" data-mode=view>
-    <a class="toggle-link" data-toggle='#toggle-by-element .edit-container' data-toggle-text="Show"
+        <section id="toggle-by-element">
+    <a class="toggle-link" data-toggle='#element-to-toggle' data-toggle-text="Show"
        data-tracking-label="Show" data-toggle-state='shown'>Hide</a>
 
-    <div class="edit-container">
+    <div class="edit-container" id="element-to-toggle">
         <div>Some content</div>
         <div>Some more content for element toggling</div>
     </div>
@@ -1939,62 +1939,6 @@ $('.sky-form').validation();
 });
         } else {
             $('#toggle-by-element .toggle-link').on('click', function() {
-    toolkit.toggle({$elClicked:$(this)});
-});
-        }
-    </script>
-</div>
-
-<div class="example">
-    <h4 class="medium">By Container</h4>
-    <div class="demo clearfix" >
-        <section id="toggle-by-container" data-mode=view>
-    <a class="toggle-link" data-toggle='#container-to-toggle' data-toggle-text="Show" data-tracking-label="Show"
-       data-toggle-state='shown'><span>Hide</span><i class="icon"></i></a>
-
-    <div class="edit-container" id="container-to-toggle">
-        <div>Some content</div>
-        <div>Some more content for container toggling</div>
-    </div>
-</section>
-    </div>
-    <script>
-        if (window.require){
-            require(['toolkit'], function(toolkit){
-    $('#toggle-by-container .toggle-link').on('click', function() {
-        toolkit.toggle({$elClicked:$(this)});
-    });
-});
-        } else {
-            $('#toggle-by-container .toggle-link').on('click', function() {
-    toolkit.toggle({$elClicked:$(this)});
-});
-        }
-    </script>
-</div>
-
-<div class="example">
-    <h4 class="medium">Complete</h4>
-    <div class="demo clearfix" >
-        <section id="toggle-already-done" data-mode=view>
-    <a class="toggle-link" data-toggle='#container-to-toggle-done' data-toggle-text="Show"
-       data-tracking-label="Show" data-toggle-state='shown'>Hide</a>
-
-    <div class="edit-container" id="container-to-toggle-done" data-toggle-state="shown">
-        <div>Some content</div>
-        <div>Some more content</div>
-    </div>
-</section>
-    </div>
-    <script>
-        if (window.require){
-            require(['toolkit'], function(toolkit){
-    $('#toggle-already-done .toggle-link').on('click', function() {
-        toolkit.toggle({$elClicked:$(this)});
-    });
-});
-        } else {
-            $('#toggle-already-done .toggle-link').on('click', function() {
     toolkit.toggle({$elClicked:$(this)});
 });
         }
