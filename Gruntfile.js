@@ -69,18 +69,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-        mocha: {
-            all: {
-                src: (function() {
-                    var pattern = grunt.option('pattern') || '[A-Z]*';
-                    return ['_site/test.html'];
-                }()),
-                options: {
-                    run: false,
-                    log: false // Set to true to see console.log() output on the terminal
-                }
-            }
-        },
         webfont: {
             icons: {
                 src: 'grunt/fonts/min/*.svg',
@@ -134,12 +122,19 @@ module.exports = function(grunt) {
             }
         },
 
-        blanket_mocha: {
-            all: [ 'test/jsUnit/A*Spec.html',  ],
-            options: {
-                threshold: 50
+        mocha: {
+            all: {
+                src: (function() {
+                    var pattern = grunt.option('pattern') || '[A-Z]*';
+                    return ['_site/test.html'];
+                }()),
+                options: {
+                    run: false,
+                    log: false // Set to true to see console.log() output on the terminal
+                }
             }
         }
+
     });
 
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -152,7 +147,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-webfont'); //https://github.com/sapegin/grunt-webfont
     grunt.loadNpmTasks('grunt-svgmin');
     grunt.loadNpmTasks('grunt-grunticon');
-    grunt.loadNpmTasks('grunt-blanket-mocha');
+//    grunt.loadNpmTasks('grunt-blanket-mocha');
+//    grunt.loadNpmTasks('grunt-mocha-cov');
+//    grunt.loadNpmTasks('grunt-istanbul');
+//    grunt.loadNpmTasks('grunt-istanbul-coverage');
+//    grunt.loadNpmTasks('grunt-jscoverage');
 
     grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
     grunt.registerTask('spy', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'watch']);
