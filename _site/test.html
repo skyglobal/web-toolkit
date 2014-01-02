@@ -1580,14 +1580,16 @@ $('.sky-form').validation();
     <script>
         if (window.require){
             require(['toolkit'], function(){
-    $('#hero').skycom_carousel({ autoplay: true, videoAds: false });
+    $('#hero').skycom_carousel({
+        autoplay: true,
+        videoAds: false
+    });
 });
         } else {
-            $('#hero').skycom_carousel(
-    {   autoplay: true,
-        videoAds: false
-    }
-);
+            $('#hero').skycom_carousel({
+    autoplay: true,
+    videoAds: false
+});
         }
     </script>
 

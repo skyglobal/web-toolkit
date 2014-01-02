@@ -601,6 +601,14 @@ ul.notes ul.notes {
   overflow: auto;
 }
 
+#changes-page h3.add:after,
+#changes-page h3.del:after {
+  font-size: 0.5em;
+  content: ' [changes]';
+  padding-left: 8px;
+  color: #999;
+}
+
 .tab-list li {
   margin: 12px 0;
   float: left;
