@@ -47,8 +47,6 @@
 <!--[if LT IE 10]>
 <link href='static/masthead/ie/ielt10.css' rel='stylesheet'>
 <![endif]-->
-<script id='skycom-view-type'></script>
-<script id='skycom-orientation'></script>
 <!--[if lte IE 7]>
 <script src='static/masthead/ie7.js' type='text/javascript'></script>
 <![endif]-->
@@ -1497,8 +1495,7 @@ $('.sky-form').validation();
          id="hero">
     <h2 class="speak">Featured News, shows or Products from around Sky</h2>
     <div class="skycom-carousel-container clearfix">
-        <div
-                class="clearfix skycom-12 alpha bg-shading light-scheme"
+        <div class="clearfix skycom-12 alpha bg-shading light-scheme"
                 data-tracking-other="Sky Sports HD1"
                 data-tracking-pod="tile-1"
                 data-tracking-label="David Beckham And Sky Team Up"
@@ -1562,8 +1559,7 @@ $('.sky-form').validation();
                 These are some different terms and conditions
             </p>
         </div>
-        <div
-                class="clearfix skycom-12 alpha bg-shading dark-scheme"
+        <div class="clearfix skycom-12 alpha bg-shading dark-scheme"
                 data-tracking-other="Sky Movies Premiere"
                 data-tracking-pod="tile-3"
                 data-tracking-label="Watch The Avengers now in 9 hours"
@@ -1590,16 +1586,14 @@ $('.sky-form').validation();
     <script>
         if (window.require){
             require(['toolkit'], function(){
-    $('#hero').skycom_carousel({
-        autoplay: true,
-        videoAds: false
-    });
+    $('#hero').skycom_carousel({ autoplay: true, videoAds: false });
 });
         } else {
-            $('#hero').skycom_carousel({
-    autoplay: true,
-    videoAds: false
-});
+            $('#hero').skycom_carousel(
+    {   autoplay: true,
+        videoAds: false
+    }
+);
         }
     </script>
 
@@ -2183,7 +2177,7 @@ updateOrientation(toolkit);
                 <a target="_github" href="https://github.com/skyglobal/web-toolkit/issues">Bugs / Feature Requests</a>
             </li>
             <li class="right meta-data" >
-                <div class="intro">Toolkit v<span id="current-version">2.0.0rc1</span></div>
+                <div class="intro">Toolkit v<span id="current-version">2.0.0rc2</span></div>
                 <small class="right">Updated: 02-01-2014</small>
             </li>
         </ul>
