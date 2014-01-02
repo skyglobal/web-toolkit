@@ -1,5 +1,5 @@
 if (typeof demo==='undefined') demo={};
-demo.main = (function(displayCode) {
+demo.main = (function(DisplayCode) {
 
     function bindEvents() {
         $(document).on('click','.toggler', toggle);
@@ -51,10 +51,11 @@ demo.main = (function(displayCode) {
             codeBase = $('a[href*="#' + feature + '"]').attr('data-diff');
             route = host + '/' + version + '/' + dir + '/' + codeBase;
         }
-        displayCode({
+        new DisplayCode({
+            header: $(this).parent().text().replace($(this).text(),'').trim(),
             feature: feature,
             dir: route,
-            fileNames: featureFiles,
+            fileNames: featureFiles.split(','),
             styled: styled
         });
     }

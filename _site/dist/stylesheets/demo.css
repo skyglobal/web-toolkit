@@ -165,6 +165,10 @@ code .variable.global, code .variable.class, code .variable.instance {
   }
 }
 
+html {
+  padding-bottom: 5em;
+}
+
 .demo-header {
   margin-bottom: 0;
 }
@@ -208,6 +212,10 @@ code .variable.global, code .variable.class, code .variable.instance {
 
 .code-h3 {
   margin: 0;
+}
+
+code.block {
+  white-space: pre;
 }
 
 .run-test {
