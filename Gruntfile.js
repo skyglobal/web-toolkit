@@ -26,8 +26,9 @@ module.exports = function(grunt) {
         },
         jshint: {
             toolkit: ['grunt/js/components/*.js',
-                      'test/specs/**/*.js',
-                      'grunt/js/utils/*.js'],
+                      'grunt/js/utils/*.js',
+                      'grunt/js/demo/*.js',
+                      'test/specs/**/*.js'],
             others: ['Gruntfile.js'],
             options: {
                 "globals": {

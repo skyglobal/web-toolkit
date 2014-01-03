@@ -137,8 +137,7 @@ demo.displayCode = (function(lightbox, hljs){
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('demo/displayCode', ['components/lightbox',
-        'demo/highlight'],function(lightbox, hljs) {
+    define('demo/displayCode', ['components/lightbox', 'lib/highlight'],function(lightbox, hljs) {
         return demo.displayCode(lightbox, hljs);
     });
 } else {
