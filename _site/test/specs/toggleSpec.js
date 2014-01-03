@@ -12,21 +12,21 @@ function toggleSpec(toggle) {
             var container = $('#toggle-by-element .edit-container');
             var toggleLink = $("#toggle-by-element .toggle-link");
 
-            expect(container.hasClass('toggle-hidden')).to.be.false;
+            expect(container.hasClass('toggle-hidden')).to.equal(false);
 
             toggle({$elClicked:toggleLink});
             expect(toggleLink.attr("data-toggle-state")).to.equal("hidden");
             expect(toggleLink.attr("data-toggle-text")).to.equal("Hide");
             expect(toggleLink.attr("data-tracking-label")).to.equal("Hide");
             expect(toggleLink.text()).to.equal("Show");
-            expect(container.hasClass('toggle-hidden')).to.be.true;
+            expect(container.hasClass('toggle-hidden')).to.equal(true);
 
             toggle({$elClicked:toggleLink});
             expect(toggleLink.attr("data-toggle-state")).to.equal("shown");
             expect(toggleLink.attr("data-toggle-text")).to.equal("Show");
             expect(toggleLink.attr("data-tracking-label")).to.equal("Show");
             expect(toggleLink.text()).to.equal("Hide");
-            expect(container.hasClass('toggle-hidden')).to.be.false;
+            expect(container.hasClass('toggle-hidden')).to.equal(false);
 
         });
 

@@ -52,8 +52,8 @@ function lightboxSpec(lightbox, focus, hash) {
             // then
             setTimeout(function(){
                 expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(true);
-                done()
-            },25)
+                done();
+            },25);
         });
 
 

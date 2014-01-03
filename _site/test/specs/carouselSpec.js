@@ -67,25 +67,25 @@ function carouselSpec() {
 
         it('indicator buttons dont do anything if it is the current active tile already', function (done) {
             var $activeSlide;
-            $activeSlide = $('#hero').find('.skycom-carousel-container > .active')
+            $activeSlide = $('#hero').find('.skycom-carousel-container > .active');
             expect($activeSlide.index()).to.equal(0);
             $('#hero').find('.indicators .container span').eq(0).click();
-            $activeSlide = $('#hero').find('.skycom-carousel-container > .active')
+            $activeSlide = $('#hero').find('.skycom-carousel-container > .active');
             setTimeout(function () {
                 expect($activeSlide.index()).to.equal(0);
-                done()
-            }, 10)
+                done();
+            }, 10);
         });
         it('indicator buttons work', function (done) {
             var $activeSlide;
-            $activeSlide = $('#hero').find('.skycom-carousel-container > .active')
+            $activeSlide = $('#hero').find('.skycom-carousel-container > .active');
             expect($activeSlide.index()).to.equal(0);
             $('#hero').find('.indicators .container span').eq(2).click();
             setTimeout(function () {
-                $activeSlide = $('#hero').find('.skycom-carousel-container > .active')
+                $activeSlide = $('#hero').find('.skycom-carousel-container > .active');
                 expect($activeSlide.index()).to.equal(2);
-                done()
-            }, 100)
+                done();
+            }, 100);
         });
 
 

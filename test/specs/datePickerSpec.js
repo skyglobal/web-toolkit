@@ -56,27 +56,27 @@ function datePickerSpec(datePicker) {
             setDate(1, 1, 2035);
             $('#demo-date-picker-one.date-picker .day').focus();
 
-            expect(parseInt($('#demo-date-picker-one.date-picker .day').val())).to.equal(1);
-            expect(parseInt($('#demo-date-picker-one.date-picker .month').val())).to.equal(1);
-            expect(parseInt($('#demo-date-picker-one.date-picker .year').val())).to.equal(2035);
+            expect(parseInt($('#demo-date-picker-one.date-picker .day').val(),10)).to.equal(1);
+            expect(parseInt($('#demo-date-picker-one.date-picker .month').val(),10)).to.equal(1);
+            expect(parseInt($('#demo-date-picker-one.date-picker .year').val(),10)).to.equal(2035);
         });
 
         it('Correctly sets a date after clicking on day input', function () {
             setDate(1, 1, 2035);
             $('#demo-date-picker-one.date-picker .day').focus();
             clickCalendarDay(2);
-            expect(parseInt($('#demo-date-picker-one.date-picker .day').val())).to.equal(2);
-            expect(parseInt($('#demo-date-picker-one.date-picker .month').val())).to.equal(1);
-            expect(parseInt($('#demo-date-picker-one.date-picker .year').val())).to.equal(2035);
+            expect(parseInt($('#demo-date-picker-one.date-picker .day').val(),10)).to.equal(2);
+            expect(parseInt($('#demo-date-picker-one.date-picker .month').val(),10)).to.equal(1);
+            expect(parseInt($('#demo-date-picker-one.date-picker .year').val(),10)).to.equal(2035);
         });
 
         it('Correctly sets a date after clicking on month input', function () {
             setDate(1, 1, 2035);
             $('#demo-date-picker-one.date-picker .month').focus();
             clickCalendarDay(2);
-            expect(parseInt($('#demo-date-picker-one.date-picker .day').val())).to.equal(2);
-            expect(parseInt($('#demo-date-picker-one.date-picker .month').val())).to.equal(1);
-            expect(parseInt($('#demo-date-picker-one.date-picker .year').val())).to.equal(2035);
+            expect(parseInt($('#demo-date-picker-one.date-picker .day').val(),10)).to.equal(2);
+            expect(parseInt($('#demo-date-picker-one.date-picker .month').val(),10)).to.equal(1);
+            expect(parseInt($('#demo-date-picker-one.date-picker .year').val(),10)).to.equal(2035);
         });
 
         it('Correctly sets a date after clicking on year input', function () {
@@ -84,9 +84,9 @@ function datePickerSpec(datePicker) {
             $('#demo-date-picker-one.date-picker .year').focus();
             clickCalendarDay(2);
 
-            expect(parseInt($('#demo-date-picker-one.date-picker .day').val())).to.equal(2);
-            expect(parseInt($('#demo-date-picker-one.date-picker .month').val())).to.equal(1);
-            expect(parseInt($('#demo-date-picker-one.date-picker .year').val())).to.equal(2035);
+            expect(parseInt($('#demo-date-picker-one.date-picker .day').val(),10)).to.equal(2);
+            expect(parseInt($('#demo-date-picker-one.date-picker .month').val(),10)).to.equal(1);
+            expect(parseInt($('#demo-date-picker-one.date-picker .year').val(),10)).to.equal(2035);
         });
 
         it('Shows the right number of days in each month', function () {
@@ -194,5 +194,5 @@ function datePickerSpec(datePicker) {
 if (window.define) {
     define('specs/datePickerSpec', ['components/datePicker'], function (datePicker) {
         return datePickerSpec();
-    })
+    });
 }
