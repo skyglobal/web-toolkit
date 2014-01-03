@@ -217,7 +217,7 @@ toolkit.diff = (function(hljs){
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/diff', ['demo/highlight'], function(hljs) {
+    define('utils/diff', ['lib/highlight'], function(hljs) {
         return toolkit.diff(hljs);
     });
 } else {

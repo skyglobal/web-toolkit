@@ -13,7 +13,7 @@ demo.tests = (function(hashManager, lightbox){
             mocha.grep(grep);
             mocha.run(function(){
                 updateTestsResults($runTestLink, $mocha);
-                $mocha.attr('id','mocha-' + spec)
+                $mocha.attr('id','mocha-' + spec);
             });
             $runTestLink.removeAttr('href');
             $('html, body').animate({
@@ -22,7 +22,7 @@ demo.tests = (function(hashManager, lightbox){
             createLightbox($mocha, spec);
             $runTestLink.on('click', function(){
                 showLightbox($('#' +  spec + '-lightbox'));
-            })
+            });
         };
         document.head.appendChild(script);
     }

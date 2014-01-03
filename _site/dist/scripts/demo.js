@@ -345,7 +345,7 @@ var hljs=new function(){function l(o){return o.replace(/&/gm,"&amp;").replace(/<
 //modified for AMD/RequireJS.
 //by Peter Mouland
 if (typeof window.define === "function" && window.define.amd) {
-    define('demo/highlight', [],function() {
+    define('lib/highlight', [],function() {
         return hljs;
     });
 };
@@ -488,8 +488,7 @@ demo.displayCode = (function(lightbox, hljs){
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('demo/displayCode', ['components/lightbox',
-        'demo/highlight'],function(lightbox, hljs) {
+    define('demo/displayCode', ['components/lightbox', 'lib/highlight'],function(lightbox, hljs) {
         return demo.displayCode(lightbox, hljs);
     });
 } else {
@@ -576,7 +575,7 @@ demo.tests = (function(hashManager, lightbox){
             mocha.grep(grep);
             mocha.run(function(){
                 updateTestsResults($runTestLink, $mocha);
-                $mocha.attr('id','mocha-' + spec)
+                $mocha.attr('id','mocha-' + spec);
             });
             $runTestLink.removeAttr('href');
             $('html, body').animate({
@@ -585,7 +584,7 @@ demo.tests = (function(hashManager, lightbox){
             createLightbox($mocha, spec);
             $runTestLink.on('click', function(){
                 showLightbox($('#' +  spec + '-lightbox'));
-            })
+            });
         };
         document.head.appendChild(script);
     }
