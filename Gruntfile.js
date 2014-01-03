@@ -132,7 +132,7 @@ module.exports = function(grunt) {
                 }()),
                 options: {
                     run: false,
-                    log: true // Set to true to see console.log() output on the terminal
+                    log: false // Set to true to see console.log() output on the terminal
                 }
             }
         }
