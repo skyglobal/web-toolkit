@@ -32,7 +32,7 @@ function popupSpec(popup) {
             };
 
             var windowOpened = popup.open({});
-            var expectedOptions = "top=" + (screen.height / 2 - 200 ) + ",left=" + (screen.width / 2 - 200) + ",width=400,height=400"
+            var expectedOptions = "top=" + (screen.height / 2 - 200 ) + ",left=" + (screen.width / 2 - 200) + ",width=400,height=400";
             expect(windowOpened.url).to.equal(undefined);
             expect(windowOpened.title).to.equal("Sky");
             expect(windowOpened.options).to.equal(expectedOptions);

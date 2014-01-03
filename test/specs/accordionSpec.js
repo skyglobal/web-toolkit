@@ -36,5 +36,5 @@ function accordionSpec() {
 if (window.define) {
     define('specs/accordionSpec', ['components/accordion'], function () {
         return accordionSpec();
-    })
+    });
 }

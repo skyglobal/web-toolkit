@@ -12,6 +12,7 @@ module.exports = function(grunt) {
         watch: {
             'toolkit': {
                 files: [ 'grunt/js/**/*.js',
+                         'test/specs/**/*.js',
                          'grunt/sass/**/*.scss'
                 ],
                 tasks: ['compass','jshint','requirejs']
@@ -25,6 +26,7 @@ module.exports = function(grunt) {
         },
         jshint: {
             toolkit: ['grunt/js/components/*.js',
+                      'test/specs/**/*.js',
                       'grunt/js/utils/*.js'],
             others: ['Gruntfile.js'],
             options: {
