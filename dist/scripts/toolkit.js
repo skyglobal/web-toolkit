@@ -94,7 +94,7 @@ toolkit.detect = (function () {
     }
 
     function touch(){
-        state.touch = ('ontouchstart' in window);
+        state.touch = (!!window.ontouchstart);
         return state.touch;
     }
 
