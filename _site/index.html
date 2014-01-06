@@ -1489,7 +1489,7 @@ $('.sky-form').validation();
         Use a maximum of 4 lines of text in total (or 3 lines plus channel logo).
     </div>
     <div class="demo clearfix" >
-        <section class="module clearfix skycom-carousel hero-3-1" data-function="carousel" data-tracking-module="hero"
+        <section class="module clearfix skycom-carousel hero-3-1 hero-mobile-16-9" data-function="carousel" data-tracking-module="hero"
          id="hero">
     <h2 class="speak">Featured News, shows or Products from around Sky</h2>
     <div class="skycom-carousel-container clearfix">
@@ -1503,8 +1503,16 @@ $('.sky-form').validation();
             <figure>
                 <div class="shade"></div>
                 <div class="poster">
-                    <img src="wiki_images/carousel/beckham.jpg"
-                         alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
+                    <div data-picture data-alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
+                        <div data-src="wiki_images/carousel/beckham.jpg"></div>
+
+                        <div data-src="wiki_images/carousel/beckham-mobile.jpg"
+                             data-media="(max-width: 600px)"></div>
+                        <noscript>
+                            <img src="wiki_images/carousel/beckham.jpg"
+                                 alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
+                        </noscript>
+                    </div>
                 </div>
                 <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
                     <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb4002.png'
@@ -1535,8 +1543,16 @@ $('.sky-form').validation();
             <figure>
                 <div class="shade"></div>
                 <div class="poster">
-                    <img src="wiki_images/carousel/cube.jpg"
-                         alt="Cube showing Sky Entertainment Extra Plus upgrade from £5 extra a month">
+                    <div data-picture data-alt="Cube showing Sky Entertainment Extra Plus upgrade from £5 extra a month">
+                        <div data-src="wiki_images/carousel/cube.jpg"></div>
+
+                        <div data-src="wiki_images/carousel/cube-mobile.jpg"
+                             data-media="(max-width: 600px)"></div>
+                        <noscript>
+                            <img src="wiki_images/carousel/cube.jpg"
+                                 alt="Cube showing Sky Entertainment Extra Plus upgrade from £5 extra a month">
+                        </noscript>
+                    </div>
                 </div>
                 <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
                     <span class='channel-logo text-only'>Sky News</span>
@@ -1566,7 +1582,16 @@ $('.sky-form').validation();
             <figure>
                 <div class="shade"></div>
                 <div class="poster">
-                    <img src="wiki_images/carousel/avengers.jpg" alt="Heroes">
+                    <div data-picture data-alt="Heroes">
+                        <div data-src="wiki_images/carousel/avengers.jpg"></div>
+
+                        <div data-src="wiki_images/carousel/avengers-mobile.jpg"
+                             data-media="(max-width: 600px)"></div>
+                        <noscript>
+                            <img src="wiki_images/carousel/avengers.jpg"
+                                 alt="Heroes">
+                        </noscript>
+                    </div>
                 </div>
                 <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
                     <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb1409.png'
@@ -1593,6 +1618,54 @@ $('.sky-form').validation();
             $('#hero').skycom_carousel({
     autoplay: true,
     videoAds: false
+});
+
+function responsiveImages(container) {
+    var w = window,
+        ps = container.getElementsByTagName("div"),
+        i = 0, il = ps.length,
+        j = 0, jl = ps.length,
+        sources, matches, media, picImg, newSrc;
+    for (; i < il; i++) {
+        if (ps[ i ].getAttribute("data-picture") !== null) {
+
+            sources = ps[ i ].getElementsByTagName("div");
+            matches = [];
+
+            // See if which sources match
+            for (j = 0, jl = sources.length; j < jl; j++) {
+                media = sources[ j ].getAttribute("data-media");
+                // if there's no media specified, OR w.matchMedia is supported
+                if (!media || ( w.matchMedia && w.matchMedia(media).matches )) {
+                    matches.push(sources[ j ]);
+                }
+            }
+
+            // Find any existing img element in the picture element
+            picImg = ps[ i ].getElementsByTagName("img")[ 0 ];
+
+            if (matches.length) {
+                if (!picImg) {
+                    picImg = w.document.createElement("img");
+                    picImg.alt = ps[ i ].getAttribute("data-alt");
+                    ps[ i ].appendChild(picImg);
+                }
+                newSrc = matches.pop().getAttribute("data-src");
+                if (picImg.src !== newSrc) {
+                    picImg.src = newSrc;
+                }
+            }
+            else if (picImg) {
+                ps[ i ].removeChild(picImg);
+            }
+        }
+    }
+}
+
+responsiveImages(document.getElementById('hero'));
+// finishing off the responsive images work from above with this jQuery event binding
+$(window).bind("skycom.resizeend", function () {
+    responsiveImages(document.getElementById('hero'));
 });
         }
     </script>
