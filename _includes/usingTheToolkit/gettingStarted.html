@@ -1,0 +1,33 @@
+<div>
+    Required includes:
+    <code class=block >
+        &lt;script src='//web-toolkit.global.sky.com/{{ site.version }}/scripts/toolkit.js'&gt;&lt;/script&gt;
+        &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/{{ site.version }}/stylesheets/toolkit.css"/&gt;
+        &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/{{ site.version }}/fonts/skycons.css"/&gt;
+    </code>
+</div>
+<p >
+    Please add the relevant internet explorer classes using the <code>lt-ie10</code> method. i.e.
+    <code class="block">
+        &lt;!--[if IE 7]>         &lt;html class="lt-ie10 lt-ie9 lt-ie8" > &lt;![endif]-->
+        &lt;!--[if IE 8]>         &lt;html class="lt-ie10 lt-ie9" > &lt;![endif]-->
+        &lt;!--[if IE 9]>         &lt;html class="lt-ie10" > &lt;![endif]-->
+        &lt;!--[if gt IE 9]>&lt;!--> &lt;html lang="en" > &lt;!--&lt;![endif]-->
+    </code>
+</p>
+<p >
+    For HTML5 compatibility, Please add the following into you <code>head</code> tag:
+    <code class=block >
+    &lt;!--[if lt IE 10]>&lt;script type="text/javascript">
+    document.createElement('header');
+    document.createElement('section');
+    document.createElement('footer');
+    document.createElement('article');
+    document.createElement('aside');
+    document.createElement('hgroup');
+    document.createElement('nav');
+    document.createElement('figure');
+    document.createElement('figcaption');
+    &lt;/script>&lt;![endif]-->
+    </code>
+</p>
