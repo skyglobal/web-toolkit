@@ -473,9 +473,20 @@
       min-height: 31vw;
       max-height: 32vw;
     }
-    @media all and (max-width: 767px) {
+
+    @media all and (max-width: $mobile-width) {
+      .poster{
         min-height: 110px;
+      }
     }
   }
+}
 
+.skycom-carousel.hero-mobile-16-9 {
+  @media all and (max-width: $mobile-carousel-width) {
+    .poster{
+      min-height: 169px;
+      max-height: 52vw;
+    }
+  }
 }
