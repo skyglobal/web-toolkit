@@ -89,11 +89,6 @@
   @include pointer($direction, $color, $size, true);
 }
 
-.internal-link{
-  color: $primary;
-  outline: 0!important;
-  border: 0;
-}
 
 //visibility classses
 body .visible-touch,
@@ -106,6 +101,11 @@ body .visible{
 }
 
 
+.internal-link{
+  color: $primary;
+  outline: 0!important;
+  border: 0;
+}
 .ellipsis{
   @include ellipses;
 }
@@ -123,6 +123,33 @@ body .visible{
   @include transform(rotate(180deg));
   .lt-ie9 & {
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  }
+}
+
+html{
+  /* Orientation */
+  &:before {
+    display:none;
+    @media (orientation:portrait) {
+      content: 'portrait';
+      font-family:'portrait';
+    }
+    @media (orientation:landscape) {
+      content: 'landscape';
+      font-family:'landscape';
+    }
+  }
+  /* view */
+  &:after {
+    display:none;
+    @media (max-width:$mobile-width) {
+      content: 'mobile';
+      font-family:'mobile';
+    }
+    @media (min-width:$mobile-width+1) {
+      content: 'desktop';
+      font-family:'desktop';
+    }
   }
 }
 

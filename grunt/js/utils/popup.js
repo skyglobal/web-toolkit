@@ -24,10 +24,12 @@ toolkit.popup = (function() {
         init: init,
         open: open
     };
-})();
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/popup', [], function() {
-        return toolkit.popup;
+        return toolkit.popup();
     });
+} else {
+    toolkit.popup = toolkit.popup();
 }

@@ -1,237 +1,64 @@
-<h3 class="wiki-h3">Carousel</h3>
+<h3 class="demo-h3 section-title smaller">
+    Carousel
+    <a href="#!lightbox/code-carousel" class="code-download">Code</a>
+    <a href="#test/carouselSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+</h3>
 <p class="design-notes">
     The carousel is fully responsive, incorporates the video player and works on touch devices (not microsoft).
 </p>
 
-<div class="dependencies">
-    for videos: you also need RequireJS.
-    <link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
-    <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
-</div>
-
 <div class="example">
-    <h4 class="medium">3:1 Carousel</h4>
+    <h4 class="medium">Default</h4>
     <div class="design-notes">
         Use a maximum of 4 lines of text in total (or 3 lines plus channel logo).
     </div>
-    <p class="developer-notes">
-        Add the class <code>hero-3-1</code>.
-    </p>
-    <div class="demo" data-selector="#hero">
-        <section class="module clearfix skycom-carousel hero-3-1" data-function="carousel" data-tracking-module="hero"
-                 id="hero">
-            <h2 class="speak">Featured News, shows or Products from around Sky</h2>
-
-            <div class="skycom-carousel-container clearfix">
-                <div
-                        class="clearfix skycom-12 alpha bg-shading light-scheme"
-                        data-tracking-other="Sky Sports HD1"
-                        data-tracking-pod="tile-1"
-                        data-tracking-label="David Beckham And Sky Team Up"
-                        data-tracking-theme="tracking-theme"
-                        data-video-id="clip-00cwoia5"
-                        >
-                    <figure>
-                        <div class="shade"></div>
-                        <div class="poster">
-                            <img src="wiki_images/carousel/beckham.jpg"
-                                 alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
-                        </div>
-                        <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
-                            <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb4002.png'
-                                 alt='Sky Sports HD1' class='channel-logo'/>
-                            <a href="#!beckham" class="clearfix">
-                                <h3 class="skycom-focus-el  section-title smaller" id="title-beckham">David Beckham And Sky Team Up</h3>
-
-                                <p class="skycom-ellipsis">Global sports star David Beckham OBE is joining Sky as an ambassador.</p>
-                            </a>
-                        </figcaption>
-                        <a href="#!" class="play-video">
-                            <i class="icon-video-play" aria-hidden="true"></i>
-                            <span class="hidden-mobile">Play Trailer</span>
-                        </a>
-                    </figure>
-                    <h4 class="speak">Terms and Conditions</h4>
-                    <p class="terms speak legal">
-                        These are some terms and conditions
-                    </p>
-                </div>
-
-                <div data-video-id="clip-00ovbt3u"
-                        class="clearfix skycom-12 alpha  light-scheme"
-                        data-tracking-other="Sky News"
-                        data-tracking-pod="tile-2"
-                        data-tracking-label="Introducing Sky Entertainment Extra+"
-                        data-tracking-theme="tracking-theme"
-                        >
-                    <figure>
-                        <div class="shade"></div>
-                        <div class="poster">
-                            <img src="wiki_images/carousel/cube.jpg"
-                                 alt="Cube showing Sky Entertainment Extra Plus upgrade from £5 extra a month">
-                        </div>
-                        <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
-                            <span class='channel-logo text-only'>Sky News</span>
-                            <a href="#!sky-entertainment-extra-plus" class="clearfix">
-                                <h3 class="skycom-focus-el section-title smaller" id="title-sky-entertainment-extra-plus">Introducing Sky
-                                    Entertainment Extra+</h3>
-
-                                <p class="skycom-ellipsis">Supercharge your TV</p>
-                            </a>
-                        </figcaption>
-                        <a href="#!" class="play-video" >
-                            <i class="icon-video-play" aria-hidden="true"></i>
-                            <span class="hidden-mobile">Play Trailer</span>
-                        </a>
-                    </figure>
-                    <h4 class="speak">Terms and Conditions</h4>
-                    <p class="terms speak legal">
-                        These are some different terms and conditions
-                    </p>
-                </div>
-                <div
-                        class="clearfix skycom-12 alpha bg-shading dark-scheme"
-                        data-tracking-other="Sky Movies Premiere"
-                        data-tracking-pod="tile-3"
-                        data-tracking-label="Watch The Avengers now in 9 hours"
-                        data-tracking-theme="tracking-theme"
-                        >
-                    <figure>
-                        <div class="shade"></div>
-                        <div class="poster">
-                            <img src="wiki_images/carousel/avengers.jpg" alt="Heroes">
-                        </div>
-                        <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
-                            <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb1409.png'
-                                 alt='Sky Movies Premiere' class='channel-logo'/>
-                            <a href="#!avengers1" class="clearfix">
-                                <h3 class="skycom-focus-el  section-title smaller" id="title-avengers1">Watch The Avengers now in 9 hours</h3>
-                                <p class="skycom-ellipsis">Watch Tonight</p>
-                            </a>
-                        </figcaption>
-                    </figure>
-                </div>
-            </div>
-        </section>
+    <div class="demo clearfix" >
+        {% include components/carousel/default.html %}
     </div>
     <script>
-        saveHTMLForDemo('#hero');
-        $('#hero').skycom_carousel({
-            carousel: {
-                autoplay: true,
-                videoAds: false
-            }
-        });
+        if (window.require){
+            {% include components/carousel/default.require.js %}
+        } else {
+            {% include components/carousel/default.js %}
+        }
     </script>
+
 </div>
+
 <div class="example">
-    <h4 class="medium">Skinny Carousel</h4>
+    <h4 class="medium">Skinny</h4>
     <div class="design-notes">
         Use a maximum of 2 lines of text in total (or 1 line plus channel logo).
     </div>
-    <p class="developer-notes">
-        Add the class <code>hero-skinny</code>.
-    </p>
-    <div class="demo" data-selector="#hero-skinny">
-        <section class="module clearfix skycom-carousel hero-skinny" data-function="carousel" data-tracking-module="hero-169"
-                 id="hero-skinny">
-            <h2 class="speak">Featured News, shows or Products from around Sky</h2>
-
-            <div class="skycom-carousel-container clearfix">
-                <div
-                        class="clearfix skycom-12 alpha bg-shading light-scheme"
-                        data-tracking-other="Sky Sports HD1"
-                        data-tracking-pod="tile-1"
-                        data-tracking-label="David Beckham And Sky Team Up"
-                        data-tracking-theme="tracking-theme"
-                        data-video-id="clip-00cwoia5"
-                        >
-                    <figure>
-                        <div class="shade"></div>
-                        <div class="poster">
-                            <img src="wiki_images/carousel/169-half-price.jpg"
-                                 alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
-                        </div>
-                        <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
-                            <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb1409.png'
-                                 alt='Sky Movies' class='channel-logo'/>
-                            <a href="#!beckham" class="clearfix">
-                                <h3 class="skycom-focus-el  section-title smaller" id="title-beckham-169">Half Price</h3>
-                                <p class="skycom-ellipsis">for 6 months</p>
-                            </a>
-                        </figcaption>
-                        <a href="#!" class="play-video">
-                            <i class="icon-video-play" aria-hidden="true"></i>
-                            <span class="hidden-mobile">Play Trailer</span>
-                        </a>
-                    </figure>
-                    <h4 class="speak">Terms and Conditions</h4>
-                    <p class="terms speak legal">
-                        These are some terms and conditions
-                    </p>
-                </div>
-
-                <div data-video-id="clip-00ovbt3u"
-                        class="clearfix skycom-12 alpha  light-scheme"
-                        data-tracking-other="Sky News"
-                        data-tracking-pod="tile-2"
-                        data-tracking-label="Introducing Sky Entertainment Extra+"
-                        data-tracking-theme="tracking-theme"
-                        >
-                    <figure>
-                        <div class="shade"></div>
-                        <div class="poster">
-                            <img src="wiki_images/carousel/169-offers.jpg"
-                                 alt="Cube showing Sky Entertainment Extra Plus upgrade from £5 extra a month">
-                        </div>
-                        <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
-                            <a href="#!sky-entertainment-extra-plus" class="clearfix">
-                                <h3 class="skycom-focus-el section-title smaller" id="title-sky-entertainment-extra-plus-169">Join Sky</h3>
-                                <p class="skycom-ellipsis">Save Money</p>
-                            </a>
-                        </figcaption>
-                    </figure>
-                    <h4 class="speak">Terms and Conditions</h4>
-                    <p class="terms speak legal">
-                        These are some different terms and conditions
-                    </p>
-                </div>
-                <div data-video-id="clip-00ovbt3u"
-                        class="clearfix skycom-12 alpha bg-shading dark-scheme"
-                        data-tracking-other="Sky Movies Premiere"
-                        data-tracking-pod="tile-3"
-                        data-tracking-label="Watch The Avengers now in 9 hours"
-                        data-tracking-theme="tracking-theme"
-                        >
-                    <figure>
-                        <div class="shade"></div>
-                        <div class="poster">
-                            <img src="wiki_images/carousel/169-box-sets.jpg" alt="Heroes">
-                        </div>
-                        <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
-                            <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb1409.png'
-                                 alt='Sky Movies Premiere' class='channel-logo'/>
-                            <a href="#!avengers1" class="clearfix">
-                                <h3 class="skycom-focus-el  section-title smaller" id="title-avengers1-169">TV Box Sets</h3>
-                                <p class="skycom-ellipsis">A fabulous collection</p>
-                            </a>
-                        </figcaption>
-                        <a href="#!" class="play-video" >
-                            <i class="icon-video-play" aria-hidden="true"></i>
-                            <span class="hidden-mobile">Play Trailer</span>
-                        </a>
-                    </figure>
-                </div>
-            </div>
-        </section>
+    <div class="demo clearfix" >
+        {% include components/carousel/skinny.html %}
     </div>
     <script>
-        saveHTMLForDemo('#hero-skinny');
-        $('#hero-skinny').skycom_carousel({
-            carousel: {
-                autoplay: true,
-                videoAds: false
-            }
-        });
+        if (window.require){
+            {% include components/carousel/skinny.require.js %}
+        } else {
+            {% include components/carousel/skinny.js %}
+        }
     </script>
+
+
+
+</div>
+
+<div class="example">
+    <h4 class="medium">Single Slide</h4>
+    <div class="design-notes">
+        This will behave like it isn't a carousel as there is only one slide.
+    </div>
+    <div class="demo clearfix">
+        {% include components/carousel/singleSlide.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include components/carousel/singleSlide.require.js %}
+        } else {
+            {% include components/carousel/singleSlide.js %}
+        }
+    </script>
+
 </div>
