@@ -482,11 +482,14 @@
   }
 }
 
-.skycom-carousel.hero-mobile-16-9 {
+.grid-1140 .skycom-carousel.hero-mobile-16-9 {
   @media all and (max-width: $mobile-carousel-width) {
     .poster{
       min-height: 169px;
       max-height: 52vw;
+    }
+    .actions .next, .actions .previous {
+      top: -6px;
     }
   }
 }
