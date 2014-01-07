@@ -60,4 +60,4 @@ var responsiveImages = (function () {
         init:init,
         bindOnResize:bindOnResize
     };
-});
+})();

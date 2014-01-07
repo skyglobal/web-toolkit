@@ -65,8 +65,6 @@ module.exports = function(grunt) {
                     generateSourceMaps: false,
                     modules:[{
                         name: 'toolkit'
-                    }, {
-                        name: 'toolkit.responsiveImages'
                     },{
                         name: 'demo'
                     }]
