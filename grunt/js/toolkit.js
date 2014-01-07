@@ -1,6 +1,6 @@
 (function init() {
-    if(toolkit && toolkit.responsiveImages) {
-        toolkit.responsiveImages.bindOnResize();
+    if(responsiveImages) {
+        responsiveImages.bindOnResize();
     }
 })();
 
@@ -40,8 +40,7 @@ if (typeof window.define === "function" && window.define.amd) {
             lightbox: lightbox,
             share: share,
             video: video,
-            carousel: carousel,
-            responsiveImages: toolkit.responsiveImages //return this so we can use toolkit.responsiveImages if using a required 'toolkit' object
+            carousel: carousel
         };
     });
 }

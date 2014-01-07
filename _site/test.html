@@ -62,7 +62,71 @@
         <link rel="stylesheet" href="dist/fonts/skycons.css">
 
         <script src="test/vendor/mocha.js"></script>
-        <script src="dist/scripts/toolkit.responsiveImages.js"></script>
+        <script>
+            var responsiveImages = (function () {
+
+    var containers = [];
+
+    function init(container) {
+        var w = window,
+            ps = container.getElementsByTagName("div"),
+            i = 0, il = ps.length,
+            j = 0, jl = ps.length,
+            sources, matches, media, picImg, newSrc;
+
+        containers.push(container);
+
+        for (; i < il; i++) {
+            if (ps[ i ].getAttribute("data-picture") !== null) {
+
+                sources = ps[ i ].getElementsByTagName("div");
+                matches = [];
+
+                // See if which sources match
+                for (j = 0, jl = sources.length; j < jl; j++) {
+                    media = sources[ j ].getAttribute("data-media");
+                    // if there's no media specified, OR w.matchMedia is supported
+                    if (!media || ( w.matchMedia && w.matchMedia(media).matches )) {
+                        matches.push(sources[ j ]);
+                    }
+                }
+
+                // Find any existing img element in the picture element
+                picImg = ps[ i ].getElementsByTagName("img")[ 0 ];
+
+                if (matches.length) {
+                    if (!picImg) {
+                        picImg = w.document.createElement("img");
+                        picImg.alt = ps[ i ].getAttribute("data-alt");
+                        ps[ i ].appendChild(picImg);
+                    }
+                    newSrc = matches.pop().getAttribute("data-src");
+                    if (picImg.src !== newSrc) {
+                        picImg.src = newSrc;
+                    }
+                }
+                else if (picImg) {
+                    ps[ i ].removeChild(picImg);
+                }
+            }
+        }
+    }
+
+    function bindOnResize() {
+        $(window).on("resizeend", function () {
+            var i;
+            for (i in containers) {
+                init(containers[i]);
+            }
+        });
+    }
+
+    return {
+        init:init,
+        bindOnResize:bindOnResize
+    };
+})();
+        </script>
         <script src="test/vendor/require.js" data-main='dist/scripts/toolkit'></script>
         <script src="test/config.js" ></script>
 
@@ -136,7 +200,7 @@
                     <ul class="nav tabs clearfix">
                         <li class="tab"><a href="index.html#toggle" class="skycom-ellipsis internal-link" data-diff="utils/toggle" data-diff-demos="element">Toggle</a></li>
                         <li class="tab"><a href="index.html#hashManager" class="skycom-ellipsis internal-link" data-diff="utils/hashManager" data-diff-demos="default">Hash Manager</a></li>
-                        <li class="tab"><a href="index.html#responsiveImages" class="skycom-ellipsis internal-link" data-diff="utils/responsiveImages" data-diff-demos="default">Responsive Images</a></li>
+                        <li class="tab"><a href="index.html#responsiveImages" class="skycom-ellipsis internal-link" data-diff="utils/responsiveImages" data-diff-demos="using,function">Responsive Images</a></li>
                         <li class="tab"><a href="index.html#detect" class="skycom-ellipsis internal-link" data-diff="utils/detect" data-diff-demos="orientation,touch,view">Detect</a></li>
                         <li class="tab"><a href="index.html#libraries" class="skycom-ellipsis internal-link" data-diff="utils/libraries" data-diff-demos="jquery,requirejs,other">External Libraries</a></li>
                     </ul>
@@ -1717,7 +1781,7 @@ $('.sky-form').validation();
 </section>
 
 <script>
-    toolkit.responsiveImages.init(document.getElementById('hero-with-bigger-mobile'));
+    responsiveImages.init(document.getElementById('hero-with-bigger-mobile'));
 </script>
     </div>
     <script>
@@ -2141,7 +2205,7 @@ toolkit.hashManager.register(['hash', 'anotherHash'], myHashCallback);
 </div>
     </div>
     <script>
-        toolkit.responsiveImages.init(document.getElementById('demo-responsive-images'));
+        responsiveImages.init(document.getElementById('demo-responsive-images'));
 
     </script>
 </div>
