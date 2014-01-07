@@ -62,6 +62,71 @@
         <link rel="stylesheet" href="dist/fonts/skycons.css">
 
         <script src="test/vendor/mocha.js"></script>
+        <script>
+            var responsiveImages = (function () {
+
+    var containers = [];
+
+    function init(container) {
+        var w = window,
+            ps = container.getElementsByTagName("div"),
+            i = 0, il = ps.length,
+            j = 0, jl = ps.length,
+            sources, matches, media, picImg, newSrc;
+
+        containers.push(container);
+
+        for (; i < il; i++) {
+            if (ps[ i ].getAttribute("data-picture") !== null) {
+
+                sources = ps[ i ].getElementsByTagName("div");
+                matches = [];
+
+                // See if which sources match
+                for (j = 0, jl = sources.length; j < jl; j++) {
+                    media = sources[ j ].getAttribute("data-media");
+                    // if there's no media specified, OR w.matchMedia is supported
+                    if (!media || ( w.matchMedia && w.matchMedia(media).matches )) {
+                        matches.push(sources[ j ]);
+                    }
+                }
+
+                // Find any existing img element in the picture element
+                picImg = ps[ i ].getElementsByTagName("img")[ 0 ];
+
+                if (matches.length) {
+                    if (!picImg) {
+                        picImg = w.document.createElement("img");
+                        picImg.alt = ps[ i ].getAttribute("data-alt");
+                        ps[ i ].appendChild(picImg);
+                    }
+                    newSrc = matches.pop().getAttribute("data-src");
+                    if (picImg.src !== newSrc) {
+                        picImg.src = newSrc;
+                    }
+                }
+                else if (picImg) {
+                    ps[ i ].removeChild(picImg);
+                }
+            }
+        }
+    }
+
+    function bindOnResize() {
+        $(window).on("resizeend", function () {
+            var i;
+            for (i in containers) {
+                init(containers[i]);
+            }
+        });
+    }
+
+    return {
+        init:init,
+        bindOnResize:bindOnResize
+    };
+})();
+        </script>
         <script src="test/vendor/require.js" data-main='dist/scripts/toolkit'></script>
         <script src="test/config.js" ></script>
 
@@ -123,7 +188,7 @@
                         <li class="tab"><a href="index.html#inPageNav" data-diff="components/inPageNav" data-diff-demos="classicTabs,sleekNav" class="skycom-ellipsis internal-link">In-Page Nav</a></li>
                         <li class="tab"><a href="index.html#lightbox" data-diff="components/lightbox" data-diff-demos=default class="skycom-ellipsis internal-link">Lightbox</a></li>
                         <li class="tab"><a href="index.html#accordion" data-diff="components/accordion" data-diff-demos=default class="skycom-ellipsis internal-link">Accordion</a></li>
-                        <li class="tab"><a href="index.html#carousel" data-diff="components/carousel" data-diff-demos="singleSlide,skinny,default" class="skycom-ellipsis internal-link">Carousel</a></li>
+                        <li class="tab"><a href="index.html#carousel" data-diff="components/carousel" data-diff-demos="biggerMobile,singleSlide,skinny,default" class="skycom-ellipsis internal-link">Carousel</a></li>
                         <li class="tab"><a href="index.html#video" data-diff="components/video" data-diff-demos="default" class="skycom-ellipsis internal-link">Video</a></li>
                         <li class="tab"><a href="index.html#share" data-diff="components/share" data-diff-demos="bar,popup" class="skycom-ellipsis internal-link">Share</a></li>
                     </ul>
@@ -135,8 +200,9 @@
                     <ul class="nav tabs clearfix">
                         <li class="tab"><a href="index.html#toggle" class="skycom-ellipsis internal-link" data-diff="utils/toggle" data-diff-demos="element">Toggle</a></li>
                         <li class="tab"><a href="index.html#hashManager" class="skycom-ellipsis internal-link" data-diff="utils/hashManager" data-diff-demos="default">Hash Manager</a></li>
+                        <li class="tab"><a href="index.html#responsiveImages" class="skycom-ellipsis internal-link" data-diff="utils/responsiveImages" data-diff-demos="using,function">Responsive Images</a></li>
                         <li class="tab"><a href="index.html#detect" class="skycom-ellipsis internal-link" data-diff="utils/detect" data-diff-demos="orientation,touch,view">Detect</a></li>
-                        <li class="tab"><a href="index.html#libraries" class="skycom-ellipsis internal-link" data-diff="utils/libraries" data-diff-demos="jquery,requirejs,other">Libraries</a></li>
+                        <li class="tab"><a href="index.html#libraries" class="skycom-ellipsis internal-link" data-diff="utils/libraries" data-diff-demos="jquery,requirejs,other">External Libraries</a></li>
                     </ul>
                 </section>
             </div>
@@ -1592,6 +1658,151 @@ $('.sky-form').validation();
 </div>
 
 <div class="example">
+    <h4 class="medium">Default with 16/9 images on Mobile</h4>
+    <div class="design-notes">
+        Use a maximum of 4 lines of text in total (or 3 lines plus channel logo).
+    </div>
+    <div class="demo clearfix" >
+        <section class="module clearfix skycom-carousel hero-3-1 hero-mobile-16-9" data-function="carousel" data-tracking-module="hero"
+         id="hero-with-bigger-mobile">
+    <h2 class="speak">Featured News, shows or Products from around Sky</h2>
+    <div class="skycom-carousel-container clearfix">
+        <div class="clearfix skycom-12 alpha bg-shading light-scheme"
+                data-tracking-other="Sky Sports HD1"
+                data-tracking-pod="tile-1"
+                data-tracking-label="David Beckham And Sky Team Up"
+                data-tracking-theme="tracking-theme"
+                data-video-id="clip-00cwoia5"
+                >
+            <figure>
+                <div class="shade"></div>
+                <div class="poster">
+                    <div data-picture data-alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
+                        <div data-src="wiki_images/carousel/beckham.jpg"></div>
+
+                        <div data-src="wiki_images/carousel/beckham-mobile.jpg"
+                             data-media="(max-width: 600px)"></div>
+                        <noscript>
+                            <img src="wiki_images/carousel/beckham.jpg"
+                                 alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
+                        </noscript>
+                    </div>
+                </div>
+                <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
+                    <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb4002.png'
+                         alt='Sky Sports HD1' class='channel-logo'/>
+                    <a href="#!beckham" class="clearfix">
+                        <h3 class="skycom-focus-el  section-title smaller" id="title-beckham">David Beckham And Sky Team Up</h3>
+                        <p class="skycom-ellipsis">Global sports star David Beckham OBE is joining Sky as an ambassador.</p>
+                    </a>
+                </figcaption>
+                <a href="#!" class="play-video">
+                    <i class="icon-video-play" aria-hidden="true"></i>
+                    <span class="hidden-mobile">Play Trailer</span>
+                </a>
+            </figure>
+            <h4 class="speak">Terms and Conditions</h4>
+            <p class="terms speak legal">
+                These are some terms and conditions
+            </p>
+        </div>
+
+        <div data-video-id="clip-00ovbt3u"
+             class="clearfix skycom-12 alpha  light-scheme"
+             data-tracking-other="Sky News"
+             data-tracking-pod="tile-2"
+             data-tracking-label="Introducing Sky Entertainment Extra+"
+             data-tracking-theme="tracking-theme"
+                >
+            <figure>
+                <div class="shade"></div>
+                <div class="poster">
+                    <div data-picture data-alt="Cube showing Sky Entertainment Extra Plus upgrade from £5 extra a month">
+                        <div data-src="wiki_images/carousel/cube.jpg"></div>
+
+                        <div data-src="wiki_images/carousel/cube-mobile.jpg"
+                             data-media="(max-width: 600px)"></div>
+                        <noscript>
+                            <img src="wiki_images/carousel/cube.jpg"
+                                 alt="Cube showing Sky Entertainment Extra Plus upgrade from £5 extra a month">
+                        </noscript>
+                    </div>
+                </div>
+                <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
+                    <span class='channel-logo text-only'>Sky News</span>
+                    <a href="#!sky-entertainment-extra-plus" class="clearfix">
+                        <h3 class="skycom-focus-el section-title smaller" id="title-sky-entertainment-extra-plus">Introducing Sky
+                            Entertainment Extra+</h3>
+
+                        <p class="skycom-ellipsis">Supercharge your TV</p>
+                    </a>
+                </figcaption>
+                <a href="#!" class="play-video" >
+                    <i class="icon-video-play" aria-hidden="true"></i>
+                    <span class="hidden-mobile">Play Trailer</span>
+                </a>
+            </figure>
+            <h4 class="speak">Terms and Conditions</h4>
+            <p class="terms speak legal">
+                These are some different terms and conditions
+            </p>
+        </div>
+        <div class="clearfix skycom-12 alpha bg-shading dark-scheme"
+                data-tracking-other="Sky Movies Premiere"
+                data-tracking-pod="tile-3"
+                data-tracking-label="Watch The Avengers now in 9 hours"
+                data-tracking-theme="tracking-theme"
+                >
+            <figure>
+                <div class="shade"></div>
+                <div class="poster">
+                    <div data-picture data-alt="Heroes">
+                        <div data-src="wiki_images/carousel/avengers.jpg"></div>
+
+                        <div data-src="wiki_images/carousel/avengers-mobile.jpg"
+                             data-media="(max-width: 600px)"></div>
+                        <noscript>
+                            <img src="wiki_images/carousel/avengers.jpg"
+                                 alt="Heroes">
+                        </noscript>
+                    </div>
+                </div>
+                <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
+                    <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb1409.png'
+                         alt='Sky Movies Premiere' class='channel-logo'/>
+                    <a href="#!avengers1" class="clearfix">
+                        <h3 class="skycom-focus-el  section-title smaller" id="title-avengers1">Watch The Avengers now in 9 hours</h3>
+                        <p class="skycom-ellipsis">Watch Tonight</p>
+                    </a>
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<script>
+    responsiveImages.init(document.getElementById('hero-with-bigger-mobile'));
+</script>
+    </div>
+    <script>
+        if (window.require){
+            require(['toolkit'], function(){
+    $('#hero-with-bigger-mobile').skycom_carousel({
+        autoplay: true,
+        videoAds: false
+    });
+});
+        } else {
+            $('#hero-with-bigger-mobile').skycom_carousel({
+    autoplay: true,
+    videoAds: false
+});
+        }
+    </script>
+
+</div>
+
+<div class="example">
     <h4 class="medium">Skinny</h4>
     <div class="design-notes">
         Use a maximum of 2 lines of text in total (or 1 line plus channel logo).
@@ -1970,6 +2181,35 @@ toolkit.hashManager.register(['hash', 'anotherHash'], myHashCallback);
 </div>
 
     </div>
+    <a name="responsiveImages"></a>
+    <div class="sub-section">
+        <h3 class="demo-h3 section-title smaller">
+    Responsive Images
+    <a href="#!lightbox/code-responsiveImages" class="code-download">Code</a>
+    <a href="#test/responsiveImagesSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+</h3>
+
+<div class="example">
+    <div class="demo clearfix">
+        <div id="demo-responsive-images">
+    <div data-picture data-alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
+        <div data-src="wiki_images/carousel/beckham.jpg"></div>
+
+        <div data-src="wiki_images/carousel/davinci-mobile.jpg"
+             data-media="(max-width: 600px)"></div>
+        <noscript>
+            <img src="wiki_images/carousel/beckham.jpg"
+                 alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
+        </noscript>
+    </div>
+</div>
+    </div>
+    <script>
+        responsiveImages.init(document.getElementById('demo-responsive-images'));
+
+    </script>
+</div>
+    </div>
     <a name="detect"></a>
     <div class="sub-section">
         <h3 class="demo-h3 section-title smaller">
@@ -2092,7 +2332,7 @@ updateOrientation(toolkit);
     <a name="libraries"></a>
     <div class="sub-section">
         <h3 class="demo-h3 section-title smaller">
-    Libraries
+    External Libraries
     <a href="#!lightbox/code-libraries" class="code-download">Versions</a></a>
 </h3>
 
