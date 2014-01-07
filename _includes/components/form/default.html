@@ -1,0 +1,89 @@
+<form class="sky-form">
+    <div class="row">
+        <label for="title" class="required">Title</label>
+
+        <div class="select">
+            <select id="title" name="title" required>
+                <option value="">Please select</option>
+                <option value="Mr">Mr</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Ms">Ms</option>
+                <option value="Sir">Sir</option>
+                <option value="Dr">Dr</option>
+                <option value="Prof.">Prof.</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <label for="first_name_g">First name</label>
+        <input id="first_name_g" type="text" placeholder="eg. Joe Bloggs"/>
+    </div>
+    <div class="row">
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="eg. joe.bloggs@me.com"/>
+    </div>
+
+
+    <div class="row">
+        <label class="required" for="postcode">Postcode</label>
+        <input type="text" placeholder="eg. TW8 1QW" id="postcode" required/>
+        <button class="btn">Find address</button>
+    </div>
+
+    <fieldset class="row">
+        <legend>Select a payment type</legend>
+        <div class="radiocheck">
+            <input type="radio" name="payment_type" value="direct_debit" id="direct-debit" checked/>
+            <label for="direct-debit">Direct debit</label>
+            <br>
+            <input type="radio" name="payment_type" value="credit_card" id="credit-card"/>
+            <label for="credit-card">Credit card</label>
+        </div>
+    </fieldset>
+    <div class="row">
+        <label for="dob">Date of birth</label>
+        <input id="dob" type="text" placeholder="DD/MM/YYYY" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" maxlength="10" aria-labelledby=dob-feedback />
+        <span class="hidden form-error feedback" data-for="dob" id="dob-feedback" >Please use the format 'DD/MM/YYYY'</span>
+    </div>
+    <div class="row">
+        <label class="descriptor" for="date-one-day">Engineer visit</label>
+        <div class="date-picker" id="demo-date-picker-one">
+            <input class="day" type="text" pattern="[0-9]{2}" placeholder="DD" maxlength="2" aria-label="day" id="date-one-day" aria-labelledby="date-one-day-feedback" />
+            <span class="data-separator">-</span><input class="month" type="text" pattern="[0-9]{2}" placeholder="MM" maxlength="2" aria-label="month" id=date-one-month aria-labelledby="date-one-month-feedback" />
+            <span class="data-separator">-</span><input class="year" type="text" pattern="[0-9]{4}" placeholder="YYYY" maxlength="4" aria-label="year" id=date-one-year aria-labelledby="date-one-year-feedback" />
+        </div>
+        <span class="hidden form-error feedback" data-for="date-one-day" id="date-one-day-feedback" >Day must 31 or less and 2 digits</span>
+        <span class="hidden form-error feedback" data-for="date-one-month" id="date-one-month-feedback">Month must be 12 or less and 2 digits</span>
+        <span class="hidden form-error feedback" data-for="date-one-year" id="date-one-year-feedback">Year must be 4 digits</span>
+    </div>
+    <div class="row">
+        <label for="date-two-day">Another date</label>
+        <div class="date-picker">
+            <input class="day" type="text" pattern="[0-9]{2}" placeholder="DD" maxlength="2" aria-label="day" id="date-two-day" aria-labelledby="date-two-day-feedback" />
+            <span class="data-separator">-</span><input class="month" type="text" pattern="[0-9]{2}" placeholder="MM" maxlength="2" aria-label="month" id="date-two-month" aria-labelledby="date-two-month-feedback" />
+            <span class="data-separator">-</span><input class="year" type="text" pattern="[0-9]{4}" placeholder="YYYY" maxlength="4" aria-label="year" id="date-two-year" aria-labelledby="date-two-year-feedback" />
+        </div>
+        <span class="hidden form-error feedback" data-for="date-two-day" id="date-two-day-feedback" >Day must 31 or less and 2 digits</span>
+        <span class="hidden form-error feedback" data-for="date-two-month" id="date-two-month-feedback">Month must be 12 or less and 2 digits</span>
+        <span class="hidden form-error feedback" data-for="date-two-year" id="date-two-year-feedback">Year must be 4 digits</span>
+    </div>
+    <div class="row">
+        <label for="telephone">Telephone</label>
+        <input id="telephone" type="tel" placeholder="eg. +447567567567"/>
+    </div>
+    <div class="row">
+        <label for="url">Homepage</label>
+        <input id="url" type="url" placeholder="eg. http://joebloggs.com"/>
+    </div>
+    <div class="row">
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="eg. Please enter a message"></textarea>
+    </div>
+    <div class="row no-label">
+        <input type="checkbox" name="confirm_terms" value="true" id="confirm-terms"/>
+        <label for="confirm-terms">I agree to the <a href="#">Terms &amp; Conditions</a></label>
+    </div>
+    <div class="row no-label">
+        <button name="form-submit" type="submit" class="form-submit btn primary-cta">Submit</button>
+    </div>
+</form>
