@@ -3,7 +3,7 @@ function responsiveImagesSpec() {
     var describeSpec = 'Responsive Images';
 
     describe(describeSpec, function () {
-        var origMatchMedia
+        var origMatchMedia;
 
         before(function() {
             origMatchMedia = window.matchMedia;
