@@ -75,6 +75,7 @@
 
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target="#toolkit-menu-tabs">
+        <script src="dist/scripts/toolkit.responsiveImages.js"></script>
         <script src="dist/scripts/toolkit.js"></script>
 
         
@@ -147,7 +148,7 @@
                         <li class="tab"><a href="index.html#hashManager" class="skycom-ellipsis internal-link" data-diff="utils/hashManager" data-diff-demos="default">Hash Manager</a></li>
                         <li class="tab"><a href="index.html#responsiveImages" class="skycom-ellipsis internal-link" data-diff="utils/responsiveImages" data-diff-demos="default">Responsive Images</a></li>
                         <li class="tab"><a href="index.html#detect" class="skycom-ellipsis internal-link" data-diff="utils/detect" data-diff-demos="orientation,touch,view">Detect</a></li>
-                        <li class="tab"><a href="index.html#libraries" class="skycom-ellipsis internal-link" data-diff="utils/libraries" data-diff-demos="jquery,requirejs,other">Libraries</a></li>
+                        <li class="tab"><a href="index.html#libraries" class="skycom-ellipsis internal-link" data-diff="utils/libraries" data-diff-demos="jquery,requirejs,other">External Libraries</a></li>
                     </ul>
                 </section>
             </div>
@@ -1721,6 +1722,10 @@ $('.sky-form').validation();
         </div>
     </div>
 </section>
+
+<script>
+    toolkit.responsiveImages.init(document.getElementById('hero-with-bigger-mobile'));
+</script>
     </div>
     <script>
         if (window.require){
@@ -1734,54 +1739,6 @@ $('.sky-form').validation();
             $('#hero-with-bigger-mobile').skycom_carousel({
     autoplay: true,
     videoAds: false
-});
-
-function responsiveImages(container) {
-    var w = window,
-        ps = container.getElementsByTagName("div"),
-        i = 0, il = ps.length,
-        j = 0, jl = ps.length,
-        sources, matches, media, picImg, newSrc;
-    for (; i < il; i++) {
-        if (ps[ i ].getAttribute("data-picture") !== null) {
-
-            sources = ps[ i ].getElementsByTagName("div");
-            matches = [];
-
-            // See if which sources match
-            for (j = 0, jl = sources.length; j < jl; j++) {
-                media = sources[ j ].getAttribute("data-media");
-                // if there's no media specified, OR w.matchMedia is supported
-                if (!media || ( w.matchMedia && w.matchMedia(media).matches )) {
-                    matches.push(sources[ j ]);
-                }
-            }
-
-            // Find any existing img element in the picture element
-            picImg = ps[ i ].getElementsByTagName("img")[ 0 ];
-
-            if (matches.length) {
-                if (!picImg) {
-                    picImg = w.document.createElement("img");
-                    picImg.alt = ps[ i ].getAttribute("data-alt");
-                    ps[ i ].appendChild(picImg);
-                }
-                newSrc = matches.pop().getAttribute("data-src");
-                if (picImg.src !== newSrc) {
-                    picImg.src = newSrc;
-                }
-            }
-            else if (picImg) {
-                ps[ i ].removeChild(picImg);
-            }
-        }
-    }
-}
-
-responsiveImages(document.getElementById('hero-with-bigger-mobile'));
-// finishing off the responsive images work from above with this jQuery event binding
-$(window).bind("skycom.resizeend", function () {
-    responsiveImages(document.getElementById('hero-with-bigger-mobile'));
 });
         }
     </script>
@@ -2191,53 +2148,8 @@ toolkit.hashManager.register(['hash', 'anotherHash'], myHashCallback);
 </div>
     </div>
     <script>
-        function responsiveImages(container) {
-    var w = window,
-        ps = container.getElementsByTagName("div"),
-        i = 0, il = ps.length,
-        j = 0, jl = ps.length,
-        sources, matches, media, picImg, newSrc;
-    for (; i < il; i++) {
-        if (ps[ i ].getAttribute("data-picture") !== null) {
+        toolkit.responsiveImages.init(document.getElementById('demo-responsive-images'));
 
-            sources = ps[ i ].getElementsByTagName("div");
-            matches = [];
-
-            // See if which sources match
-            for (j = 0, jl = sources.length; j < jl; j++) {
-                media = sources[ j ].getAttribute("data-media");
-                // if there's no media specified, OR w.matchMedia is supported
-                if (!media || ( w.matchMedia && w.matchMedia(media).matches )) {
-                    matches.push(sources[ j ]);
-                }
-            }
-
-            // Find any existing img element in the picture element
-            picImg = ps[ i ].getElementsByTagName("img")[ 0 ];
-
-            if (matches.length) {
-                if (!picImg) {
-                    picImg = w.document.createElement("img");
-                    picImg.alt = ps[ i ].getAttribute("data-alt");
-                    ps[ i ].appendChild(picImg);
-                }
-                newSrc = matches.pop().getAttribute("data-src");
-                if (picImg.src !== newSrc) {
-                    picImg.src = newSrc;
-                }
-            }
-            else if (picImg) {
-                ps[ i ].removeChild(picImg);
-            }
-        }
-    }
-}
-
-responsiveImages(document.getElementById('demo-responsive-images'));
-// finishing off the responsive images work from above with this jQuery event binding
-$(window).bind("skycom.resizeend", function () {
-    responsiveImages(document.getElementById('demo-responsive-images'));
-});
     </script>
 </div>
     </div>
@@ -2363,7 +2275,7 @@ updateOrientation(toolkit);
     <a name="libraries"></a>
     <div class="sub-section">
         <h3 class="demo-h3 section-title smaller">
-    Libraries
+    External Libraries
     <a href="#!lightbox/code-libraries" class="code-download">Versions</a></a>
 </h3>
 

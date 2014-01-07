@@ -38,3 +38,9 @@ if (typeof window.define === "function" && window.define.amd) {
         };
     });
 }
+
+(function init() {
+    if(toolkit && toolkit.responsiveImages) {
+        toolkit.responsiveImages.bindOnResize();
+    }
+})();
