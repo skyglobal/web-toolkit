@@ -94,6 +94,7 @@ toolkit.hashManager = (function() {
     function registerFallback(callback, undo){
         vars.fallback.callback = callback;
         vars.fallback.undo = undo;
+        onHashChange();
     }
 
     function cleanHash(hash) {

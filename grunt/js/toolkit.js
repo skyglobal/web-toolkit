@@ -1,3 +1,9 @@
+(function init() {
+    if(toolkit && toolkit.responsiveImages) {
+        toolkit.responsiveImages.bindOnResize();
+    }
+})();
+
 if (typeof window.define === "function" && window.define.amd) {
 //    explicitly call all js files here to ensure all files are available
     define('toolkit',[
@@ -34,13 +40,8 @@ if (typeof window.define === "function" && window.define.amd) {
             lightbox: lightbox,
             share: share,
             video: video,
-            carousel: carousel
+            carousel: carousel,
+            responsiveImages: toolkit.responsiveImages //return this so we can use toolkit.responsiveImages if using a required 'toolkit' object
         };
     });
 }
-
-(function init() {
-    if(toolkit && toolkit.responsiveImages) {
-        toolkit.responsiveImages.bindOnResize();
-    }
-})();
