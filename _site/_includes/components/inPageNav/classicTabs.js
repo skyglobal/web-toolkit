@@ -1,0 +1,1 @@
+$('#demo-classic-tabs').inPageNav();
