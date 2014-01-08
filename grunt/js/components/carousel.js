@@ -273,8 +273,10 @@ toolkit.carousel = (function(window, $, video) {
                     actions = options.actions,
                     onclick = options.onclick;
                 if(options.count <= 1) return this;
-                for (i in actions) {
+
+                for (i=0;i<actions.length;i++) {
                     action = actions[i];
+
                     id = action.id;
                     extraClass = (id=='next' || id=='previous') ? ' hidden-touch ' : '';
                     icon = 'skycon-' + action.icon;

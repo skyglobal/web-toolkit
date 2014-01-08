@@ -2,22 +2,19 @@ if (typeof toolkit==='undefined') toolkit={};
 toolkit.tooltip = (function() {
 
     var $document = $(document);
-    var $w = $(window);
 
     function bindEvents() {
-        $document.on('mouseenter mouseleave ', '[data-tooltip-content-id], [title]', displayTooltip);
+        $document.on('mouseenter mouseleave ', '[data-tooltip-content-id], [title]', getTooltipContent);
     }
 
-    function displayTooltip(e) {
+
+
+    function getTooltipContent(event) {
         var content = $(this).data('tooltip-content');
 
         if (!content) {
 
-            var contentId = $(this).attr('data-tooltip-content-id');
-
-            if (contentId) {
-                content = $('#' + contentId, $(this).parent());
-            }
+            content = $('#' + $(this).attr('data-tooltip-content-id'), $(this).parent());
 
             if (!content) {
                 var title = $(this).attr('title');
@@ -27,18 +24,15 @@ toolkit.tooltip = (function() {
 
             content.addClass('tltp').hide();
             $(this).data('tooltip-content', content);
-
-            if (toolkit.elementVisible(content) === false) {
-                content.addClass("top");
-            } else {
-                content.removeClass("top");
-            }
-
         }
         clearTimeout(content.attr('data-tooltip-content-timeout'));
+        displayToolTip(event, content);
+    }
 
-        if (e.type == 'mouseenter') {
+    function displayToolTip(event, content) {
+        if (event.type == 'mouseenter') {
             $(this).attr('data-tooltip-original-title', $(this).attr('title')).attr('title', '');
+
             if (toolkit.elementVisible(content) === false) {
                 content.addClass("top");
             } else {
@@ -56,7 +50,7 @@ toolkit.tooltip = (function() {
     bindEvents();
 
     return {
-        displayTooltip: displayTooltip
+        displayTooltip: getTooltipContent
     };
 }());
 
