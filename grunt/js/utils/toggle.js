@@ -68,8 +68,11 @@ toolkit.toggle = (function() {
         $('body')
             .append($('<div id="toggle-tmp-height" class="skycom-container"></div>')
             .append($el.clone().attr('style', '').removeClass('toggle-hidden')));
-        $el.data('openHeight', $('#toggle-tmp-height > div').height());
+        $('#toggle-tmp-height > div').append('<div class="toggle-clearfix-div clearfix clear" style="padding:1px"></div> ');
+        $('#toggle-tmp-height > div').prepend('<div class="toggle-clearfix-div clearfix clear" style="padding:1px"></div> ');
+        $el.data('openHeight', $('#toggle-tmp-height > div').height() - 2);
         $('#toggle-tmp-height').remove();
+        $('.toggle-clearfix-div').remove();
 
         return $el.data('openHeight');
     }
