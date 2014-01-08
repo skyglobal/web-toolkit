@@ -16,8 +16,9 @@ if (typeof window.define === "function" && window.define.amd) {
         'components/datePicker',
         'components/lightbox',
         'components/share',
+        'components/tooltip',
         'components/video',
-        'components/carousel'], function(polyfill, detect, skycons, hashManager, popup,toggle, diff, focus, validation,elementVisible, inPageNav, accordion, datePicker, lightbox, share, video, carousel){
+        'components/carousel'], function(polyfill, detect, skycons, hashManager, popup,toggle, diff, focus, validation,elementVisible, inPageNav, accordion, datePicker, lightbox, share, tooltip, video, carousel){
 
         return {
             polyfill: polyfill,
@@ -35,6 +36,7 @@ if (typeof window.define === "function" && window.define.amd) {
             datePicker: datePicker,
             lightbox: lightbox,
             share: share,
+            tooltip: tooltip,
             video: video,
             carousel: carousel
         };
