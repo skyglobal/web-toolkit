@@ -46,7 +46,7 @@ toolkit.skycons = (function() {
         'skycon-user-profile' : "&#xf126;",
         'skycon-video-play' : "&#xf127;",
         'skycon-volume' : "&#xf128;",
-        'skycon-warning' : "&#xf129;",
+        'skycon-warning' : "&#xf129;"
     };
 
 
