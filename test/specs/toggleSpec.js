@@ -8,7 +8,7 @@ function toggleSpec(toggle) {
 
     describe(describeSpec, function () {
 
-        it('can toggle based on the element that was clicked on', function (done) {
+        it('can toggle based on the element that was clicked on', function () {
             var container = $('#toggle-by-element .edit-container');
             var toggleLink = $("#toggle-by-element .toggle-link");
 
@@ -20,21 +20,13 @@ function toggleSpec(toggle) {
             expect(toggleLink.attr("data-tracking-label")).to.equal("Hide");
             expect(toggleLink.text()).to.equal("Show");
             expect(container.hasClass('toggle-hidden')).to.equal(true);
-            setTimeout(function() {
-                expect(container.height()).to.equal(0);
-                toggle({$elClicked:toggleLink});
-                setTimeout(function () {
-                    expect(toggleLink.attr("data-toggle-state")).to.equal("shown");
-                    expect(toggleLink.attr("data-toggle-text")).to.equal("Show");
-                    expect(toggleLink.attr("data-tracking-label")).to.equal("Show");
-                    expect(toggleLink.text()).to.equal("Hide");
-                    expect(container.hasClass('toggle-hidden')).to.equal(false);
-                    expect(container.height()).to.equal(40);
-                    done();
-                }, 600);
-            }, 600);
 
-
+            toggle({$elClicked:toggleLink});
+            expect(toggleLink.attr("data-toggle-state")).to.equal("shown");
+            expect(toggleLink.attr("data-toggle-text")).to.equal("Show");
+            expect(toggleLink.attr("data-tracking-label")).to.equal("Show");
+            expect(toggleLink.text()).to.equal("Hide");
+            expect(container.hasClass('toggle-hidden')).to.equal(false);
 
         });
 
