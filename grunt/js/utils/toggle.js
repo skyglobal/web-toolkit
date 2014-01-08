@@ -20,7 +20,19 @@ toolkit.toggle = (function() {
 
         supportTransition = (function () {
             var body = document.body || document.documentElement;
-            return (typeof body.style.transition == 'string');
+            var style = body.style;
+            var property = 'transition';
+            if(typeof style[property] == 'string') {return true; }
+
+            // Tests for vendor specific prop
+            var vendorPrefix = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'];
+
+            property = property.charAt(0).toUpperCase() + property.substr(1);
+
+            for(var i=0; i<vendorPrefix.length; i++) {
+                if(typeof style[vendorPrefix[i] + property] == 'string') { return true; }
+            }
+            return false;
         }());
 
     function animate($el, to) {
