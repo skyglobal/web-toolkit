@@ -49,8 +49,8 @@ var responsiveImages = (function () {
 
     function bindOnResize() {
         $(window).on("resizeend", function () {
-            var i;
-            for (i in containers) {
+            var i, n=containers.length;
+            for (i=0;i< n;i++) {
                 init(containers[i]);
             }
         });
