@@ -1,4 +1,4 @@
-version: 2.0.0rc6
+version: 2.0.0rc7
 destination: _site
 source: .
 exclude: [
