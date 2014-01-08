@@ -1,5 +1,5 @@
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.share = (function() {
+toolkit.share = (function(detect) {
 
     var $document = $(document);
 
@@ -14,9 +14,9 @@ toolkit.share = (function() {
         if(e.type === 'click' || e.type === 'touchend' || (e.type === 'keypress' && e.which === 13)) {
             $section.toggleClass('active');
             var popover = $(this).parent().find('.popover');
-
-            if(toolkit.elementVisible(popover) === false) {
+            if(detect.elementVisibleBottom(popover) === false) {
                  popover.addClass("top");
+
             } else {
                 popover.removeClass("top");
             }
@@ -38,9 +38,9 @@ toolkit.share = (function() {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/share', ['utils/elementVisible'], function() {
-        return toolkit.share();
+    define('components/share', ['utils/detect'], function(detect) {
+        return toolkit.share(detect);
     });
 } else {
-    toolkit.share = toolkit.share();
+    toolkit.share = toolkit.share(toolkit.detect);
 }
