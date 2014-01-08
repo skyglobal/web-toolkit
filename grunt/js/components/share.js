@@ -13,6 +13,14 @@ toolkit.share = (function() {
             triggerEvents = 'keypress ' + ('ontouchend' in document.documentElement ? 'touchend' : 'click');
         if(e.type === 'click' || e.type === 'touchend' || (e.type === 'keypress' && e.which === 13)) {
             $section.toggleClass('active');
+            var popover = $(this).parent().find('.popover');
+
+            if(toolkit.elementVisible(popover) === false) {
+                 popover.addClass("top");
+            } else {
+                popover.removeClass("top");
+            }
+
             $document.on(triggerEvents, function hidePopover(e) {
                 if(!$.contains($section[0], e.target)) {
                     $section.removeClass('active');
