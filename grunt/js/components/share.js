@@ -38,7 +38,7 @@ toolkit.share = (function() {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/share', [], function() {
+    define('components/share', ['utils/elementVisible'], function() {
         return toolkit.share();
     });
 } else {
