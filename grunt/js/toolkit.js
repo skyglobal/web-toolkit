@@ -1,3 +1,9 @@
+(function init() {
+    if(responsiveImages) {
+        responsiveImages.bindOnResize();
+    }
+})();
+
 if (typeof window.define === "function" && window.define.amd) {
 //    explicitly call all js files here to ensure all files are available
     define('toolkit',[

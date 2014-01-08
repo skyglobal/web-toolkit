@@ -1,32 +1,15 @@
 <!doctype html>
-<!--To put correct ie classes on document root to essentially enable css conditionals-->
 <!--[if IE 7]>         <html class="lt-ie10 lt-ie9 lt-ie8" > <![endif]-->
 <!--[if IE 8]>         <html class="lt-ie10 lt-ie9" > <![endif]-->
 <!--[if IE 9]>         <html class="lt-ie10" > <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
-<!--end css conditionals-->
 	<head>
         <meta charset="UTF-8"/>
-
-        <!--jquery-->
 		<!--[if lt IE 9]> <script src="//web-toolkit.global.sky.com/static/lib/jquery-1.10.2.js" ></script> <![endif]-->
         <!--[if gte IE 9]><!--> <script src="//web-toolkit.global.sky.com/static/lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
         <script src="//web-toolkit.global.sky.com/static/lib/jquery.scrollspy.js" ></script>
-        <!--end-jquery-->
-
-        <!--to help prevent 'font flash'-->
-        <link href='//web-toolkit.global.sky.com/static/fonts/sky_regular.ttf' rel='prefetch'>
-        <link href='//web-toolkit.global.sky.com/static/fonts/sky_regular.svg' rel='prefetch'>
-        <link href='//web-toolkit.global.sky.com/static/fonts/sky_medium.ttf' rel='prefetch'>
-        <link href='//web-toolkit.global.sky.com/static/fonts/sky_medium.svg' rel='prefetch'>
-        <!--end prevent 'font flash'-->
-
-        <!--for video player pre-requisits-->
         <link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
         <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
-        <!--end video player pre-requisits-->
-
-        <!--from masthead-->
 		<!--[if LT IE 9]>
 <link href='http://assets.sky.com/dist/759/css/non-responsive-12.css' rel='stylesheet'>
 <![endif]-->
@@ -38,12 +21,16 @@
 <script id='skycom-view-type'></script>
 <script id='skycom-orientation'></script>
 <link href='http://assets.sky.com/images/favicon.png' rel='icon' type='image/png'>
+<link href='http://assets.sky.com/fonts/sky_regular.ttf' rel='prefetch'>
+<link href='http://assets.sky.com/fonts/sky_regular.svg' rel='prefetch'>
+<link href='http://assets.sky.com/fonts/sky_medium.ttf' rel='prefetch'>
+<link href='http://assets.sky.com/fonts/sky_medium.svg' rel='prefetch'>
 <link href='http://assets.sky.com/images/apple-touch-icon-precomposed.png' rel='apple-touch-icon-precomposed'>
 <link href='http://assets.sky.com/images/apple-touch-icon-114x114-precomposed.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
 <style media='print'>
     #skycom-menu-button,  #skycom-profile-button,  #acc-links,  #skycom-footer-wrapper,  #skycom_breadcrumb,  #skycom-nav-wrapper,  #skycom-search-wrapper{    display:none;  }
 </style>
-<!--<link href='http://assets.sky.com/dist/759/css/fonts.css' rel='stylesheet'>-->
+<link href='http://assets.sky.com/dist/759/css/fonts.css' rel='stylesheet'>
 <link href='http://assets.sky.com/dist/759/fonts/skyicons.css' rel='stylesheet'>
 <!--[if IE 6]>
 <link href='http://assets.sky.com/dist/759/css/ie/ie6.css' rel='stylesheet'>
@@ -69,13 +56,11 @@
 </script>
 <script src='http://assets.sky.com/dist/759/js/masthead.js'></script>
 
-        <!--end masthead-->
-
         <link rel="stylesheet" href="dist/stylesheets/demo.css">
         <link rel="stylesheet" href="dist/stylesheets/toolkit.css">
         <link rel="stylesheet" href="dist/fonts/skycons.css">
 
-        <!--for html 5 cross browser-->
+
         <!--[if lt IE 10]><script type="text/javascript">
             document.createElement('header');
             document.createElement('section');
@@ -87,9 +72,81 @@
             document.createElement('figure');
             document.createElement('figcaption');
         </script><![endif]-->
+        <script>
+            var responsiveImages = (function () {
 
+    var containers = [];
+
+    function loadImage(container) {
+
+        var w = window,
+            ps = container.getElementsByTagName("div"),
+            i = 0, il = ps.length,
+            j = 0, jl = ps.length,
+            sources, matches, media, picImg, newSrc;
+
+        for (; i < il; i++) {
+            if (ps[ i ].getAttribute("data-picture") !== null) {
+
+                sources = ps[ i ].getElementsByTagName("div");
+                matches = [];
+
+                // See if which sources match
+                for (j = 0, jl = sources.length; j < jl; j++) {
+                    media = sources[ j ].getAttribute("data-media");
+                    // if there's no media specified, OR w.matchMedia is supported
+                    if (!media || ( w.matchMedia && w.matchMedia(media).matches )) {
+                        matches.push(sources[ j ]);
+                    }
+                }
+
+                // Find any existing img element in the picture element
+                picImg = ps[ i ].getElementsByTagName("img")[ 0 ];
+
+                if (matches.length) {
+                    if (!picImg) {
+                        picImg = w.document.createElement("img");
+                        picImg.alt = ps[ i ].getAttribute("data-alt");
+                        ps[ i ].appendChild(picImg);
+                    }
+                    newSrc = matches.pop().getAttribute("data-src");
+                    if (picImg.src !== newSrc) {
+                        picImg.src = newSrc;
+                    }
+                }
+                else if (picImg) {
+                    ps[ i ].removeChild(picImg);
+                }
+            }
+        }
+    }
+
+    function bindOnResize() {
+        $(window).on("resizeend", function () {
+            var i, n=containers.length;
+            for (i=0;i< n;i++) {
+                loadImage(containers[i]);
+            }
+        });
+    }
+
+    function init(container) {
+        if(container) {
+            loadImage(container);
+            containers.push(container);
+        }
+    }
+
+    return {
+        init:init,
+        bindOnResize:bindOnResize
+    };
+})();
+
+        </script>
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target="#toolkit-menu-tabs">
+
         <script src="dist/scripts/toolkit.js"></script>
 
         
@@ -99,7 +156,7 @@
         <h1 class="demo-header section-title clearfix">
             <img src="static/images/sky-logo.png" alt="" height="52" width="82">
             <span>Toolkit</span>
-            <a href="#!lightbox/code-usingTheToolkit" class="code-download" data-docs="accessibility,codingPractices,contributing,gettingStarted">[ How To &hellip; ]</a>
+            <a href="#!lightbox/code-usingTheToolkit" class="code-download" data-docs="requireJSAndGrunt,accessibility,codingPractices,contributing,gettingStarted">[ How To &hellip; ]</a>
         </h1>
 
     </div>
@@ -132,7 +189,6 @@
                     <ul class="nav tabs clearfix">
                         <li class="tab selected"><a href="index.html#grid" class="skycom-ellipsis internal-link" data-diff="baseStyles/grid" data-diff-demos="974,1140,lightbox,tabletPortrait">Grid</a></li>
                         <li class="tab"><a href="index.html#colours" class="skycom-ellipsis internal-link" data-diff="baseStyles/colours" data-diff-demos="backgrounds,buttonsIcons,channels,shop,typography,v3Brand">Colours</a></li>
-                        <li class="tab"><a href="index.html#fonts" class="skycom-ellipsis internal-link" data-diff="baseStyles/fonts" data-diff-demos="all">Fonts</a></li>
                         <li class="tab"><a href="index.html#typography" class="skycom-ellipsis internal-link" data-diff="baseStyles/typography" data-diff-demos="all">Typography</a></li>
                         <li class="tab"><a href="index.html#icons" class="skycom-ellipsis internal-link" data-diff="baseStyles/icons" data-diff-demos="sprite,skycons">Icons</a></li>
                         <li class="tab"><a href="index.html#buttons" class="skycom-ellipsis internal-link" data-diff="baseStyles/buttons" data-diff-demos="primary,secondary">Buttons</a></li>
@@ -149,7 +205,7 @@
                         <li class="tab"><a href="index.html#inPageNav" data-diff="components/inPageNav" data-diff-demos="classicTabs,sleekNav" class="skycom-ellipsis internal-link">In-Page Nav</a></li>
                         <li class="tab"><a href="index.html#lightbox" data-diff="components/lightbox" data-diff-demos=default class="skycom-ellipsis internal-link">Lightbox</a></li>
                         <li class="tab"><a href="index.html#accordion" data-diff="components/accordion" data-diff-demos=default class="skycom-ellipsis internal-link">Accordion</a></li>
-                        <li class="tab"><a href="index.html#carousel" data-diff="components/carousel" data-diff-demos="singleSlide,skinny,default" class="skycom-ellipsis internal-link">Carousel</a></li>
+                        <li class="tab"><a href="index.html#carousel" data-diff="components/carousel" data-diff-demos="biggerMobile,singleSlide,skinny,default" class="skycom-ellipsis internal-link">Carousel</a></li>
                         <li class="tab"><a href="index.html#video" data-diff="components/video" data-diff-demos="default" class="skycom-ellipsis internal-link">Video</a></li>
                         <li class="tab"><a href="index.html#share" data-diff="components/share" data-diff-demos="bar,popup" class="skycom-ellipsis internal-link">Share</a></li>
                     </ul>
@@ -161,8 +217,9 @@
                     <ul class="nav tabs clearfix">
                         <li class="tab"><a href="index.html#toggle" class="skycom-ellipsis internal-link" data-diff="utils/toggle" data-diff-demos="element">Toggle</a></li>
                         <li class="tab"><a href="index.html#hashManager" class="skycom-ellipsis internal-link" data-diff="utils/hashManager" data-diff-demos="default">Hash Manager</a></li>
+                        <li class="tab"><a href="index.html#responsiveImages" class="skycom-ellipsis internal-link" data-diff="utils/responsiveImages" data-diff-demos="using,function">Responsive Images</a></li>
                         <li class="tab"><a href="index.html#detect" class="skycom-ellipsis internal-link" data-diff="utils/detect" data-diff-demos="orientation,touch,view">Detect</a></li>
-                        <li class="tab"><a href="index.html#libraries" class="skycom-ellipsis internal-link" data-diff="utils/libraries" data-diff-demos="jquery,requirejs,other">Libraries</a></li>
+                        <li class="tab"><a href="index.html#libraries" class="skycom-ellipsis internal-link" data-diff="utils/libraries" data-diff-demos="jquery,requirejs,other">External Libraries</a></li>
                     </ul>
                 </section>
             </div>
@@ -211,7 +268,7 @@
         </form>
         <div class="warning error sky-well hidden" >
             To workout changes we must go to
-            <a href="http://web-toolkit.global.sky.com/2.0.0rc7/_site/changes.html">here</a>.
+            <a href="http://web-toolkit.global.sky.com/2.0.0rc6/_site/changes.html">here</a>.
         </div>
     </div>
 </section>
@@ -238,7 +295,7 @@
                 <a target="_github" href="https://github.com/skyglobal/web-toolkit/issues">Bugs / Feature Requests</a>
             </li>
             <li class="right meta-data" >
-                <div class="intro">Toolkit v<span id="current-version">2.0.0rc7</span></div>
+                <div class="intro">Toolkit v<span id="current-version">2.0.0rc6</span></div>
                 <small class="right">Updated: 08-01-2014</small>
             </li>
         </ul>

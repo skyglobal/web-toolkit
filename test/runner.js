@@ -11,6 +11,7 @@ define('runner',[''
         ,'specs/toggleSpec'
         ,'specs/lightboxSpec'
         ,'specs/hashManagerSpec'
+        ,'specs/responsiveImagesSpec'
     ], function(){
 
     mocha.run();
