@@ -17,7 +17,7 @@ toolkit.toggle = (function() {
     var hasResized = false,
         hasContentChanged = false,
         elementsToToggle = {},
-
+        hiddenClass = 'toggle-hide'
         supportTransition = (function () {
             var body = document.body || document.documentElement;
             return (typeof body.style.transition == 'string');
@@ -30,12 +30,13 @@ toolkit.toggle = (function() {
             }, 25);
 
         }
-        $el.toggleClass('toggle-hidden', (to === 0));
+        $el.toggleClass(hiddenClass, (to === 0));
         return $el;
     }
 
     function setOpenHeight($el){
         var hasHeight = false;
+        if(!supportTransition) return;
         if ($el.attr('style')){
             var styles = ($el.attr('style').split(';'));
             for (var i in styles){
@@ -55,7 +56,7 @@ toolkit.toggle = (function() {
 
         $('body')
             .append($('<div id="toggle-tmp-height" class="skycom-container"></div>')
-            .append($el.clone().attr('style', '').removeClass('toggle-hidden')));
+            .append($el.clone().attr('style', '').removeClass(hiddenClass)));
         $el.data('openHeight', $('#toggle-tmp-height > div').height());
         $('#toggle-tmp-height').remove();
 
