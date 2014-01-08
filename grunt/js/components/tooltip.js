@@ -1,5 +1,5 @@
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.tooltip = (function() {
+toolkit.tooltip = (function(detect) {
 
     var $document = $(document);
 
@@ -33,7 +33,7 @@ toolkit.tooltip = (function() {
         if (event.type == 'mouseenter') {
             $(this).attr('data-tooltip-original-title', $(this).attr('title')).attr('title', '');
 
-            if (toolkit.elementVisible(content) === false) {
+            if (detect.elementVisibleBottom(content) === false) {
                 content.addClass("top");
             } else {
                 content.removeClass("top");
@@ -52,12 +52,12 @@ toolkit.tooltip = (function() {
     return {
         displayTooltip: getTooltipContent
     };
-}());
+});
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/tooltip', [], function() {
-        return toolkit.tooltip;
+    define('components/tooltip', ['utils/detect'], function(detect) {
+        return toolkit.tooltip(ev);
     });
 } else {
-    toolkit.tooltip = toolkit.tooltip;
+    toolkit.tooltip = toolkit.tooltip(toolkit.detect);
 }

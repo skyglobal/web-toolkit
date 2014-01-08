@@ -13,10 +13,6 @@
   margin-top: 13px;
   @include box-shadow(2px 1px 3px rgba(0, 0, 0, 0.15));
 
-  @media all and (max-width: 767px) {
-    @include box-shadow(-2px -1px 3px rgba(0, 0, 0, 0.15));
-  }
-
   &.top {
     @include box-shadow(-2px -1px 3px rgba(0, 0, 0, 0.15));
     @include pointer-bordered(bottom, #FFF, #CCC);

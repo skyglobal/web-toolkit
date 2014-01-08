@@ -8,6 +8,7 @@ toolkit.detect = (function () {
     var touchClasses = { hasNot: toolkitClasses[0], has: toolkitClasses[1] };
     var viewClasses = { mobile:toolkitClasses[2], desktop:toolkitClasses[3] };
     var orientationClasses = { landscape: toolkitClasses[4], portrait: toolkitClasses[5] };
+    var $window = $(window);
 
     function bindEvents(){
         var $window = $(window);
@@ -64,6 +65,15 @@ toolkit.detect = (function () {
         document.documentElement.className = arrClasses.join(' ');
     }
 
+    function elementVisibleBottom(el) {
+        if (el.length < 1)
+            return;
+
+        var elementOffSet = el.offset();
+
+        return (elementOffSet.top + el.height() <= $window.scrollTop() + $window.height());
+    }
+
     attachClasses();
     bindEvents();
 
@@ -72,7 +82,8 @@ toolkit.detect = (function () {
         orientation: orientation,
         view: view,
         pseudo: pseudo,
-        state: state
+        state: state,
+        elementVisibleBottom: elementVisibleBottom
     };
 
 });

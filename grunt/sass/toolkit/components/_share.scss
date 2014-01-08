@@ -101,19 +101,6 @@
         padding: 8px;
       }
     }
-
-    @media all and (max-width: 767px) {
-      @include pointer-bordered(bottom, #FFF, #CCC);
-      position: absolute;
-      top: auto;
-      bottom: 1.8em;
-      left: 15px;
-
-      &:before,
-      &:after {
-        left: 20px;
-      }
-    }
   }
 
   &.active .popover {
