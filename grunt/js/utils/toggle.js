@@ -17,7 +17,7 @@ toolkit.toggle = (function() {
     var hasResized = false,
         hasContentChanged = false,
         elementsToToggle = {},
-        hiddenClass = 'toggle-hide'
+        hiddenClass = 'toggle-hidden',
         supportTransition = (function () {
             var body = document.body || document.documentElement;
             return (typeof body.style.transition == 'string');
