@@ -56,7 +56,7 @@ toolkit.tooltip = (function(detect) {
 
 if (typeof window.define === "function" && window.define.amd) {
     define('components/tooltip', ['utils/detect'], function(detect) {
-        return toolkit.tooltip(ev);
+        return toolkit.tooltip(detect);
     });
 } else {
     toolkit.tooltip = toolkit.tooltip(toolkit.detect);
