@@ -10,10 +10,7 @@ toolkit.detect = (function () {
     var orientationClasses = { landscape: toolkitClasses[4], portrait: toolkitClasses[5] };
 
     function bindEvents(){
-        var $window = $(window);
-        $window.bind('resize', onResize);
-        clearTimeout(resize);
-        resize = setTimeout(function(){$window.trigger('resizeend');},200);
+        $(window).bind('resize', onResize);
     }
 
     function pseudo(el, pos){
@@ -43,6 +40,8 @@ toolkit.detect = (function () {
     function onResize(){
         removeClasses();
         attachClasses();
+        clearTimeout(resize);
+        resize = setTimeout(function(){$(window).trigger('resizeend');},200);
     }
 
     function removeClasses(){

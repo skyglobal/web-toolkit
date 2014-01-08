@@ -65,8 +65,7 @@ module.exports = function(grunt) {
                     generateSourceMaps: false,
                     modules:[{
                         name: 'toolkit'
-                    },
-                    {
+                    },{
                         name: 'demo'
                     }]
                 }
