@@ -3,7 +3,6 @@
   position: absolute;
   display: none;
   top: auto;
-  left: 15px;
   z-index: 1;
   min-width: 200px;
   max-width: 450px;
@@ -11,7 +10,7 @@
   padding: 6px 16px;
   background-color: #FFF;
   border: 1px solid #dcdcdc;
-  margin-top: 6px;
+  margin-top: 13px;
   @include box-shadow(2px 1px 3px rgba(0, 0, 0, 0.15));
 
   @media all and (max-width: 767px) {
@@ -27,12 +26,12 @@
     left: 15px;
     &:before,
     &:after {
-      left: 20px;
+      left: 40px;
     }
   }
 
   &:before,
   &:after {
-    left: 20px;
+    left: 40px;
   }
 }
