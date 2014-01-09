@@ -133,3 +133,12 @@ ul.notes{
     font-size: 0.9em;
   }
 }
+
+#demo-tooltip {
+  &:hover {
+    cursor: pointer;
+  }
+  span {
+    padding-left: 8px;
+  }
+}
