@@ -2,7 +2,7 @@ if (typeof toolkit === 'undefined') toolkit = {};
 toolkit.tooltip = (function (detect) {
 
     function bindEvents() {
-        $(document).on('mouseenter mouseleave ', '[data-tooltip]', hover);
+        $(document).on('mouseenter mouseleave', '[data-tooltip]', hover);
     }
 
     function hover(event) {
@@ -25,12 +25,12 @@ toolkit.tooltip = (function (detect) {
     function show($tooltip) {
         position($tooltip);
         $tooltip.attr('data-tooltip-content-timeout', setTimeout(function () {
-            $tooltip.fadeIn(100).css('display', 'block');
-        }, 500));
+            $tooltip.addClass('show');
+        }, 750));
     }
 
     function hide($tooltip) {
-        $tooltip.fadeOut(350);
+        $tooltip.removeClass('show top');
     }
 
     bindEvents();
