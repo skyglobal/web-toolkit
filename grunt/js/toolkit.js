@@ -16,13 +16,16 @@ if (typeof window.define === "function" && window.define.amd) {
         'utils/diff',
         'utils/focus',
         'utils/validation',
+        'utils/event',
         'components/inPageNav',
         'components/accordion',
         'components/datePicker',
         'components/lightbox',
         'components/share',
         'components/video',
-        'components/carousel'], function(polyfill, detect, skycons, hashManager, popup,toggle, diff, focus, validation, inPageNav, accordion, datePicker, lightbox, share, video, carousel){
+        'components/carousel'], function(
+            polyfill, detect, skycons, hashManager, popup,toggle, diff, focus, validation, event,
+            inPageNav, accordion, datePicker, lightbox, share, video, carousel){
 
         return {
             polyfill: polyfill,
@@ -34,6 +37,7 @@ if (typeof window.define === "function" && window.define.amd) {
             diff: diff,
             focus: focus,
             validation: validation,
+            event: event,
             inPageNav: inPageNav,
             accordion: accordion,
             datePicker: datePicker,

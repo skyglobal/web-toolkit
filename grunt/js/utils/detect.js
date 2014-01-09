@@ -3,14 +3,13 @@ toolkit.detect = (function () {
     "use strict";
 
     var state = {};
-    var resize = '';
     var toolkitClasses = ["no-touch", "touch-device", "mobile-view", "desktop-view", "landscape", "portrait"];
     var touchClasses = { hasNot: toolkitClasses[0], has: toolkitClasses[1] };
     var viewClasses = { mobile:toolkitClasses[2], desktop:toolkitClasses[3] };
     var orientationClasses = { landscape: toolkitClasses[4], portrait: toolkitClasses[5] };
 
     function bindEvents(){
-        $(window).bind('resize', onResize);
+        $(window).bind('resize', updateDetectionStates);
     }
 
     function pseudo(el, pos){
@@ -37,11 +36,9 @@ toolkit.detect = (function () {
         return state.touch;
     }
 
-    function onResize(){
+    function updateDetectionStates(){
         removeClasses();
         attachClasses();
-        clearTimeout(resize);
-        resize = setTimeout(function(){$(window).trigger('resizeend');},200);
     }
 
     function removeClasses(){
