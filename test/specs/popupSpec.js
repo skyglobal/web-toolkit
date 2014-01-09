@@ -4,8 +4,6 @@ function popupSpec(popup) {
 
     describe(describeSpec, function () {
 
-        popup.init();
-
         var args = {
             url:"http://www.google.com",
             width:400,
