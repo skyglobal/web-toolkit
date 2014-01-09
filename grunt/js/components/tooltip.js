@@ -19,11 +19,7 @@ toolkit.tooltip = (function (detect) {
     }
 
     function position($tooltip) {
-        if (detect.elementVisibleBottom($tooltip) === false) {
-            $tooltip.addClass("top");
-        } else {
-            $tooltip.removeClass("top");
-        }
+        $tooltip.toggleClass("top", !detect.elementVisibleBottom($tooltip));
     }
 
     function show($tooltip) {
