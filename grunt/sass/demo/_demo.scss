@@ -135,6 +135,7 @@ ul.notes{
 }
 
 #demo-tooltip {
+  display: inline-block;
   &:hover {
     cursor: pointer;
   }
