@@ -1,0 +1,20 @@
+<p>
+    To use the toolkit with RequireJS, you need to get the RequireJS config to point the 'toolkit' module to the correct location.
+    <code class="block">
+        requirejs.config({
+            paths:{
+                'toolkit':'http://web-toolkit.global.sky.com/{{ site.version }}/scripts/toolkit.js'
+            }
+        });
+    </code>
+</p>
+<p >
+    If you are also using Grunt with RequireJS to handle dependency management on the server side, you will need to exclude the toolkit file from being optimized. In your gruntfile, add the following to the requireJS options:
+    <code class=block >
+        options: {
+            paths: {
+                toolkit: 'empty:'
+            }
+        },
+    </code>
+</p>
