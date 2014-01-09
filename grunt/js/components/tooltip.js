@@ -1,61 +1,49 @@
-if (typeof toolkit==='undefined') toolkit={};
-toolkit.tooltip = (function(detect) {
-
-    var $document = $(document);
+if (typeof toolkit === 'undefined') toolkit = {};
+toolkit.tooltip = (function (detect) {
 
     function bindEvents() {
-        $document.on('mouseenter mouseleave ', '[data-tooltip-content-id], [title]', getTooltipContent);
+        $(document).on('mouseenter mouseleave ', '[data-tooltip]', hover);
     }
 
-
-
-    function getTooltipContent(event) {
-        var content = $(this).data('tooltip-content');
-
-        if (!content) {
-
-            content = $('#' + $(this).attr('data-tooltip-content-id'), $(this).parent());
-
-            if (!content) {
-                var title = $(this).attr('title');
-                content = $('<div/>').text(title);
-                $(this).prepend(content);
-            }
-
-            content.addClass('tltp').hide();
-            $(this).data('tooltip-content', content);
-        }
-        clearTimeout(content.attr('data-tooltip-content-timeout'));
-        displayToolTip(event, content);
-    }
-
-    function displayToolTip(event, content) {
+    function hover(event) {
+        var $hoveredElement = $(this),
+            $tooltip = $hoveredElement.find('.tltp');
+        clearTimeout($tooltip.attr('data-tooltip-content-timeout'));
         if (event.type == 'mouseenter') {
-            $(this).attr('data-tooltip-original-title', $(this).attr('title')).attr('title', '');
-
-            if (detect.elementVisibleBottom(content) === false) {
-                content.addClass("top");
-            } else {
-                content.removeClass("top");
+            if ($tooltip.text() !== "") {
+                show($tooltip);
             }
-            content.fadeIn();
         } else {
-            $(this).attr('title', $(this).attr('data-tooltip-original-title')).attr('data-tooltip-original-title', '');
-            content.attr('data-tooltip-content-timeout', setTimeout(function () {
-                content.fadeOut();
-            }, 1000));
+            hide($tooltip);
         }
+    }
+
+    function position($tooltip) {
+        if (detect.elementVisibleBottom($tooltip) === false) {
+            $tooltip.addClass("top");
+        } else {
+            $tooltip.removeClass("top");
+        }
+    }
+
+    function show($tooltip) {
+        position($tooltip);
+
+        $tooltip.attr('data-tooltip-content-timeout', setTimeout(function () {
+            $tooltip.fadeIn(100).css('display', 'block');
+        }, 750));
+    }
+
+    function hide($tooltip) {
+        $tooltip.fadeOut(350);
     }
 
     bindEvents();
 
-    return {
-        displayTooltip: getTooltipContent
-    };
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/tooltip', ['utils/detect'], function(detect) {
+    define('components/tooltip', ['utils/detect'], function (detect) {
         return toolkit.tooltip(detect);
     });
 } else {
