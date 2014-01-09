@@ -70,7 +70,7 @@ end
 desc 'Deploys a new version to the CDN'
 task :deploy_new_version do
 
-  system "git config user.email 'dl-skycom@bskyb.com'"
+  system "git config user.email 'circleci@bskyb.com'"
   system "git config user.name 'CircleCI'"
 
   puts "*** Grunting files ***"
