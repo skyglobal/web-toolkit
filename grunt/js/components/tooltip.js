@@ -1,8 +1,15 @@
 if (typeof toolkit === 'undefined') toolkit = {};
 toolkit.tooltip = (function (detect) {
 
+
     function bindEvents() {
-        $(document).on('mouseenter mouseleave ', '[data-tooltip]', hover);
+        $(document).on('mouseenter mouseleave', '[data-tooltip]', hover);
+        $("[data-tooltip] .tltp").on('click', preventClicksToParent);
+    }
+
+    function preventClicksToParent(event) {
+        event.preventDefault();
+        event.stopPropagation();
     }
 
     function hover(event) {
@@ -23,14 +30,21 @@ toolkit.tooltip = (function (detect) {
     }
 
     function show($tooltip) {
-        position($tooltip);
         $tooltip.attr('data-tooltip-content-timeout', setTimeout(function () {
-            $tooltip.fadeIn(100).css('display', 'block');
+            $tooltip.addClass('show');
+            setTimeout(function() {
+                $tooltip.addClass('fade');
+                position($tooltip);
+            }, 15);
         }, 500));
     }
 
     function hide($tooltip) {
-        $tooltip.fadeOut(350);
+        var transitionDuration=250;
+        $tooltip.removeClass('fade');
+        setTimeout(function() {
+            $tooltip.removeClass('show top');
+        }, transitionDuration);
     }
 
     bindEvents();
