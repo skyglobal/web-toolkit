@@ -1,6 +1,7 @@
 if (typeof toolkit === 'undefined') toolkit = {};
 toolkit.tooltip = (function (detect) {
 
+
     function bindEvents() {
         $(document).on('mouseenter mouseleave', '[data-tooltip]', hover);
     }
@@ -23,14 +24,21 @@ toolkit.tooltip = (function (detect) {
     }
 
     function show($tooltip) {
-        position($tooltip);
         $tooltip.attr('data-tooltip-content-timeout', setTimeout(function () {
             $tooltip.addClass('show');
-        }, 750));
+            setTimeout(function() {
+                $tooltip.addClass('fade');
+                position($tooltip);
+            }, 15);
+        }, 500));
     }
 
     function hide($tooltip) {
-        $tooltip.removeClass('show top');
+        var transitionDuration=250;
+        $tooltip.removeClass('fade');
+        setTimeout(function() {
+            $tooltip.removeClass('show top');
+        }, transitionDuration);
     }
 
     bindEvents();
