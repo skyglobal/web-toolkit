@@ -35,7 +35,8 @@ function shareSpec(share) {
 }
 
 if (window.define) {
-    define('specs/shareSpec', ['components/share'], function (share) {
+    define('specs/shareSpec', ['components/share'], function (share) { //, 'specs/popupSpec', , popupSpec
+//            var popupDescription = popupSpec();
             return shareSpec(share);
         }
     );
