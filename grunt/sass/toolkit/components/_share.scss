@@ -3,7 +3,7 @@
   margin-top: 10px;
   z-index: 2;
 
-  a{
+  a {
     color: #666;
   }
   .share-word {
@@ -59,11 +59,25 @@
     background-color: #FFF;
     border: 1px solid #dcdcdc;
     min-width: 235px;
-
+    z-index: 2;
     &:before,
     &:after {
       left: 20px;
     }
+
+    &.top {
+      @include box-shadow(-2px -1px 3px rgba(0, 0, 0, 0.15));
+      @include pointer-bordered(bottom, #FFF, #CCC);
+      position: absolute;
+      top: auto;
+      bottom: 1.8em;
+      left: 15px;
+      &:before,
+      &:after {
+        left: 20px;
+      }
+    }
+
     .share-count {
       font-family: Helvetica, Arial;
       font-size: 12px;
@@ -87,19 +101,6 @@
         padding: 8px;
       }
     }
-
-    @media all and (max-width: 767px) {
-      @include pointer-bordered(bottom, #FFF, #CCC);
-      position: absolute;
-      top: auto;
-      bottom: 1.8em;
-      left: 15px;
-
-      &:before,
-      &:after {
-        left: 20px;
-      }
-    }
   }
 
   &.active .popover {
@@ -111,7 +112,8 @@
     }
   }
 }
-.share-popup .has-focus .share-count{
+
+.share-popup .has-focus .share-count {
   color: $white;
 }
 
@@ -124,7 +126,7 @@
   }
   a {
     color: #333;
-    span{
+    span {
       display: inline;
       position: static !important;
       clip: auto;
@@ -152,6 +154,7 @@
     h3 {
       font-size: 1.1em;
     }
+
     ul {
       margin-left: 15px;
       li {
@@ -185,6 +188,6 @@
   }
 }
 
-.skycon-twitter{
+.skycon-twitter {
   font-size: 17px;
 }
