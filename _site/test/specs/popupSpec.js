@@ -13,6 +13,17 @@ function popupSpec(popup) {
             title:'test title'
         };
 
+        it('testing the binding of the click of the share link', function () {
+            var hasBeenCalled = false;
+            window.open = function (url, title, options) {
+                hasBeenCalled = true;
+            };
+
+            $('li.share-page-by-facebook a').click();
+
+            expect(hasBeenCalled).to.equal(true);
+        });
+
         it('clicking share link should open the popup', function () {
             window.open = function (url, title, options) {
                 return { url:url, title:title, options:options};
