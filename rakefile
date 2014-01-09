@@ -88,21 +88,23 @@ task :deploy_new_version do
     next
   end
 
-  puts "*** Tagging Version ***"
-  system "git tag -a v#{latest_version_number} -m \"Rake deploy: auto tag version\""
-  system "git push origin --tags"
+  puts "*** Tagging Version #{latest_version_number} ***"
+  system "git tag -a v#{latest_version_number} -m \"Rake deploy: auto tag on #{getDate}\""
+  system "git push origin master v#{latest_version_number}"
 
   puts "*** Pushing to the AmazonS3 ***"
   doc_resources = []
-  puts 'Uploading doc files'
+  puts 'Uploading assets'
   cd "dist"
   assets_to_upload.each do |file|
     doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
   cd ".."
+  puts 'Uploading template files'
   templates_to_upload.each do |file|
     doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
+  puts 'Uploading static files'
   static_to_upload.each do |file|
     doc_resources << bucket.objects["#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
