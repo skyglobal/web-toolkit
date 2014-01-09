@@ -28,10 +28,9 @@ toolkit.tooltip = (function (detect) {
 
     function show($tooltip) {
         position($tooltip);
-
         $tooltip.attr('data-tooltip-content-timeout', setTimeout(function () {
             $tooltip.fadeIn(100).css('display', 'block');
-        }, 750));
+        }, 500));
     }
 
     function hide($tooltip) {

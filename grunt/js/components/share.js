@@ -13,12 +13,12 @@ toolkit.share = (function(detect) {
             triggerEvents = 'keypress ' + ('ontouchend' in document.documentElement ? 'touchend' : 'click');
         if(e.type === 'click' || e.type === 'touchend' || (e.type === 'keypress' && e.which === 13)) {
             $section.toggleClass('active');
-            var popover = $(this).parent().find('.popover');
-            if(detect.elementVisibleBottom(popover) === false) {
-                 popover.addClass("top");
+            var $popover = $(this).parent().find('.popover');
+            if(detect.elementVisibleBottom($popover) === false) {
+                 $popover.addClass("top");
 
             } else {
-                popover.removeClass("top");
+                $popover.removeClass("top");
             }
 
             $document.on(triggerEvents, function hidePopover(e) {
