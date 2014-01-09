@@ -6,20 +6,28 @@
   z-index: 1;
   min-width: 210px;
   max-width: 450px;
+  opacity: 0;
+  @include transition(opacity 0.25s ease-in-out);
   bottom: auto;
   padding: 6px 16px;
   background-color: #FFF;
   border: 1px solid #dcdcdc;
   margin-top: 13px;
   @include box-shadow(2px 1px 3px rgba(0, 0, 0, 0.15));
+  cursor: default;
+
+  &.fade {
+    opacity: 1;
+  }
+  &.show {
+    display: block;
+  }
 
   &.top {
     @include box-shadow(-2px -1px 3px rgba(0, 0, 0, 0.15));
     @include pointer-bordered(bottom, #FFF, #CCC);
     position: absolute;
-    top: auto;
     bottom: 1.8em;
-    left: 15px;
     &:before,
     &:after {
       left: 40px;
