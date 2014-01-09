@@ -46,8 +46,18 @@ var responsiveImages = (function () {
         }
     }
 
+
+    function on(el, eventName, exec){
+        if (el.addEventListener) {
+            el.addEventListener(eventName, exec, false);
+        } else {
+            el.attachEvent(eventName, exec);
+        }
+    }
+
+
     function bindOnResize() {
-        $(window).on("resizeend", function () {
+        on(window, "resizeend", function () {
             var i, n=containers.length;
             for (i=0;i< n;i++) {
                 loadImage(containers[i]);
