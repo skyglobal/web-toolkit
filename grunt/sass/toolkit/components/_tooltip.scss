@@ -1,7 +1,7 @@
 .tltp {
   @include pointer-bordered(top, #FFF, #CCC);
   position: absolute;
-  display: block;
+  display: none;
   top: auto;
   z-index: 1;
   min-width: 210px;
@@ -14,9 +14,13 @@
   border: 1px solid #dcdcdc;
   margin-top: 13px;
   @include box-shadow(2px 1px 3px rgba(0, 0, 0, 0.15));
+  cursor: default;
 
-  &.show {
+  &.fade {
     opacity: 1;
+  }
+  &.show {
+    display: block;
   }
 
   &.top {
