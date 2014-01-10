@@ -169,6 +169,17 @@
 })();
 
         </script>
+
+        <!--local test of analytics-->
+        <script src=//analytics.global.sky.com/1.3.2/analytics.js></script>
+        <script>
+            analytics.trackPage({
+                site: 'global',
+                section: 'skyglobal/analytics/demo',
+                account: 'bskybdemodev'
+            });
+        </script>
+        <!--end local test of analytics-->
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target="#toolkit-menu-tabs">
 
@@ -277,6 +288,8 @@
         <li><span class="medium">Typography</span> Headings now have default margins + mobile sizes adjusted</li>
         <li><span class="medium">Skycons</span> <code>colour</code> class should now be on the skycon element</li>
         <li><span class="medium">carousel</span> JS options object doesnt need to be wrapped in a <code>carousel</code> object</li>
+        <li><span class="medium">carousel</span> please add the class <code>slide</code> to the slides within the carousel</li>
+        <li><span class="medium">carousel</span> <a href="https://github.com/skyglobal/web-toolkit/issues/21">bug 21</a> has been fixed which means you  may need to get rid of some extra click events.</li>
     </ul>
     <div class="sub-section ">
         <form class="sky-form sky-well hidden" data-diff-container>
@@ -295,7 +308,7 @@
         </form>
         <div class="warning error sky-well hidden" >
             To workout changes we must go to
-            <a href="http://web-toolkit.global.sky.com/2.0.0-rc10/_site/changes.html">here</a>.
+            <a href="http://web-toolkit.global.sky.com/2.0.0-rc11/_site/changes.html">here</a>.
         </div>
     </div>
 </section>
@@ -322,7 +335,7 @@
                 <a target="_github" href="https://github.com/skyglobal/web-toolkit/issues">Bugs / Feature Requests</a>
             </li>
             <li class="right meta-data" >
-                <div class="intro">Toolkit v<span id="current-version">2.0.0-rc10</span></div>
+                <div class="intro">Toolkit v<span id="current-version">2.0.0-rc11</span></div>
                 <small class="right">Updated: 10-01-2014</small>
             </li>
         </ul>
