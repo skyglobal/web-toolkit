@@ -48,6 +48,7 @@ function carouselSpec() {
             }, 0, 2, 100, done);
         });
 
+
         describe('will be created correctly when initialised', function () {
 
             it('with indicators, previous, next, play and pause controls', function () {
@@ -104,30 +105,41 @@ function carouselSpec() {
 
                 it('indicator controls wont change the slide when clicking the active slide indicator', function (done) {
                     $('#hero').trigger('goto', 0);
-                    var $activeSlide;
-                    $activeSlide = $('#hero').find('.skycom-carousel-container > .active');
-                    expect($activeSlide.index()).to.equal(0);
-                    $('#hero').find('.indicators .container span').eq(0).click();
-                    $activeSlide = $('#hero').find('.skycom-carousel-container > .active');
-                    setTimeout(function () {
+                    setTimeout(function() {
+                        var $activeSlide;
+                        $activeSlide = $('#hero').find('.skycom-carousel-container > .active');
                         expect($activeSlide.index()).to.equal(0);
-                        done();
-                    }, 10);
+                        $('#hero').find('.indicators .container span').eq(0).click();
+                        setTimeout(function () {
+                            $activeSlide = $('#hero').find('.skycom-carousel-container > .active');
+                            expect($activeSlide.index()).to.equal(0);
+                            done();
+                        }, 100);
+                    }, 100);
                 });
 
                 it('indicator controls change slide', function (done) {
                     $('#hero').trigger('goto', 0);
-                    var $activeSlide;
-                    $activeSlide = $('#hero').find('.skycom-carousel-container > .active');
-                    expect($activeSlide.index()).to.equal(0);
-                    $('#hero').find('.indicators .container span').eq(2).click();
-                    setTimeout(function () {
+                    setTimeout(function() {
+                        var $activeSlide;
                         $activeSlide = $('#hero').find('.skycom-carousel-container > .active');
-                        expect($activeSlide.index()).to.equal(2);//this line fails
-                        done();
+                        expect($activeSlide.index()).to.equal(0);
+                        $('#hero').find('.indicators .container span').eq(2).click();
+                        setTimeout(function () {
+                            $activeSlide = $('#hero').find('.skycom-carousel-container > .active');
+                            expect($activeSlide.index()).to.equal(2);
+                            done();
+                        }, 100);
                     }, 100);
                 });
-            })
+
+//                it('clicking the image will go to the headline link', function(){
+//                    $('#hero').trigger('goto', 0);
+//                    location.hash = '';
+//                    $('#hero').find('.skycom-carousel-container > .active .shade').click();
+//                    expect(location.hash).to.equal('#!beckham'); //i'll have a quick look at
+//                });
+            });
         });
 
 
