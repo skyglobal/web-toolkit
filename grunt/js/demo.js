@@ -39,6 +39,9 @@ demo.main = (function(DisplayCode, menu, tests, skycons) {
         if (location.hostname.indexOf('local')===0){
             host = 'http://' + location.host;
             dir = '../_includes';
+        } else if (document.location.host === "skyglobal.github.io"){
+            host = 'http://skyglobal.github.io/web-toolkit',
+            dir = '../_includes';
         }
         var featureFiles, codeBase, route;
         if ($(this).attr('data-docs')){
