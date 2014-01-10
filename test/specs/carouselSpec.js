@@ -133,12 +133,15 @@ function carouselSpec() {
                     }, 100);
                 });
 
-//                it('clicking the image will go to the headline link', function(){
-//                    $('#hero').trigger('goto', 0);
-//                    location.hash = '';
-//                    $('#hero').find('.skycom-carousel-container > .active .shade').click();
-//                    expect(location.hash).to.equal('#!beckham'); //i'll have a quick look at
-//                });
+                it('clicking the image will go to the headline link', function(done){
+                    $('#hero').trigger('goto', 2);
+                    location.hash = '';
+                    setTimeout(function() {
+                        $('#hero').find('.skycom-carousel-container > .active .shade').click();
+                        expect(location.hash).to.equal('#!avengers1');
+                        done();
+                    },100);
+                });
             });
         });
 

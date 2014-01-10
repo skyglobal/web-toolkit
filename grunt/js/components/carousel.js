@@ -38,6 +38,17 @@ toolkit.carousel = (function(window, $, video) {
         bindEvents: function() {
             this.bindTouchEvents();
             this.$slideContainer.find('a').on('click', this.pause.bind(this));
+
+            this.$slideContainer.find('figure').on('click', function (e) {
+                if (e.target.parentNode.className.indexOf('play-video') >= 0 || e.target.className.indexOf('play-video') >= 0) {
+                    return;
+                }
+                document.location = $(this).closest('.slide').find('figcaption a').attr('href');
+            });
+
+            this.$slideContainer.on('hover', '.slide figure', function (e) {
+                $(this).closest('.slide').find('figcaption a').toggleClass('hover', e.type === 'mouseenter');
+            });
         },
         unbindEvents: function() {
             this.unbindTouchEvents();
