@@ -1609,16 +1609,16 @@ $('.sky-form').validation();
          id="hero">
     <h2 class="speak">Featured News, shows or Products from around Sky</h2>
     <div class="skycom-carousel-container clearfix">
-        <div class="clearfix skycom-12 alpha bg-shading light-scheme"
+        <div class="slide clearfix skycom-12 alpha bg-shading light-scheme"
                 data-tracking-other="Sky Sports HD1"
                 data-tracking-pod="tile-1"
                 data-tracking-label="David Beckham And Sky Team Up"
                 data-tracking-theme="tracking-theme"
                 data-video-id="clip-00cwoia5"
                 >
-            <figure>
-                <div class="shade"></div>
-                <div class="poster">
+            <figure >
+                <div class="shade"   data-tracking></div>
+                <div class="poster" >
                     <img src="wiki_images/carousel/beckham.jpg"
                          alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
                 </div>
@@ -1642,16 +1642,16 @@ $('.sky-form').validation();
         </div>
 
         <div data-video-id="clip-00ovbt3u"
-             class="clearfix skycom-12 alpha  light-scheme"
+             class="slide clearfix skycom-12 alpha  light-scheme"
              data-tracking-other="Sky News"
              data-tracking-pod="tile-2"
              data-tracking-label="Introducing Sky Entertainment Extra+"
              data-tracking-theme="tracking-theme"
                 >
-            <figure>
+            <figure >
                 <div class="shade"></div>
                 <div class="poster">
-                    <img src="wiki_images/carousel/cube.jpg"
+                    <img src="wiki_images/carousel/cube.jpg"  data-tracking
                          alt="Cube showing Sky Entertainment Extra Plus upgrade from £5 extra a month">
                 </div>
                 <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
@@ -1673,14 +1673,14 @@ $('.sky-form').validation();
                 These are some different terms and conditions
             </p>
         </div>
-        <div class="clearfix skycom-12 alpha bg-shading dark-scheme"
+        <div class="slide clearfix skycom-12 alpha bg-shading dark-scheme"
                 data-tracking-other="Sky Movies Premiere"
                 data-tracking-pod="tile-3"
                 data-tracking-label="Watch The Avengers now in 9 hours"
                 data-tracking-theme="tracking-theme"
                 >
-            <figure>
-                <div class="shade"></div>
+            <figure >
+                <div class="shade" data-tracking></div>
                 <div class="poster">
                     <img src="wiki_images/carousel/avengers.jpg" alt="Heroes">
                 </div>
@@ -1727,7 +1727,7 @@ $('.sky-form').validation();
 
     <div class="skycom-carousel-container clearfix">
         <div
-                class="clearfix skycom-12 alpha bg-shading light-scheme"
+                class="slide clearfix skycom-12 alpha bg-shading light-scheme"
                 data-tracking-other="Sky Sports HD1"
                 data-tracking-pod="tile-1"
                 data-tracking-label="David Beckham And Sky Team Up"
@@ -1756,7 +1756,7 @@ $('.sky-form').validation();
         </div>
 
         <div data-video-id="clip-00ovbt3u"
-             class="clearfix skycom-12 alpha  light-scheme"
+             class="slide clearfix skycom-12 alpha  light-scheme"
              data-tracking-other="Sky News"
              data-tracking-pod="tile-2"
              data-tracking-label="Introducing Sky Entertainment Extra+"
@@ -1781,7 +1781,7 @@ $('.sky-form').validation();
             </p>
         </div>
         <div data-video-id="clip-00ovbt3u"
-             class="clearfix skycom-12 alpha bg-shading dark-scheme"
+             class="slide clearfix skycom-12 alpha bg-shading dark-scheme"
              data-tracking-other="Sky Movies Premiere"
              data-tracking-pod="tile-3"
              data-tracking-label="Watch The Avengers now in 9 hours"
@@ -1844,7 +1844,7 @@ $('.sky-form').validation();
     <h2 class="speak">Featured News, shows or Products from around Sky</h2>
     <div class="skycom-carousel-container clearfix">
         <div
-                class="clearfix skycom-12 alpha bg-shading light-scheme"
+                class="slide clearfix skycom-12 alpha bg-shading light-scheme"
                 data-tracking-other="Sky Sports HD1"
                 data-tracking-pod="tile-1"
                 data-tracking-label="David Beckham And Sky Team Up"
@@ -2030,13 +2030,11 @@ $('.sky-form').validation();
 <div class="example">
     <div class="demo clearfix" style="position: relative" data-selector="*" >
         <div id="demo-tooltip" data-tooltip><i class="skycon-info"></i><span>Hover</span>
-    <div class="tltp">
+    <div class="tooltip-content">
         <i class="skycon-remote-record colour"></i> <strong>Remote Record</strong>
-        <p>Record Great Sky Content!</p>
+        <a href="http://www.google.com">Record Great Sky Content!</a>
     </div>
 </div>
-
-
     </div>
 </div>
 </div>
@@ -2064,9 +2062,9 @@ $('.sky-form').validation();
        data-tracking-label="Show" data-toggle-state='shown'>Hide</a>
 
     <div class="edit-container" id="element-to-toggle">
-        <h1>example header with margins</h1>
-        <div>Some content</div>
-        <div>Some more content for element toggling</div>
+        <p style="margin:30px 0">text with margins</p>
+        <div>1st content of 2 lines</div>
+        <div>2nd line Some more content for element toggling</div>
     </div>
 </section>
     </div>
@@ -2331,7 +2329,7 @@ updateOrientation(toolkit);
                 <a target="_github" href="https://github.com/skyglobal/web-toolkit/issues">Bugs / Feature Requests</a>
             </li>
             <li class="right meta-data" >
-                <div class="intro">Toolkit v<span id="current-version">2.0.0-rc9</span></div>
+                <div class="intro">Toolkit v<span id="current-version">2.0.0</span></div>
                 <small class="right">Updated: 10-01-2014</small>
             </li>
         </ul>
