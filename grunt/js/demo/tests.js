@@ -4,7 +4,7 @@ demo.tests = (function(hashManager, lightbox){
     function runTest(hash){
         var spec = hash.replace('test/','');
         var script = document.createElement('script');
-        script.src = "/test/specs/" + spec + ".js";
+        script.src = "test/specs/" + spec + ".js";
         script.onload =  function(){
             var $runTestLink = $('a[href*="#' + hash + '"]'),
                 $mocha = $('<div id="mocha" class="mocha-container"></div>');
