@@ -4,7 +4,7 @@ toolkit.tooltip = (function (detect) {
 
     function bindEvents() {
         $(document).on('mouseenter mouseleave', '[data-tooltip]', hover);
-        $("[data-tooltip] .tltp").on('click', preventClicksToParent);
+        $("[data-tooltip] .tooltip-content").on('click', preventClicksToParent);
     }
 
     function preventClicksToParent(event) {
@@ -14,14 +14,15 @@ toolkit.tooltip = (function (detect) {
 
     function hover(event) {
         var $hoveredElement = $(this),
-            $tooltip = $hoveredElement.find('.tltp');
-        clearTimeout($tooltip.attr('data-tooltip-content-timeout'));
+            $tooltip = $hoveredElement.find('.tooltip-content');
+        clearTimeout($tooltip.attr('data-tooltip-entry-timeout'));
+        clearTimeout($tooltip.attr('data-tooltip-exit-timeout'));
         if (event.type == 'mouseenter') {
             if ($tooltip.text() !== "") {
                 show($tooltip);
             }
         } else {
-            hide($tooltip);
+                hide($tooltip);
         }
     }
 
@@ -30,7 +31,7 @@ toolkit.tooltip = (function (detect) {
     }
 
     function show($tooltip) {
-        $tooltip.attr('data-tooltip-content-timeout', setTimeout(function () {
+        $tooltip.attr('data-tooltip-entry-timeout', setTimeout(function () {
             $tooltip.addClass('show');
             setTimeout(function() {
                 $tooltip.addClass('fade');
@@ -41,10 +42,13 @@ toolkit.tooltip = (function (detect) {
 
     function hide($tooltip) {
         var transitionDuration=250;
-        $tooltip.removeClass('fade');
-        setTimeout(function() {
-            $tooltip.removeClass('show top');
-        }, transitionDuration);
+        $tooltip.attr('data-tooltip-exit-timeout', setTimeout(function () {
+            $tooltip.removeClass('fade');
+            setTimeout(function() {
+                $tooltip.removeClass('show top');
+            }, transitionDuration);
+        },300));
+
     }
 
     bindEvents();

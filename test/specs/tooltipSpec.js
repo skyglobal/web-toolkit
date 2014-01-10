@@ -7,18 +7,18 @@ function tooltipSpec(tooltip) {
             it('Tooltip shows on mouse over', function (done) {
                 $('#demo-tooltip').trigger('mouseenter');
                 setTimeout(function() {
-                    expect($('#demo-tooltip .tltp').is(":visible")).to.equal(true);
-                    expect($('#demo-tooltip .tltp').css('display')).to.equal('block');
+                    expect($('#demo-tooltip .tooltip-content').is(":visible")).to.equal(true);
+                    expect($('#demo-tooltip .tooltip-content').css('display')).to.equal('block');
                     done();
-                }, 900);
+                }, 600);
             });
 
             it('Tooltip disappears on mouse leave with a minimum visible time', function (done) {
                 $('#demo-tooltip').trigger('mouseleave');
                 setTimeout(function() {
-                    expect($('#demo-tooltip .tltp').is(":visible")).to.equal(false);
+                    expect($('#demo-tooltip .tooltip-content').is(":visible")).to.equal(false);
                     done();
-                }, 400);
+                }, 600);
             });
 
         });
