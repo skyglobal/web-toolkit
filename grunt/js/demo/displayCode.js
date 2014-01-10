@@ -104,7 +104,11 @@ demo.displayCode = (function(lightbox, hljs){
         if (this.$container.find('#' + tabName + '-tab').length){ return ; }
         if(featureFile==='notes'){ return; }
 
-        var $tabListItem = $('<li id="' + tabName + '-tab" aria-controls="' + tabName + '-tab-contents" role="tab" class="tab"><a href="#!' + tabName + '-tab-contents" class="skycom-ellipsis internal-link"><span>' + (featureFile ? featureFile : 'default') + '</span></a></li>');
+        var featureFileLabel = featureFile || 'default';
+        featureFileLabel = featureFileLabel.replace(/([A-Z][a-z])/g, ' $1').replace(/([a-z])([AI])/g, '$1 $2'); // the last one for single-letter words 'A' and 'I'
+        featureFileLabel = featureFileLabel.charAt(0).toUpperCase() + featureFileLabel.slice(1); // capitalise the first letter
+
+        var $tabListItem = $('<li id="' + tabName + '-tab" aria-controls="' + tabName + '-tab-contents" role="tab" class="tab"><a href="#!' + tabName + '-tab-contents" class="skycom-ellipsis internal-link"><span>' + featureFileLabel + '</span></a></li>');
         this.$tabList.prepend($tabListItem);
 
         var $tab = $('<div class="tabpanel" id="' + tabName + '-tab-contents" class="tabpanel selected" aria-labeledby="' + tabName + '-tab" role="tabpanel"></div>');
