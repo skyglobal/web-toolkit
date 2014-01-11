@@ -78,9 +78,6 @@ task :deploy do
   system "git rm --cached _site -r"
   system "git rm --cached dist -r"
 
-  system "gem install RedCloth"
-
-
   puts "*** Grunting files ***"
   system "grunt"
   system "jekyll build"
