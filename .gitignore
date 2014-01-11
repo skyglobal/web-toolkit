@@ -21,6 +21,6 @@ _site/dist/images
 _site/dist/scripts
 _site/dist/stylesheets
 /dist/fonts
-dist/images
-dist/scripts
-dist/stylesheets
+/dist/images
+/dist/scripts
+/dist/stylesheets
