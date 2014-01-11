@@ -77,13 +77,14 @@ module.exports = function(grunt) {
                 dest: 'dist/fonts',
                 destCss: 'dist/fonts',
                 options: {
-                    font: 'skycons',
-                    template:'grunt/fonts/template/skycon-template.css',
-                    htmlDemoTemplate:'grunt/fonts/template/skycon-template.html',
-                    htmlDemo: true,
-                    destHtml: '_includes/baseStyles/icons',
-                    hashes: false,
-                    embed: true
+                    font : 'skycons',
+                    template : 'grunt/fonts/template/skycon-template.css',
+                    htmlDemoTemplate : 'grunt/fonts/template/skycon-template.html',
+                    htmlDemo : true,
+                    destHtml : '_includes/baseStyles/icons',
+                    hashes : false,
+                    embed : true,
+                    engine : 'node'
                 }
             }
         },
