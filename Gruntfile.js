@@ -83,8 +83,7 @@ module.exports = function(grunt) {
                     htmlDemo : true,
                     destHtml : '_includes/baseStyles/icons',
                     hashes : false,
-                    embed : true,
-                    engine : 'node'
+                    embed : true
                 }
             }
         },
