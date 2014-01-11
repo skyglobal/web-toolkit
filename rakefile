@@ -75,7 +75,14 @@ task :deploy do
 
   system "mv .gitignore .gitignore.proper"
   system "mv .gitignore.rake_deploy .gitignore"
-  system "git rm --cached _site -r"
+  system "git rm --cached _site/*.html"
+  system "git rm --cached _site/_includes -r"
+  system "git rm --cached _site/static -r"
+  system "git rm --cached _site/test -r"
+  system "git rm --cached _site/wiki_images -r"
+  system "git rm --cached _site/dist/images -r"
+  system "git rm --cached _site/dist/scripts -r"
+  system "git rm --cached _site/dist/stylesheets -r"
   system "git rm --cached dist -r"
 
   puts "*** Grunting files ***"
