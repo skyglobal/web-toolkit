@@ -1,1 +1,0 @@
-$('#demo-inpage-nav-tabs').inPageNav();
