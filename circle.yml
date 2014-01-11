@@ -2,4 +2,4 @@ deployment:
   production:
     branch: master
     commands:
-      - bundle exec rake deploy_new_version
+      - bundle exec rake deploy
