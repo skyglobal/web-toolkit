@@ -10,3 +10,6 @@ web-toolkit.ipr
 node_modules/
 grunt/fonts/min
 dist/scripts/build.txt
+
+_site
+dist
