@@ -1,0 +1,48 @@
+<h3 class="demo-h3 section-title smaller">
+    In-Page Navigation
+    <a href="#!lightbox/code-inPageNav" class="code-download">Code</a>
+    <a href="#test/inPageNavSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+</h3>
+<p class="design-notes">
+    <span class="error">These modules are not yet complete.</span>  If you need them, please complete 'accessibility' checks an re-submit.
+</p>
+
+<div class="example">
+    <h4 class="medium">Sleek Nav</h4>
+    <div class="design-notes">
+        This module should be used when only a small section of the page changes after an item click.
+    </div>
+    <div class="design-notes">
+        If all of, or the majority of, the page changes please use '<code>classic navigation</code>'.
+    </div>
+    <div class="demo clearfix">
+        {% include components/inPageNav/sleekNav.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include components/inPageNav/sleekNav.require.js %}
+        } else {
+            {% include components/inPageNav/sleekNav.js %}
+        }
+    </script>
+</div>
+
+<div class="example">
+    <h4 class="medium">Classic Tabs</h4>
+    <div class="design-notes">
+        This module should be used when only a small section of the page changes after an item click.
+    </div>
+    <div class="design-notes">
+        If all of, or the majority of the page changes please use '<code>In-Page Navigation</code>'.
+    </div>
+    <div class="demo clearfix">
+        {% include components/inPageNav/classicTabs.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include components/inPageNav/classicTabs.require.js %}
+        } else {
+            {% include components/inPageNav/classicTabs.js %}
+        }
+    </script>
+</div>

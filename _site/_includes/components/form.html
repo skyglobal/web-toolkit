@@ -1,0 +1,17 @@
+<h3 class="demo-h3 section-title smaller">
+    Forms
+    <a href="#!lightbox/code-form" class="code-download">Code</a>
+    <a href="#test/datePickerSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+</h3>
+<div class="example">
+    <div class="demo clearfix">
+        {% include components/form/default.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include components/form/default.require.js %}
+        } else {
+            {% include components/form/default.js %}
+        }
+    </script>
+</div>

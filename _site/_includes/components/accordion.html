@@ -1,0 +1,20 @@
+<h3 class="demo-h3 section-title smaller">
+    Accordion
+    <a href="#!lightbox/code-accordion" class="code-download">Code</a>
+    <a href="#test/accordionSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+</h3>
+<p class="design-notes">
+    The accordion is fully responsive.
+</p>
+<div class="example">
+    <div class="demo clearfix" >
+        {% include components/accordion/default.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include components/accordion/default.require.js %}
+        } else {
+            {% include components/accordion/default.js %}
+        }
+    </script>
+</div>

@@ -1,0 +1,25 @@
+<h3 class="demo-h3 section-title smaller">
+    Video
+    <a href="#!lightbox/code-video" class="code-download">Code</a>
+    <a href="#test/videoSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+</h3>
+
+<div class="design-notes">
+    A wrapper for the Sky video player, The video will expand to fit the ratio of the video.
+</div>
+
+    <link rel="stylesheet" href="//player.sky.com/css/styles.min.css"/>
+    <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
+
+<div class="example">
+    <div class="demo clearfix" >
+        {% include components/video/default.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include components/video/default.require.js %}
+        } else {
+            {% include components/video/default.js %}
+        }
+    </script>
+</div>

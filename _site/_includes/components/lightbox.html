@@ -1,0 +1,20 @@
+<h3 class="demo-h3 section-title smaller">
+    Lightbox
+    <a href="#!lightbox/code-lightbox" class="code-download">Code</a>
+    <a href="#test/lightboxSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+</h3>
+<a id="lightbox-demo-link" href="#!lightbox/lightbox-demo" >Show Lightbox</a> |
+<a id="lightbox-demo-tabbable-link" tabindex="101" href="#!">link that cant be tabbed to if lightbox is open</a>
+
+<div class="example">
+    <div class="demo clearfix" >
+        {% include components/lightbox/default.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include components/lightbox/default.require.js %}
+        } else {
+            {% include components/lightbox/default.js %}
+        }
+    </script>
+</div>

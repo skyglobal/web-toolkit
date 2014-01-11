@@ -1,0 +1,64 @@
+<h3 class="demo-h3 section-title smaller">
+    Carousel
+    <a href="#!lightbox/code-carousel" class="code-download">Code</a>
+    <a href="#test/carouselSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+</h3>
+<p class="design-notes">
+    The carousel is fully responsive, incorporates the video player and works on touch devices (not microsoft).
+</p>
+
+<div class="example">
+    <h4 class="medium">Default</h4>
+    <div class="design-notes">
+        Use a maximum of 4 lines of text in total (or 3 lines plus channel logo).
+    </div>
+    <div class="demo clearfix" >
+        {% include components/carousel/default.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include components/carousel/default.require.js %}
+        } else {
+            {% include components/carousel/default.js %}
+        }
+    </script>
+
+</div>
+
+<div class="example">
+    <h4 class="medium">Skinny</h4>
+    <div class="design-notes">
+        Use a maximum of 2 lines of text in total (or 1 line plus channel logo).
+    </div>
+    <div class="demo clearfix" >
+        {% include components/carousel/skinny.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include components/carousel/skinny.require.js %}
+        } else {
+            {% include components/carousel/skinny.js %}
+        }
+    </script>
+
+
+
+</div>
+
+<div class="example">
+    <h4 class="medium">Single Slide</h4>
+    <div class="design-notes">
+        This will behave like it isn't a carousel as there is only one slide.
+    </div>
+    <div class="demo clearfix">
+        {% include components/carousel/singleSlide.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include components/carousel/singleSlide.require.js %}
+        } else {
+            {% include components/carousel/singleSlide.js %}
+        }
+    </script>
+
+</div>
