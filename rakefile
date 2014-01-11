@@ -75,6 +75,8 @@ task :deploy do
 
   system "mv .gitignore .gitignore.proper"
   system "mv .gitignore.rake_deploy .gitignore"
+  system "git rm --cached _site -r"
+  system "git rm --cached dist -r"
 
   puts "*** Grunting files ***"
   system "grunt"
