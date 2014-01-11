@@ -1,0 +1,18 @@
+<h3 class="demo-h3 section-title smaller">
+    Hash Manager
+    <a href="#!lightbox/code-hashManager" class="code-download">Code</a>
+    <a href="#test/hashManagerSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+</h3>
+
+<div class="example">
+    <div class="demo clearfix">
+        {% include utils/hashManager/default.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include utils/hashManager/default.require.js %}
+        } else {
+            {% include utils/hashManager/default.js %}
+        }
+    </script>
+</div>
