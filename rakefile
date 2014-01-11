@@ -79,7 +79,6 @@ task :deploy do
   system "git rm --cached dist -r"
 
   puts "*** Grunting files ***"
-  system "grunt fonts"
   system "grunt"
   system "jekyll build"
   system "git add ./dist"
