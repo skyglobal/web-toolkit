@@ -79,6 +79,10 @@ def getDate
   `date +'%d-%m-%Y'`
 end
 
+task :emptyGitCache do
+  emptyGitCache
+end
+
 desc 'Deploys a new version to the CDN'
 task :deploy do
 
