@@ -112,16 +112,16 @@ task :deploy do
     system "git checkout gh-pages"
     system "git push origin master:gh-pages"
     system "git checkout master"
+
+    puts "*** Tagging Version #{latest_version_number} ***"
+    system "git tag -a v#{latest_version_number} -m \"Rake deploy: auto tag on #{getDate}\""
+    system "git push origin master v#{latest_version_number}"
   end
 
   if version_already_exists?
     puts "Version #{latest_version_number} exists so exiting."
     next
   end
-
-  puts "*** Tagging Version #{latest_version_number} ***"
-  system "git tag -a v#{latest_version_number} -m \"Rake deploy: auto tag on #{getDate}\""
-  system "git push origin master v#{latest_version_number}"
 
   puts "*** Pushing to the AmazonS3 ***"
   doc_resources = []
