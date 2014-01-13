@@ -49,7 +49,6 @@ toolkit.skycons = (function() {
         'skycon-google-plus' : "&#xf129;"
     };
 
-
     function supportsPsuedo(){
         var doc = document,
             html = doc.documentElement,
