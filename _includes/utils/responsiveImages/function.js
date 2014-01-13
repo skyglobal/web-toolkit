@@ -72,6 +72,8 @@ var responsiveImages = (function () {
         }
     }
 
+    bindOnResize();
+
     return {
         init:init,
         bindOnResize:bindOnResize
