@@ -1,15 +1,9 @@
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.carousel = (function(window, $, video) {
+toolkit.carousel = (function(video, detect) {
     'use strict';
 
-    // get CSS3 capabilities
-    var has3d = (function() {
-        return ('WebKitCSSMatrix' in window && 'm11' in new window.WebKitCSSMatrix());
-    }());
-    var hasTransform = (function() {
-        var s = document.body.style;
-        return s.transform !== undefined || s.WebkitTransform !== undefined || s.MozTransform !== undefined || s.OTransform !== undefined;
-    }());
+    var has3d = detect.css('support3D');
+    var hasTransform = detect.css('transform');
 
     function Carousel(element, options) {
         this.options = options;
@@ -414,9 +408,9 @@ toolkit.carousel = (function(window, $, video) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/carousel', ['components/video'], function(video) {
-        return toolkit.carousel(window, jQuery, video);
+    define('components/carousel', ['components/video', 'utils/detect'], function(video, detect) {
+        return toolkit.carousel(video, detect);
     });
 } else {
-    toolkit.carousel = toolkit.carousel(window, jQuery, toolkit.video);
+    toolkit.carousel = toolkit.carousel(toolkit.video, toolkit.detect);
 }
