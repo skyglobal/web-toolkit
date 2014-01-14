@@ -107,8 +107,8 @@ def buildDistributionFiles
   system "jekyll build"
 end
 
-def addDistributionFilesToGit
-  puts "*** Adding Distribution Files To Git ***"
+def addDistributionFilesToGhPages
+  puts "*** Adding Distribution Files To global.github.io ***"
   system "git add ./dist"
   system "git add ./_site"
   system "git commit -m 'Rake deploy: adding distribution + jekyll files'"
@@ -132,9 +132,10 @@ task :deploy do
 
   system "git checkout gh-pages"
 
+  buildDistributionFiles
+
     if !version_is_release_candidate?
-      buildDistributionFiles
-      addDistributionFilesToGit
+      addDistributionFilesToGhPages
     end
 
     if version_already_exists?
