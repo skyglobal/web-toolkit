@@ -90,27 +90,17 @@ task :deploy do
   system "git config user.email 'circleci@bskyb.com'"
   system "git config user.name 'CircleCI'"
 
-  system "mv .gitignore .gitignore.proper"
-  system "mv .gitignore.rake_deploy .gitignore"
-
-  emptyGitCache
-
-  puts "*** Grunting files ***"
-  system "grunt"
-  system "jekyll build"
-  system "git add ./dist"
-  system "git add ./_site"
-  system "git commit -m 'Rake deploy: adding distribution + jekyll files'"
-  system "git push origin HEAD:master"
-
-  system "mv .gitignore .gitignore.rake_deploy"
-  system "mv .gitignore.proper .gitignore"
-
-  emptyGitCache
-
   if !version_is_release_candidate?
     puts "*** Pushing to github.io ***"
     system "git checkout gh-pages"
+
+    puts "*** Grunting files ***"
+    system "grunt"
+    system "jekyll build"
+    system "git add ./dist"
+    system "git add ./_site"
+    system "git commit -m 'Rake deploy: adding distribution + jekyll files'"
+
     system "git push origin master:gh-pages"
     system "git checkout master"
 
