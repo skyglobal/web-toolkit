@@ -45,3 +45,18 @@
         }
     </script>
 </div>
+
+
+<div class="example">
+    <h4 class="demo-h4 pod-title smaller">CSS</h4>
+    <div class="demo clearfix">
+        {% include utils/detect/css.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include utils/detect/css.require.js %}
+        } else {
+            {% include utils/detect/css.js %}
+        }
+    </script>
+</div>

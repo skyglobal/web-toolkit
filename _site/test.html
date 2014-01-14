@@ -134,6 +134,8 @@
         }
     }
 
+    bindOnResize();
+
     return {
         init:init,
         bindOnResize:bindOnResize
@@ -214,10 +216,10 @@
             <div id="utils-tab-contents" class="tabpanel" aria-labeledby="utils-tab" role="tabpanel">
                 <section class="tabcontents tabs-container page-nav">
                     <ul class="nav tabs clearfix">
-                        <li class="tab"><a href="index.html#toggle" class="skycom-ellipsis internal-link" data-diff="utils/toggle" data-diff-demos="element">Toggle</a></li>
+                        <li class="tab"><a href="index.html#toggle" class="skycom-ellipsis internal-link" data-diff="utils/toggle" data-diff-demos="openElement,closedElement">Toggle</a></li>
                         <li class="tab"><a href="index.html#hashManager" class="skycom-ellipsis internal-link" data-diff="utils/hashManager" data-diff-demos="default">Hash Manager</a></li>
                         <li class="tab"><a href="index.html#responsiveImages" class="skycom-ellipsis internal-link" data-diff="utils/responsiveImages" data-diff-demos="using,function">Responsive Images</a></li>
-                        <li class="tab"><a href="index.html#detect" class="skycom-ellipsis internal-link" data-diff="utils/detect" data-diff-demos="orientation,touch,view">Detect</a></li>
+                        <li class="tab"><a href="index.html#detect" class="skycom-ellipsis internal-link" data-diff="utils/detect" data-diff-demos="orientation,touch,view,css">Detect</a></li>
                         <li class="tab"><a href="index.html#libraries" class="skycom-ellipsis internal-link" data-diff="utils/libraries" data-diff-demos="jquery,requirejs,other">External Libraries</a></li>
                     </ul>
                 </section>
@@ -2030,7 +2032,7 @@ $('.sky-form').validation();
 
 
 <div class="example">
-    <h4 class="medium">By Element</h4>
+    <h4 class="medium">Open Element</h4>
     <div class="demo clearfix" >
         <section id="toggle-by-element">
     <a class="toggle-link" data-toggle='#element-to-toggle' data-toggle-text="Show"
@@ -2052,6 +2054,32 @@ $('.sky-form').validation();
 });
         } else {
             $('#toggle-by-element .toggle-link').on('click', function() {
+    toolkit.toggle({$elClicked:$(this)});
+});
+        }
+    </script>
+    <h4 class="medium">Closed Element</h4>
+    <div class="demo clearfix" >
+        <section id="toggle-by-element-closed" >
+    <a class="toggle-link" data-toggle='#element-to-toggle-closed' data-toggle-text="Hide"
+       data-tracking-label="Hide" data-toggle-state='hidden'>Show</a>
+
+    <div class="edit-container toggle-hidden" id="element-to-toggle-closed">
+        <p style="margin:30px 0">text with margins</p>
+        <div>1st content of 2 lines</div>
+        <div>2nd line Some more content for element toggling</div>
+    </div>
+</section>
+    </div>
+    <script>
+        if (window.require){
+            require(['toolkit'], function(toolkit){
+    $('#toggle-by-element-closed .toggle-link').on('click', function() {
+        toolkit.toggle({$elClicked:$(this)});
+    });
+});
+        } else {
+            $('#toggle-by-element-closed .toggle-link').on('click', function() {
     toolkit.toggle({$elClicked:$(this)});
 });
         }
@@ -2132,15 +2160,17 @@ toolkit.hashManager.register(['hash', 'anotherHash'], myHashCallback);
 <div class="example">
     <h4 class="demo-h4 pod-title smaller">View</h4>
     <div class="demo clearfix">
-        <div>
-    current view: <span id="view-demo"></span>
-</div>
-<div>
-    is desktop: <span id="view-demo-is-desktop"></span>
-</div>
-<div>
-    is mobile: <span id="view-demo-is-mobile"></span>
-</div>
+        <ul class="grey-bullets">
+    <li>
+        current view: <span id="view-demo"></span>
+    </li>
+    <li>
+        is desktop: <span id="view-demo-is-desktop"></span>
+    </li>
+    <li>
+        is mobile: <span id="view-demo-is-mobile"></span>
+    </li>
+</ul>
     </div>
     <script>
         if (window.require){
@@ -2177,9 +2207,9 @@ updateView(toolkit);
 <div class="example">
     <h4 class="demo-h4 pod-title smaller">Touch</h4>
     <div class="demo clearfix">
-        <div>
+        <ul class="grey-bullets"><li>
     Is touch supported: <span id="touch-demo"></span>
-</div>
+</li></ul>
     </div>
     <script>
         if (window.require){
@@ -2197,15 +2227,17 @@ $('#touch-demo').text(touch);
 <div class="example">
     <h4 class="demo-h4 pod-title smaller">Orientation</h4>
     <div class="demo clearfix">
-        <div>
-    current orientation: <span id="orientation-demo"></span>
-</div>
-<div>
-    is landscape: <span id="orientation-demo-is-landscape"></span>
-</div>
-<div>
-    is portrait: <span id="orientation-demo-is-portrait"></span>
-</div>
+        <ul class="grey-bullets">
+    <li>
+        current orientation: <span id="orientation-demo"></span>
+    </li>
+    <li>
+        is landscape: <span id="orientation-demo-is-landscape"></span>
+    </li>
+    <li>
+        is portrait: <span id="orientation-demo-is-portrait"></span>
+    </li>
+</ul>
     </div>
     <script>
         if (window.require){
@@ -2235,6 +2267,49 @@ $('#touch-demo').text(touch);
 
 $(window).on('resize',function(){updateOrientation(toolkit);});
 updateOrientation(toolkit);
+        }
+    </script>
+</div>
+
+
+<div class="example">
+    <h4 class="demo-h4 pod-title smaller">CSS</h4>
+    <div class="demo clearfix">
+        <div>
+    <p>You can detect many css style capabilities, including:</p>
+    <ul class="grey-bullets">
+        <li>transition: <span id="css-demo-transition"></span></li>
+        <li>transform:  <span id="css-demo-transform"></span> i.e. <code>transform: translate(...)</code></li>
+        <li>support3D: <span id="css-demo-support3D"></span> i.e. <code>transform: translate3d</code></li>
+    </ul>
+</div>
+    </div>
+    <script>
+        if (window.require){
+            require(['toolkit'], function(toolkit){
+
+    function updateDetectCSS(toolkit){
+        var transition = toolkit.detect.css('transition');
+        var support3D = toolkit.detect.css('support3D');
+        var transform = toolkit.detect.css('transform');
+        $('#css-demo-transition').text(transition);
+        $('#css-demo-support3D').text(support3D);
+        $('#css-demo-transform').text(transform);
+    }
+
+    updateDetectCSS(toolkit);
+});
+        } else {
+            function updateDetectCSS(toolkit){
+    var transition = toolkit.detect.css('transition');
+    var support3D = toolkit.detect.css('support3D');
+    var transform = toolkit.detect.css('transform');
+    $('#css-demo-transition').text(transition);
+    $('#css-demo-support3D').text(support3D);
+    $('#css-demo-transform').text(transform);
+}
+
+updateDetectCSS(toolkit);
         }
     </script>
 </div>

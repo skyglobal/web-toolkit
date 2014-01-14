@@ -64,6 +64,7 @@ def content_type(file)
 end
 
 def emptyGitCache
+  system "git rm --cached grunt/fonts/min -r"
   system "git rm --cached _site/*.html"
   system "git rm --cached _site/_includes -r"
   system "git rm --cached _site/static -r"
