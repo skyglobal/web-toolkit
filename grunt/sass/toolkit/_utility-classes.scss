@@ -90,6 +90,7 @@
 }
 
 
+
 //visibility classses
 body .visible-touch,
 body .hidden{
@@ -166,7 +167,7 @@ html{
    }
   .visible-mobile,
   .hidden-desktop{
-    display:none;
+    display:none!important;
   }
 
 }
@@ -184,6 +185,6 @@ html{
   }
   .visible-desktop,
   .hidden-mobile{
-    display:none;
+    display:none!important;
   }
 }
