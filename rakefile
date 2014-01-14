@@ -109,8 +109,8 @@ end
 
 def addDistributionFilesToGhPages
   puts "*** Adding Distribution Files To global.github.io ***"
-  system "git add ./dist"
-  system "git add ./_site"
+  system "git add -all ./dist"
+  system "git add -all ./_site"
   system "git commit -m 'Rake deploy: adding distribution + jekyll files'"
   system "git push origin master:gh-pages"
 end
