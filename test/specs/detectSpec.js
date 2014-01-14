@@ -27,7 +27,7 @@ function detectSpec(detect) {
             css.remove();
         });
 
-        it('know when you are in mobile view', function () {
+        it('when you are in mobile view', function () {
             var css =$("<style type='text/css'> html:after{ content:'mobile'} </style>");
             css.appendTo("head");
             $(window).trigger('resize');
@@ -38,7 +38,7 @@ function detectSpec(detect) {
             css.remove();
         });
 
-        it('know when you are not a touch device', function () {
+        it('when you are not a touch device', function () {
             delete window.ontouchstart;
             $(window).trigger('resize');
             expect(detect.touch()).to.equal(false);
@@ -46,7 +46,7 @@ function detectSpec(detect) {
             expect($('html').hasClass('touch-device')).to.equal(false);
         });
 
-        it('know when you are a touch device', function () {
+        it('when you are a touch device', function () {
             window.ontouchstart = true;
             $(window).trigger('resize');
             if (window.ontouchstart){ //doesnt work in grunt cli for some reason
@@ -57,7 +57,7 @@ function detectSpec(detect) {
             }
         });
 
-        it('know your orientation is landscape', function () {
+        it('your orientation is landscape', function () {
             var css =$("<style type='text/css'> html:before{ content:'landscape'} </style>");
             css.appendTo("head");
             $(window).trigger('resize');
@@ -68,7 +68,7 @@ function detectSpec(detect) {
             css.remove();
         });
 
-        it('know your orientation is portrait', function () {
+        it('your orientation is portrait', function () {
             var css =$("<style type='text/css'> html:before{ content:'portrait'} </style>");
             css.appendTo("head");
             $(window).trigger('resize');
@@ -77,6 +77,16 @@ function detectSpec(detect) {
             expect($('html').hasClass('landscape')).to.equal(false);
             expect($('html').hasClass('portrait')).to.equal(true);
             css.remove();
+        });
+
+        it('that a css property is supported', function () {
+            expect(detect.css('transition')).to.equal(true);
+            expect(detect.css('support3D')).to.equal(true);
+        });
+
+        it('that a css property is not supported', function () {
+            expect(detect.css('nonExistantCss')).to.equal(false);
+
         });
     });
 

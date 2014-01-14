@@ -2,8 +2,14 @@ if (typeof toolkit==='undefined') toolkit={};
 toolkit.detect = (function () {
     "use strict";
 
-    var state = {};
+    var state = {
+        css : {}
+    };
+
+    var html = document.documentElement;
     var toolkitClasses = ["no-touch", "touch-device", "mobile-view", "desktop-view", "landscape", "portrait"];
+    var vendorPrefix = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'];
+
     var touchClasses = { hasNot: toolkitClasses[0], has: toolkitClasses[1] };
     var viewClasses = { mobile:toolkitClasses[2], desktop:toolkitClasses[3] };
     var orientationClasses = { landscape: toolkitClasses[4], portrait: toolkitClasses[5] };
@@ -11,6 +17,46 @@ toolkit.detect = (function () {
 
     function bindEvents(){
         $(window).bind('resize', updateDetectionStates);
+    }
+
+    function support3D(){
+        var property = 'transform';
+        var style = html.style;
+        for(var i=0; i<vendorPrefix.length; i++) {
+            style[vendorPrefix[i] + property] = 'translate3D(0,0,0)';
+            if (style[vendorPrefix[i] + property] === 'translate3D(0,0,0)'){
+                state.css.support3D = true;
+                return state.css.support3D;
+            }
+        }
+        state.css.support3D = false;
+        return state.css.support3D;
+    }
+
+    function inHtml(property){
+        var style = html.style;
+        if(typeof style[property] == 'string') {
+            state.css[property] = true;
+            return true;
+        }
+        property = property.charAt(0).toUpperCase() + property.substr(1);
+        for(var i=0; i<vendorPrefix.length; i++) {
+            if(typeof style[vendorPrefix[i] + property] == 'string') {
+                state.css[property] = true;
+                return state.css[property];
+            }
+        }
+        state.css[property] = false;
+        return state.css[property];
+    }
+
+    function css(property){
+        if (state.css[property]) { return state.css[property]; }
+        if (property === 'support3D' ){
+            return support3D(property);
+        } else {
+            return inHtml(property);
+        }
     }
 
     function pseudo(el, pos){
@@ -21,13 +67,11 @@ toolkit.detect = (function () {
     }
 
     function view(type){
-        var html = document.getElementsByTagName('html')[0];
         state.view = pseudo(html,'after') || 'desktop';
         return (type) ? state.view == type : state.view ;
     }
 
     function orientation(type){
-        var html = document.getElementsByTagName('html')[0];
         state.orientation = pseudo(html, 'before') || 'landscape';
         return (type) ? state.orientation == type : state.orientation;
     }
@@ -43,22 +87,22 @@ toolkit.detect = (function () {
     }
 
     function removeClasses(){
-        var arrClasses = document.documentElement.className.split(' ');
+        var arrClasses = html.className.split(' ');
         for (var i in toolkitClasses){
             var indexToRemove = arrClasses.indexOf(toolkitClasses[i]);
             if (indexToRemove > -1) {
                 arrClasses.splice(indexToRemove,1);
             }
         }
-        document.documentElement.className = arrClasses.join(' ');
+        html.className = arrClasses.join(' ');
     }
 
     function attachClasses(){
-        var arrClasses = document.documentElement.className.split(' ');
+        var arrClasses = html.className.split(' ');
         arrClasses.push(touch() ? touchClasses.has : touchClasses.hasNot);
         arrClasses.push(view('mobile') ? viewClasses.mobile : viewClasses.desktop);
         arrClasses.push(orientation('landscape') ? orientationClasses.landscape : orientationClasses.portrait);
-        document.documentElement.className = arrClasses.join(' ');
+        html.className = arrClasses.join(' ');
     }
 
     function elementVisibleBottom($el) {
@@ -71,6 +115,7 @@ toolkit.detect = (function () {
     bindEvents();
 
     return {
+        css: css,
         touch: touch,
         orientation: orientation,
         view: view,
