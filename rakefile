@@ -134,9 +134,9 @@ task :deploy do
 
   buildDistributionFiles
 
-    if !version_is_release_candidate?
+    #if !version_is_release_candidate?
       addDistributionFilesToGhPages
-    end
+    #end
 
     if version_already_exists?
       puts "Version #{latest_version_number} exists so exiting."
