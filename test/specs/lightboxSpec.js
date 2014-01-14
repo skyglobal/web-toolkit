@@ -183,6 +183,22 @@ function lightboxSpec(lightbox, focus, hash) {
                 }, 501);
             });
         });
+
+        context("Ajax", function() {
+
+            it("should load content via Ajax when the href doesn't start with a hash", function(done) {
+                $("#lightbox-demo-link2").click();
+                setTimeout(function () {
+                    expect( $("#ajax-lightbox-content").text() ).to.equal("LIGHTBOX CONTENT");
+                    $("#ajax-lightbox-content").closest('.lightbox').click();
+                    done();
+                }, 500);
+
+            });
+
+        });
+
+
     });
 
     return describeSpec;
