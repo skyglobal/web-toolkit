@@ -93,7 +93,7 @@
 //visibility classses
 body .visible-touch,
 body .hidden{
-  display:none;
+  display:none !important;
 }
 body .touch-device .visible-touch,
 body .visible{
