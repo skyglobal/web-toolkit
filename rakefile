@@ -119,6 +119,7 @@ def getDate
   `date +'%d-%m-%Y'`
 end
 
+desc 'Removes previously cached directories that were in git but are now in .gitIgnore'
 task :emptyGitCache do
   emptyGitCache
 end
