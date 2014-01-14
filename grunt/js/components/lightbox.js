@@ -19,6 +19,10 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             return scrollbarWidth;
         }();
 
+    var html = {
+        waitingForAjax: '<div class="lightbox-content"><div class="skycom-container"><div class="skycom-12"><div class="spinner-blue"><p>Please wait...</p></div></div></div></div>'
+    };
+
 	function disableElementTabbing(index, element) {
 		var $element = $(element);
 		$element.attr('data-tabindex', $element.attr('tabindex'));
@@ -63,33 +67,47 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
         $('body').removeAttr('style');
     }
 
-    function Lightbox(id, $lightboxLink, options){
-        var $element = $('#' + id.replace('lightbox/',''));
-
-        this.id = id;
-        this.$container = ($element.hasClass(classes.main)) ? $element : $element.closest('.' + classes.main);
-        this.$contents = (this.$container.length) ? this.$container.find('.' + classes.content) : $element ;
-        this.$closeIcon = this.$container.find('.' + classes.closeButton);
-        this.$lightboxLink = $lightboxLink;
-
-        if (!this.$container.length){
-            this.create();
-            this.bindEvents();
+    function Lightbox(href, $lightboxLink, options){
+        this.ajax = false;
+        if (href.substring(0,1) === '#') {
+            this.setup(href.replace('#!',''), $lightboxLink, options);
         }
-        if (options){
-            this.onShow = options.onShow;
-            this.onClose = options.onClose;
+        else {
+            this.ajax = true;
+            this.$lightboxLink = $lightboxLink;
+            this.$lightboxLink.on("click", this.openAjax.bind(this));
         }
     }
 
 	Lightbox.prototype = {
-		bindEvents: function() {
-            hash.register([this.id],this.open.bind(this) );
 
-            this.$lightboxLink.on("click", this.open.bind(this));
+        setup: function(href, $lightboxLink, options) {
+            var $element = $('#' + href.replace('lightbox/',''));
+
+            this.id = href;
+            this.$container = ($element.hasClass(classes.main)) ? $element : $element.closest('.' + classes.main);
+            this.$contents = (this.$container.length) ? this.$container.find('.' + classes.content) : $element ;
+            this.$closeIcon = this.$container.find('.' + classes.closeButton);
+            this.$lightboxLink = $lightboxLink;
+
+            if (!this.$container.length){
+                this.create();
+                this.bindEvents();
+            }
+            if (options){
+                this.onShow = options.onShow;
+                this.onClose = options.onClose;
+            }
+        },
+
+        bindEvents: function() {
+            if (!this.ajax) {
+                hash.register([this.id],this.open.bind(this) );
+                this.$lightboxLink.on("click", this.open.bind(this));
+            }
+            this.$contents.on("click", function(e) { return false; });
+            this.$closeIcon.on("click", this.close.bind(this));
             this.$container.on("click", this.close.bind(this));
-			this.$closeIcon.on("click", this.close.bind(this));
-			this.$contents.on("click", function(e) { return false; });
 		},
 
         create: function(){
@@ -117,12 +135,28 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             }
             hideBodyScrollBar();
 
-			this.$container.addClass(classes.open);
+            this.$container.addClass(classes.open);
 
             focusOnCloseButton(this.$lightboxLink, this.$closeIcon);
             disablePageTabbing();
             enablePageTabbing(this.$container);
 		},
+
+        openAjax: function() {
+            var lightbox = this;
+            lightbox.$contents = $( html.waitingForAjax n);
+            $("body").append(lightbox.$contents);
+            lightbox.create();
+            lightbox.bindEvents();
+            lightbox.open();
+
+            var promise = $.get(this.$lightboxLink.attr('href'));
+            promise.done(function(data) {
+                lightbox.$contents.html(data);
+            });
+
+            return false;
+        },
 
 		close: function(event) {
             var lightbox = this;
@@ -140,13 +174,20 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
                 if (lightbox.onClose){
                     lightbox.onClose();
                 }
+                if (lightbox.ajax) {
+                    lightbox.destroy();
+                }
             }, 500);
-		}
+		},
+
+        destroy: function() {
+            this.$contents.closest('.' + classes.main).remove();
+        }
 	};
 
 	$.fn.lightbox = function(options) {
 		return this.each(function() {
-			var lb = new Lightbox($(this).attr('href').replace('#!',''),$(this), options);
+			var lb = new Lightbox($(this).attr('href'),$(this), options);
 		});
 	};
 
