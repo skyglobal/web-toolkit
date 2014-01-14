@@ -78,6 +78,9 @@ end
 
 def tagBuild
   puts "*** Tagging Version #{latest_version_number} ***"
+
+  system "git config user.email 'circleci@bskyb.com'"
+  system "git config user.name 'CircleCI'"
   system "git tag -a v#{latest_version_number} -m \"Rake deploy: auto tag on #{getDate}\""
   system "git push origin master v#{latest_version_number}"
 end
@@ -89,11 +92,13 @@ def pushToAmazonS3
   cd "dist"
   assets_to_upload.each do |file|
     doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+    doc_resources << bucket.objects["latest/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
   cd ".."
   puts 'Uploading template files'
   templates_to_upload.each do |file|
     doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+    doc_resources << bucket.objects["latest/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
   puts 'Uploading static files'
   static_to_upload.each do |file|
@@ -105,14 +110,6 @@ def buildDistributionFiles
   puts "*** Grunting Distribution files ***"
   system "grunt"
   system "jekyll build"
-end
-
-def addDistributionFilesToGhPages
-  puts "*** Adding Distribution Files To global.github.io ***"
-  system "git add ./dist"
-  system "git add ./_site"
-  system "git commit -m 'Rake deploy: adding distribution + jekyll files'"
-  system "git push origin master:gh-pages"
 end
 
 def getDate
@@ -127,26 +124,17 @@ end
 desc 'Deploys a new version to the CDN'
 task :deploy do
 
-  system "git config user.email 'circleci@bskyb.com'"
-  system "git config user.name 'CircleCI'"
-
-  system "git checkout gh-pages"
+  if version_already_exists?
+    puts "Version #{latest_version_number} exists so exiting."
+    next
+  end
 
   buildDistributionFiles
 
-    if !version_is_release_candidate?
-      addDistributionFilesToGhPages
-    end
+  pushToAmazonS3
 
-    if version_already_exists?
-      puts "Version #{latest_version_number} exists so exiting."
-      next
-    end
-
-    pushToAmazonS3
-
-  system "git checkout master"
-
-  tagBuild
+  if !version_is_release_candidate?
+    tagBuild
+  end
 
 end
