@@ -141,9 +141,9 @@ task :deploy do
 
   pushToAmazonS3
 
-  #if !version_is_release_candidate?
+  if !version_is_release_candidate?
     pushToAmazonS3LatestDir
     tagBuild
-  #end
+  end
 
 end
