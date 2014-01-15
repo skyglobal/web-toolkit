@@ -1,1 +1,1 @@
-$('#lightbox-demo-link2').lightbox();
+$('.ajax-lightbox').lightbox();
