@@ -20,8 +20,17 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
         }();
 
     var html = {
-        waitingForAjax: '<div class="lightbox-content"><div class="skycom-container"><div class="skycom-12"><div class="spinner-blue"><p>Please wait...</p></div></div></div></div>'
+        waitingForAjax: '<div class="lightbox-content"><div class="skycom-container"><div class="skycom-12"><div class="spinner-blue"><p>Please wait...</p></div></div></div></div>',
+        closeButton: '<a class="internal-link ' + classes.closeButton + ' skycon-close" href="#!"><span class="speak">Close</span></a>',
+        container: '<div class="skycom-container lightbox-container clearfix"></div>',
+        lightboxWrapper: '<div class="' + classes.main + '"></div>'
     };
+
+    var lightboxId = 1;
+
+    function nextLightboxId() {
+        return lightboxId++;
+    }
 
 	function disableElementTabbing(index, element) {
 		var $element = $(element);
@@ -67,55 +76,56 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
         $('body').removeAttr('style');
     }
 
-    function Lightbox(href, $lightboxLink, options){
-        this.ajax = false;
-        if (href.substring(0,1) === '#') {
-            this.setup(href.replace('#!',''), $lightboxLink, options);
-        }
-        else {
-            this.ajax = true;
-            this.$lightboxLink = $lightboxLink;
-            this.$lightboxLink.on("click", this.openAjax.bind(this));
-        }
+    function Lightbox( lightboxLink, options){
+        this.$lightboxLink = $(lightboxLink);
+        this.href = this.$lightboxLink.attr('href');
+        this.init(options);
     }
 
 	Lightbox.prototype = {
 
-        setup: function(href, $lightboxLink, options) {
-            var $element = $('#' + href.replace('lightbox/',''));
+        init: function(options) {
+            if (options){
+                this.onShow = options.onShow;
+                this.onClose = options.onClose;
+            }
 
-            this.id = href;
+            if (this.href.substring(0,1) === '#') {
+                this.setup();
+            }
+            else {
+                this.$lightboxLink.on("click", this.getContent.bind(this));
+            }
+        },
+
+        setup: function() {
+            var $element = $('#' + this.href.replace('#!lightbox/',''));
+
             this.$container = ($element.hasClass(classes.main)) ? $element : $element.closest('.' + classes.main);
             this.$contents = (this.$container.length) ? this.$container.find('.' + classes.content) : $element ;
-            this.$closeIcon = this.$container.find('.' + classes.closeButton);
-            this.$lightboxLink = $lightboxLink;
+            //this.$closeIcon = this.$container.find('.' + classes.closeButton);
 
             if (!this.$container.length){
                 this.create();
                 this.bindEvents();
             }
-            if (options){
-                this.onShow = options.onShow;
-                this.onClose = options.onClose;
-            }
+
         },
 
         bindEvents: function() {
-            if (!this.ajax) {
-                hash.register([this.id],this.open.bind(this) );
-                this.$lightboxLink.on("click", this.open.bind(this));
-            }
+            hash.register([this.href],this.open.bind(this) );
+            this.$lightboxLink.on("click", this.open.bind(this));
             this.$contents.on("click", function(e) { return false; });
-            this.$closeIcon.on("click", this.close.bind(this));
+            this.$container.find('.' + classes.closeButton).on("click", this.close.bind(this));
             this.$container.on("click", this.close.bind(this));
 		},
 
         create: function(){
             var $contents = this.$contents,
                 $parent = this.$contents.parent(),
-                $lightboxDiv = $('<div class="' + classes.main + '"></div>'),
-                $container = $('<div class="skycom-container lightbox-container clearfix"></div>'),
-                $close = $('<a class="internal-link ' + classes.closeButton + ' skycon-close" href="#!"><span class="speak">Close</span></a>');
+                $lightboxDiv = $(html.lightboxWrapper),
+                $container = $(html.container),
+                $close = $(html.closeButton);
 
             $contents.addClass(classes.content + ' skycom-10 skycom-offset1').attr('role','dialog');
             $contents.prepend($close);
@@ -137,25 +147,35 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
 
             this.$container.addClass(classes.open);
 
-            focusOnCloseButton(this.$lightboxLink, this.$closeIcon);
+            focusOnCloseButton(this.$lightboxLink, this.$container.find('.' + classes.closeButton));
             disablePageTabbing();
             enablePageTabbing(this.$container);
 		},
 
-        openAjax: function() {
+        getContent: function() {
             var lightbox = this;
-            lightbox.$contents = $( html.waitingForAjax n);
-            $("body").append(lightbox.$contents);
-            lightbox.create();
-            lightbox.bindEvents();
-            lightbox.open();
+            var promise;
+            var url = lightbox.$lightboxLink.attr('href');
+            var lightboxId = 'lightbox-' + nextLightboxId();
+            var $content = $( html.waitingForAjax ).attr('id', lightboxId );
 
-            var promise = $.get(this.$lightboxLink.attr('href'));
+            $("body").append($content);
+            lightbox.href = '#!lightbox/' + lightboxId;
+            lightbox.$lightboxLink.attr('href', this.href);
+            lightbox.$lightboxLink.off('click');
+            lightbox.setup();
+            hash.change( this.href );
+
+            promise = $.get(url);
+
             promise.done(function(data) {
                 lightbox.$contents.html(data);
+                lightbox.$contents.prepend(html.closeButton);
+                lightbox.$container.find('.' + classes.closeButton).on("click", lightbox.close.bind(lightbox));
             });
 
             return false;
+
         },
 
 		close: function(event) {
@@ -174,9 +194,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
                 if (lightbox.onClose){
                     lightbox.onClose();
                 }
-                if (lightbox.ajax) {
-                    lightbox.destroy();
-                }
+
             }, 500);
 		},
 
@@ -187,7 +205,8 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
 
 	$.fn.lightbox = function(options) {
 		return this.each(function() {
-			var lb = new Lightbox($(this).attr('href'),$(this), options);
+//			var lb = new Lightbox($(this).attr('href'),$(this), options);
+			var lb = new Lightbox( this, options);
 		});
 	};
 
