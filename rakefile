@@ -65,15 +65,10 @@ end
 
 def emptyGitCache
   system "git rm --cached grunt/fonts/min -r"
-  system "git rm --cached _site/*.html"
-  system "git rm --cached _site/_includes -r"
-  system "git rm --cached _site/static -r"
-  system "git rm --cached _site/test -r"
-  system "git rm --cached _site/wiki_images -r"
-  system "git rm --cached _site/dist/images -r"
-  system "git rm --cached _site/dist/scripts -r"
-  system "git rm --cached _site/dist/stylesheets -r"
-  system "git rm --cached dist -r"
+  system "git rm --cached _site -r"
+  system "git rm --cached dist/images -r"
+  system "git rm --cached dist/scripts -r"
+  system "git rm --cached dist/stylesheets -r"
 end
 
 def tagBuild
