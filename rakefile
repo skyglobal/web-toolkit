@@ -124,14 +124,14 @@ end
 desc 'Deploys a new version to the CDN'
 task :deploy do
 
-  if version_already_exists?
-    puts "Version #{latest_version_number} exists so exiting."
-    next
-  end
+  #if version_already_exists?
+  #  puts "Version #{latest_version_number} exists so exiting."
+  #  next
+  #end
 
   buildDistributionFiles
 
-  pushToAmazonS3
+  #pushToAmazonS3
 
   if !version_is_release_candidate?
     tagBuild
