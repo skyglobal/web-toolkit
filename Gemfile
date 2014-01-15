@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'jekyll','1.2.1'
+gem 'jekyll'
 gem 'compass'
 gem 'aws-sdk'
 gem 'rake'
-gem 'RedCloth'
+#gem 'RedCloth'

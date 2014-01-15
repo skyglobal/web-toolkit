@@ -7,5 +7,5 @@ exclude: [
   Web-toolkit.iml,web-toolkit.ipr, web-toolkit.iws,circle.yml, Gruntfile.js,package.json,
   build.txt,
   deprecated, lib]
-#include: [_includes, test]
+include: [_includes, test]
 port: 4000
