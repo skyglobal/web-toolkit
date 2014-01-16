@@ -58,11 +58,11 @@ toolkit.detect = (function () {
         return state.css.support3D;
     }
 
-    function supportsPsuedo(){
+    function supportsPseudo(){
         var doc = document,
             html = doc.documentElement,
             body = doc.body,
-            supportsPseudo = false,
+            supported = false,
             paraBefore = doc.createElement('p'),
             styleBefore = doc.createElement('style'),
             heightBefore,
@@ -82,20 +82,27 @@ toolkit.detect = (function () {
 
         heightBefore = doc.getElementById('testbefore').offsetHeight;
 
-        if (heightBefore >= 1) {
-            supportsPseudo = true;
-        }
-
         body.removeChild(styleBefore);
         body.removeChild(paraBefore);
-        return supportsPseudo;
+
+        return (heightBefore >= 1);
     }
 
-    function getPseudoClass(el, pos){
+    function pseudo(el, pos, property){
+        if (!el){ return supportsPseudo(); }
         if (!window.getComputedStyle) { return false; }
         var css = window.getComputedStyle(el, ':' + pos);
-        var str = (css.getPropertyValue('content') && css.getPropertyValue('content')!='normal') ? css.getPropertyValue('content') : css.getPropertyValue('font-family');
-        return (str)? str.replace(/"/g,'').replace(/'/g,'') : '';
+        var str = css.getPropertyValue(property);
+        if (str && (str.indexOf("'")===0 || str.indexOf('"')===0)){
+            str = str.substring(1,str.length-1);
+        }
+        return str;
+    }
+
+    function getHtmlPseudo(pos){
+        var content = pseudo(html, pos, 'content');
+        var fontFamily = pseudo(html, pos, 'font-family');
+        return (content && content!='normal') ? content : fontFamily;
     }
 
     function css(property){
@@ -120,12 +127,12 @@ toolkit.detect = (function () {
     }
 
     function view(type){
-        state.view = getPseudoClass(html,'after') || 'desktop';
+        state.view = getHtmlPseudo('after') || 'desktop';
         return (type) ? state.view == type : state.view ;
     }
 
     function orientation(type){
-        state.orientation = getPseudoClass(html, 'before') || 'landscape';
+        state.orientation = getHtmlPseudo('before') || 'landscape';
         return (type) ? state.orientation == type : state.orientation;
     }
 
@@ -136,7 +143,6 @@ toolkit.detect = (function () {
 
     function elementVisibleBottom($el) {
         if ($el.length < 1) { return; }
-
         return ($el.offset().top + $el.height() <= $window.scrollTop() + $window.height());
     }
 
@@ -148,8 +154,7 @@ toolkit.detect = (function () {
         touch: touch,
         orientation: orientation,
         view: view,
-        pseudo: getPseudoClass,
-        supportsPsuedo: supportsPsuedo,
+        pseudo: pseudo,
         state: state,
         elementVisibleBottom: elementVisibleBottom
     };
