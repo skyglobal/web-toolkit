@@ -89,12 +89,12 @@
     padding-right: 46px;
     border-bottom: solid 1px #dcdcdc;
     border-top: solid 1px #dcdcdc;
+    height: 44px;
   }
 
   .tabs > .tab {
     float: left;
     padding: 0 30px 0 0;
-    height: 44px;
 
     @include box-sizing(border-box);
 
