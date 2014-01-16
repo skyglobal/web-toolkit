@@ -18,6 +18,7 @@
 
   position: absolute;
   right: 0;
+  z-index:1;
 
   @include box-sizing(border-box);
 
@@ -39,7 +40,6 @@
     padding: 0;
     border:1px solid transparent;
     border-top:0;
-    z-index:10;
     color:$secondary;
 
     @include box-sizing(border-box);
@@ -115,7 +115,7 @@
     &.selected {
       margin-bottom:-1px;
       height: 45px;
-      
+
       a{
         font-family: $font-family-medium;
         border-bottom: 2px solid #0073c5;
@@ -211,17 +211,18 @@
 .classic .dropdown-tab-select{
   >a{
     border-top:1px solid transparent;
-    height:45px;
+    height:44px;
   }
   a.dropdown-tab-selected{
+    height:45px;
     border-radius: 5px 5px 0 0;
     border-top:1px solid #dcdcdc;
+    z-index: 1;
   }
   ul a{
     font-size: 16px;
   }
 }
 .classic .more-tabs{
-  z-index: 5;
-  top:44px;
+  top: 44px;
 }
