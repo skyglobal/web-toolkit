@@ -56,7 +56,7 @@ toolkit.skycons = (function(detect, event) {
     }
 
     function init(){
-        if (detect.supportsPsuedo()){ return; }
+        if (detect.pseudo()){ return; }
         var els = document.getElementsByTagName('*'),
             i, c, el;
         for (i = 0; ; i += 1) {

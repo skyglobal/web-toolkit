@@ -88,6 +88,35 @@ function detectSpec(detect) {
             expect(detect.css('nonExistantCss')).to.equal(false);
 
         });
+
+        it('when pseduo classes are supported', function(){
+            expect(detect.pseudo()).to.equal(true);
+        });
+
+        it('when pseduo classes are not supported', function(){
+            var css =$("<style type='text/css'> *:before{ display:none!important;} </style>");
+            css.appendTo("head");
+            expect(detect.pseudo()).to.equal(false);
+            css.remove();
+        });
+
+        it('what is in the contents of a pseudo class', function(){
+            expect(detect.pseudo(document.documentElement,'before', 'content')).not.to.equal('rock on');
+            expect(detect.pseudo(document.documentElement,'before', 'content')).not.to.equal(null);
+            expect(detect.pseudo(document.documentElement,'after', 'content')).not.to.equal('rock on some more');
+
+            var before,after;
+            before=$("<style type='text/css'> html:before{ content:'rock on';} </style>");
+            before.appendTo("head");
+            after=$("<style type='text/css'> html:after{ content:'rock on some more';} </style>");
+            after.appendTo("head");
+
+            expect(detect.pseudo(document.documentElement,'before', 'content')).to.equal('rock on');
+            expect(detect.pseudo(document.documentElement,'after', 'content')).to.equal('rock on some more');
+
+            before.remove();
+            after.remove();
+        });
     });
 
     return describeSpec;
