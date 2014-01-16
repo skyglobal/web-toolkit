@@ -11,36 +11,17 @@
  */
 
 if (typeof toolkit==='undefined') toolkit={};
-
-toolkit.toggle = (function() {
+toolkit.toggle = (function(detect) {
 
     var hasResized = false,
         hasContentChanged = false,
         elementsToToggle = {},
         hiddenClass = 'toggle-hidden',
-        supportTransition = (function () {
-            var body = document.body || document.documentElement;
-            var style = body.style;
-            var property = 'transition';
-            if(typeof style[property] == 'string') {return true; }
-
-            // Tests for vendor specific prop
-            var vendorPrefix = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'];
-
-            property = property.charAt(0).toUpperCase() + property.substr(1);
-
-            for(var i=0; i<vendorPrefix.length; i++) {
-                if(typeof style[vendorPrefix[i] + property] == 'string') { return true; }
-            }
-            return false;
-        }());
+        supportTransition = detect.css('transition');
 
     function animate($el, to) {
         if (supportTransition) {
-//            setTimeout(function(){
-                $el.css({'height':to, overflow:'hidden', 'transition': 'height 0.5s ease-in-out'});
-//            }, 25);
-
+            $el.css({'height':to, overflow:'hidden', 'transition': 'height 0.5s ease-in-out'});
         }
         $el.toggleClass(hiddenClass, (to === 0));
         return $el;
@@ -147,9 +128,9 @@ toolkit.toggle = (function() {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/toggle', [], function() {
-        return toolkit.toggle();
+    define('utils/toggle', ['utils/detect'], function(detect) {
+        return toolkit.toggle(detect);
     });
 } else {
-    toolkit.toggle = toolkit.toggle();
+    toolkit.toggle = toolkit.toggle(toolkit.detect);
 }

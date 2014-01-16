@@ -2,22 +2,23 @@
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.lightbox = (function ($, keyboardFocus, hash) {
     "use strict";
-	var classes = {
+	var scrollbarWidth,
+        classes = {
             main: 'lightbox',
             closing: 'lightbox-closing',
             content: 'lightbox-content',
             closeButton: 'lightbox-close',
             open: 'lightbox-open'
         },
-        scrollbarWidth = function() {
-            var scrollDiv = document.createElement("div"),
-                scrollbarWidth;
+        getSrollbarWidth = function() {
+            //cant self execute if toolkit.js is in the head as document.body doesnt exist yet
+            var scrollDiv = document.createElement("div");
             scrollDiv.className = "lightbox-scrollbar-measure";
             document.body.appendChild(scrollDiv);
             scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
             document.body.removeChild(scrollDiv);
             return scrollbarWidth;
-        }();
+        };
 
     var html = {
         waitingForAjax: '<div class="lightbox-content"><div class="skycom-container"><div class="skycom-12"><div class="spinner-blue"><p>Please wait...</p></div></div></div></div>',
@@ -73,7 +74,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
     function hideBodyScrollBar(){
         $('body').css( {
             'overflow':		'hidden',
-            'padding-right': scrollbarWidth + 'px'
+            'padding-right': (scrollbarWidth || getSrollbarWidth()) + 'px'
         });
     }
     function showBodyScrollBar(){

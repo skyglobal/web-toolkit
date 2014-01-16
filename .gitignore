@@ -10,17 +10,11 @@ web-toolkit.ipr
 node_modules/
 grunt/fonts/min
 dist/scripts/build.txt
+vendor
+.bundle
 
 #allow _site/dist/fonts to be in git as they cant be built on circle
-_site/*.html
-_site/_includes
-_site/static
-_site/test
-_site/wiki_images
-_site/dist/images
-_site/dist/scripts
-_site/dist/stylesheets
-/dist/fonts
+_site
 /dist/images
 /dist/scripts
 /dist/stylesheets
