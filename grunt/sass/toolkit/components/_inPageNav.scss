@@ -15,15 +15,11 @@
 /* tab dropdown */
 .dropdown-tab-select {
   display: none;
-  float: right;
 
   position: absolute;
-  top: 0;
   right: 0;
   box-sizing: border-box;
   -moz-box-sizing:border-box;
-
-  z-index: 0;
 
   a {
     color: $primary;
