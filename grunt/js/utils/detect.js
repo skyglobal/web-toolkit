@@ -1,5 +1,5 @@
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.detect = (function () {
+toolkit.detect = (function (event) {
     "use strict";
 
     var state = {
@@ -13,10 +13,9 @@ toolkit.detect = (function () {
     var touchClasses = { hasNot: toolkitClasses[0], has: toolkitClasses[1] };
     var viewClasses = { mobile:toolkitClasses[2], desktop:toolkitClasses[3] };
     var orientationClasses = { landscape: toolkitClasses[4], portrait: toolkitClasses[5] };
-    var $window = $(window);
 
     function bindEvents(){
-        $(window).bind('resize', updateDetectionStates);
+        event.on(window,'resize', updateDetectionStates);
     }
 
 
@@ -143,7 +142,7 @@ toolkit.detect = (function () {
 
     function elementVisibleBottom($el) {
         if ($el.length < 1) { return; }
-        return ($el.offset().top + $el.height() <= $window.scrollTop() + $window.height());
+        return ($el.offset().top + $el.height() <= $(window).scrollTop() + $(window).height());
     }
 
     attachClasses();
@@ -156,16 +155,17 @@ toolkit.detect = (function () {
         view: view,
         pseudo: pseudo,
         state: state,
-        elementVisibleBottom: elementVisibleBottom
+        elementVisibleBottom: elementVisibleBottom,
+        updateDetectionStates: updateDetectionStates //just expose this while phantomJS doesnt understand event.emit(window,'resize');
     };
 
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/detect', [], function() {
+    define('utils/detect', ['utils/event'], function(event) {
         'use strict';
-        return toolkit.detect();
+        return toolkit.detect(event);
     });
 } else {
-    toolkit.detect = toolkit.detect();
+    toolkit.detect = toolkit.detect(toolkit.event);
 }

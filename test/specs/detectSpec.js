@@ -1,8 +1,9 @@
-function detectSpec(detect) {
+function detectSpec(detect, event) {
 
     var describeSpec = 'Detect module can use JS and HTML to know';
 
     if (!detect) { //for in page test runs
+        event = toolkit.event;
         detect = toolkit.detect;
     }
 
@@ -14,12 +15,20 @@ function detectSpec(detect) {
         }
     };
 
+    function resize(){
+        try{ //phantomJS doent understand this :(
+            event.emit(window,'resize');
+        } catch (e) {
+            detect.updateDetectionStates();
+        }
+    }
+
     describe(describeSpec, function () {
 
         it('when you are in desktop view', function () {
             var css =$("<style type='text/css'> html:after{ content:'desktop'} </style>");
             css.appendTo("head");
-            $(window).trigger('resize');
+            resize();
             expect(detect.view()).to.equal('desktop');
             expect(detect.view('desktop')).to.equal(true);
             expect($('html').hasClass('desktop-view')).to.equal(true);
@@ -30,7 +39,7 @@ function detectSpec(detect) {
         it('when you are in mobile view', function () {
             var css =$("<style type='text/css'> html:after{ content:'mobile'} </style>");
             css.appendTo("head");
-            $(window).trigger('resize');
+            resize();
             expect(detect.view()).to.equal('mobile');
             expect(detect.view('mobile')).to.equal(true);
             expect($('html').hasClass('mobile-view')).to.equal(true);
@@ -40,7 +49,7 @@ function detectSpec(detect) {
 
         it('when you are not a touch device', function () {
             delete window.ontouchstart;
-            $(window).trigger('resize');
+            resize();
             expect(detect.touch()).to.equal(false);
             expect($('html').hasClass('no-touch')).to.equal(true);
             expect($('html').hasClass('touch-device')).to.equal(false);
@@ -48,7 +57,7 @@ function detectSpec(detect) {
 
         it('when you are a touch device', function () {
             window.ontouchstart = true;
-            $(window).trigger('resize');
+            resize();
             if (window.ontouchstart){ //doesnt work in grunt cli for some reason
                 expect(detect.touch()).to.equal(true);
                 expect($('html').hasClass('no-touch')).to.equal(false);
@@ -60,7 +69,7 @@ function detectSpec(detect) {
         it('your orientation is landscape', function () {
             var css =$("<style type='text/css'> html:before{ content:'landscape'} </style>");
             css.appendTo("head");
-            $(window).trigger('resize');
+            resize();
             expect(detect.orientation('landscape')).to.equal(true);
             expect(detect.orientation()).to.equal('landscape');
             expect($('html').hasClass('landscape')).to.equal(true);
@@ -71,7 +80,7 @@ function detectSpec(detect) {
         it('your orientation is portrait', function () {
             var css =$("<style type='text/css'> html:before{ content:'portrait'} </style>");
             css.appendTo("head");
-            $(window).trigger('resize');
+            resize();
             expect(detect.orientation('portrait')).to.equal(true);
             expect(detect.orientation()).to.equal('portrait');
             expect($('html').hasClass('landscape')).to.equal(false);
@@ -124,7 +133,7 @@ function detectSpec(detect) {
 }
 
 if (window.define) {
-    define('specs/detectSpec', ['utils/detect'], function (detect) {
-        return detectSpec(detect);
+    define('specs/detectSpec', ['utils/detect', 'utils/event'], function (detect, event) {
+        return detectSpec(detect, event);
     });
 }
