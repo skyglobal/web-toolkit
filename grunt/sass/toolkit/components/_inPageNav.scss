@@ -89,12 +89,12 @@
     padding-right: 46px;
     border-bottom: solid 1px #dcdcdc;
     border-top: solid 1px #dcdcdc;
-    height: 44px;
   }
 
   .tabs > .tab {
     float: left;
     padding: 0 30px 0 0;
+    height: 44px;
 
     @include box-sizing(border-box);
 
@@ -105,6 +105,8 @@
     }
     &:hover{
       margin-bottom:-1px;
+      height: 45px;
+
       a{
         border-bottom: 2px solid #0073c5;
         color:$link;
@@ -112,6 +114,8 @@
     }
     &.selected {
       margin-bottom:-1px;
+      height: 45px;
+      
       a{
         font-family: $font-family-medium;
         border-bottom: 2px solid #0073c5;
