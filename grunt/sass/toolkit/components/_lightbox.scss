@@ -22,7 +22,11 @@
 	overflow-y:			scroll;
 	background-color:	rgba(255, 255, 255, 0.8);
 	cursor: 			pointer;
-
+    .lt-ie9 & {
+      background-color: transparent;
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#50FFFFFF,endColorstr=#50FFFFFF);
+      zoom: 1;
+    }
 
 	&.lightbox-open {
 		display:			block;
@@ -46,6 +50,9 @@
 		background-color:	#fff;
 		@include 			box-shadow(rgba(0,0,0,0.6) 0px 0px 10px 0px);
 		cursor: 			default;
+        .lt-ie9 & {
+          outline: 1px solid #3D505A;
+        }
 	}
 
 	.lightbox-close {

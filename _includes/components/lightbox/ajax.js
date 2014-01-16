@@ -1,1 +1,3 @@
-$('.ajax-lightbox').lightbox();
+$('.ajax-lightbox').lightbox({
+    sizingClasses: 'skycom-12'
+});
