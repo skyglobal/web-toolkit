@@ -1,15 +1,23 @@
-define('demo', ['utils/developer-notes-logger'], function(logger) {
+if (typeof demo==='undefined') demo={};
+demo.main = (function(DisplayCode, menu, tests, skycons) {
 
     function bindEvents() {
         $(document).on('click','.toggler', toggle);
-        $('#check').on('click', checkDiff);
+        $(document).on('click','.code-download', showCode);
+        $('.sky-form').on('submit', checkDiff);
     }
 
     function checkDiff(e) {
         e.preventDefault();
-        var oldVersion = $('#version').val(),
-            newVersion = $('.wiki-header small').text().replace('v',''),
-            route = 'http://web-toolkit.global.sky.com';
+        var newRouteDir,
+            oldVersion = $('#version').val(),
+            newVersion = $('#current-version').text(),
+            route = 'http://web-toolkit.global.sky.com',
+            routeDir = newRouteDir = '_site/_includes';
+        if (location.hostname.indexOf('local')===0){
+            route = 'http://'+location.host;
+            newRouteDir = '../_includes';
+        }
         if (oldVersion.split('.').length<3 || (oldVersion.split('.')[0]<1)){
             $('.sky-form .error').text("The version number is required, and must be '1.0.0' or higher");
         }
@@ -17,30 +25,42 @@ define('demo', ['utils/developer-notes-logger'], function(logger) {
             oldVersion = '0.6.9';//get lowest version available
         }
         window.toolkit.diff({
-            oldRoute: route + '/' + oldVersion + '/_site/_includes/',
-            newRoute: route + '/' + newVersion + '/_site/_includes/'
+            oldRoute: route + '/' + oldVersion + '/' + routeDir,
+            newRoute: route + '/' + newVersion + '/' + newRouteDir
         });
     }
 
-    function sortSkyconsTable(){
-        var skycons = [];
-        var rows = $('#wiki-skycons tbody tr');
-        rows.each(function(i){
-            skycons.push({i:i, skycon:$(this).find('td').first().text().trim()});
-        });
-        skycons.sort(function (a, b) {
-            if (a.skycon > b.skycon) {
-                return 1;
-            } else if (a.skycon < b.skycon) {
-                return -1;
-            } else {
-                return 0;
-            }
-        });
-        $('#wiki-skycons tbody tr').remove();
-        for (var i=0; i<skycons.length; i++){
-            $('#wiki-skycons tbody').append($(rows[skycons[i].i]));
+    function showCode(e){
+        var styled = false;
+        var feature = $(this).attr('href').replace('#!lightbox/code-','');
+        var version = $('#current-version').text(),
+            host = 'http://web-toolkit.global.sky.com',
+            dir = '_site/_includes';
+        if (location.hostname.indexOf('local')===0){
+            host = 'http://' + location.host;
+            dir = '../_includes';
+        } else if (document.location.host === "skyglobal.github.io"){
+            host = 'http://skyglobal.github.io/web-toolkit',
+            dir = '../_includes';
         }
+        var featureFiles, codeBase, route;
+        if ($(this).attr('data-docs')){
+            featureFiles = $(this).attr('data-docs');
+            codeBase = feature;
+            route = host + '/' + version + '/' + dir + '/' + codeBase;
+            styled = true;
+        } else {
+            featureFiles = $('a[href*="#' + feature + '"]').attr('data-diff-demos');
+            codeBase = $('a[href*="#' + feature + '"]').attr('data-diff');
+            route = host + '/' + version + '/' + dir + '/' + codeBase;
+        }
+        new DisplayCode({
+            header: $(this).parent().text().replace($(this).text(),'').trim(),
+            feature: feature,
+            dir: route,
+            fileNames: featureFiles.split(','),
+            styled: styled
+        });
     }
 
     function toggle(){
@@ -55,9 +75,17 @@ define('demo', ['utils/developer-notes-logger'], function(logger) {
         }
     }
 
-    logger();
-    window.toolkit.modules.init();
     bindEvents();
-    sortSkyconsTable();
 
 });
+
+if (typeof window.define === "function" && window.define.amd){
+    define('demo', ['demo/displayCode',
+        'demo/menu',
+        'demo/tests',
+        'demo/skycons'], function(displayCode, menu, tests, skycons) {
+        return demo.main(displayCode, menu, tests, skycons);
+    });
+} else {
+    demo.main(demo.displayCode, demo.menu, demo.tests, demo.skycons);
+}

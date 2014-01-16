@@ -1,0 +1,31 @@
+<h3 class="demo-h3 section-title smaller">
+    Toggle
+    <a href="#!lightbox/code-toggle" class="code-download">Code</a>
+    <a href="#test/toggleSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+</h3>
+
+
+<div class="example">
+    <h4 class="medium">Open Element</h4>
+    <div class="demo clearfix" >
+        {% include utils/toggle/openElement.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include utils/toggle/openElement.require.js %}
+        } else {
+            {% include utils/toggle/openElement.js %}
+        }
+    </script>
+    <h4 class="medium">Closed Element</h4>
+    <div class="demo clearfix" >
+        {% include utils/toggle/closedElement.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include utils/toggle/closedElement.require.js %}
+        } else {
+            {% include utils/toggle/closedElement.js %}
+        }
+    </script>
+</div>

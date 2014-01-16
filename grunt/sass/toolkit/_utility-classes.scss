@@ -89,16 +89,12 @@
   @include pointer($direction, $color, $size, true);
 }
 
-.internal-link{
-  color: $primary;
-  outline: 0!important;
-  border: 0;
-}
+
 
 //visibility classses
 body .visible-touch,
 body .hidden{
-  display:none;
+  display:none !important;
 }
 body .touch-device .visible-touch,
 body .visible{
@@ -106,6 +102,11 @@ body .visible{
 }
 
 
+.internal-link{
+  color: $primary;
+  outline: 0!important;
+  border: 0;
+}
 .ellipsis{
   @include ellipses;
 }
@@ -126,6 +127,33 @@ body .visible{
   }
 }
 
+html{
+  /* Orientation */
+  &:before {
+    display:none;
+    @media (orientation:portrait) {
+      content: 'portrait';
+      font-family:'portrait';
+    }
+    @media (orientation:landscape) {
+      content: 'landscape';
+      font-family:'landscape';
+    }
+  }
+  /* view */
+  &:after {
+    display:none;
+    @media (max-width:$mobile-width) {
+      content: 'mobile';
+      font-family:'mobile';
+    }
+    @media (min-width:$mobile-width+1) {
+      content: 'desktop';
+      font-family:'desktop';
+    }
+  }
+}
+
 //DESKTOP ONLY CLASSES
 @media (min-width: $mobile-width+1) {
   .sticky-desktop {
@@ -139,7 +167,7 @@ body .visible{
    }
   .visible-mobile,
   .hidden-desktop{
-    display:none;
+    display:none!important;
   }
 
 }
@@ -157,6 +185,6 @@ body .visible{
   }
   .visible-desktop,
   .hidden-mobile{
-    display:none;
+    display:none!important;
   }
 }

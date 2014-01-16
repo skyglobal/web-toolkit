@@ -11,24 +11,35 @@
  */
 
 if (typeof toolkit==='undefined') toolkit={};
-
-toolkit.toggle = (function() {
+toolkit.toggle = (function(detect) {
 
     var hasResized = false,
         hasContentChanged = false,
         elementsToToggle = {},
-
-        supportTransition = (function () {
-            var body = document.body || document.documentElement;
-            return (typeof body.style.transition == 'string');
-        }());
+        hiddenClass = 'toggle-hidden',
+        supportTransition = detect.css('transition');
 
     function animate($el, to) {
         if (supportTransition) {
-            $el.css({'height':to, overflow:'hidden', 'transition':'height 0.5s ease-in-out'});
+            $el.css({'height':to, overflow:'hidden', 'transition': 'height 0.5s ease-in-out'});
         }
-        $el.toggleClass('toggle-hidden', (to === 0));
+        $el.toggleClass(hiddenClass, (to === 0));
         return $el;
+    }
+
+    function setOpenHeight($el){
+        var hasHeight = false;
+        if(!supportTransition) return;
+        if ($el.attr('style')){
+            var styles = ($el.attr('style').split(';'));
+            for (var i in styles){
+                if (styles[i].trim().indexOf('height')===0){
+                    hasHeight = true;
+                }
+            }
+            if (hasHeight){ return; }
+        }
+        $el.css({'height':getOpenHeight($el)});
     }
 
     function getOpenHeight($el) {
@@ -38,11 +49,14 @@ toolkit.toggle = (function() {
 
         $('body')
             .append($('<div id="toggle-tmp-height" class="skycom-container"></div>')
-            .append($el.clone().attr('style', '').removeClass('toggle-hidden')));
-        $el.data('openHeight', $('#toggle-tmp-height > div').height());
+            .append($el.clone().attr('style', '').removeClass(hiddenClass + ' transition ')));
+        $('#toggle-tmp-height > div').append('<div class="toggle-clearfix-div clearfix clear" style="padding:1px"></div> ');
+        $('#toggle-tmp-height > div').prepend('<div class="toggle-clearfix-div clearfix clear" style="padding:1px"></div> ');
+        $el.data('openHeight', $('#toggle-tmp-height > div').height() - 2);
         $('#toggle-tmp-height').remove();
+        $('.toggle-clearfix-div').remove();
 
-        return $el.data('openHeight');
+        return 100;
     }
 
     function updateText($elClicked) {
@@ -54,16 +68,13 @@ toolkit.toggle = (function() {
             .attr('data-tracking-label', oldText);
     }
 
-    function rotateIcon($elClicked) {
-        $elClicked.find('i').toggleClass('rotate-180');
-    }
-
     function show($elToToggle) {
         var openHeight = getOpenHeight($elToToggle);
         animate($elToToggle, openHeight);
     }
 
     function hide($elToToggle) {
+        setOpenHeight($elToToggle);
         animate($elToToggle, 0);
     }
 
@@ -94,7 +105,6 @@ toolkit.toggle = (function() {
         }
         if ($elClicked && state !== $elClicked.attr('data-toggle-state')) {
             updateText($elClicked, state);
-            rotateIcon($elClicked);
             $elClicked.attr('data-toggle-state', state);
         }
 
@@ -115,10 +125,12 @@ toolkit.toggle = (function() {
 
     return toggle;
 
-    })();
+});
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/toggle', [], function() {
-        return toolkit.toggle;
+    define('utils/toggle', ['utils/detect'], function(detect) {
+        return toolkit.toggle(detect);
     });
+} else {
+    toolkit.toggle = toolkit.toggle(toolkit.detect);
 }

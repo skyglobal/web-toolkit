@@ -12,6 +12,7 @@ module.exports = function(grunt) {
         watch: {
             'toolkit': {
                 files: [ 'grunt/js/**/*.js',
+                         'test/specs/**/*.js',
                          'grunt/sass/**/*.scss'
                 ],
                 tasks: ['compass','jshint','requirejs']
@@ -24,8 +25,10 @@ module.exports = function(grunt) {
             fonts: ['grunt/fonts/min','dist/fonts']
         },
         jshint: {
-            toolkit: ['grunt/js/modules/*.js',
-                      'grunt/js/utils/*.js'],
+            toolkit: ['grunt/js/components/*.js',
+                      'grunt/js/utils/*.js',
+                      'grunt/js/demo/*.js',
+                      'test/specs/**/*.js'],
             others: ['Gruntfile.js'],
             options: {
                 "globals": {
@@ -62,22 +65,9 @@ module.exports = function(grunt) {
                     generateSourceMaps: false,
                     modules:[{
                         name: 'toolkit'
-                    },
-                    {
+                    },{
                         name: 'demo'
                     }]
-                }
-            }
-        },
-        mocha: {
-            all: {
-                src: (function() {
-                    var pattern = grunt.option('pattern') || '[A-Z]*';
-                    return ['test/jsUnit/' + pattern + '.html'];
-                }()),
-                options: {
-                    run: false,
-                    log: false // Set to true to see console.log() output on the terminal
                 }
             }
         },
@@ -87,13 +77,14 @@ module.exports = function(grunt) {
                 dest: 'dist/fonts',
                 destCss: 'dist/fonts',
                 options: {
-                    font: 'skycons',
-                    template:'grunt/fonts/template/skycon-template.css',
-                    htmlDemoTemplate:'grunt/fonts/template/skycon-template.html',
-                    htmlDemo: true,
-                    destHtml: '_includes/base-styles',
-                    hashes: false,
-                    embed: true
+                    font : 'skycons',
+                    template : 'grunt/fonts/template/skycon-template.css',
+                    htmlDemoTemplate : 'grunt/fonts/template/skycon-template.html',
+                    htmlDemo : true,
+//                    engine : 'node',
+                    destHtml : '_includes/baseStyles/icons',
+                    hashes : false,
+                    embed : true
                 }
             }
         },
@@ -108,7 +99,7 @@ module.exports = function(grunt) {
             fonts: {                         // Target
                 files: [{                   // Dictionary of files
                     expand: true,           // Enable dynamic expansion.
-                    cwd: 'lib/font-svgs/',    // Src matches are relative to this path.
+                    cwd: 'static/font-svgs/',    // Src matches are relative to this path.
                     src: ['*.svg'],      // Actual pattern(s) to match.
                     dest: 'grunt/fonts/min/', // Destination path prefix.
                     ext: '.svg'         // Dest filepaths will have this extension.
@@ -132,6 +123,19 @@ module.exports = function(grunt) {
                     dest: "dist/svgs/"
                 }
             }
+        },
+
+        mocha: {
+            all: {
+                src: (function() {
+                    var pattern = grunt.option('pattern') || '[A-Z]*';
+                    return ['_site/test.html'];
+                }()),
+                options: {
+                    run: false,
+                    log: false // Set to true to see console.log() output on the terminal
+                }
+            }
         }
     });
 
@@ -145,9 +149,15 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-webfont'); //https://github.com/sapegin/grunt-webfont
     grunt.loadNpmTasks('grunt-svgmin');
     grunt.loadNpmTasks('grunt-grunticon');
+//    grunt.loadNpmTasks('grunt-blanket-mocha');
+//    grunt.loadNpmTasks('grunt-mocha-cov');
+//    grunt.loadNpmTasks('grunt-istanbul');
+//    grunt.loadNpmTasks('grunt-istanbul-coverage');
+//    grunt.loadNpmTasks('grunt-jscoverage');
 
     grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
     grunt.registerTask('spy', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'watch']);
+    grunt.registerTask('sloppy', ['clean:toolkit', 'compass:toolkit', 'requirejs', 'watch']);
     grunt.registerTask('css', ['clean:css', 'compass:toolkit']);
     grunt.registerTask('js', ['clean:js', 'jshint', 'requirejs']);
     grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);

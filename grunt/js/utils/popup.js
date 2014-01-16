@@ -12,22 +12,27 @@ toolkit.popup = (function() {
         return window.open(url, windowTitle, 'top=' + top + ',left=' + left + ',width=' + width + ',height='+ height);
     }
 
-    function init() {
-        $('body').on('click', '[data-popup]', function(e) {
-            e.preventDefault();
-            var args = $.extend($(this).data('popup'), {url: $(this).attr('href')});
-            open(args);
-        });
+    function openThisLink(e) {
+        e.preventDefault();
+        var args = $.extend($(this).data('popup'), {url: $(this).attr('href')});
+        open(args);
     }
 
+    function bindEvents() {
+        $(document).on('click', '[data-popup]', openThisLink);
+    }
+
+    bindEvents();
+
     return {
-        init: init,
         open: open
     };
-})();
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/popup', [], function() {
-        return toolkit.popup;
+        return toolkit.popup();
     });
+} else {
+    toolkit.popup = toolkit.popup();
 }

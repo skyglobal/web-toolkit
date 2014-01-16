@@ -38,16 +38,16 @@ toolkit.skycons = (function() {
         'skycon-mail' : "&#xf11e;",
         'skycon-sky-go' : "&#xf11f;",
         'skycon-twitter-follow' : "&#xf120;",
-        'skycon-minify' : "&#xf121;",
-        'skycon-twitter' : "&#xf122;",
-        'skycon-close' : "&#xf123;",
-        'skycon-menu' : "&#xf124;",
-        'skycon-phone' : "&#xf125;",
-        'skycon-cloud' : "&#xf126;",
-        'skycon-video-play' : "&#xf127;",
-        'skycon-google-plus' : "&#xf128;"
+        'skycon-pending' : "&#xf121;",
+        'skycon-minify' : "&#xf122;",
+        'skycon-twitter' : "&#xf123;",
+        'skycon-close' : "&#xf124;",
+        'skycon-menu' : "&#xf125;",
+        'skycon-phone' : "&#xf126;",
+        'skycon-cloud' : "&#xf127;",
+        'skycon-video-play' : "&#xf128;",
+        'skycon-google-plus' : "&#xf129;"
     };
-
 
     function supportsPsuedo(){
         var doc = document,
@@ -89,27 +89,29 @@ toolkit.skycons = (function() {
     }
 
     function init(){
-        if (!supportsPsuedo()){
-            var els = document.getElementsByTagName('*'),
-                i, c, el;
-            for (i = 0; ; i += 1) {
-                el = els[i];
-                if(!el) { break; }
-                c = el.className;
-                c = c.match(/skycon-[^\s'"]+/);
-                if (c) { addSkycon(el, c[0]); }
-            }
+        if (supportsPsuedo()){ return; }
+        var els = document.getElementsByTagName('*'),
+            i, c, el;
+        for (i = 0; ; i += 1) {
+            el = els[i];
+            if(!el) { break; }
+            c = el.className;
+            c = c.match(/skycon-[^\s'"]+/);
+            if (c) { addSkycon(el, c[0]); }
         }
     }
 
+    $(document).ready(init);
+
     return {
-        add: addSkycon,
-        init: init
+        add: addSkycon
     };
-}());
+});
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/skycons', [], function() {
-        return toolkit.skycons;
+        return toolkit.skycons();
     });
+} else {
+    toolkit.skycons = toolkit.skycons();
 }

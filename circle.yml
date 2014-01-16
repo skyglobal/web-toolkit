@@ -2,4 +2,7 @@ deployment:
   production:
     branch: master
     commands:
-      - bundle exec rake deploy_new_version
+      - bundle exec rake deploy
+machine:
+  ruby:
+    version: ruby-1.9.3-p392

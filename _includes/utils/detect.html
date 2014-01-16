@@ -1,0 +1,62 @@
+<h3 class="demo-h3 section-title smaller">
+    Detect
+    <a href="#!lightbox/code-detect" class="code-download">Code</a>
+    <a href="#test/detectSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+</h3>
+
+<div class="example">
+    <h4 class="demo-h4 pod-title smaller">View</h4>
+    <div class="demo clearfix">
+        {% include utils/detect/view.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include utils/detect/view.require.js %}
+        } else {
+            {% include utils/detect/view.js %}
+        }
+    </script>
+</div>
+
+<div class="example">
+    <h4 class="demo-h4 pod-title smaller">Touch</h4>
+    <div class="demo clearfix">
+        {% include utils/detect/touch.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include utils/detect/touch.require.js %}
+        } else {
+            {% include utils/detect/touch.js %}
+        }
+    </script>
+</div>
+
+<div class="example">
+    <h4 class="demo-h4 pod-title smaller">Orientation</h4>
+    <div class="demo clearfix">
+        {% include utils/detect/orientation.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include utils/detect/orientation.require.js %}
+        } else {
+            {% include utils/detect/orientation.js %}
+        }
+    </script>
+</div>
+
+
+<div class="example">
+    <h4 class="demo-h4 pod-title smaller">CSS</h4>
+    <div class="demo clearfix">
+        {% include utils/detect/css.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include utils/detect/css.require.js %}
+        } else {
+            {% include utils/detect/css.js %}
+        }
+    </script>
+</div>
