@@ -32,17 +32,8 @@ See the [reference page](http://skyglobal.github.io/web-toolkit/) for a descript
   - npm install
 
 ### Code structure
-- grunt/js/
-  The source code, unminified and ready to work on.
-
-- grunt/js/toolkit.js
-  The public API is created here (returned at the bottom). This file brings together files from /modules and /utils.
-
-- grunt/js/demo.js
-  JS to make the demo page work.  This JS is also used as part of the unit testing.
-
-- grunt/sass/
-  The look and feel for the /wiki and /toolkit pages.
+- grunt/
+  Dev area - get stuck into css and js here
 
 - dist/
   Compiled code (via grunt)
@@ -109,7 +100,7 @@ To release a new version with:
 This library should follow the [Semantic versioning specification](http://semver.org/).
 In short, that means the following:
 
-Version: X.Y.Z(rc)?
+Version: X.Y.Z(-rc)?
 
 - API changes that are **not backwards compatible**, and break existing
   calls using the API must increment the X value.
