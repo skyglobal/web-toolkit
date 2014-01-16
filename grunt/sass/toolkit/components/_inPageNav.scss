@@ -107,10 +107,8 @@
     }
 
     &:only-of-type {
-      float: none;
       padding-right: 0;
       max-width: 100%;
-      display: inline-block;
     }
   }
 }
@@ -183,7 +181,6 @@
     }
 
     &:only-of-type {
-      margin-right: 46px;
       box-sizing: border-box;
       max-width: 100%;
 
