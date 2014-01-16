@@ -78,6 +78,27 @@ These tests are automatically run on the CircleCI server upon pushing to Github
 3. Browse to
   - http://localhost:4000
 
+
+### Contributing 
+
+####Fork the repository
+  - Using `git` you should fork a version of the toolkit (using github). Clone the fork locally ready to build your new/upgraded feature.
+  `git clone` _italic_ clone url _italic_
+    
+  - Dont forget to set the upstream using:
+  `git remote add upstream https://github.com/skyglobal/web-toolkit.git`
+    
+####Building A New/Updated Feature
+  - It is best to code in a new branch allowing you to commit multiple branches/features without having a dependency on the previous request.
+    
+  - Before you start a feature you should ensure your code is up to date by running:
+  `git pull upstream master`
+
+####Committing
+  - Before you submit your pull request ensure your code is up to date and merged by running:
+  `git pull upstream master`
+
+
 ### Deployment
 To release a new version with:
   - Code changes -  increment the version number (described below) in _config.yml. This will update gh-pages and the S3.
