@@ -18,7 +18,7 @@
 
   position: absolute;
   right: 0;
-  z-index:1;
+  z-index:10;
 
   @include box-sizing(border-box);
 
@@ -214,15 +214,15 @@
     height:44px;
   }
   a.dropdown-tab-selected{
-    height:45px;
+    height:44px;
     border-radius: 5px 5px 0 0;
     border-top:1px solid #dcdcdc;
-    z-index: 1;
   }
   ul a{
     font-size: 16px;
   }
 }
 .classic .more-tabs{
+  z-index: 5;
   top: 44px;
 }
