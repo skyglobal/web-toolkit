@@ -145,7 +145,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
         bindEvents: function() {
             var lightbox = this;
 
-            //this.$lightboxLink.on("click", this.open.bind(this));
+            this.$lightboxLink.on("click", this.open.bind(this));
             hash.register([this.href],this.open.bind(this) );
             this.$container.on('click', function(e) {
                 var $target = $(e.target);
