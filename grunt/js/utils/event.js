@@ -11,9 +11,6 @@ toolkit.event = (function () {
             clearTimeout(timeout.resize);
             timeout.resize = setTimeout(emitResizeEnd,200);
         });
-        ready(function(){
-            emit(document,'ready');
-        });
     }
 
     function emitResizeEnd(){
