@@ -1,7 +1,6 @@
 .share-popup {
   position: relative;
   margin-top: 10px;
-  z-index: 2;
 
   a {
     color: #666;
@@ -28,7 +27,6 @@
     height: 1em;
     line-height: 1em;
     padding-right: 10px;
-    z-index: 2;
     position: relative;
 
     &.has-focus span {
@@ -55,15 +53,14 @@
     display: none;
     height: 44px;
     top: 1.8em;
-    left: -7px;
+    z-index: 1;
     padding-left: 16px;
     background-color: #FFF;
     border: 1px solid #dcdcdc;
     min-width: 235px;
-    z-index: 2;
     &:before,
     &:after {
-      left: 20px;
+      left: 24px;
     }
 
     &.top {
@@ -72,10 +69,9 @@
       position: absolute;
       top: auto;
       bottom: 1.8em;
-      left: 15px;
       &:before,
       &:after {
-        left: 20px;
+        left: 24px;
       }
     }
 
@@ -107,7 +103,6 @@
   &.active .popover {
     display: block;
     @include box-shadow(2px 1px 3px rgba(0, 0, 0, 0.15));
-    z-index: 1;
     @media all and (max-width: 767px) {
       @include box-shadow(-2px -1px 3px rgba(0, 0, 0, 0.15));
     }
