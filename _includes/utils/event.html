@@ -1,0 +1,62 @@
+<h3 class="demo-h3 section-title smaller">
+    Event
+    <a href="#!lightbox/code-event" class="code-download">Code</a>
+    <a href="#test/eventSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+</h3>
+
+<div class="example">
+    <h4 class="demo-h4 pod-title smaller">Document Ready</h4>
+    <div class="demo clearfix">
+        {% include utils/event/ready.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include utils/event/ready.require.js %}
+        } else {
+            {% include utils/event/ready.js %}
+        }
+    </script>
+</div>
+
+<div class="example">
+    <h4 class="demo-h4 pod-title smaller">On</h4>
+    <div class="demo clearfix">
+        {% include utils/event/on.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include utils/event/on.require.js %}
+        } else {
+            {% include utils/event/on.js %}
+        }
+    </script>
+</div>
+
+<div class="example">
+    <h4 class="demo-h4 pod-title smaller">Emit</h4>
+    <div class="demo clearfix">
+        {% include utils/event/emit.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include utils/event/emit.require.js %}
+        } else {
+            {% include utils/event/emit.js %}
+        }
+    </script>
+</div>
+
+
+<div class="example">
+    <h4 class="demo-h4 pod-title smaller">Resize End</h4>
+    <div class="demo clearfix">
+        {% include utils/event/resizeEnd.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include utils/event/resizeEnd.require.js %}
+        } else {
+            {% include utils/event/resizeEnd.js %}
+        }
+    </script>
+</div>
