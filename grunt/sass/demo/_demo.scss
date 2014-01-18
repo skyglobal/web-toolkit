@@ -144,3 +144,9 @@ ul.notes{
     padding-left: 8px;
   }
 }
+
+pre code{
+  overflow: auto;
+  max-height: 400px;
+  max-width: 100%;
+}
