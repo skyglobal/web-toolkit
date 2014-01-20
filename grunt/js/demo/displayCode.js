@@ -1,5 +1,5 @@
 if (typeof demo==='undefined') demo={};
-demo.displayCode = (function(lightbox, hljs){
+demo.displayCode = (function( hljs){
 
     function addStyledCode(name, ext, code){
         var $code = $(code.replace(/{{ site.version }}/g,$('#current-version').text()));
@@ -141,9 +141,9 @@ demo.displayCode = (function(lightbox, hljs){
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('demo/displayCode', ['components/lightbox', 'lib/highlight'],function(lightbox, hljs) {
-        return demo.displayCode(lightbox, hljs);
+    define('demo/displayCode', ['lib/highlight'],function( hljs) {
+        return demo.displayCode( hljs);
     });
 } else {
-    demo.displayCode = demo.displayCode(toolkit.lightbox, hljs);
+    demo.displayCode = demo.displayCode( hljs);
 }

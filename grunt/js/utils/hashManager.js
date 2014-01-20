@@ -12,14 +12,11 @@ toolkit.hashManager = (function() {
         hasLoaded: false,
         windowLoaded: false,
         lastExecutor: null,
-        hash: null,
-        fallback: {
-            callback: null,
-            undo: null
-        }
+        hash: null
     };
 
     function bindEvents() {
+        console.log('bindHashEvents');
         $(window).on('hashchange', onHashChange);
         var doc_mode = document.documentMode,
         hashChangeSupport = 'onhashchange' in window && ( doc_mode === undefined || doc_mode > 7 );
@@ -37,8 +34,9 @@ toolkit.hashManager = (function() {
     function onHashChange(hash) {
         var evt, fn;
         hash = cleanHash((typeof hash === 'string') ? hash : location.hash);
+        console.log('onHashchange!', hash);
         if (hash) {
-            evt = vars.globalHashList[hash];
+            evt = getRegisteredHash(hash);
             fn = 'callback';
             vars.lastExecutor = hash;
         } else if (vars.lastExecutor) {
@@ -47,10 +45,6 @@ toolkit.hashManager = (function() {
         }
         if (evt && typeof evt[fn] === 'function') {
             evt[fn](hash);
-        } else if (fn === 'callback' && vars.fallback.callback) {
-            vars.fallback.callback(hash);
-        } else if (fn === 'undo' && vars.fallback.undo) {
-            vars.fallback.undo(hash);
         }
     }
 
@@ -68,20 +62,38 @@ toolkit.hashManager = (function() {
         location.hash = '!' + hash;
     }
 
+    function getRegisteredHash(hash){
+        var globalHashList = vars.globalHashList,
+            registeredHash;
+        for(registeredHash in globalHashList) {
+            var hashSections = registeredHash.split('/*');
+            var hashMatched = ((hash.indexOf(hashSections[0]) === 0 && hashSections.length>1) ||
+                hash == registeredHash);
+            console.log('Does ', hash, ' match ', hashSections[0]);
+            if(hashMatched) {
+                console.log('matched hash!');
+                return globalHashList[registeredHash];
+            }
+        }
+        return false;
+    }
+
     function register(hashList, callback, undo){
-        var globalHashList = vars.globalHashList;
+        console.log('registerHashEvents');
         $(hashList).each(function(i, hash) {
+            console.log(' |-> registerHashEvent: ', hash);
             hash = cleanHash(hash);
-            if (globalHashList[hash]){
+            if (vars.globalHashList[hash]){
                 var err = 'hashManager: hash (' + hash + ') already exists';
                 throw new Error(err);
             }
-            globalHashList[hash] = {
+            vars.globalHashList[hash] = {
                 callback: callback,
                 undo: undo
             };
 
             if (vars.windowLoaded && hash === cleanHash(location.hash)) {
+                console.log('on hash change calling');
                 onHashChange(hash);
             }
         });
@@ -89,12 +101,6 @@ toolkit.hashManager = (function() {
 
     function resetHash() {
         vars.globalHashList = [];
-    }
-
-    function registerFallback(callback, undo){
-        vars.fallback.callback = callback;
-        vars.fallback.undo = undo;
-        onHashChange();
     }
 
     function cleanHash(hash) {
@@ -105,7 +111,6 @@ toolkit.hashManager = (function() {
 
     return {
         register: register,
-        registerFallback: registerFallback,
         change: change,
         remove: remove,
         onHashChange: onHashChange,

@@ -44,6 +44,68 @@ function hashManagerSpec(hash) {
             expect(location.hash).to.equal('#!my-this-is-wonderful');
         });
 
+        describe(' Can Register Wildcards (\'/*\')', function () {
+            it('so multiple unknown hashes execute the same functions', function(done) {
+                hash.change('');
+                var count= 0,
+                    callback = function (hash) {
+                        console.log('hsh:', hash);
+                        count++;
+                    };
+                setTimeout(function(){
+                    hash.register(['test-wildcard/*'], callback);
+                    hash.change('test-wildcard/first');
+                    setTimeout(function(){
+                        expect(count).to.equal(1);
+                        expect(location.hash).to.equal('#!test-wildcard/first');
+                        hash.change('test-wildcard/second');
+                        setTimeout(function(){
+                            expect(count).to.equal(2);
+                            expect(location.hash).to.equal('#!test-wildcard/second');
+                            hash.change('test-wildcard');
+                            setTimeout(function(){
+                                expect(count).to.equal(3);
+                                expect(location.hash).to.equal('#!test-wildcard');
+                                hash.change('test-wild');
+                                setTimeout(function(){
+                                    expect(count).to.equal(3);
+                                    expect(location.hash).to.equal('#!test-wild');
+                                    done();
+                                },5);
+                            },5);
+                        },5);
+                    },5);
+                },5);
+            });
+
+
+            it('but two similar hash\'s (\'pete\' and \'peter\') still execute two different function', function(done) {
+                var count1= 0,
+                    count2= 0,
+                    callback1 = function (hash) {
+                        console.log('hsh1:', hash);
+                        count1++;
+                    },
+                    callback2 = function (hash) {
+                        console.log('hsh2:', hash);
+                        count2++;
+                    };
+                hash.register(['my-main-hash-man'], callback1);
+                hash.register(['my-main-hash-manager'], callback2);
+                expect(count1).to.equal(0);
+                hash.change('my-main-hash-man');
+                setTimeout(function(){
+                    expect(count1).to.equal(1);
+                    expect(count2).to.equal(0);
+                    hash.change('my-main-hash-manager');
+                    setTimeout(function(){
+                        expect(count1).to.equal(1);
+                        expect(count2).to.equal(1);
+                        done();
+                    },5);
+                },5);
+            });
+        });
     });
 
     return describeSpec;
