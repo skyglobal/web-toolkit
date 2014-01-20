@@ -1,31 +1,6 @@
 if (typeof demo==='undefined') demo={};
 demo.displayCode = (function( hljs){
 
-    function addStyledCode(name, ext, code){
-        var $code = $(code.replace(/{{ site.version }}/g,$('#current-version').text()));
-        if (ext.indexOf('js')>-1){
-            $code = $.parseHTML($code);
-        }
-        $(document.getElementById(name + ext + '-table')).append($code);
-    }
-    function addRow(name, ext, lineNumber, code){
-        var tableBody = document.getElementById(name + ext + '-table'),
-            tr = document.createElement('tr'),
-            td2 = document.createElement('td'),
-            td3 = document.createElement('td'),
-            txt2 = document.createTextNode(lineNumber),
-            txt3 = document.createTextNode(code);
-
-        td2.className = 'codekolom';
-        td3.className = 'bredecode';
-        td2.appendChild(txt2);
-        td3.appendChild(txt3);
-        tr.appendChild(td2);
-        tr.appendChild(td3);
-        tableBody.appendChild(tr);
-        hljs.highlightBlock(td3);
-    }
-
     function DisplayCode(options){
         this.header = options.header;
         this.feature = options.feature;
@@ -72,8 +47,8 @@ demo.displayCode = (function( hljs){
         this.$tabList = this.$container.find('.tabs');
 
         this.addContainer();
-        this.addTab(featureFile,ext, styled);
-        this.show(featureFile,ext, styled);
+        this.addTab(featureFile, ext, styled);
+        this.addCode(featureFile, ext, styled);
         if (this.fileCount === this.filesReceived){
             $('#code-' + this.feature).inPageNav();
             this.$lightboxLink.lightbox({closeButtonColour: 'black'});
@@ -89,12 +64,12 @@ demo.displayCode = (function( hljs){
         this.$lightboxLink.parent().parent().append(this.$container);
     };
 
-    DisplayCode.prototype.createTable = function(featureFile, ext, styled){
-        var id = this.feature + '-' + featureFile + ext + '-table';
+    DisplayCode.prototype.createContainer = function(featureFile, ext, styled){
+        var id = this.feature + '-' + featureFile + ext + '-container';
         if (this.styled || styled){
             return $('<div id="' + id + '" class="styled ' + ext + '"></div> ');
         } else {
-            return $('<pre><table class=language-' + ext.replace('require.','') + '><thead><tr><th colspan="3">' + ext.toUpperCase() + '</th></tr></thead><tbody id="' + id + '"></tbody></table></pre>');
+            return $('<h4 class="intro smaller">' + ext.toUpperCase() + '</h4> <pre><code class="language-' + ext.replace('require.','') + ' hljs vhdl"  id="' + id + '"></code></pre>');
         }
 
     };
@@ -113,27 +88,46 @@ demo.displayCode = (function( hljs){
 
         var $tab = $('<div class="tabpanel" id="' + tabName + '-tab-contents" class="tabpanel selected" aria-labeledby="' + tabName + '-tab" role="tabpanel"></div>');
         var $tabContents = $('<section class="tabcontents clearfix"></section>');
-        $tabContents.append(this.createTable(featureFile, 'notes.html', styled))
-            .append(this.createTable(featureFile, 'html'))
-            .append(this.createTable(featureFile, 'require.js'))
-            .append(this.createTable(featureFile, 'js'));
+        $tabContents.append(this.createContainer(featureFile, 'notes.html', styled))
+            .append(this.createContainer(featureFile, 'html'))
+            .append(this.createContainer(featureFile, 'require.js'))
+            .append(this.createContainer(featureFile, 'js'));
 
         $tab.append($tabContents);
         this.$container.append($tab);
 
     };
 
-    DisplayCode.prototype.show = function(featureFile, ext, styled){
+    DisplayCode.prototype.addCode = function(featureFile, ext, styled){
+        var fnName = (this.styled || styled) ? 'Styled' : 'Highlighted';
+        this['add' + fnName + 'Code'](featureFile, ext);
+    };
+
+    DisplayCode.prototype.addStyledCode = function(featureFile, ext){
         var id = this.feature + '-' + featureFile;
-        if (this.styled || styled){
-            addStyledCode(id, ext, this[id + ext]);
-        } else {
-            var code = (this[id + ext]) ? this[id + ext].split('\n') : '' ;
-            for (var i in code){
-                var line = code[i];
-                addRow(id, ext, parseInt(i,10) + 1, line);
-            }
+        var codeDom = document.getElementById(id + ext + '-container'),
+            code = this[id + ext];
+
+        var $code = $(code.replace(/{{ site.version }}/g,$('#current-version').text()));
+        if (ext.indexOf('js')>-1){
+            $code = $.parseHTML($code);
         }
+        $(codeDom).append($code);
+    };
+
+    DisplayCode.prototype.addHighlightedCode = function(featureFile, ext){
+        var id = this.feature + '-' + featureFile;
+        var languageShortHand = ext.replace('require.','');
+        var language = (languageShortHand=='js') ? 'javascript' : 'xml';
+        var codeDom = document.getElementById(id + ext + '-container'),
+            code = this[id + ext] || 'none',
+            codeNode;
+
+        var highlighted = hljs.highlight(language, code, true);
+//        codeNode = document.createTextNode(highlighted.value);
+        $(codeDom).append(highlighted.value);
+//        codeDom.appendChild(highlighted.value);
+
     };
 
     return DisplayCode;
