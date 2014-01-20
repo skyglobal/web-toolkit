@@ -189,7 +189,7 @@ function lightboxSpec(lightbox, focus, hash) {
             it("should load content via Ajax when the href doesn't start with a hash", function(done) {
                 $(".ajax-lightbox").click();
                 setTimeout(function () {
-                    expect( $("#ajax-lightbox-content").text() ).to.equal("Lightbox content 1");
+                    expect( $("#lightbox").text() ).to.equal("Lightbox content 1");
                     $("#ajax-lightbox-content").closest('.lightbox').click();
                     done();
                 }, 500);
