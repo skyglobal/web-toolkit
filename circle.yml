@@ -3,3 +3,6 @@ deployment:
     branch: master
     commands:
       - bundle exec rake deploy
+machine:
+  ruby:
+    version: ruby-1.9.3-p392

@@ -1,18 +1,22 @@
 function inPageNavSpec(hash, tabs) {
 
-    var describeSpec = 'Test responsive tabs';
+    var describeSpec = 'Responsive tabs';
 
     describe(describeSpec, function () {
 
-        it('check change tab removes class and adds classes for the correct controlID', function () {
-            expect($('#first-tab').hasClass('selected')).to.equal(true);
+        it('change tab look when changing tabs', function () {
             $('#first-tab').click();
             expect($('#first-tab').hasClass('selected')).to.equal(true);
-            expect($('#second-tab').hasClass('selected')).to.equal(false);
+            expect($('#fourth-tab').hasClass('selected')).to.equal(false);
             $('#fourth-tab').click();
-            expect($('#first-tab').hasClass('selected')).to.equal(false);
-            expect($('#third-tab').hasClass('selected')).to.equal(false);
             expect($('#fourth-tab').hasClass('selected')).to.equal(true);
+            expect($('#first-tab').hasClass('selected')).to.equal(false);
+        });
+        it('will only have one tab selected at a time', function () {
+            $('#first-tab').click();
+            expect($('#demo-inpage-nav-tabs .tab.selected').length).to.equal(1);
+            $('#fourth-tab').click();
+            expect($('#demo-inpage-nav-tabs .tab.selected').length).to.equal(1);
         });
     });
 

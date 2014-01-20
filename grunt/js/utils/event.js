@@ -2,12 +2,14 @@ if (typeof toolkit==='undefined') toolkit={};
 toolkit.event = (function () {
     "use strict";
 
-    var resize = null;
+    var timeout = {
+        resize : null
+    };
 
     function bindEvents(){
         on(window,'resize',function(){
-            clearTimeout(resize);
-            resize = setTimeout(emitResizeEnd,200);
+            clearTimeout(timeout.resize);
+            timeout.resize = setTimeout(emitResizeEnd,200);
         });
     }
 
@@ -35,11 +37,20 @@ toolkit.event = (function () {
         }
     }
 
+    function ready(exec){
+        if (/in/.test(document.readyState)){
+            setTimeout(function(){ ready(exec); },9);
+        } else {
+            exec();
+        }
+    }
+
     bindEvents();
 
     return {
         on: on,
-        emit: emit
+        emit: emit,
+        ready: ready
     };
 
 });
