@@ -87,5 +87,5 @@ if (typeof window.define === "function" && window.define.amd){
         return demo.main(displayCode, menu, tests, skycons);
     });
 } else {
-    demo.main(demo.displayCode, demo.menu, demo.tests);
+    demo.main(demo.displayCode, demo.menu, demo.tests, demo.skycons);
 }
