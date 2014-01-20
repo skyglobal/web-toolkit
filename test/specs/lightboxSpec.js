@@ -41,7 +41,7 @@ function lightboxSpec(lightbox, focus, hash) {
             // when
             openLightboxWithClick();
             // then
-            expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(true);
+            expect( $('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(true);
         });
 
         it('will be displayed when a user loads a page with lightbox id in it', function (done) {
@@ -183,6 +183,21 @@ function lightboxSpec(lightbox, focus, hash) {
                 }, 501);
             });
         });
+
+        context("Ajax", function() {
+
+            it("should load content via Ajax when the href doesn't start with a hash", function(done) {
+                $(".ajax-lightbox").click();
+                setTimeout(function () {
+                    expect( $("#ajax-lightbox-content").text() ).to.equal("Lightbox content 1");
+                    $("#ajax-lightbox-content").closest('.lightbox').click();
+                    done();
+                }, 500);
+
+            });
+
+        });
+
     });
 
     return describeSpec;
