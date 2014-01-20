@@ -1,5 +1,5 @@
 if (typeof demo==='undefined') demo={};
-demo.main = (function(DisplayCode, menu, tests) {
+demo.main = (function(DisplayCode, menu, tests, skycons) {
 
     function bindEvents() {
         $(document).on('click','.toggler', toggle);
@@ -82,9 +82,10 @@ demo.main = (function(DisplayCode, menu, tests) {
 if (typeof window.define === "function" && window.define.amd){
     define('demo', ['demo/displayCode',
         'demo/menu',
-        'demo/tests'], function(displayCode, menu, tests) {
-        return demo.main(displayCode, menu, tests);
+        'demo/tests',
+        'demo/skycons'], function(displayCode, menu, tests, skycons) {
+        return demo.main(displayCode, menu, tests, skycons);
     });
 } else {
-    demo.main(demo.displayCode, demo.menu, demo.tests);
+    demo.main(demo.displayCode, demo.menu, demo.tests, demo.skycons);
 }
