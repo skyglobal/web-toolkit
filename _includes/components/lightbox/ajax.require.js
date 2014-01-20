@@ -1,5 +1,3 @@
 require(['toolkit'], function(toolkit){
-    $('.ajax-lightbox').lightbox({
-        sizingClasses: 'skycom-12'
-    });
+    $('.ajax-lightbox').lightbox({closeButtonColour: 'black'});
 });
