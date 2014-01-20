@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'jekyll','1.4.3'
-gem 'compass'
+gem 'jekyll'
 gem 'aws-sdk'
+gem 'compass'
 gem 'rake'
-gem 'RedCloth'

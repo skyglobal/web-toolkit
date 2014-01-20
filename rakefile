@@ -65,15 +65,10 @@ end
 
 def emptyGitCache
   system "git rm --cached grunt/fonts/min -r"
-  system "git rm --cached _site/*.html"
-  system "git rm --cached _site/_includes -r"
-  system "git rm --cached _site/static -r"
-  system "git rm --cached _site/test -r"
-  system "git rm --cached _site/wiki_images -r"
-  system "git rm --cached _site/dist/images -r"
-  system "git rm --cached _site/dist/scripts -r"
-  system "git rm --cached _site/dist/stylesheets -r"
-  system "git rm --cached dist -r"
+  system "git rm --cached _site -r"
+  system "git rm --cached dist/images -r"
+  system "git rm --cached dist/scripts -r"
+  system "git rm --cached dist/stylesheets -r"
 end
 
 def tagBuild
@@ -92,17 +87,30 @@ def pushToAmazonS3
   cd "dist"
   assets_to_upload.each do |file|
     doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
-    doc_resources << bucket.objects["latest/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
   cd ".."
   puts 'Uploading template files'
   templates_to_upload.each do |file|
     doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
-    doc_resources << bucket.objects["latest/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
   puts 'Uploading static files'
   static_to_upload.each do |file|
     doc_resources << bucket.objects["#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+  end
+end
+
+def pushToAmazonS3LatestDir
+  puts "*** Pushing to the AmazonS3 Latest Dir ***"
+  doc_resources = []
+  puts 'Uploading assets'
+  cd "dist"
+  assets_to_upload.each do |file|
+    doc_resources << bucket.objects["latest/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+  end
+  cd ".."
+  puts 'Uploading template files'
+  templates_to_upload.each do |file|
+    doc_resources << bucket.objects["latest/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
 end
 
@@ -134,6 +142,7 @@ task :deploy do
   pushToAmazonS3
 
   if !version_is_release_candidate?
+    pushToAmazonS3LatestDir
     tagBuild
   end
 
