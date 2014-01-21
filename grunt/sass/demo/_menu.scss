@@ -1,16 +1,16 @@
-.main-menu.tabs-container.page-nav [role=tablist]{
+.main-menu.tabs-container.main-menu [role=tablist]{
   margin-bottom: 0;
   > li.selected a,
   > li:hover a{
     border:0;
   }
 }
-.main-menu.tabs-container.page-nav .tabs{
+.main-menu.tabs-container.main-menu .tabs{
   margin-top: 0;
   margin-bottom: 0;
   border:0;
 }
-.page-nav .tabpanel{
+.main-menu .tabpanel{
   border-bottom: 1px solid #ccc;
 }
 .secondary-menu,
@@ -56,11 +56,11 @@
 body {
 
   @media (max-width:768px){
-    .tabs-container.page-nav .tabs > .tab a{
+    .tabs-container.main-menu .tabs > .tab a{
       font-size: 20px;
       line-height:36px;
     }
-    .tabs-container.page-nav .tabcontents .tabs > .tab a{
+    .tabs-container.main-menu .tabcontents .tabs > .tab a{
       font-size: 14px;
       line-height:30px;
     }
