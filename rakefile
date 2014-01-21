@@ -103,7 +103,7 @@ def updateGHPages
   `git fetch origin gh-pages`
   `git checkout gh-pages`
   `git rebase master`
-  `git pull`
+  `git pull origin gh-pages`
   `grunt`
   `jekyll build`
   `git add ./dist/`
@@ -144,6 +144,9 @@ end
 
 desc 'Deploys a new version to the CDN'
 task :deploy do
+
+  `git config --global user.email "circle@circle.com"`
+  `git config --global user.name "rake file"`
 
   if version_already_exists?
     puts "Version #{latest_version_number} exists so exiting."
