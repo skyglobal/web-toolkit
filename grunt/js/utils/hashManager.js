@@ -66,7 +66,7 @@ toolkit.hashManager = (function() {
             exactMatchEvent;
         for(registeredHash in globalHashList) {
             if(matches(hash, registeredHash) || matches(registeredHash, hash)) {
-                if (registeredHash.indexOf('/*')>=0) { 
+                if (registeredHash.indexOf('/*')>=0) {
                     wildcardEvent = globalHashList[registeredHash];
                 } else {
                     exactMatchEvent = globalHashList[registeredHash];
@@ -102,7 +102,7 @@ toolkit.hashManager = (function() {
                 undo: undo
             };
 
-            if (vars.eventsAlreadyBound) {
+            if (vars.eventsAlreadyBound && hash === cleanHash(location.hash)) {
                 onHashChange();
             }
         }

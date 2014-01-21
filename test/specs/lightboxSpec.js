@@ -29,7 +29,7 @@ function lightboxSpec(lightbox, focus, hash) {
         }
 
         function close(done) {
-            $('#lightbox-demo').closest('.lightbox').click();
+            $('#lightbox-demo, #lightbox-ajax-demo').closest('.lightbox').click();
             setTimeout(function () {
                 done();
             }, 500);
@@ -189,7 +189,7 @@ function lightboxSpec(lightbox, focus, hash) {
             it("should load content via Ajax when the href doesn't start with a hash", function(done) {
                 $(".ajax-lightbox").click();
                 setTimeout(function () {
-                    expect( $("#lightbox").text() ).to.equal("Lightbox content 1");
+                    expect( $("#lightbox-ajax-demo h1").text() ).to.equal("Ajaxed header");
                     $("#ajax-lightbox-content").closest('.lightbox').click();
                     done();
                 }, 500);
