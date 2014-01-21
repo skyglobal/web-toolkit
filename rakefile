@@ -115,21 +115,6 @@ def updateGHPages
   `git push origin gh-pages`
 end
 
-def pushToAmazonS3LatestDir
-  puts "*** Pushing to the AmazonS3 Latest Dir ***"
-  doc_resources = []
-  puts 'Uploading assets'
-  cd "dist"
-  assets_to_upload.each do |file|
-    doc_resources << bucket.objects["latest/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
-  end
-  cd ".."
-  puts 'Uploading template files'
-  templates_to_upload.each do |file|
-    doc_resources << bucket.objects["latest/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
-  end
-end
-
 def buildDistributionFiles
   puts "*** Grunting Distribution files ***"
   system "grunt"
@@ -163,9 +148,7 @@ task :deploy do
   pushToAmazonS3
 
   if !version_is_release_candidate?
-    pushToAmazonS3LatestDir
     tagBuild
-    buildDistributionFiles
     updateGHPages
   end
 
