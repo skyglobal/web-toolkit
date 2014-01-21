@@ -106,8 +106,8 @@ def updateGHPages
   `git pull origin gh-pages`
   `grunt`
   `jekyll build`
-  `git add ./dist/`
-  `git add ./_site/`
+  `git add -A ./dist/`
+  `git add -A ./_site/`
   `git commit -m "Rake deploy: auto push to gh-pages"`
   `git push origin gh-pages`
 end
