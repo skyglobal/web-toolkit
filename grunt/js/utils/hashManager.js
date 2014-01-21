@@ -9,8 +9,7 @@ toolkit.hashManager = (function() {
 
     var vars = {
         globalHashList: {},
-        hasLoaded: false,
-        windowLoaded: false,
+        eventsAlreadyBound: false,
         lastExecutor: null,
         hash: null
     };
@@ -23,18 +22,18 @@ toolkit.hashManager = (function() {
             vars.hash = document.location.hash;
             setInterval(function(){
                 if (document.location.hash !== vars.hash){
-                    $(window).trigger( 'hashchange' );
+                    $(window).trigger('hashchange');
                 }
             },200);
         }
-        vars.windowLoaded = true;
+        vars.eventsAlreadyBound = true;
     }
 
     function onHashChange(hash) {
         var evt, fn;
-        hash = cleanHash((typeof hash === 'string') ? hash : location.hash);
-        if (hash) {
-            evt = getRegisteredHash(hash);
+        hash = cleanHash((typeof hash === 'string') ? hash : location.hash); //todo: possibly remove hash param. its only being used in tests/
+        evt = getHashEvent(hash);
+        if (hash && evt) {
             fn = 'callback';
             vars.lastExecutor = hash;
         } else if (vars.lastExecutor) {
@@ -60,23 +59,40 @@ toolkit.hashManager = (function() {
         location.hash = '!' + hash;
     }
 
-    function getRegisteredHash(hash){
+    function getHashEvent(hash){
         var globalHashList = vars.globalHashList,
-            registeredHash;
+            registeredHash,
+            wildcardEvent,
+            exactMatchEvent;
         for(registeredHash in globalHashList) {
-            var hashSections = registeredHash.split('/*');
-            var hashMatched = ((hash.indexOf(hashSections[0]) === 0 && hashSections.length>1) ||
-                hash == registeredHash);
-            if(hashMatched) {
-                return globalHashList[registeredHash];
+            if(matches(hash, registeredHash) || matches(registeredHash, hash)) {
+                if (registeredHash.indexOf('/*')>=0) { 
+                    wildcardEvent = globalHashList[registeredHash];
+                } else {
+                    exactMatchEvent = globalHashList[registeredHash];
+                    break;
+                }
             }
         }
-        return false;
+        return exactMatchEvent || wildcardEvent;
+    }
+
+    function matches(hash, toMatch) {
+        hash = cleanHash(hash);
+        toMatch = cleanHash(toMatch);
+        var hashSections = toMatch.split('/*');
+        var hashMatched = ((hash.indexOf(hashSections[0]) === 0 && hashSections.length>1) ||
+            hash == toMatch);
+        return hashMatched;
     }
 
     function register(hashList, callback, undo){
-        $(hashList).each(function(i, hash) {
-            hash = cleanHash(hash);
+        if (typeof hashList === 'string') { hashList = [hashList];}
+        var hash,
+            i= 0,
+            len = hashList.length;
+        for (i;i<len;i++){
+            hash = cleanHash(hashList[i]);
             if (vars.globalHashList[hash]){
                 var err = 'hashManager: hash (' + hash + ') already exists';
                 throw new Error(err);
@@ -86,10 +102,10 @@ toolkit.hashManager = (function() {
                 undo: undo
             };
 
-            if (vars.windowLoaded && hash === cleanHash(location.hash)) {
-                onHashChange(hash);
+            if (vars.eventsAlreadyBound) {
+                onHashChange();
             }
-        });
+        }
     }
 
     function resetHash() {
