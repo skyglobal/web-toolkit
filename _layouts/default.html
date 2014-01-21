@@ -6,54 +6,27 @@
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 <!--end css conditionals-->
 	<head>
-        <meta charset="UTF-8"/>
 
-        <!--jquery-->
-		<!--[if lt IE 9]> <script src="//web-toolkit.global.sky.com/static/lib/jquery-1.10.2.js" ></script> <![endif]-->
-        <!--[if gte IE 9]><!--> <script src="//web-toolkit.global.sky.com/static/lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
+        {% include head.html %}
+
         <script src="//web-toolkit.global.sky.com/static/lib/jquery.scrollspy.js" ></script>
-        <!--end-jquery-->
 
-        <!--to help prevent 'font flash'-->
-        <link href='//web-toolkit.global.sky.com/static/fonts/sky_regular.ttf' rel='prefetch'>
-        <link href='//web-toolkit.global.sky.com/static/fonts/sky_regular.svg' rel='prefetch'>
-        <link href='//web-toolkit.global.sky.com/static/fonts/sky_medium.ttf' rel='prefetch'>
-        <link href='//web-toolkit.global.sky.com/static/fonts/sky_medium.svg' rel='prefetch'>
-        <!--end prevent 'font flash'-->
-
-        <!--for video player pre-requisits-->
-        <link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
-        <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
-        <!--end video player pre-requisits-->
-
-        <!--from masthead-->
-		{% include skycomResources.html %}
-        <!--end masthead-->
-
-        <link rel="stylesheet" href="dist/stylesheets/demo.css">
-        <link rel="stylesheet" href="dist/stylesheets/toolkit.css">
-        <link rel="stylesheet" href="dist/fonts/skycons.css">
-
-        <!--for html 5 cross browser-->
-        <!--[if lt IE 10]><script type="text/javascript">
-            document.createElement('header');
-            document.createElement('section');
-            document.createElement('footer');
-            document.createElement('article');
-            document.createElement('aside');
-            document.createElement('hgroup');
-            document.createElement('nav');
-            document.createElement('figure');
-            document.createElement('figcaption');
-        </script><![endif]-->
-        <script>
-            {% include utils/responsiveImages/function.js %}
-        </script>
-        <script src="dist/scripts/toolkit.js"></script>
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target="#toolkit-menu-tabs">
 
-        {% include header.html %}
+        <div class="skycom-container clearfix">
+            <div class="alpha skycom-12">
+
+                <h1 class="demo-header section-title clearfix">
+                    <img src="static/images/sky-logo.png" alt="" height="52" width="82">
+                    <span>Toolkit</span>
+                    <a href="#!lightbox/code-usingTheToolkit" class="code-download" data-docs="requireJSAndGrunt,accessibility,codingPractices,contributing,gettingStarted,troubleshooting">[ How To &hellip; ]</a>
+                </h1>
+
+            </div>
+        </div>
+
+        {% include menu.html %}
 
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
@@ -64,7 +37,6 @@
         {% include footer.html %}
 
         <script src="dist/scripts/demo.js"></script>
-
 
         <script src="test/libraries/mocha.js"></script>
         <script src="http://web-toolkit.global.sky.com/static/lib/require-2.1.9.min.js"></script>
