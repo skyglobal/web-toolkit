@@ -99,13 +99,16 @@ def pushToAmazonS3
   end
 end
 
-def updateGHPages
+def fetchGHPages
+  puts "*** Fecthing GH Pages ***"
   `git fetch origin gh-pages`
   `git checkout gh-pages`
   `git rebase master`
   `git pull origin gh-pages`
-  `grunt`
-  `jekyll build`
+end
+
+def updateGHPages
+  puts "*** Updating GH Pages ***"
   `git add -A ./dist/`
   `git add -A ./_site/`
   `git commit -m "Rake deploy: auto push to gh-pages"`
@@ -153,6 +156,8 @@ task :deploy do
     next
   end
 
+  fetchGHPages
+
   buildDistributionFiles
 
   pushToAmazonS3
@@ -160,6 +165,7 @@ task :deploy do
   if !version_is_release_candidate?
     pushToAmazonS3LatestDir
     tagBuild
+    buildDistributionFiles
   end
   updateGHPages #todo - move this to non-rc versions only (after test)
 
