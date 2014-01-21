@@ -99,6 +99,19 @@ def pushToAmazonS3
   end
 end
 
+def updateGHPages
+  `git fetch origin gh-pages`
+  `git checkout gh-pages`
+  `git rebase master`
+  `git pull`
+  `grunt`
+  `jekyll build`
+  `git add ./dist/`
+  `git add ./_site/`
+  `git commit -m "Rake deploy: auto push to gh-pages"`
+  `git push origin gh-pages`
+end
+
 def pushToAmazonS3LatestDir
   puts "*** Pushing to the AmazonS3 Latest Dir ***"
   doc_resources = []
@@ -145,5 +158,6 @@ task :deploy do
     pushToAmazonS3LatestDir
     tagBuild
   end
+  updateGHPages #todo - move this to non-rc versions only (after test)
 
 end
