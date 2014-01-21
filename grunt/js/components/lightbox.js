@@ -7,7 +7,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
         classes = {
             main: 'lightbox',
             closing: 'lightbox-closing',
-            content: 'lightbox-content skycom-10 skycom-offset1',
+            content: 'lightbox-content',
             closeButton: 'lightbox-close',
             open: 'lightbox-open'
         },
@@ -21,10 +21,10 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             return scrollbarWidth;
         },
         html = {
-            waitingForAjax: '<div class="spinner-blue"><p>Please wait...</p></div>',
+            waitingForAjax: '<div style="margin:0 auto;width: 150px;"><div class="spinner-blue"><p>Please wait...</p></div></div>',
             closeButton: '<a class="internal-link ' + classes.closeButton + ' skycon-close" href="#!"><span class="speak">Close</span></a>',
             container: '<div class="skycom-container lightbox-container clearfix"></div>',
-            contents: '<div ></div>',
+            contents: '<div class="' + classes.content + '" role="dialog"></div>',
             lightboxWrapper: '<div class="' + classes.main + '"></div>'
         },
         defaults = {
@@ -107,7 +107,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
         getAjaxContent: function() {
             var lightbox = this;
             var $spinner = $( html.waitingForAjax );
-            lightbox.$container.append($spinner);
+            lightbox.$contents.append($spinner);
 
             $.get(lightbox.href).done(function(data) {
                 lightbox.$lightboxLink.attr('href', lightbox.restfulHash);
@@ -152,9 +152,9 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
                 $contents = $(html.contents);
                 $parent = $('body').append($contents);
             }
-
+            this.$contents = $contents;
             $parent = $contents.parent();
-            $contents.attr('aria-labelledby',this.$lightboxLink.id).attr('role','dialog').addClass(classes.content);
+            $contents.attr('aria-labelledby',this.$lightboxLink.id).attr('role','dialog').addClass('skycom-10 skycom-offset1');
             $contents.prepend($close);
             $container.append($contents);
             $lightboxDiv.append($container);
