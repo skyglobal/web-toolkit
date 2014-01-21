@@ -166,7 +166,7 @@ task :deploy do
     pushToAmazonS3LatestDir
     tagBuild
     buildDistributionFiles
+    updateGHPages
   end
-  updateGHPages #todo - move this to non-rc versions only (after test)
 
 end
