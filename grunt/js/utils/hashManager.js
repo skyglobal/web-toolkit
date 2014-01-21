@@ -16,7 +16,6 @@ toolkit.hashManager = (function() {
     };
 
     function bindEvents() {
-        console.log('bindHashEvents');
         $(window).on('hashchange', onHashChange);
         var doc_mode = document.documentMode,
         hashChangeSupport = 'onhashchange' in window && ( doc_mode === undefined || doc_mode > 7 );
@@ -34,7 +33,6 @@ toolkit.hashManager = (function() {
     function onHashChange(hash) {
         var evt, fn;
         hash = cleanHash((typeof hash === 'string') ? hash : location.hash);
-        console.log('onHashchange!', hash);
         if (hash) {
             evt = getRegisteredHash(hash);
             fn = 'callback';
@@ -69,9 +67,7 @@ toolkit.hashManager = (function() {
             var hashSections = registeredHash.split('/*');
             var hashMatched = ((hash.indexOf(hashSections[0]) === 0 && hashSections.length>1) ||
                 hash == registeredHash);
-            console.log('Does ', hash, ' match ', hashSections[0]);
             if(hashMatched) {
-                console.log('matched hash!');
                 return globalHashList[registeredHash];
             }
         }
@@ -79,9 +75,7 @@ toolkit.hashManager = (function() {
     }
 
     function register(hashList, callback, undo){
-        console.log('registerHashEvents');
         $(hashList).each(function(i, hash) {
-            console.log(' |-> registerHashEvent: ', hash);
             hash = cleanHash(hash);
             if (vars.globalHashList[hash]){
                 var err = 'hashManager: hash (' + hash + ') already exists';
@@ -93,7 +87,6 @@ toolkit.hashManager = (function() {
             };
 
             if (vars.windowLoaded && hash === cleanHash(location.hash)) {
-                console.log('on hash change calling');
                 onHashChange(hash);
             }
         });
