@@ -36,7 +36,7 @@ Sky branded front end web framework and style guide.
 1. In the root of the project, run the following:
   - `jekyll serve --watch`
 2. In another terminal run:
-  - `grunt spy` (add '--beautify' to help when debugging)
+  - `grunt spy` (add ` --beautify` to help when debugging)
 3. Browse to
   - `http://localhost:4000`
 
