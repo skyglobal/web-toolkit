@@ -7,7 +7,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
         classes = {
             main: 'lightbox',
             closing: 'lightbox-closing',
-            content: 'lightbox-content',
+            content: 'lightbox-content skycom-10 skycom-offset1',
             closeButton: 'lightbox-close',
             open: 'lightbox-open'
         },
@@ -24,7 +24,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             waitingForAjax: '<div class="spinner-blue"><p>Please wait...</p></div>',
             closeButton: '<a class="internal-link ' + classes.closeButton + ' skycon-close" href="#!"><span class="speak">Close</span></a>',
             container: '<div class="skycom-container lightbox-container clearfix"></div>',
-            contents: '<div class="' + classes.content + ' skycom-10 skycom-offset1" role="dialog"></div>',
+            contents: '<div ></div>',
             lightboxWrapper: '<div class="' + classes.main + '"></div>'
         },
         defaults = {
@@ -97,7 +97,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
 
         getRestfulHash: function(){
             if (this.isAjaxRequest){
-                this.restfulHash = '#!' + (this.options.restfulHash || 'lightbox/lightbox-' + nextLightboxId());
+                this.restfulHash = '#!' + (this.href.split('#!')[1]);
             } else {
                 this.restfulHash = this.href;
             }
@@ -143,7 +143,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
 
         create: function(){
             var $parent,
-                $contents = $('#' + this.restfulHash.replace('#!lightbox/','')),
+                $contents = $('#' + hash.cleanHash(this.restfulHash.replace(/\//g,'-'))),
                 $lightboxDiv = $(html.lightboxWrapper),
                 $container = $(html.container),
                 $close = $(html.closeButton).addClass(this.options.closeButtonColour);
@@ -154,7 +154,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             }
 
             $parent = $contents.parent();
-            $contents.attr('aria-labelledby',this.$lightboxLink.id);
+            $contents.attr('aria-labelledby',this.$lightboxLink.id).attr('role','dialog').addClass(classes.content);
             $contents.prepend($close);
             $container.append($contents);
             $lightboxDiv.append($container);
@@ -181,7 +181,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             enablePageTabbing(this.$container);
 
             if (this.isAjaxRequest) {
-                if (e){ e.preventDefault(); }
+                if (e && e.preventDefault){ e.preventDefault(); }
                 this.getAjaxContent();
             }
 		},

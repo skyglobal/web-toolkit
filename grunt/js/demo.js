@@ -3,7 +3,7 @@ demo.main = (function(DisplayCode, menu, tests, skycons) {
 
     function bindEvents() {
         $(document).on('click','.toggler', toggle);
-        $(document).on('click','.code-download', showCode);
+        toolkit.hashManager.register('code/*',showCode);
         $('.sky-form').on('submit', checkDiff);
     }
 
@@ -30,9 +30,10 @@ demo.main = (function(DisplayCode, menu, tests, skycons) {
         });
     }
 
-    function showCode(e){
+    function showCode(hash){
         var styled = false;
-        var feature = $(this).attr('href').replace('#!lightbox/code-','');
+        var $lightboxLink = $('a[href="#!' + hash + '"]');
+        var feature = hash.replace(/code\//g,'');
         var version = $('#current-version').text(),
             host = 'http://web-toolkit.global.sky.com',
             dir = '_site/_includes';
@@ -44,8 +45,8 @@ demo.main = (function(DisplayCode, menu, tests, skycons) {
             dir = '../_includes';
         }
         var featureFiles, codeBase, route;
-        if ($(this).attr('data-docs')){
-            featureFiles = $(this).attr('data-docs');
+        if ($lightboxLink.attr('data-docs')){
+            featureFiles = $lightboxLink.attr('data-docs');
             codeBase = feature;
             route = host + '/' + version + '/' + dir + '/' + codeBase;
             styled = true;
@@ -55,7 +56,7 @@ demo.main = (function(DisplayCode, menu, tests, skycons) {
             route = host + '/' + version + '/' + dir + '/' + codeBase;
         }
         new DisplayCode({
-            header: $(this).parent().text().replace($(this).text(),'').trim(),
+            header: $lightboxLink.parent().text().replace($lightboxLink.text(),'').trim(),
             feature: feature,
             dir: route,
             fileNames: featureFiles.split(','),
