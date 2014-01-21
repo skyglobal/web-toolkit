@@ -113,9 +113,8 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
                 lightbox.$lightboxLink.attr('href', lightbox.restfulHash);
                 lightbox.href = lightbox.restfulHash;
                 hash.change(hash.cleanHash(lightbox.href));
-                lightbox.isAjaxRequest = false;
                 $spinner.remove();
-                lightbox.$container.find('.' + classes.content).append(data);
+                lightbox.populate(null,data);
             });
 
             return false;
@@ -141,24 +140,29 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
 
 		},
 
+        populate: function(e, data){
+            data = data || $('#' + hash.cleanHash(this.restfulHash.replace(/\//g,'-'))).removeClass('hidden');
+            if (data.length>0) {
+                this.$container.find('.' + classes.content).append(data);
+            } else {
+                if (e && e.preventDefault){ e.preventDefault(); }
+                this.getAjaxContent();
+            }
+        },
+
         create: function(){
-            var $parent,
-                $contents = $('#' + hash.cleanHash(this.restfulHash.replace(/\//g,'-'))),
-                $lightboxDiv = $(html.lightboxWrapper),
+            var $lightboxDiv = $(html.lightboxWrapper),
+                $contents = $(html.contents),
                 $container = $(html.container),
                 $close = $(html.closeButton).addClass(this.options.closeButtonColour);
 
-            if (!$contents.length){
-                $contents = $(html.contents);
-                $parent = $('body').append($contents);
-            }
             this.$contents = $contents;
-            $parent = $contents.parent();
             $contents.attr('aria-labelledby',this.$lightboxLink.id).attr('role','dialog').addClass('skycom-10 skycom-offset1');
             $contents.prepend($close);
             $container.append($contents);
             $lightboxDiv.append($container);
-            $parent.append($lightboxDiv);
+
+            $('body').append($lightboxDiv);
 
             this.$container = $lightboxDiv;
         },
@@ -166,6 +170,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
 		open: function(e) {
             if (!this.$container){
                 this.create();
+                this.populate(e);
                 this.bindEvents();
             }
             if (this.$container.hasClass(classes.open)) { return ; }
@@ -180,10 +185,6 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             disablePageTabbing();
             enablePageTabbing(this.$container);
 
-            if (this.isAjaxRequest) {
-                if (e && e.preventDefault){ e.preventDefault(); }
-                this.getAjaxContent();
-            }
 		},
 
 		close: function(event) {

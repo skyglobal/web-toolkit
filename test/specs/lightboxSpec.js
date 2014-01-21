@@ -60,7 +60,7 @@ function lightboxSpec(lightbox, focus, hash) {
         it('closes when the close icon is clicked', function (done) {
             openLightboxWithClick();
             // when
-            $('#lightbox-demo .lightbox-close').click();
+            $("#lightbox-demo").prev('.lightbox-close').click();
             // then
             setTimeout(function () {
                 expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(false);
@@ -69,6 +69,25 @@ function lightboxSpec(lightbox, focus, hash) {
 
         });
 
+        it('can specify the colour of the close button', function (done) {
+            $(".ajax-lightbox").click();
+            setTimeout(function () {
+                expect( $("#lightbox-ajax-demo").prev('.lightbox-close').attr('class') ).to.contain('black');
+                expect( $("#lightbox-ajax-demo").prev('.lightbox-close').attr('class') ).to.not.contain('white');
+                $("#ajax-lightbox-content").closest('.lightbox').click();
+                done();
+            }, 500);
+        });
+
+        it('has a default close button colour of white', function (done) {
+            openLightboxWithClick();
+            setTimeout(function () {
+                expect( $("#lightbox-demo").prev('.lightbox-close').attr('class') ).to.contain('white');
+                expect( $("#lightbox-demo").prev('.lightbox-close').attr('class') ).to.not.contain('black');
+                $("#lightbox-content").closest('.lightbox').click();
+                done();
+            }, 500);
+        });
 
         it('closes when the faded background is clicked', function (done) {
             openLightboxWithClick();
@@ -97,7 +116,7 @@ function lightboxSpec(lightbox, focus, hash) {
             expect($('body').is('[style]')).to.equal(true);
             expect($('body').css('overflow')).to.equal('hidden');
             // when
-            $('#lightbox-demo .lightbox-close').click();
+            $("#lightbox-demo").prev('.lightbox-close').click();
             // then
             setTimeout(function () {
                 expect($('body').is('[style]')).to.equal(false);
@@ -124,7 +143,7 @@ function lightboxSpec(lightbox, focus, hash) {
             };
             $('#lightbox-demo').one('my-lightbox-closed', handler);
             openLightboxWithClick();
-            $('#lightbox-demo .lightbox-close').click();
+            $("#lightbox-demo").prev('.lightbox-close').click();
         });
 
 
@@ -140,7 +159,7 @@ function lightboxSpec(lightbox, focus, hash) {
                 // given
                 openLightboxWithClick();
                 // when
-                $('#lightbox-demo .lightbox-close').click();
+                $("#lightbox-demo").prev('.lightbox-close').click();
                 // then
                 setTimeout(function () {
                     expect(document.activeElement.id).to.equal('lightbox-demo-link');
@@ -150,11 +169,11 @@ function lightboxSpec(lightbox, focus, hash) {
 
             it("highlights the close button in blue if the lightbox link is highlighted in blue", function () {
                 // given
-                expect($('#lightbox-demo .lightbox-close').hasClass(focus.className)).to.equal(false);
+                expect($("#lightbox-demo").prev('.lightbox-close').hasClass(focus.className)).to.equal(false);
                 $('#lightbox-demo-link').addClass(focus.className);
                 openLightboxWithClick();
                 // then
-                expect($('#lightbox-demo .lightbox-close').hasClass(focus.className)).to.equal(true);
+                expect($("#lightbox-demo").prev('.lightbox-close').hasClass(focus.className)).to.equal(true);
             });
 
 //				it('Constrains the tab focus to the lightbox', function() {
@@ -175,7 +194,7 @@ function lightboxSpec(lightbox, focus, hash) {
                 openLightboxWithClick();
                 expect($('#lightbox-demo-link').attr('tabindex')).to.equal('-1');
                 expect($('#lightbox-demo-tabbable-link').attr('tabindex')).to.equal('-1');
-                $('#lightbox-demo .lightbox-close').click();
+                $("#lightbox-demo").prev('.lightbox-close').click();
                 setTimeout(function () {
                     expect($('#lightbox-demo-link').attr('tabindex')).to.equal(undefined);
                     expect($('#lightbox-demo-tabbable-link').attr('tabindex')).to.equal('101');
