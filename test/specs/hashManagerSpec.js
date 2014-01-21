@@ -37,6 +37,53 @@ function hashManagerSpec(hash) {
             location.hash = 'unregistered-hash-link';
         });
 
+        it('Will execute an assigned function when the documents current hash is registered later', function(done){
+            hash.change('page-load-hash');
+            var count = 0,
+                callback = function () {
+                    count++;
+                    expect(count).to.equal(1);
+                };
+            setTimeout(function() {
+                hash.register(['page-load-hash'], callback);
+                setTimeout(function() {
+                    hash.register(['something'], callback);
+                    done();
+                }, 5);
+            }, 5);
+        });
+        it('can register a single hash (string), or multiple (array)', function (done) {
+            hash.change('');
+            var count = 0,
+                callback = function () {
+                    count++;
+                };
+            setTimeout(function() {
+                hash.register('single-hash', callback);
+                hash.register(['array-hash-1','array-hash-2'], callback);
+                expect(count).to.equal(0);
+                setTimeout(function(){
+                    hash.change('single-hash');
+                    setTimeout(function() {
+                        expect(count).to.equal(1);
+                        expect(location.hash).to.equal('#!single-hash');
+                        hash.change('array-hash-2');
+                        setTimeout(function() {
+                            expect(count).to.equal(2);
+                            expect(location.hash).to.equal('#!array-hash-2');
+                            hash.change('array-hash-1');
+                            setTimeout(function() {
+                                expect(count).to.equal(3);
+                                expect(location.hash).to.equal('#!array-hash-1');
+                                done();
+                            },5);
+                        },5);
+                    },5);
+                },5);
+            },5);
+
+        });
+
         it('can change the documents location with .changeHash()', function () {
             hash.change('newHash');
             expect(location.hash).to.equal('#!newHash');
@@ -45,11 +92,11 @@ function hashManagerSpec(hash) {
         });
 
         describe(' Can Register Wildcards (\'/*\')', function () {
+
             it('so multiple unknown hashes execute the same functions', function(done) {
                 hash.change('');
                 var count= 0,
                     callback = function (hash) {
-                        console.log('hsh:', hash);
                         count++;
                     };
                 setTimeout(function(){
@@ -78,16 +125,41 @@ function hashManagerSpec(hash) {
                 },5);
             });
 
+            it('prioritises exact hashes over wildcard hashes', function(done) {
+                hash.change('');
+                var count1= 0,count2= 0,
+                    callback1 = function (hash) {
+                        count1++;
+                    },
+                    callback2 = function (hash) {
+                        count2++;
+                    };
+                setTimeout(function(){
+                    hash.register(['test-prioritisation/*'], callback1);
+                    hash.register(['test-prioritisation/exact'], callback2);
+                    hash.change('test-prioritisation/exact');
+                    setTimeout(function(){
+                        expect(count2).to.equal(1);
+                        expect(count1).to.equal(0);
+                        expect(location.hash).to.equal('#!test-prioritisation/exact');
+                        hash.change('test-prioritisation/unknown');
+                        setTimeout(function(){
+                            expect(count2).to.equal(1);
+                            expect(count1).to.equal(1);
+                            expect(location.hash).to.equal('#!test-prioritisation/unknown');
+                            done();
+                        },5);
+                    },5);
+                },5);
+            });
 
             it('but two similar hash\'s (\'pete\' and \'peter\') still execute two different function', function(done) {
                 var count1= 0,
                     count2= 0,
                     callback1 = function (hash) {
-                        console.log('hsh1:', hash);
                         count1++;
                     },
                     callback2 = function (hash) {
-                        console.log('hsh2:', hash);
                         count2++;
                     };
                 hash.register(['my-main-hash-man'], callback1);
@@ -105,6 +177,7 @@ function hashManagerSpec(hash) {
                     },5);
                 },5);
             });
+
         });
     });
 
