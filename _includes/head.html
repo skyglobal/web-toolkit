@@ -1,0 +1,45 @@
+<meta charset="UTF-8"/>
+
+<!--jquery-->
+<!--[if lt IE 9]> <script src="//web-toolkit.global.sky.com/static/lib/jquery-1.10.2.js" ></script> <![endif]-->
+<!--[if gte IE 9]><!--> <script src="//web-toolkit.global.sky.com/static/lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
+<!--end-jquery-->
+
+<!--to help prevent 'font flash'-->
+<link href='//web-toolkit.global.sky.com/static/fonts/sky_regular.ttf' rel='prefetch'>
+<link href='//web-toolkit.global.sky.com/static/fonts/sky_regular.svg' rel='prefetch'>
+<link href='//web-toolkit.global.sky.com/static/fonts/sky_medium.ttf' rel='prefetch'>
+<link href='//web-toolkit.global.sky.com/static/fonts/sky_medium.svg' rel='prefetch'>
+<!--end prevent 'font flash'-->
+
+<!--for video player pre-requisits-->
+<link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
+<script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
+<!--end video player pre-requisits-->
+
+<!--from masthead-->
+{% include skycomResources.html %}
+<!--end masthead-->
+
+<link rel="stylesheet" href="dist/stylesheets/demo.css">
+<link rel="stylesheet" href="dist/stylesheets/toolkit.css">
+<link rel="stylesheet" href="dist/fonts/skycons.css">
+
+<!--for html 5 cross browser-->
+<!--[if lt IE 10]><script type="text/javascript">
+    document.createElement('header');
+    document.createElement('section');
+    document.createElement('footer');
+    document.createElement('article');
+    document.createElement('aside');
+    document.createElement('hgroup');
+    document.createElement('nav');
+    document.createElement('figure');
+    document.createElement('figcaption');
+</script><![endif]-->
+<script>
+    {% include utils/responsiveImages/function.js %}
+</script>
+<script src="dist/scripts/toolkit.js"></script>
+
+
