@@ -76,7 +76,7 @@ These tests are automatically run on the CircleCI server upon pushing to Github
     │   ├── js          => place for source JS files
     │   ├── sass        => place for source SCSS files
     │   └── svgs        => retina ready multi-coloured icons.
-    ├── mode_modules    => npm plugins
+    ├── node_modules    => npm plugins
     ├── static          => home of the unchanging and non-generated code
     │   ├── deprecated  => code moved from the masthead project
     │   ├── font-svgs   => src svg files used to generate font icons (skycons)
@@ -95,7 +95,7 @@ These tests are automatically run on the CircleCI server upon pushing to Github
     ├── gemfile
     ├── gruntfile.js    => grunt config file
     ├── index.html      => Main demo page
-    ├── package.json
+    ├── package.json    => NodeJS config file
     ├── rakefile        => build script
     ├── test.html       => used by `grunt test` to run all tests at once
     └── README.md
