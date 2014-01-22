@@ -27,9 +27,12 @@ function lightboxSpec(lightbox, focus, hash) {
         function openLightboxWithClick(){
             $('#lightbox-demo-link').click();
         }
+        function openCallbacksLightboxWithClick(){
+            $('#lightbox-demo-link-with-callbacks').click();
+        }
 
         function close(done) {
-            $('#lightbox-demo, #lightbox-ajax-demo').closest('.lightbox').click();
+            $('#lightbox-demo, #lightbox-ajax-demo, #lightbox-small-demo, #lightbox-demo-with-callbacks').closest('.lightbox').click();
             setTimeout(function () {
                 done();
             }, 500);
@@ -38,10 +41,13 @@ function lightboxSpec(lightbox, focus, hash) {
         it('will be displayed when a user clicks a lightbox link', function () {
             // given
             expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(false);
+
             // when
             openLightboxWithClick();
             // then
-            expect( $('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(true);
+            expect($('#lightbox-demo').closest('.lightbox').attr('class') ).to.contain('lightbox-open');
+            expect($('#lightbox-demo').closest('.lightbox > .skycom-container > *').attr('class')).to.contain('skycom-10');
+            expect($('#lightbox-demo').closest('.lightbox > .skycom-container > *').attr('class')).to.contain('skycom-offset1');
         });
 
         it('will be displayed when a user loads a page with lightbox id in it', function (done) {
@@ -51,11 +57,26 @@ function lightboxSpec(lightbox, focus, hash) {
             openLightboxWithHash();
             // then
             setTimeout(function(){
-                expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(true);
+                expect($('#lightbox-demo').closest('.lightbox').attr('class')).to.contain('lightbox-open');
+                expect($('#lightbox-demo').closest('.lightbox > .skycom-container > *').attr('class')).to.contain('skycom-10');
+                expect($('#lightbox-demo').closest('.lightbox > .skycom-container > *').attr('class')).to.contain('skycom-offset1');
                 done();
-            },25);
+            },5);
         });
 
+        it('can be small', function (done) {
+            // given
+            expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(false);
+            // when
+            hash.change($('#lightbox-small-demo-link').attr('href').replace('#','').replace('!',''));
+            // then
+            setTimeout(function(){
+                expect($('#lightbox-small-demo').closest('.lightbox').attr('class') ).to.contain('lightbox-open');
+                expect($('#lightbox-small-demo').closest('.lightbox > .skycom-container > *').attr('class')).to.contain('skycom-5');
+                expect($('#lightbox-small-demo').closest('.lightbox > .skycom-container > *').attr('class')).to.contain('skycom-offset3');
+                done();
+            },5);
+        });
 
         it('closes when the close icon is clicked', function (done) {
             openLightboxWithClick();
@@ -131,9 +152,10 @@ function lightboxSpec(lightbox, focus, hash) {
                 expect(onShowCount).to.equal(1);
                 done();
             };
-            $('#lightbox-demo').one('my-lightbox-opened', handler);
-            openLightboxWithClick();
+            $('#lightbox-demo-with-callbacks').one('my-lightbox-opened', handler);
+            openCallbacksLightboxWithClick();
         });
+
         it('executes a given function after the lightbox is closes (onClose)', function (done) {
             var onCloseCount = 0;
             var handler = function(){
@@ -141,9 +163,9 @@ function lightboxSpec(lightbox, focus, hash) {
                 expect(onCloseCount).to.equal(1);
                 done();
             };
-            $('#lightbox-demo').one('my-lightbox-closed', handler);
-            openLightboxWithClick();
-            $("#lightbox-demo").prev('.lightbox-close').click();
+            $('#lightbox-demo-with-callbacks').one('my-lightbox-closed', handler);
+            openCallbacksLightboxWithClick();
+            $("#lightbox-demo-with-callbacks").prev('.lightbox-close').click();
         });
 
 
@@ -190,14 +212,14 @@ function lightboxSpec(lightbox, focus, hash) {
 //				});
             it('disables tabbing of page elements', function (done) {
                 $('#lightbox-demo-link').removeAttr('tabindex data-tabindex');
-                $('#lightbox-demo-tabbable-link').removeAttr('data-tabindex').attr('tabindex','101');
+                $('#lightbox-demo-link-with-callbacks').removeAttr('data-tabindex').attr('tabindex','101');
                 openLightboxWithClick();
                 expect($('#lightbox-demo-link').attr('tabindex')).to.equal('-1');
-                expect($('#lightbox-demo-tabbable-link').attr('tabindex')).to.equal('-1');
+                expect($('#lightbox-demo-link-with-callbacks').attr('tabindex')).to.equal('-1');
                 $("#lightbox-demo").prev('.lightbox-close').click();
                 setTimeout(function () {
                     expect($('#lightbox-demo-link').attr('tabindex')).to.equal(undefined);
-                    expect($('#lightbox-demo-tabbable-link').attr('tabindex')).to.equal('101');
+                    expect($('#lightbox-demo-link-with-callbacks').attr('tabindex')).to.equal('101');
                     done();
                 }, 501);
             });

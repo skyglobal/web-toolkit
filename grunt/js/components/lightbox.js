@@ -9,7 +9,9 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             closing: 'lightbox-closing',
             content: 'lightbox-content',
             closeButton: 'lightbox-close',
-            open: 'lightbox-open'
+            open: 'lightbox-open',
+            large: 'skycom-10 skycom-offset1',
+            small: 'skycom-5 skycom-offset3'
         },
         getSrollbarWidth = function() {
             //cant self execute if toolkit.js is in the head as document.body doesnt exist yet
@@ -28,6 +30,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             lightboxWrapper: '<div class="' + classes.main + '"></div>'
         },
         defaults = {
+            size: 'large',
             closeButtonColour: 'white'
         };
 
@@ -157,7 +160,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
                 $close = $(html.closeButton).addClass(this.options.closeButtonColour);
 
             this.$contents = $contents;
-            $contents.attr('aria-labelledby',this.$lightboxLink.id).attr('role','dialog').addClass('skycom-10 skycom-offset1');
+            $contents.attr('aria-labelledby',this.$lightboxLink.id).attr('role','dialog').addClass(classes[this.options.size]);
             $contents.prepend($close);
             $container.append($contents);
             $lightboxDiv.append($container);

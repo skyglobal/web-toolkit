@@ -1,4 +1,9 @@
 <div class="notes">
-    Bind lightboxes to links using the <code>href=#!lightbox/</code> then the ID of the element to be shown.
-    If you are retrieving content for the lightbox using Ajax then the url of content need to be passed in the href
+    <p>
+        Bind lightboxes to there content using a hash that translates to the elements ID. i.e. clicking a lightbox link with the href <code>#!weather/editor</code> would display the div with the id <code>weather-editor</code>.
+    </p>
+    <p>
+        For AJAX lightboxes, the href should be the link to the page to be displayed, followed by a hash ID as above. i.e. clicking a lightbox link with the href <code>http://skyglobal.github.io/webtoolkit#!toolkit/show</code> would AJAX in the page <code>http://skyglobal.github.io/webtoolkit</code> and give the lightbox the ID <code>toolkit-show</code>.
+    </p>
+    <p>Please try to use <code>RESTful</code> hashes where possible</p>
 </div>
