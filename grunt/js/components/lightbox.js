@@ -1,4 +1,5 @@
 /*global jQuery:false */
+//todo: add 'flip' option for if a picture is clicked.
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.lightbox = (function ($, keyboardFocus, hash) {
     "use strict";
