@@ -18,6 +18,7 @@
 	    ,"grunt-webfont": "0.2.2"
 	    ,"grunt-svgmin": "latest"
 	    ,"grunt-grunticon": "latest"
+	    ,"grunt-jekyll": "latest"
     },
     "scripts": {
         "test": "grunt test"

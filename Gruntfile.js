@@ -139,6 +139,25 @@ module.exports = function(grunt) {
                     log: false // Set to true to see console.log() output on the terminal
                 }
             }
+        },
+
+        jekyll: {                            // Task
+            options: {                          // Universal options
+                bundleExec: true,
+                config: '_config.yml'
+            },
+            test:{
+                options: {
+                    watch: false,
+                    serve: false
+                }
+            },
+            run:{
+                options: {
+                    watch: true,
+                    serve: true
+                }
+            }
         }
     });
 
@@ -152,11 +171,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-webfont'); //https://github.com/sapegin/grunt-webfont
     grunt.loadNpmTasks('grunt-svgmin');
     grunt.loadNpmTasks('grunt-grunticon');
-//    grunt.loadNpmTasks('grunt-blanket-mocha');
-//    grunt.loadNpmTasks('grunt-mocha-cov');
-//    grunt.loadNpmTasks('grunt-istanbul');
-//    grunt.loadNpmTasks('grunt-istanbul-coverage');
-//    grunt.loadNpmTasks('grunt-jscoverage');
+    grunt.loadNpmTasks('grunt-jekyll');
 
     grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
     grunt.registerTask('spy', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'watch']);
@@ -165,6 +180,5 @@ module.exports = function(grunt) {
     grunt.registerTask('js', ['clean:js', 'jshint', 'requirejs']);
     grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
-    grunt.registerTask('test', ['mocha']);
-    grunt.registerTask('hint', ['jshint']);
+    grunt.registerTask('test', ['default', 'jekyll:test', 'mocha']);
 };
