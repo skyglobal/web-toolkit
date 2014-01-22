@@ -99,19 +99,20 @@ def pushToAmazonS3
   end
 end
 
-def pushToAmazonS3LatestDir
-  puts "*** Pushing to the AmazonS3 Latest Dir ***"
-  doc_resources = []
-  puts 'Uploading assets'
-  cd "dist"
-  assets_to_upload.each do |file|
-    doc_resources << bucket.objects["latest/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
-  end
-  cd ".."
-  puts 'Uploading template files'
-  templates_to_upload.each do |file|
-    doc_resources << bucket.objects["latest/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
-  end
+def fetchGHPages
+  puts "*** Fecthing GH Pages ***"
+  `git fetch origin gh-pages`
+  `git checkout gh-pages`
+  `git rebase master`
+  `git pull origin gh-pages`
+end
+
+def updateGHPages
+  puts "*** Updating GH Pages ***"
+  `git add -A ./dist/`
+  `git add -A ./_site/`
+  `git commit -m "Rake deploy: auto push to gh-pages"`
+  `git push origin gh-pages`
 end
 
 def buildDistributionFiles
@@ -132,18 +133,23 @@ end
 desc 'Deploys a new version to the CDN'
 task :deploy do
 
+  `git config --global user.email "circle@circle.com"`
+  `git config --global user.name "rake file"`
+
   if version_already_exists?
     puts "Version #{latest_version_number} exists so exiting."
     next
   end
+
+  fetchGHPages
 
   buildDistributionFiles
 
   pushToAmazonS3
 
   if !version_is_release_candidate?
-    pushToAmazonS3LatestDir
     tagBuild
+    updateGHPages
   end
 
 end

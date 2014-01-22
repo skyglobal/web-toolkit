@@ -1,45 +1,20 @@
 <!doctype html>
+<!--To put correct ie classes on document root to essentially enable css conditionals-->
 <!--[if IE 7]>         <html class="lt-ie10 lt-ie9 lt-ie8" > <![endif]-->
 <!--[if IE 8]>         <html class="lt-ie10 lt-ie9" > <![endif]-->
 <!--[if IE 9]>         <html class="lt-ie10" > <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
+<!--end css conditionals-->
 	<head>
-        <meta charset="UTF-8"/>
-        <!--[if lt IE 9]> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-1.10.2.js" ></script> <![endif]-->
-        <!--[if gte IE 9]><!--> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
-        <script src="http://web-toolkit.global.sky.com/static/lib/jquery.scrollspy.js" ></script>
-        <link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
-        <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
 
-		{% include skycomResources.html %}
-
-        <link rel="stylesheet" href="dist/stylesheets/demo.css">
-        <link rel="stylesheet" href="dist/stylesheets/toolkit.css">
-        <link rel="stylesheet" href="dist/fonts/skycons.css">
+        {% include head.html %}
 
         <script src="test/libraries/mocha.js"></script>
-        <script>
-            {% include utils/responsiveImages/function.js %}
-        </script>
         <script src="http://web-toolkit.global.sky.com/static/lib/require-2.1.9.min.js" data-main='dist/scripts/toolkit'></script>
         <script src="test/config.js" ></script>
 
-        <!--[if lt IE 10]><script type="text/javascript">
-            document.createElement('header');
-            document.createElement('section');
-            document.createElement('footer');
-            document.createElement('article');
-            document.createElement('aside');
-            document.createElement('hgroup');
-            document.createElement('nav');
-            document.createElement('figure');
-            document.createElement('figcaption');
-        </script><![endif]-->
-
 	</head>
-	<body class="grid-1140" data-spy="scroll" data-target=".nav-container">
-
-        {% include menu.html %}
+	<body class="grid-1140" >
 
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
