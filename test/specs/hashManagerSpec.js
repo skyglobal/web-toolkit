@@ -33,7 +33,6 @@ function hashManagerSpec(hash) {
             } catch (e) {
                 expect(e.message).to.equal('hashManager: hash (unregistered-hash-link) already exists');
             }
-
             location.hash = 'unregistered-hash-link';
         });
 
@@ -42,16 +41,19 @@ function hashManagerSpec(hash) {
             var count = 0,
                 callback = function () {
                     count++;
-                    expect(count).to.equal(1);
                 };
             setTimeout(function() {
                 hash.register(['page-load-hash'], callback);
                 setTimeout(function() {
                     hash.register(['something'], callback);
-                    done();
+                    setTimeout(function() {
+                        expect(count).to.equal(1);
+                        done();
+                    }, 5);
                 }, 5);
             }, 5);
         });
+
         it('can register a single hash (string), or multiple (array)', function (done) {
             hash.change('');
             var count = 0,
@@ -153,7 +155,7 @@ function hashManagerSpec(hash) {
                 },5);
             });
 
-            it('but two similar hash\'s (\'pete\' and \'peter\') still execute two different function', function(done) {
+            it('two similar hash\'s (\'pete\' and \'peter\') still execute two different function', function(done) {
                 var count1= 0,
                     count2= 0,
                     callback1 = function (hash) {
@@ -178,6 +180,23 @@ function hashManagerSpec(hash) {
                 },5);
             });
 
+            it('Will execute an assigned wildcard function when documents current hash is registered later', function (done) {
+                hash.change('page-load/hash');
+                var count = 0,
+                    callback = function () {
+                        count++;
+                    };
+                setTimeout(function() {
+                    hash.register(['page-load/*'], callback);
+                    setTimeout(function() {
+                        hash.register(['something/else'], callback);
+                        setTimeout(function() {
+                            expect(count).to.equal(1);
+                            done();
+                        }, 5);
+                    }, 5);
+                }, 5);
+            });
         });
     });
 
