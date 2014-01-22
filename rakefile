@@ -103,8 +103,8 @@ def fetchGHPages
   puts "*** Fecthing GH Pages ***"
   `git fetch origin gh-pages`
   `git checkout gh-pages`
-  `git rebase master`
   `git pull origin gh-pages`
+  `git rebase master`
 end
 
 def updateGHPages
