@@ -77,12 +77,12 @@ toolkit.hashManager = (function() {
         return exactMatchEvent || wildcardEvent;
     }
 
-    function matches(hash, toMatch) {
-        hash = cleanHash(hash);
-        toMatch = cleanHash(toMatch);
-        var hashSections = toMatch.split('/*');
-        var hashMatched = ((hash.indexOf(hashSections[0]) === 0 && hashSections.length>1) ||
-            hash == toMatch);
+    function matches(hashWithoutWildCard, hashWithWildCard) {
+        hashWithoutWildCard = cleanHash(hashWithoutWildCard);
+        hashWithWildCard = cleanHash(hashWithWildCard);
+        var hashSections = hashWithWildCard.split('/*');
+        var hashMatched = ((hashWithoutWildCard.indexOf(hashSections[0]) === 0 && hashSections.length>1) ||
+            hashWithoutWildCard == hashWithWildCard);
         return hashMatched;
     }
 
@@ -102,7 +102,7 @@ toolkit.hashManager = (function() {
                 undo: undo
             };
 
-            if (vars.eventsAlreadyBound && hash === cleanHash(location.hash)) {
+            if (vars.eventsAlreadyBound && matches(location.hash, hash)) {
                 onHashChange();
             }
         }
