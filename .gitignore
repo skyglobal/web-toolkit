@@ -13,8 +13,3 @@ build.txt
 .rakeTasks
 vendor
 .bundle
-
-#allow _site/dist/fonts to be in git as they cant be built on circle
-/dist/images
-/dist/scripts
-/dist/stylesheets
