@@ -99,6 +99,9 @@ def pushToAmazonS3
   end
 end
 
+
+
+
 def fetchGHPages
   puts "*** Fecthing GH Pages ***"
   `git fetch origin gh-pages`
@@ -108,26 +111,28 @@ def fetchGHPages
 end
 
 def updateGHPages
-  puts "*** Updating GH Pages ***"
-  `git add -A ./dist/`
-  `git add -A ./_site/`
-  `git commit -m "Rake deploy: auto push to gh-pages"`
-  `git push origin gh-pages`
+  puts "*** Pushing to github.io ***"
+  system "git checkout gh-pages"
+  system "git push origin master:gh-pages"
+  system "git checkout master"
 end
 
 def buildDistributionFiles
   puts "*** Grunting Distribution files ***"
   system "grunt"
   system "jekyll build"
+  `git add -A ./dist/`
+  `git add -A ./_site/`
+end
+
+def updateMaster
+  puts "*** Updating MAster ***"
+  system "git commit -m 'Rake deploy: adding grunted files'"
+  system "git push origin HEAD:master"
 end
 
 def getDate
   `date +'%d-%m-%Y'`
-end
-
-desc 'Removes previously cached directories that were in git but are now in .gitIgnore'
-task :emptyGitCache do
-  emptyGitCache
 end
 
 desc 'Deploys a new version to the CDN'
@@ -136,20 +141,20 @@ task :deploy do
   `git config --global user.email "circle@circle.com"`
   `git config --global user.name "rake file"`
 
+  buildDistributionFiles
+  updateMaster
+
   if version_already_exists?
     puts "Version #{latest_version_number} exists so exiting."
     next
   end
 
-  fetchGHPages
-
-  buildDistributionFiles
-
   pushToAmazonS3
 
   if !version_is_release_candidate?
-    tagBuild
+    fetchGHPages
     updateGHPages
+    tagBuild
   end
 
 end
