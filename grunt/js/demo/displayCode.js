@@ -58,7 +58,7 @@ demo.displayCode = (function( hljs){
     DisplayCode.prototype.addContainer = function(){
         if (this.$container.length){ return ; }
         var $notesContainer = this.createContainer('notes','html',true);
-        this.$container = $('<div class="lightbox-content skycom-10 skycom-offset1 code-container clearfix tabs-container page-nav" data-function="tabs" id="code-' + this.feature + '"><h3 class="code-h3">' + this.header + '</h3></div>');
+        this.$container = $('<div class="cushioned code-container clearfix tabs-container page-nav" data-function="tabs" id="code-' + this.feature + '"><h3 class="code-h3">' + this.header + '</h3></div>');
         this.$tabList = $('<ul class="tabs clearfix" role="tablist" ><div class="dropdown-tab-select"><a href="#!" aria-controls="dropdown" aria-label="more tabs" class="medium">&hellip;</a><ul class="more-tabs"></ul></div></ul>');
         this.$container.append($notesContainer).append(this.$tabList);
         this.$lightboxLink.parent().parent().append(this.$container);
