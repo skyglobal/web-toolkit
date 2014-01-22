@@ -3,14 +3,25 @@
     <a href="#!code/lightbox" class="code-download">Code</a>
     <a href="#test/lightboxSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
 </h3>
+<div class="skycom-7 alpha design-notes">
+    <p>
+        A lightbox should be used when providing auxiliary information that needs to focus the all of the users attention.
+    </p>
+    <p>
+        Lightbox is centered and covers 10 columns of the grid.  The lightbox should then contain a new 12 column grid.  The lightbox goes full-width in mobile view.
+    </p>
+</div>
 
-<a id="lightbox-demo-link" href="#!lightbox/demo" >Show Lightbox from DOM</a><br/>
-<a class="ajax-lightbox" href="_includes/components/lightbox/ajax-content.html#!lightbox/ajax-demo">Show external content in Lightbox</a> |
-<a id="lightbox-demo-tabbable-link" tabindex="101" href="#!">link that cant be tabbed to if lightbox is open</a> |
-
-
-<div class="example">
-    <div class="demo clearfix" >
+<div class="example clear">
+    <h4 class="medium">Default Lightbox <small>(Large)</small></h4>
+    <div class="design-notes skycom-7 alpha">
+        <p>
+            If the content goes below the fold (on a desktop (fold considered 768) then use a new page
+            <!--If the content clicked on is a picture then use the flip transition, otherwise use a fade in-->
+            <!--transition, into the centre of the browser.-->
+        </p>
+    </div>
+    <div class="demo clearfix clear" >
         {% include components/lightbox/default.html %}
     </div>
     <script>
@@ -20,6 +31,31 @@
             {% include components/lightbox/default.js %}
         }
     </script>
+    <h4 class="medium">Small Lightbox <small>(under 350x350 pixels)</small></h4>
+    <div class="design-notes skycom-7 alpha">
+        <p>
+            The lightbox fades in to the centre of the browser.
+        </p>
+    </div>
+    <div class="demo clearfix clear" >
+        {% include components/lightbox/small.html %}
+    </div>
+    <script>
+        if (window.require){
+            {% include components/lightbox/small.require.js %}
+        } else {
+            {% include components/lightbox/small.js %}
+        }
+    </script>
+    <h4 class="medium">Lightbox using AJAX</h4>
+    <div class="design-notes skycom-7 alpha">
+        <p>
+            This example allows the content of an external page be shown in a lightbox.
+        </p>
+    </div>
+    <div class="demo clearfix  clear" >
+        {% include components/lightbox/ajax.html %}
+    </div>
     <script>
         if (window.require){
             {% include components/lightbox/ajax.require.js %}

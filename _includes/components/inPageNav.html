@@ -3,19 +3,21 @@
     <a href="#!code/inPageNav" class="code-download">Code</a>
     <a href="#test/inPageNavSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
 </h3>
-<p class="design-notes">
+<p class="design-notes skycom-7 alpha">
     <span class="error">These modules are not yet complete.</span>  If you need them, please complete 'accessibility' checks an re-submit.
 </p>
 
-<div class="example">
+<div class="example  clear">
     <h4 class="medium">Sleek Nav</h4>
-    <div class="design-notes">
-        This module should be used when only a small section of the page changes after an item click.
+    <div class="skycom-7 alpha">
+        <p class="design-notes">
+            This module should be used when only a small section of the page changes after an item click.
+        </p>
+        <p class="design-notes">
+            If all of, or the majority of, the page changes please use '<code>classic navigation</code>'.
+        </p>
     </div>
-    <div class="design-notes">
-        If all of, or the majority of, the page changes please use '<code>classic navigation</code>'.
-    </div>
-    <div class="demo clearfix">
+    <div class="demo clearfix clear">
         {% include components/inPageNav/sleekNav.html %}
     </div>
     <script>
@@ -29,13 +31,15 @@
 
 <div class="example">
     <h4 class="medium">Classic Tabs</h4>
-    <div class="design-notes">
+    <div class="skycom-7 alpha design-notes">
+        <p >
         This module should be used when only a small section of the page changes after an item click.
+        </p>
+        <p>
+            If all of, or the majority of the page changes please use '<code>In-Page Navigation</code>'.
+        </p>
     </div>
-    <div class="design-notes">
-        If all of, or the majority of the page changes please use '<code>In-Page Navigation</code>'.
-    </div>
-    <div class="demo clearfix">
+    <div class="demo clearfix  clear">
         {% include components/inPageNav/classicTabs.html %}
     </div>
     <script>
