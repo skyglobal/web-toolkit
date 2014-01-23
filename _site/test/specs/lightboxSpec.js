@@ -12,7 +12,7 @@ function lightboxSpec(lightbox, focus, hash) {
     $demo.attr('id', 'lightbox-demo');
     $links.attr('id', 'open-links');
 
-    $("<style type='text/css'> body .lightbox{ -webkit-animation-duration: 0s!important;animation-duration:0!important;} </style>").appendTo("head");
+    turnOffAnimation('.lightbox');
 
     describe(describeSpec, function () {
 
