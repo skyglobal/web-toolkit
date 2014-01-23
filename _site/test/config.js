@@ -69,3 +69,8 @@ define('setup',['chai', 'smoax'], function(chai, smoax) {
 
 
 require(['setup']);
+
+window.turnOffAnimation = function(selector){
+    $("<style type='text/css'> body " + selector + "{ transition-duration:0s!important;-webkit-transition-duration:0s!important; -webkit-animation-duration: 0s!important;animation-duration:0!important;} </style>").appendTo("head");
+
+};

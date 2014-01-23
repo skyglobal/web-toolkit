@@ -10,6 +10,7 @@ function accordionSpec() {
         var $last = $('.view-container').last();
         var $lastLink = $('.accordion-heading').last();
 
+        turnOffAnimation('.view-container');
 
         function closeAllAccordians(){
             if (!$first.hasClass('toggle-hidden')){
@@ -55,19 +56,17 @@ function accordionSpec() {
             expect($last.parent().find('> a i').hasClass('rotate-180')).to.equal(true);
             $lastLink.click();
             expect($first.hasClass('toggle-hidden')).to.equal(false);
-            expect($last.hasClass('toggle-hidden')).to.equal(false);
+            expect($last.hasClass('toggle-hidden')).to.equal(true);
             expect($last.parent().find('> a i').hasClass('rotate-180')).to.equal(false);
         });
 
-        it('open to the height of its content', function (done) {
-            var css =$("<style type='text/css'> #first-accordion-content .accordion-content{ height: 600px; margin:10px 0;} </style>");
+        it('open to the height of its content', function () {
+            var css =$("<style type='text/css'> #first-accordion-content .accordion-content{ height: 600px; margin:10px 0; padding:8px; border:1px} </style>");
             css.appendTo("head");
-            $firstContent.data('openHeight',undefined);
+            $firstContent.removeData('openHeight');
+
             $firstLink.click();
-            setTimeout(function(){
-                expect($firstContent.height()).to.equal(600 + 10 + 10);
-                done();
-            }, 505);
+            expect($firstContent.height()).to.equal(600 + 20 + 16 + 2);
 
             css.remove();
         });
