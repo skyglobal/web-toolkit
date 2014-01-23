@@ -606,11 +606,12 @@ toolkit.toggle = (function(detect) {
             .append($el.clone().attr('style', '').removeClass(hiddenClass + ' transition ')));
         $('#toggle-tmp-height > div').append('<div class="toggle-clearfix-div clearfix clear" style="padding:1px"></div> ');
         $('#toggle-tmp-height > div').prepend('<div class="toggle-clearfix-div clearfix clear" style="padding:1px"></div> ');
-        $el.data('openHeight', $('#toggle-tmp-height > div').height() - 2);
+        var openHeight  = $('#toggle-tmp-height > div').height() - 2;
+        $el.data('openHeight', openHeight);
         $('#toggle-tmp-height').remove();
         $('.toggle-clearfix-div').remove();
 
-        return 100;
+        return openHeight;
     }
 
     function updateText($elClicked) {
