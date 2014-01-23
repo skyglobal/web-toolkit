@@ -33,8 +33,10 @@ Sky branded front end web framework and style guide.
 
 ### Running
 
+Grunt is our friend here, he will take of reloading the jekyll project whenever a file is edited.
+
 1. In the root of the project, run the following:
-  - `jekyll serve --watch`
+  - `jekyll serve`
 2. In another terminal run:
   - `grunt spy` (add ` --beautify` to help when debugging)
 3. Browse to
