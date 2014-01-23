@@ -1,5 +1,5 @@
-if (typeof toolkit==='undefined') toolkit={};
-toolkit.diff = (function(hljs){
+if (typeof changes==='undefined') changes={};
+changes.diff = (function(hljs){
 
     function findFiles(opts){
         var oldRoute = opts.oldRoute,
@@ -24,6 +24,7 @@ toolkit.diff = (function(hljs){
             }
         });
     }
+
 
     function getDiff(name, ext, matrix, a1, a2, x, y){
         if(x>0 && y>0 && a1[y-1]===a2[x-1]){
@@ -217,9 +218,9 @@ toolkit.diff = (function(hljs){
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/diff', ['lib/highlight'], function(hljs) {
-        return toolkit.diff(hljs);
+    define('changes/diff', ['lib/highlight'], function(hljs) {
+        return changes.diff(hljs);
     });
 } else {
-    toolkit.diff = toolkit.diff(hljs);
+    changes.diff = changes.diff(hljs);
 }

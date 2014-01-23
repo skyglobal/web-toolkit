@@ -7,7 +7,6 @@ if (typeof window.define === "function" && window.define.amd) {
         'utils/hashManager',
         'utils/popup',
         'utils/toggle',
-        'utils/diff',
         'utils/focus',
         'utils/validation',
         'utils/event',
@@ -19,7 +18,7 @@ if (typeof window.define === "function" && window.define.amd) {
         'components/tooltip',
         'components/video',
         'components/carousel'], function(
-            polyfill, detect, skycons, hashManager, popup,toggle, diff, focus, validation, event,
+            polyfill, detect, skycons, hashManager, popup,toggle, focus, validation, event,
             inPageNav, accordion, datePicker, lightbox, share, tooltip, video, carousel){
 
         return {
@@ -29,7 +28,6 @@ if (typeof window.define === "function" && window.define.amd) {
             hashManager: hashManager,
             popup: popup,
             toggle: toggle,
-            diff: diff,
             focus: focus,
             validation: validation,
             event: event,

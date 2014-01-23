@@ -23,7 +23,7 @@ module.exports = function(grunt) {
                 tasks: ['compass', 'jekyll:build']
             },
             'jekyll': {
-                files: [ '_includes/**/*', '_layouts/**/*', '*.html' ],
+                files: [ '_includes/**/*', '_layouts/**/*', '*.html', '_config.yml' ],
                 tasks: ['jekyll:build']
             },
             'specs': {
@@ -81,6 +81,8 @@ module.exports = function(grunt) {
                         name: 'toolkit'
                     },{
                         name: 'demo'
+                    },{
+                        name: 'changes'
                     }]
                 }
             }
@@ -185,7 +187,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-jekyll');
 
     grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
-    grunt.registerTask('spy', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'watch']);
+    grunt.registerTask('spy', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'jekyll:build', 'watch']);
     grunt.registerTask('sloppy', ['clean:toolkit', 'compass:toolkit', 'requirejs', 'watch']);
     grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
