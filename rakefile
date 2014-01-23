@@ -82,6 +82,7 @@ end
 
 def pushToAmazonS3
   puts "*** Pushing to the AmazonS3 ***"
+  system "grunt"
   doc_resources = []
   puts 'Uploading assets'
   cd "dist"
@@ -119,7 +120,7 @@ end
 
 def buildDistributionFiles
   puts "*** Grunting Distribution files ***"
-  system "grunt"
+  system "grunt --beautify"
   system "jekyll build"
   `git add -A ./dist/`
   `git add -A ./_site/`
