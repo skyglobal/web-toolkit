@@ -357,32 +357,7 @@ if (typeof demo==='undefined') demo={};
 demo.main = (function(DisplayCode, menu, tests, skycons) {
 
     function bindEvents() {
-        $(document).on('click','.toggler', toggle);
         toolkit.hashManager.register('code/*',showCode);
-        $('.sky-form').on('submit', checkDiff);
-    }
-
-    function checkDiff(e) {
-        e.preventDefault();
-        var newRouteDir,
-            oldVersion = $('#version').val(),
-            newVersion = $('#current-version').text(),
-            route = 'http://web-toolkit.global.sky.com',
-            routeDir = newRouteDir = '_site/_includes';
-        if (location.hostname.indexOf('local')===0){
-            route = 'http://'+location.host;
-            newRouteDir = '../_includes';
-        }
-        if (oldVersion.split('.').length<3 || (oldVersion.split('.')[0]<1)){
-            $('.sky-form .error').text("The version number is required, and must be '1.0.0' or higher");
-        }
-        if (parseFloat(oldVersion,10)===1 || (oldVersion.split('.')[0]==='0')){
-            oldVersion = '0.6.9';//get lowest version available
-        }
-        window.toolkit.diff({
-            oldRoute: route + '/' + oldVersion + '/' + routeDir,
-            newRoute: route + '/' + newVersion + '/' + newRouteDir
-        });
     }
 
     function showCode(hash){
