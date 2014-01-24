@@ -57,12 +57,35 @@ if (typeof window.define === "function" && window.define.amd) {
     toolkit.polyfill = toolkit.polyfill();
 };
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.event = (function () {
+toolkit.event = (function (detect) {
     
-
     var timeout = {
         resize : null
     };
+    var state = {    };
+    var browserSpecificEvents = {
+        'transitionend' : check('transition','end'),
+        'animationend' : check('animation','end')
+    };
+
+    function capitalise(str){
+        return str.replace(/\b[a-z]/g, function() {return arguments[0].toUpperCase();});
+    }
+
+    function check(eventName, type){
+        var result = false,
+            eventType = eventName.toLowerCase() + type.toLowerCase(),
+            eventTypeCaps = capitalise(eventName.toLowerCase()) + capitalise(type.toLowerCase());
+        if (state[eventType]){ return state[eventType]; }
+        if('on' + eventType in window) {
+            result = eventType;
+        } else if('onwebkit' + eventType in window) {
+            result = 'webkit' + eventTypeCaps;
+        } else if('ono' + eventType in document.documentElement) {
+            result = 'o' + eventTypeCaps;
+        }
+        return result;
+    }
 
     function bindEvents(){
         on(window,'resize',function(){
@@ -77,6 +100,8 @@ toolkit.event = (function () {
     }
 
     function on(el, eventName, exec){
+        var browserSpecificEventName = browserSpecificEvents[eventName.toLowerCase()];
+        eventName = browserSpecificEventName ||  eventName;
         if (el.addEventListener) {
             el.addEventListener(eventName, exec, false);
         } else {
@@ -114,12 +139,12 @@ toolkit.event = (function () {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/event', [], function() {
+    define('utils/event', ['utils/detect'], function(detect) {
         
-        return toolkit.event();
+        return toolkit.event(detect);
     });
 } else {
-    toolkit.event = toolkit.event();
+    toolkit.event = toolkit.event(toolkit.detect);
 };
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.detect = (function (event) {
@@ -181,33 +206,28 @@ toolkit.detect = (function (event) {
     }
 
     function supportsPseudo(){
-        var doc = document,
-            html = doc.documentElement,
-            body = doc.body,
-            supported = false,
-            paraBefore = doc.createElement('p'),
-            styleBefore = doc.createElement('style'),
+//        if (state.css.pseudo){ return state.css.pseudo; }
+        var paraBefore = document.createElement('p'),
+            styleBefore = document.createElement('style'),
             heightBefore,
             selectorsBefore = '#testbefore:before { content: "before"; }';
-
         styleBefore.type = 'text\/css';
         paraBefore.id = 'testbefore';
 
         if (styleBefore.styleSheet) {
             styleBefore.styleSheet.cssText = selectorsBefore;
         } else {
-            styleBefore.appendChild(doc.createTextNode(selectorsBefore));
+            styleBefore.appendChild(document.createTextNode(selectorsBefore));
         }
 
-        body.appendChild(styleBefore);
-        body.appendChild(paraBefore);
+        document.body.appendChild(styleBefore);
+        document.body.appendChild(paraBefore);
+        heightBefore = document.getElementById('testbefore').offsetHeight;
+        document.body.removeChild(styleBefore);
+        document.body.removeChild(paraBefore);
 
-        heightBefore = doc.getElementById('testbefore').offsetHeight;
-
-        body.removeChild(styleBefore);
-        body.removeChild(paraBefore);
-
-        return (heightBefore >= 1);
+        state.css.pseudo =(heightBefore >= 1);
+        return state.css.pseudo;
     }
 
     function pseudo(el, pos, property){
@@ -259,7 +279,7 @@ toolkit.detect = (function (event) {
     }
 
     function touch(){
-        state.touch = (!!window.ontouchstart);
+        state.touch = (typeof window.ontouchstart !== "undefined");
         return state.touch;
     }
 
@@ -1327,10 +1347,9 @@ if (typeof window.define === "function" && window.define.amd) {
 /*global jQuery:false */
 //todo: add 'flip' option for if a picture is clicked.
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.lightbox = (function ($, keyboardFocus, hash) {
+toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
     
 	var scrollbarWidth,
-        lightboxId = 1,
         classes = {
             main: 'lightbox',
             closing: 'lightbox-closing',
@@ -1340,8 +1359,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             large: 'skycom-10 skycom-offset1',
             small: 'skycom-5 skycom-offset3'
         },
-        getSrollbarWidth = function() {
-            //cant self execute if toolkit.js is in the head as document.body doesnt exist yet
+        getSrollbarWidth = function() {//cant self execute if toolkit.js is in the head as document.body doesnt exist yet
             var scrollDiv = document.createElement("div");
             scrollDiv.className = "lightbox-scrollbar-measure";
             document.body.appendChild(scrollDiv);
@@ -1360,10 +1378,6 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             size: 'large',
             closeButtonColour: 'white'
         };
-
-    function nextLightboxId() {
-        return lightboxId++;
-    }
 
 	function disableElementTabbing(index, element) {
 		var $element = $(element);
@@ -1422,7 +1436,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             this.isAjaxRequest = (this.href.substring(0,1) !== '#');
             var restfulHash = this.getRestfulHash();
             this.$lightboxLink.on("click", this.open.bind(this));
-            hash.register([restfulHash],this.open.bind(this));
+            hash.register(restfulHash, this.open.bind(this));
         },
 
         getRestfulHash: function(){
@@ -1467,7 +1481,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
 
                 lightbox.close();
             });
-
+            event.on(this.$container[0], 'animationend', lightbox.onClose.bind(lightbox));
 		},
 
         populate: function(e, data){
@@ -1510,31 +1524,39 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             hideBodyScrollBar();
 
             this.$container.addClass(classes.open);
-
+            console.log('open', this.$container);
             focusOnCloseButton(this.$lightboxLink, this.$container.find('.' + classes.closeButton));
             disablePageTabbing();
             enablePageTabbing(this.$container);
 
 		},
 
-		close: function(event) {
+		close: function() {
             var lightbox = this;
             if (this.$container.hasClass(classes.closing)) { return ; }
 
+            if (!detect.css('animation')){
+                setTimeout(lightbox.onClose.bind(lightbox),500);
+            }
+
             this.$container.addClass(classes.closing);
             hash.remove();
+        },
 
-            window.setTimeout(function() {
-                lightbox.$container.removeClass(classes.open + ' ' + classes.closing);
-                focusOnLightboxLink(lightbox.$lightboxLink);
-                showBodyScrollBar();
-                enablePageTabbing($('body'));
-                if (lightbox.options.onClose){
-                    lightbox.options.onClose();
-                }
+        onClose: function(){
+            var lightbox = this;
+            if (!lightbox.$container.hasClass(classes.closing)) { return; }
+            lightbox.$container.removeClass(classes.open + ' ' + classes.closing);
+            focusOnLightboxLink(lightbox.$lightboxLink);
+            showBodyScrollBar();
+            console.log('onClose', this.$container);
+            enablePageTabbing($('body'));
+            if (lightbox.options.onClose){
+                lightbox.options.onClose();
+            }
+        }
 
-            }, 500);
-		}
+
 	};
 
 	$.fn.lightbox = function(options) {
@@ -1546,12 +1568,17 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/lightbox', ['utils/focus', 'utils/hashManager'], function(focus, hash) {
+    define('components/lightbox',
+            ['utils/focus',
+            'utils/hashManager',
+            'utils/event',
+            'utils/detect'
+            ], function(focus, hash, event, detect) {
         
-        return toolkit.lightbox(jQuery, focus, hash);
+        return toolkit.lightbox(jQuery, focus, hash, event, detect);
     });
 } else {
-    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager);
+    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager, toolkit.event, toolkit.detect);
 };
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.share = (function(detect) {

@@ -1,10 +1,33 @@
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.event = (function () {
+toolkit.event = (function (detect) {
     "use strict";
-
     var timeout = {
         resize : null
     };
+    var state = {    };
+    var browserSpecificEvents = {
+        'transitionend' : check('transition','end'),
+        'animationend' : check('animation','end')
+    };
+
+    function capitalise(str){
+        return str.replace(/\b[a-z]/g, function() {return arguments[0].toUpperCase();});
+    }
+
+    function check(eventName, type){
+        var result = false,
+            eventType = eventName.toLowerCase() + type.toLowerCase(),
+            eventTypeCaps = capitalise(eventName.toLowerCase()) + capitalise(type.toLowerCase());
+        if (state[eventType]){ return state[eventType]; }
+        if('on' + eventType in window) {
+            result = eventType;
+        } else if('onwebkit' + eventType in window) {
+            result = 'webkit' + eventTypeCaps;
+        } else if('ono' + eventType in document.documentElement) {
+            result = 'o' + eventTypeCaps;
+        }
+        return result;
+    }
 
     function bindEvents(){
         on(window,'resize',function(){
@@ -19,6 +42,8 @@ toolkit.event = (function () {
     }
 
     function on(el, eventName, exec){
+        var browserSpecificEventName = browserSpecificEvents[eventName.toLowerCase()];
+        eventName = browserSpecificEventName ||  eventName;
         if (el.addEventListener) {
             el.addEventListener(eventName, exec, false);
         } else {
@@ -56,10 +81,10 @@ toolkit.event = (function () {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/event', [], function() {
+    define('utils/event', ['utils/detect'], function(detect) {
         'use strict';
-        return toolkit.event();
+        return toolkit.event(detect);
     });
 } else {
-    toolkit.event = toolkit.event();
+    toolkit.event = toolkit.event(toolkit.detect);
 }

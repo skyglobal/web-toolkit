@@ -83,6 +83,7 @@ html {
 
 .demo {
   margin-bottom: 40px;
+  clear: both;
 }
 
 .demo-section > h2 {
@@ -169,6 +170,10 @@ code.block {
 }
 .dev-button i {
   font-size: 14px;
+}
+
+.example {
+  clear: both;
 }
 
 .code-download {

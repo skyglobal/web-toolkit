@@ -71,6 +71,10 @@ define('setup',['chai', 'smoax'], function(chai, smoax) {
 require(['setup']);
 
 window.turnOffAnimation = function(selector){
-    $("<style type='text/css'> body " + selector + "{ transition-duration:0s!important;-webkit-transition-duration:0s!important; -webkit-animation-duration: 0s!important;animation-duration:0!important;} </style>").appendTo("head");
-
+    var offTime = '10ms'; //can't be zero as we still need the 'end' events to fire.
+    if (selector){
+        $("<style type='text/css' class='turnOffAnimation'> body " + selector + "{ transition-duration:" + offTime + "!important;-webkit-transition-duration:" + offTime + "!important; -webkit-animation-duration: " + offTime + "!important;animation-duration:" + offTime + "!important;} </style>").appendTo("head");
+    } else {
+        $('.turnOffAnimation').remove();
+    }
 };

@@ -27,7 +27,7 @@ module.exports = function(grunt) {
                 tasks: ['jekyll:build']
             },
             'specs': {
-                files: ['test/specs/*.js'],
+                files: ['test/specs/*.js','test/config.js'],
                 tasks: ['jshint','jekyll:build']
             }
         },

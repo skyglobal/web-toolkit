@@ -12,31 +12,37 @@ function lightboxSpec(lightbox, focus, hash) {
     $demo.attr('id', 'lightbox-demo');
     $links.attr('id', 'open-links');
 
-    turnOffAnimation('.lightbox');
+    function openLightboxWithHash(){
+        hash.change($('#lightbox-demo-link').attr('href').replace('#','').replace('!',''));
+    }
+
+    function openLightboxWithClick(){
+        $('#lightbox-demo-link').click();
+    }
+    function openCallbacksLightboxWithClick(){
+        $('#lightbox-demo-link-with-callbacks').click();
+    }
+
+    function close(done) {
+        $('#lightbox-demo, #lightbox-ajax-demo, #lightbox-small-demo, #lightbox-demo-with-callbacks').closest('.lightbox').click();
+        setTimeout(function () {
+            done();
+        }, 100);
+    }
 
     describe(describeSpec, function () {
+
+        before(function(){
+            turnOffAnimation('.lightbox');
+        });
+
+        after(function(){
+            turnOffAnimation(false);
+        });
 
         afterEach(function (done) {
             close(done);
         });
-
-        function openLightboxWithHash(){
-            hash.change($('#lightbox-demo-link').attr('href').replace('#','').replace('!',''));
-        }
-
-        function openLightboxWithClick(){
-            $('#lightbox-demo-link').click();
-        }
-        function openCallbacksLightboxWithClick(){
-            $('#lightbox-demo-link-with-callbacks').click();
-        }
-
-        function close(done) {
-            $('#lightbox-demo, #lightbox-ajax-demo, #lightbox-small-demo, #lightbox-demo-with-callbacks').closest('.lightbox').click();
-            setTimeout(function () {
-                done();
-            }, 500);
-        }
 
         it('will be displayed when a user clicks a lightbox link', function () {
             // given
@@ -61,7 +67,7 @@ function lightboxSpec(lightbox, focus, hash) {
                 expect($('#lightbox-demo').closest('.lightbox > .skycom-container > *').attr('class')).to.contain('skycom-10');
                 expect($('#lightbox-demo').closest('.lightbox > .skycom-container > *').attr('class')).to.contain('skycom-offset1');
                 done();
-            },5);
+            },100);
         });
 
         it('can be small', function (done) {
@@ -75,7 +81,7 @@ function lightboxSpec(lightbox, focus, hash) {
                 expect($('#lightbox-small-demo').closest('.lightbox > .skycom-container > *').attr('class')).to.contain('skycom-5');
                 expect($('#lightbox-small-demo').closest('.lightbox > .skycom-container > *').attr('class')).to.contain('skycom-offset3');
                 done();
-            },5);
+            },100);
         });
 
         it('closes when the close icon is clicked', function (done) {
@@ -86,7 +92,7 @@ function lightboxSpec(lightbox, focus, hash) {
             setTimeout(function () {
                 expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(false);
                 done();
-            }, 500);
+            }, 100);
 
         });
 
@@ -97,7 +103,7 @@ function lightboxSpec(lightbox, focus, hash) {
                 expect( $("#lightbox-ajax-demo").prev('.lightbox-close').attr('class') ).to.not.contain('white');
                 $("#ajax-lightbox-content").closest('.lightbox').click();
                 done();
-            }, 500);
+            }, 100);
         });
 
         it('has a default close button colour of white', function (done) {
@@ -107,7 +113,7 @@ function lightboxSpec(lightbox, focus, hash) {
                 expect( $("#lightbox-demo").prev('.lightbox-close').attr('class') ).to.not.contain('black');
                 $("#lightbox-content").closest('.lightbox').click();
                 done();
-            }, 500);
+            }, 100);
         });
 
         it('closes when the faded background is clicked', function (done) {
@@ -118,7 +124,7 @@ function lightboxSpec(lightbox, focus, hash) {
             setTimeout(function () {
                 expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(false);
                 done();
-            }, 501);
+            }, 100);
         });
 
 
@@ -142,7 +148,7 @@ function lightboxSpec(lightbox, focus, hash) {
             setTimeout(function () {
                 expect($('body').is('[style]')).to.equal(false);
                 done();
-            }, 501);
+            }, 100);
         });
 
         it('executes a given function before the lightbox is shown (onShow)', function (done) {
@@ -186,7 +192,7 @@ function lightboxSpec(lightbox, focus, hash) {
                 setTimeout(function () {
                     expect(document.activeElement.id).to.equal('lightbox-demo-link');
                     done();
-                }, 501);
+                }, 100);
             });
 
             it("highlights the close button in blue if the lightbox link is highlighted in blue", function () {
@@ -221,7 +227,7 @@ function lightboxSpec(lightbox, focus, hash) {
                     expect($('#lightbox-demo-link').attr('tabindex')).to.equal(undefined);
                     expect($('#lightbox-demo-link-with-callbacks').attr('tabindex')).to.equal('101');
                     done();
-                }, 501);
+                }, 100); //has to be longer as searching + changing the dom takes longer
             });
         });
 
@@ -233,7 +239,7 @@ function lightboxSpec(lightbox, focus, hash) {
                     expect( $("#lightbox-ajax-demo h1").text() ).to.equal("Ajaxed header");
                     $("#ajax-lightbox-content").closest('.lightbox').click();
                     done();
-                }, 500);
+                }, 100);
 
             });
 

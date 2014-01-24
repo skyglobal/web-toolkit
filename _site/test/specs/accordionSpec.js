@@ -10,8 +10,6 @@ function accordionSpec() {
         var $last = $('.view-container').last();
         var $lastLink = $('.accordion-heading').last();
 
-        turnOffAnimation('.view-container');
-
         function closeAllAccordians(){
             if (!$first.hasClass('toggle-hidden')){
                 $firstLink.click();
@@ -22,6 +20,13 @@ function accordionSpec() {
                 expect($last.hasClass('toggle-hidden')).to.equal(true);
             }
         }
+
+        before(function(){
+            turnOffAnimation('.view-container');
+        });
+        after(function(){
+            turnOffAnimation(false);
+        });
 
         afterEach(function(){
             closeAllAccordians();
@@ -60,15 +65,34 @@ function accordionSpec() {
             expect($last.parent().find('> a i').hasClass('rotate-180')).to.equal(false);
         });
 
-        it('open to the height of its content', function () {
+        it('open to the height of its content', function (done) {
             var css =$("<style type='text/css'> #first-accordion-content .accordion-content{ height: 600px; margin:10px 0; padding:8px; border:1px} </style>");
             css.appendTo("head");
             $firstContent.removeData('openHeight');
 
             $firstLink.click();
-            expect($firstContent.height()).to.equal(600 + 20 + 16 + 2);
+            setTimeout(function(){
+                expect($firstContent.height()).to.equal(600 + 20 + 16 + 2);
+                css.remove();
+                $firstContent.removeData('openHeight');
+                done();
+            },250);
+        });
+        it('close to the height of zero', function (done) {
+            var css =$("<style type='text/css'> #first-accordion-content .accordion-content{ height: 600px; margin:10px 0; padding:8px; border:1px} </style>");
+            css.appendTo("head");
+            $firstContent.removeData('openHeight');
 
-            css.remove();
+            $firstLink.click();
+            setTimeout(function(){
+                $firstLink.click();
+                setTimeout(function(){
+                    expect($firstContent.height()).to.equal(0);
+                    css.remove();
+                    $firstContent.removeData('openHeight');
+                    done();
+                },250);
+            },25);
         });
     });
 
