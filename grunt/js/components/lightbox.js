@@ -1,10 +1,9 @@
 /*global jQuery:false */
 //todo: add 'flip' option for if a picture is clicked.
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.lightbox = (function ($, keyboardFocus, hash) {
+toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
     "use strict";
 	var scrollbarWidth,
-        lightboxId = 1,
         classes = {
             main: 'lightbox',
             closing: 'lightbox-closing',
@@ -14,8 +13,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             large: 'skycom-10 skycom-offset1',
             small: 'skycom-5 skycom-offset3'
         },
-        getSrollbarWidth = function() {
-            //cant self execute if toolkit.js is in the head as document.body doesnt exist yet
+        getSrollbarWidth = function() {//cant self execute if toolkit.js is in the head as document.body doesnt exist yet
             var scrollDiv = document.createElement("div");
             scrollDiv.className = "lightbox-scrollbar-measure";
             document.body.appendChild(scrollDiv);
@@ -34,10 +32,6 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             size: 'large',
             closeButtonColour: 'white'
         };
-
-    function nextLightboxId() {
-        return lightboxId++;
-    }
 
 	function disableElementTabbing(index, element) {
 		var $element = $(element);
@@ -96,7 +90,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             this.isAjaxRequest = (this.href.substring(0,1) !== '#');
             var restfulHash = this.getRestfulHash();
             this.$lightboxLink.on("click", this.open.bind(this));
-            hash.register([restfulHash],this.open.bind(this));
+            hash.register(restfulHash, this.open.bind(this));
         },
 
         getRestfulHash: function(){
@@ -141,7 +135,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
 
                 lightbox.close();
             });
-
+            event.on(this.$container[0], 'animationend', lightbox.onClose.bind(lightbox));
 		},
 
         populate: function(e, data){
@@ -184,31 +178,39 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             hideBodyScrollBar();
 
             this.$container.addClass(classes.open);
-
+            console.log('open', this.$container);
             focusOnCloseButton(this.$lightboxLink, this.$container.find('.' + classes.closeButton));
             disablePageTabbing();
             enablePageTabbing(this.$container);
 
 		},
 
-		close: function(event) {
+		close: function() {
             var lightbox = this;
             if (this.$container.hasClass(classes.closing)) { return ; }
 
+            if (!detect.css('animation')){
+                setTimeout(lightbox.onClose.bind(lightbox),500);
+            }
+
             this.$container.addClass(classes.closing);
             hash.remove();
+        },
 
-            window.setTimeout(function() {
-                lightbox.$container.removeClass(classes.open + ' ' + classes.closing);
-                focusOnLightboxLink(lightbox.$lightboxLink);
-                showBodyScrollBar();
-                enablePageTabbing($('body'));
-                if (lightbox.options.onClose){
-                    lightbox.options.onClose();
-                }
+        onClose: function(){
+            var lightbox = this;
+            if (!lightbox.$container.hasClass(classes.closing)) { return; }
+            lightbox.$container.removeClass(classes.open + ' ' + classes.closing);
+            focusOnLightboxLink(lightbox.$lightboxLink);
+            showBodyScrollBar();
+            console.log('onClose', this.$container);
+            enablePageTabbing($('body'));
+            if (lightbox.options.onClose){
+                lightbox.options.onClose();
+            }
+        }
 
-            }, 500);
-		}
+
 	};
 
 	$.fn.lightbox = function(options) {
@@ -220,10 +222,15 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/lightbox', ['utils/focus', 'utils/hashManager'], function(focus, hash) {
+    define('components/lightbox',
+            ['utils/focus',
+            'utils/hashManager',
+            'utils/event',
+            'utils/detect'
+            ], function(focus, hash, event, detect) {
         'use strict';
-        return toolkit.lightbox(jQuery, focus, hash);
+        return toolkit.lightbox(jQuery, focus, hash, event, detect);
     });
 } else {
-    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager);
+    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager, toolkit.event, toolkit.detect);
 }

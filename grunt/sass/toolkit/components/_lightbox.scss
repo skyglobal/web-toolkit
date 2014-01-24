@@ -38,6 +38,7 @@
 	}
 
     &.lightbox-closing {
+	    display: block;
 	    opacity: 0;
 		-webkit-animation: lightbox-fade-out 0.5s;
 		animation: lightbox-fade-out 0.5s;
