@@ -1,38 +1,14 @@
 if (typeof demo==='undefined') demo={};
-demo.main = (function(DisplayCode, menu, tests) {
+demo.main = (function(DisplayCode, menu, tests, skycons) {
 
     function bindEvents() {
-        $(document).on('click','.toggler', toggle);
-        $(document).on('click','.code-download', showCode);
-        $('.sky-form').on('submit', checkDiff);
+        toolkit.hashManager.register('code/*',showCode);
     }
 
-    function checkDiff(e) {
-        e.preventDefault();
-        var newRouteDir,
-            oldVersion = $('#version').val(),
-            newVersion = $('#current-version').text(),
-            route = 'http://web-toolkit.global.sky.com',
-            routeDir = newRouteDir = '_site/_includes';
-        if (location.hostname.indexOf('local')===0){
-            route = 'http://'+location.host;
-            newRouteDir = '../_includes';
-        }
-        if (oldVersion.split('.').length<3 || (oldVersion.split('.')[0]<1)){
-            $('.sky-form .error').text("The version number is required, and must be '1.0.0' or higher");
-        }
-        if (parseFloat(oldVersion,10)===1 || (oldVersion.split('.')[0]==='0')){
-            oldVersion = '0.6.9';//get lowest version available
-        }
-        window.toolkit.diff({
-            oldRoute: route + '/' + oldVersion + '/' + routeDir,
-            newRoute: route + '/' + newVersion + '/' + newRouteDir
-        });
-    }
-
-    function showCode(e){
+    function showCode(hash){
         var styled = false;
-        var feature = $(this).attr('href').replace('#!lightbox/code-','');
+        var $lightboxLink = $('a[href="#!' + hash + '"]');
+        var feature = hash.replace(/code\//g,'');
         var version = $('#current-version').text(),
             host = 'http://web-toolkit.global.sky.com',
             dir = '_site/_includes';
@@ -44,8 +20,8 @@ demo.main = (function(DisplayCode, menu, tests) {
             dir = '../_includes';
         }
         var featureFiles, codeBase, route;
-        if ($(this).attr('data-docs')){
-            featureFiles = $(this).attr('data-docs');
+        if ($lightboxLink.attr('data-docs')){
+            featureFiles = $lightboxLink.attr('data-docs');
             codeBase = feature;
             route = host + '/' + version + '/' + dir + '/' + codeBase;
             styled = true;
@@ -55,7 +31,7 @@ demo.main = (function(DisplayCode, menu, tests) {
             route = host + '/' + version + '/' + dir + '/' + codeBase;
         }
         new DisplayCode({
-            header: $(this).parent().text().replace($(this).text(),'').trim(),
+            header: $lightboxLink.parent().text().replace($lightboxLink.text(),'').trim(),
             feature: feature,
             dir: route,
             fileNames: featureFiles.split(','),
@@ -82,9 +58,10 @@ demo.main = (function(DisplayCode, menu, tests) {
 if (typeof window.define === "function" && window.define.amd){
     define('demo', ['demo/displayCode',
         'demo/menu',
-        'demo/tests'], function(displayCode, menu, tests) {
-        return demo.main(displayCode, menu, tests);
+        'demo/tests',
+        'demo/skycons'], function(displayCode, menu, tests, skycons) {
+        return demo.main(displayCode, menu, tests, skycons);
     });
 } else {
-    demo.main(demo.displayCode, demo.menu, demo.tests);
+    demo.main(demo.displayCode, demo.menu, demo.tests, demo.skycons);
 }

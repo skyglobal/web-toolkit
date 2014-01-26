@@ -19,6 +19,7 @@ html{
 
 .demo{
   margin-bottom: 40px;
+  clear:both;
 }
 .demo-section > h2{
   margin-top: 40px;
@@ -97,6 +98,9 @@ code.block{
     font-size: 14px;
   }
 }
+.example{
+  clear: both;
+}
 .code-download{
   font-family: SkyTextRegular;
   font-size: 24px;
@@ -143,4 +147,10 @@ ul.notes{
   span {
     padding-left: 8px;
   }
+}
+
+pre code{
+  overflow: auto;
+  max-height: 400px;
+  max-width: 100%;
 }

@@ -10,12 +10,25 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         watch: {
-            'toolkit': {
-                files: [ 'grunt/js/**/*.js',
-                         'test/specs/**/*.js',
-                         'grunt/sass/**/*.scss'
-                ],
-                tasks: ['compass','jshint','requirejs']
+            gruntfile: {
+                files: 'Gruntfile.js',
+                tasks: ['jshint']
+            },
+            'js': {
+                files: [ 'grunt/js/**/*.js' ],
+                tasks: ['jshint','requirejs','jekyll:build']
+            },
+            'scss': {
+                files: [ 'grunt/sass/**/*.scss'],
+                tasks: ['compass', 'jekyll:build']
+            },
+            'jekyll': {
+                files: [ '_includes/**/*', '_layouts/**/*', '*.html', '_config.yml' ],
+                tasks: ['jekyll:build']
+            },
+            'specs': {
+                files: ['test/specs/*.js','test/config.js'],
+                tasks: ['jshint','jekyll:build']
             }
         },
         clean: {
@@ -25,7 +38,8 @@ module.exports = function(grunt) {
             fonts: ['grunt/fonts/min','dist/fonts']
         },
         jshint: {
-            toolkit: ['grunt/js/components/*.js',
+            toolkit: ['Gruntfile.js',
+                      'grunt/js/components/*.js',
                       'grunt/js/utils/*.js',
                       'grunt/js/demo/*.js',
                       'test/specs/**/*.js'],
@@ -67,6 +81,8 @@ module.exports = function(grunt) {
                         name: 'toolkit'
                     },{
                         name: 'demo'
+                    },{
+                        name: 'changes'
                     }]
                 }
             }
@@ -136,6 +152,25 @@ module.exports = function(grunt) {
                     log: false // Set to true to see console.log() output on the terminal
                 }
             }
+        },
+
+        jekyll: {                            // Task
+            options: {                          // Universal options
+                bundleExec: true,
+                config: '_config.yml'
+            },
+            build:{
+                options: {
+                    watch: false,
+                    serve: false
+                }
+            },
+            run:{
+                options: {
+                    watch: true,
+                    serve: true
+                }
+            }
         }
     });
 
@@ -149,19 +184,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-webfont'); //https://github.com/sapegin/grunt-webfont
     grunt.loadNpmTasks('grunt-svgmin');
     grunt.loadNpmTasks('grunt-grunticon');
-//    grunt.loadNpmTasks('grunt-blanket-mocha');
-//    grunt.loadNpmTasks('grunt-mocha-cov');
-//    grunt.loadNpmTasks('grunt-istanbul');
-//    grunt.loadNpmTasks('grunt-istanbul-coverage');
-//    grunt.loadNpmTasks('grunt-jscoverage');
+    grunt.loadNpmTasks('grunt-jekyll');
 
     grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
-    grunt.registerTask('spy', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'watch']);
+    grunt.registerTask('spy', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'jekyll:build', 'watch']);
     grunt.registerTask('sloppy', ['clean:toolkit', 'compass:toolkit', 'requirejs', 'watch']);
-    grunt.registerTask('css', ['clean:css', 'compass:toolkit']);
-    grunt.registerTask('js', ['clean:js', 'jshint', 'requirejs']);
     grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
     grunt.registerTask('test', ['mocha']);
-    grunt.registerTask('hint', ['jshint']);
 };

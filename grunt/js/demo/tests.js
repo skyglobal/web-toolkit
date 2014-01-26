@@ -1,5 +1,5 @@
 if (typeof demo==='undefined') demo={};
-demo.tests = (function(hashManager, lightbox){
+demo.tests = (function(){
 
     function runTest(hash){
         var spec = hash.replace('test/','');
@@ -81,7 +81,7 @@ demo.tests = (function(hashManager, lightbox){
         $('.run-test').each(function(){
             hashes.push($(this).attr('href').split('#')[1]);
         });
-        window.toolkit.hashManager.register(hashes, runTest); //todo: this should be just 'hashManager'
+        window.toolkit.hashManager.register(hashes, runTest);
     }
 
     registerTests();
@@ -89,9 +89,9 @@ demo.tests = (function(hashManager, lightbox){
 });
 
 if (typeof window.define === "function" && window.define.amd){
-    define('demo/tests', ['utils/hashManager', 'components/lightbox'], function(hash, lightbox) {
-        return demo.tests(hash, lightbox);
+    define('demo/tests', function() {
+        return demo.tests( );
     });
 } else {
-    demo.tests(toolkit.hash, toolkit.lightbox);
+    demo.tests();
 }

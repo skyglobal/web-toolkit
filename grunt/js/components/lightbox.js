@@ -1,6 +1,7 @@
 /*global jQuery:false */
+//todo: add 'flip' option for if a picture is clicked.
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.lightbox = (function ($, keyboardFocus, hash) {
+toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
     "use strict";
 	var scrollbarWidth,
         classes = {
@@ -8,16 +9,28 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
             closing: 'lightbox-closing',
             content: 'lightbox-content',
             closeButton: 'lightbox-close',
-            open: 'lightbox-open'
+            open: 'lightbox-open',
+            large: 'skycom-10 skycom-offset1',
+            small: 'skycom-5 skycom-offset3'
         },
-        getSrollbarWidth = function() {
-            //cant self execute if toolkit.js is in the head as document.body doesnt exist yet
+        getSrollbarWidth = function() {//cant self execute if toolkit.js is in the head as document.body doesnt exist yet
             var scrollDiv = document.createElement("div");
             scrollDiv.className = "lightbox-scrollbar-measure";
             document.body.appendChild(scrollDiv);
             scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
             document.body.removeChild(scrollDiv);
             return scrollbarWidth;
+        },
+        html = {
+            waitingForAjax: '<div style="margin:0 auto;width: 150px;"><div class="spinner-blue"><p>Please wait...</p></div></div>',
+            closeButton: '<a class="internal-link ' + classes.closeButton + ' skycon-close" href="#!"><span class="speak">Close</span></a>',
+            container: '<div class="skycom-container lightbox-container clearfix"></div>',
+            contents: '<div class="' + classes.content + '" role="dialog"></div>',
+            lightboxWrapper: '<div class="' + classes.main + '"></div>'
+        },
+        defaults = {
+            size: 'large',
+            closeButtonColour: 'white'
         };
 
 	function disableElementTabbing(index, element) {
@@ -64,100 +77,160 @@ toolkit.lightbox = (function ($, keyboardFocus, hash) {
         $('body').removeAttr('style');
     }
 
-    function Lightbox(id, $lightboxLink, options){
-        var $element = $('#' + id.replace('lightbox/',''));
-
-        this.id = id;
-        this.$container = ($element.hasClass(classes.main)) ? $element : $element.closest('.' + classes.main);
-        this.$contents = (this.$container.length) ? this.$container.find('.' + classes.content) : $element ;
-        this.$closeIcon = this.$container.find('.' + classes.closeButton);
-        this.$lightboxLink = $lightboxLink;
-
-        if (!this.$container.length){
-            this.create();
-            this.bindEvents();
-        }
-        if (options){
-            this.onShow = options.onShow;
-            this.onClose = options.onClose;
-        }
+    function Lightbox( lightboxLink, options){
+        this.$lightboxLink = $(lightboxLink);
+        this.href = this.$lightboxLink.attr('href');
+        this.options = $.extend( {}, defaults, options) ;
+        this.init();
     }
 
 	Lightbox.prototype = {
-		bindEvents: function() {
-            hash.register([this.id],this.open.bind(this) );
 
+        init: function() {
+            this.isAjaxRequest = (this.href.substring(0,1) !== '#');
+            var restfulHash = this.getRestfulHash();
             this.$lightboxLink.on("click", this.open.bind(this));
-            this.$container.on("click", this.close.bind(this));
-			this.$closeIcon.on("click", this.close.bind(this));
-			this.$contents.on("click", function(e) { return false; });
-		},
-
-        create: function(){
-            var $contents = this.$contents,
-                $parent = this.$contents.parent(),
-                $lightboxDiv = $('<div class="' + classes.main + '"></div>'),
-                $container = $('<div class="skycom-container lightbox-container clearfix"></div>'),
-                $close = $('<a class="internal-link ' + classes.closeButton + ' skycon-close" href="#!"><span class="speak">Close</span></a>');
-
-            $contents.addClass(classes.content + ' skycom-10 skycom-offset1').attr('role','dialog');
-            $contents.prepend($close);
-
-            $container.append($contents);
-            $lightboxDiv.append($container);
-            $parent.append($lightboxDiv);
-
-            this.$container = $lightboxDiv;
-            this.$closeIcon = $close;
+            hash.register(restfulHash, this.open.bind(this));
         },
 
-		open: function() {
+        getRestfulHash: function(){
+            if (this.isAjaxRequest){
+                this.restfulHash = '#!' + (this.href.split('#!')[1]);
+            } else {
+                this.restfulHash = this.href;
+            }
+            return this.restfulHash;
+        },
+
+        getAjaxContent: function() {
+            var lightbox = this;
+            var $spinner = $( html.waitingForAjax );
+            lightbox.$contents.append($spinner);
+
+            $.get(lightbox.href).done(function(data) {
+                lightbox.$lightboxLink.attr('href', lightbox.restfulHash);
+                lightbox.href = lightbox.restfulHash;
+                hash.change(hash.cleanHash(lightbox.href));
+                $spinner.remove();
+                lightbox.populate(null,data);
+            });
+
+            return false;
+
+        },
+
+        bindEvents: function() {
+            var lightbox = this;
+
+            this.$container.on('click', function(e) {
+                var $target = $(e.target);
+
+                if ($target.hasClass(classes.closeButton) ) {
+                    e.preventDefault();
+                    lightbox.close();
+                }
+                if ($target.closest('.' + classes.content).length) {
+                    return false;
+                }
+
+                lightbox.close();
+            });
+            event.on(this.$container[0], 'animationend', lightbox.onClose.bind(lightbox));
+		},
+
+        populate: function(e, data){
+            data = data || $('#' + hash.cleanHash(this.restfulHash.replace(/\//g,'-'))).removeClass('hidden');
+            if (data.length>0) {
+                this.$container.find('.' + classes.content).append(data);
+            } else {
+                if (e && e.preventDefault){ e.preventDefault(); }
+                this.getAjaxContent();
+            }
+        },
+
+        create: function(){
+            var $lightboxDiv = $(html.lightboxWrapper),
+                $contents = $(html.contents),
+                $container = $(html.container),
+                $close = $(html.closeButton).addClass(this.options.closeButtonColour);
+
+            this.$contents = $contents;
+            $contents.attr('aria-labelledby',this.$lightboxLink.id).attr('role','dialog').addClass(classes[this.options.size]);
+            $contents.prepend($close);
+            $container.append($contents);
+            $lightboxDiv.append($container);
+
+            $('body').append($lightboxDiv);
+
+            this.$container = $lightboxDiv;
+        },
+
+		open: function(e) {
+            if (!this.$container){
+                this.create();
+                this.populate(e);
+                this.bindEvents();
+            }
             if (this.$container.hasClass(classes.open)) { return ; }
-            if (this.onShow){
-                this.onShow();
+            if (this.options.onShow){
+                this.options.onShow();
             }
             hideBodyScrollBar();
 
-			this.$container.addClass(classes.open);
-
-            focusOnCloseButton(this.$lightboxLink, this.$closeIcon);
+            this.$container.addClass(classes.open);
+            console.log('open', this.$container);
+            focusOnCloseButton(this.$lightboxLink, this.$container.find('.' + classes.closeButton));
             disablePageTabbing();
             enablePageTabbing(this.$container);
+
 		},
 
-		close: function(event) {
+		close: function() {
             var lightbox = this;
-			event.preventDefault();
             if (this.$container.hasClass(classes.closing)) { return ; }
+
+            if (!detect.css('animation')){
+                setTimeout(lightbox.onClose.bind(lightbox),500);
+            }
 
             this.$container.addClass(classes.closing);
             hash.remove();
+        },
 
-            window.setTimeout(function() {
-                lightbox.$container.removeClass(classes.open + ' ' + classes.closing);
-                focusOnLightboxLink(lightbox.$lightboxLink);
-                showBodyScrollBar();
-                enablePageTabbing($('body'));
-                if (lightbox.onClose){
-                    lightbox.onClose();
-                }
-            }, 500);
-		}
+        onClose: function(){
+            var lightbox = this;
+            if (!lightbox.$container.hasClass(classes.closing)) { return; }
+            lightbox.$container.removeClass(classes.open + ' ' + classes.closing);
+            focusOnLightboxLink(lightbox.$lightboxLink);
+            showBodyScrollBar();
+            console.log('onClose', this.$container);
+            enablePageTabbing($('body'));
+            if (lightbox.options.onClose){
+                lightbox.options.onClose();
+            }
+        }
+
+
 	};
 
 	$.fn.lightbox = function(options) {
 		return this.each(function() {
-			var lb = new Lightbox($(this).attr('href').replace('#!',''),$(this), options);
+			var lb = new Lightbox( this, options);
 		});
 	};
 
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/lightbox', ['utils/focus', 'utils/hashManager'], function(focus, hash) {
+    define('components/lightbox',
+            ['utils/focus',
+            'utils/hashManager',
+            'utils/event',
+            'utils/detect'
+            ], function(focus, hash, event, detect) {
         'use strict';
-        return toolkit.lightbox(jQuery, focus, hash);
+        return toolkit.lightbox(jQuery, focus, hash, event, detect);
     });
 } else {
-    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager);
+    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager, toolkit.event, toolkit.detect);
 }

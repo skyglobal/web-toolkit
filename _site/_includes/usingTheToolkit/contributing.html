@@ -1,0 +1,37 @@
+<p >
+    The source code is available in a private repository on Github, along with instructions for building/running the project locally.
+</p>
+<dl class="clearfix wiki-dl">
+    <dt>Feature Requests</dt>
+    <dd>Please check <a href="https://github.com/skyglobal/web-toolkit/issues">here</a> to see if there is already a similar request. If not, create a New
+       Issue and flag it as an '<code>enhancement</code>'</dd>
+    <dt>Bug Reporting</dt>
+    <dd>Please check <a href="https://github.com/skyglobal/web-toolkit/issues">here</a> to see if there is already a similar request. If not, create a New
+    Issue and flag it as a '<code>bug</code>'</dd>
+</dl>
+
+<h3 class="intro">Adding to the Toolkit</h3>
+<h4 class="intro smaller">Starting the project locally</h4>
+<p>
+    Using <code>git</code> you should fork a version of the toolkit (using github). Clone the fork locally ready to build your new/upgraded feature.
+    <code class="block">git clone <i>clone url</i></code>
+    Dont forget to set the upstream using:
+    <code class="block">git remote add upstream https://github.com/skyglobal/web-toolkit.git</code>
+    To get the toolkit running locally please go through the <a href="https://github.com/skyglobal/web-toolkit/blob/master/README.md" target="_blank">ReadMe</a>.
+</p>
+<h4 class="intro smaller">Building A New/Updated Feature</h4>
+<p>
+    It is best to code in a new branch allowing you to commit multiple branches/features without having a dependency on the previous request.
+    Before you start a feature you should ensure your code is up to date by running:
+    <code class="block">git pull upstream master</code>
+</p>
+<h4 class="intro smaller">Testing</h4>
+<p>
+    Please write tests and add the 'Play Tests' button to the demo page.  Use this button to then check your feature.  Also test/retest your code by running:
+    <code class="block">grunt test</code>
+</p>
+<h4 class="intro smaller">Committing</h4>
+<p>
+    Before you submit your pull request ensure your code is up to date and merged by running:
+    <code class="block">git pull upstream master</code>
+</p>

@@ -58,33 +58,28 @@ toolkit.detect = (function (event) {
     }
 
     function supportsPseudo(){
-        var doc = document,
-            html = doc.documentElement,
-            body = doc.body,
-            supported = false,
-            paraBefore = doc.createElement('p'),
-            styleBefore = doc.createElement('style'),
+//        if (state.css.pseudo){ return state.css.pseudo; }
+        var paraBefore = document.createElement('p'),
+            styleBefore = document.createElement('style'),
             heightBefore,
             selectorsBefore = '#testbefore:before { content: "before"; }';
-
         styleBefore.type = 'text\/css';
         paraBefore.id = 'testbefore';
 
         if (styleBefore.styleSheet) {
             styleBefore.styleSheet.cssText = selectorsBefore;
         } else {
-            styleBefore.appendChild(doc.createTextNode(selectorsBefore));
+            styleBefore.appendChild(document.createTextNode(selectorsBefore));
         }
 
-        body.appendChild(styleBefore);
-        body.appendChild(paraBefore);
+        document.body.appendChild(styleBefore);
+        document.body.appendChild(paraBefore);
+        heightBefore = document.getElementById('testbefore').offsetHeight;
+        document.body.removeChild(styleBefore);
+        document.body.removeChild(paraBefore);
 
-        heightBefore = doc.getElementById('testbefore').offsetHeight;
-
-        body.removeChild(styleBefore);
-        body.removeChild(paraBefore);
-
-        return (heightBefore >= 1);
+        state.css.pseudo =(heightBefore >= 1);
+        return state.css.pseudo;
     }
 
     function pseudo(el, pos, property){
@@ -136,7 +131,7 @@ toolkit.detect = (function (event) {
     }
 
     function touch(){
-        state.touch = (!!window.ontouchstart);
+        state.touch = (typeof window.ontouchstart !== "undefined");
         return state.touch;
     }
 
