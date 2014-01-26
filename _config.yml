@@ -1,4 +1,4 @@
-version: 2.1.2-feature-testing
+version: 2.1.2-rc2
 destination: _site
 exclude: [
   grunt,
