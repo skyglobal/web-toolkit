@@ -15,7 +15,7 @@
 	    ,"grunt-contrib-requirejs": "latest"
 	    ,"grunt-contrib-watch": "latest"
 	    ,"grunt-mocha": "latest"
-	    ,"grunt-webfont": "0.2.2"
+	    ,"grunt-webfont": "latest"
 	    ,"grunt-svgmin": "latest"
 	    ,"grunt-grunticon": "latest"
 	    ,"grunt-jekyll": "latest"
