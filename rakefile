@@ -154,7 +154,7 @@ task :deploy do
 
 
   if is_feature_version?
-    error "*** version is a feature '#{latest_version_number}'.  Please commit in a feature branch. ***"
+    puts "*** version is a feature '#{latest_version_number}'.  Please commit in a feature branch. ***"
     fail
   end
 
@@ -185,7 +185,7 @@ desc 'Deploys a new feature to the CDN'
 task :deploy_feature do
 
   if !is_feature_version?
-    error "*** version is not a feature '#{latest_version_number}' ***"
+    puts "*** version is not a feature '#{latest_version_number}' ***"
     fail
   end
 
