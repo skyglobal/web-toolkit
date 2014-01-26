@@ -21,6 +21,14 @@ def version_is_release_candidate?
   latest_version_number.include? 'rc'
 end
 
+def is_feature_release?
+  branchName.include? 'feature'
+end
+
+def branchName
+  `git branch | sed -n '/\* /s///p'`
+end
+
 
 def static_to_upload
   Dir.glob("static/**/*.*")
@@ -126,24 +134,25 @@ def buildDistributionFiles
   `git add -A ./_site/`
 end
 
-def updateMaster
-  puts "*** Updating MAster ***"
+
+def updateBranch branch
+  puts "*** Updating #{branch} ***"
   system "git commit -m 'Rake deploy: adding grunted files'"
-  system "git push origin HEAD:master"
+  system "git push origin HEAD:" + branch
 end
 
 def getDate
   `date +'%d-%m-%Y'`
 end
 
-desc 'Deploys a new version to the CDN'
+desc 'Deploys a new version to the CDN and skyglobal.github.io/web-toolkit'
 task :deploy do
 
   `git config --global user.email "circle@circle.com"`
   `git config --global user.name "rake file"`
 
   buildDistributionFiles
-  updateMaster
+  updateBranch 'master'
 
   if version_already_exists?
     puts "Version #{latest_version_number} exists so exiting."
@@ -157,5 +166,26 @@ task :deploy do
     updateGHPages
     tagBuild
   end
+
+end
+
+
+
+desc 'Deploys a new feature to the CDN'
+task :deploy_feature do
+
+  if !is_feature_release?
+    next
+  end
+
+  buildDistributionFiles
+  updateBranch branchName
+
+  if version_already_exists?
+    puts "Version #{latest_version_number} exists so exiting."
+    next
+  end
+
+  pushToAmazonS3
 
 end
