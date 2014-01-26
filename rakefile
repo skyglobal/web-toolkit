@@ -21,8 +21,12 @@ def version_is_release_candidate?
   latest_version_number.include? 'rc'
 end
 
-def is_feature_release?
+def is_feature_branch?
   branchName.include? 'feature'
+end
+
+def is_feature_version?
+  latest_version_number.include? 'feature'
 end
 
 def branchName
@@ -174,8 +178,9 @@ end
 desc 'Deploys a new feature to the CDN'
 task :deploy_feature do
 
-  if !is_feature_release?
-    next
+  if !is_feature_version?
+    error "*** version is not a feature '#{latest_version_number}' ***"
+    fail
   end
 
   buildDistributionFiles
