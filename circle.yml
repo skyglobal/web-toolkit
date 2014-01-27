@@ -7,6 +7,10 @@ deployment:
     branch: /feature-.*/
     commands:
       - bundle exec rake deploy_feature
+  release_candidate:
+    branch: /rc-.*/
+    commands:
+      - bundle exec rake deploy_rc
 machine:
   ruby:
     version: ruby-1.9.3-p392
