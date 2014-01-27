@@ -18,7 +18,7 @@ def version_already_exists?
 end
 
 def version_is_release_candidate?
-  latest_version_number.include? 'rc'
+  latest_version_number.include? '-rc'
 end
 
 def is_feature_branch?
@@ -149,12 +149,17 @@ def getDate
   `date +'%d-%m-%Y'`
 end
 
+
 desc 'Deploys a new version to the CDN and skyglobal.github.io/web-toolkit'
 task :deploy do
 
 
   if is_feature_version?
     puts "*** version is a feature '#{latest_version_number}'.  Please commit in a feature branch. ***"
+    fail
+  end
+  if version_is_release_candidate?
+    puts "*** version is a Release Candidate '#{latest_version_number}'.  Please commit in a -rc branch. ***"
     fail
   end
 
@@ -170,12 +175,9 @@ task :deploy do
   end
 
   pushToAmazonS3
-
-  if !version_is_release_candidate?
-    fetchGHPages
-    updateGHPages
-    tagBuild
-  end
+  fetchGHPages
+  updateGHPages
+  tagBuild
 
 end
 
@@ -188,6 +190,30 @@ task :deploy_feature do
     puts "*** version is not a feature '#{latest_version_number}' ***"
     fail
   end
+
+  buildDistributionFiles
+  updateBranch branchName
+
+  if version_already_exists?
+    puts "Version #{latest_version_number} exists so exiting."
+    next
+  end
+
+  pushToAmazonS3
+
+end
+
+
+desc 'Deploys a release candidate to the CDN'
+task :deploy_rc do
+
+  if !version_is_release_candidate?
+    puts "*** version is not a Release Candidate '#{latest_version_number}' ***"
+    fail
+  end
+
+  `git config --global user.email "circle@circle.com"`
+  `git config --global user.name "rake file"`
 
   buildDistributionFiles
   updateBranch branchName
