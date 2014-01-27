@@ -50,13 +50,12 @@ These tests are automatically run on the CircleCI server upon pushing to Github
 ### Contributing 
 
 ####Building A New/Updated Feature
-  - It is best to code in a new branch allowing you to commit multiple branches/features without having a dependency on the previous request.
-    
-  - Before you start a feature you should ensure your code is up to date by running:
-  `git pull upstream master`
-
+  - Write code in a new branch.
+  - Before you start a feature, ensure your code is up to date. Run:
+    - `git pull upstream master`
   - Write tests as you go
-  - refactor so the code is self documenting
+  - Refactor so the code is self documenting
+  - If you would like the feature to go live sooner, mention this in the comments/commit.  We will provide a temporary live url that will allow you to carry on without getting blocked.
 
 ####Committing
   - Before you submit your pull request ensure your code is up to date and merged by running:
