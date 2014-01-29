@@ -604,7 +604,6 @@
     }); // module: browser/path.js
 
     require.register("browser/progress.js", function(module, exports, require){
-
         /**
          * Expose `Progress`.
          */
@@ -693,40 +692,41 @@
          */
 
         Progress.prototype.draw = function(ctx){
-            var percent = Math.min(this.percent, 100)
-                , size = this._size
-                , half = size / 2
-                , x = half
-                , y = half
-                , rad = half - 1
-                , fontSize = this._fontSize;
+            try {
+                var percent = Math.min(this.percent, 100)
+                    , size = this._size
+                    , half = size / 2
+                    , x = half
+                    , y = half
+                    , rad = half - 1
+                    , fontSize = this._fontSize;
 
-            ctx.font = fontSize + 'px ' + this._font;
+                ctx.font = fontSize + 'px ' + this._font;
 
-            var angle = Math.PI * 2 * (percent / 100);
-            ctx.clearRect(0, 0, size, size);
+                var angle = Math.PI * 2 * (percent / 100);
+                ctx.clearRect(0, 0, size, size);
 
-            // outer circle
-            ctx.strokeStyle = '#9f9f9f';
-            ctx.beginPath();
-            ctx.arc(x, y, rad, 0, angle, false);
-            ctx.stroke();
+                // outer circle
+                ctx.strokeStyle = '#9f9f9f';
+                ctx.beginPath();
+                ctx.arc(x, y, rad, 0, angle, false);
+                ctx.stroke();
 
-            // inner circle
-            ctx.strokeStyle = '#eee';
-            ctx.beginPath();
-            ctx.arc(x, y, rad - 1, 0, angle, true);
-            ctx.stroke();
+                // inner circle
+                ctx.strokeStyle = '#eee';
+                ctx.beginPath();
+                ctx.arc(x, y, rad - 1, 0, angle, true);
+                ctx.stroke();
 
-            // text
-            var text = this._text || (percent | 0) + '%'
-                , w = ctx.measureText(text).width;
+                // text
+                var text = this._text || (percent | 0) + '%'
+                    , w = ctx.measureText(text).width;
 
-            ctx.fillText(
-                text
-                , x - w / 2 + 1
-                , y + fontSize / 2 - 1);
-
+                ctx.fillText(
+                    text
+                    , x - w / 2 + 1
+                    , y + fontSize / 2 - 1);
+            } catch (ex) {} //don't fail if we can't render progress
             return this;
         };
 
@@ -893,16 +893,16 @@
          * BDD-style interface:
          *
          *      describe('Array', function(){
-         *        describe('#indexOf()', function(){
-         *          it('should return -1 when not present', function(){
-         *
-         *          });
-         *
-         *          it('should return the index when present', function(){
-         *
-         *          });
-         *        });
-         *      });
+ *        describe('#indexOf()', function(){
+ *          it('should return -1 when not present', function(){
+ *
+ *          });
+ *
+ *          it('should return the index when present', function(){
+ *
+ *          });
+ *        });
+ *      });
          *
          */
 
@@ -1033,16 +1033,16 @@
          * TDD-style interface:
          *
          *     exports.Array = {
-         *       '#indexOf()': {
-         *         'should return -1 when the value is not present': function(){
-         *
-         *         },
-         *
-         *         'should return the correct index when the value is present': function(){
-         *
-         *         }
-         *       }
-         *     };
+ *       '#indexOf()': {
+ *         'should return -1 when the value is not present': function(){
+ *
+ *         },
+ *
+ *         'should return the correct index when the value is present': function(){
+ *
+ *         }
+ *       }
+ *     };
          *
          */
 
@@ -1109,22 +1109,22 @@
          *     suite('Array');
          *
          *     test('#length', function(){
-         *       var arr = [1,2,3];
-         *       ok(arr.length == 3);
-         *     });
+ *       var arr = [1,2,3];
+ *       ok(arr.length == 3);
+ *     });
          *
          *     test('#indexOf()', function(){
-         *       var arr = [1,2,3];
-         *       ok(arr.indexOf(1) == 0);
-         *       ok(arr.indexOf(2) == 1);
-         *       ok(arr.indexOf(3) == 2);
-         *     });
+ *       var arr = [1,2,3];
+ *       ok(arr.indexOf(1) == 0);
+ *       ok(arr.indexOf(2) == 1);
+ *       ok(arr.indexOf(3) == 2);
+ *     });
          *
          *     suite('String');
          *
          *     test('#length', function(){
-         *       ok('foo'.length == 3);
-         *     });
+ *       ok('foo'.length == 3);
+ *     });
          *
          */
 
@@ -1233,24 +1233,24 @@
          * TDD-style interface:
          *
          *      suite('Array', function(){
-         *        suite('#indexOf()', function(){
-         *          suiteSetup(function(){
-         *
-         *          });
-         *
-         *          test('should return -1 when not present', function(){
-         *
-         *          });
-         *
-         *          test('should return the index when present', function(){
-         *
-         *          });
-         *
-         *          suiteTeardown(function(){
-         *
-         *          });
-         *        });
-         *      });
+ *        suite('#indexOf()', function(){
+ *          suiteSetup(function(){
+ *
+ *          });
+ *
+ *          test('should return -1 when not present', function(){
+ *
+ *          });
+ *
+ *          test('should return the index when present', function(){
+ *
+ *          });
+ *
+ *          suiteTeardown(function(){
+ *
+ *          });
+ *        });
+ *      });
          *
          */
 
@@ -1437,6 +1437,21 @@
             if (null != options.timeout) this.timeout(options.timeout);
             this.useColors(options.useColors)
             if (options.slow) this.slow(options.slow);
+
+            this.suite.on('pre-require', function (context) {
+                exports.afterEach = context.afterEach || context.teardown;
+                exports.after = context.after || context.suiteTeardown;
+                exports.beforeEach = context.beforeEach || context.setup;
+                exports.before = context.before || context.suiteSetup;
+                exports.describe = context.describe || context.suite;
+                exports.it = context.it || context.test;
+                exports.setup = context.setup || context.beforeEach;
+                exports.suiteSetup = context.suiteSetup || context.before;
+                exports.suiteTeardown = context.suiteTeardown || context.after;
+                exports.suite = context.suite || context.describe;
+                exports.teardown = context.teardown || context.afterEach;
+                exports.test = context.test || context.it;
+            });
         }
 
         /**
@@ -1840,7 +1855,8 @@
 
         var tty = require('browser/tty')
             , diff = require('browser/diff')
-            , ms = require('../ms');
+            , ms = require('../ms')
+            , utils = require('../utils');
 
         /**
          * Save timer references to avoid Sinon interfering (see GH-237).
@@ -1976,7 +1992,7 @@
                     exports.cursor.deleteLine();
                     exports.cursor.beginningOfLine();
                 } else {
-                    process.stdout.write('\n');
+                    process.stdout.write('\r');
                 }
             }
         };
@@ -2014,15 +2030,15 @@
                 // explicitly show diff
                 if (err.showDiff && sameType(actual, expected)) {
                     escape = false;
-                    err.actual = actual = stringify(actual);
-                    err.expected = expected = stringify(expected);
+                    err.actual = actual = stringify(canonicalize(actual));
+                    err.expected = expected = stringify(canonicalize(expected));
                 }
 
                 // actual / expected diff
                 if ('string' == typeof actual && 'string' == typeof expected) {
                     fmt = color('error title', '  %s) %s:\n%s') + color('error stack', '\n%s\n');
                     var match = message.match(/^([^:]+): expected/);
-                    msg = match ? '\n      ' + color('error message', match[1]) : '';
+                    msg = '\n      ' + color('error message', match ? match[1] : msg);
 
                     if (exports.inlineDiffs) {
                         msg += inlineDiff(err, escape);
@@ -2280,7 +2296,7 @@
         /**
          * Stringify `obj`.
          *
-         * @param {Mixed} obj
+         * @param {Object} obj
          * @return {String}
          * @api private
          */
@@ -2288,6 +2304,40 @@
         function stringify(obj) {
             if (obj instanceof RegExp) return obj.toString();
             return JSON.stringify(obj, null, 2);
+        }
+
+        /**
+         * Return a new object that has the keys in sorted order.
+         * @param {Object} obj
+         * @return {Object}
+         * @api private
+         */
+
+        function canonicalize(obj, stack) {
+            stack = stack || [];
+
+            if (utils.indexOf(stack, obj) !== -1) return obj;
+
+            var canonicalizedObj;
+
+            if ('[object Array]' == {}.toString.call(obj)) {
+                stack.push(obj);
+                canonicalizedObj = utils.map(obj, function(item) {
+                    return canonicalize(item, stack);
+                });
+                stack.pop();
+            } else if (typeof obj === 'object' && obj !== null) {
+                stack.push(obj);
+                canonicalizedObj = {};
+                utils.forEach(utils.keys(obj).sort(), function(key) {
+                    canonicalizedObj[key] = canonicalize(obj[key], stack);
+                });
+                stack.pop();
+            } else {
+                canonicalizedObj = obj;
+            }
+
+            return canonicalizedObj;
         }
 
         /**
@@ -2304,7 +2354,6 @@
             b = Object.prototype.toString.call(b);
             return a == b;
         }
-
 
 
     }); // module: reporters/base.js
@@ -3813,10 +3862,6 @@
                 if (1 == indents) console.log();
             });
 
-            runner.on('test', function(test){
-                process.stdout.write(indent() + color('pass', '  ◦ ' + test.title + ': '));
-            });
-
             runner.on('pending', function(test){
                 var fmt = indent() + color('pending', '  - %s');
                 console.log(fmt, test.title);
@@ -4021,7 +4066,7 @@
             var attrs = {
                 classname: test.parent.fullTitle()
                 , name: test.title
-                , time: test.duration / 1000
+                , time: (test.duration / 1000) || 0
             };
 
             if ('failed' == test.state) {
@@ -4212,6 +4257,16 @@
         };
 
         /**
+         * Whitelist these globals for this test run
+         *
+         * @api private
+         */
+        Runnable.prototype.globals = function(arr){
+            var self = this;
+            this._allowedGlobals = arr;
+        };
+
+        /**
          * Run the test and invoke `fn(err)`.
          *
          * @param {Function} fn
@@ -4342,13 +4397,14 @@
         function Runner(suite) {
             var self = this;
             this._globals = [];
+            this._abort = false;
             this.suite = suite;
             this.total = suite.total();
             this.failures = 0;
             this.on('test end', function(test){ self.checkGlobals(test); });
             this.on('hook end', function(hook){ self.checkGlobals(hook); });
             this.grep(/.*/);
-            this.globals(this.globalProps().concat(['errno']));
+            this.globals(this.globalProps().concat(extraGlobals()));
         }
 
         /**
@@ -4453,13 +4509,14 @@
         Runner.prototype.checkGlobals = function(test){
             if (this.ignoreLeaks) return;
             var ok = this._globals;
+
             var globals = this.globalProps();
             var isNode = process.kill;
             var leaks;
 
-            // check length - 2 ('errno' and 'location' globals)
-            if (isNode && 1 == ok.length - globals.length) return;
-            else if (2 == ok.length - globals.length) return;
+            if (test) {
+                ok = ok.concat(test._allowedGlobals || []);
+            }
 
             if(this.prevGlobalsLength == globals.length) return;
             this.prevGlobalsLength = globals.length;
@@ -4713,6 +4770,8 @@
                 // if we bail after first err
                 if (self.failures && suite._bail) return fn();
 
+                if (self._abort) return fn();
+
                 if (err) return hookErr(err, errSuite, true);
 
                 // next test
@@ -4794,6 +4853,8 @@
                         return done(errSuite);
                     }
                 }
+
+                if (self._abort) return done();
 
                 var curr = suite.suites[i++];
                 if (!curr) return done();
@@ -4880,6 +4941,17 @@
         };
 
         /**
+         * Cleanly abort execution
+         *
+         * @return {Runner} for chaining
+         * @api public
+         */
+        Runner.prototype.abort = function(){
+            debug('aborting');
+            this._abort = true;
+        }
+
+        /**
          * Filter leaks with the given globals flagged as `ok`.
          *
          * @param {Array} ok
@@ -4911,6 +4983,31 @@
                 });
                 return matched.length == 0 && (!global.navigator || 'onerror' !== key);
             });
+        }
+
+        /**
+         * Array of globals dependent on the environment.
+         *
+         * @return {Array}
+         * @api private
+         */
+
+        function extraGlobals() {
+            if (typeof(process) === 'object' &&
+                typeof(process.version) === 'string') {
+
+                var nodeVersion = process.version.split('.').reduce(function(a, v) {
+                    return a << 8 | v;
+                });
+
+                // 'errno' was renamed to process._errno in v0.9.11.
+
+                if (nodeVersion < 0x00090B) {
+                    return ['errno'];
+                }
+            }
+
+            return [];
         }
 
     }); // module: runner.js
@@ -5306,6 +5403,22 @@
         };
 
         /**
+         * Array#map (<=IE8)
+         *
+         * @param {Array} array
+         * @param {Function} fn
+         * @param {Object} scope
+         * @api private
+         */
+
+        exports.map = function(arr, fn, scope){
+            var result = [];
+            for (var i = 0, l = arr.length; i < l; i++)
+                result.push(fn.call(scope, arr[i], i));
+            return result;
+        };
+
+        /**
          * Array#indexOf (<=IE8)
          *
          * @parma {Array} arr
@@ -5454,11 +5567,13 @@
 
         exports.clean = function(str) {
             str = str
+                .replace(/\r\n?|[\n\u2028\u2029]/g, "\n").replace(/^\uFEFF/, '')
                 .replace(/^function *\(.*\) *{/, '')
                 .replace(/\s+\}$/, '');
 
-            var whitespace = str.match(/^\n?(\s*)/)[1]
-                , re = new RegExp('^' + whitespace, 'gm');
+            var spaces = str.match(/^\n?( *)/)[1].length
+                , tabs = str.match(/^\n?(\t*)/)[1].length
+                , re = new RegExp('^\n?' + (tabs ? '\t' : ' ') + '{' + (tabs ? tabs : spaces) + '}', 'gm');
 
             str = str.replace(re, '');
 
@@ -5578,9 +5693,8 @@
     process.removeListener = function(e, fn){
         if ('uncaughtException' == e) {
             global.onerror = function() {};
-
-            var indexOfFn = uncaughtExceptionHandlers.indexOf(fn);
-            if (indexOfFn != -1) { uncaughtExceptionHandlers.splice(indexOfFn, 1); }
+            var i = Mocha.utils.indexOf(uncaughtExceptionHandlers, fn);
+            if (i != -1) { uncaughtExceptionHandlers.splice(i, 1); }
         }
     };
 
@@ -5592,6 +5706,7 @@
         if ('uncaughtException' == e) {
             global.onerror = function(err, url, line){
                 fn(new Error(err + ' (' + url + ':' + line + ')'));
+                return true;
             };
             uncaughtExceptionHandlers.push(fn);
         }
@@ -5603,6 +5718,11 @@
 
     var Mocha = global.Mocha = require('mocha'),
         mocha = global.mocha = new Mocha({ reporter: 'html' });
+
+// The BDD UI is registered by default, but no UI will be functional in the
+// browser without an explicit call to the overridden `mocha.ui` (see below).
+// Ensure that this default UI does not expose its methods to the global scope.
+    mocha.suite.removeAllListeners('pre-require');
 
     var immediateQueue = []
         , immediateTimeout;
@@ -5636,7 +5756,7 @@
      * only receive the 'message' attribute of the Error.
      */
     mocha.throwError = function(err) {
-        uncaughtExceptionHandlers.forEach(function (fn) {
+        Mocha.utils.forEach(uncaughtExceptionHandlers, function (fn) {
             fn(err);
         });
         throw err;

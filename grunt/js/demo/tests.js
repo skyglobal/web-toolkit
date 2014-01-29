@@ -10,7 +10,7 @@ demo.tests = (function(){
                 $mocha = $('<div id="mocha" class="mocha-container"></div>');
             $runTestLink.parent().after($mocha);
             var grep = window[spec]();
-            mocha.grep(grep);
+//            mocha.grep(grep);
             mocha.run(function(){
                 updateTestsResults($runTestLink, $mocha);
                 $mocha.attr('id','mocha-' + spec);
