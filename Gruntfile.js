@@ -148,6 +148,7 @@ module.exports = function(grunt) {
                     return ['_site/test.html'];
                 }()),
                 options: {
+                    reporter: 'Spec',
                     run: false,
                     log: false // Set to true to see console.log() output on the terminal
                 }

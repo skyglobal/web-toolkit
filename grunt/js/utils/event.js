@@ -54,7 +54,8 @@ toolkit.event = (function (detect) {
     function emit(el, eventName) {
         var event;
         if (document.createEvent) {
-            event = new Event(eventName);
+            event = document.createEvent('CustomEvent'); // MUST be 'CustomEvent'
+            event.initCustomEvent(eventName, false, false, null);
             el.dispatchEvent(event);
         } else {
             event = document.createEventObject();

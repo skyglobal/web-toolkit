@@ -54,6 +54,14 @@ define('setup',['chai', 'smoax'], function(chai, smoax) {
         };
     }
 
+    // screenshotting function
+    window.screenshot = function(component, aspect, container) {
+        // de-jQuery container
+        container = container.first ? container[0] : container;
+        // we communicate with PhantomJS through their listener of console.log
+        console.log(JSON.stringify({action:'render',filename:'screenshot/test/' + component + '/' + aspect + '.png',format:'png',clipRect:container.getBoundingClientRect()}));
+    }
+
     // PhantomJS had some problem if should is set as a global variable and was timing out
     // window.should = should
 
