@@ -2442,10 +2442,16 @@ toolkit.event.on(window,'resizeend',updateEventResizeEnd);
 
 
 <div id="mocha"></div>
+<script src="test/libraries/blanket.js"></script>
 <script type="text/javascript">
     require(['runner']);
 </script>
 
+<script>
+    if (window.PHANTOMJS) {
+        blanket.options("reporter", "support/grunt-reporter.js");
+    }
+</script>
 			</div>
 		</div>
 	</body>

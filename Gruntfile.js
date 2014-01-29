@@ -154,6 +154,20 @@ module.exports = function(grunt) {
             }
         },
 
+        blanket_mocha: {
+            all: {
+                src: (function() {
+                    var pattern = grunt.option('pattern') || '[A-Z]*';
+                    return ['_site/test.html'];
+                }()),
+                options: {
+                    run: false,
+                    threshold: 25,
+                    log: false // Set to true to see console.log() output on the terminal
+                }
+            }
+        },
+
         jekyll: {                            // Task
             options: {                          // Universal options
                 bundleExec: true,
@@ -186,10 +200,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-grunticon');
     grunt.loadNpmTasks('grunt-jekyll');
 
+    grunt.loadTasks('tasks');
+
     grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
     grunt.registerTask('spy', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'jekyll:build', 'watch']);
     grunt.registerTask('sloppy', ['clean:toolkit', 'compass:toolkit', 'requirejs', 'watch']);
     grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
     grunt.registerTask('test', ['mocha']);
+    grunt.registerTask('test_coverage', ['blanket_mocha']);
 };
