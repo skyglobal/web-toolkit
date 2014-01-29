@@ -155,6 +155,13 @@ module.exports = function(grunt) {
             }
         },
 
+        screenshot_diff: {
+            files: ['screenshot/'],
+            options: {
+                outputFormat: 'json' // or html
+            }
+        },
+
         jekyll: {                            // Task
             options: {                          // Universal options
                 bundleExec: true,
@@ -186,11 +193,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-svgmin');
     grunt.loadNpmTasks('grunt-grunticon');
     grunt.loadNpmTasks('grunt-jekyll');
+    grunt.loadNpmTasks('grunt-screenshot-diff');
 
     grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
     grunt.registerTask('spy', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'jekyll:build', 'watch']);
     grunt.registerTask('sloppy', ['clean:toolkit', 'compass:toolkit', 'requirejs', 'watch']);
     grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
-    grunt.registerTask('test', ['mocha']);
+    grunt.registerTask('screenshot', ['screenshot_diff']);
+    grunt.registerTask('test', ['mocha', 'screenshot_diff']);
 };
