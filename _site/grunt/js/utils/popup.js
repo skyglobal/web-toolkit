@@ -31,7 +31,8 @@ toolkit.popup = (function() {
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/popup', [], function() {
-        return toolkit.popup();
+        toolkit.popup = toolkit.popup();
+        return toolkit.popup;
     });
 } else {
     toolkit.popup = toolkit.popup();

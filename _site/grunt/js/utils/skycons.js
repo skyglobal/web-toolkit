@@ -78,7 +78,8 @@ toolkit.skycons = (function(detect, event) {
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/skycons', ['utils/detect','utils/event'], function(detect,event) {
-        return toolkit.skycons(detect,event);
+        toolkit.skycons = toolkit.skycons(detect,event);
+        return toolkit.skycons;
     });
 } else {
     toolkit.skycons = toolkit.skycons(toolkit.detect,toolkit.event);

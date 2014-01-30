@@ -1,0 +1,247 @@
+<!doctype html>
+<!--To put correct ie classes on document root to essentially enable css conditionals-->
+<!--[if IE 7]>         <html class="lt-ie10 lt-ie9 lt-ie8" > <![endif]-->
+<!--[if IE 8]>         <html class="lt-ie10 lt-ie9" > <![endif]-->
+<!--[if IE 9]>         <html class="lt-ie10" > <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
+<!--end css conditionals-->
+	<head>
+
+        <meta charset="UTF-8"/>
+
+<!--jquery-->
+<!--[if lt IE 9]> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-1.10.2.js" ></script> <![endif]-->
+<!--[if gte IE 9]><!--> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
+<!--end-jquery-->
+
+<!--to help prevent 'font flash'-->
+<link href='//web-toolkit.global.sky.com/static/fonts/sky_regular.ttf' rel='prefetch'>
+<link href='//web-toolkit.global.sky.com/static/fonts/sky_regular.svg' rel='prefetch'>
+<link href='//web-toolkit.global.sky.com/static/fonts/sky_medium.ttf' rel='prefetch'>
+<link href='//web-toolkit.global.sky.com/static/fonts/sky_medium.svg' rel='prefetch'>
+<!--end prevent 'font flash'-->
+
+<!--for video player pre-requisits-->
+<link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
+<script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
+<!--end video player pre-requisits-->
+
+<!--from masthead-->
+<!--[if LT IE 9]>
+<link href='http://assets.sky.com/dist/759/css/non-responsive-12.css' rel='stylesheet'>
+<![endif]-->
+<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<link class='skycom-responsive-css' href='http://assets.sky.com/dist/759/css/responsive-12.css' media='(min-width: 768px)' rel='stylesheet'>
+<!--[mobilestart]-->
+<link class='skycom-mobile-css' href='http://assets.sky.com/dist/759/css/mobile-12.css' media='(max-width: 767px)' rel='stylesheet'>
+<!--[mobileend]-->
+<script id='skycom-view-type'></script>
+<script id='skycom-orientation'></script>
+<link href='http://assets.sky.com/images/favicon.png' rel='icon' type='image/png'>
+<link href='http://assets.sky.com/images/apple-touch-icon-precomposed.png' rel='apple-touch-icon-precomposed'>
+<link href='http://assets.sky.com/images/apple-touch-icon-114x114-precomposed.png' rel='apple-touch-icon-precomposed' sizes='114x114'>
+<style media='print'>
+    #skycom-menu-button,  #skycom-profile-button,  #acc-links,  #skycom-footer-wrapper,  #skycom_breadcrumb,  #skycom-nav-wrapper,  #skycom-search-wrapper{    display:none;  }
+</style>
+<!--<link href='http://assets.sky.com/dist/759/css/fonts.css' rel='stylesheet'>-->
+<link href='http://assets.sky.com/dist/759/fonts/skyicons.css' rel='stylesheet'>
+<!--[if IE 6]>
+<link href='http://assets.sky.com/dist/759/css/ie/ie6.css' rel='stylesheet'>
+<![endif]-->
+<!--[if IE 7]>
+<link href='http://assets.sky.com/dist/759/css/ie/ie7.css' rel='stylesheet'>
+<![endif]-->
+<!--[if LT IE 9]>
+<link href='http://assets.sky.com/dist/759/css/ie/ielt9.css' rel='stylesheet'>
+<![endif]-->
+<!--[if IE 9]>
+<link href='http://assets.sky.com/dist/759/css/ie/ie9.css' rel='stylesheet'>
+<![endif]-->
+<!--[if LT IE 10]>
+<link href='http://assets.sky.com/dist/759/css/ie/ielt10.css' rel='stylesheet'>
+<![endif]-->
+<!--[if lte IE 7]>
+<script src='http://assets.sky.com/dist/759/js/ie7.js' type='text/javascript'></script>
+<![endif]-->
+<script>
+    var globalskycom = globalskycom || { };
+    globalskycom.serverHost = 'assets.sky.com';
+</script>
+<script src='http://assets.sky.com/dist/759/js/masthead.js'></script>
+
+<!--end masthead-->
+
+<link rel="stylesheet" href="dist/stylesheets/demo.css">
+<link rel="stylesheet" href="dist/stylesheets/toolkit.css">
+<link rel="stylesheet" href="dist/fonts/skycons.css">
+
+<!--for html 5 cross browser-->
+<!--[if lt IE 10]><script type="text/javascript">
+    document.createElement('header');
+    document.createElement('section');
+    document.createElement('footer');
+    document.createElement('article');
+    document.createElement('aside');
+    document.createElement('hgroup');
+    document.createElement('nav');
+    document.createElement('figure');
+    document.createElement('figcaption');
+</script><![endif]-->
+<script>
+    var responsiveImages = (function () {
+
+    var containers = [];
+
+    function loadImage(container) {
+
+        var w = window,
+            ps = container.getElementsByTagName("div"),
+            i = 0, il = ps.length,
+            j = 0, jl = ps.length,
+            sources, matches, media, picImg, newSrc;
+
+        for (; i < il; i++) {
+            if (ps[ i ].getAttribute("data-picture") !== null) {
+
+                sources = ps[ i ].getElementsByTagName("div");
+                matches = [];
+
+                // See if which sources match
+                for (j = 0, jl = sources.length; j < jl; j++) {
+                    media = sources[ j ].getAttribute("data-media");
+                    // if there's no media specified, OR w.matchMedia is supported
+                    if (!media || ( w.matchMedia && w.matchMedia(media).matches )) {
+                        matches.push(sources[ j ]);
+                    }
+                }
+
+                // Find any existing img element in the picture element
+                picImg = ps[ i ].getElementsByTagName("img")[ 0 ];
+
+                if (matches.length) {
+                    if (!picImg) {
+                        picImg = w.document.createElement("img");
+                        picImg.alt = ps[ i ].getAttribute("data-alt");
+                        ps[ i ].appendChild(picImg);
+                    }
+                    newSrc = matches.pop().getAttribute("data-src");
+                    if (picImg.src !== newSrc) {
+                        picImg.src = newSrc;
+                    }
+                }
+                else if (picImg) {
+                    ps[ i ].removeChild(picImg);
+                }
+            }
+        }
+    }
+
+
+    function on(el, eventName, exec){
+        if (el.addEventListener) {
+            el.addEventListener(eventName, exec, false);
+        } else {
+            el.attachEvent(eventName, exec);
+        }
+    }
+
+
+    function bindOnResize() {
+        on(window, "resizeend", function () {
+            var i, n=containers.length;
+            for (i=0;i< n;i++) {
+                loadImage(containers[i]);
+            }
+        });
+    }
+
+    function init(container) {
+        if(container) {
+            loadImage(container);
+            containers.push(container);
+        }
+    }
+
+    bindOnResize();
+
+    return {
+        init:init,
+        bindOnResize:bindOnResize
+    };
+})();
+
+</script>
+<script src="//web-toolkit.global.sky.com/static/lib/jquery.scrollspy.js" ></script>
+
+
+
+
+        <script src="test/libraries/mocha.js"></script>
+        <script src="test/libraries/chai.js"></script>
+        <script src="http://web-toolkit.global.sky.com/static/lib/require-2.1.9.min.js"></script>
+        <script src="test/libraries/blanket.js" data-cover-flags="debug" data-cover-never="specs"></script>
+        <script>
+            requirejs.config({
+                baseUrl: "./grunt/js/",
+                paths: {
+                    specs: '../../test/specs'
+                }
+            });
+
+            window.turnOffAnimation = function(selector){
+                var offTime = '10ms'; //can't be zero as we still need the 'end' events to fire.
+                if (selector){
+                    $("<style type='text/css' class='turnOffAnimation'> body " + selector + "{ transition-duration:" + offTime + "!important;-webkit-transition-duration:" + offTime + "!important; -webkit-animation-duration: " + offTime + "!important;animation-duration:" + offTime + "!important;} </style>").appendTo("head");
+                } else {
+                    $('.turnOffAnimation').remove();
+                }
+            };
+
+            window.chai = chai;
+            window.assert = chai.assert;
+            window.expect = chai.expect;
+            window.to = chai.to;
+
+            mocha.setup('bdd');
+            mocha.setup({ignoreLeaks: true});
+
+        </script>
+	</head>
+	<body class="grid-1140" >
+
+        <div class="skycom-container clearfix">
+			<div class="alpha skycom-12">
+				<style>
+    #fixtures-container{
+        height:0;
+        overflow: hidden;
+    }
+    #fixtures{
+        height: auto;
+        overflow: visible;
+    }
+    html{
+        padding: 0;
+    }
+</style>
+
+<div class="spinner-blue">
+    <p>Please wait...</p>
+</div>
+
+<div id="mocha" class="mocha-container"></div>
+<div id="blanket-main" class="blanket-container"></div>
+<div id="fixtures-container">
+    <div id="fixtures">
+    </div>
+</div>
+
+<script>
+//    require(['testIFrame']);
+</script>
+<script src="dist/scripts/testIframe.js"></script>
+
+			</div>
+		</div>
+	</body>
+</html>

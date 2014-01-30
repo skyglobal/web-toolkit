@@ -15,46 +15,19 @@ title: Sky Web Toolkit Testing
         padding: 0;
     }
 </style>
-<script>
-    (function(){
 
-    var item = document.location.hash.replace(/#/,'');
-    var spec = item.split('/')[1] + 'Spec';
-
-
-
-//    var script = document.createElement('script');
-//    script.src = "test/libraries/blanket.js";
-//    script.setAttribute("data-cover-never", "specs");
-//    script.setAttribute("data-cover-only", item);
-//        script.onload =  function(){
-
-            require(['specs/' + spec], function(specDescription){
-
-                mocha.grep(specDescription);
-                setTimeout(function(){
-                    $('.spinner-blue').remove();
-                    mocha.run(function (){
-                        document.location.hash = item;
-                        if (window.parent && window.parent.demo){
-                            window.parent.demo.tests.updateTestsResults({ failures:$('.failures em').text(), spec:spec});
-                        }
-                    });
-                },2000);
-            });
-//        };
-//        document.head.appendChild(script);
-
-
-}());
-</script>
 <div class="spinner-blue">
     <p>Please wait...</p>
 </div>
+
 <div id="mocha" class="mocha-container"></div>
 <div id="blanket-main" class="blanket-container"></div>
 <div id="fixtures-container">
     <div id="fixtures">
-        {% include components/carousel.html %}
     </div>
 </div>
+
+<script>
+//    require(['testIFrame']);
+</script>
+<script src="dist/scripts/testIframe.js"></script>

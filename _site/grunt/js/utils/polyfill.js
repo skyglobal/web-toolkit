@@ -50,7 +50,8 @@ toolkit.polyfill = (function () {
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/polyfill', [], function() {
         'use strict';
-        return toolkit.polyfill();
+        toolkit.polyfill = toolkit.polyfill();
+        return toolkit.polyfill;
     });
 } else {
     toolkit.polyfill = toolkit.polyfill();

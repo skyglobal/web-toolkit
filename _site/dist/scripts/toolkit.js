@@ -51,7 +51,8 @@ toolkit.polyfill = (function () {
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/polyfill', [], function() {
         
-        return toolkit.polyfill();
+        toolkit.polyfill = toolkit.polyfill();
+        return toolkit.polyfill;
     });
 } else {
     toolkit.polyfill = toolkit.polyfill();
@@ -141,7 +142,8 @@ toolkit.event = (function () {
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/event', [],function() {
         
-        return toolkit.event();
+        toolkit.event = toolkit.event();
+        return toolkit.event;
     });
 } else {
     toolkit.event = toolkit.event();
@@ -307,7 +309,8 @@ toolkit.detect = (function (event) {
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/detect', ['utils/event'], function(event) {
         
-        return toolkit.detect(event);
+        toolkit.detect = toolkit.detect(event);
+        return toolkit.detect;
     });
 } else {
     toolkit.detect = toolkit.detect(toolkit.event);
@@ -392,7 +395,8 @@ toolkit.skycons = (function(detect, event) {
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/skycons', ['utils/detect','utils/event'], function(detect,event) {
-        return toolkit.skycons(detect,event);
+        toolkit.skycons = toolkit.skycons(detect,event);
+        return toolkit.skycons;
     });
 } else {
     toolkit.skycons = toolkit.skycons(toolkit.detect,toolkit.event);
@@ -529,7 +533,8 @@ toolkit.hashManager = (function() {
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/hashManager', [], function() {
-        return toolkit.hashManager();
+        toolkit.hashManager =  toolkit.hashManager();
+        return toolkit.hashManager;
     });
 } else {
     toolkit.hashManager =  toolkit.hashManager();
@@ -567,7 +572,8 @@ toolkit.popup = (function() {
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/popup', [], function() {
-        return toolkit.popup();
+        toolkit.popup = toolkit.popup();
+        return toolkit.popup;
     });
 } else {
     toolkit.popup = toolkit.popup();
@@ -704,7 +710,8 @@ toolkit.toggle = (function(detect) {
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/toggle', ['utils/detect'], function(detect) {
-        return toolkit.toggle(detect);
+        toolkit.toggle = toolkit.toggle(detect);
+        return toolkit.toggle;
     });
 } else {
     toolkit.toggle = toolkit.toggle(toolkit.detect);
@@ -762,7 +769,8 @@ toolkit.focus = (function () {
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/focus', [], function() {
         
-        return toolkit.focus();
+        toolkit.focus = toolkit.focus();
+        return toolkit.focus;
     });
 } else {
     toolkit.focus = toolkit.focus();
@@ -771,7 +779,7 @@ if (typeof window.define === "function" && window.define.amd) {
 /*global jQuery:false */
 
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.validation = (function ($) {
+toolkit.validation = (function () {
     
 
     function isSafari() {
@@ -962,10 +970,11 @@ toolkit.validation = (function ($) {
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/validation', [], function() {
         
-        return toolkit.validation(jQuery);
+        toolkit.validation =  toolkit.validation();
+        return toolkit.validation;
     });
 } else {
-    toolkit.validation =  toolkit.validation(jQuery);
+    toolkit.validation =  toolkit.validation();
 };
 /**
  purpose:

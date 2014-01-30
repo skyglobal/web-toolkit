@@ -159,7 +159,8 @@ toolkit.detect = (function (event) {
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/detect', ['utils/event'], function(event) {
         'use strict';
-        return toolkit.detect(event);
+        toolkit.detect = toolkit.detect(event);
+        return toolkit.detect;
     });
 } else {
     toolkit.detect = toolkit.detect(toolkit.event);

@@ -83,6 +83,8 @@ module.exports = function(grunt) {
                         name: 'demo'
                     },{
                         name: 'changes'
+                    },{
+                        name: 'testIFrame'
                     }]
                 }
             }

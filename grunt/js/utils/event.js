@@ -83,7 +83,8 @@ toolkit.event = (function () {
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/event', function() {
         'use strict';
-        return toolkit.event();
+        toolkit.event = toolkit.event();
+        return toolkit.event;
     });
 } else {
     toolkit.event = toolkit.event();

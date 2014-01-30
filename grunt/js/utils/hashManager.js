@@ -130,7 +130,8 @@ toolkit.hashManager = (function() {
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/hashManager', [], function() {
-        return toolkit.hashManager();
+        toolkit.hashManager =  toolkit.hashManager();
+        return toolkit.hashManager;
     });
 } else {
     toolkit.hashManager =  toolkit.hashManager();

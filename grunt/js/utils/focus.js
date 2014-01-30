@@ -50,7 +50,8 @@ toolkit.focus = (function () {
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/focus', [], function() {
         'use strict';
-        return toolkit.focus();
+        toolkit.focus = toolkit.focus();
+        return toolkit.focus;
     });
 } else {
     toolkit.focus = toolkit.focus();

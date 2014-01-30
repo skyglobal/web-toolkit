@@ -60,8 +60,8 @@ if (typeof window.define === "function" && window.define.amd){
         'demo/menu',
         'demo/tests',
         'demo/skycons',
-        'utils/hashManager'], function(displayCode, menu, tests, skycons, hash) {
-        return demo.main(displayCode, menu, tests, skycons, hash);
+        'utils/hashManager'], function(displayCode, menu, tests, skycons, hashManager) {
+        return demo.main(displayCode, menu, tests, skycons, hashManager);
     });
 } else {
     demo.main(demo.displayCode, demo.menu, demo.tests, demo.skycons, toolkit.hashManager);

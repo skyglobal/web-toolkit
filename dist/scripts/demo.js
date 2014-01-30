@@ -33,7 +33,6 @@ demo.displayCode = (function( hljs){
             this.getFile(this.dir, this.fileNames[i], 'html');
             this.getFile(this.dir, this.fileNames[i], 'notes.html', true);
             this.getFile(this.dir, this.fileNames[i], 'js');
-            this.getFile(this.dir, this.fileNames[i], 'require.js');
         }
     };
 
@@ -80,7 +79,7 @@ demo.displayCode = (function( hljs){
         if (this.styled || styled){
             return $('<div id="' + id + '" class="styled ' + ext + '"></div> ');
         } else {
-            return $('<h4 class="intro smaller">' + ext.toUpperCase() + '</h4> <pre><code class="language-' + ext.replace('require.','') + ' hljs vhdl"  id="' + id + '"></code></pre>');
+            return $('<h4 class="intro smaller">' + ext.toUpperCase() + '</h4> <pre><code class="language-' + ext + ' hljs vhdl"  id="' + id + '"></code></pre>');
         }
 
     };
@@ -101,7 +100,6 @@ demo.displayCode = (function( hljs){
         var $tabContents = $('<section class="tabcontents clearfix"></section>');
         $tabContents.append(this.createContainer(featureFile, 'notes.html', styled))
             .append(this.createContainer(featureFile, 'html'))
-            .append(this.createContainer(featureFile, 'require.js'))
             .append(this.createContainer(featureFile, 'js'));
 
         $tab.append($tabContents);
@@ -128,17 +126,11 @@ demo.displayCode = (function( hljs){
 
     DisplayCode.prototype.addHighlightedCode = function(featureFile, ext){
         var id = this.feature + '-' + featureFile;
-        var languageShortHand = ext.replace('require.','');
-        var language = (languageShortHand=='js') ? 'javascript' : 'xml';
-        var codeDom = document.getElementById(id + ext + '-container'),
-            code = this[id + ext] || 'none',
-            codeNode;
-
+        var language = (ext=='js') ? 'javascript' : 'xml';
+        var codeDom = document.getElementById(id + ext + '-container');
+        var code = this[id + ext] || 'none';
         var highlighted = hljs.highlight(language, code, true);
-//        codeNode = document.createTextNode(highlighted.value);
         $(codeDom).append(highlighted.value);
-//        codeDom.appendChild(highlighted.value);
-
     };
 
     return DisplayCode;
@@ -147,10 +139,10 @@ demo.displayCode = (function( hljs){
 
 if (typeof window.define === "function" && window.define.amd) {
     define('demo/displayCode', ['lib/highlight'],function( hljs) {
-        return demo.displayCode( hljs);
+        return demo.displayCode(hljs);
     });
 } else {
-    demo.displayCode = demo.displayCode( hljs);
+    demo.displayCode = demo.displayCode(hljs);
 };
 if (typeof demo==='undefined') demo={};
 demo.menu = (function(){
@@ -350,7 +342,8 @@ toolkit.hashManager = (function() {
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/hashManager', [], function() {
-        return toolkit.hashManager();
+        toolkit.hashManager =  toolkit.hashManager();
+        return toolkit.hashManager;
     });
 } else {
     toolkit.hashManager =  toolkit.hashManager();
@@ -554,8 +547,8 @@ if (typeof window.define === "function" && window.define.amd){
         'demo/menu',
         'demo/tests',
         'demo/skycons',
-        'utils/hashManager'], function(displayCode, menu, tests, skycons, hash) {
-        return demo.main(displayCode, menu, tests, skycons, hash);
+        'utils/hashManager'], function(displayCode, menu, tests, skycons, hashManager) {
+        return demo.main(displayCode, menu, tests, skycons, hashManager);
     });
 } else {
     demo.main(demo.displayCode, demo.menu, demo.tests, demo.skycons, toolkit.hashManager);

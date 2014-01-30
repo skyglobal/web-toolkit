@@ -130,7 +130,8 @@ toolkit.toggle = (function(detect) {
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/toggle', ['utils/detect'], function(detect) {
-        return toolkit.toggle(detect);
+        toolkit.toggle = toolkit.toggle(detect);
+        return toolkit.toggle;
     });
 } else {
     toolkit.toggle = toolkit.toggle(toolkit.detect);
