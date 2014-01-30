@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>Mocha</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="test/libraries/mocha.css" />
+    <script src="test/libraries/mocha.js"></script>
+    <script src="test/libraries/chai.js"></script>
+    <script src="test/libraries/jquery-2.0.3.js"></script>
+
+    <script type="text/javascript" src="test/libraries/require.js"> </script>
+    <script type="text/javascript" src="test/libraries/blanket.js" id="blanket-src" data-cover-only="accordion" data-cover-flags="branchTracking"> </script>
+
+    <script>
+        window.chai = chai;
+        window.assert = chai.assert;
+        window.expect = chai.expect;
+        window.to = chai.to;
+    </script>
+    <script>mocha.setup('bdd')</script>
+    <script>
+        requirejs.config({
+            baseUrl: "./grunt/js/",
+            paths: {
+               specs: '../../test/specs'
+           }
+        });
+
+        require([
+            "specs/eventSpec",
+            "specs/accordionSpec"
+        ], function (eventSpec, accordionSpec) {
+            blanket.options({filter:'event'});
+            mocha.grep(eventSpec);
+            mocha.run();
+
+        });
+    </script>
+</head>
+<body>
+<div id="mocha" class="mocha-container"></div>
+</body>
+</html>

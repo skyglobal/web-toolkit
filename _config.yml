@@ -1,7 +1,6 @@
 version: 2.1.3
 destination: _site
 exclude: [
-  grunt,
   node_modules, test, README.md,
   Gemfile, Gemfile.lock, rakefile,
   Web-toolkit.iml,web-toolkit.iml, web-toolkit.ipr, web-toolkit.iws,circle.yml, Gruntfile.js,package.json,

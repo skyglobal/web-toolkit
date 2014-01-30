@@ -1,5 +1,6 @@
 /*! blanket - v1.1.5 */
 
+if (typeof QUnit !== 'undefined'){ QUnit.config.autostart = false; }
 (function(define){
 
     /*
@@ -4124,6 +4125,8 @@ var parseAndModify = (inBrowser ? window.falafel : require("falafel"));
             }else{
                 var sourceArray = _blanket._prepareSource(inFile);
                 _blanket._trackingArraySetup=[];
+                //remove shebang
+                inFile = inFile.replace(/^\#\!.*/, "");
                 var instrumented =  parseAndModify(inFile,{loc:true,comment:true}, _blanket._addTracking(inFileName));
                 instrumented = _blanket._trackingSetup(inFileName,sourceArray)+instrumented;
                 if (_blanket.options("sourceURL")){
@@ -4857,7 +4860,7 @@ blanket.defaultReporter = function(coverage){
         totals.passedBranches += passedBranches;
         totals.totalBranches += totalBranches;
 
-        // if "data-cover-modulepattern" was provided, 
+        // if "data-cover-modulepattern" was provided,
         // track totals per module name as well as globally
         if (modulePatternRegex) {
             var moduleName = file.match(modulePatternRegex)[1];
@@ -4898,7 +4901,7 @@ blanket.defaultReporter = function(coverage){
         bodyContent += output;
     }
 
-    // create temporary function for use by the global totals reporter, 
+    // create temporary function for use by the global totals reporter,
     // as well as the per-module totals reporter
     var createAggregateTotal = function(numSt, numCov, numBranch, numCovBr, moduleName) {
 
@@ -4916,8 +4919,8 @@ blanket.defaultReporter = function(coverage){
         bodyContent += totalsOutput;
     };
 
-    // if "data-cover-modulepattern" was provided, 
-    // output the per-module totals alongside the global totals    
+    // if "data-cover-modulepattern" was provided,
+    // output the per-module totals alongside the global totals
     if (modulePatternRegex) {
         for (var thisModuleName in totals.moduleTotalStatements) {
             if (totals.moduleTotalStatements.hasOwnProperty(thisModuleName)) {
@@ -5364,6 +5367,84 @@ blanket.defaultReporter = function(coverage){
 
 })(blanket);
 
+(function(){
+    if (typeof QUnit !== 'undefined'){
+        //check to make sure requirejs is completed before we start the test runner
+        var allLoaded = function() {
+            return window.QUnit.config.queue.length > 0 && blanket.noConflict().requireFilesLoaded();
+        };
+
+        if (!QUnit.config.urlConfig[0].tooltip){
+            //older versions we run coverage automatically
+            //and we change how events are binded
+            QUnit.begin=function(){
+                blanket.noConflict().setupCoverage();
+            };
+
+            QUnit.done=function(failures, total) {
+                blanket.noConflict().onTestsDone();
+            };
+            QUnit.moduleStart=function( details ) {
+                blanket.noConflict().onModuleStart();
+            };
+            QUnit.testStart=function( details ) {
+                blanket.noConflict().onTestStart();
+            };
+            QUnit.testDone=function( details ) {
+                blanket.noConflict().onTestDone(details.total,details.passed);
+            };
+            blanket.beforeStartTestRunner({
+                condition: allLoaded,
+                callback: QUnit.start
+            });
+        }else{
+            QUnit.config.urlConfig.push({
+                id: "coverage",
+                label: "Enable coverage",
+                tooltip: "Enable code coverage."
+            });
+
+            if ( QUnit.urlParams.coverage || blanket.options("autoStart") ) {
+                QUnit.begin(function(){
+                    blanket.noConflict().setupCoverage();
+                });
+
+                QUnit.done(function(failures, total) {
+                    blanket.noConflict().onTestsDone();
+                });
+                QUnit.moduleStart(function( details ) {
+                    blanket.noConflict().onModuleStart();
+                });
+                QUnit.testStart(function( details ) {
+                    blanket.noConflict().onTestStart();
+                });
+                QUnit.testDone(function( details ) {
+                    blanket.noConflict().onTestDone(details.total,details.passed);
+                });
+                blanket.noConflict().beforeStartTestRunner({
+                    condition: allLoaded,
+                    callback: function(){
+                        if (!(blanket.options("existingRequireJS") && !blanket.options("autoStart"))){
+                            QUnit.start();
+                        }
+                    }
+                });
+            }else{
+                if (blanket.options("existingRequireJS")){ requirejs.load = _blanket.utils.oldloader; }
+                blanket.noConflict().beforeStartTestRunner({
+                    condition: allLoaded,
+                    callback: function(){
+                        if (!(blanket.options("existingRequireJS") && !blanket.options("autoStart"))){
+                            QUnit.start();
+                        }
+                    },
+                    coverage:false
+                });
+            }
+        }
+    }
+})();
+
 (function() {
 
     if(!mocha) {
@@ -5387,8 +5468,7 @@ blanket.defaultReporter = function(coverage){
      *
      */
 
-//    var OriginalReporter = mocha._reporter;
-    var mochaInstance = window.Mocha || window.mocha;
+    var OriginalReporter = mocha._reporter;
 
     var BlanketReporter = function(runner) {
         runner.on('start', function() {
@@ -5412,13 +5492,12 @@ blanket.defaultReporter = function(coverage){
         });
 
         // NOTE: this is an instance of BlanketReporter
-        mochaInstance.reporters.HTML.call(this, runner);
+        OriginalReporter.apply(this, arguments);
     };
-    var Klass = function () {};
-    Klass.prototype = mochaInstance.reporters.HTML.prototype;
-    BlanketReporter.prototype = new Klass();
+    BlanketReporter.prototype = OriginalReporter.prototype;
 
     mocha.reporter(BlanketReporter);
+
     var oldRun = mocha.run,
         oldCallback = null;
 

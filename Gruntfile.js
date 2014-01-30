@@ -23,7 +23,7 @@ module.exports = function(grunt) {
                 tasks: ['compass', 'jekyll:build']
             },
             'jekyll': {
-                files: [ '_includes/**/*', '_layouts/**/*', '*.html', '_config.yml' ],
+                files: [ '_includes/**/*', '_layouts/**/*', '*.html', '_config.yml', 'test/libraries/*.js','mocha-blanket/**/*' ],
                 tasks: ['jekyll:build']
             },
             'specs': {

@@ -57,7 +57,7 @@ if (typeof window.define === "function" && window.define.amd) {
     toolkit.polyfill = toolkit.polyfill();
 };
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.event = (function (detect) {
+toolkit.event = (function () {
     
     var timeout = {
         resize : null
@@ -139,12 +139,12 @@ toolkit.event = (function (detect) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/event', ['utils/detect'], function(detect) {
+    define('utils/event', [],function() {
         
-        return toolkit.event(detect);
+        return toolkit.event();
     });
 } else {
-    toolkit.event = toolkit.event(toolkit.detect);
+    toolkit.event = toolkit.event();
 };
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.detect = (function (event) {
