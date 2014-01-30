@@ -1,19 +1,17 @@
 if (typeof demo==='undefined') demo={};
-demo.tests = (function(){
+demo.tests = (function(hashManager){
 
     function runTest(hash){
         var spec = hash.replace('test/','');
-        var script = document.createElement('script');
-        script.src = "test/specs/" + spec + ".js";
-        script.onload =  function(){
+        require(['specs/' + spec], function(specDescription){
             var $runTestLink = $('a[href*="#' + hash + '"]'),
                 $mocha = $('<div id="mocha" class="mocha-container"></div>');
             $runTestLink.parent().after($mocha);
-            var grep = window[spec]();
-//            mocha.grep(grep);
+//            var grep = window[spec]();
+            mocha.grep(specDescription);
             mocha.run(function(){
                 updateTestsResults($runTestLink, $mocha);
-                $mocha.attr('id','mocha-' + spec);
+                $mocha.attr('id','mocha-' + specDescription);
             });
             $runTestLink.removeAttr('href');
             $('html, body').animate({
@@ -21,10 +19,9 @@ demo.tests = (function(){
             }, 200);
             createLightbox($mocha, spec);
             $runTestLink.on('click', function(){
-                showLightbox($('#' +  spec + '-lightbox'));
+                showLightbox($('#' +  specDescription + '-lightbox'));
             });
-        };
-        document.head.appendChild(script);
+        });
     }
 
     function updateTestsResults($runTestLink, $mocha){
@@ -81,7 +78,7 @@ demo.tests = (function(){
         $('.run-test').each(function(){
             hashes.push($(this).attr('href').split('#')[1]);
         });
-        window.toolkit.hashManager.register(hashes, runTest);
+        hashManager.register(hashes, runTest);
     }
 
     registerTests();
@@ -89,9 +86,9 @@ demo.tests = (function(){
 });
 
 if (typeof window.define === "function" && window.define.amd){
-    define('demo/tests', function() {
-        return demo.tests( );
+    define('demo/tests', ['utils/hashManager'], function(hashManager) {
+        return demo.tests(hashManager);
     });
 } else {
-    demo.tests();
+    demo.tests(toolkit.hashManager);
 }

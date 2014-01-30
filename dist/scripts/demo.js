@@ -218,22 +218,157 @@ if (typeof window.define === "function" && window.define.amd){
     demo.menu();
 }
 ;
+/**
+ purpose:
+ to let 'anchor' tags do their job and change the hash in the url for internal links.
+ this will execute the associated callback with that hash.
+ no onclick events needed.
+ **/
+if (typeof toolkit==='undefined') toolkit={};
+toolkit.hashManager = (function() {
+
+    var vars = {
+        globalHashList: {},
+        eventsAlreadyBound: false,
+        lastExecutor: null,
+        hash: null
+    };
+
+    function bindEvents() {
+        $(window).on('hashchange', onHashChange);
+        var doc_mode = document.documentMode,
+        hashChangeSupport = 'onhashchange' in window && ( doc_mode === undefined || doc_mode > 7 );
+        if (!hashChangeSupport){ //IE7 support
+            vars.hash = document.location.hash;
+            setInterval(function(){
+                if (document.location.hash !== vars.hash){
+                    $(window).trigger('hashchange');
+                }
+            },200);
+        }
+        vars.eventsAlreadyBound = true;
+    }
+
+    function onHashChange(hash) {
+        var evt, fn;
+        hash = cleanHash((typeof hash === 'string') ? hash : location.hash);
+        evt = getHashEvent(hash);
+        if (hash && evt) {
+            fn = 'callback';
+            vars.lastExecutor = hash;
+        } else if (vars.lastExecutor) {
+            evt = vars.globalHashList[vars.lastExecutor];
+            fn = 'undo';
+        }
+        if (evt && typeof evt[fn] === 'function') {
+            evt[fn](hash);
+        }
+    }
+
+    function remove() {
+        var loc = window.location;
+        if ("pushState" in history) {
+            location.hash = '!';
+            history.pushState("", document.title, loc.pathname + loc.search);
+        } else {
+            location.hash = '!';
+        }
+    }
+
+    function change(hash){
+        location.hash = '!' + hash;
+    }
+
+    function getHashEvent(hash){
+        var globalHashList = vars.globalHashList,
+            registeredHash,
+            wildcardEvent,
+            exactMatchEvent;
+        for(registeredHash in globalHashList) {
+            if(matches(hash, registeredHash) || matches(registeredHash, hash)) {
+                if (registeredHash.indexOf('/*')>=0) {
+                    wildcardEvent = globalHashList[registeredHash];
+                } else {
+                    exactMatchEvent = globalHashList[registeredHash];
+                    break;
+                }
+            }
+        }
+        return exactMatchEvent || wildcardEvent;
+    }
+
+    function matches(hashWithoutWildCard, hashWithWildCard) {
+        hashWithoutWildCard = cleanHash(hashWithoutWildCard);
+        hashWithWildCard = cleanHash(hashWithWildCard);
+        var hashSections = hashWithWildCard.split('/*');
+        var hashMatched = ((hashWithoutWildCard.indexOf(hashSections[0]) === 0 && hashSections.length>1) ||
+            hashWithoutWildCard == hashWithWildCard);
+        return hashMatched;
+    }
+
+    function register(hashList, callback, undo){
+        if (typeof hashList === 'string') { hashList = [hashList];}
+        var hash,
+            i= 0,
+            len = hashList.length;
+        for (i;i<len;i++){
+            hash = cleanHash(hashList[i]);
+            if (vars.globalHashList[hash]){
+                var err = 'hashManager: hash (' + hash + ') already exists';
+                throw new Error(err);
+            }
+            vars.globalHashList[hash] = {
+                callback: callback,
+                undo: undo
+            };
+
+            if (vars.eventsAlreadyBound && matches(location.hash, hash)) {
+                onHashChange();
+            }
+        }
+    }
+
+    function resetHash() {
+        vars.globalHashList = [];
+    }
+
+    function cleanHash(hash) {
+        return hash.replace(/[#!]/g, '');
+    }
+
+    bindEvents();
+
+    return {
+        register: register,
+        change: change,
+        remove: remove,
+        onHashChange: onHashChange,
+        resetHash: resetHash,
+        cleanHash: cleanHash
+    };
+});
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('utils/hashManager', [], function() {
+        return toolkit.hashManager();
+    });
+} else {
+    toolkit.hashManager =  toolkit.hashManager();
+};
 if (typeof demo==='undefined') demo={};
-demo.tests = (function(){
+demo.tests = (function(hashManager){
 
     function runTest(hash){
         var spec = hash.replace('test/','');
-        var script = document.createElement('script');
-        script.src = "test/specs/" + spec + ".js";
-        script.onload =  function(){
+        require(['specs/' + spec], function(specDescription){
             var $runTestLink = $('a[href*="#' + hash + '"]'),
                 $mocha = $('<div id="mocha" class="mocha-container"></div>');
             $runTestLink.parent().after($mocha);
-            var grep = window[spec]();
-//            mocha.grep(grep);
+//            var grep = window[spec]();
+            mocha.grep(specDescription);
             mocha.run(function(){
                 updateTestsResults($runTestLink, $mocha);
-                $mocha.attr('id','mocha-' + spec);
+                $mocha.attr('id','mocha-' + specDescription);
             });
             $runTestLink.removeAttr('href');
             $('html, body').animate({
@@ -241,10 +376,9 @@ demo.tests = (function(){
             }, 200);
             createLightbox($mocha, spec);
             $runTestLink.on('click', function(){
-                showLightbox($('#' +  spec + '-lightbox'));
+                showLightbox($('#' +  specDescription + '-lightbox'));
             });
-        };
-        document.head.appendChild(script);
+        });
     }
 
     function updateTestsResults($runTestLink, $mocha){
@@ -301,7 +435,7 @@ demo.tests = (function(){
         $('.run-test').each(function(){
             hashes.push($(this).attr('href').split('#')[1]);
         });
-        window.toolkit.hashManager.register(hashes, runTest);
+        hashManager.register(hashes, runTest);
     }
 
     registerTests();
@@ -309,11 +443,11 @@ demo.tests = (function(){
 });
 
 if (typeof window.define === "function" && window.define.amd){
-    define('demo/tests', [],function() {
-        return demo.tests( );
+    define('demo/tests', ['utils/hashManager'], function(hashManager) {
+        return demo.tests(hashManager);
     });
 } else {
-    demo.tests();
+    demo.tests(toolkit.hashManager);
 }
 ;
 if (typeof demo==='undefined') demo={};
@@ -354,10 +488,10 @@ if (typeof window.define === "function" && window.define.amd){
 }
 ;
 if (typeof demo==='undefined') demo={};
-demo.main = (function(DisplayCode, menu, tests, skycons) {
+demo.main = (function(DisplayCode, menu, tests, skycons, hash) {
 
     function bindEvents() {
-        toolkit.hashManager.register('code/*',showCode);
+        hash.register('code/*',showCode);
     }
 
     function showCode(hash){
@@ -414,10 +548,11 @@ if (typeof window.define === "function" && window.define.amd){
     define('demo', ['demo/displayCode',
         'demo/menu',
         'demo/tests',
-        'demo/skycons'], function(displayCode, menu, tests, skycons) {
-        return demo.main(displayCode, menu, tests, skycons);
+        'demo/skycons',
+        'utils/hashManager'], function(displayCode, menu, tests, skycons, hash) {
+        return demo.main(displayCode, menu, tests, skycons, hash);
     });
 } else {
-    demo.main(demo.displayCode, demo.menu, demo.tests, demo.skycons);
+    demo.main(demo.displayCode, demo.menu, demo.tests, demo.skycons, toolkit.hashManager);
 }
 ;

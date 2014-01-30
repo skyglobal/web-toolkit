@@ -9,8 +9,39 @@
 
         {% include head.html %}
 
-        <script src="dist/scripts/toolkit.js" data-cover></script>
+        <!--<script src="dist/scripts/toolkit.js"></script>-->
+        <script src="test/libraries/mocha.js"></script>
+        <script src="test/libraries/chai.js"></script>
+        <script src="http://web-toolkit.global.sky.com/static/lib/require-2.1.9.min.js"></script>
 
+        <!--<script src="test/libraries/blanket.js" data-cover-flags="debug"></script>-->
+        <script>
+            requirejs.config({
+                baseUrl: "./grunt/js/",
+                paths: {
+                    specs: '../../test/specs'
+                }
+            });
+
+            window.turnOffAnimation = function(selector){
+                var offTime = '10ms'; //can't be zero as we still need the 'end' events to fire.
+                if (selector){
+                    $("<style type='text/css' class='turnOffAnimation'> body " + selector + "{ transition-duration:" + offTime + "!important;-webkit-transition-duration:" + offTime + "!important; -webkit-animation-duration: " + offTime + "!important;animation-duration:" + offTime + "!important;} </style>").appendTo("head");
+                } else {
+                    $('.turnOffAnimation').remove();
+                }
+            };
+
+            window.chai = chai;
+            window.assert = chai.assert;
+            window.expect = chai.expect;
+            window.to = chai.to;
+
+            mocha.setup('bdd');
+            mocha.setup({ignoreLeaks: true});
+
+            require(['toolkit']);
+        </script>
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target="#toolkit-menu-tabs">
         <div class="skycom-container clearfix">
@@ -35,11 +66,10 @@
 
         {% include footer.html %}
 
-        <script src="dist/scripts/demo.js"></script>
+        <!--<script src="dist/scripts/demo.js"></script>-->
+        <script>
+            require(['demo']);
+        </script>
 
-        <script src="test/libraries/mocha.js"></script>
-        <script src="http://web-toolkit.global.sky.com/static/lib/require-2.1.9.min.js"></script>
-        <script src="test/libraries/blanket.js" data-cover-flags="debug"></script>
-        <script src="test/config.js" ></script>
 	</body>
 </html>
