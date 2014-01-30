@@ -61,5 +61,5 @@ if (typeof window.define === "function" && window.define.amd){
         return demo.menu();
     });
 } else {
-    demo.menu();
+    demo.menu = demo.menu();
 }

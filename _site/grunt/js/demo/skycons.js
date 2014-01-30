@@ -32,5 +32,5 @@ if (typeof window.define === "function" && window.define.amd){
         return demo.skycons();
     });
 } else {
-    demo.skycons();
+    demo.skycons = demo.skycons();
 }

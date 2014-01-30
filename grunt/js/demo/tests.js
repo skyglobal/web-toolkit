@@ -1,11 +1,13 @@
 if (typeof demo==='undefined') demo={};
 demo.tests = (function(hashManager){
 
+    var timeout = {};
+
     function runTest(hash){
         var item = hash.replace(/test\//,'');
         var spec = item.split('/')[1] + 'Spec';
         var $runTestLink = $('a[href*="#' + hash + '"]');
-        $runTestLink.removeAttr('href');
+        $runTestLink.removeAttr('href').attr('id', 'link-test-' + spec);
         $('html, body').animate({
             scrollTop: $runTestLink.parent().offset().top
         }, 200);
@@ -15,12 +17,16 @@ demo.tests = (function(hashManager){
         $runTestLink.on('click', function(){
             showLightbox($('#' +  spec + '-lightbox'));
         });
+        timeout[spec] = setInterval(function(){
+            $testFrame.height($testFrame.contents().find("body").height());
+        },100);
     }
 
-    function updateTestsResults($runTestLink, $mocha){
-        var findFailure = $mocha.find('.failures em').text();
-
-        if(findFailure === '0'){
+    function updateTestsResults(results){
+        var spec = results.spec;
+        var failures = results.failures;
+        var $runTestLink = $('a[id="link-test-' + spec + '"]');
+        if(failures === '0'){
             $runTestLink.prepend("<span class='dev-button result-summary'><i class='skycon-tick colour' aria-hidden='true'></i> Tests Passed</span>");
         } else {
             $runTestLink.prepend("<span class='dev-button result-summary error'><i class='skycon-warning colour' aria-hidden='true'></i> Tests Failed</span>");
@@ -71,16 +77,22 @@ demo.tests = (function(hashManager){
             hashes.push($(this).attr('href').split('#')[1]);
         });
         hashManager.register(hashes, runTest);
+
     }
 
     registerTests();
+
+    return {
+        updateTestsResults: updateTestsResults
+    };
 
 });
 
 if (typeof window.define === "function" && window.define.amd){
     define('demo/tests', ['utils/hashManager'], function(hashManager) {
-        return demo.tests(hashManager);
+        demo.tests = demo.tests(hashManager);
+        return demo.tests;
     });
 } else {
-    demo.tests(toolkit.hashManager);
+    demo.tests = demo.tests(toolkit.hashManager);
 }
