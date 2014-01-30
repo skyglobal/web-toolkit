@@ -19,18 +19,20 @@ testIFrame.main = (function() {
         var $examples = $(window.parent.document).find('#' + item.replace(/\//,' #') + ' .example');
         $examples.each(function(){
             var example = $(this).attr('data-example');
+            var init = $(this).find('script').length;
             getCode(item, example, 'html').always(function(data){
                 filesReceived++;
                 $('#fixtures').append($(data));
-                getCode(item, example, 'js').always(function(data){
-                    filesReceived++;
-                    if (data){
-                        $('#fixtures').append($('<script>' + data + '</script>'));
-                    }
-                    if (exampleCount === filesReceived){
+                if (init){
+                    getCode(item, example, 'js').always(function(data){
+                        filesReceived++;
+                        if (data){
+                            $('#fixtures').append($('<script>' + data + '</script>'));
+                        }
                         getTests();
-                    }
-                });
+                    });
+                }
+                getTests();
             });
         });
     }
@@ -44,6 +46,7 @@ testIFrame.main = (function() {
         });
     }
     function getTests(){
+        if (exampleCount !== filesReceived){ return ; }
         require(['specs/' + spec], function(specDescription){
             mocha.grep(specDescription);
             setTimeout(runMocha,2000);
