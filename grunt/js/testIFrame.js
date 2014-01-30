@@ -24,7 +24,9 @@ testIFrame.main = (function() {
                 $('#fixtures').append($(data));
                 getCode(item, example, 'js').always(function(data){
                     filesReceived++;
-                    $('#fixtures').append($('<script>' + data + '</script>'));
+                    if (data){
+                        $('#fixtures').append($('<script>' + data + '</script>'));
+                    }
                     if (exampleCount === filesReceived){
                         getTests();
                     }
@@ -59,12 +61,5 @@ testIFrame.main = (function() {
 
     require([item], getFixtures);
 
-});
+})();
 
-//if (typeof window.define === "function" && window.define.amd){
-//    define(function() {
-//        return testIFrame.main();
-//    });
-//} else {
-    testIFrame.main();
-//}
