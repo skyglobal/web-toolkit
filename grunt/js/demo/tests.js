@@ -64,6 +64,7 @@ demo.tests = (function(hashManager){
         showLightbox($('#' +  spec + '-lightbox'));
         $close.add($(lightboxDiv)).on('click', function(e){
             hideLightbox(e, $('#' +  spec + '-lightbox'));
+            clearInterval(timeout[spec]);
         });
     }
 

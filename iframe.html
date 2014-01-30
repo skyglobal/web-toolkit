@@ -20,29 +20,32 @@ title: Sky Web Toolkit Testing
 
     var item = document.location.hash.replace(/#/,'');
     var spec = item.split('/')[1] + 'Spec';
-    var hash ='parentlink';
 
-    require(['specs/' + spec], function(specDescription){
 
-        mocha.grep(specDescription);
-        setTimeout(function(){
-            $('.spinner-blue').remove();
-            mocha.run(function (){
-                document.location.hash = item;
-                if (window.parent){
-                    window.parent.demo.tests.updateTestsResults({ failures:$('.failures em').text(), spec:spec});
-                }
+
+//    var script = document.createElement('script');
+//    script.src = "test/libraries/blanket.js";
+//    script.setAttribute("data-cover-never", "specs");
+//    script.setAttribute("data-cover-only", item);
+//        script.onload =  function(){
+
+            require(['specs/' + spec], function(specDescription){
+
+                mocha.grep(specDescription);
+                setTimeout(function(){
+                    $('.spinner-blue').remove();
+                    mocha.run(function (){
+                        document.location.hash = item;
+                        if (window.parent && window.parent.demo){
+                            window.parent.demo.tests.updateTestsResults({ failures:$('.failures em').text(), spec:spec});
+                        }
+                    });
+                },2000);
             });
-        },100);
-//        $runTestLink.removeAttr('href');
-//        $('html, body').animate({
-//            scrollTop: $mocha.parent().prev().offset().top
-//        }, 200);
-//        createLightbox($mocha, spec);
-//        $runTestLink.on('click', function(){
-//            showLightbox($('#' +  spec + '-lightbox'));
-//        });
-    });
+//        };
+//        document.head.appendChild(script);
+
+
 }());
 </script>
 <div class="spinner-blue">
