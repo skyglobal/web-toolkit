@@ -1524,7 +1524,6 @@ toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
             hideBodyScrollBar();
 
             this.$container.addClass(classes.open);
-            console.log('open', this.$container);
             focusOnCloseButton(this.$lightboxLink, this.$container.find('.' + classes.closeButton));
             disablePageTabbing();
             enablePageTabbing(this.$container);
@@ -1549,7 +1548,6 @@ toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
             lightbox.$container.removeClass(classes.open + ' ' + classes.closing);
             focusOnLightboxLink(lightbox.$lightboxLink);
             showBodyScrollBar();
-            console.log('onClose', this.$container);
             enablePageTabbing($('body'));
             if (lightbox.options.onClose){
                 lightbox.options.onClose();

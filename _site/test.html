@@ -177,7 +177,6 @@
 
 
         <script src="test/libraries/mocha.js"></script>
-        <script src="test/libraries/blanket.js"></script>
         <script src="http://web-toolkit.global.sky.com/static/lib/require-2.1.9.min.js" data-main='dist/scripts/toolkit'></script>
         <script src="test/config.js" ></script>
 
@@ -2445,12 +2444,6 @@ toolkit.event.on(window,'resizeend',updateEventResizeEnd);
 <div id="mocha"></div>
 <script type="text/javascript">
     require(['runner']);
-</script>
-
-<script>
-    if (window.PHANTOMJS) {
-        blanket.options("reporter", "support/grunt-reporter.js");
-    }
 </script>
 			</div>
 		</div>
