@@ -1,7 +1,7 @@
 <h3 class="demo-h3 section-title smaller">
     Carousel
     <a href="#!code/carousel" class="code-download">Code</a>
-    <a href="#test/carouselSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+    <a href="#test/components/carousel" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
 </h3>
 <p class="design-notes skycom-7 alpha">
     The carousel is fully responsive, incorporates the video player and works on touch devices (not microsoft).
@@ -16,11 +16,9 @@
         {% include components/carousel/default.html %}
     </div>
     <script>
-        if (window.require){
-            {% include components/carousel/default.require.js %}
-        } else {
+        require(['components/carousel'], function(){
             {% include components/carousel/default.js %}
-        }
+        });
     </script>
 
 </div>
@@ -34,11 +32,9 @@
         {% include components/carousel/skinny.html %}
     </div>
     <script>
-        if (window.require){
-            {% include components/carousel/skinny.require.js %}
-        } else {
+        require(['components/carousel'], function(){
             {% include components/carousel/skinny.js %}
-        }
+        });
     </script>
 
 
@@ -54,11 +50,9 @@
         {% include components/carousel/singleSlide.html %}
     </div>
     <script>
-        if (window.require){
-            {% include components/carousel/singleSlide.require.js %}
-        } else {
+        require(['components/carousel'], function(){
             {% include components/carousel/singleSlide.js %}
-        }
+        });
     </script>
 
 </div>

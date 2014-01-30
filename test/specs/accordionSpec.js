@@ -22,6 +22,7 @@ function accordionSpec() {
         }
 
         before(function(){
+            console.log('beforeall');
             turnOffAnimation('.view-container');
         });
         after(function(){

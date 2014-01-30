@@ -176,38 +176,9 @@
 
 
 
-        <!--<script src="dist/scripts/toolkit.js"></script>-->
-        <script src="test/libraries/mocha.js"></script>
-        <script src="test/libraries/chai.js"></script>
         <script src="http://web-toolkit.global.sky.com/static/lib/require-2.1.9.min.js"></script>
-
-        <!--<script src="test/libraries/blanket.js" data-cover-flags="debug"></script>-->
         <script>
-            requirejs.config({
-                baseUrl: "./grunt/js/",
-                paths: {
-                    specs: '../../test/specs'
-                }
-            });
-
-            window.turnOffAnimation = function(selector){
-                var offTime = '10ms'; //can't be zero as we still need the 'end' events to fire.
-                if (selector){
-                    $("<style type='text/css' class='turnOffAnimation'> body " + selector + "{ transition-duration:" + offTime + "!important;-webkit-transition-duration:" + offTime + "!important; -webkit-animation-duration: " + offTime + "!important;animation-duration:" + offTime + "!important;} </style>").appendTo("head");
-                } else {
-                    $('.turnOffAnimation').remove();
-                }
-            };
-
-            window.chai = chai;
-            window.assert = chai.assert;
-            window.expect = chai.expect;
-            window.to = chai.to;
-
-            mocha.setup('bdd');
-            mocha.setup({ignoreLeaks: true});
-
-            require(['toolkit']);
+            require({ baseUrl: "./grunt/js/"}, ['toolkit']);
         </script>
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target="#toolkit-menu-tabs">
@@ -1599,7 +1570,7 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
         <h3 class="demo-h3 section-title smaller">
     Carousel
     <a href="#!code/carousel" class="code-download">Code</a>
-    <a href="#test/carouselSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+    <a href="#test/components/carousel" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
 </h3>
 <p class="design-notes skycom-7 alpha">
     The carousel is fully responsive, incorporates the video player and works on touch devices (not microsoft).
@@ -1704,19 +1675,12 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
 </section>
     </div>
     <script>
-        if (window.require){
-            require(['toolkit'], function(){
-    $('#hero').skycom_carousel({
-        autoplay: true,
-        videoAds: false
-    });
-});
-        } else {
+        require(['components/carousel'], function(){
             $('#hero').skycom_carousel({
     autoplay: true,
     videoAds: false
 });
-        }
+        });
     </script>
 
 </div>
@@ -1820,19 +1784,12 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
 </section>
     </div>
     <script>
-        if (window.require){
-            require(['toolkit'], function(){
-    $('#hero-skinny').skycom_carousel({
-        autoplay: true,
-        videoAds: false
-    });
-});
-        } else {
+        require(['components/carousel'], function(){
             $('#hero-skinny').skycom_carousel({
     autoplay: true,
     videoAds: false
 });
-        }
+        });
     </script>
 
 
@@ -1885,19 +1842,12 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
 </section>
     </div>
     <script>
-        if (window.require){
-            require(['toolkit'], function(){
-    $('#empty-hero').skycom_carousel({
-        autoplay: true,
-        videoAds: false
-    });
-});
-        } else {
+        require(['components/carousel'], function(){
             $('#empty-hero').skycom_carousel({
     autoplay: true,
     videoAds: false
 });
-        }
+        });
     </script>
 
 </div>
@@ -2557,6 +2507,11 @@ toolkit.event.on(window,'resizeend',updateEventResizeEnd);
     </div>
 </section>
 
+
+
+<script>
+    require(['demo']);
+</script>
 			</div>
 		</div>
 
@@ -2579,11 +2534,6 @@ toolkit.event.on(window,'resizeend',updateEventResizeEnd);
         </ul>
     </div>
 </div>
-
-        <!--<script src="dist/scripts/demo.js"></script>-->
-        <script>
-            require(['demo']);
-        </script>
 
 	</body>
 </html>

@@ -1,0 +1,37 @@
+---
+layout: test
+title: Sky Web Toolkit Testing
+---
+<style>
+    #fixtures-container{
+        height:0;
+        overflow: hidden;
+    }
+    #fixtures{
+        height: auto;
+        overflow: visible;
+    }
+</style>
+<script>
+    (function(){
+
+    var item = document.location.hash.replace(/#/,'');
+    var spec = item.split('/')[1] + 'Spec';
+    var hash ='parentlink';
+
+    require(['specs/' + spec], function(specDescription){
+
+        mocha.grep(specDescription);
+        setTimeout(function(){
+            mocha.run();
+        },1000);
+    });
+}());
+</script>
+<div id="mocha" class="mocha-container"></div>
+<div id="blanket-main" class="blanket-container"></div>
+<div id="fixtures-container">
+    <div id="fixtures">
+        {% include components/carousel.html %}
+    </div>
+</div>

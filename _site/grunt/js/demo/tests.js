@@ -2,25 +2,18 @@ if (typeof demo==='undefined') demo={};
 demo.tests = (function(hashManager){
 
     function runTest(hash){
-        var spec = hash.replace('test/','');
-        require(['specs/' + spec], function(specDescription){
-            var $runTestLink = $('a[href*="#' + hash + '"]'),
-                $mocha = $('<div id="mocha" class="mocha-container"></div>');
-            $runTestLink.parent().after($mocha);
-//            var grep = window[spec]();
-            mocha.grep(specDescription);
-            mocha.run(function(){
-                updateTestsResults($runTestLink, $mocha);
-                $mocha.attr('id','mocha-' + specDescription);
-            });
-            $runTestLink.removeAttr('href');
-            $('html, body').animate({
-                scrollTop: $mocha.parent().prev().offset().top
-            }, 200);
-            createLightbox($mocha, spec);
-            $runTestLink.on('click', function(){
-                showLightbox($('#' +  specDescription + '-lightbox'));
-            });
+        var item = hash.replace(/test\//,'');
+        var spec = item.split('/')[1] + 'Spec';
+        var $runTestLink = $('a[href*="#' + hash + '"]');
+        $runTestLink.removeAttr('href');
+        $('html, body').animate({
+            scrollTop: $runTestLink.parent().offset().top
+        }, 200);
+        var $testFrame = $("<iframe src='./iframe.html#" + item + "' style='width:100%'></iframe>");
+        $("body").append($testFrame);
+        createLightbox($testFrame, spec);
+        $runTestLink.on('click', function(){
+            showLightbox($('#' +  spec + '-lightbox'));
         });
     }
 
@@ -47,7 +40,7 @@ demo.tests = (function(hashManager){
         $box.show().addClass('lightbox-open');
     }
 
-    function createLightbox($mocha, spec){
+    function createLightbox($contents, spec){
         //todo: make lightbox do this automatically
         var lightboxDiv = document.createElement('div');
         var container = document.createElement('div');
@@ -57,12 +50,11 @@ demo.tests = (function(hashManager){
         lightboxDiv.id = spec + '-lightbox';
         container.className = 'skycom-container lightbox-container clearfix';
         article.className = 'lightbox-content skycom-10 skycom-offset1';
-        $(article).append($close);
-        $(article).append($mocha.find('#mocha-stats'));
-        $(article).append($mocha.find('#mocha-report'));
+        $(article).append($contents);
+        $(container).append($close);
         $(container).append($(article));
         $(lightboxDiv).append($(container));
-        $mocha.append($(lightboxDiv));
+        $('body').append($(lightboxDiv));
         showLightbox($('#' +  spec + '-lightbox'));
         $close.add($(lightboxDiv)).on('click', function(e){
             hideLightbox(e, $('#' +  spec + '-lightbox'));
@@ -70,7 +62,7 @@ demo.tests = (function(hashManager){
     }
 
     function registerTests(){
-        if (!window.require || !window.describe){
+        if (!window.require){
             setTimeout(registerTests,250);
             return;
         }
