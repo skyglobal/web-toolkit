@@ -1,4 +1,4 @@
-define('runner',['toolkit'
+define('suite',['toolkit'
         ,'specs/accordionSpec'
         ,'specs/carouselSpec'
         ,'specs/datePickerSpec'

@@ -89,7 +89,18 @@
   @include pointer($direction, $color, $size, true);
 }
 
-
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+a{
+  text-decoration:none;
+}
+a:hover{
+  text-decoration:underline;
+}
 
 //visibility classses
 body .visible-touch,

@@ -7,6 +7,6 @@ exclude: [
   build.txt,
   vendor,
   deprecated,
-  tasks, support, phantomjs]
+  tasks, phantomjs]
 include: [_includes, test]
 port: 4000

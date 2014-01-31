@@ -1,5 +1,5 @@
 if (typeof toolkit === 'undefined') toolkit = {};
-toolkit.video = (function (window, $) {
+toolkit.video = (function (window, $, event) {
     'use strict';
 
     function Video($container, options) {
@@ -75,7 +75,7 @@ toolkit.video = (function (window, $) {
         stop:function (e) {
             if(e) { e.preventDefault(); }
             var video = this;
-            $(window).off('skycom.resizeend', video.resizeContainer);
+            $(window).off('resizeend', video.resizeContainer);
             sky.html5player.close(this.$wrapper);
             this.hideCanvas();
         },
@@ -96,7 +96,7 @@ toolkit.video = (function (window, $) {
                 $close.addClass('active');
                 height = video.calculateHeight();
                 $container.animate({ height:height }, animationSpeed, function () {
-                    $(window).on('skycom.resizeend', $.proxy(video.resizeContainer, video));
+                    $(window).on('resizeend', $.proxy(video.resizeContainer, video));
                     $wrapper.show();
                     $overlay.fadeOut(animationSpeed);
                     callback();
@@ -143,9 +143,9 @@ toolkit.video = (function (window, $) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/video', [], function () {
-        return toolkit.video(window, jQuery);
+    define('components/video', ['utils/event'], function (event) {
+        return toolkit.video(window, jQuery, event);
     });
 } else {
-    toolkit.video =  toolkit.video(window, jQuery);
+    toolkit.video =  toolkit.video(window, jQuery, toolkit.event);
 }

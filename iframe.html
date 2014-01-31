@@ -26,5 +26,12 @@ title: Sky Web Toolkit Testing
     <div id="fixtures">
     </div>
 </div>
-
+<script>
+    requirejs.config({
+        baseUrl: "./grunt/js/",
+        paths: {
+            specs: '../../test/specs'
+        }
+    });
+</script>
 <script src="dist/scripts/testIframe.js"></script>

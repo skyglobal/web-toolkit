@@ -5,7 +5,7 @@
  no onclick events needed.
 **/
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.inPageNav = (function(hash) {
+toolkit.inPageNav = (function(hash, event) {
 //    todo: accessibility check when moving tabs about - perhaps dont have 2 separate lists.
 //    todo: move 'more' link to outside the ul
 
@@ -35,7 +35,7 @@ toolkit.inPageNav = (function(hash) {
                 self.toggleShowMore();
             });
             $('body').on('click', this.hideMore.bind(self));
-            $(window).bind('skycom.resizeend',  this.initTabs.bind(self));
+            event.on(window,'resizeend',  this.initTabs.bind(self));
         },
 
         getHashList: function() {
@@ -134,9 +134,10 @@ toolkit.inPageNav = (function(hash) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/inPageNav', ['utils/hashManager'], function(hash) {
-        return toolkit.inPageNav(hash);
+    define('components/inPageNav', ['utils/hashManager','utils/event'], function(hash, event) {
+        toolkit.inPageNav = toolkit.inPageNav(hash, event);
+        return toolkit.inPageNav;
     });
 } else {
-    toolkit.inPageNav = toolkit.inPageNav(toolkit.hashManager);
+    toolkit.inPageNav = toolkit.inPageNav(toolkit.hashManager, toolkit.event);
 }

@@ -5496,6 +5496,15 @@ blanket.defaultReporter = function(coverage){
     };
     BlanketReporter.prototype = OriginalReporter.prototype;
 
+    // From mocha.js HTML reporter
+    BlanketReporter.prototype.suiteURL = function(suite){
+        return '?grep=' + encodeURIComponent(suite.fullTitle());
+    };
+
+    BlanketReporter.prototype.testURL = function(test){
+        return '?grep=' + encodeURIComponent(test.fullTitle());
+    };
+
     mocha.reporter(BlanketReporter);
 
     var oldRun = mocha.run,

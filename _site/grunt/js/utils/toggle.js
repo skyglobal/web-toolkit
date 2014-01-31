@@ -11,7 +11,7 @@
  */
 
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.toggle = (function(detect) {
+toolkit.toggle = (function(detect, event) {
 
     var hasResized = false,
         hasContentChanged = false,
@@ -111,7 +111,7 @@ toolkit.toggle = (function(detect) {
 
     }
 
-    $(window).on('skycom.resizeend', function () {
+    event.on(window,'resizeend', function () {
         hasResized = true;
         var item, i;
         for (i in elementsToToggle) {
@@ -129,10 +129,10 @@ toolkit.toggle = (function(detect) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/toggle', ['utils/detect'], function(detect) {
-        toolkit.toggle = toolkit.toggle(detect);
+    define('utils/toggle', ['utils/detect','utils/event'], function(detect,event) {
+        toolkit.toggle = toolkit.toggle(detect, event);
         return toolkit.toggle;
     });
 } else {
-    toolkit.toggle = toolkit.toggle(toolkit.detect);
+    toolkit.toggle = toolkit.toggle(toolkit.detect, toolkit.event);
 }

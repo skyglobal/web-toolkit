@@ -591,7 +591,7 @@ if (typeof window.define === "function" && window.define.amd) {
  */
 
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.toggle = (function(detect) {
+toolkit.toggle = (function(detect, event) {
 
     var hasResized = false,
         hasContentChanged = false,
@@ -691,7 +691,7 @@ toolkit.toggle = (function(detect) {
 
     }
 
-    $(window).on('skycom.resizeend', function () {
+    event.on(window,'resizeend', function () {
         hasResized = true;
         var item, i;
         for (i in elementsToToggle) {
@@ -709,12 +709,12 @@ toolkit.toggle = (function(detect) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/toggle', ['utils/detect'], function(detect) {
-        toolkit.toggle = toolkit.toggle(detect);
+    define('utils/toggle', ['utils/detect','utils/event'], function(detect,event) {
+        toolkit.toggle = toolkit.toggle(detect, event);
         return toolkit.toggle;
     });
 } else {
-    toolkit.toggle = toolkit.toggle(toolkit.detect);
+    toolkit.toggle = toolkit.toggle(toolkit.detect, toolkit.event);
 }
 ;
 if (typeof toolkit==='undefined') toolkit={};
@@ -782,7 +782,7 @@ if (typeof window.define === "function" && window.define.amd) {
  no onclick events needed.
 **/
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.inPageNav = (function(hash) {
+toolkit.inPageNav = (function(hash, event) {
 //    todo: accessibility check when moving tabs about - perhaps dont have 2 separate lists.
 //    todo: move 'more' link to outside the ul
 
@@ -812,7 +812,7 @@ toolkit.inPageNav = (function(hash) {
                 self.toggleShowMore();
             });
             $('body').on('click', this.hideMore.bind(self));
-            $(window).bind('skycom.resizeend',  this.initTabs.bind(self));
+            event.on(window,'resizeend',  this.initTabs.bind(self));
         },
 
         getHashList: function() {
@@ -911,11 +911,12 @@ toolkit.inPageNav = (function(hash) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/inPageNav', ['utils/hashManager'], function(hash) {
-        return toolkit.inPageNav(hash);
+    define('components/inPageNav', ['utils/hashManager','utils/event'], function(hash, event) {
+        toolkit.inPageNav = toolkit.inPageNav(hash, event);
+        return toolkit.inPageNav;
     });
 } else {
-    toolkit.inPageNav = toolkit.inPageNav(toolkit.hashManager);
+    toolkit.inPageNav = toolkit.inPageNav(toolkit.hashManager, toolkit.event);
 };
 /*global jQuery:false */
 if (typeof toolkit==='undefined') toolkit={};
@@ -1707,14 +1708,15 @@ toolkit.tooltip = (function (detect) {
 
 if (typeof window.define === "function" && window.define.amd) {
     define('components/tooltip', ['utils/detect'], function (detect) {
-        return toolkit.tooltip(detect);
+        toolkit.tooltip = toolkit.tooltip(detect);
+        return toolkit.tooltip;
     });
 } else {
     toolkit.tooltip = toolkit.tooltip(toolkit.detect);
 }
 ;
 if (typeof toolkit === 'undefined') toolkit = {};
-toolkit.video = (function (window, $) {
+toolkit.video = (function (window, $, event) {
     
 
     function Video($container, options) {
@@ -1790,7 +1792,7 @@ toolkit.video = (function (window, $) {
         stop:function (e) {
             if(e) { e.preventDefault(); }
             var video = this;
-            $(window).off('skycom.resizeend', video.resizeContainer);
+            $(window).off('resizeend', video.resizeContainer);
             sky.html5player.close(this.$wrapper);
             this.hideCanvas();
         },
@@ -1811,7 +1813,7 @@ toolkit.video = (function (window, $) {
                 $close.addClass('active');
                 height = video.calculateHeight();
                 $container.animate({ height:height }, animationSpeed, function () {
-                    $(window).on('skycom.resizeend', $.proxy(video.resizeContainer, video));
+                    $(window).on('resizeend', $.proxy(video.resizeContainer, video));
                     $wrapper.show();
                     $overlay.fadeOut(animationSpeed);
                     callback();
@@ -1858,11 +1860,11 @@ toolkit.video = (function (window, $) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/video', [], function () {
-        return toolkit.video(window, jQuery);
+    define('components/video', ['utils/event'], function (event) {
+        return toolkit.video(window, jQuery, event);
     });
 } else {
-    toolkit.video =  toolkit.video(window, jQuery);
+    toolkit.video =  toolkit.video(window, jQuery, toolkit.event);
 };
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.carousel = (function(video, detect) {
