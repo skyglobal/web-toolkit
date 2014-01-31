@@ -7,5 +7,11 @@ title: Sky Web Toolkit
 
 <div id="mocha"></div>
 <script type="text/javascript">
-    require(['runner']);
+    require({
+        baseUrl: "./dist/scripts/",
+        paths: {
+            specs: '../../test/specs',
+            runner: '../../test/runner'
+        }
+    }, ['runner']);
 </script>
