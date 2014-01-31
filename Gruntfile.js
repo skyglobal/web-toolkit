@@ -156,6 +156,20 @@ module.exports = function(grunt) {
             }
         },
 
+        blanket_mocha: {
+            all: {
+                src: (function() {
+                    var pattern = grunt.option('pattern') || '[A-Z]*';
+                    return ['_site/test.html'];
+                }()),
+                options: {
+                    run: false,
+//                    log: true, // Set to true to see console.log() output on the terminal
+                    threshold: 60
+                }
+            }
+        },
+
         jekyll: {                            // Task
             options: {                          // Universal options
                 bundleExec: true,
@@ -187,6 +201,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-svgmin');
     grunt.loadNpmTasks('grunt-grunticon');
     grunt.loadNpmTasks('grunt-jekyll');
+
+    grunt.loadTasks('tasks');
 
     grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
     grunt.registerTask('spy', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'jekyll:build', 'watch']);

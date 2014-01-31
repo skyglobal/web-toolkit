@@ -15,3 +15,8 @@ title: Sky Web Toolkit
         }
     }, ['runner']);
 </script>
+<script>
+    if (window.PHANTOMJS) {
+        blanket.options("reporter", "/support/grunt-reporter.js");
+    }
+</script>
