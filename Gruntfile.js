@@ -200,6 +200,5 @@ module.exports = function(grunt) {
     grunt.registerTask('sloppy', ['clean:toolkit', 'compass:toolkit', 'requirejs', 'watch']);
     grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
-    grunt.registerTask('test', ['mocha']);
-    grunt.registerTask('test_coverage', ['blanket_mocha']);
+    grunt.registerTask('test', ['blanket_mocha']);
 };
