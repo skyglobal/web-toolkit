@@ -84,6 +84,9 @@ def emptyGitCache
 end
 
 def tagBuild
+
+  `git config --global user.email "dl-skycom@bskyb.com"`
+  `git config --global user.name "Rake file"`
   puts "*** Tagging Version #{latest_version_number} ***"
 
   system "git config user.email 'circleci@bskyb.com'"
@@ -130,18 +133,9 @@ def updateGHPages
   system "git checkout master"
 end
 
-def buildDistributionFiles
-  puts "*** Grunting Distribution files ***"
-  system "grunt --beautify"
-  system "jekyll build"
-  `git add -A ./dist/`
-  `git add -A ./_site/`
-end
-
 
 def updateBranch branch
-  puts "*** Updating #{branch} ***"
-  system "git commit -m 'Rake deploy: adding grunted files'"
+  puts "*** push branch: #{branch} ***"
   system "git push origin HEAD:" + branch
 end
 
@@ -162,12 +156,6 @@ task :deploy do
     puts "*** version is a Release Candidate '#{latest_version_number}'.  Please commit in a -rc branch. ***"
     fail
   end
-
-  `git config --global user.email "circle@circle.com"`
-  `git config --global user.name "rake file"`
-
-  buildDistributionFiles
-  updateBranch 'master'
 
   if version_already_exists?
     puts "Version #{latest_version_number} exists so exiting."
@@ -191,7 +179,6 @@ task :deploy_feature do
     fail
   end
 
-  buildDistributionFiles
   updateBranch branchName
 
   if version_already_exists?
@@ -212,10 +199,6 @@ task :deploy_rc do
     fail
   end
 
-  `git config --global user.email "circle@circle.com"`
-  `git config --global user.name "rake file"`
-
-  buildDistributionFiles
   updateBranch branchName
 
   if version_already_exists?
