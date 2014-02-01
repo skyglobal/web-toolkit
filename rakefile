@@ -85,12 +85,9 @@ end
 
 def tagBuild
 
+  puts "*** Tagging Version #{latest_version_number} ***"
   `git config --global user.email "dl-skycom@bskyb.com"`
   `git config --global user.name "Rake file"`
-  puts "*** Tagging Version #{latest_version_number} ***"
-
-  system "git config user.email 'circleci@bskyb.com'"
-  system "git config user.name 'CircleCI'"
   system "git tag -a v#{latest_version_number} -m \"Rake deploy: auto tag on #{getDate}\""
   system "git push origin master v#{latest_version_number}"
 end
