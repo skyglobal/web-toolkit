@@ -129,8 +129,6 @@
             data-cover-flags="branchTracking"
             data-cover-only="toolkit.js"></script>
 
-    <!--<script type="text/javascript" src="node_modules/grunt-blanket-mocha/support/mocha-blanket.js"></script>-->
-
     <script>
         window.turnOffAnimation = function(selector){
             var offTime = '10ms'; //can't be zero as we still need the 'end' events to fire.
@@ -150,8 +148,7 @@
         mocha.setup({ignoreLeaks: true});
 
         if (window.PHANTOMJS) {
-            blanket.options("reporter", "support/grunt-reporter.js"
-            );
+            blanket.options("reporter", "test/libraries/grunt-reporter.js");
         }
 
         //load main js first, this will load all the
