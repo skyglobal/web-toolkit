@@ -5,47 +5,39 @@
 <!--[if IE 9]>         <html class="lt-ie10" > <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 <!--end css conditionals-->
-	<head>
+    <head>
+    <meta charset="utf-8">
+    <title>Mocha Tests</title>
+    <!--<link rel="stylesheet" href="node_modules/mocha/mocha.css" />-->
+    <!--jquery-->
+    <!--[if lt IE 9]> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-1.10.2.js" ></script> <![endif]-->
+    <!--[if gte IE 9]><!--> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
+    <!--end-jquery-->
 
-        <meta charset="UTF-8"/>
+    <script>
+        var globalskycom = globalskycom || { };
+        globalskycom.serverHost = 'assets.sky.com';
+    </script>
+    <script src='http://assets.sky.com/dist/759/js/masthead.js'></script>
 
-<!--jquery-->
-<!--We recommend that you use these files from the toolkit static lib folder: '//web-toolkit.global.sky.com/static/lib/' -->
-<!--[if lt IE 9]> <script src="static/lib/jquery-1.10.2.js" ></script> <![endif]-->
-<!--[if gte IE 9]><!--> <script src="static/lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
-<!--end-jquery-->
+        <link rel="stylesheet" href="dist/stylesheets/demo.css">
+        <link rel="stylesheet" href="dist/stylesheets/toolkit.css">
+        <link rel="stylesheet" href="dist/fonts/skycons.css">
 
-<!--to help prevent 'font flash'-->
-<!--We recommend that you prefetch these files from the toolkit static fonts folder: '//web-toolkit.global.sky.com/static/fonts/' -->
-<link href='static/fonts/sky_regular.ttf' rel='prefetch'>
-<link href='static/fonts/sky_regular.svg' rel='prefetch'>
-<link href='static/fonts/sky_medium.ttf' rel='prefetch'>
-<link href='static/fonts/sky_medium.svg' rel='prefetch'>
-<!--end prevent 'font flash'-->
-
-<!--for video player pre-requisits-->
-<link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
-<script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
-<!--end video player pre-requisits-->
-
-<link rel="stylesheet" href="dist/stylesheets/demo.css">
-<link rel="stylesheet" href="dist/stylesheets/toolkit.css">
-<link rel="stylesheet" href="dist/fonts/skycons.css">
-
-<!--for html 5 cross browser-->
-<!--[if lt IE 10]><script type="text/javascript">
-    document.createElement('header');
-    document.createElement('section');
-    document.createElement('footer');
-    document.createElement('article');
-    document.createElement('aside');
-    document.createElement('hgroup');
-    document.createElement('nav');
-    document.createElement('figure');
-    document.createElement('figcaption');
-</script><![endif]-->
-<script>
-    var responsiveImages = (function () {
+        <!--for html 5 cross browser-->
+        <!--[if lt IE 10]><script type="text/javascript">
+        document.createElement('header');
+        document.createElement('section');
+        document.createElement('footer');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('hgroup');
+        document.createElement('nav');
+        document.createElement('figure');
+        document.createElement('figcaption');
+    </script><![endif]-->
+        <script>
+            var responsiveImages = (function () {
 
     var containers = [];
 
@@ -127,53 +119,61 @@
     };
 })();
 
-</script>
-
-<!--this is just for the menu - i wouldn't bother if i were you ;)-->
-<script src="static/lib/jquery.scrollspy.js" ></script>
-
-
-
+        </script>
 
         <script src="test/libraries/mocha.js"></script>
         <script src="test/libraries/chai.js"></script>
+        <script src="test/libraries/require.js"></script>
 
-        <!--We recommend that you use these files from the toolkit static lib folder: '//web-toolkit.global.sky.com/static/lib/' -->
-        <script src="static/lib/require-2.1.9.min.js"></script>
-        <script src="test/libraries/blanket.js" data-cover-never="specs"></script>
-        <!--data-cover-flags="branchTracking"-->
-        <script>
+        <script type="text/javascript" src="test/libraries/blanket.js"
+            data-cover-flags="branchTracking"
+            data-cover-only="toolkit.js"></script>
 
-            requirejs.config({
-                baseUrl: "./grunt/js/",
-                paths: {
-                    specs: '../../test/specs'
-                }
-            });
-            window.turnOffAnimation = function(selector){
-                var offTime = '10ms'; //can't be zero as we still need the 'end' events to fire.
-                if (selector){
-                    $("<style type='text/css' class='turnOffAnimation'> body " + selector + "{ transition-duration:" + offTime + "!important;-webkit-transition-duration:" + offTime + "!important; -webkit-animation-duration: " + offTime + "!important;animation-duration:" + offTime + "!important;} </style>").appendTo("head");
-                } else {
-                    $('.turnOffAnimation').remove();
-                }
-            };
+    <!--<script type="text/javascript" src="node_modules/grunt-blanket-mocha/support/mocha-blanket.js"></script>-->
 
-            window.chai = chai;
-            window.assert = chai.assert;
-            window.expect = chai.expect;
-            window.to = chai.to;
+    <script>
+        window.turnOffAnimation = function(selector){
+            var offTime = '10ms'; //can't be zero as we still need the 'end' events to fire.
+            if (selector){
+                $("<style type='text/css' class='turnOffAnimation'> body " + selector + "{ transition-duration:" + offTime + "!important;-webkit-transition-duration:" + offTime + "!important; -webkit-animation-duration: " + offTime + "!important;animation-duration:" + offTime + "!important;} </style>").appendTo("head");
+            } else {
+                $('.turnOffAnimation').remove();
+            }
+        };
 
-            mocha.setup('bdd');
-            mocha.setup({ignoreLeaks: true});
+        window.chai = chai;
+        window.assert = chai.assert;
+        window.expect = chai.expect;
+        window.to = chai.to;
 
-        </script>
-	</head>
-	<body class="grid-1140" >
+        mocha.setup('bdd');
+        mocha.setup({ignoreLeaks: true});
 
-        <div class="skycom-container clearfix">
-			<div class="alpha skycom-12">
-				<section class="demo-section" id="base-styles">
+        if (window.PHANTOMJS) {
+            blanket.options("reporter", "support/grunt-reporter.js"
+            );
+        }
+
+        //load main js first, this will load all the
+        //script dependencies
+        require({baseUrl:'dist/scripts', paths: {suite: '../../test/suite', specs: '../../test/specs'}},
+                ["toolkit"], function(main) {
+                    require(["suite"], function(TestLoader) {
+                        //start running the mocha tests
+                        //                TestLoader.start();
+                        setTimeout(function(){
+                            mocha.run();
+                        },2000);
+                    });
+                });
+
+    </script>
+</head>
+<body class="grid-1140" >
+    <div id="mocha"></div>
+    <div class="skycom-container clearfix">
+        <div class="alpha skycom-12">
+            <section class="demo-section" id="base-styles">
     <h2>Base Styles</h2>
     <div class="sub-section" id="grid">
         <h3 class="demo-h3 section-title smaller">
@@ -2226,23 +2226,7 @@ toolkit.event.on(window,'resizeend',updateEventResizeEnd);
     </div>
 </section>
 
-
-<div id="mocha"></div>
-<script type="text/javascript">
-    require({
-        baseUrl: "./dist/scripts/",
-        paths: {
-            specs: '../../test/specs',
-            suite: '../../test/suite'
-        }
-    }, ['suite']);
-</script>
-<script>
-    if (window.PHANTOMJS) {
-        blanket.options("reporter", "/support/grunt-reporter.js");
-    }
-</script>
-			</div>
-		</div>
-	</body>
+        </div>
+    </div>
+</body>
 </html>

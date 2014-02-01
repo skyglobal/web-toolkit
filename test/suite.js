@@ -1,4 +1,4 @@
-define('suite',['toolkit'
+define('suite',[
         ,'specs/accordionSpec'
         ,'specs/carouselSpec'
         ,'specs/datePickerSpec'
@@ -16,6 +16,6 @@ define('suite',['toolkit'
         ,'specs/validationSpec'
     ], function(){
 
-    mocha.run();
+//    mocha.run();
 
 });

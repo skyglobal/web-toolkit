@@ -4,19 +4,3 @@ title: Sky Web Toolkit
 ---
 
 {% include allIncludes.html %}
-
-<div id="mocha"></div>
-<script type="text/javascript">
-    require({
-        baseUrl: "./dist/scripts/",
-        paths: {
-            specs: '../../test/specs',
-            suite: '../../test/suite'
-        }
-    }, ['suite']);
-</script>
-<script>
-    if (window.PHANTOMJS) {
-        blanket.options("reporter", "/support/grunt-reporter.js");
-    }
-</script>

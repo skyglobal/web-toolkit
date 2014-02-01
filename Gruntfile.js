@@ -23,12 +23,12 @@ module.exports = function(grunt) {
                 tasks: ['compass', 'jekyll:build']
             },
             'jekyll': {
-                files: [ '_includes/**/*', '_layouts/**/*', '*.html', '_config.yml', 'test/libraries/*.js','mocha-blanket/**/*' ],
+                files: [ '_includes/**/*', '_layouts/**/*', '*.html', '_config.yml', 'test/libraries/*.js','test/*' ],
                 tasks: ['jekyll:build']
             },
             'specs': {
                 files: ['test/specs/*.js','test/config.js'],
-                tasks: ['jshint','jekyll:build']
+                tasks: ['jekyll:build'] //'jshint',
             }
         },
         clean: {
@@ -41,8 +41,8 @@ module.exports = function(grunt) {
             toolkit: ['Gruntfile.js',
                       'grunt/js/components/*.js',
                       'grunt/js/utils/*.js',
-                      'grunt/js/demo/*.js',
-                      'test/specs/**/*.js'],
+                      'grunt/js/demo/*.js'],
+//        'test/specs/**/*.js',
             others: ['Gruntfile.js'],
             options: {
                 "globals": {
@@ -157,16 +157,12 @@ module.exports = function(grunt) {
         },
 
         blanket_mocha: {
-            all: {
-                src: (function() {
-                    var pattern = grunt.option('pattern') || '[A-Z]*';
-                    return ['_site/test.html'];
-                }()),
-                options: {
-                    run: false,
-//                    log: true, // Set to true to see console.log() output on the terminal
-                    threshold: 60
-                }
+
+            all : ['_site/test.html'],
+            options : {
+                threshold : 70, // <- percetage of files that have to pass coverage rules
+                globalThreshold : 80, // <- coverage rule
+                log : true
             }
         },
 
@@ -190,19 +186,14 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-compass');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-requirejs');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-mocha');
-    grunt.loadNpmTasks('grunt-webfont'); //https://github.com/sapegin/grunt-webfont
-    grunt.loadNpmTasks('grunt-svgmin');
-    grunt.loadNpmTasks('grunt-grunticon');
-    grunt.loadNpmTasks('grunt-jekyll');
+    // Loading dependencies
+    for (var key in grunt.file.readJSON("package.json").devDependencies) {
+        if (key !== "grunt" && key.indexOf("grunt") === 0) {
+            grunt.loadNpmTasks(key);
+        }
+    }
 
-    grunt.loadTasks('tasks');
+//    grunt.loadTasks('tasks');
 
     grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
     grunt.registerTask('spy', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'jekyll:build', 'watch']);

@@ -1,23 +1,29 @@
 <meta charset="UTF-8"/>
 
 <!--jquery-->
-<!--We recommend that you use these files from the toolkit static lib folder: '//web-toolkit.global.sky.com/static/lib/' -->
-<!--[if lt IE 9]> <script src="static/lib/jquery-1.10.2.js" ></script> <![endif]-->
-<!--[if gte IE 9]><!--> <script src="static/lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
+<!--[if lt IE 9]> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-1.10.2.js" ></script> <![endif]-->
+<!--[if gte IE 9]><!--> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
 <!--end-jquery-->
 
 <!--to help prevent 'font flash'-->
-<!--We recommend that you prefetch these files from the toolkit static fonts folder: '//web-toolkit.global.sky.com/static/fonts/' -->
-<link href='static/fonts/sky_regular.ttf' rel='prefetch'>
-<link href='static/fonts/sky_regular.svg' rel='prefetch'>
-<link href='static/fonts/sky_medium.ttf' rel='prefetch'>
-<link href='static/fonts/sky_medium.svg' rel='prefetch'>
+<link href='//web-toolkit.global.sky.com/static/fonts/sky_regular.ttf' rel='prefetch'>
+<link href='//web-toolkit.global.sky.com/static/fonts/sky_regular.svg' rel='prefetch'>
+<link href='//web-toolkit.global.sky.com/static/fonts/sky_medium.ttf' rel='prefetch'>
+<link href='//web-toolkit.global.sky.com/static/fonts/sky_medium.svg' rel='prefetch'>
 <!--end prevent 'font flash'-->
 
 <!--for video player pre-requisits-->
 <link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
 <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
 <!--end video player pre-requisits-->
+
+<!--from masthead-->
+<script>
+    var globalskycom = globalskycom || { };
+    globalskycom.serverHost = 'assets.sky.com';
+</script>
+<script src='http://assets.sky.com/dist/759/js/masthead.js'></script>
+<!--end masthead-->
 
 <link rel="stylesheet" href="dist/stylesheets/demo.css">
 <link rel="stylesheet" href="dist/stylesheets/toolkit.css">
@@ -38,8 +44,6 @@
 <script>
     {% include utils/responsiveImages/function.js %}
 </script>
-
-<!--this is just for the menu - i wouldn't bother if i were you ;)-->
-<script src="static/lib/jquery.scrollspy.js" ></script>
+<script src="//web-toolkit.global.sky.com/static/lib/jquery.scrollspy.js" ></script>
 
 
