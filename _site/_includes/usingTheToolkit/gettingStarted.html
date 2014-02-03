@@ -3,6 +3,7 @@
     <code class=block >&lt;script src='//web-toolkit.global.sky.com/{{ site.version }}/scripts/toolkit.js'&gt;&lt;/script&gt;
 &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/{{ site.version }}/stylesheets/toolkit.css"/&gt;
 &lt;link rel="stylesheet" href="//web-toolkit.global.sky.com/{{ site.version }}/fonts/skycons.css"/&gt;</code>
+
     <h4 class="intro smaller">With RequireJS</h4>
     <p >
         Dont use the JS as above, but point the RequireJS config to the 'toolkit' location.
@@ -12,6 +13,12 @@
         'toolkit':'http://web-toolkit.global.sky.com/{{ site.version }}/scripts/toolkit.js'
     }
 });    </code></pre>
+    <p>
+        You can now 'require' and use the toolkit using the following:
+    <pre><code>require(['toolkit'],function(toolkit){
+    toolkit.even.emit('click');
+});    </code></pre>
+    </p>
 
     <h4 class="intro">Setting IE Classes</h4>
     <p>

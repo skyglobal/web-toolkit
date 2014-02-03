@@ -5,21 +5,92 @@
 <!--[if IE 9]>         <html class="lt-ie10" > <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 <!--end css conditionals-->
-	<head>
+    <head>
+    <meta charset="utf-8">
+    <title>Mocha Tests</title>
+    <!--<link rel="stylesheet" href="node_modules/mocha/mocha.css" />-->
+    <!--jquery-->
+    <!--[if lt IE 9]> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-1.10.2.js" ></script> <![endif]-->
+    <!--[if gte IE 9]><!--> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
+    <!--end-jquery-->
 
-        {% include head.html %}
+    <script>
+        var globalskycom = globalskycom || { };
+        globalskycom.serverHost = 'assets.sky.com';
+    </script>
+    <script src='http://assets.sky.com/dist/759/js/masthead.js'></script>
+
+        <link rel="stylesheet" href="dist/stylesheets/demo.css">
+        <link rel="stylesheet" href="dist/stylesheets/toolkit.css">
+        <link rel="stylesheet" href="dist/fonts/skycons.css">
+
+        <!--for html 5 cross browser-->
+        <!--[if lt IE 10]><script type="text/javascript">
+        document.createElement('header');
+        document.createElement('section');
+        document.createElement('footer');
+        document.createElement('article');
+        document.createElement('aside');
+        document.createElement('hgroup');
+        document.createElement('nav');
+        document.createElement('figure');
+        document.createElement('figcaption');
+    </script><![endif]-->
+        <script>
+            {% include utils/responsiveImages/function.js %}
+        </script>
 
         <script src="test/libraries/mocha.js"></script>
-        <script src="http://web-toolkit.global.sky.com/static/lib/require-2.1.9.min.js" data-main='dist/scripts/toolkit'></script>
-        <script src="test/config.js" ></script>
+        <script src="test/libraries/chai.js"></script>
+        <script src="test/libraries/require.js"></script>
 
-	</head>
-	<body class="grid-1140" >
+        <script type="text/javascript" src="test/libraries/blanket.js"
+            data-cover-flags="branchTracking"
+            data-cover-only="toolkit.js"></script>
 
-        <div class="skycom-container clearfix">
-			<div class="alpha skycom-12">
-				{{ content }}
-			</div>
-		</div>
-	</body>
+    <script>
+        window.turnOffAnimation = function(selector){
+            var offTime = '10ms'; //can't be zero as we still need the 'end' events to fire.
+            if (selector){
+                $("<style type='text/css' class='turnOffAnimation'> body " + selector + "{ transition-duration:" + offTime + "!important;-webkit-transition-duration:" + offTime + "!important; -webkit-animation-duration: " + offTime + "!important;animation-duration:" + offTime + "!important;} </style>").appendTo("head");
+            } else {
+                $('.turnOffAnimation').remove();
+            }
+        };
+
+        window.chai = chai;
+        window.assert = chai.assert;
+        window.expect = chai.expect;
+        window.to = chai.to;
+
+        mocha.setup('bdd');
+        mocha.setup({ignoreLeaks: true});
+
+        if (window.PHANTOMJS) {
+            blanket.options("reporter", "test/libraries/grunt-reporter.js");
+        }
+
+        //load main js first, this will load all the
+        //script dependencies
+        require({baseUrl:'dist/scripts', paths: {suite: '../../test/suite', specs: '../../test/specs'}},
+                ["toolkit"], function(main) {
+                    require(["suite"], function(TestLoader) {
+                        //start running the mocha tests
+                        //                TestLoader.start();
+                        setTimeout(function(){
+                            mocha.run();
+                        },2000);
+                    });
+                });
+
+    </script>
+</head>
+<body class="grid-1140" >
+    <div id="mocha"></div>
+    <div class="skycom-container clearfix">
+        <div class="alpha skycom-12">
+            {{ content }}
+        </div>
+    </div>
+</body>
 </html>

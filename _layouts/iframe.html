@@ -1,0 +1,54 @@
+<!doctype html>
+<!--To put correct ie classes on document root to essentially enable css conditionals-->
+<!--[if IE 7]>         <html class="lt-ie10 lt-ie9 lt-ie8" > <![endif]-->
+<!--[if IE 8]>         <html class="lt-ie10 lt-ie9" > <![endif]-->
+<!--[if IE 9]>         <html class="lt-ie10" > <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
+<!--end css conditionals-->
+	<head>
+
+        {% include head.html %}
+
+        <script src="test/libraries/mocha.js"></script>
+        <script src="test/libraries/chai.js"></script>
+
+        <!--We recommend that you use these files from the toolkit static lib folder: '//web-toolkit.global.sky.com/static/lib/' -->
+        <script src="static/lib/require-2.1.9.min.js"></script>
+        <script src="test/libraries/blanket.js" data-cover-never="specs"></script>
+        <!--data-cover-flags="branchTracking"-->
+        <script>
+
+            requirejs.config({
+                baseUrl: "./grunt/js/",
+                paths: {
+                    specs: '../../test/specs'
+                }
+            });
+            window.turnOffAnimation = function(selector){
+                var offTime = '10ms'; //can't be zero as we still need the 'end' events to fire.
+                if (selector){
+                    $("<style type='text/css' class='turnOffAnimation'> body " + selector + "{ transition-duration:" + offTime + "!important;-webkit-transition-duration:" + offTime + "!important; -webkit-animation-duration: " + offTime + "!important;animation-duration:" + offTime + "!important;} </style>").appendTo("head");
+                } else {
+                    $('.turnOffAnimation').remove();
+                }
+            };
+
+            window.chai = chai;
+            window.assert = chai.assert;
+            window.expect = chai.expect;
+            window.to = chai.to;
+
+            mocha.setup('bdd');
+            mocha.setup({ignoreLeaks: true});
+
+        </script>
+	</head>
+	<body class="grid-1140" >
+
+        <div class="skycom-container clearfix">
+			<div class="alpha skycom-12">
+				{{ content }}
+			</div>
+		</div>
+	</body>
+</html>

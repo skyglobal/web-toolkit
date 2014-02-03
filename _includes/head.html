@@ -18,7 +18,11 @@
 <!--end video player pre-requisits-->
 
 <!--from masthead-->
-{% include skycomResources.html %}
+<script>
+    var globalskycom = globalskycom || { };
+    globalskycom.serverHost = 'assets.sky.com';
+</script>
+<script src='http://assets.sky.com/dist/759/js/masthead.js'></script>
 <!--end masthead-->
 
 <link rel="stylesheet" href="dist/stylesheets/demo.css">

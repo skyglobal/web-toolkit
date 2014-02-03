@@ -51,13 +51,14 @@ toolkit.polyfill = (function () {
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/polyfill', [], function() {
         
-        return toolkit.polyfill();
+        toolkit.polyfill = toolkit.polyfill();
+        return toolkit.polyfill;
     });
 } else {
     toolkit.polyfill = toolkit.polyfill();
 };
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.event = (function (detect) {
+toolkit.event = (function () {
     
     var timeout = {
         resize : null
@@ -139,12 +140,13 @@ toolkit.event = (function (detect) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/event', ['utils/detect'], function(detect) {
+    define('utils/event', [],function() {
         
-        return toolkit.event(detect);
+        toolkit.event = toolkit.event();
+        return toolkit.event;
     });
 } else {
-    toolkit.event = toolkit.event(toolkit.detect);
+    toolkit.event = toolkit.event();
 };
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.detect = (function (event) {
@@ -307,7 +309,8 @@ toolkit.detect = (function (event) {
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/detect', ['utils/event'], function(event) {
         
-        return toolkit.detect(event);
+        toolkit.detect = toolkit.detect(event);
+        return toolkit.detect;
     });
 } else {
     toolkit.detect = toolkit.detect(toolkit.event);
@@ -392,7 +395,8 @@ toolkit.skycons = (function(detect, event) {
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/skycons', ['utils/detect','utils/event'], function(detect,event) {
-        return toolkit.skycons(detect,event);
+        toolkit.skycons = toolkit.skycons(detect,event);
+        return toolkit.skycons;
     });
 } else {
     toolkit.skycons = toolkit.skycons(toolkit.detect,toolkit.event);
@@ -529,7 +533,8 @@ toolkit.hashManager = (function() {
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/hashManager', [], function() {
-        return toolkit.hashManager();
+        toolkit.hashManager =  toolkit.hashManager();
+        return toolkit.hashManager;
     });
 } else {
     toolkit.hashManager =  toolkit.hashManager();
@@ -567,7 +572,8 @@ toolkit.popup = (function() {
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/popup', [], function() {
-        return toolkit.popup();
+        toolkit.popup = toolkit.popup();
+        return toolkit.popup;
     });
 } else {
     toolkit.popup = toolkit.popup();
@@ -585,7 +591,7 @@ if (typeof window.define === "function" && window.define.amd) {
  */
 
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.toggle = (function(detect) {
+toolkit.toggle = (function(detect, event) {
 
     var hasResized = false,
         hasContentChanged = false,
@@ -685,7 +691,7 @@ toolkit.toggle = (function(detect) {
 
     }
 
-    $(window).on('skycom.resizeend', function () {
+    event.on(window,'resizeend', function () {
         hasResized = true;
         var item, i;
         for (i in elementsToToggle) {
@@ -703,11 +709,12 @@ toolkit.toggle = (function(detect) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/toggle', ['utils/detect'], function(detect) {
-        return toolkit.toggle(detect);
+    define('utils/toggle', ['utils/detect','utils/event'], function(detect,event) {
+        toolkit.toggle = toolkit.toggle(detect, event);
+        return toolkit.toggle;
     });
 } else {
-    toolkit.toggle = toolkit.toggle(toolkit.detect);
+    toolkit.toggle = toolkit.toggle(toolkit.detect, toolkit.event);
 }
 ;
 if (typeof toolkit==='undefined') toolkit={};
@@ -762,210 +769,11 @@ toolkit.focus = (function () {
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/focus', [], function() {
         
-        return toolkit.focus();
+        toolkit.focus = toolkit.focus();
+        return toolkit.focus;
     });
 } else {
     toolkit.focus = toolkit.focus();
-};
-/*jshint strict: true */
-/*global jQuery:false */
-
-if (typeof toolkit==='undefined') toolkit={};
-toolkit.validation = (function ($) {
-    
-
-    function isSafari() {
-        var ua = navigator.userAgent.toLowerCase();
-        if (ua.indexOf('safari')!=-1){
-            return (ua.indexOf('chrome') === -1);
-        }
-        return false;
-    }
-
-    function getValue($el){
-        var $radiosWithSameName = null;
-        return ($el.is('[type=checkbox]')) ?
-            $el.is(':checked') : ($el.is('[type=radio]') ?
-            // Cache all radio buttons (in the same form) with the same name as this one
-            ($radiosWithSameName = $el.parents('form')
-                // **TODO: escape the radio buttons' name before using it in the jQuery selector
-                .find('input[name="' + $el.attr('name') + '"]'))
-                .filter(':checked')
-                .length > 0 : $el.val());
-    }
-
-    function InvalidInputHelper(input, options) {
-        if (options.emptyText){
-            input.setCustomValidity(options.defaultText);
-        }
-
-        function changeOrInput() {
-            if (input.value === "") {
-                if (options.emptyText){
-                    input.setCustomValidity(options.emptyText);
-                }
-            } else {
-                input.setCustomValidity("");
-            }
-        }
-
-        function invalid() {
-            if (input.value === "") {
-                if (options.emptyText){
-                    input.setCustomValidity(options.emptyText);
-                }
-            } else if (options.invalidText) {
-                input.setCustomValidity(options.invalidText);
-            }
-        }
-
-        input.addEventListener("change", changeOrInput);
-        input.addEventListener("input", changeOrInput);
-        input.addEventListener("invalid", invalid);
-    }
-
-    var useCustomFormErrors =  (!('required' in document.createElement('input')) ||
-                                !('pattern' in document.createElement('input')) || isSafari());
-    var canCustomiseHTML5Message = ('setCustomValidity' in document.createElement('input'));
-
-    function Validation($container) {
-        this.$container = $container;
-        this.$requiredInputs = $container.find('*[required]');
-        this.$patternInputs = $container.find('*[pattern]');
-        this.errors = [];
-        this.hasError = false;
-        this.customiseHTML5Messages();
-        this.bindEvents();
-    }
-
-    Validation.prototype = {
-        bindEvents: function() {
-            var validation = this;
-            //feature detect the required attribute
-            if (useCustomFormErrors) {
-                validation.$container.on("submit", function(e) {
-                    validation.validate(e);
-                });
-            }
-        },
-
-        customiseHTML5Messages: function(){
-            if (!canCustomiseHTML5Message) return;
-            this.$container.find('.feedback[data-for]').each(function(){
-                var el = document.getElementById($(this).attr('data-for'));
-                new InvalidInputHelper(el, {invalidText: this.innerText || this.innerHTML});
-            });
-        },
-
-        addErrorMessageToInput: function($input) {
-            var inputId     = $input.attr('id'),
-                $descriptor = this.$container.find('label[for=' + inputId + ']'),
-                $feedbacks  = this.$container.find('.feedback[data-for=' + inputId + ']');
-
-            this.hasError = true;
-
-            if ($feedbacks.length > 0) {
-                $feedbacks.removeClass('hidden');
-            } else {
-                //create a feedback if one does not exist
-                $feedbacks = $('<span class="form-error feedback" data-for="' + $input.attr('id') + '">' + $descriptor.text() + ' is required</span>').appendTo($input.closest('.row'));
-            }
-
-            if (!$input.hasClass('form-error')) {
-                $input.addClass('form-error');
-                $('<i class="form-error skycon-warning"></i>').insertAfter($input);
-            }
-
-            this.errors.push($feedbacks.first());
-        },
-
-        removeErrorsFromInput: function($input) {
-            var inputId     = $input.attr('id'),
-                $feedbacks  = this.$container.find('.feedback[data-for=' + inputId + ']');
-
-            if ($input.hasClass('form-error')) {
-                $input.removeClass('form-error');
-                $input.next('.skycon-warning').remove();
-            }
-            $feedbacks.addClass('hidden');
-        },
-
-        createErrorsAtTop: function() {
-            var errorHtml = '<div id="feedback-list-container" class="row" aria-live="polite"><p><i class="form-error skycon-warning"></i>Please correct the highlighted fields below:</p><ul class="feedback-list">',
-                i;
-
-            for (i = 0; i < this.errors.length; i++) {
-                errorHtml += '<li class="form-error">' + this.errors[i].text() + '</li>';
-            }
-
-            errorHtml += '</ul></div>';
-
-            this.$container.prepend(errorHtml);
-            // scroll to the top of the forms
-            window.location.href = window.location.href.split('#')[0] + '#feedback-list-container';
-        },
-
-        resetErrors: function() {
-            this.hasError = false;
-            this.errors = [];
-            this.$container.find('#feedback-list-container').remove();
-        },
-
-        validateRequired: function (index, input) {
-            var $input = $(input),
-                validation = this;
-            if ($input.val() === '') {
-                validation.addErrorMessageToInput($input);
-            } else {
-                validation.removeErrorsFromInput($input);
-            }
-        },
-
-        validatePattern: function (index, input) {
-            var $input = $(input),
-                validation = this,
-                pattern = $input.attr('pattern'),
-                re = new RegExp('^(?:' + pattern + ')$'),
-                value = getValue($input);
-            if (value && !re.test(value)) {
-                validation.addErrorMessageToInput($input);
-            } else {
-                validation.removeErrorsFromInput($input);
-            }
-        },
-
-        validate: function(e) {
-            var validation = this;
-            validation.resetErrors();
-
-            this.$requiredInputs.each(this.validateRequired.bind(validation));
-            this.$patternInputs.each(this.validatePattern.bind(validation));
-
-            // create list of error messages at the top of the form if there has been any errors
-            if (validation.hasError) {
-                e.preventDefault();
-                validation.createErrorsAtTop();
-            }
-        }
-
-    };
-
-    $.fn.validation = function() {
-        return this.each(function() {
-            var validation = new Validation($(this));
-        });
-    };
-
-    return Validation;
-
-});
-if (typeof window.define === "function" && window.define.amd) {
-    define('utils/validation', [], function() {
-        
-        return toolkit.validation(jQuery);
-    });
-} else {
-    toolkit.validation =  toolkit.validation(jQuery);
 };
 /**
  purpose:
@@ -974,7 +782,7 @@ if (typeof window.define === "function" && window.define.amd) {
  no onclick events needed.
 **/
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.inPageNav = (function(hash) {
+toolkit.inPageNav = (function(hash, event) {
 //    todo: accessibility check when moving tabs about - perhaps dont have 2 separate lists.
 //    todo: move 'more' link to outside the ul
 
@@ -1004,7 +812,7 @@ toolkit.inPageNav = (function(hash) {
                 self.toggleShowMore();
             });
             $('body').on('click', this.hideMore.bind(self));
-            $(window).bind('skycom.resizeend',  this.initTabs.bind(self));
+            event.on(window,'resizeend',  this.initTabs.bind(self));
         },
 
         getHashList: function() {
@@ -1103,11 +911,12 @@ toolkit.inPageNav = (function(hash) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/inPageNav', ['utils/hashManager'], function(hash) {
-        return toolkit.inPageNav(hash);
+    define('components/inPageNav', ['utils/hashManager','utils/event'], function(hash, event) {
+        toolkit.inPageNav = toolkit.inPageNav(hash, event);
+        return toolkit.inPageNav;
     });
 } else {
-    toolkit.inPageNav = toolkit.inPageNav(toolkit.hashManager);
+    toolkit.inPageNav = toolkit.inPageNav(toolkit.hashManager, toolkit.event);
 };
 /*global jQuery:false */
 if (typeof toolkit==='undefined') toolkit={};
@@ -1344,6 +1153,221 @@ if (typeof window.define === "function" && window.define.amd) {
 } else {
     toolkit.datePicker = toolkit.datePicker();
 };
+/*jshint strict: true */
+/*global jQuery:false */
+
+if (typeof toolkit==='undefined') toolkit={};
+toolkit.validation = (function () {
+    
+
+    function isSafari() {
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.indexOf('safari')!=-1){
+            return (ua.indexOf('chrome') === -1);
+        }
+        return false;
+    }
+
+    function getValue($el){
+        var $radiosWithSameName = null;
+        return ($el.is('[type=checkbox]')) ?
+            $el.is(':checked') : ($el.is('[type=radio]') ?
+            // Cache all radio buttons (in the same form) with the same name as this one
+            ($radiosWithSameName = $el.parents('form')
+                // **TODO: escape the radio buttons' name before using it in the jQuery selector
+                .find('input[name="' + $el.attr('name') + '"]'))
+                .filter(':checked')
+                .length > 0 : $el.val());
+    }
+
+    function InvalidInputHelper(input, options) {
+        if (options.emptyText){
+            input.setCustomValidity(options.defaultText);
+        }
+
+        function changeOrInput() {
+            if (input.value === "") {
+                if (options.emptyText){
+                    input.setCustomValidity(options.emptyText);
+                }
+            } else {
+                input.setCustomValidity("");
+            }
+        }
+
+        function invalid() {
+            if (input.value === "") {
+                if (options.emptyText){
+                    input.setCustomValidity(options.emptyText);
+                }
+            } else if (options.invalidText) {
+                input.setCustomValidity(options.invalidText);
+            }
+        }
+
+        input.addEventListener("change", changeOrInput);
+        input.addEventListener("input", changeOrInput);
+        input.addEventListener("invalid", invalid);
+    }
+
+    var useCustomFormErrors =  (!('required' in document.createElement('input')) ||
+                                !('pattern' in document.createElement('input')) || isSafari());
+    var canCustomiseHTML5Message = ('setCustomValidity' in document.createElement('input'));
+
+    function Validation($container) {
+        this.$container = $container;
+        this.$requiredInputs = $container.find('*[required]');
+        this.$patternInputs = $container.find('*[pattern]');
+        this.errors = [];
+        this.hasError = false;
+        this.customiseHTML5Messages();
+        this.bindEvents();
+    }
+
+    Validation.prototype = {
+        bindEvents: function() {
+            var validation = this;
+            //feature detect the required attribute
+            if (useCustomFormErrors) {
+                validation.$container.on("submit", function(e) {
+                    validation.validate(e);
+                });
+            }
+        },
+
+        customiseHTML5Messages: function(){
+            if (!canCustomiseHTML5Message) return;
+            this.$container.find('.feedback[data-for]').each(function(){
+                var el = document.getElementById($(this).attr('data-for'));
+                new InvalidInputHelper(el, {invalidText: this.innerText || this.innerHTML});
+            });
+        },
+
+        addErrorMessageToInput: function($input) {
+            var inputId     = $input.attr('id'),
+                $descriptor = this.$container.find('label[for=' + inputId + ']'),
+                $feedbacks  = this.$container.find('.feedback[data-for=' + inputId + ']');
+
+            this.hasError = true;
+
+            if ($feedbacks.length > 0) {
+                $feedbacks.removeClass('hidden');
+            } else {
+                //create a feedback if one does not exist
+                $feedbacks = $('<span class="form-error feedback" data-for="' + $input.attr('id') + '">' + $descriptor.text() + ' is required</span>').appendTo($input.closest('.row'));
+            }
+
+            if (!$input.hasClass('form-error')) {
+                $input.addClass('form-error');
+                $('<i class="form-error skycon-warning"></i>').insertAfter($input);
+            }
+
+            this.errors.push($feedbacks.first());
+        },
+
+        removeErrorsFromInput: function($input) {
+            var inputId     = $input.attr('id'),
+                $feedbacks  = this.$container.find('.feedback[data-for=' + inputId + ']');
+
+            if ($input.hasClass('form-error')) {
+                $input.removeClass('form-error');
+                $input.next('.skycon-warning').remove();
+            }
+            $feedbacks.addClass('hidden');
+        },
+
+        createErrorsAtTop: function() {
+            var errorHtml = '<div id="feedback-list-container" class="row" aria-live="polite"><p><i class="form-error skycon-warning"></i>Please correct the highlighted fields below:</p><ul class="feedback-list">',
+                i;
+
+            for (i = 0; i < this.errors.length; i++) {
+                errorHtml += '<li class="form-error">' + this.errors[i].text() + '</li>';
+            }
+
+            errorHtml += '</ul></div>';
+
+            this.$container.prepend(errorHtml);
+            // scroll to the top of the forms
+            window.location.href = window.location.href.split('#')[0] + '#feedback-list-container';
+        },
+
+        resetErrors: function() {
+            this.hasError = false;
+            this.errors = [];
+            this.$container.find('#feedback-list-container').remove();
+        },
+
+        validateRequired: function (index, input) {
+            var $input = $(input),
+                validation = this;
+            if ($input.val() === '') {
+                validation.addErrorMessageToInput($input);
+            } else {
+                validation.removeErrorsFromInput($input);
+            }
+        },
+
+        validatePattern: function (index, input) {
+            var $input = $(input),
+                validation = this,
+                pattern = $input.attr('pattern'),
+                re = new RegExp('^(?:' + pattern + ')$'),
+                value = getValue($input);
+            if (value && !re.test(value)) {
+                validation.addErrorMessageToInput($input);
+            } else {
+                validation.removeErrorsFromInput($input);
+            }
+        },
+
+        validate: function(e) {
+            var validation = this;
+            validation.resetErrors();
+
+            this.$requiredInputs.each(this.validateRequired.bind(validation));
+            this.$patternInputs.each(this.validatePattern.bind(validation));
+
+            // create list of error messages at the top of the form if there has been any errors
+            if (validation.hasError) {
+                e.preventDefault();
+                validation.createErrorsAtTop();
+            }
+        }
+
+    };
+
+    $.fn.validation = function() {
+        return this.each(function() {
+            var validation = new Validation($(this));
+        });
+    };
+
+    return Validation;
+
+});
+if (typeof window.define === "function" && window.define.amd) {
+    define('utils/validation', [], function() {
+        
+        toolkit.validation =  toolkit.validation();
+        return toolkit.validation;
+    });
+} else {
+    toolkit.validation =  toolkit.validation();
+};
+if (typeof toolkit === 'undefined') toolkit = {};
+toolkit.form = (function (datePicker, validation) {
+
+
+});
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('components/form', ['components/datePicker','utils/validation'], function (datePicker, validation) {
+        return toolkit.form(datePicker, validation);
+    });
+} else {
+    toolkit.form = toolkit.form(toolkit.datePicker, toolkit.validation);
+}
+;
 /*global jQuery:false */
 //todo: add 'flip' option for if a picture is clicked.
 if (typeof toolkit==='undefined') toolkit={};
@@ -1524,7 +1548,6 @@ toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
             hideBodyScrollBar();
 
             this.$container.addClass(classes.open);
-            console.log('open', this.$container);
             focusOnCloseButton(this.$lightboxLink, this.$container.find('.' + classes.closeButton));
             disablePageTabbing();
             enablePageTabbing(this.$container);
@@ -1549,7 +1572,6 @@ toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
             lightbox.$container.removeClass(classes.open + ' ' + classes.closing);
             focusOnLightboxLink(lightbox.$lightboxLink);
             showBodyScrollBar();
-            console.log('onClose', this.$container);
             enablePageTabbing($('body'));
             if (lightbox.options.onClose){
                 lightbox.options.onClose();
@@ -1686,14 +1708,15 @@ toolkit.tooltip = (function (detect) {
 
 if (typeof window.define === "function" && window.define.amd) {
     define('components/tooltip', ['utils/detect'], function (detect) {
-        return toolkit.tooltip(detect);
+        toolkit.tooltip = toolkit.tooltip(detect);
+        return toolkit.tooltip;
     });
 } else {
     toolkit.tooltip = toolkit.tooltip(toolkit.detect);
 }
 ;
 if (typeof toolkit === 'undefined') toolkit = {};
-toolkit.video = (function (window, $) {
+toolkit.video = (function (window, $, event) {
     
 
     function Video($container, options) {
@@ -1769,7 +1792,7 @@ toolkit.video = (function (window, $) {
         stop:function (e) {
             if(e) { e.preventDefault(); }
             var video = this;
-            $(window).off('skycom.resizeend', video.resizeContainer);
+            $(window).off('resizeend', video.resizeContainer);
             sky.html5player.close(this.$wrapper);
             this.hideCanvas();
         },
@@ -1790,7 +1813,7 @@ toolkit.video = (function (window, $) {
                 $close.addClass('active');
                 height = video.calculateHeight();
                 $container.animate({ height:height }, animationSpeed, function () {
-                    $(window).on('skycom.resizeend', $.proxy(video.resizeContainer, video));
+                    $(window).on('resizeend', $.proxy(video.resizeContainer, video));
                     $wrapper.show();
                     $overlay.fadeOut(animationSpeed);
                     callback();
@@ -1837,11 +1860,11 @@ toolkit.video = (function (window, $) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/video', [], function () {
-        return toolkit.video(window, jQuery);
+    define('components/video', ['utils/event'], function (event) {
+        return toolkit.video(window, jQuery, event);
     });
 } else {
-    toolkit.video =  toolkit.video(window, jQuery);
+    toolkit.video =  toolkit.video(window, jQuery, toolkit.event);
 };
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.carousel = (function(video, detect) {
@@ -2270,11 +2293,10 @@ if (typeof window.define === "function" && window.define.amd) {
         'utils/popup',
         'utils/toggle',
         'utils/focus',
-        'utils/validation',
         'utils/event',
         'components/inPageNav',
         'components/accordion',
-        'components/datePicker',
+        'components/form',
         'components/lightbox',
         'components/share',
         'components/tooltip',

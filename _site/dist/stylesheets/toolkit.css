@@ -1,5 +1,20 @@
 @charset "UTF-8";
 @import url("../../static/fonts/fonts.css");
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 body .visible-touch,
 body .hidden {
   display: none !important;

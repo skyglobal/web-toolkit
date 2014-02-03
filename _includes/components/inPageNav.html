@@ -1,13 +1,13 @@
 <h3 class="demo-h3 section-title smaller">
     In-Page Navigation
     <a href="#!code/inPageNav" class="code-download">Code</a>
-    <a href="#test/inPageNavSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+    <a href="#test/components/inPageNav" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
 </h3>
 <p class="design-notes skycom-7 alpha">
     <span class="error">These modules are not yet complete.</span>  If you need them, please complete 'accessibility' checks an re-submit.
 </p>
 
-<div class="example  clear">
+<div class="example" data-example="sleekNav">
     <h4 class="medium">Sleek Nav</h4>
     <div class="skycom-7 alpha">
         <p class="design-notes">
@@ -21,10 +21,8 @@
         {% include components/inPageNav/sleekNav.html %}
     </div>
     <script>
-        if (window.require){
-            {% include components/inPageNav/sleekNav.require.js %}
-        } else {
+        require(['components/inPageNav'], function(){
             {% include components/inPageNav/sleekNav.js %}
-        }
+        });
     </script>
 </div>

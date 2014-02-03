@@ -14,11 +14,11 @@ function validationSpec(validation) {
 
         beforeEach(function () {
             $('#input-one').val('');
-            $('#input-two').val('');
-            $('#input-three').val('');
-            $('input.required').removeClass('form-error');
-            $('.feedback').addClass('hidden');
-            $('#feedback-list-container').remove();
+//            $('#input-two').val('');
+//            $('#input-three').val('');
+//            $('input.required').removeClass('form-error');
+//            $('.feedback').addClass('hidden');
+//            $('#feedback-list-container').remove();
         });
         /*
          //    TEST WILL ONLY RUN IN A BROWSER THAT DOES NOT SUPPORT THE REQUIRED ATTRIBUTE

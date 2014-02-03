@@ -1,7 +1,7 @@
 <h3 class="demo-h3 section-title smaller">
     Lightbox
     <a href="#!code/lightbox" class="code-download">Code</a>
-    <a href="#test/lightboxSpec" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+    <a href="#test/components/lightbox" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
 </h3>
 <div class="skycom-7 alpha design-notes">
     <p>
@@ -12,7 +12,7 @@
     </p>
 </div>
 
-<div class="example clear">
+<div class="example" data-example="default">
     <h4 class="medium">Default Lightbox <small>(Large)</small></h4>
     <div class="design-notes skycom-7 alpha">
         <p>
@@ -23,12 +23,13 @@
         {% include components/lightbox/default.html %}
     </div>
     <script>
-        if (window.require){
-            {% include components/lightbox/default.require.js %}
-        } else {
+        require(['components/lightbox'], function(){
             {% include components/lightbox/default.js %}
-        }
+        });
     </script>
+</div>
+
+<div class="example" data-example="small">
     <h4 class="medium">Small Lightbox <small>(under 350x350 pixels)</small></h4>
     <div class="design-notes skycom-7 alpha">
         <p>
@@ -39,12 +40,13 @@
         {% include components/lightbox/small.html %}
     </div>
     <script>
-        if (window.require){
-            {% include components/lightbox/small.require.js %}
-        } else {
+        require(['components/lightbox'], function(){
             {% include components/lightbox/small.js %}
-        }
+        });
     </script>
+</div>
+
+<div class="example" data-example="AJAX">
     <h4 class="medium">Lightbox using AJAX</h4>
     <div class="design-notes skycom-7 alpha">
         <p>
@@ -55,10 +57,8 @@
         {% include components/lightbox/ajax.html %}
     </div>
     <script>
-        if (window.require){
-            {% include components/lightbox/ajax.require.js %}
-        } else {
+        require(['components/lightbox'], function(){
             {% include components/lightbox/ajax.js %}
-        }
+        });
     </script>
 </div>

@@ -1,4 +1,4 @@
-function responsiveImagesSpec(event) {
+function responsiveImagesSpec(responsiveImages, event) {
 
     var describeSpec = 'Responsive Images';
 
@@ -35,7 +35,7 @@ function responsiveImagesSpec(event) {
 }
 
 if (window.define) {
-    define('specs/responsiveImagesSpec', ['utils/event'], function (event) {
-        return responsiveImagesSpec(event);
+    define('specs/responsiveImagesSpec', ['utils/responsiveImages','utils/event'], function (responsiveImages, event) {
+        return responsiveImagesSpec(responsiveImages, event);
     });
 }
