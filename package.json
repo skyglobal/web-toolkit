@@ -1,13 +1,9 @@
 {
     "name": "grunt-for-toolkit",
-    "version": "1.0.4",
+    "version": "1.0.5",
 	"repository" : {
         "type": "git",
         "url": "https://github.com/skyglobal/web-toolkit.git"
-    },
-    "dependencies": {
-        "grunt-lib-phantomjs": "~0.4.0",
-        "mocha": "~1.14.0"
     },
     "devDependencies": {
 		"grunt": "latest"
