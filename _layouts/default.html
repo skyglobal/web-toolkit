@@ -46,10 +46,12 @@
             document.createElement('figure');
             document.createElement('figcaption');
         </script><![endif]-->
-
+        <script>
+            {% include utils/responsiveImages/function.js %}
+        </script>
+        <script src="dist/scripts/toolkit.js"></script>
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target="#toolkit-menu-tabs">
-        <script src="dist/scripts/toolkit.js"></script>
 
         {% include header.html %}
 
@@ -64,8 +66,8 @@
         <script src="dist/scripts/demo.js"></script>
 
 
-        <script src="test/vendor/mocha.js"></script>
-        <script src="test/vendor/require.js"></script>
+        <script src="test/libraries/mocha.js"></script>
+        <script src="http://web-toolkit.global.sky.com/static/lib/require-2.1.9.min.js"></script>
         <script src="test/config.js" ></script>
 	</body>
 </html>

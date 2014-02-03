@@ -1,9 +1,9 @@
 requirejs.config({
     baseUrl: 'dist/scripts/',
     paths: {
-        mocha: '../../test/vendor/mocha',
-        chai: '../../test/vendor/chai',
-        smoax: '../../test/vendor/smoax',
+        mocha: '../../test/libraries/mocha',
+        chai: '../../test/libraries/chai',
+        smoax: '../../test/libraries/smoax',
         runner: '../../test/runner',
         specs: '../../test/specs/'
     },
@@ -18,7 +18,7 @@ requirejs.config({
 define('setup',['chai', 'smoax'], function(chai, smoax) {
 
     function uiSetup(headElement) {
-        var styles = ['test/vendor/mocha.css'];
+        var styles = ['test/libraries/mocha.css'];
         var body = document.getElementsByTagName('body').item(0);
         var linkElement, i;
 

@@ -4,8 +4,6 @@ function popupSpec(popup) {
 
     describe(describeSpec, function () {
 
-        popup.init();
-
         var args = {
             url:"http://www.google.com",
             width:400,
@@ -14,6 +12,17 @@ function popupSpec(popup) {
             left:137,
             title:'test title'
         };
+
+        it('testing the binding of the click of the share link', function () {
+            var hasBeenCalled = false;
+            window.open = function (url, title, options) {
+                hasBeenCalled = true;
+            };
+
+            $('li.share-page-by-facebook a').click();
+
+            expect(hasBeenCalled).to.equal(true);
+        });
 
         it('clicking share link should open the popup', function () {
             window.open = function (url, title, options) {

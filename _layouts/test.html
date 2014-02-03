@@ -5,9 +5,9 @@
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 	<head>
         <meta charset="UTF-8"/>
-        <!--[if lt IE 9]> <script src="http://assets.sky.com/js/lib/jquery-1.10.2.js" ></script> <![endif]-->
-        <!--[if gte IE 9]><!--> <script src="http://assets.sky.com/js/lib/jquery.2.0.3.min.js" ></script> <!--<![endif]-->
-        <script src="test/vendor/jquery.scrollspy.js" ></script>
+        <!--[if lt IE 9]> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-1.10.2.js" ></script> <![endif]-->
+        <!--[if gte IE 9]><!--> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
+        <script src="http://web-toolkit.global.sky.com/static/lib/jquery.scrollspy.js" ></script>
         <link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
         <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
 
@@ -17,8 +17,11 @@
         <link rel="stylesheet" href="dist/stylesheets/toolkit.css">
         <link rel="stylesheet" href="dist/fonts/skycons.css">
 
-        <script src="test/vendor/mocha.js"></script>
-        <script src="test/vendor/require.js" data-main='dist/scripts/toolkit'></script>
+        <script src="test/libraries/mocha.js"></script>
+        <script>
+            {% include utils/responsiveImages/function.js %}
+        </script>
+        <script src="http://web-toolkit.global.sky.com/static/lib/require-2.1.9.min.js" data-main='dist/scripts/toolkit'></script>
         <script src="test/config.js" ></script>
 
         <!--[if lt IE 10]><script type="text/javascript">

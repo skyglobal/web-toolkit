@@ -63,48 +63,87 @@ def content_type(file)
     content_type
 end
 
+def emptyGitCache
+  system "git rm --cached grunt/fonts/min -r"
+  system "git rm --cached _site -r"
+  system "git rm --cached dist/images -r"
+  system "git rm --cached dist/scripts -r"
+  system "git rm --cached dist/stylesheets -r"
+end
+
+def tagBuild
+  puts "*** Tagging Version #{latest_version_number} ***"
+
+  system "git config user.email 'circleci@bskyb.com'"
+  system "git config user.name 'CircleCI'"
+  system "git tag -a v#{latest_version_number} -m \"Rake deploy: auto tag on #{getDate}\""
+  system "git push origin master v#{latest_version_number}"
+end
+
+def pushToAmazonS3
+  puts "*** Pushing to the AmazonS3 ***"
+  doc_resources = []
+  puts 'Uploading assets'
+  cd "dist"
+  assets_to_upload.each do |file|
+    doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+  end
+  cd ".."
+  puts 'Uploading template files'
+  templates_to_upload.each do |file|
+    doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+  end
+  puts 'Uploading static files'
+  static_to_upload.each do |file|
+    doc_resources << bucket.objects["#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+  end
+end
+
+def pushToAmazonS3LatestDir
+  puts "*** Pushing to the AmazonS3 Latest Dir ***"
+  doc_resources = []
+  puts 'Uploading assets'
+  cd "dist"
+  assets_to_upload.each do |file|
+    doc_resources << bucket.objects["latest/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+  end
+  cd ".."
+  puts 'Uploading template files'
+  templates_to_upload.each do |file|
+    doc_resources << bucket.objects["latest/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+  end
+end
+
+def buildDistributionFiles
+  puts "*** Grunting Distribution files ***"
+  system "grunt"
+  system "jekyll build"
+end
+
 def getDate
   `date +'%d-%m-%Y'`
 end
 
+desc 'Removes previously cached directories that were in git but are now in .gitIgnore'
+task :emptyGitCache do
+  emptyGitCache
+end
+
 desc 'Deploys a new version to the CDN'
-task :deploy_new_version do
-
-  puts "*** Grunting files ***"
-  system "grunt"
-  system "git add ./dist"
-  system "git commit -m 'Rake deploy - adding grunted files'"
-  if version_already_exists?
-    system "git tag release-#{latest_version_number} -m \"Release Date:#{getDate}\""
-    system "git push --tags release-#{latest_version_number}"
-  end
-  system "git push origin HEAD:master"
-
-  if !version_is_release_candidate?
-    puts "*** Pushing to github.io ***"
-    system "git checkout gh-pages"
-    system "git push origin master:gh-pages"
-    system "git checkout master"
-  end
+task :deploy do
 
   if version_already_exists?
     puts "Version #{latest_version_number} exists so exiting."
     next
   end
 
-  puts "*** Pushing to the AmazonS3 ***"
-  doc_resources = []
-  puts 'Uploading doc files'
-  cd "dist"
-  assets_to_upload.each do |file|
-    doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
-  end
-  cd ".."
-  templates_to_upload.each do |file|
-    doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
-  end
-  static_to_upload.each do |file|
-    doc_resources << bucket.objects["#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+  buildDistributionFiles
+
+  pushToAmazonS3
+
+  if !version_is_release_candidate?
+    pushToAmazonS3LatestDir
+    tagBuild
   end
 
 end

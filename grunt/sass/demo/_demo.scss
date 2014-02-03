@@ -113,6 +113,7 @@ a[name]:not([href]){
   top: -5em;
   display: block;
   position: relative;
+  z-index: -1;
 }
 body a[name=base-styles]{
   padding-top: 6px!important;
@@ -131,5 +132,15 @@ ul.notes{
   ul.notes{
     list-style-type: circle;
     font-size: 0.9em;
+  }
+}
+
+#demo-tooltip {
+  display: inline-block;
+  &:hover {
+    cursor: pointer;
+  }
+  span {
+    padding-left: 8px;
   }
 }

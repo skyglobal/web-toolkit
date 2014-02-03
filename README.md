@@ -32,17 +32,8 @@ See the [reference page](http://skyglobal.github.io/web-toolkit/) for a descript
   - npm install
 
 ### Code structure
-- grunt/js/
-  The source code, unminified and ready to work on.
-
-- grunt/js/toolkit.js
-  The public API is created here (returned at the bottom). This file brings together files from /modules and /utils.
-
-- grunt/js/demo.js
-  JS to make the demo page work.  This JS is also used as part of the unit testing.
-
-- grunt/sass/
-  The look and feel for the /wiki and /toolkit pages.
+- grunt/
+  Dev area - get stuck into css and js here
 
 - dist/
   Compiled code (via grunt)
@@ -78,6 +69,27 @@ These tests are automatically run on the CircleCI server upon pushing to Github
 3. Browse to
   - http://localhost:4000
 
+
+### Contributing 
+
+####Fork the repository
+  - Using `git` you should fork a version of the toolkit (using github). Clone the fork locally ready to build your new/upgraded feature.
+  `git clone` _italic_ clone url _italic_
+    
+  - Dont forget to set the upstream using:
+  `git remote add upstream https://github.com/skyglobal/web-toolkit.git`
+    
+####Building A New/Updated Feature
+  - It is best to code in a new branch allowing you to commit multiple branches/features without having a dependency on the previous request.
+    
+  - Before you start a feature you should ensure your code is up to date by running:
+  `git pull upstream master`
+
+####Committing
+  - Before you submit your pull request ensure your code is up to date and merged by running:
+  `git pull upstream master`
+
+
 ### Deployment
 To release a new version with:
   - Code changes -  increment the version number (described below) in _config.yml. This will update gh-pages and the S3.
@@ -88,7 +100,7 @@ To release a new version with:
 This library should follow the [Semantic versioning specification](http://semver.org/).
 In short, that means the following:
 
-Version: X.Y.Z(rc)?
+Version: X.Y.Z(-rc)?
 
 - API changes that are **not backwards compatible**, and break existing
   calls using the API must increment the X value.

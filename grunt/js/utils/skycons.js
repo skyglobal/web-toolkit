@@ -3,94 +3,60 @@
  Needed for IE7
  **/
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.skycons = (function() {
+toolkit.skycons = (function(detect, event) {
     var icons = {
-        'skycon-sky' : "&#xf100;",
-        'skycon-chevron-down' : "&#xf101;",
-        'skycon-info' : "&#xf102;",
-        'skycon-arrow-right' : "&#xf103;",
-        'skycon-plus-circle' : "&#xf104;",
-        'skycon-sky-plus' : "&#xf105;",
-        'skycon-tv' : "&#xf106;",
-        'skycon-twitter-reply' : "&#xf107;",
-        'skycon-arrow-down-left' : "&#xf108;",
-        'skycon-chevron-up' : "&#xf109;",
-        'skycon-chevron' : "&#xf10a;",
-        'skycon-facebook' : "&#xf10b;",
-        'skycon-tick' : "&#xf10c;",
-        'skycon-remote-record' : "&#xf10d;",
-        'skycon-warning' : "&#xf10e;",
-        'skycon-carousel-play' : "&#xf10f;",
-        'skycon-arrow-left' : "&#xf110;",
-        'skycon-chevron-left' : "&#xf111;",
-        'skycon-on-demand' : "&#xf112;",
-        'skycon-user-profile' : "&#xf113;",
-        'skycon-search' : "&#xf114;",
-        'skycon-twitter-retweet' : "&#xf115;",
-        'skycon-at' : "&#xf116;",
-        'skycon-volume' : "&#xf117;",
-        'skycon-twitter-favourite' : "&#xf118;",
-        'skycon-expand' : "&#xf119;",
-        'skycon-carousel-pause' : "&#xf11a;",
-        'skycon-mouse' : "&#xf11b;",
-        'skycon-share' : "&#xf11c;",
-        'skycon-never-miss' : "&#xf11d;",
-        'skycon-mail' : "&#xf11e;",
-        'skycon-sky-go' : "&#xf11f;",
-        'skycon-twitter-follow' : "&#xf120;",
-        'skycon-pending' : "&#xf121;",
-        'skycon-minify' : "&#xf122;",
-        'skycon-twitter' : "&#xf123;",
-        'skycon-close' : "&#xf124;",
-        'skycon-menu' : "&#xf125;",
-        'skycon-phone' : "&#xf126;",
-        'skycon-cloud' : "&#xf127;",
-        'skycon-video-play' : "&#xf128;",
-        'skycon-google-plus' : "&#xf129;"
+        'skycon-arrow-down-left' : "&#xe001;",
+        'skycon-arrow-left' : "&#xe002;",
+        'skycon-arrow-right' : "&#xe003;",
+        'skycon-at' : "&#xe004;",
+        'skycon-carousel-pause' : "&#xe005;",
+        'skycon-carousel-play' : "&#xe006;",
+        'skycon-chevron-down' : "&#xe007;",
+        'skycon-chevron-left' : "&#xe008;",
+        'skycon-chevron-up' : "&#xe009;",
+        'skycon-chevron' : "&#xe00a;",
+        'skycon-close' : "&#xe00b;",
+        'skycon-cloud' : "&#xe00c;",
+        'skycon-expand' : "&#xe00d;",
+        'skycon-facebook' : "&#xe00e;",
+        'skycon-google-plus' : "&#xe00f;",
+        'skycon-info' : "&#xe010;",
+        'skycon-mail' : "&#xe011;",
+        'skycon-menu' : "&#xe012;",
+        'skycon-minify' : "&#xe013;",
+        'skycon-mouse' : "&#xe014;",
+        'skycon-never-miss' : "&#xe015;",
+        'skycon-on-demand' : "&#xe016;",
+        'skycon-pending' : "&#xe017;",
+        'skycon-phone' : "&#xe018;",
+        'skycon-plus-circle' : "&#xe019;",
+        'skycon-remote-record' : "&#xe01a;",
+        'skycon-search' : "&#xe01b;",
+        'skycon-share' : "&#xe01c;",
+        'skycon-sky-go' : "&#xe01d;",
+        'skycon-sky-plus' : "&#xe01e;",
+        'skycon-sky' : "&#xe01f;",
+        'skycon-tick' : "&#xe020;",
+        'skycon-tv' : "&#xe021;",
+        'skycon-twitter-favourite' : "&#xe022;",
+        'skycon-twitter-follow' : "&#xe023;",
+        'skycon-twitter-reply' : "&#xe024;",
+        'skycon-twitter-retweet' : "&#xe025;",
+        'skycon-twitter' : "&#xe026;",
+        'skycon-user-profile' : "&#xe027;",
+        'skycon-video-play' : "&#xe028;",
+        'skycon-volume' : "&#xe029;",
+        'skycon-warning' : "&#xe02a;"
     };
 
-
-    function supportsPsuedo(){
-        var doc = document,
-            html = doc.documentElement,
-            body = doc.body,
-            supportsPseudo = false,
-            paraBefore = doc.createElement('p'),
-            styleBefore = doc.createElement('style'),
-            heightBefore,
-            selectorsBefore = '#testbefore:before { content: "before"; }';
-
-        styleBefore.type = 'text\/css';
-        paraBefore.id = 'testbefore';
-
-        if (styleBefore.styleSheet) {
-            styleBefore.styleSheet.cssText = selectorsBefore;
-        } else {
-            styleBefore.appendChild(doc.createTextNode(selectorsBefore));
-        }
-
-        body.appendChild(styleBefore);
-        body.appendChild(paraBefore);
-
-        heightBefore = doc.getElementById('testbefore').offsetHeight;
-        
-        if (heightBefore >= 1) {
-            supportsPseudo = true;
-        }
-        
-        body.removeChild(styleBefore);
-        body.removeChild(paraBefore);
-        return supportsPseudo;
-    }
-
-    function addSkycon(el, c){
+    function addWebfont(el, c){
         var html = el.innerHTML,
             entity = icons[c];
-        el.innerHTML = '<span style="font-family: \'skycons\'" class="ie7-skycon">' + entity + '</span>' + html;
+        el.innerHTML = '<span style="font-style:normal;font-family: \'skycons\'">' + entity + '</span>' + html;
     }
 
     function init(){
-        if (supportsPsuedo()){ return; }
+        if (detect.pseudo()){ return; }
         var els = document.getElementsByTagName('*'),
             i, c, el;
         for (i = 0; ; i += 1) {
@@ -98,22 +64,21 @@ toolkit.skycons = (function() {
             if(!el) { break; }
             c = el.className;
             c = c.match(/skycon-[^\s'"]+/);
-            if (c) { addSkycon(el, c[0]); }
+            if (c) { addWebfont(el, c[0]); }
         }
     }
 
-    $(document).ready(init);
+    event.ready(init);
 
     return {
-        add: addSkycon,
-        init: init
+        add: addWebfont
     };
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/skycons', [], function() {
-        return toolkit.skycons();
+    define('utils/skycons', ['utils/detect','utils/event'], function(detect,event) {
+        return toolkit.skycons(detect,event);
     });
 } else {
-    toolkit.skycons = toolkit.skycons();
+    toolkit.skycons = toolkit.skycons(toolkit.detect,toolkit.event);
 }

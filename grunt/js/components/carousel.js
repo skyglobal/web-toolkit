@@ -1,15 +1,9 @@
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.carousel = (function(window, $, video) {
+toolkit.carousel = (function(video, detect) {
     'use strict';
 
-    // get CSS3 capabilities
-    var has3d = (function() {
-        return ('WebKitCSSMatrix' in window && 'm11' in new window.WebKitCSSMatrix());
-    }());
-    var hasTransform = (function() {
-        var s = document.body.style;
-        return s.transform !== undefined || s.WebkitTransform !== undefined || s.MozTransform !== undefined || s.OTransform !== undefined;
-    }());
+    var has3d = detect.css('support3D');
+    var hasTransform = detect.css('transform');
 
     function Carousel(element, options) {
         this.options = options;
@@ -38,6 +32,17 @@ toolkit.carousel = (function(window, $, video) {
         bindEvents: function() {
             this.bindTouchEvents();
             this.$slideContainer.find('a').on('click', this.pause.bind(this));
+
+            this.$slideContainer.find('figure').on('click', function (e) {
+                if (e.target.parentNode.className.indexOf('play-video') >= 0 || e.target.className.indexOf('play-video') >= 0) {
+                    return;
+                }
+                document.location = $(this).closest('.slide').find('figcaption a').attr('href');
+            });
+
+            this.$slideContainer.on('hover', '.slide figure', function (e) {
+                $(this).closest('.slide').find('figcaption a').toggleClass('hover', e.type === 'mouseenter');
+            });
         },
         unbindEvents: function() {
             this.unbindTouchEvents();
@@ -273,8 +278,10 @@ toolkit.carousel = (function(window, $, video) {
                     actions = options.actions,
                     onclick = options.onclick;
                 if(options.count <= 1) return this;
-                for (i in actions) {
+
+                for (i=0;i<actions.length;i++) {
                     action = actions[i];
+
                     id = action.id;
                     extraClass = (id=='next' || id=='previous') ? ' hidden-touch ' : '';
                     icon = 'skycon-' + action.icon;
@@ -401,9 +408,9 @@ toolkit.carousel = (function(window, $, video) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/carousel', ['components/video'], function(video) {
-        return toolkit.carousel(window, jQuery, video);
+    define('components/carousel', ['components/video', 'utils/detect'], function(video, detect) {
+        return toolkit.carousel(video, detect);
     });
 } else {
-    toolkit.carousel = toolkit.carousel(window, jQuery, toolkit.video);
+    toolkit.carousel = toolkit.carousel(toolkit.video, toolkit.detect);
 }

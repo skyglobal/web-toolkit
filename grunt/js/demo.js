@@ -1,5 +1,5 @@
 if (typeof demo==='undefined') demo={};
-demo.main = (function(DisplayCode, menu, tests, skycons) {
+demo.main = (function(DisplayCode, menu, tests) {
 
     function bindEvents() {
         $(document).on('click','.toggler', toggle);
@@ -38,6 +38,9 @@ demo.main = (function(DisplayCode, menu, tests, skycons) {
             dir = '_site/_includes';
         if (location.hostname.indexOf('local')===0){
             host = 'http://' + location.host;
+            dir = '../_includes';
+        } else if (document.location.host === "skyglobal.github.io"){
+            host = 'http://skyglobal.github.io/web-toolkit',
             dir = '../_includes';
         }
         var featureFiles, codeBase, route;
@@ -79,10 +82,9 @@ demo.main = (function(DisplayCode, menu, tests, skycons) {
 if (typeof window.define === "function" && window.define.amd){
     define('demo', ['demo/displayCode',
         'demo/menu',
-        'demo/tests',
-        'demo/skycons'], function(displayCode, menu, tests, skycons) {
-        return demo.main(displayCode, menu, tests, skycons);
+        'demo/tests'], function(displayCode, menu, tests) {
+        return demo.main(displayCode, menu, tests);
     });
 } else {
-    demo.main(demo.displayCode, demo.menu, demo.tests, demo.skycons);
+    demo.main(demo.displayCode, demo.menu, demo.tests);
 }
