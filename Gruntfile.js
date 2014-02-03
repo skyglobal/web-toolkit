@@ -112,7 +112,7 @@ module.exports = function(grunt) {
                     htmlDemoTemplate : 'grunt/fonts/template/skycon-template.html',
                     htmlDemo : true,
 //                    engine : 'node',
-                    destHtml : '_includes/baseStyles/icons',
+                    destHtml : '_includes/base-styles/icons',
                     hashes : false,
                     embed : true
                 }
