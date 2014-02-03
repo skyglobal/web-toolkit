@@ -197,9 +197,9 @@ module.exports = function(grunt) {
 
 //    grunt.loadTasks('tasks');
 
-    grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
-    grunt.registerTask('spy', ['default', 'jekyll:build', 'watch']);
-    grunt.registerTask('sloppy', ['clean:toolkit', 'compass:toolkit', 'requirejs', 'watch']);
+    grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'jekyll:build']);
+    grunt.registerTask('spy', ['default', 'watch']);
+    grunt.registerTask('sloppy', ['clean:toolkit', 'compass:toolkit', 'requirejs', 'jekyll:build', 'watch']);
     grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
     grunt.registerTask('test', ['requirejs:beautify','jekyll:build', 'blanket_mocha']);

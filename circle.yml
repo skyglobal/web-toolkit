@@ -15,8 +15,8 @@ test:
   pre:
     - bundle install
   override:
-    - bundle exec npm run-script test-without-coverage
-    - bundle exec npm test
+    - bundle exec grunt test-without-coverage
+    - bundle exec grunt test
 machine:
   ruby:
     version: ruby-1.9.3-p392
