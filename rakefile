@@ -163,7 +163,6 @@ task :deploy do
   fetchGHPages
   updateGHPages
   tagBuild
-
 end
 
 

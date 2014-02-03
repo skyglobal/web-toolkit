@@ -37,7 +37,7 @@
         document.createElement('figcaption');
     </script><![endif]-->
         <script>
-            {% include utils/responsiveImages/function.js %}
+            {% include utils/responsive-images/function.js %}
         </script>
 
         <script src="test/libraries/mocha.js"></script>
@@ -70,13 +70,11 @@
             blanket.options("reporter", "test/libraries/grunt-reporter.js");
         }
 
-        //load main js first, this will load all the
-        //script dependencies
-        require({baseUrl:'dist/scripts', paths: {suite: '../../test/suite', specs: '../../test/specs'}},
+        require({baseUrl:'dist/scripts',
+                paths: {suite: '../../test/suite',
+                        specs: '../../test/specs'}},
                 ["toolkit"], function(main) {
                     require(["suite"], function(TestLoader) {
-                        //start running the mocha tests
-                        //                TestLoader.start();
                         setTimeout(function(){
                             mocha.run();
                         },2000);

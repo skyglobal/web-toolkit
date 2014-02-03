@@ -5,7 +5,7 @@ toolkit.form = (function (datePicker, validation) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/form', ['components/datePicker','utils/validation'], function (datePicker, validation) {
+    define('components/form', ['components/date-picker','utils/validation'], function (datePicker, validation) {
         return toolkit.form(datePicker, validation);
     });
 } else {

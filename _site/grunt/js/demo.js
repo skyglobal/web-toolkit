@@ -1,5 +1,5 @@
 if (typeof demo==='undefined') demo={};
-demo.main = (function(DisplayCode, menu, tests, skycons, hash) {
+demo.main = (function(DisplayCode,ss, menu, tests, skycons, hash, inPageNav) {
 
     function bindEvents() {
         hash.register('code/*',showCode);
@@ -8,7 +8,7 @@ demo.main = (function(DisplayCode, menu, tests, skycons, hash) {
     function showCode(hash){
         var styled = false;
         var $lightboxLink = $('a[href="#!' + hash + '"]');
-        var feature = hash.replace(/code\//g,'');
+        var feature = hash.replace(/code\//g,'').replace('/','--').trim();
         var version = $('#current-version').text(),
             host = 'http://web-toolkit.global.sky.com',
             dir = '_site/_includes';
@@ -20,21 +20,14 @@ demo.main = (function(DisplayCode, menu, tests, skycons, hash) {
             dir = '../_includes';
         }
         var featureFiles, codeBase, route;
-        if ($lightboxLink.attr('data-docs')){
-            featureFiles = $lightboxLink.attr('data-docs');
-            codeBase = feature;
-            route = host + '/' + version + '/' + dir + '/' + codeBase;
-            styled = true;
-        } else {
-            featureFiles = $('a[href*="#' + feature + '"]').attr('data-diff-demos');
-            codeBase = $('a[href*="#' + feature + '"]').attr('data-diff');
-            route = host + '/' + version + '/' + dir + '/' + codeBase;
-        }
+        featureFiles = $('a[href*="#' + feature + '"]').attr('data-diff-demos').trim();
+        codeBase = $('a[href*="#' + feature + '"]').attr('data-diff').trim();
+        route = host + '/' + version + '/' + dir + '/' + codeBase;
         new DisplayCode({
             header: $lightboxLink.parent().text().replace($lightboxLink.text(),'').trim(),
             feature: feature,
             dir: route,
-            fileNames: featureFiles.split(','),
+            fileNames: featureFiles.replace(/ /g,'').split(','),
             styled: styled
         });
     }
@@ -56,13 +49,15 @@ demo.main = (function(DisplayCode, menu, tests, skycons, hash) {
 });
 
 if (typeof window.define === "function" && window.define.amd){
-    define('demo', ['demo/displayCode',
+    define('demo', ['demo/display-code',
+        'lib/jquery.scrollspy',
         'demo/menu',
         'demo/tests',
         'demo/skycons',
-        'utils/hashManager'], function(displayCode, menu, tests, skycons, hashManager) {
-        return demo.main(displayCode, menu, tests, skycons, hashManager);
+        'utils/hash-manager',
+        'components/in-page-nav'], function(displayCode, scrollspy, menu, tests, skycons, hashManager, inPageNav) {
+        return demo.main(displayCode, scrollspy, menu, tests, skycons, hashManager, inPageNav);
     });
 } else {
-    demo.main(demo.displayCode, demo.menu, demo.tests, demo.skycons, toolkit.hashManager);
+    demo.main(demo.displayCode, scrollspy, demo.menu, demo.tests, demo.skycons, toolkit.hashManager, toolkit.inPageNav);
 }

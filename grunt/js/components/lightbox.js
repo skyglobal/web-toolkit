@@ -222,7 +222,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
 if (typeof window.define === "function" && window.define.amd) {
     define('components/lightbox',
             ['utils/focus',
-            'utils/hashManager',
+            'utils/hash-manager',
             'utils/event',
             'utils/detect'
             ], function(focus, hash, event, detect) {

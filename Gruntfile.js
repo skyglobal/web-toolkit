@@ -23,7 +23,7 @@ module.exports = function(grunt) {
                 tasks: ['compass', 'jekyll:build']
             },
             'jekyll': {
-                files: [ '_includes/**/*', '_layouts/**/*', '*.html', '_config.yml', 'test/libraries/*.js','test/*' ],
+                files: [ '_includes/**/*', '_layouts/**/*', '_data/**/*', '*.html', '_config.yml', 'test/libraries/*.js','test/*' ],
                 tasks: ['jekyll:build']
             },
             'specs': {
@@ -69,23 +69,35 @@ module.exports = function(grunt) {
             }
         },
         requirejs:{
+            options: {
+                preserveLicenseComments: false,
+                baseUrl: "grunt/js",
+                dir: "dist/scripts",
+                removeCombined: true,
+                generateSourceMaps: false,
+                modules:[{
+                    name: 'toolkit'
+                },{
+                    name: 'demo'
+                },{
+                    name: 'changes'
+                },{
+                    name: 'testIFrame'
+                }]
+            },
             toolkit: {
                 options: {
-                    optimize: grunt.option('beautify') ? "none" : "uglify2",
-                    preserveLicenseComments: false,
-                    baseUrl: "grunt/js",
-                    dir: "dist/scripts",
-                    removeCombined: true,
-                    generateSourceMaps: false,
-                    modules:[{
-                        name: 'toolkit'
-                    },{
-                        name: 'demo'
-                    },{
-                        name: 'changes'
-                    },{
-                        name: 'testIFrame'
-                    }]
+                    optimize: grunt.option('beautify') ? "none" : "uglify2"
+                }
+            },
+            beautify: {
+                options: {
+                    optimize: "none"
+                }
+            },
+            uglify: {
+                options: {
+                    optimize: "uglify2"
                 }
             }
         },
@@ -143,19 +155,6 @@ module.exports = function(grunt) {
             }
         },
 
-        mocha: {
-            all: {
-                src: (function() {
-                    var pattern = grunt.option('pattern') || '[A-Z]*';
-                    return ['_site/test.html'];
-                }()),
-                options: {
-                    run: false,
-                    log: true // Set to true to see console.log() output on the terminal
-                }
-            }
-        },
-
         blanket_mocha: {
 
             all : ['_site/test.html'],
@@ -164,6 +163,9 @@ module.exports = function(grunt) {
                 globalThreshold : 80, // <- coverage rule
                 log : true
             }
+        },
+        mocha: {
+            all : ['_site/test-without-coverage.html']
         },
 
         jekyll: {                            // Task
@@ -196,9 +198,10 @@ module.exports = function(grunt) {
 //    grunt.loadTasks('tasks');
 
     grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
-    grunt.registerTask('spy', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'jekyll:build', 'watch']);
+    grunt.registerTask('spy', ['default', 'jekyll:build', 'watch']);
     grunt.registerTask('sloppy', ['clean:toolkit', 'compass:toolkit', 'requirejs', 'watch']);
     grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
-    grunt.registerTask('test', ['blanket_mocha']);
+    grunt.registerTask('test', ['requirejs:beautify','jekyll:build', 'blanket_mocha']);
+    grunt.registerTask('test_without_coverage', ['requirejs:uglify','jekyll:build', 'mocha']);
 };
