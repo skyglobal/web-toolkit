@@ -81,7 +81,7 @@ function validationSpec(validation) {
 }
 
 if (window.define) {
-    define('specs/validationSpec', ['utils/validation'], function (validation) {
+    define('specs/validation-spec', ['utils/validation'], function (validation) {
             return validationSpec(validation);
         });
 }

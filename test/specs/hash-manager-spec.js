@@ -204,7 +204,7 @@ function hashManagerSpec(hash) {
 }
 
 if (window.define) {
-    define('specs/hashManagerSpec', ['utils/hashManager'], function (hash) {
+    define('specs/hash-manager-spec', ['utils/hash-manager'], function (hash) {
         return hashManagerSpec(hash);
     });
 }

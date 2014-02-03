@@ -251,7 +251,7 @@ function lightboxSpec(lightbox, focus, hash) {
 }
 
 if (window.define) {
-    define('specs/lightboxSpec', ['components/lightbox', 'utils/focus', 'utils/hashManager'],
+    define('specs/lightbox-spec', ['components/lightbox', 'utils/focus', 'utils/hash-manager'],
         function (lightbox, focus, hash) {
             return lightboxSpec(lightbox, focus, hash);
         }

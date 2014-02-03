@@ -135,7 +135,7 @@ function eventSpec(event) {
 }
 
 if (window.define) {
-    define('specs/eventSpec', ['utils/event'], function ( event) {
+    define('specs/event-spec', ['utils/event'], function ( event) {
         return eventSpec(event);
     });
 }

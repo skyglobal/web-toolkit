@@ -30,9 +30,10 @@ demo.displayCode = (function( hljs){
         this.filesReceived = 0;
         this.getFile(this.dir, 'notes', 'html', true);
         for (var i in this.fileNames){
-            this.getFile(this.dir, this.fileNames[i], 'html');
-            this.getFile(this.dir, this.fileNames[i], 'notes.html', true);
-            this.getFile(this.dir, this.fileNames[i], 'js');
+            var file = this.fileNames[i].trim();
+            this.getFile(this.dir, file, 'html');
+            this.getFile(this.dir, file, 'notes.html', true);
+            this.getFile(this.dir, file, 'js');
         }
     };
 
@@ -143,6 +144,170 @@ if (typeof window.define === "function" && window.define.amd) {
     });
 } else {
     demo.displayCode = demo.displayCode(hljs);
+};
+/* ========================================================================
+ * Bootstrap: scrollspy.js v3.0.2
+ * http://getbootstrap.com/javascript/#scrollspy
+ * ========================================================================
+ * Copyright 2013 Twitter, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ======================================================================== */
+
+
+var scrollspy = (function ($) { 
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+    function ScrollSpy(element, options) {
+        var href
+        var process  = $.proxy(this.process, this)
+
+        this.$element       = $(element).is('body') ? $(window) : $(element)
+        this.$body          = $('body')
+        this.$scrollElement = this.$element.on('scroll.bs.scroll-spy.data-api', process)
+        this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+        this.selector       = (this.options.target
+            || ((href = $(element).attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')) //strip for ie7
+            || '') + ' .nav li > a'
+        this.offsets        = $([])
+        this.targets        = $([])
+        this.activeTarget   = null
+
+        this.refresh()
+        this.process()
+    }
+
+    ScrollSpy.DEFAULTS = {
+        offset: 10
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+        var offsetMethod = this.$element[0] == window ? 'offset' : 'position'
+
+        this.offsets = $([])
+        this.targets = $([])
+
+        var self     = this
+        var $targets = this.$body
+            .find(this.selector)
+            .map(function () {
+                var $el   = $(this)
+                var href  = $el.data('target') || $el.attr('href')
+                var $href = /.*#\w/.test(href) && ($(href).length ? $(href) : $('[id=' + href.split('#')[1] + ']'))
+
+                return ($href
+                    && $href.length
+                    && [[ $href[offsetMethod]().top + (!$.isWindow(self.$scrollElement.get(0)) && self.$scrollElement.scrollTop()), href ]]) || null
+            })
+            .sort(function (a, b) { return a[0] - b[0] })
+            .each(function () {
+                self.offsets.push(this[0])
+                self.targets.push(this[1])
+            })
+    }
+
+    ScrollSpy.prototype.process = function () {
+        var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+        var scrollHeight = this.$scrollElement[0].scrollHeight || this.$body[0].scrollHeight
+        var maxScroll    = scrollHeight - this.$scrollElement.height()
+        var offsets      = this.offsets
+        var targets      = this.targets
+        var activeTarget = this.activeTarget
+        var i
+
+        if (scrollTop >= maxScroll) {
+            return activeTarget != (i = targets.last()[0]) && this.activate(i)
+        }
+
+        for (i = offsets.length; i--;) {
+            activeTarget != targets[i]
+                && scrollTop >= offsets[i]
+                && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+            && this.activate( targets[i] )
+        }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+        this.activeTarget = target
+
+        var selector = this.selector
+            + '[data-target="' + target + '"],'
+            + this.selector + '[href="' + target + '"]'
+
+        $(this.selector)
+            .parents('.selected')
+            .removeClass('selected')
+
+        var active = $(selector)
+            .parents('li')
+            .addClass('selected')
+
+        $('#toolkit-menu-tabs').find('[role=tablist] .selected').removeClass('selected');
+        active = $('#' + active.parent().parent().parent().addClass('selected').attr('aria-labeledby')).addClass('selected');
+
+        active.trigger('activate')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy = function (option) {
+        return this.each(function () {
+            var $this   = $(this)
+            var data    = $this.data('bs.scrollspy')
+            var options = typeof option == 'object' && option
+
+            if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+            if (typeof option == 'string') data[option]()
+        })
+    }
+
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+        $.fn.scrollspy = old
+        return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load', function () {
+        $('[data-spy="scroll"]').each(function () {
+            var $spy = $(this)
+            $spy.scrollspy($spy.data())
+        })
+    })
+
+});
+
+//modified for AMD/RequireJS.
+//by Peter Mouland
+if (typeof window.define === "function" && window.define.amd) {
+    define('lib/jquery.scrollspy', [],function() {
+        return scrollspy(jQuery);
+    });
+} else {
+    scrollspy(jQuery);
 };
 if (typeof demo==='undefined') demo={};
 demo.menu = (function(){
@@ -355,7 +520,7 @@ demo.tests = (function(hashManager){
 
     function runTest(hash){
         var item = hash.replace(/test\//,'');
-        var spec = item.split('/')[1] + 'Spec';
+        var spec = item.split('/')[1] + '-spec';
         var $runTestLink = $('a[href*="#' + hash + '"]');
         $runTestLink.removeAttr('href').attr('id', 'link-test-' + spec);
         $('html, body').animate({
@@ -485,8 +650,259 @@ if (typeof window.define === "function" && window.define.amd){
     demo.skycons = demo.skycons();
 }
 ;
+if (typeof toolkit==='undefined') toolkit={};
+toolkit.event = (function () {
+    
+    var timeout = {
+        resize : null
+    };
+    var state = {    };
+    var browserSpecificEvents = {
+        'transitionend' : check('transition','end'),
+        'animationend' : check('animation','end')
+    };
+
+    function capitalise(str){
+        return str.replace(/\b[a-z]/g, function() {return arguments[0].toUpperCase();});
+    }
+
+    function check(eventName, type){
+        var result = false,
+            eventType = eventName.toLowerCase() + type.toLowerCase(),
+            eventTypeCaps = capitalise(eventName.toLowerCase()) + capitalise(type.toLowerCase());
+        if (state[eventType]){ return state[eventType]; }
+        if('on' + eventType in window) {
+            result = eventType;
+        } else if('onwebkit' + eventType in window) {
+            result = 'webkit' + eventTypeCaps;
+        } else if('ono' + eventType in document.documentElement) {
+            result = 'o' + eventTypeCaps;
+        }
+        return result;
+    }
+
+    function bindEvents(){
+        on(window,'resize',function(){
+            clearTimeout(timeout.resize);
+            timeout.resize = setTimeout(emitResizeEnd,200);
+        });
+    }
+
+    function emitResizeEnd(){
+        emit(window,'resizeend'); // raw JS version
+        $(window).trigger('resizeend'); // jQuery version
+    }
+
+    function on(el, eventName, exec){
+        var browserSpecificEventName = browserSpecificEvents[eventName.toLowerCase()];
+        eventName = browserSpecificEventName ||  eventName;
+        if (el.addEventListener) {
+            el.addEventListener(eventName, exec, false);
+        } else {
+            el.attachEvent(eventName, exec);
+        }
+    }
+
+    function off(el, eventName, exec) {
+        var browserSpecificEventName = browserSpecificEvents[eventName.toLowerCase()];
+        eventName = browserSpecificEventName ||  eventName;
+        if (el.removeEventListener)
+            el.removeEventListener(eventName, exec, false);
+        else
+            el.detachEvent('on' + eventName, exec);
+    }
+//todo : compare
+// if (document.createEvent) {
+//    event = document.createEvent('HTMLEvents')
+//    event.initEvent('change', true, false)
+//    el.dispatchEvent(event)
+//} else {
+//    el.fireEvent('onchange')
+//}
+    function emit(el, eventName) {
+        var event;
+        if (document.createEvent) {
+            event = new Event(eventName);
+            el.dispatchEvent(event);
+        } else {
+            event = document.createEventObject();
+            el.fireEvent('on' + eventName, event);
+        }
+    }
+
+    function ready(exec){
+        if (/in/.test(document.readyState)){
+            setTimeout(function(){ ready(exec); },9);
+        } else {
+            exec();
+        }
+    }
+
+    bindEvents();
+
+    return {
+        on: on,
+        off: off,
+        emit: emit,
+        ready: ready
+    };
+
+});
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('utils/event', [],function() {
+        
+        toolkit.event = toolkit.event();
+        return toolkit.event;
+    });
+} else {
+    toolkit.event = toolkit.event();
+};
+/**
+ purpose:
+ to automatically hook into the bootstrap html and shows/hides tabs.
+ Works based registering the tabs 'hash' with the changeTab function.
+ no onclick events needed.
+**/
+if (typeof toolkit==='undefined') toolkit={};
+toolkit.inPageNav = (function(hash, event) {
+//    todo: accessibility check when moving tabs about - perhaps dont have 2 separate lists.
+//    todo: move 'more' link to outside the ul
+
+    function InPageNav($element){
+        this.$tabContainer = $element;
+        this.$tabs = $element.find('li[role=tab]');
+        this.$tabTargets = $element.find('div[role=tabpanel]');
+        this.$showMore = $element.find('.dropdown-tab-select > a');
+        this.$moreTabsContainer = $element.find('.dropdown-tab-select');
+        this.$moreTabsLink = $element.find('.more-tabs');
+        this.numberOfTabsToShow = 0;
+
+        this.saveTabOrder();
+        this.bindEvents();
+        this.initTabs();
+    }
+
+    InPageNav.prototype = {
+        bindEvents : function(){
+            var self = this;
+            hash.register(this.getHashList(), this.changeTab.bind(self));
+            this.$tabs.on('click', function(e){
+                self.changeTab($(this).find('a').attr('href'));
+            });
+            this.$showMore.on('click', function(e){
+                e.preventDefault();
+                self.toggleShowMore();
+            });
+            $('body').on('click', this.hideMore.bind(self));
+            event.on(window,'resizeend',  this.initTabs.bind(self));
+        },
+
+        getHashList: function() {
+            var arrHash = [];
+            this.$tabs.each(function(){
+                arrHash.push($(this).attr('aria-controls'));
+            });
+            return arrHash;
+        },
+
+        saveTabOrder: function(){
+            this.$tabs.each(function(i){
+                $(this).attr('data-position', i);
+            });
+        },
+
+        initTabs: function(){
+            this.moveTabsToList();
+            this.moveTabsToDropdown();
+            if (!this.$tabTargets.filter('.selected').length){
+                this.changeTab(this.$tabTargets.first()[0].id);
+            }
+        },
+
+        changeTab: function(controlId){
+            controlId = controlId.replace('#!','');
+            var $thisTab = $("#" + controlId.replace('-tab-contents','') + "-tab"),
+                $thisTabTarget = $("#" + controlId);
+            this.$tabTargets.add(this.$tabs).removeClass("selected");
+            $thisTab.add($thisTabTarget).addClass('selected');
+            this.initTabs();
+        },
+
+        hideMore: function(e){
+            if ($(e.target).closest(this.$showMore).length) { return; }
+            this.toggleShowMore('hide');
+        },
+
+        toggleShowMore: function(type){
+            var action = (this.$moreTabsLink.hasClass('dropdown-tab-selected') || type==='hide') ? 'remove' : 'add';
+            this.$showMore.add(this.$moreTabsLink)[action + 'Class']('dropdown-tab-selected');
+        },
+
+        getNumberOfTabsToShow: function() {
+            var containerWidth = this.$tabContainer.outerWidth(true) -
+                    this.$moreTabsContainer.show().outerWidth(true) -
+                    this.$tabs.filter('.selected').outerWidth(true),
+                totalWidth = 0,
+                numberOfTabs = 0;
+            this.$tabs.not('.selected').attr('style','float:left').each(function () {
+                totalWidth += ($(this).outerWidth(true));
+                if (totalWidth > containerWidth) { return ; }
+                numberOfTabs++;
+            });
+            this.$tabs.add(this.$moreTabsContainer).removeAttr('style');
+            return numberOfTabs;
+        },
+
+        moveTabsToList: function() {
+            var self = this;
+            this.$tabs.each(function (i) {
+                $(this).appendTo(self.$tabContainer.find('.tabs'));
+            });
+            sortTabs(this.$tabContainer.find('.tabs'));
+            this.numberOfTabsToShow = this.getNumberOfTabsToShow();
+        },
+
+        moveTabsToDropdown: function() {
+            var self = this;
+            this.$tabs.not('.selected').each(function (i) {
+                if(i < self.numberOfTabsToShow) { return ; }
+                $(this).appendTo(self.$moreTabsLink);
+                self.$moreTabsContainer.show();
+            });
+            sortTabs(this.$moreTabsLink);
+        }
+    };
+
+    function sortTabs($el) {
+        var list = [];
+        $el.find('li').each(function () {
+            list.push($(this).attr('data-position'));
+        });
+        list.sort();
+        $.each(list, function () {
+            $el.find('li[data-position="'+this+'"]').appendTo($el);
+        });
+    }
+
+    $.fn.inPageNav = function() {
+        return this.each(function() {
+            var inPageNav = new InPageNav($(this));
+        });
+    };
+
+});
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('components/in-page-nav', ['utils/hash-manager','utils/event'], function(hash, event) {
+        toolkit.inPageNav = toolkit.inPageNav(hash, event);
+        return toolkit.inPageNav;
+    });
+} else {
+    toolkit.inPageNav = toolkit.inPageNav(toolkit.hashManager, toolkit.event);
+};
 if (typeof demo==='undefined') demo={};
-demo.main = (function(DisplayCode, menu, tests, skycons, hash) {
+demo.main = (function(DisplayCode,ss, menu, tests, skycons, hash, inPageNav) {
 
     function bindEvents() {
         hash.register('code/*',showCode);
@@ -537,13 +953,15 @@ demo.main = (function(DisplayCode, menu, tests, skycons, hash) {
 
 if (typeof window.define === "function" && window.define.amd){
     define('demo', ['demo/display-code',
+        'lib/jquery.scrollspy',
         'demo/menu',
         'demo/tests',
         'demo/skycons',
-        'utils/hash-manager'], function(displayCode, menu, tests, skycons, hashManager) {
-        return demo.main(displayCode, menu, tests, skycons, hashManager);
+        'utils/hash-manager',
+        'components/in-page-nav'], function(displayCode, scrollspy, menu, tests, skycons, hashManager, inPageNav) {
+        return demo.main(displayCode, scrollspy, menu, tests, skycons, hashManager, inPageNav);
     });
 } else {
-    demo.main(demo.displayCode, demo.menu, demo.tests, demo.skycons, toolkit.hashManager);
+    demo.main(demo.displayCode, scrollspy, demo.menu, demo.tests, demo.skycons, toolkit.hashManager, toolkit.inPageNav);
 }
 ;

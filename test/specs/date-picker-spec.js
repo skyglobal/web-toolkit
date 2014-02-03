@@ -192,7 +192,7 @@ function datePickerSpec(datePicker) {
 }
 
 if (window.define) {
-    define('specs/datePickerSpec', ['components/datePicker'], function (datePicker) {
+    define('specs/date-picker-spec', ['components/date-picker'], function (datePicker) {
         return datePickerSpec();
     });
 }

@@ -143,19 +143,6 @@ module.exports = function(grunt) {
             }
         },
 
-        mocha: {
-            all: {
-                src: (function() {
-                    var pattern = grunt.option('pattern') || '[A-Z]*';
-                    return ['_site/test.html'];
-                }()),
-                options: {
-                    run: false,
-                    log: true // Set to true to see console.log() output on the terminal
-                }
-            }
-        },
-
         blanket_mocha: {
 
             all : ['_site/test.html'],

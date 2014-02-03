@@ -86,7 +86,7 @@ These tests are automatically run on the CircleCI server upon pushing to Github
     │   └── lib         => untouched third-party files
     ├── test
     │   ├── libararies  => Third-party src files for testing
-    │   ├── specs       => place for *Spec.js files
+    │   ├── specs       => place for *-spec.js files
     │   ├── config.js   => RequireJS and Mocha config file
     │   └── runner.js   => explitly call each spec file for `grunt test` to run
     ├── wiki-images     => images used for demos in the wiki

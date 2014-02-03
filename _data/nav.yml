@@ -40,10 +40,6 @@ Base Styles :
     examples :
       - example : all
         developer_notes_file : true
-  Fonts :
-    developer_notes_file : true
-    examples :
-      - example : All
   Icons :
     examples :
       - example : Skycons

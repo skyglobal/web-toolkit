@@ -103,7 +103,7 @@ function accordionSpec() {
 }
 
 if (window.define) {
-    define('specs/accordionSpec', ['components/accordion'], function () {
+    define('specs/accordion-spec', ['components/accordion'], function () {
         return accordionSpec();
     });
 }

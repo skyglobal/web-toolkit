@@ -19,9 +19,10 @@ demo.displayCode = (function( hljs){
         this.filesReceived = 0;
         this.getFile(this.dir, 'notes', 'html', true);
         for (var i in this.fileNames){
-            this.getFile(this.dir, this.fileNames[i], 'html');
-            this.getFile(this.dir, this.fileNames[i], 'notes.html', true);
-            this.getFile(this.dir, this.fileNames[i], 'js');
+            var file = this.fileNames[i].trim();
+            this.getFile(this.dir, file, 'html');
+            this.getFile(this.dir, file, 'notes.html', true);
+            this.getFile(this.dir, file, 'js');
         }
     };
 

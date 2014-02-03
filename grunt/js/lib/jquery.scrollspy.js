@@ -18,7 +18,7 @@
  * ======================================================================== */
 
 
-+function ($) { "use strict";
+var scrollspy = (function ($) { "use strict";
 
     // SCROLLSPY CLASS DEFINITION
     // ==========================
@@ -57,7 +57,7 @@
             .map(function () {
                 var $el   = $(this)
                 var href  = $el.data('target') || $el.attr('href')
-                var $href = /.*#\w/.test(href) && ($(href).length ? $(href) : $('[name=' + href.split('#')[1] + ']'))
+                var $href = /.*#\w/.test(href) && ($(href).length ? $(href) : $('[id=' + href.split('#')[1] + ']'))
 
                 return ($href
                     && $href.length
@@ -151,4 +151,14 @@
         })
     })
 
-}(jQuery);
+});
+
+//modified for AMD/RequireJS.
+//by Peter Mouland
+if (typeof window.define === "function" && window.define.amd) {
+    define('lib/jquery.scrollspy', function() {
+        return scrollspy(jQuery);
+    });
+} else {
+    scrollspy(jQuery);
+}

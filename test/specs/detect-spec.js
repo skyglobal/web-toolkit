@@ -133,7 +133,7 @@ function detectSpec(detect, event) {
 }
 
 if (window.define) {
-    define('specs/detectSpec', ['utils/detect', 'utils/event'], function (detect, event) {
+    define('specs/detect-spec', ['utils/detect', 'utils/event'], function (detect, event) {
         return detectSpec(detect, event);
     });
 }

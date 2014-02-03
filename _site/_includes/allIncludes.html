@@ -1,17 +1,15 @@
 {% for primary_link in site.data.nav %}
     {% assign primary_link_name = primary_link[0] %}
     {% assign primary_link_url = primary_link_name | downcase | replace: ' ','-' %}
-    <a name="{{primary_link_url}}"></a>
-    <section class="demo-section" >
+    <section class="demo-section" id="{{primary_link_url}}">
         <h2>{{ primary_link_name }}</h2>
         {% for secondary_link in primary_link[1] %}
             {% assign secondary_link_name = secondary_link[0] %}
             {% assign secondary_link_url = secondary_link_name | downcase | replace: ' ','-' %}
-            <a name="{{primary_link_url}}--{{ secondary_link_url }}"></a>
-            <div class="sub-section">
+            <div class="sub-section" id="{{primary_link_url}}--{{ secondary_link_url }}">
                 <h3 class="demo-h3 section-title smaller">
                     {{secondary_link_name}}
-                    <a href="#!code/{{ primary_link_url }}/{{ secondary_link_url }}" class="code-download">Code</a>
+                    <a href="#!code/{{ primary_link_url }}--{{ secondary_link_url }}" class="code-download">Code</a>
                     {% if secondary_link[1].has_tests %}
                         <a href="#test/{{ primary_link_url }}/{{ secondary_link_url }}" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
                     {% endif %}

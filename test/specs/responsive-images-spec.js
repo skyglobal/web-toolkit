@@ -35,7 +35,7 @@ function responsiveImagesSpec(responsiveImages, event) {
 }
 
 if (window.define) {
-    define('specs/responsiveImagesSpec', ['utils/responsiveImages','utils/event'], function (responsiveImages, event) {
+    define('specs/responsive-images-spec', ['utils/responsive-images','utils/event'], function (responsiveImages, event) {
         return responsiveImagesSpec(responsiveImages, event);
     });
 }

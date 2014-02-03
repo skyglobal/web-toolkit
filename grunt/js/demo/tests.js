@@ -5,7 +5,7 @@ demo.tests = (function(hashManager){
 
     function runTest(hash){
         var item = hash.replace(/test\//,'');
-        var spec = item.split('/')[1] + 'Spec';
+        var spec = item.split('/')[1] + '-spec';
         var $runTestLink = $('a[href*="#' + hash + '"]');
         $runTestLink.removeAttr('href').attr('id', 'link-test-' + spec);
         $('html, body').animate({

@@ -48,7 +48,7 @@ function toggleSpec(toggle) {
 }
 
 if (window.define) {
-    define('specs/toggleSpec', ['utils/toggle'], function (toggle) {
+    define('specs/toggle-spec', ['utils/toggle'], function (toggle) {
             return toggleSpec(toggle);
         }
     );

@@ -256,7 +256,7 @@ function carouselSpec() {
 }
 
 if (window.define) {
-    define('specs/carouselSpec', ['components/carousel'], function () {
+    define('specs/carousel-spec', ['components/carousel'], function () {
             return carouselSpec();
         });
 }

@@ -53,7 +53,7 @@ function popupSpec(popup) {
 }
 
 if (window.define) {
-    define('specs/popupSpec', ['utils/popup'], function (popup) {
+    define('specs/popup-spec', ['utils/popup'], function (popup) {
             return popupSpec(popup);
         }
     );

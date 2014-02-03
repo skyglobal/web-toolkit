@@ -3,7 +3,7 @@ if (typeof testIFrame === 'undefined') testIFrame={};
 testIFrame.main = (function() {
 
     var item = document.location.hash.replace(/#/,'');
-    var spec = item.split('/')[1] + 'Spec';
+    var spec = item.split('/')[1] + '-spec';
     var filesReceived=0;
     var exampleCount=0;
 
@@ -17,7 +17,12 @@ testIFrame.main = (function() {
     }
     function getFixtures(){
 //        var $examples = $('#' + item.replace('/',' #')).find('.example');
-        var $examples = $(window.parent.document).find('#' + item.replace(/\//,' #') + ' .example');
+        var $examples = $(window.parent.document).find('#' + item.replace('/','--').replace(/\//,' #') + ' .example');
+        if (!$examples.length){
+            $('.spinner-blue').remove();
+            $('#fixtures').append('No demos found. [$(#' + item.replace('/','--').replace(/\//,' #') + ' .example)]');
+            return;
+        }
         $examples.each(function(){
             var example = $(this).attr('data-example');
             var init = $(this).find('script').length;
