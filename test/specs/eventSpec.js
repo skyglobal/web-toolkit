@@ -29,29 +29,55 @@ function eventSpec(event) {
 
         it('can emit and catch custom events on a single element e.g. document or h1', function (done) {
             var counter = 0;
-            event.on(document,'petesTest1',function(){
+            event.on(document,'petesTestOn',function(){
                 counter++;
                 expect(counter).to.equal(1);
             });
-            event.on(h1,'petesTest1',function(){
+            event.on(h1,'petesTestOn',function(){
                 counter++;
                 expect(counter).to.equal(2);
             });
-            event.on(window,'petesTest1',function(){
+            event.on(window,'petesTestOn',function(){
                 counter++;
                 expect(counter).to.equal(3);
                 done();
             });
             try {
-                event.emit(document,'petesTest1');
-                event.emit(h1,'petesTest1');
-                event.emit(window,'petesTest1');
+                event.emit(document,'petesTestOn');
+                event.emit(h1,'petesTestOn');
+                event.emit(window,'petesTestOn');
             } catch (e) {
                 console.log('PhantomJS really hates events :(');
                 done();
             }
         });
 
+
+        it('can turn off custom events', function (done) {
+            var counter = 0;
+            var exec = function(){
+                    counter++;
+                };
+            event.on(document,'petesTestOff',exec);
+            event.on(h1,'petesTestOff',exec);
+            event.on(window,'petesTestOff', exec);
+            event.on(window,'petesTestOffFinal', function(){
+                expect(counter).to.equal(0);
+                done();
+            });
+            try {
+                event.off(document,'petesTestOff', exec);
+                event.off(h1,'petesTestOff', exec);
+                event.off(window,'petesTestOff', exec);
+                event.emit(document,'petesTestOff', exec);
+                event.emit(h1,'petesTestOff');
+                event.emit(window,'petesTestOff');
+                event.emit(window,'petesTestOffFinal');
+            } catch (e) {
+                console.log('PhantomJS really hates events :(. fix me!');
+                done();
+            }
+        });
         it('will not catch events emitted from the wrong element', function (done) {
             var counter = 0;
             event.on(document,'petesTest2',function(){

@@ -1,85 +1,64 @@
-<section class="demo-section" id="base-styles">
-    <h2>Base Styles</h2>
-    <div class="sub-section" id="grid">
-        {% include baseStyles/grid.html %}
-    </div>
-    <div class="sub-section" id="colours">
-        {% include baseStyles/colours.html %}
-    </div>
-    <div class="sub-section" id="fonts">
-        {% include baseStyles/fonts.html %}
-    </div>
-    <div class="sub-section" id="typography">
-        {% include baseStyles/typography.html %}
-    </div>
-    <div class="sub-section" id="icons">
-        {% include baseStyles/icons.html %}
-    </div>
-    <div class="sub-section" id="buttons">
-        {% include baseStyles/buttons.html %}
-    </div>
-    <div class="sub-section" id="spinners">
-        {% include baseStyles/spinners.html %}
-    </div>
-</section>
-
-<section class="demo-section" id="components">
-    <h2>Components</h2>
-    <div class="sub-section" id="breadcrumbs">
-        {% include components/breadcrumbs.html %}
-    </div>
-    <div class="sub-section" id="form">
-        {% include components/form.html %}
-    </div>
-    <div class="sub-section" id="inPageNav">
-        {% include components/inPageNav.html %}
-    </div>
-    <div class="sub-section" id="lightbox">
-        {% include components/lightbox.html %}
-    </div>
-    <div class="sub-section" id="accordion">
-        {% include components/accordion.html %}
-    </div>
-    <div class="sub-section" id="carousel">
-        {% include components/carousel.html %}
-    </div>
-    <div class="sub-section" id="video">
-        {% include components/video.html %}
-    </div>
-    <div class="sub-section" id="share">
-        {% include components/share.html %}
-    </div>
-    <div class="sub-section" id="tooltip">
-        {% include components/tooltip.html %}
-    </div>
-
-</section>
-
-<section class="demo-section" id="utils">
-    <h2>Utils</h2>
-    <div class="sub-section" id="toggle">
-        {% include utils/toggle.html %}
-    </div>
-    <div class="sub-section" id="hashManager">
-        {% include utils/hashManager.html %}
-    </div>
-    <div class="sub-section" id="responsiveImages">
-        {% include utils/responsiveImages.html %}
-    </div>
-    <div class="sub-section" id="detect">
-        {% include utils/detect.html %}
-    </div>
-    <div class="sub-section" id="event">
-        {% include utils/event.html %}
-    </div>
-    <div class="sub-section" id="libraries">
-        {% include utils/libraries.html %}
-    </div>
-</section>
-
-<section class="demo-section" id="examples">
-    <h2>Examples</h2>
-    <div class="sub-section" id="errorPage">
-        {% include examples/errorPage.html %}
-    </div>
-</section>
+{% for primary_link in site.data.nav %}
+    {% assign primary_link_name = primary_link[0] %}
+    {% assign primary_link_url = primary_link_name | downcase | replace: ' ','-' %}
+    <a name="{{primary_link_url}}"></a>
+    <section class="demo-section" >
+        <h2>{{ primary_link_name }}</h2>
+        {% for secondary_link in primary_link[1] %}
+            {% assign secondary_link_name = secondary_link[0] %}
+            {% assign secondary_link_url = secondary_link_name | downcase | replace: ' ','-' %}
+            <a name="{{primary_link_url}}--{{ secondary_link_url }}"></a>
+            <div class="sub-section">
+                <h3 class="demo-h3 section-title smaller">
+                    {{secondary_link_name}}
+                    <a href="#!code/{{ primary_link_url }}/{{ secondary_link_url }}" class="code-download">Code</a>
+                    {% if secondary_link[1].has_tests %}
+                        <a href="#test/{{ primary_link_url }}/{{ secondary_link_url }}" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+                    {% endif %}
+                </h3>
+                {% if secondary_link[1].warning %}
+                    <p class="designer-notes skycom-7 alpha error">{{ secondary_link[1].warning }}</p>
+                {% endif %}
+                {% if secondary_link[1].design_notes %}
+                    <p class="designer-notes skycom-7 alpha">{{ secondary_link[1].design_notes }}</p>
+                {% endif %}
+                {% for example in secondary_link[1].examples %}
+                    {% assign title = example.example %}
+                    {% if example.title %}
+                        {% assign title = example.title %}
+                    {% endif %}
+                    {% assign url = example.example | downcase | replace: ' ','-' %}
+                    {% capture html_path %}{{ primary_link_url }}/{{ secondary_link_url }}/{{ url }}.html{% endcapture %}
+                    <div class="example" data-example="{{ url }}">
+                        {% capture header %}<h4 class="demo-h4 pod-title smaller">{{ title }}</h4>{% endcapture %}
+                        {% if forloop.last %}
+                            {% if forloop.first %}
+                                {% unless example.design_notes %}
+                                    {% capture header %}{% endcapture %}
+                                {% endunless %}
+                            {% endif %}
+                        {% endif %}
+                        {{ header }}
+                        {% if example.warning %}
+                            <p class="designer-notes skycom-7 alpha error">{{ example.warning }}</p>
+                        {% endif %}
+                        {% if example.design_notes %}
+                            <p class="designer-notes skycom-7 alpha">{{ example.design_notes }}</p>
+                        {% endif %}
+                        <div class="demo clearfix">
+                            {% include {{html_path}} %}
+                        </div>
+                        {%if example.js_file%}
+                            {% capture js_path %}{{ primary_link_url }}/{{ secondary_link_url }}/{{ url }}.js{% endcapture %}
+                            <script>
+                                require(['{{ primary_link_url }}/{{ secondary_link_url }}'], function(){
+                                    {% include {{js_path}} %}
+                                });
+                            </script>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </section>
+{% endfor %}

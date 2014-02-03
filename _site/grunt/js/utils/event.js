@@ -51,6 +51,22 @@ toolkit.event = (function () {
         }
     }
 
+    function off(el, eventName, exec) {
+        var browserSpecificEventName = browserSpecificEvents[eventName.toLowerCase()];
+        eventName = browserSpecificEventName ||  eventName;
+        if (el.removeEventListener)
+            el.removeEventListener(eventName, exec, false);
+        else
+            el.detachEvent('on' + eventName, exec);
+    }
+//todo : compare
+// if (document.createEvent) {
+//    event = document.createEvent('HTMLEvents')
+//    event.initEvent('change', true, false)
+//    el.dispatchEvent(event)
+//} else {
+//    el.fireEvent('onchange')
+//}
     function emit(el, eventName) {
         var event;
         if (document.createEvent) {
@@ -74,6 +90,7 @@ toolkit.event = (function () {
 
     return {
         on: on,
+        off: off,
         emit: emit,
         ready: ready
     };

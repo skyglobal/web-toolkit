@@ -138,7 +138,7 @@ demo.displayCode = (function( hljs){
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('demo/displayCode', ['lib/highlight'],function( hljs) {
+    define('demo/display-code', ['lib/highlight'],function( hljs) {
         return demo.displayCode(hljs);
     });
 } else {
@@ -341,7 +341,7 @@ toolkit.hashManager = (function() {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/hashManager', [], function() {
+    define('utils/hash-manager', [], function() {
         toolkit.hashManager =  toolkit.hashManager();
         return toolkit.hashManager;
     });
@@ -440,7 +440,7 @@ demo.tests = (function(hashManager){
 });
 
 if (typeof window.define === "function" && window.define.amd){
-    define('demo/tests', ['utils/hashManager'], function(hashManager) {
+    define('demo/tests', ['utils/hash-manager'], function(hashManager) {
         demo.tests = demo.tests(hashManager);
         return demo.tests;
     });
@@ -495,7 +495,7 @@ demo.main = (function(DisplayCode, menu, tests, skycons, hash) {
     function showCode(hash){
         var styled = false;
         var $lightboxLink = $('a[href="#!' + hash + '"]');
-        var feature = hash.replace(/code\//g,'');
+        var feature = hash.replace(/code\//g,'').replace('/','--').trim();
         var version = $('#current-version').text(),
             host = 'http://web-toolkit.global.sky.com',
             dir = '_site/_includes';
@@ -507,21 +507,14 @@ demo.main = (function(DisplayCode, menu, tests, skycons, hash) {
             dir = '../_includes';
         }
         var featureFiles, codeBase, route;
-        if ($lightboxLink.attr('data-docs')){
-            featureFiles = $lightboxLink.attr('data-docs');
-            codeBase = feature;
-            route = host + '/' + version + '/' + dir + '/' + codeBase;
-            styled = true;
-        } else {
-            featureFiles = $('a[href*="#' + feature + '"]').attr('data-diff-demos');
-            codeBase = $('a[href*="#' + feature + '"]').attr('data-diff');
-            route = host + '/' + version + '/' + dir + '/' + codeBase;
-        }
+        featureFiles = $('a[href*="#' + feature + '"]').attr('data-diff-demos').trim();
+        codeBase = $('a[href*="#' + feature + '"]').attr('data-diff').trim();
+        route = host + '/' + version + '/' + dir + '/' + codeBase;
         new DisplayCode({
             header: $lightboxLink.parent().text().replace($lightboxLink.text(),'').trim(),
             feature: feature,
             dir: route,
-            fileNames: featureFiles.split(','),
+            fileNames: featureFiles.replace(/ /g,'').split(','),
             styled: styled
         });
     }
@@ -543,11 +536,11 @@ demo.main = (function(DisplayCode, menu, tests, skycons, hash) {
 });
 
 if (typeof window.define === "function" && window.define.amd){
-    define('demo', ['demo/displayCode',
+    define('demo', ['demo/display-code',
         'demo/menu',
         'demo/tests',
         'demo/skycons',
-        'utils/hashManager'], function(displayCode, menu, tests, skycons, hashManager) {
+        'utils/hash-manager'], function(displayCode, menu, tests, skycons, hashManager) {
         return demo.main(displayCode, menu, tests, skycons, hashManager);
     });
 } else {

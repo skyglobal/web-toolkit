@@ -110,6 +110,22 @@ toolkit.event = (function () {
         }
     }
 
+    function off(el, eventName, exec) {
+        var browserSpecificEventName = browserSpecificEvents[eventName.toLowerCase()];
+        eventName = browserSpecificEventName ||  eventName;
+        if (el.removeEventListener)
+            el.removeEventListener(eventName, exec, false);
+        else
+            el.detachEvent('on' + eventName, exec);
+    }
+//todo : compare
+// if (document.createEvent) {
+//    event = document.createEvent('HTMLEvents')
+//    event.initEvent('change', true, false)
+//    el.dispatchEvent(event)
+//} else {
+//    el.fireEvent('onchange')
+//}
     function emit(el, eventName) {
         var event;
         if (document.createEvent) {
@@ -133,6 +149,7 @@ toolkit.event = (function () {
 
     return {
         on: on,
+        off: off,
         emit: emit,
         ready: ready
     };
@@ -532,7 +549,7 @@ toolkit.hashManager = (function() {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/hashManager', [], function() {
+    define('utils/hash-manager', [], function() {
         toolkit.hashManager =  toolkit.hashManager();
         return toolkit.hashManager;
     });
@@ -911,7 +928,7 @@ toolkit.inPageNav = (function(hash, event) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/inPageNav', ['utils/hashManager','utils/event'], function(hash, event) {
+    define('components/in-page-nav', ['utils/hash-manager','utils/event'], function(hash, event) {
         toolkit.inPageNav = toolkit.inPageNav(hash, event);
         return toolkit.inPageNav;
     });
@@ -1147,7 +1164,7 @@ toolkit.datePicker = (function () {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/datePicker', [], function() {
+    define('components/date-picker', [], function() {
         return toolkit.datePicker();
     });
 } else {
@@ -1361,7 +1378,7 @@ toolkit.form = (function (datePicker, validation) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/form', ['components/datePicker','utils/validation'], function (datePicker, validation) {
+    define('components/form', ['components/date-picker','utils/validation'], function (datePicker, validation) {
         return toolkit.form(datePicker, validation);
     });
 } else {
@@ -1592,7 +1609,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
 if (typeof window.define === "function" && window.define.amd) {
     define('components/lightbox',
             ['utils/focus',
-            'utils/hashManager',
+            'utils/hash-manager',
             'utils/event',
             'utils/detect'
             ], function(focus, hash, event, detect) {
@@ -1792,7 +1809,7 @@ toolkit.video = (function (window, $, event) {
         stop:function (e) {
             if(e) { e.preventDefault(); }
             var video = this;
-            $(window).off('resizeend', video.resizeContainer);
+            event.off(window, 'resizeend', video.resizeContainer);
             sky.html5player.close(this.$wrapper);
             this.hideCanvas();
         },
@@ -1813,7 +1830,7 @@ toolkit.video = (function (window, $, event) {
                 $close.addClass('active');
                 height = video.calculateHeight();
                 $container.animate({ height:height }, animationSpeed, function () {
-                    $(window).on('resizeend', $.proxy(video.resizeContainer, video));
+                    event.on(window, 'resizeend', $.proxy(video.resizeContainer, video));
                     $wrapper.show();
                     $overlay.fadeOut(animationSpeed);
                     callback();
@@ -2289,12 +2306,12 @@ if (typeof window.define === "function" && window.define.amd) {
         'utils/polyfill',
         'utils/detect',
         'utils/skycons',
-        'utils/hashManager',
+        'utils/hash-manager',
         'utils/popup',
         'utils/toggle',
         'utils/focus',
         'utils/event',
-        'components/inPageNav',
+        'components/in-page-nav',
         'components/accordion',
         'components/form',
         'components/lightbox',
