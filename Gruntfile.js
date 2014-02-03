@@ -155,13 +155,6 @@ module.exports = function(grunt) {
             }
         },
 
-        screenshot_diff: {
-            files: ['screenshot/'],
-            options: {
-                outputFormat: 'json' // or html
-            }
-        },
-
         jekyll: {                            // Task
             options: {                          // Universal options
                 bundleExec: true,
@@ -182,115 +175,24 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('screenshot_verify_diff', 'Verify that the screenshots have no changes.', function() {
-        var diffs = grunt.file.readJSON('screenshot/v2-v1-diff.json');
-        var verified = true;
-        diffs.forEach(function(diff) {
-            if (!diff.equal) {
-                grunt.log.warn('Test screenshot ' + diff.file_a + ' is different to verified screenshot ' + diff.file_b);
-                verified = false;
-            }
-        });
-        if (!verified) {
-            grunt.log.error('Please verify the screenshot differences and \'grunt screenshot_replace\', or fix the bugs :-)');
-        }
-        return verified;
-    });
-
-    grunt.registerTask('screenshot_verify_new', 'Verify that there are no new screenshots.', function() {
-        var verified = true;
-        var files = grunt.file.expand('screenshot/*-v2.*');
-        if (!grunt.file.exists('screenshot/v2-v1-diff.json')) {
-            files.each(function(file) {
-                grunt.log.error('Test screenshot ' + file + ' is new');
-                verified = false;
-            });
-        } else {
-            var diffs = grunt.file.readJSON('screenshot/v2-v1-diff.json');
-            files.forEach(function(file) {
-                found = false;
-                diffs.forEach(function(diff) {
-                    if ('screenshot/' + diff.file_b === file.toString()) {
-                        found = true;
-                    }
-                });
-                if (!found) {
-                    grunt.log.error('Test screenshot ' + files[j] + ' is new');
-                    verified = false;
-                }
-            });
-        }
-        if (!verified) {
-            grunt.log.error('Please verify the new screenshots and \'grunt screenshot_add\'');
-        }
-        return verified;
-    });
-
-    grunt.registerTask('screenshot_replace', 'Replace the screenshots.', function() {
-        var replaced = false;
-        var diffs = grunt.file.readJSON('screenshot/v2-v1-diff.json');
-        diffs.forEach(function(diff) {
-            if (!diff.equal) {
-                grunt.file.copy('screenshot/' + diff.file_b, 'screenshot/' + diff.file_a);
-                replaced = true;
-                grunt.log.ok('Test screenshot ' + diff.file_b + ' is now the verified screenshot ' + diff.file_a);
-            }
-        });
-        if (replaced) {
-            grunt.log.ok('Old screenshots replaced.');
-        }
-    });
-
-    grunt.registerTask('screenshot_add', 'Add new screenshots.', function() {
-        var added = false;
-        var files = grunt.file.expand('screenshot/*-v2.*');
-        if (!grunt.file.exists('screenshot/v2-v1-diff.json')) {
-            files.forEach(function(file) {
-                var filename = file.toString().replace(/-v2/, '-v1');
-                grunt.file.copy(file, filename);
-                grunt.log.ok('Test screenshot ' + file + ' is now the verified screenshot ' + filename);
-                added = true;
-            });
-        } else {
-            var diffs = grunt.file.readJSON('screenshot/v2-v1-diff.json');
-            files.forEach(function(file) {
-                found = false;
-                diffs.forEach(function(diff) {
-                    if ('screenshot/' + diff.file_b === file.toString()) {
-                        found = true;
-                    }
-                });
-                if (!found) {
-                    var filename = file.toString().replace(/-v2/, '-v1');
-                    grunt.file.copy(file, filename);
-                    grunt.log.ok('Test screenshot ' + file + ' is now the verified screenshot ' + filename);
-                    added = true;
-                }
-            });
-        }
-        if (added) {
-            grunt.log.ok('New screenshots added.');
-        }
-    });
-
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-mocha');
+    grunt.loadNpmTasks('grunt-mocha-screenshot'); // pending pull request on grunt-mocha
     grunt.loadNpmTasks('grunt-webfont'); //https://github.com/sapegin/grunt-webfont
     grunt.loadNpmTasks('grunt-svgmin');
     grunt.loadNpmTasks('grunt-grunticon');
     grunt.loadNpmTasks('grunt-jekyll');
-    grunt.loadNpmTasks('grunt-screenshot-diff');
+    grunt.loadNpmTasks('grunt-screenshot-compare');
 
     grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
     grunt.registerTask('spy', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'jekyll:build', 'watch']);
     grunt.registerTask('sloppy', ['clean:toolkit', 'compass:toolkit', 'requirejs', 'watch']);
     grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
-    grunt.registerTask('screenshot', ['screenshot_diff', 'screenshot_verify_new', 'screenshot_verify_diff']);
+    grunt.registerTask('screenshot', ['screenshot-compare', 'screenshot-compare-verify']);
     grunt.registerTask('test', ['mocha', 'screenshot']);
 };

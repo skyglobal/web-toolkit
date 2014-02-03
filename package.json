@@ -14,12 +14,12 @@
 	    ,"grunt-contrib-compass": "latest"
 	    ,"grunt-contrib-requirejs": "latest"
 	    ,"grunt-contrib-watch": "latest"
-	    ,"grunt-mocha": "latest"
+	    ,"grunt-mocha-screenshot": "latest"
 	    ,"grunt-webfont": "0.2.2"
 	    ,"grunt-svgmin": "latest"
 	    ,"grunt-grunticon": "latest"
 	    ,"grunt-jekyll": "latest"
-        ,"grunt-screenshot-diff": "latest"
+            ,"grunt-screenshot-compare": "latest"
     },
     "scripts": {
         "test": "grunt test"
