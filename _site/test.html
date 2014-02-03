@@ -151,8 +151,6 @@
             blanket.options("reporter", "test/libraries/grunt-reporter.js");
         }
 
-        //load main js first, this will load all the
-        //script dependencies
         require({baseUrl:'dist/scripts',
                 paths: {suite: '../../test/suite',
                         specs: '../../test/specs'}},

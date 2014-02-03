@@ -69,23 +69,35 @@ module.exports = function(grunt) {
             }
         },
         requirejs:{
+            options: {
+                preserveLicenseComments: false,
+                baseUrl: "grunt/js",
+                dir: "dist/scripts",
+                removeCombined: true,
+                generateSourceMaps: false,
+                modules:[{
+                    name: 'toolkit'
+                },{
+                    name: 'demo'
+                },{
+                    name: 'changes'
+                },{
+                    name: 'testIFrame'
+                }]
+            },
             toolkit: {
                 options: {
-                    optimize: grunt.option('beautify') ? "none" : "uglify2",
-                    preserveLicenseComments: false,
-                    baseUrl: "grunt/js",
-                    dir: "dist/scripts",
-                    removeCombined: true,
-                    generateSourceMaps: false,
-                    modules:[{
-                        name: 'toolkit'
-                    },{
-                        name: 'demo'
-                    },{
-                        name: 'changes'
-                    },{
-                        name: 'testIFrame'
-                    }]
+                    optimize: grunt.option('beautify') ? "none" : "uglify2"
+                }
+            },
+            beautify: {
+                options: {
+                    optimize: "none"
+                }
+            },
+            uglify: {
+                options: {
+                    optimize: "uglify2"
                 }
             }
         },
@@ -153,8 +165,7 @@ module.exports = function(grunt) {
             }
         },
         mocha: {
-
-            all : ['_site/test.html']
+            all : ['_site/test-without-coverage.html']
         },
 
         jekyll: {                            // Task
@@ -187,10 +198,10 @@ module.exports = function(grunt) {
 //    grunt.loadTasks('tasks');
 
     grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
-    grunt.registerTask('spy', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'jekyll:build', 'watch']);
+    grunt.registerTask('spy', ['default', 'jekyll:build', 'watch']);
     grunt.registerTask('sloppy', ['clean:toolkit', 'compass:toolkit', 'requirejs', 'watch']);
     grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
-    grunt.registerTask('test', ['blanket_mocha']);
-    grunt.registerTask('test_without_coverage', ['requirejs','jekyll:build', 'mocha']);
+    grunt.registerTask('test', ['requirejs:beautify','jekyll:build', 'blanket_mocha']);
+    grunt.registerTask('test_without_coverage', ['requirejs:uglify','jekyll:build', 'mocha']);
 };

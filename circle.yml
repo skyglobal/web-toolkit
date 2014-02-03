@@ -6,6 +6,7 @@ deployment:
     test:
       - bundle install
       - bundle exec npm run-script test-without-coverage
+      - bundle exec npm test
   feature:
     branch: /feature-.*/
     commands:
