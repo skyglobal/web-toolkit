@@ -3,6 +3,9 @@ deployment:
     branch: master
     commands:
       - bundle exec rake deploy
+    test:
+      - bundle install
+      - bundle exec npm run-script test-without-coverage
   feature:
     branch: /feature-.*/
     commands:
