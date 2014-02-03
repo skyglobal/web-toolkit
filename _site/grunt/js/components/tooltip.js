@@ -27,7 +27,7 @@ toolkit.tooltip = (function (detect) {
     }
 
     function position($tooltip) {
-        $tooltip.toggleClass("top", !detect.elementVisibleBottom($tooltip));
+        $tooltip.toggleClass("top", !detect.elementVisibleBottom($tooltip[0]));
     }
 
     function show($tooltip) {

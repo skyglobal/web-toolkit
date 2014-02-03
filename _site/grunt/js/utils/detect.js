@@ -99,7 +99,7 @@ toolkit.detect = (function (event) {
         return (content && content!='normal') ? content : fontFamily;
     }
 
-    function css(property){
+    function supportsCSS(property){
         if (state.css[property]) { return state.css[property]; }
         if (property === 'support3D' ){
             return support3D(property);
@@ -120,6 +120,20 @@ toolkit.detect = (function (event) {
         return state.css[property];
     }
 
+    function css(el, property){
+        if (!property){ return supportsCSS(el); }
+        var strValue = "";
+        if(document.defaultView && document.defaultView.getComputedStyle){
+            strValue = document.defaultView.getComputedStyle(el, "").getPropertyValue(property);
+        } else if(el.currentStyle){
+            property = property.replace(/\-(\w)/g, function (strMatch, p1){
+                return p1.toUpperCase();
+            });
+            strValue = el.currentStyle[property];
+        }
+        return strValue;
+    }
+
     function view(type){
         state.view = getHtmlPseudo('after') || 'desktop';
         return (type) ? state.view == type : state.view ;
@@ -135,9 +149,11 @@ toolkit.detect = (function (event) {
         return state.touch;
     }
 
-    function elementVisibleBottom($el) {
-        if ($el.length < 1) { return; }
-        return ($el.offset().top + $el.height() <= $(window).scrollTop() + $(window).height());
+    function elementVisibleBottom(el) {
+        if (!el) { return; }
+        var offset = {left: el.offsetLeft, top: el.offsetTop};
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        return (offset.top + $(el).height() <= scrollTop + document.documentElement.clientHeight); //grr.. jquery
     }
 
     attachClasses();

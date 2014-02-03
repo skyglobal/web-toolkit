@@ -14,7 +14,7 @@ toolkit.share = (function(detect) {
         if(e.type === 'click' || e.type === 'touchend' || (e.type === 'keypress' && e.which === 13)) {
             $section.toggleClass('active');
             var $popover = $(this).parent().find('.popover');
-            if(detect.elementVisibleBottom($popover) === false) {
+            if(detect.elementVisibleBottom($popover[0]) === false) {
                  $popover.addClass("top");
 
             } else {

@@ -2246,6 +2246,11 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
         <li>transform:  <span id="css-demo-transform"></span> i.e. <code>transform: translate(...)</code></li>
         <li>support3D: <span id="css-demo-support3D"></span> i.e. <code>transform: translate3d</code></li>
     </ul>
+    <p>You can return the value associated with a css property:</p>
+    <ul class="grey-bullets">
+        <li>transform: <span id="css-demo-return-transform"></span></li>
+    </ul>
+    <span class="pull-me dev-button"><span class="instructions">Pull me!</span> detecting height and width using <code>.css</code> doesn't work, use jQuery.</span>
 </div>
                         </div>
                         
@@ -2253,12 +2258,20 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
                             <script>
                                 require(['utils/detect'], function(){
                                     function updateDetectCSS(toolkit){
+    var demoTransition = document.getElementById('css-demo-transition');
+    var demo3D = document.getElementById('css-demo-support3D');
+    var demoTransform = document.getElementById('css-demo-transform');
+    var returnTransform = document.getElementById('css-demo-return-transform');
+
     var transition = toolkit.detect.css('transition');
     var support3D = toolkit.detect.css('support3D');
     var transform = toolkit.detect.css('transform');
-    $('#css-demo-transition').text(transition);
-    $('#css-demo-support3D').text(support3D);
-    $('#css-demo-transform').text(transform);
+
+    demoTransition.innerHTML = transition;
+    demo3D.innerHTML = support3D;
+    demoTransform.innerHTML = transform;
+
+    returnTransform.innerHTML = toolkit.detect.css(demoTransition, 'transition');
 }
 
 updateDetectCSS(toolkit);

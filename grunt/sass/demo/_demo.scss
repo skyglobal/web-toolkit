@@ -108,7 +108,16 @@ code.block{
   line-height: 3em;
   white-space: nowrap;
 }
-
+.pull-me{
+  border: 1px solid $colour-v3-pink;
+  span{
+    color: $colour-v3-pink;
+    position: relative;
+    top:2px;
+    margin-right: 8px;
+    font-size: 20px;
+  }
+}
 .block {
   display: block;
 }

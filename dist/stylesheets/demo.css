@@ -185,6 +185,17 @@ code.block {
   white-space: nowrap;
 }
 
+.pull-me {
+  border: 1px solid #ed0677;
+}
+.pull-me span {
+  color: #ed0677;
+  position: relative;
+  top: 2px;
+  margin-right: 8px;
+  font-size: 20px;
+}
+
 .block {
   display: block;
 }

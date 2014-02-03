@@ -38,7 +38,9 @@ toolkit.event = (function () {
 
     function emitResizeEnd(){
         emit(window,'resizeend'); // raw JS version
-        $(window).trigger('resizeend'); // jQuery version
+        if (typeof $ !== 'undefined'){
+            $(window).trigger('resizeend'); // jQuery version
+        }
     }
 
     function on(el, eventName, exec){
