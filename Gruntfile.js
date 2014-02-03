@@ -152,6 +152,10 @@ module.exports = function(grunt) {
                 log : true
             }
         },
+        mocha: {
+
+            all : ['_site/test.html']
+        },
 
         jekyll: {                            // Task
             options: {                          // Universal options
@@ -188,4 +192,5 @@ module.exports = function(grunt) {
     grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
     grunt.registerTask('test', ['blanket_mocha']);
+    grunt.registerTask('test_without_coverage', ['mocha']);
 };

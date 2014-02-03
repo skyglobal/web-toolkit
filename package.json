@@ -13,6 +13,7 @@
 	    ,"grunt-contrib-compass": "latest"
 	    ,"grunt-contrib-requirejs": "latest"
 	    ,"grunt-contrib-watch": "latest"
+	    ,"grunt-mocha": "latest"
 	    ,"grunt-blanket-mocha": "latest"
 	    ,"grunt-webfont": "0.2.2"
 	    ,"grunt-svgmin": "latest"
@@ -20,7 +21,7 @@
 	    ,"grunt-jekyll": "latest"
     },
     "scripts": {
-        "test": "grunt test"
+        "test": "grunt test_without_coverage"
     },
     "engines": {
         "node": "0.10.24"

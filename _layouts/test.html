@@ -72,11 +72,11 @@
 
         //load main js first, this will load all the
         //script dependencies
-        require({baseUrl:'dist/scripts', paths: {suite: '../../test/suite', specs: '../../test/specs'}},
+        require({baseUrl:'dist/scripts',
+                paths: {suite: '../../test/suite',
+                        specs: '../../test/specs'}},
                 ["toolkit"], function(main) {
                     require(["suite"], function(TestLoader) {
-                        //start running the mocha tests
-                        //                TestLoader.start();
                         setTimeout(function(){
                             mocha.run();
                         },2000);
