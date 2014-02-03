@@ -163,9 +163,6 @@ task :deploy do
   fetchGHPages
   updateGHPages
   tagBuild
-
-  puts "***** HELLO ****"
-
 end
 
 

@@ -21,8 +21,8 @@
 	    ,"grunt-jekyll": "latest"
     },
     "scripts": {
-        "test": "grunt test_without_coverage",
-        "test-with-coverage": "grunt --beautify && grunt test"
+        "test-without-coverage": "grunt test_without_coverage",
+        "test": "grunt --beautify && grunt test"
     },
     "engines": {
         "node": "0.10.24"
