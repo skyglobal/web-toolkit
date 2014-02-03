@@ -203,5 +203,5 @@ module.exports = function(grunt) {
     grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
     grunt.registerTask('test', ['requirejs:beautify','jekyll:build', 'blanket_mocha']);
-    grunt.registerTask('test_without_coverage', ['requirejs:uglify','jekyll:build', 'mocha']);
+    grunt.registerTask('test-without-coverage', ['requirejs:uglify','jekyll:build', 'mocha']);
 };
