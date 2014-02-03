@@ -164,6 +164,8 @@ task :deploy do
   updateGHPages
   tagBuild
 
+  puts "***** HELLO ****"
+
 end
 
 
