@@ -15,7 +15,7 @@ test:
   pre:
     - bundle install
   override:
-    - bundle exec grunt test-without-coverage
+#    - bundle exec grunt test-without-coverage
     - bundle exec grunt test
 machine:
   ruby:
