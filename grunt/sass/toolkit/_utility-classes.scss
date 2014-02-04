@@ -1,4 +1,4 @@
-@mixin ellipses {
+@mixin ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -119,7 +119,7 @@ body .visible{
   border: 0;
 }
 .ellipsis{
-  @include ellipses;
+  @include ellipsis;
 }
 .clearfix{
   @include clearfix;
@@ -171,7 +171,7 @@ html{
     @include sticky;
   }
   .ellipsis-desktop {
-    @include ellipses;
+    @include ellipsis;
   }
   .speak-desktop{
     @include speak;
@@ -189,7 +189,7 @@ html{
     @include sticky;
   }
   .ellipsis-mobile {
-    @include ellipses;
+    @include ellipsis;
   }
   .speak-mobile{
     @include speak;

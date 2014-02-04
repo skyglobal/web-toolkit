@@ -10,7 +10,7 @@
                     {% if forloop.first %}
                         selected
                     {% endif %}
-                    "><a href="index.html#{{primary_link_url}}" class="intro skycom-ellipsis internal-link">{{primary_link_name}}</a></li>
+                    "><a href="index.html#{{primary_link_url}}" class="intro ellipsis internal-link">{{primary_link_name}}</a></li>
                 {% endfor %}
             </ul>
 
@@ -30,7 +30,7 @@
                                 {% assign secondary_link_url = secondary_link_name | downcase | replace: ' ','-' %}
                             <li class="tab {{secondary_selected}}">
                                 {% assign secondary_selected = "" %}
-                                <a href="index.html#{{primary_link_url}}--{{secondary_link_url}}" class="skycom-ellipsis internal-link" data-diff="{{primary_link_url}}/{{secondary_link_url}}" data-diff-demos="
+                                <a href="index.html#{{primary_link_url}}--{{secondary_link_url}}" class="ellipsis internal-link" data-diff="{{primary_link_url}}/{{secondary_link_url}}" data-diff-demos="
                                 {% for example in secondary_link[1].examples %}
                                     {% assign url = example.example | downcase | replace: ' ','-' %}
                                     {{url}}{% unless forloop.last %},{% endunless %}
