@@ -149,6 +149,11 @@
                     $('.turnOffAnimation').remove();
                 }
             };
+            window.addScript = function(route, feature, item){
+                var script = document.createElement('script');
+                script.src = '_includes/' + route + '/' + feature + '/' + item + '.js';
+                document.head.appendChild(script);
+            };
 
             window.chai = chai;
             window.assert = chai.assert;

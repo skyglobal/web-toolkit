@@ -28,15 +28,6 @@ testIFrame.main = (function() {
             getCode(item, example, 'html').always(function(data){
                 filesReceived++;
                 $('#fixtures').append($(data));
-                if (init){
-                    getCode(item, example, 'js').always(function(data){
-                        filesReceived++;
-                        if (data){
-                            $('#fixtures').append($('<script>' + data + '</script>'));
-                        }
-                        getTests();
-                    });
-                }
                 getTests();
             });
         });
