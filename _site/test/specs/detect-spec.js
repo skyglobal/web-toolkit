@@ -14,6 +14,10 @@ function detectSpec(detect, event) {
             deviceType: function (){}
         }
     };
+    addScript('utils','detect','css');
+    addScript('utils','detect','orientation');
+    addScript('utils','detect','touch');
+    addScript('utils','detect','view');
 
     function resize(){
         try{ //phantomJS doent understand this :(

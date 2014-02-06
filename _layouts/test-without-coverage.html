@@ -6,19 +6,11 @@
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 <!--end css conditionals-->
     <head>
-    <meta charset="utf-8">
-    <title>Mocha Tests</title>
-    <!--<link rel="stylesheet" href="node_modules/mocha/mocha.css" />-->
+        <title>Mocha Tests</title>
     <!--jquery-->
     <!--[if lt IE 9]> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-1.10.2.js" ></script> <![endif]-->
     <!--[if gte IE 9]><!--> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
     <!--end-jquery-->
-
-    <script>
-        var globalskycom = globalskycom || { };
-        globalskycom.serverHost = 'assets.sky.com';
-    </script>
-    <script src='http://assets.sky.com/dist/759/js/masthead.js'></script>
 
         <link rel="stylesheet" href="dist/stylesheets/demo.css">
         <link rel="stylesheet" href="dist/stylesheets/toolkit.css">
@@ -44,6 +36,7 @@
         <script src="test/libraries/chai.js"></script>
         <script src="test/libraries/require.js"></script>
     <script>
+        window.environment = 'test';
         window.turnOffAnimation = function(selector){
             var offTime = '10ms'; //can't be zero as we still need the 'end' events to fire.
             if (selector){
@@ -51,6 +44,11 @@
             } else {
                 $('.turnOffAnimation').remove();
             }
+        };
+        window.addScript = function(route, feature, item){
+            var script = document.createElement('script');
+            script.src = '_includes/' + route + '/' + feature + '/' + item + '.js';
+            document.head.appendChild(script);
         };
 
         window.chai = chai;
@@ -61,17 +59,6 @@
         mocha.setup('bdd');
         mocha.setup({ignoreLeaks: true});
 
-        require({baseUrl:'dist/scripts',
-                paths: {suite: '../../test/suite',
-                        specs: '../../test/specs'}},
-                ["toolkit"], function(main) {
-                    require(["suite"], function(TestLoader) {
-                        setTimeout(function(){
-                            mocha.run();
-                        },2000);
-                    });
-                });
-
     </script>
 </head>
 <body class="grid-1140" >
@@ -81,5 +68,21 @@
             {{ content }}
         </div>
     </div>
+<script>
+    require(
+            {   baseUrl:'dist/scripts',
+                paths: {suite: '../../test/suite',
+                    specs: '../../test/specs'}
+            },
+            ["toolkit"],
+            function(main) {
+                require(["suite"], function(TestLoader) {
+                    setTimeout(function(){
+                        mocha.run();
+                    },2000);
+                });
+            }
+    );
+</script>
 </body>
 </html>

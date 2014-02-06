@@ -6,7 +6,6 @@
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 <!--end css conditionals-->
 	<head>
-
         <meta charset="UTF-8"/>
 
 <!--jquery-->
@@ -130,7 +129,8 @@
         <!--We recommend that you use these files from the toolkit static lib folder: '//web-toolkit.global.sky.com/static/lib/' -->
         <script src="static/lib/require-2.1.9.min.js"></script>
         <script>
-            require({ baseUrl: "./grunt/js/"}, ['toolkit']);
+            window.environment = 'demo';
+            require({ baseUrl: "./dist/scripts/"}, ['toolkit']);
         </script>
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target="#toolkit-menu-tabs">
@@ -1598,9 +1598,11 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
                         
                             
                             <script>
-                                require(['components/accordion'], function(){
-                                        $('.accordion').accordion();
-                                });
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                            $('.accordion').accordion();
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -1774,12 +1776,14 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
                         
                             
                             <script>
-                                require(['components/carousel'], function(){
-                                    $('#hero').skycom_carousel({
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        $('#hero').skycom_carousel({
     autoplay: true,
     videoAds: false
 });
-                                });
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -1837,12 +1841,14 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
                         
                             
                             <script>
-                                require(['components/carousel'], function(){
-                                    $('#empty-hero').skycom_carousel({
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        $('#empty-hero').skycom_carousel({
     autoplay: true,
     videoAds: false
 });
-                                });
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -1957,12 +1963,14 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
                         
                             
                             <script>
-                                require(['components/carousel'], function(){
-                                    $('#hero-skinny').skycom_carousel({
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        $('#hero-skinny').skycom_carousel({
     autoplay: true,
     videoAds: false
 });
-                                });
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -2092,10 +2100,12 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
                         
                             
                             <script>
-                                require(['components/form'], function(){
-                                    $('.date-picker').datePicker();
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        $('.date-picker').datePicker();
 $('.sky-form').validation();
-                                });
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -2237,9 +2247,11 @@ $('.sky-form').validation();
                         
                             
                             <script>
-                                require(['components/in-page-nav'], function(){
-                                    $('#demo-inpage-nav-tabs').inPageNav();
-                                });
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        $('#demo-inpage-nav-tabs').inPageNav();
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -2328,8 +2340,9 @@ $('.sky-form').validation();
                         
                             
                             <script>
-                                require(['components/lightbox'], function(){
-                                    //JS for default lightbox
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        //JS for default lightbox
 $('#lightbox-demo-link').lightbox();
 
 //JS for default lightbox with callbacks (onShow and onClose)
@@ -2341,7 +2354,8 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
         $('#lightbox-demo-with-callbacks').trigger('my-lightbox-closed');
     }
 });
-                                });
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -2366,9 +2380,11 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
                         
                             
                             <script>
-                                require(['components/lightbox'], function(){
-                                    $('.ajax-lightbox').lightbox({closeButtonColour: 'black'});
-                                });
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        $('.ajax-lightbox').lightbox({closeButtonColour: 'black'});
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -2418,9 +2434,11 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
                         
                             
                             <script>
-                                require(['components/lightbox'], function(){
-                                    $('#lightbox-small-demo-link').lightbox({size:'small'});
-                                });
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        $('#lightbox-small-demo-link').lightbox({size:'small'});
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -2605,8 +2623,9 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
                         
                             
                             <script>
-                                require(['components/video'], function(){
-                                    $('#demo-video.video-container').video({
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        $('#demo-video.video-container').video({
     token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85", //this token should be unique to your team
     displayAdverts:false ,
     onPlay: function() { //optional
@@ -2616,7 +2635,8 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
         //stuff to do after video closes
     }
 });
-                                });
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -2671,8 +2691,9 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
                         
                             
                             <script>
-                                require(['utils/detect'], function(){
-                                    function updateDetectCSS(toolkit){
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        function updateDetectCSS(toolkit){
     var demoTransition = document.getElementById('css-demo-transition');
     var demo3D = document.getElementById('css-demo-support3D');
     var demoTransform = document.getElementById('css-demo-transform');
@@ -2690,7 +2711,8 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
 }
 
 updateDetectCSS(toolkit);
-                                });
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -2713,10 +2735,12 @@ updateDetectCSS(toolkit);
                         
                             
                             <script>
-                                require(['utils/detect'], function(){
-                                    var touch = toolkit.detect.touch();
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        var touch = toolkit.detect.touch();
 $('#touch-demo').text(touch);
-                                });
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -2747,8 +2771,9 @@ $('#touch-demo').text(touch);
                         
                             
                             <script>
-                                require(['utils/detect'], function(){
-                                    function updateOrientation(toolkit){
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        function updateOrientation(toolkit){
     var orientation = toolkit.detect.orientation();
     var isPortrait = toolkit.detect.orientation('portrait');
     var isLandscape = toolkit.detect.orientation('landscape');
@@ -2759,7 +2784,8 @@ $('#touch-demo').text(touch);
 
 $(window).on('resize',function(){updateOrientation(toolkit);});
 updateOrientation(toolkit);
-                                });
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -2792,8 +2818,9 @@ updateOrientation(toolkit);
                         
                             
                             <script>
-                                require(['utils/detect'], function(){
-                                    function updateView(toolkit){
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        function updateView(toolkit){
     var view = toolkit.detect.view();
     var desktop = toolkit.detect.view('desktop');
     var mobile = toolkit.detect.view('mobile');
@@ -2804,7 +2831,8 @@ updateOrientation(toolkit);
 
 $(window).on('resize',function(){updateView(toolkit);});
 updateView(toolkit);
-                                });
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -2843,13 +2871,15 @@ updateView(toolkit);
                         
                             
                             <script>
-                                require(['utils/event'], function(){
-                                    function updateEventReady(){
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        function updateEventReady(){
     document.getElementById('css-demo-event-ready').innerHTML = 'Woah, document loaded.';
 }
 
 toolkit.event.ready(updateEventReady);
-                                });
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -2916,15 +2946,17 @@ toolkit.event.ready(updateEventReady);
                         
                             
                             <script>
-                                require(['utils/event'], function(){
-                                    var elResizeEnd = document.getElementById('css-demo-event-resizeend');
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        var elResizeEnd = document.getElementById('css-demo-event-resizeend');
 
 function updateEventResizeEnd(){
     elResizeEnd.innerHTML = 'boom. resized.';
 }
 
 toolkit.event.on(window,'resizeend',updateEventResizeEnd);
-                                });
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -2973,13 +3005,15 @@ toolkit.event.on(window,'resizeend',updateEventResizeEnd);
                         
                             
                             <script>
-                                require(['utils/hash-manager'], function(){
-                                    function myHashCallback() {
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        function myHashCallback() {
     $('#currentHash').text(location.hash);
 }
 
 toolkit.hashManager.register(['hash', 'anotherHash', 'wildcard/*'], myHashCallback);
-                                });
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -3103,10 +3137,12 @@ toolkit.hashManager.register(['hash', 'anotherHash', 'wildcard/*'], myHashCallba
                         
                             
                             <script>
-                                require(['utils/responsive-images'], function(){
-                                    responsiveImages.init(document.getElementById('demo-responsive-images'));
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        responsiveImages.init(document.getElementById('demo-responsive-images'));
 
-                                });
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -3151,11 +3187,13 @@ toolkit.hashManager.register(['hash', 'anotherHash', 'wildcard/*'], myHashCallba
                         
                             
                             <script>
-                                require(['utils/toggle'], function(){
-                                    $('#toggle-by-element-closed .toggle-link').on('click', function() {
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        $('#toggle-by-element-closed .toggle-link').on('click', function() {
     toolkit.toggle({$elClicked:$(this)});
 });
-                                });
+                                    });
+                                }
                             </script>
                         
                     </div>
@@ -3187,11 +3225,13 @@ toolkit.hashManager.register(['hash', 'anotherHash', 'wildcard/*'], myHashCallba
                         
                             
                             <script>
-                                require(['utils/toggle'], function(){
-                                    $('#toggle-by-element .toggle-link').on('click', function() {
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        $('#toggle-by-element .toggle-link').on('click', function() {
     toolkit.toggle({$elClicked:$(this)});
 });
-                                });
+                                    });
+                                }
                             </script>
                         
                     </div>

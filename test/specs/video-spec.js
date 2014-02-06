@@ -2,6 +2,12 @@ function videoSpec(Video) {
 
     var describeSpec = 'Video module';
 
+    var fixtures = {
+        'demo-video': document.getElementById('demo-video').outerHTML
+    };
+
+    addScript('components','video','default');
+
     var $container = $('#demo-video'),
         $wrapper, $overlay, $close;
 

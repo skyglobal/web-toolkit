@@ -6,6 +6,12 @@ function responsiveImagesSpec(responsiveImages, event) {
         event = toolkit.event;
     }
 
+    var fixtures = {
+        'demo-responsive-images': document.getElementById('demo-responsive-images').outerHTML
+    };
+
+    addScript('utils','responsive-images','using');
+
     describe(describeSpec, function () {
         var origMatchMedia;
 
@@ -19,6 +25,7 @@ function responsiveImagesSpec(responsiveImages, event) {
 
         it('shows a desktop image in desktop view and then changes to mobile on resize if the media query matches', function () {
             if(window.outerWidth > 0) { //doesnt work in gruntcli for some reason
+                console.log('grunt cli doent like responsive images. fix me.');
                 window.matchMedia = function() { return { matches: false }; };
                 event.emit(window, 'resizeend');
                 expect($('#demo-responsive-images').find('img').attr('src')).to.contain('beckham.jpg');

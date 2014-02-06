@@ -6,13 +6,13 @@
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 <!--end css conditionals-->
 	<head>
-
         {% include head.html %}
 
         <!--We recommend that you use these files from the toolkit static lib folder: '//web-toolkit.global.sky.com/static/lib/' -->
         <script src="static/lib/require-2.1.9.min.js"></script>
         <script>
-            require({ baseUrl: "./grunt/js/"}, ['toolkit']);
+            window.environment = 'demo';
+            require({ baseUrl: "./dist/scripts/"}, ['toolkit']);
         </script>
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target="#toolkit-menu-tabs">

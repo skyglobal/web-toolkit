@@ -2,6 +2,11 @@ function accordionSpec() {
 
     var describeSpec = 'Accordion module should';
 
+    var fixtures = {
+        accordion: document.getElementsByClassName('accordion')[0].outerHTML
+    };
+    addScript('components','accordion','default');
+
 //        todo: put these tests back in. were working before coverage update
     describe.skip(describeSpec, function () {
 

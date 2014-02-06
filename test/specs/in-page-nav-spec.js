@@ -2,6 +2,12 @@ function inPageNavSpec(hash, tabs) {
 
     var describeSpec = 'Responsive tabs';
 
+    var fixtures = {
+        'demo-inpage-nav-tabs': document.getElementById('demo-inpage-nav-tabs').outerHTML
+    };
+
+    addScript('components','in-page-nav','sleek-nav');
+
     describe(describeSpec, function () {
 
         it('change tab look when changing tabs', function () {

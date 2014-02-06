@@ -6,6 +6,14 @@ function toggleSpec(toggle) {
         toggle = toolkit.toggle;
     }
 
+    var fixtures = {
+        'toggle-by-element-closed': document.getElementById('toggle-by-element-closed').outerHTML,
+        'toggle-by-element': document.getElementById('toggle-by-element').outerHTML
+    };
+
+    addScript('utils','toggle','closed-element');
+    addScript('utils','toggle','open-element');
+
     describe(describeSpec, function () {
 
         it('can toggle based on the element that was clicked on', function () {

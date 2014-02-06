@@ -16,6 +16,15 @@ function carouselSpec() {
         }
     };
 
+    var fixtures = {
+        hero: document.getElementById('hero').outerHTML,
+        'empty-hero': document.getElementById('empty-hero').outerHTML,
+        'hero-skinny': document.getElementById('hero-skinny').outerHTML
+    };
+    addScript('components','carousel','default');
+    addScript('components','carousel','single-slide');
+    addScript('components','carousel','skinny');
+
     describe(describeSpec, function () {
 
         beforeEach(function() {
@@ -257,6 +266,6 @@ function carouselSpec() {
 
 if (window.define) {
     define('specs/carousel-spec', ['components/carousel'], function () {
-            return carouselSpec();
-        });
+        return carouselSpec();
+    });
 }

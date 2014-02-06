@@ -7,6 +7,17 @@ function lightboxSpec(lightbox, focus, hash) {
         hash = toolkit.hashManager;
     }
 
+    var fixtures = {
+        'ajax-lightbox': document.getElementsByClassName('ajax-lightbox')[0].outerHTML,
+        'lightbox-demo-link': document.getElementById('lightbox-demo-link').outerHTML,
+        'lightbox-demo-link-with-callbacks': document.getElementById('lightbox-demo-link-with-callbacks').outerHTML,
+        'lightbox-small-demo-link': document.getElementById('lightbox-small-demo-link').outerHTML
+    };
+
+    addScript('components','lightbox','default');
+    addScript('components','lightbox','ajax');
+    addScript('components','lightbox','small');
+
     var $demo = $('#lightbox-demo-source').clone();
     var $links = $('#open-links-source').clone();
     $demo.attr('id', 'lightbox-demo');

@@ -1,6 +1,6 @@
-define('suite',[
-        ,'specs/accordion-spec'
-        ,'specs/carousel-spec'
+define('suite',[ ''
+    ,'specs/accordion-spec'
+    ,'specs/carousel-spec'
         ,'specs/date-picker-spec'
         ,'specs/detect-spec'
         ,'specs/event-spec'

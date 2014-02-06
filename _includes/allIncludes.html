@@ -49,9 +49,11 @@
                         {%if example.js_file%}
                             {% capture js_path %}{{ primary_link_url }}/{{ secondary_link_url }}/{{ url }}.js{% endcapture %}
                             <script>
-                                require(['{{ primary_link_url }}/{{ secondary_link_url }}'], function(){
-                                    {% include {{js_path}} %}
-                                });
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        {% include {{js_path}} %}
+                                    });
+                                }
                             </script>
                         {% endif %}
                     </div>

@@ -6,6 +6,12 @@ function eventSpec(event) {
         event = toolkit.event;
     }
 
+    addScript('utils','event','emit');
+    addScript('utils','event','off-event');
+    addScript('utils','event','on-event');
+    addScript('utils','event','ready');
+    addScript('utils','event','resize-end');
+
     window.globalskycom = {
         browserSupport: {
             orientationchange: function (){},

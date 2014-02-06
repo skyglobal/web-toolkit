@@ -6,6 +6,12 @@ function hashManagerSpec(hash) {
         hash = toolkit.hashManager;
     }
 
+    var fixtures = {
+        'currentHash': document.getElementById('currentHash').outerHTML
+    };
+
+    addScript('utils','hash-manager','default');
+
     describe(describeSpec, function () {
 
         it('cleans up any occurence of the # character in the hash', function () {
