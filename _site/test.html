@@ -117,23 +117,24 @@
 </script>
 
     <script src="test/libraries/mocha.js"></script>
+    <!--<script src="test/libraries/mocha-browserstack.js"></script>-->
     <script src="test/libraries/chai.js"></script>
     <script src="test/libraries/require.js"></script>
 
-    <script src="test/libraries/blanket.js" data-cover-flags="branchTracking" data-cover-only="toolkit.js"></script>
     <script src="test/config.js"></script>
 
-    <script>
-        if (window.PHANTOMJS) {
-            blanket.options("reporter", "test/libraries/grunt-reporter.js");
-        }
-    </script>
 </head>
 <body class="grid-1140" >
     <div id="mocha"></div>
     <div class="skycom-container clearfix">
         <div class="alpha skycom-12">
-            
+            <script src="test/libraries/blanket.js" data-cover-flags="branchTracking" data-cover-only="toolkit.js"></script>
+<script>
+    if (window.PHANTOMJS) {
+        blanket.options("reporter", "test/libraries/grunt-reporter.js");
+    }
+</script>
+
     
     
     <section class="demo-section" id="base-styles">

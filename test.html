@@ -2,5 +2,10 @@
 layout: test
 title: Sky Web Toolkit
 ---
-
+<script src="test/libraries/blanket.js" data-cover-flags="branchTracking" data-cover-only="toolkit.js"></script>
+<script>
+    if (window.PHANTOMJS) {
+        blanket.options("reporter", "test/libraries/grunt-reporter.js");
+    }
+</script>
 {% include allIncludes.html %}

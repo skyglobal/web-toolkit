@@ -5,33 +5,33 @@
 <!--[if IE 9]>         <html class="lt-ie10" > <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 <!--end css conditionals-->
-	<head>
-        <title>Single Mocha Test - with code coverage</title>
+<head>
+    <title>Single Mocha Test - with code coverage</title>
 
-        {% include head.html %}
+    {% include head.html %}
 
-        <script src="test/libraries/mocha.js"></script>
-        <script src="test/libraries/chai.js"></script>
-        <script src="test/libraries/require.js"></script>
+    <script src="test/libraries/mocha.js"></script>
+    <script src="test/libraries/chai.js"></script>
+    <script src="test/libraries/require.js"></script>
 
-        <script src="test/libraries/blanket.js" data-cover-never="specs" data-cover-flags="branchTracking"></script>
-        <script src="test/config.js"></script>
+    <script src="test/libraries/blanket.js" data-cover-never="specs" data-cover-flags="branchTracking"></script>
+    <script src="test/config.js"></script>
 
-        <script>
-            requirejs.config({
-                baseUrl: "./grunt/js/",
-                paths: {
-                    specs: '../../test/specs'
-                }
-            });
+    <script>
+        requirejs.config({
+            baseUrl: "./grunt/js/",
+            paths: {
+                specs: '../../test/specs'
+            }
+        });
 
-        </script>
-	</head>
-	<body class="grid-1140" >
-        <div class="skycom-container clearfix">
-			<div class="alpha skycom-12">
-				{{ content }}
-			</div>
-		</div>
-	</body>
+    </script>
+</head>
+<body class="grid-1140" >
+    <div class="skycom-container clearfix">
+        <div class="alpha skycom-12">
+            {{ content }}
+        </div>
+    </div>
+</body>
 </html>

@@ -5,10 +5,10 @@
 <!--[if IE 9]>         <html class="lt-ie10" > <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 <!--end css conditionals-->
-    <head>
-        <title>Mocha Tests - without code coverage</title>
+<head>
+    <title>Mocha Tests - with code coverage</title>
 
-        <meta charset="UTF-8"/>
+    <meta charset="UTF-8"/>
 
 <!--jquery-->
 <!--[if lt IE 9]> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-1.10.2.js" ></script> <![endif]-->
@@ -116,10 +116,12 @@
 
 </script>
 
-        <script src="test/libraries/mocha.js"></script>
-        <script src="test/libraries/chai.js"></script>
-        <script src="test/libraries/require.js"></script>
-        <script src="test/config.js"></script>
+    <script src="test/libraries/mocha.js"></script>
+    <!--<script src="test/libraries/mocha-browserstack.js"></script>-->
+    <script src="test/libraries/chai.js"></script>
+    <script src="test/libraries/require.js"></script>
+
+    <script src="test/config.js"></script>
 
 </head>
 <body class="grid-1140" >
@@ -2848,8 +2850,8 @@ toolkit.hashManager.register(['hash', 'anotherHash', 'wildcard/*'], myHashCallba
 
         </div>
     </div>
-<script>
-    require(
+    <script>
+        require(
             {   baseUrl:'dist/scripts',
                 paths: {suite: '../../test/suite',
                         specs: '../../test/specs'}
@@ -2857,10 +2859,12 @@ toolkit.hashManager.register(['hash', 'anotherHash', 'wildcard/*'], myHashCallba
             ["toolkit"],
             function(main) {
                 require(["suite"], function(TestLoader) {
-                    mocha.run();
+                    setTimeout(function(){
+                        mocha.run();
+                    },2000); //wait for blanket
                 });
             }
-    );
-</script>
+        );
+    </script>
 </body>
 </html>
