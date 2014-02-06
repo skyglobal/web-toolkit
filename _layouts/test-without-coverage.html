@@ -72,14 +72,12 @@
     require(
             {   baseUrl:'dist/scripts',
                 paths: {suite: '../../test/suite',
-                    specs: '../../test/specs'}
+                        specs: '../../test/specs'}
             },
             ["toolkit"],
             function(main) {
                 require(["suite"], function(TestLoader) {
-                    setTimeout(function(){
-                        mocha.run();
-                    },2000);
+                    mocha.run();
                 });
             }
     );
