@@ -203,7 +203,7 @@ module.exports = function(grunt) {
 
 //  testing tasks
     grunt.registerTask('test', ['requirejs:beautify','jekyll:build', 'blanket_mocha']);
-    grunt.registerTask('test-without-coverage', ['requirejs:uglify','jekyll:build', 'mocha']);
+    grunt.registerTask('test-without-coverage', ['requirejs:beautify','jekyll:build', 'mocha']);
 
 //  default
     grunt.registerTask('default', ['build']);
