@@ -6,24 +6,14 @@
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 <!--end css conditionals-->
 	<head>
+        <title>Single Mocha Test - with code coverage</title>
+
         <meta charset="UTF-8"/>
 
 <!--jquery-->
 <!--[if lt IE 9]> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-1.10.2.js" ></script> <![endif]-->
 <!--[if gte IE 9]><!--> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
 <!--end-jquery-->
-
-<!--to help prevent 'font flash'-->
-<link href='//web-toolkit.global.sky.com/static/fonts/sky_regular.ttf' rel='prefetch'>
-<link href='//web-toolkit.global.sky.com/static/fonts/sky_regular.svg' rel='prefetch'>
-<link href='//web-toolkit.global.sky.com/static/fonts/sky_medium.ttf' rel='prefetch'>
-<link href='//web-toolkit.global.sky.com/static/fonts/sky_medium.svg' rel='prefetch'>
-<!--end prevent 'font flash'-->
-
-<!--for video player pre-requisits-->
-<link rel="stylesheet" href="//player.sky.com/css/styles.min.css" />
-<script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
-<!--end video player pre-requisits-->
 
 <link rel="stylesheet" href="dist/stylesheets/demo.css">
 <link rel="stylesheet" href="dist/stylesheets/toolkit.css">
@@ -128,45 +118,22 @@
 
         <script src="test/libraries/mocha.js"></script>
         <script src="test/libraries/chai.js"></script>
+        <script src="test/libraries/require.js"></script>
 
-        <!--We recommend that you use these files from the toolkit static lib folder: '//web-toolkit.global.sky.com/static/lib/' -->
-        <script src="static/lib/require-2.1.9.min.js"></script>
-        <script src="test/libraries/blanket.js" data-cover-never="specs"></script>
-        <!--data-cover-flags="branchTracking"-->
+        <script src="test/libraries/blanket.js" data-cover-never="specs" data-cover-flags="branchTracking"></script>
+        <script src="test/config.js"></script>
+
         <script>
-            window.environment = 'test';
             requirejs.config({
                 baseUrl: "./grunt/js/",
                 paths: {
                     specs: '../../test/specs'
                 }
             });
-            window.turnOffAnimation = function(selector){
-                var offTime = '10ms'; //can't be zero as we still need the 'end' events to fire.
-                if (selector){
-                    $("<style type='text/css' class='turnOffAnimation'> body " + selector + "{ transition-duration:" + offTime + "!important;-webkit-transition-duration:" + offTime + "!important; -webkit-animation-duration: " + offTime + "!important;animation-duration:" + offTime + "!important;} </style>").appendTo("head");
-                } else {
-                    $('.turnOffAnimation').remove();
-                }
-            };
-            window.addScript = function(route, feature, item){
-                var script = document.createElement('script');
-                script.src = '_includes/' + route + '/' + feature + '/' + item + '.js';
-                document.head.appendChild(script);
-            };
-
-            window.chai = chai;
-            window.assert = chai.assert;
-            window.expect = chai.expect;
-            window.to = chai.to;
-
-            mocha.setup('bdd');
-            mocha.setup({ignoreLeaks: true});
 
         </script>
 	</head>
 	<body class="grid-1140" >
-
         <div class="skycom-container clearfix">
 			<div class="alpha skycom-12">
 				<style>
