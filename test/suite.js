@@ -1,4 +1,4 @@
-define('suite',[
+define('suite',[ ''
         ,'specs/accordion-spec'
         ,'specs/carousel-spec'
         ,'specs/date-picker-spec'

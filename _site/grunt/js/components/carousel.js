@@ -48,7 +48,7 @@ toolkit.carousel = (function(video, detect) {
             this.unbindTouchEvents();
             this.$slideContainer.find('a').off('click');
         },
-        setOffset: function(percent, animate) {
+        setOffset: function(percent, animate, direction) {
             var $container = this.$slideContainer.removeClass("animate");
             if (animate) $container.addClass("animate");
             if (has3d) {
@@ -110,18 +110,19 @@ toolkit.carousel = (function(video, detect) {
             var self = this,
                 $slides = this.$slides,
                 cssFloat, indexToShow;
+            var direction = (cssFloat == 'left') ? 'next' : 'previous';
 
             indexToShow = (opts.index >= this.slideCount)?0:(opts.index < 0) ? this.slideCount - 1 : opts.index;
             cssFloat = (opts.index>this.currentIndex && !opts.reverse) ? 'left' : 'right';
 
             $slides.filter(':not(:eq(' + this.currentIndex + '))').hide();
-            $slides.eq(this.currentIndex).css('float', cssFloat);
-            $slides.eq(indexToShow).show().css('float', cssFloat == 'left' ? 'right' : 'left');
+            $slides.eq(this.currentIndex).css('float', cssFloat).addClass('current').removeClass('next previous');
+            $slides.eq(indexToShow).show().css('float', cssFloat == 'left' ? 'right' : 'left').removeClass('current next previous').addClass(direction);
 
             this.setOffset(opts.start, false);
             if (typeof opts.end !== 'undefined'){
                 setTimeout(function(){
-                    self.setOffset(opts.end, true);
+                    self.setOffset(opts.end, true, direction);
                     self.showTermsLink(indexToShow);
                     self.$viewport.trigger('change', indexToShow);
                 }, 20);
@@ -297,6 +298,8 @@ toolkit.carousel = (function(video, detect) {
                         e.preventDefault();
                     });
                 });
+                $element.find('.slide figure > *:not(.poster)').addClass('foreground');
+                $element.find('.slide figure > .poster').addClass('background');
                 return this;
             },
             indicators: function($element, options) {

@@ -261,7 +261,7 @@
 }
 
 
-.skycom-notouch .skycom-carousel a{
+.no-touch .skycom-carousel a{
   cursor: pointer;
 }
 
@@ -389,7 +389,7 @@
 }
 
 
-.skycom-notouch {
+.no-touch {
   .skycom-carousel .play-video{
     left:50px;
   }
@@ -491,5 +491,33 @@
     .actions .next, .actions .previous {
       top: -6px;
     }
+  }
+}
+
+
+.fancy.skycom-carousel {
+  .background{
+    -webkit-transform:translate(10%,0) scale(1.2);
+    transform: translate(10%,0) scale(1.2);
+  }
+  figure{
+    overflow: hidden;
+  }
+  .background{
+    left: 0%;
+    transition: left 1.3s linear;
+    position: relative;
+  }
+  .current .background{
+    left: 0%;
+  }
+  .next .background{
+    left:10%;
+  }
+  .previous .background{
+    left:-10%;
+  }
+  .skycom-carousel-container.animate{
+    transition: all 1.3s linear;
   }
 }

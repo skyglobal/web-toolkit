@@ -2052,7 +2052,7 @@ button.btn {
   margin: 0;
 }
 
-.skycom-notouch .skycom-carousel a {
+.no-touch .skycom-carousel a {
   cursor: pointer;
 }
 
@@ -2170,14 +2170,14 @@ button.btn {
   }
 }
 
-.skycom-notouch .skycom-carousel .play-video {
+.no-touch .skycom-carousel .play-video {
   left: 50px;
 }
-.skycom-notouch .carousel-content {
+.no-touch .carousel-content {
   padding-left: 50px;
 }
 @media all and (max-width: 600px) {
-  .skycom-notouch .carousel-content {
+  .no-touch .carousel-content {
     padding-left: 3.15789%;
   }
 }
@@ -2259,6 +2259,31 @@ button.btn {
   .grid-1140 .skycom-carousel.hero-mobile-16-9 .actions .next, .grid-1140 .skycom-carousel.hero-mobile-16-9 .actions .previous {
     top: -6px;
   }
+}
+
+.fancy.skycom-carousel .background {
+  -webkit-transform: translate(10%, 0) scale(1.2);
+  transform: translate(10%, 0) scale(1.2);
+}
+.fancy.skycom-carousel figure {
+  overflow: hidden;
+}
+.fancy.skycom-carousel .background {
+  left: 0%;
+  transition: left 1.3s linear;
+  position: relative;
+}
+.fancy.skycom-carousel .current .background {
+  left: 0%;
+}
+.fancy.skycom-carousel .next .background {
+  left: 10%;
+}
+.fancy.skycom-carousel .previous .background {
+  left: -10%;
+}
+.fancy.skycom-carousel .skycom-carousel-container.animate {
+  transition: all 1.3s linear;
 }
 
 .video-container {
