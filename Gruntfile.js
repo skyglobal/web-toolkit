@@ -190,12 +190,12 @@ module.exports = function(grunt) {
     }
 
 //  dev'ing tasks - allows 'debugger;' within JS files
-    grunt.registerTask('dev-build', ['clean:toolkit', 'compass:toolkit', 'requirejs', 'jekyll:build']);
+    grunt.registerTask('dev-build', ['clean:toolkit', 'compass:toolkit', 'requirejs:toolkit', 'jekyll:build']);
     grunt.registerTask('dev-spy', ['dev-build', 'watch']);
 
 //  standard build tasks that lints your JS
-    grunt.registerTask('build', ['jshint', 'build']);
-    grunt.registerTask('spy', ['build', 'watch']);
+    grunt.registerTask('build', ['jshint', 'dev-build']);
+    grunt.registerTask('spy', ['jshint', 'dev-spy']);
 
 //  misc tasks
     grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);
