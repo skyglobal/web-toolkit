@@ -178,12 +178,6 @@ module.exports = function(grunt) {
                     watch: false,
                     serve: false
                 }
-            },
-            run:{
-                options: {
-                    watch: true,
-                    serve: true
-                }
             }
         }
     });
@@ -195,13 +189,22 @@ module.exports = function(grunt) {
         }
     }
 
-//    grunt.loadTasks('tasks');
+//  dev'ing tasks - allows 'debugger;' within JS files
+    grunt.registerTask('dev-build', ['clean:toolkit', 'compass:toolkit', 'requirejs', 'jekyll:build']);
+    grunt.registerTask('dev-spy', ['dev-build', 'watch']);
 
-    grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'jekyll:build']);
-    grunt.registerTask('spy', ['default', 'watch']);
-    grunt.registerTask('sloppy', ['clean:toolkit', 'compass:toolkit', 'requirejs', 'jekyll:build', 'watch']);
+//  standard build tasks that lints your JS
+    grunt.registerTask('build', ['jshint', 'build']);
+    grunt.registerTask('spy', ['build', 'watch']);
+
+//  misc tasks
     grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
+
+//  testing tasks
     grunt.registerTask('test', ['requirejs:beautify','jekyll:build', 'blanket_mocha']);
     grunt.registerTask('test-without-coverage', ['requirejs:uglify','jekyll:build', 'mocha']);
+
+//  default
+    grunt.registerTask('default', ['build']);
 };
