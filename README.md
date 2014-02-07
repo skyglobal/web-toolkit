@@ -103,9 +103,20 @@ These tests are automatically run on the CircleCI server upon pushing to Github
     
 ### Deployment
 To release a new version with:
-  - Code changes -  increment the version number (described below) in _config.yml. This will update gh-pages and the S3.
-  - Documentation changes - Dont increment the version number. This will update gh-pages branch only.
-  - Release Candidate changes - Add '-rc' to the end of the version number e.g. '1.0.1-rc2'. this will update the S3 only
+  - Code changes
+    -  increment the version number (described below) in _config.yml.
+    - This will update gh-pages and the S3.
+  - Documentation changes
+    - Don't increment the version number.
+    - This will update gh-pages branch only.
+  - Release Candidate changes
+    - Ensure that the code is committed in a branch that starts with `rc-xxx111`. Where xxx is feature and 111 is the version number
+    - Add '-rc' to the end of the version number e.g. `1.0.1-rc2`.
+    - This will update the S3 only.
+  - Feature releases
+    - Ensure that the code is committed in a branch that starts with `feature-xxx`. Where xxx is feature.
+    - Add '-feature-xxx' to the end of the version number e.g. '1.0.1-feature-fancy-carousel'.
+    - This will update the S3 only
 
 #### Versioning
 This library should follow the [Semantic versioning specification](http://semver.org/).
