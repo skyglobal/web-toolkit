@@ -13,12 +13,15 @@
 	    ,"grunt-contrib-compass": "latest"
 	    ,"grunt-contrib-requirejs": "latest"
 	    ,"grunt-contrib-watch": "latest"
+	    ,"grunt-contrib-connect": "latest"
+	    ,"grunt-exec": "latest"
 	    ,"grunt-mocha": "latest"
 	    ,"grunt-blanket-mocha": "latest"
 	    ,"grunt-webfont": "0.2.2"
 	    ,"grunt-svgmin": "latest"
 	    ,"grunt-grunticon": "latest"
 	    ,"grunt-jekyll": "latest"
+        ,"browserstack-test": "latest"
     },
     "engines": {
         "node": "0.10.24"

@@ -8,15 +8,22 @@
 <head>
     <title>Mocha Tests - with code coverage</title>
 
-    {% include head.html %}
-
     <script src="test/libraries/mocha.js"></script>
-    <script src="test/libraries/mocha-browserstack.js"></script>
     <script src="test/libraries/chai.js"></script>
+    <script src="test/libraries/mocha-browserstack.js"></script>
+    <script src="http://web-toolkit.global.sky.com/static/lib/jquery-1.10.2.js" ></script>
     <script src="test/libraries/require.js"></script>
 
-    <script src="test/config.js"></script>
+    <link rel="stylesheet" href="dist/stylesheets/demo.css">
+    <link rel="stylesheet" href="dist/stylesheets/toolkit.css">
+    <link rel="stylesheet" href="dist/fonts/skycons.css">
 
+    <script>
+        window.addScript = function(){
+
+        };
+        mocha.ui('bdd').reporter(Mocha.BrowserStack);
+    </script>
 </head>
 <body class="grid-1140" >
     <div id="mocha"></div>
@@ -26,20 +33,6 @@
         </div>
     </div>
     <script>
-        require(
-            {   baseUrl:'dist/scripts',
-                paths: {suite: '../../test/suite',
-                        specs: '../../test/specs'}
-            },
-            ["toolkit"],
-            function(main) {
-                require(["suite"], function(TestLoader) {
-                    setTimeout(function(){
-                        mocha.run();
-                    },2000); //wait for blanket
-                });
-            }
-        );
     </script>
 </body>
 </html>

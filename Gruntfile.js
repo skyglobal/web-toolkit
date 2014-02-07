@@ -9,6 +9,7 @@ module.exports = function(grunt) {
     };
 
     grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
         watch: {
             gruntfile: {
                 files: 'Gruntfile.js',
@@ -156,7 +157,6 @@ module.exports = function(grunt) {
         },
 
         blanket_mocha: {
-
             all : ['_site/test.html'],
             options : {
                 threshold : 70, // <- percetage of files that have to pass coverage rules
@@ -178,6 +178,20 @@ module.exports = function(grunt) {
                     watch: false,
                     serve: false
                 }
+            }
+        },
+
+        connect: {
+            server: {
+                options: {
+                    base: "_site",
+                    port: 9999
+                }
+            }
+        },
+        exec: {
+            browserstacktest: {
+                command: 'node_modules/browserstack-test/bin/browserstack-test -u $BROWSERSTACK_USERNAME -p $BROWSERSTACK_PASS -k $BROWSERSTACK_AUTHKEY -b test/browsers.json -t 60 http://localhost:9999/test-crossbrowser.html'
             }
         }
     });
@@ -202,8 +216,9 @@ module.exports = function(grunt) {
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
 
 //  testing tasks
-    grunt.registerTask('test', ['requirejs:beautify','jekyll:build', 'blanket_mocha']);
-    grunt.registerTask('test-without-coverage', ['requirejs:beautify','jekyll:build', 'mocha']);
+    grunt.registerTask('test', ['requirejs','jekyll:build', 'blanket_mocha']);
+    grunt.registerTask('test-without-coverage', ['requirejs','jekyll:build', 'mocha']);
+    grunt.registerTask('test-crossbrowser', ['jekyll:build','connect', 'exec:browserstacktest']);
 
 //  default
     grunt.registerTask('default', ['build']);

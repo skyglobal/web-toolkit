@@ -21,6 +21,7 @@ function detectSpec(detect, event) {
 
     function resize(){
         try{ //phantomJS doent understand this :(
+            console.log('phantomJS doent understand this emit.resize. fix me.');
             event.emit(window,'resize');
         } catch (e) {
             detect.updateDetectionStates();

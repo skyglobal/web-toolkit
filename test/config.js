@@ -21,4 +21,4 @@ window.expect = chai.expect;
 window.to = chai.to;
 
 mocha.setup({ignoreLeaks: true});
-mocha.setup('bdd');
+mocha.ui('bdd');

@@ -893,16 +893,16 @@
          * BDD-style interface:
          *
          *      describe('Array', function(){
- *        describe('#indexOf()', function(){
- *          it('should return -1 when not present', function(){
- *
- *          });
- *
- *          it('should return the index when present', function(){
- *
- *          });
- *        });
- *      });
+         *        describe('#indexOf()', function(){
+         *          it('should return -1 when not present', function(){
+         *
+         *          });
+         *
+         *          it('should return the index when present', function(){
+         *
+         *          });
+         *        });
+         *      });
          *
          */
 
@@ -1033,16 +1033,16 @@
          * TDD-style interface:
          *
          *     exports.Array = {
- *       '#indexOf()': {
- *         'should return -1 when the value is not present': function(){
- *
- *         },
- *
- *         'should return the correct index when the value is present': function(){
- *
- *         }
- *       }
- *     };
+         *       '#indexOf()': {
+         *         'should return -1 when the value is not present': function(){
+         *
+         *         },
+         *
+         *         'should return the correct index when the value is present': function(){
+         *
+         *         }
+         *       }
+         *     };
          *
          */
 
@@ -1109,22 +1109,22 @@
          *     suite('Array');
          *
          *     test('#length', function(){
- *       var arr = [1,2,3];
- *       ok(arr.length == 3);
- *     });
+         *       var arr = [1,2,3];
+         *       ok(arr.length == 3);
+         *     });
          *
          *     test('#indexOf()', function(){
- *       var arr = [1,2,3];
- *       ok(arr.indexOf(1) == 0);
- *       ok(arr.indexOf(2) == 1);
- *       ok(arr.indexOf(3) == 2);
- *     });
+         *       var arr = [1,2,3];
+         *       ok(arr.indexOf(1) == 0);
+         *       ok(arr.indexOf(2) == 1);
+         *       ok(arr.indexOf(3) == 2);
+         *     });
          *
          *     suite('String');
          *
          *     test('#length', function(){
- *       ok('foo'.length == 3);
- *     });
+         *       ok('foo'.length == 3);
+         *     });
          *
          */
 
@@ -1233,24 +1233,24 @@
          * TDD-style interface:
          *
          *      suite('Array', function(){
- *        suite('#indexOf()', function(){
- *          suiteSetup(function(){
- *
- *          });
- *
- *          test('should return -1 when not present', function(){
- *
- *          });
- *
- *          test('should return the index when present', function(){
- *
- *          });
- *
- *          suiteTeardown(function(){
- *
- *          });
- *        });
- *      });
+         *        suite('#indexOf()', function(){
+         *          suiteSetup(function(){
+         *
+         *          });
+         *
+         *          test('should return -1 when not present', function(){
+         *
+         *          });
+         *
+         *          test('should return the index when present', function(){
+         *
+         *          });
+         *
+         *          suiteTeardown(function(){
+         *
+         *          });
+         *        });
+         *      });
          *
          */
 
