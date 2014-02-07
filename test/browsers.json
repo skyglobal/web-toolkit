@@ -1,8 +1,114 @@
 [
-  {
-    "os_version": "XP",
-    "os": "Windows",
-    "browser_version": "12.16",
-    "browser": "opera"
-  }
+    {
+        "browser":"firefox",
+        "os_version":"8",
+        "os":"Windows",
+        "device":null,
+        "browser_version":"26.0"
+    },
+    {
+        "browser":"chrome",
+        "os_version":"8",
+        "os":"Windows",
+        "device":null,
+        "browser_version":"31.0"
+    },
+    {
+        "browser":"ie",
+        "os_version":"8",
+        "os":"Windows",
+        "device":null,
+        "browser_version":"10.0"
+    },
+    {
+        "browser":"ie",
+        "os_version":"7",
+        "os":"Windows",
+        "device":null,
+        "browser_version":"9.0"
+    },
+    {
+        "browser":"ie",
+        "os_version":"8.1",
+        "os":"Windows",
+        "device":null,
+        "browser_version":"11.0"
+    },
+    {
+        "browser":"ie",
+        "os_version":"XP",
+        "os":"Windows",
+        "device":null,
+        "browser_version":"7.0"
+    },
+    {
+        "browser":"safari",
+        "os_version":"Lion",
+        "os":"OS X",
+        "device":null,
+        "browser_version":"6.0"
+    },
+    {
+        "browser":"chrome",
+        "os_version":"Lion",
+        "os":"OS X",
+        "device":null,
+        "browser_version":"31.0"
+    },
+    {
+        "browser":"safari",
+        "os_version":"Snow Leopard",
+        "os":"OS X",
+        "device":null,
+        "browser_version":"5.1"
+    },
+    {
+        "browser":"safari",
+        "os_version":"Mavericks",
+        "os":"OS X",
+        "device":null,
+        "browser_version":"7.0"
+    },
+    {
+        "browser":"safari",
+        "os_version":"Mountain Lion",
+        "os":"OS X",
+        "device":null,
+        "browser_version":"6.1"
+    },
+    {
+        "browser":"android",
+        "os_version":"4.1",
+        "os":"android",
+        "device":"Samsung Galaxy S III",
+        "browser_version":null
+    },
+    {
+        "browser":"android",
+        "os_version":"4.0",
+        "os":"android",
+        "device":"Amazon Kindle Fire HD 8.9",
+        "browser_version":null
+    },
+    {
+        "browser":"ipad",
+        "os_version":"7.0",
+        "os":"ios",
+        "device":"iPad 3rd (7.0)",
+        "browser_version":null
+    },
+    {
+        "browser":"iphone",
+        "os_version":"7.0",
+        "os":"ios",
+        "device":"iPhone 5S",
+        "browser_version":null
+    },
+    {
+        "browser":"iphone",
+        "os_version":"6.0",
+        "os":"ios",
+        "device":"iPhone 4S (6.0)",
+        "browser_version":null
+    }
 ]

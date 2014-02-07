@@ -216,8 +216,8 @@ module.exports = function(grunt) {
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
 
 //  testing tasks
-    grunt.registerTask('test', ['requirejs','jekyll:build', 'blanket_mocha']);
-    grunt.registerTask('test-without-coverage', ['requirejs','jekyll:build', 'mocha']);
+    grunt.registerTask('test', ['requirejs:beautify','jekyll:build', 'blanket_mocha']);
+    grunt.registerTask('test-without-coverage', ['requirejs:uglify','jekyll:build', 'mocha']);
     grunt.registerTask('test-crossbrowser', ['jekyll:build','connect', 'exec:browserstacktest']);
 
 //  default
