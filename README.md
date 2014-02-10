@@ -62,7 +62,7 @@ Grunt is our friend here, he will take of reloading the jekyll project whenever 
 
 Before you submit your pull request, run :
   - `git pull upstream master` to ensure your code is up to date and merged correctly
-  - 'grunt test-cross-browser'. You will need to set up a [Browser Stack](http://www.browserstack.com) account.
+  - `grunt test-cross-browser`. You will need to set up a [Browser Stack](http://www.browserstack.com) account.
 
 
 ### Code structure
