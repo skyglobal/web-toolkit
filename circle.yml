@@ -17,7 +17,7 @@ test:
   override:
     - bundle exec grunt test-without-coverage
     - bundle exec grunt test-with-coverage
-    - bundle exec grunt test-crossbrowser
+    - bundle exec grunt test-cross-browser
 machine:
   ruby:
     version: ruby-1.9.3-p392
