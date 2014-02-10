@@ -16,7 +16,8 @@ test:
     - bundle install
   override:
     - bundle exec grunt test-without-coverage
-    - bundle exec grunt test
+    - bundle exec grunt test-with-coverage
+    - bundle exec grunt test-crossbrowser
 machine:
   ruby:
     version: ruby-1.9.3-p392

@@ -42,11 +42,6 @@ Grunt is our friend here, he will take of reloading the jekyll project whenever 
 3. Browse to
   - `http://localhost:4000`
 
-### Testing
-These tests are automatically run on the CircleCI server upon pushing to Github
-  - `grunt test` for unit (using [mocha](http://visionmedia.github.io/mocha/) and [chai](http://chaijs.com/‎))
-
-
 ### Contributing 
 
 ####Building A New/Updated Feature
@@ -57,9 +52,17 @@ These tests are automatically run on the CircleCI server upon pushing to Github
   - Refactor so the code is self documenting
   - If you would like the feature to go live sooner, mention this in the comments/commit.  We will provide a temporary live url that will allow you to carry on without getting blocked.
 
+#### Testing
+  - Tests are automatically run on the CircleCI server upon pushing to Github.
+  - `grunt test` for unit (using [mocha](http://visionmedia.github.io/mocha/) and [chai](http://chaijs.com/‎))
+  - Tests include code coverage, please keep this above 80%
+  - Code coverage does not work on 'beautified' code.
+
 ####Committing
-  - Before you submit your pull request ensure your code is up to date and merged by running:
-  `git pull upstream master`
+
+Before you submit your pull request, run :
+  - `git pull upstream master` to ensure your code is up to date and merged correctly
+  - 'grunt test-cross-browser'. You will need to set up a [Browser Stack](http://www.browserstack.com) account.
 
 
 ### Code structure
