@@ -40,7 +40,7 @@ end
 
 def assets_to_upload
   ["stylesheets/toolkit.css",
-    "fonts/skycons.css", "fonts/skycons.eot", "fonts/skycons.svg", "fonts/skycons.ttf",
+    "fonts/skycons.css", "fonts/skycons.eot", "fonts/skycons.ttf",
     "scripts/toolkit.js",
     "images/icon.png"]
 end
