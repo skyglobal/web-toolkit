@@ -135,7 +135,7 @@ toolkit.datePicker = (function () {
             var datePicker = this;
             datePicker.$container.find('.selected').removeClass('selected');
             $(e.currentTarget).addClass('selected');
-            datePicker.calendarDate.day = parseInt(e.currentTarget.innerText,10);
+            datePicker.calendarDate.day = parseInt(e.currentTarget.textContent || e.currentTarget.innerText,10);
             datePicker.$day.val(normaliseDate(datePicker.calendarDate.day));
             datePicker.$month.val(normaliseDate(datePicker.calendarDate.month));
             datePicker.$year.val(normaliseDate(datePicker.calendarDate.year));

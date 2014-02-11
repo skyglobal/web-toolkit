@@ -84,7 +84,7 @@ toolkit.validation = (function () {
             if (!canCustomiseHTML5Message) return;
             this.$container.find('.feedback[data-for]').each(function(){
                 var el = document.getElementById($(this).attr('data-for'));
-                new InvalidInputHelper(el, {invalidText: this.innerText || this.innerHTML});
+                new InvalidInputHelper(el, {invalidText: this.textContent || this.innerText});
             });
         },
 
