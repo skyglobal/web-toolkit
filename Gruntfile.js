@@ -17,7 +17,7 @@ module.exports = function(grunt) {
             },
             'js': {
                 files: [ 'grunt/js/**/*.js' ],
-                tasks: ['jshint','requirejs','jekyll:build']
+                tasks: ['jshint','requirejs:toolkit','jekyll:build']
             },
             'scss': {
                 files: [ 'grunt/sass/**/*.scss'],
