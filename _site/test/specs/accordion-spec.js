@@ -8,7 +8,7 @@ function accordionSpec() {
     addScript('components','accordion','default');
 
 //        todo: put these tests back in. were working before coverage update
-    describe.skip(describeSpec, function () {
+    describe(describeSpec, function () {
 
         var $first = $('.view-container').first();
         var $firstLink = $('.accordion-heading').first();
