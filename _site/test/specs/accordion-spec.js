@@ -7,7 +7,6 @@ function accordionSpec() {
     };
     addScript('components','accordion','default');
 
-//        todo: put these tests back in. were working before coverage update
     describe(describeSpec, function () {
 
         var $first = $('.view-container').first();
@@ -28,7 +27,6 @@ function accordionSpec() {
         }
 
         before(function(){
-            console.log('beforeall');
             turnOffAnimation('.view-container');
         });
         after(function(){
