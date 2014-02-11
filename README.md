@@ -1,4 +1,4 @@
-[Web Toolkit](http://skyglobal.github.io/web-toolkit/) [![Build Status](https://circleci.com/gh/skyglobal/web-toolkit.png?circle-token=24eeba25d7352dec038ea9fa25b22671ba28be5e)](https://circleci.com/gh/skyglobal/web-toolkit)
+[Web Toolkit](http://skyglobal.github.io/web-toolkit/) [![Build Status](https://circleci.com/gh/skyglobal/web-toolkit.png?circle-token=24eeba25d7352dec038ea9fa25b22671ba28be5e)](https://circleci.com/gh/skyglobal/web-toolkit) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 ========================
 
 > Sky branded front end web framework and style guide.
@@ -42,9 +42,9 @@ Grunt is our friend here, he will take of reloading the jekyll project whenever 
 3. Browse to
   - `http://localhost:4000`
 
-### Contributing 
+## Contributing 
 
-####Building A New/Updated Feature
+###Building A New/Updated Feature
   - Write code in a new branch.
   - Before you start a feature, ensure your code is up to date. Run:
     - `git pull upstream master`
@@ -52,20 +52,20 @@ Grunt is our friend here, he will take of reloading the jekyll project whenever 
   - Refactor so the code is self documenting
   - If you would like the feature to go live sooner, mention this in the comments/commit.  We will provide a temporary live url that will allow you to carry on without getting blocked.
 
-#### Testing
+### Testing
   - Tests are automatically run on the CircleCI server upon pushing to Github.
   - `grunt test` for unit (using [mocha](http://visionmedia.github.io/mocha/) and [chai](http://chaijs.com/‎))
   - Tests include code coverage, please keep this above 80%
   - Code coverage does not work on 'beautified' code.
 
-####Committing
+###Committing
 
 Before you submit your pull request, run :
   - `git pull upstream master` to ensure your code is up to date and merged correctly
   - `grunt test-cross-browser`. You will need to set up a [Browser Stack](http://www.browserstack.com) account.
 
 
-### Code structure
+## Code structure
 
     $ tree
     .
@@ -104,7 +104,7 @@ Before you submit your pull request, run :
     ├── test.html       => used by `grunt test` to run all tests at once
     └── README.md
     
-### Deployment
+## Deployments
 To release a new version with:
   - Code changes
     -  increment the version number (described below) in _config.yml.
