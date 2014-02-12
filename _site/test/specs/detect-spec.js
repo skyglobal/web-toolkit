@@ -138,7 +138,12 @@ function detectSpec(detect, event) {
 }
 
 if (window.define) {
-    define('specs/detect-spec', ['utils/detect', 'utils/event'], function (detect, event) {
+
+    define(['chai','utils/detect', 'utils/event'], function (chai, detect, event) {
+        window.chai = chai;
+        window.assert = chai.assert;
+        window.expect = chai.expect;
+        window.to = chai.to;
         return detectSpec(detect, event);
     });
 }

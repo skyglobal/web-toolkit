@@ -6,13 +6,13 @@ function toggleSpec(toggle) {
         toggle = toolkit.toggle;
     }
 
+
+    addScript('utils','toggle','closed-element');
+    addScript('utils','toggle','open-element');
     var fixtures = {
         'toggle-by-element-closed': document.getElementById('toggle-by-element-closed').outerHTML,
         'toggle-by-element': document.getElementById('toggle-by-element').outerHTML
     };
-
-    addScript('utils','toggle','closed-element');
-    addScript('utils','toggle','open-element');
 
     describe(describeSpec, function () {
 
@@ -56,7 +56,11 @@ function toggleSpec(toggle) {
 }
 
 if (window.define) {
-    define('specs/toggle-spec', ['utils/toggle'], function (toggle) {
+    require(['chai', 'utils/toggle'], function (chai, toggle) {
+            window.chai = chai;
+            window.assert = chai.assert;
+            window.expect = chai.expect;
+            window.to = chai.to;
             return toggleSpec(toggle);
         }
     );

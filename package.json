@@ -21,6 +21,11 @@
 	    ,"grunt-svgmin": "latest"
 	    ,"grunt-grunticon": "latest"
 	    ,"grunt-jekyll": "latest"
+	    ,"grunt-karma": "latest"
+	    ,"karma": "latest"
+	    ,"karma-mocha": "latest"
+        ,"karma-html2js-preprocessor": "latest"
+        ,"karma-browserstack-launcher": "latest"
         ,"browserstack-test": "latest"
     },
     "engines": {

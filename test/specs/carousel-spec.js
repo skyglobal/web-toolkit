@@ -16,14 +16,14 @@ function carouselSpec() {
         }
     };
 
+    addScript('components','carousel','default');
+    addScript('components','carousel','single-slide');
+    addScript('components','carousel','skinny');
     var fixtures = {
         hero: document.getElementById('hero').outerHTML,
         'empty-hero': document.getElementById('empty-hero').outerHTML,
         'hero-skinny': document.getElementById('hero-skinny').outerHTML
     };
-    addScript('components','carousel','default');
-    addScript('components','carousel','single-slide');
-    addScript('components','carousel','skinny');
 
     describe(describeSpec, function () {
 
@@ -265,7 +265,11 @@ function carouselSpec() {
 }
 
 if (window.define) {
-    define('specs/carousel-spec', ['components/carousel'], function () {
+    require(['chai', 'components/carousel'], function (chai) {
+        window.chai = chai;
+        window.assert = chai.assert;
+        window.expect = chai.expect;
+        window.to = chai.to;
         return carouselSpec();
     });
 }

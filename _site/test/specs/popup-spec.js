@@ -53,7 +53,11 @@ function popupSpec(popup) {
 }
 
 if (window.define) {
-    define('specs/popup-spec', ['utils/popup'], function (popup) {
+    require(['chai', 'utils/popup'], function (chai, popup) {
+            window.chai = chai;
+            window.assert = chai.assert;
+            window.expect = chai.expect;
+            window.to = chai.to;
             return popupSpec(popup);
         }
     );

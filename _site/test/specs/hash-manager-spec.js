@@ -6,11 +6,11 @@ function hashManagerSpec(hash) {
         hash = toolkit.hashManager;
     }
 
+
+    addScript('utils','hash-manager','default');
     var fixtures = {
         'currentHash': document.getElementById('currentHash').outerHTML
     };
-
-    addScript('utils','hash-manager','default');
 
     describe(describeSpec, function () {
 
@@ -210,7 +210,11 @@ function hashManagerSpec(hash) {
 }
 
 if (window.define) {
-    define('specs/hash-manager-spec', ['utils/hash-manager'], function (hash) {
+    require(['chai', 'utils/hash-manager'], function (chai, hash) {
+        window.chai = chai;
+        window.assert = chai.assert;
+        window.expect = chai.expect;
+        window.to = chai.to;
         return hashManagerSpec(hash);
     });
 }

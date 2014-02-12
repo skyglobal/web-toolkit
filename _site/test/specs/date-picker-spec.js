@@ -2,12 +2,12 @@ function datePickerSpec(datePicker) {
 
     var describeSpec = 'Datepicker module';
 
+
+    addScript('components','form','default');
     var fixtures = {
         'date-picker': document.getElementsByClassName('date-picker')[0].outerHTML,
         'sky-form': document.getElementsByClassName('sky-form')[0].outerHTML
     };
-
-    addScript('components','form','default');
 
     function setDate(day, month, year) {
         $('#demo-date-picker-one.date-picker .day').val(day).trigger('keyup').trigger('blur');
@@ -199,7 +199,11 @@ function datePickerSpec(datePicker) {
 }
 
 if (window.define) {
-    define('specs/date-picker-spec', ['components/date-picker'], function (datePicker) {
+    require(['chai', 'components/date-picker'], function (chai, datePicker) {
+        window.chai = chai;
+        window.assert = chai.assert;
+        window.expect = chai.expect;
+        window.to = chai.to;
         return datePickerSpec();
     });
 }

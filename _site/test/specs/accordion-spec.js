@@ -2,10 +2,10 @@ function accordionSpec() {
 
     var describeSpec = 'Accordion module should';
 
+    addScript('components','accordion','default');
     var fixtures = {
         accordion: document.getElementsByClassName('accordion')[0].outerHTML
     };
-    addScript('components','accordion','default');
 
     describe(describeSpec, function () {
 
@@ -106,7 +106,11 @@ function accordionSpec() {
 }
 
 if (window.define) {
-    define('specs/accordion-spec', ['components/accordion'], function () {
+    require(['chai', 'components/accordion'], function (chai) {
+        window.chai = chai;
+        window.assert = chai.assert;
+        window.expect = chai.expect;
+        window.to = chai.to;
         return accordionSpec();
     });
 }

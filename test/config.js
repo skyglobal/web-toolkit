@@ -15,10 +15,5 @@ window.addScript = function(route, feature, item){
     document.head.appendChild(script);
 };
 
-window.chai = chai;
-window.assert = chai.assert;
-window.expect = chai.expect;
-window.to = chai.to;
-
 mocha.setup({ignoreLeaks: true});
 mocha.ui('bdd');

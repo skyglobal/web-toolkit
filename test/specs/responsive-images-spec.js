@@ -6,11 +6,11 @@ function responsiveImagesSpec(responsiveImages, event) {
         event = toolkit.event;
     }
 
+    addScript('utils','responsive-images','using');
     var fixtures = {
         'demo-responsive-images': document.getElementById('demo-responsive-images').outerHTML
     };
 
-    addScript('utils','responsive-images','using');
 
     describe(describeSpec, function () {
         var origMatchMedia;
@@ -42,7 +42,11 @@ function responsiveImagesSpec(responsiveImages, event) {
 }
 
 if (window.define) {
-    define('specs/responsive-images-spec', ['utils/responsive-images','utils/event'], function (responsiveImages, event) {
+    require(['chai', 'utils/responsive-images','utils/event'], function (chai, responsiveImages, event) {
+        window.chai = chai;
+        window.assert = chai.assert;
+        window.expect = chai.expect;
+        window.to = chai.to;
         return responsiveImagesSpec(responsiveImages, event);
     });
 }

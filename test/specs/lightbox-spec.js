@@ -7,16 +7,16 @@ function lightboxSpec(lightbox, focus, hash) {
         hash = toolkit.hashManager;
     }
 
+
+    addScript('components','lightbox','default');
+    addScript('components','lightbox','ajax');
+    addScript('components','lightbox','small');
     var fixtures = {
         'ajax-lightbox': document.getElementsByClassName('ajax-lightbox')[0].outerHTML,
         'lightbox-demo-link': document.getElementById('lightbox-demo-link').outerHTML,
         'lightbox-demo-link-with-callbacks': document.getElementById('lightbox-demo-link-with-callbacks').outerHTML,
         'lightbox-small-demo-link': document.getElementById('lightbox-small-demo-link').outerHTML
     };
-
-    addScript('components','lightbox','default');
-    addScript('components','lightbox','ajax');
-    addScript('components','lightbox','small');
 
     var $demo = $('#lightbox-demo-source').clone();
     var $links = $('#open-links-source').clone();
@@ -262,8 +262,12 @@ function lightboxSpec(lightbox, focus, hash) {
 }
 
 if (window.define) {
-    define('specs/lightbox-spec', ['components/lightbox', 'utils/focus', 'utils/hash-manager'],
+    require(['chai', 'components/lightbox', 'utils/focus', 'utils/hash-manager'],
         function (lightbox, focus, hash) {
+            window.chai = chai;
+            window.assert = chai.assert;
+            window.expect = chai.expect;
+            window.to = chai.to;
             return lightboxSpec(lightbox, focus, hash);
         }
     );

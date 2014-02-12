@@ -81,7 +81,11 @@ function validationSpec(validation) {
 }
 
 if (window.define) {
-    define('specs/validation-spec', ['utils/validation'], function (validation) {
-            return validationSpec(validation);
-        });
+    require(['chai', 'utils/validation'], function (chai, validation) {
+        window.chai = chai;
+        window.assert = chai.assert;
+        window.expect = chai.expect;
+        window.to = chai.to;
+        return validationSpec(validation);
+    });
 }

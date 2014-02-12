@@ -167,7 +167,49 @@ module.exports = function(grunt) {
         mocha: {
             all : ['_site/test-without-coverage.html']
         },
-
+        karma: {
+            options: {
+                basePath: '.',
+                frameworks: ['mocha', 'requirejs'],
+                files: [
+                    'test/libraries/jquery-2.0.3.js',
+                    '_site/dist/stylesheets/*.css',
+                    '_site/static/fonts/fonts.css',
+                    {pattern: 'grunt/js/**/*.js', included: false},
+                    {pattern: 'test/specs/*.js', included: false},
+                    {pattern: 'test/libraries/*.js', included: false},
+                    {pattern: '_site/_includes/**/*.js', included: false},
+                    {pattern: '_site/_includes/**/*.html', watched: false},
+                    'test/require.karma.config.js'
+                ],
+                preprocessors: {
+                    '**/*.html': ['html2js']
+                },
+                client: {
+                    mocha: {
+                        ui: 'bdd'
+                    }
+                },
+                plugins: [
+                    'karma-firefox-launcher',
+                    'karma-chrome-launcher',
+                    'karma-phantomjs-launcher',
+                    'karma-html2js-preprocessor',
+                    'karma-mocha',
+                    'karma-requirejs'
+                ],
+                reporters: 'dots'
+            },
+            run: {
+                browsers: ['PhantomJS', 'Chrome', 'Firefox'],
+                singleRun: true
+            },
+            debug: {
+                browsers: ['Chrome'],
+                logLevel: 'DEBUG',
+                singleRun: false
+            }
+        },
         jekyll: {                            // Task
             options: {                          // Universal options
                 bundleExec: true,

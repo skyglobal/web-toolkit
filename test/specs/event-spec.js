@@ -20,7 +20,7 @@ function eventSpec(event) {
         }
     };
 
-    var h1 = document.getElementsByTagName('h1')[0];
+    var h1 = document.getElementById('demo-ready-element');
 
     describe(describeSpec, function () {
 
@@ -141,7 +141,11 @@ function eventSpec(event) {
 }
 
 if (window.define) {
-    define('specs/event-spec', ['utils/event'], function ( event) {
+    require(['chai','utils/event'], function (chai, event) {
+        window.chai = chai;
+        window.assert = chai.assert;
+        window.expect = chai.expect;
+        window.to = chai.to;
         return eventSpec(event);
     });
 }

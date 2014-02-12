@@ -2423,7 +2423,7 @@ updateView(toolkit);
                         
                         
                         <div class="demo clearfix">
-                            <div>
+                            <div id="demo-ready-element">
     <p>You can detect when the document has finished loading everything except images:</p>
     <p><code>.ready</code>: <span id="css-demo-event-ready">document loading...</span></p>
 </div>
@@ -2860,6 +2860,7 @@ toolkit.hashManager.register(['hash', 'anotherHash', 'wildcard/*'], myHashCallba
         require(
             {   baseUrl:'dist/scripts',
                 paths: {suite: '../../test/suite',
+                        chai: '../../test/libraries/chai',
                         specs: '../../test/specs'}
             },
             ["toolkit"],

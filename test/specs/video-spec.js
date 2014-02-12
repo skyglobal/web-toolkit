@@ -2,11 +2,10 @@ function videoSpec(Video) {
 
     var describeSpec = 'Video module';
 
+    addScript('components','video','default');
     var fixtures = {
         'demo-video': document.getElementById('demo-video').outerHTML
     };
-
-    addScript('components','video','default');
 
     var $container = $('#demo-video'),
         $wrapper, $overlay, $close;
@@ -35,6 +34,7 @@ function videoSpec(Video) {
         });
 
 //        todo: unskip. was working before coverage update.
+        console.log('todo: unskip. was working before coverage update.');
         it.skip('will play the video when play is clicked', function () {
             expect($wrapper.length).to.equal(0);
             expect($overlay.length).to.equal(0);
@@ -72,7 +72,11 @@ function videoSpec(Video) {
 }
 
 if (window.define) {
-    define('specs/video-spec', ['components/video'], function (Video) {
+    require(['chai', 'components/video'], function (chai, Video) {
+        window.chai = chai;
+        window.assert = chai.assert;
+        window.expect = chai.expect;
+        window.to = chai.to;
         return videoSpec(Video);
     });
 }

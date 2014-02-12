@@ -2,11 +2,11 @@ function inPageNavSpec(hash, tabs) {
 
     var describeSpec = 'Responsive tabs';
 
+
+    addScript('components','in-page-nav','sleek-nav');
     var fixtures = {
         'demo-inpage-nav-tabs': document.getElementById('demo-inpage-nav-tabs').outerHTML
     };
-
-    addScript('components','in-page-nav','sleek-nav');
 
     describe(describeSpec, function () {
 
@@ -30,8 +30,12 @@ function inPageNavSpec(hash, tabs) {
 }
 
 if (window.define) {
-    define('specs/in-page-nav-spec', ['utils/hash-manager', 'components/in-page-nav'],
-        function (hash, tabs) {
+    require(['chai', 'utils/hash-manager', 'components/in-page-nav'],
+        function (chai, hash, tabs) {
+            window.chai = chai;
+            window.assert = chai.assert;
+            window.expect = chai.expect;
+            window.to = chai.to;
             return inPageNavSpec(hash, tabs);
         }
     );

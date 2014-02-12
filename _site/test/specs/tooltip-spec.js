@@ -27,7 +27,13 @@ function tooltipSpec(tooltip) {
 }
 
 if (window.define) {
-    define('specs/tooltipSpec', ['components/tooltip'], function (tooltip) {
+    require(['chai', 'components/tooltip'], function (chai, tooltip) {
+
+            window.chai = chai;
+            window.assert = chai.assert;
+            window.expect = chai.expect;
+            window.to = chai.to;
+
             return tooltipSpec(tooltip);
         }
     );

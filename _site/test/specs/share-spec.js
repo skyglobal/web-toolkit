@@ -35,8 +35,11 @@ function shareSpec(share) {
 }
 
 if (window.define) {
-    define('specs/share-spec', ['components/share'], function (share) { //, 'specs/popupSpec', , popupSpec
-//            var popupDescription = popupSpec();
+    require(['chai','components/share'], function (chai, share) {
+            window.chai = chai;
+            window.assert = chai.assert;
+            window.expect = chai.expect;
+            window.to = chai.to;
             return shareSpec(share);
         }
     );
