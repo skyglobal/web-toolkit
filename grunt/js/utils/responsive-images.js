@@ -84,7 +84,7 @@ toolkit.responsiveImages = (function () {
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/responsive-images', [], function() {
-        toolkit.responsiveImages = toolkit.responsiveImages();
+        window.responsiveImages = toolkit.responsiveImages = toolkit.responsiveImages();
         return toolkit.responsiveImages;
     });
 } else {
