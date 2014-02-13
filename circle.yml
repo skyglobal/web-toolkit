@@ -7,6 +7,17 @@ deployment:
     branch: /feature-.*/
     commands:
       - bundle exec rake deploy_feature
+  release_candidate:
+    branch: /rc-.*/
+    commands:
+      - bundle exec rake deploy_rc
+test:
+  pre:
+    - bundle install
+  override:
+    - bundle exec grunt test-without-coverage
+    - bundle exec grunt test-with-coverage
+#    - bundle exec grunt test-cross-browser
 machine:
   ruby:
     version: ruby-1.9.3-p392

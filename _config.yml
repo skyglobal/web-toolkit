@@ -1,12 +1,11 @@
-version: 2.1.2-rc2
+version: 2.1.4
 destination: _site
 exclude: [
-  grunt,
   node_modules, test, README.md,
   Gemfile, Gemfile.lock, rakefile,
   Web-toolkit.iml,web-toolkit.iml, web-toolkit.ipr, web-toolkit.iws,circle.yml, Gruntfile.js,package.json,
   build.txt,
   vendor,
-  deprecated, lib]
+  deprecated]
 include: [_includes, test]
 port: 4000

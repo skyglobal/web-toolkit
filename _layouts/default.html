@@ -6,11 +6,21 @@
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 <!--end css conditionals-->
 	<head>
-
         {% include head.html %}
 
-        <script src="dist/scripts/toolkit.js"></script>
+        <!--to help prevent 'font flash'-->
+        <link href='//web-toolkit.global.sky.com/static/fonts/sky_regular.ttf' rel='prefetch'>
+        <link href='//web-toolkit.global.sky.com/static/fonts/sky_regular.svg' rel='prefetch'>
+        <link href='//web-toolkit.global.sky.com/static/fonts/sky_medium.ttf' rel='prefetch'>
+        <link href='//web-toolkit.global.sky.com/static/fonts/sky_medium.svg' rel='prefetch'>
+        <!--end prevent 'font flash'-->
 
+        <!--We recommend that you use these files from the toolkit static lib folder: '//web-toolkit.global.sky.com/static/lib/' -->
+        <script src="static/lib/require-2.1.9.min.js"></script>
+        <script>
+            window.environment = 'demo';
+            require({ baseUrl: "./dist/scripts/"}, ['toolkit']);
+        </script>
 	</head>
 	<body class="grid-1140" data-spy="scroll" data-target="#toolkit-menu-tabs">
         <div class="skycom-container clearfix">
@@ -35,10 +45,5 @@
 
         {% include footer.html %}
 
-        <script src="dist/scripts/demo.js"></script>
-
-        <script src="test/libraries/mocha.js"></script>
-        <script src="http://web-toolkit.global.sky.com/static/lib/require-2.1.9.min.js"></script>
-        <script src="test/config.js" ></script>
 	</body>
 </html>

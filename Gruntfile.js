@@ -9,26 +9,27 @@ module.exports = function(grunt) {
     };
 
     grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
         watch: {
             gruntfile: {
                 files: 'Gruntfile.js',
-                tasks: ['jshint']
+                tasks: ['build']
             },
             'js': {
                 files: [ 'grunt/js/**/*.js' ],
-                tasks: ['jshint','requirejs','jekyll:build']
+                tasks: ['jshint','requirejs:toolkit','jekyll:build']
             },
             'scss': {
                 files: [ 'grunt/sass/**/*.scss'],
                 tasks: ['compass', 'jekyll:build']
             },
             'jekyll': {
-                files: [ '_includes/**/*', '_layouts/**/*', '*.html', '_config.yml' ],
+                files: [ '_includes/**/*', '_layouts/**/*', '_data/**/*', '*.html', '_config.yml', 'test/libraries/*.js','test/*' ],
                 tasks: ['jekyll:build']
             },
             'specs': {
                 files: ['test/specs/*.js','test/config.js'],
-                tasks: ['jshint','jekyll:build']
+                tasks: ['jekyll:build'] //'jshint',
             }
         },
         clean: {
@@ -41,8 +42,8 @@ module.exports = function(grunt) {
             toolkit: ['Gruntfile.js',
                       'grunt/js/components/*.js',
                       'grunt/js/utils/*.js',
-                      'grunt/js/demo/*.js',
-                      'test/specs/**/*.js'],
+                      'grunt/js/demo/*.js'],
+//        'test/specs/**/*.js',
             others: ['Gruntfile.js'],
             options: {
                 "globals": {
@@ -69,21 +70,35 @@ module.exports = function(grunt) {
             }
         },
         requirejs:{
+            options: {
+                preserveLicenseComments: false,
+                baseUrl: "grunt/js",
+                dir: "dist/scripts",
+                removeCombined: true,
+                generateSourceMaps: false,
+                modules:[{
+                    name: 'toolkit'
+                },{
+                    name: 'demo'
+                },{
+                    name: 'changes'
+                },{
+                    name: 'testIFrame'
+                }]
+            },
             toolkit: {
                 options: {
-                    optimize: grunt.option('beautify') ? "none" : "uglify2",
-                    preserveLicenseComments: false,
-                    baseUrl: "grunt/js",
-                    dir: "dist/scripts",
-                    removeCombined: true,
-                    generateSourceMaps: false,
-                    modules:[{
-                        name: 'toolkit'
-                    },{
-                        name: 'demo'
-                    },{
-                        name: 'changes'
-                    }]
+                    optimize: grunt.option('beautify') ? "none" : "uglify2"
+                }
+            },
+            beautify: {
+                options: {
+                    optimize: "none"
+                }
+            },
+            uglify: {
+                options: {
+                    optimize: "uglify2"
                 }
             }
         },
@@ -98,7 +113,7 @@ module.exports = function(grunt) {
                     htmlDemoTemplate : 'grunt/fonts/template/skycon-template.html',
                     htmlDemo : true,
 //                    engine : 'node',
-                    destHtml : '_includes/baseStyles/icons',
+                    destHtml : '_includes/base-styles/icons',
                     hashes : false,
                     embed : true
                 }
@@ -141,17 +156,16 @@ module.exports = function(grunt) {
             }
         },
 
-        mocha: {
-            all: {
-                src: (function() {
-                    var pattern = grunt.option('pattern') || '[A-Z]*';
-                    return ['_site/test.html'];
-                }()),
-                options: {
-                    run: false,
-                    log: false // Set to true to see console.log() output on the terminal
-                }
+        blanket_mocha: {
+            all : ['_site/test.html'],
+            options : {
+                threshold : 70, // <- percetage of files that have to pass coverage rules
+                globalThreshold : 80, // <- coverage rule
+                log : true
             }
+        },
+        mocha: {
+            all : ['_site/test-without-coverage.html']
         },
 
         jekyll: {                            // Task
@@ -164,32 +178,53 @@ module.exports = function(grunt) {
                     watch: false,
                     serve: false
                 }
-            },
-            run:{
+            }
+        },
+
+        connect: {
+            server: {
                 options: {
-                    watch: true,
-                    serve: true
+                    base: "_site",
+                    port: 9999
                 }
+            }
+        },
+        exec: {
+            browserstack: {
+                command: 'node_modules/browserstack-test/bin/browserstack-test -u $BROWSERSTACK_USERNAME -p $BROWSERSTACK_PASS -k $BROWSERSTACK_AUTHKEY -b test/browsers.json -t 60 http://localhost:9999/test-crossbrowser.html'
+            },
+            'browserstack-live':{
+                cmd: 'java -jar test/libraries/BrowserStackTunnel.jar $BROWSERSTACK_AUTHKEY localhost,4000,0'
             }
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-compass');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-requirejs');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-mocha');
-    grunt.loadNpmTasks('grunt-webfont'); //https://github.com/sapegin/grunt-webfont
-    grunt.loadNpmTasks('grunt-svgmin');
-    grunt.loadNpmTasks('grunt-grunticon');
-    grunt.loadNpmTasks('grunt-jekyll');
+    // Loading dependencies
+    for (var key in grunt.file.readJSON("package.json").devDependencies) {
+        if (key !== "grunt" && key.indexOf("grunt") === 0) {
+            grunt.loadNpmTasks(key);
+        }
+    }
 
-    grunt.registerTask('default', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs']);
-    grunt.registerTask('spy', ['clean:toolkit', 'compass:toolkit', 'jshint', 'requirejs', 'jekyll:build', 'watch']);
-    grunt.registerTask('sloppy', ['clean:toolkit', 'compass:toolkit', 'requirejs', 'watch']);
+//  dev'ing tasks - allows 'debugger;' within JS files
+    grunt.registerTask('dev-build', ['clean:toolkit', 'compass:toolkit', 'requirejs:toolkit', 'jekyll:build']);
+    grunt.registerTask('dev-spy', ['dev-build', 'watch']);
+
+//  standard build tasks that lints your JS
+    grunt.registerTask('build', ['jshint', 'dev-build']);
+    grunt.registerTask('spy', ['jshint', 'dev-spy']);
+
+//  misc tasks
     grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
-    grunt.registerTask('test', ['mocha']);
+
+//  testing tasks
+    grunt.registerTask('test-with-coverage', ['requirejs:beautify','jekyll:build', 'blanket_mocha']);
+    grunt.registerTask('test-without-coverage', ['requirejs:uglify','jekyll:build', 'mocha']);
+    grunt.registerTask('test-cross-browser', ['jekyll:build','connect', 'exec:browserstack']);
+    grunt.registerTask('test-cross-browser-live', ['jekyll:build','connect', 'exec:browserstack-live']);
+
+//  alias
+    grunt.registerTask('test', ['test-with-coverage']);
+    grunt.registerTask('default', ['build']);
 };

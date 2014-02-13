@@ -1,0 +1,37 @@
+---
+layout: iframe
+title: Sky Web Toolkit Testing
+---
+<style>
+    #fixtures-container{
+        height:0;
+        overflow: hidden;
+    }
+    #fixtures{
+        height: auto;
+        overflow: visible;
+    }
+    html{
+        padding: 0;
+    }
+</style>
+<h1>Testing &hellip;</h1>
+<div class="spinner-blue">
+    <p>Please wait...</p>
+</div>
+
+<div id="mocha" class="mocha-container"></div>
+<div id="blanket-main" class="blanket-container"></div>
+<div id="fixtures-container">
+    <div id="fixtures">
+    </div>
+</div>
+<script>
+    requirejs.config({
+        baseUrl: "./grunt/js/",
+        paths: {
+            specs: '../../test/specs'
+        }
+    });
+</script>
+<script src="dist/scripts/testIFrame.js"></script>

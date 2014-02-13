@@ -15,7 +15,13 @@
 /* tab dropdown */
 .dropdown-tab-select {
   display: none;
-  float: right;
+
+  position: absolute;
+  right: 0;
+  z-index:10;
+
+  @include box-sizing(border-box);
+
   a {
     color: $primary;
     display: block;
@@ -28,18 +34,22 @@
     line-height: 31px;
     text-align: center;
     position:relative;
-    height:44px; width:44px;
+    height:44px;
+    width:44px;
     margin-bottom: -1px;
     padding: 0;
     border:1px solid transparent;
     border-top:0;
-    z-index:10;
     color:$secondary;
+
+    @include box-sizing(border-box);
+
     &.dropdown-tab-selected{
       visibility: visible;
       border-color:#dcdcdc;
       border-bottom-color: #fff;
       color: #0073c5;
+      background-color: #fff;
     }
   }
 }
@@ -50,8 +60,10 @@
   border: 1px solid #dcdcdc;
   position: absolute;
   right: 0;
-  top: 45px;
+  top: 44px;
   width: 300px;
+
+  @include box-sizing(border-box);
 
   &.dropdown-tab-selected{
     visibility: visible;
@@ -75,6 +87,7 @@
   .tabs {
     position: relative;
     margin: 20px 0;
+    padding-right: 46px;
     border-bottom: solid 1px #dcdcdc;
     border-top: solid 1px #dcdcdc;
   }
@@ -82,13 +95,20 @@
   .tabs > .tab {
     float: left;
     padding: 0 30px 0 0;
+    height: 44px;
+
+    @include box-sizing(border-box);
+
     a {
       line-height: 44px;
       text-decoration: none;
       border-bottom: 2px solid transparent;
+      display: block;
     }
     &:hover{
       margin-bottom:-1px;
+      height: 45px;
+
       a{
         border-bottom: 2px solid #0073c5;
         color:$link;
@@ -96,10 +116,17 @@
     }
     &.selected {
       margin-bottom:-1px;
+      height: 45px;
+
       a{
         font-family: $font-family-medium;
         border-bottom: 2px solid #0073c5;
       }
+    }
+
+    &:only-of-type {
+      padding-right: 0;
+      max-width: 100%;
     }
   }
 }
@@ -109,6 +136,7 @@
   .tabs{
     font-size: 1.25em;
     margin: 20px 0;
+    padding-right: 46px;
     border-bottom: solid 1px #d7d5d5;
   }
   .tabs > .tab {
@@ -121,6 +149,9 @@
     border-bottom: 0;
     position: relative;
     bottom: -11px;
+
+    @include box-sizing(border-box);
+
     &:before {
       content: "";
       position: absolute;
@@ -169,14 +200,23 @@
         line-height: 44px;
       }
     }
+
+    &:only-of-type {
+      max-width: 100%;
+
+      a {
+        text-align: left;
+      }
+    }
   }
 }
 .classic .dropdown-tab-select{
   >a{
     border-top:1px solid transparent;
-    height:43px;
+    height:44px;
   }
   a.dropdown-tab-selected{
+    height:44px;
     border-radius: 5px 5px 0 0;
     border-top:1px solid #dcdcdc;
   }
@@ -186,5 +226,5 @@
 }
 .classic .more-tabs{
   z-index: 5;
-  top:44px;
+  top: 44px;
 }
