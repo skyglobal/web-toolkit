@@ -17,6 +17,7 @@ font-style:normal;
     font-family:"<%= fontBaseName %>";
     display:inline-block;
     vertical-align:middle;
+    line-height:1;
     font-weight:normal;
     font-style:normal;
     speak:none;
@@ -46,9 +47,9 @@ a [class*=" <%= classPrefix %>"] {
 }
 /* Makes the font 33% larger relative to the icon container */
 .<%= classPrefix %>large:before {
-                       vertical-align:top;
-                       font-size:1.333em;
-                   }
+   vertical-align:top;
+   font-size:1.333em;
+}
 /* Keeps button heights with and without icons the same */
 .btn [class^="<%= classPrefix %>"],
 .btn [class*=" <%= classPrefix %>"] {
@@ -62,9 +63,9 @@ li [class*=" <%= classPrefix %>"] {
 }
 /* 1.5 increased font size for <%= classPrefix %>large * 1.25 width */
 li .<%= classPrefix %>large[class^="<%= classPrefix %>"],
-                      li .<%= classPrefix %>large[class*=" <%= classPrefix %>"] {
-                                                width:1.875em;
-                                            }
+li .<%= classPrefix %>large[class*=" <%= classPrefix %>"] {
+    width:1.875em;
+}
 li[class^="<%= classPrefix %>"],
 li[class*=" <%= classPrefix %>"] {
     margin-left:0;
@@ -76,9 +77,9 @@ li[class*=" <%= classPrefix %>"]:before {
     text-align:center;
 }
 li[class^="<%= classPrefix %>"].<%= classPrefix %>large:before,
-                                                  li[class*=" <%= classPrefix %>"].<%= classPrefix %>large:before {
-                                                                                                         text-indent:-1.333em;
-                                                                                                     }
+li[class*=" <%= classPrefix %>"].<%= classPrefix %>large:before {
+     text-indent:-1.333em;
+ }
 <% } %>
 
 <% if (iconsStyles) { %>/* Icons */<% for (var glyphIdx = 0; glyphIdx < glyphs.length; glyphIdx++) { %>
@@ -87,10 +88,17 @@ li[class^="<%= classPrefix %>"].<%= classPrefix %>large:before,
 &:before {
     content:"<% if (addLigatures) { %><%= glyphs[glyphIdx] %><% } else { %>\<%= codepoints[glyphIdx] %><% } %>";
 }
+<% if (ie7) {%>
+    *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#x<%= codepoints[glyphIdx]%>;');
+<% } %>
     }<% } else { %>
+<% if (ie7) {%>.<%= classPrefix %><%= glyphs[glyphIdx] %> {
+    *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#x<%= codepoints[glyphIdx]%>;');
+}
+<% } %>
 .<%= classPrefix %><%= glyphs[glyphIdx] %>:before {
-                                              content:"<% if (addLigatures) { %><%= glyphs[glyphIdx] %><% } else { %>\<%= codepoints[glyphIdx] %><% } %>";
-                                          }<% } %>
+  content:"<% if (addLigatures) { %><%= glyphs[glyphIdx] %><% } else { %>\<%= codepoints[glyphIdx] %><% } %>";
+}<% } %>
 <% } } %>
 
 
@@ -109,9 +117,3 @@ li[class^="<%= classPrefix %>"].<%= classPrefix %>large:before,
     font-size: 16px;
     line-height: 1.125em;
 }
-/*
-COPY THIS INTO grunt/js/utils/skycons.js
-var icons = {<% for (var glyphIdx = 0; glyphIdx < glyphs.length; glyphIdx++) { %>
-    '<%= classPrefix %><%= glyphs[glyphIdx] %>' : "&#x<% if (addLigatures) { %><%= glyphs[glyphIdx] %><% } else { %><%= codepoints[glyphIdx] %><% } %>;",<% } %>
-};
-*/

@@ -43,7 +43,6 @@ module.exports = function(grunt) {
                       'grunt/js/components/*.js',
                       'grunt/js/utils/*.js',
                       'grunt/js/demo/*.js'],
-//        'test/specs/**/*.js',
             others: ['Gruntfile.js'],
             options: {
                 "globals": {
@@ -146,7 +145,6 @@ module.exports = function(grunt) {
                 }]
             }
         },
-
         grunticon: {
             colourSVG: {
                 options: {
@@ -155,7 +153,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-
         blanket_mocha: {
             all : ['_site/test.html'],
             options : {
@@ -167,7 +164,6 @@ module.exports = function(grunt) {
         mocha: {
             all : ['_site/test-without-coverage.html']
         },
-
         jekyll: {                            // Task
             options: {                          // Universal options
                 bundleExec: true,
@@ -180,7 +176,6 @@ module.exports = function(grunt) {
                 }
             }
         },
-
         connect: {
             server: {
                 options: {
@@ -215,7 +210,7 @@ module.exports = function(grunt) {
     grunt.registerTask('spy', ['jshint', 'dev-spy']);
 
 //  misc tasks
-    grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit']);
+    grunt.registerTask('fonts', ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'build']);
     grunt.registerTask('svgs', ['svgmin:icons', 'grunticon']);
 
 //  testing tasks
