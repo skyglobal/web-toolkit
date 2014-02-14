@@ -16,14 +16,21 @@ function carouselSpec() {
         }
     };
 
-    addScript('components','carousel','default');
-    addScript('components','carousel','single-slide');
-    addScript('components','carousel','skinny');
-    var fixtures = {
-        hero: document.getElementById('hero').outerHTML,
-        'empty-hero': document.getElementById('empty-hero').outerHTML,
-        'hero-skinny': document.getElementById('hero-skinny').outerHTML
-    };
+    document.body.innerHTML += window.__html__['components/carousel/default.html'];
+    document.body.innerHTML += window.__html__['components/carousel/single-slide.html'];
+    document.body.innerHTML += window.__html__['components/carousel/skinny.html'];
+    $('#hero').skycom_carousel({
+        autoplay: true,
+        videoAds: false
+    });
+    $('#empty-hero').skycom_carousel({
+        autoplay: true,
+        videoAds: false
+    });
+    $('#hero-skinny').skycom_carousel({
+        autoplay: true,
+        videoAds: false
+    });
 
     describe(describeSpec, function () {
 

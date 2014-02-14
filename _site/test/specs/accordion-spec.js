@@ -2,10 +2,8 @@ function accordionSpec() {
 
     var describeSpec = 'Accordion module should';
 
-    addScript('components','accordion','default');
-    var fixtures = {
-        accordion: document.getElementsByClassName('accordion')[0].outerHTML
-    };
+    document.body.innerHTML += window.__html__['components/accordion/default.html'];
+    $('.accordion').accordion();
 
     describe(describeSpec, function () {
 

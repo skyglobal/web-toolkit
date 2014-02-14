@@ -6,11 +6,45 @@ function eventSpec(event) {
         event = toolkit.event;
     }
 
-    addScript('utils','event','emit');
-    addScript('utils','event','off-event');
-    addScript('utils','event','on-event');
-    addScript('utils','event','ready');
-    addScript('utils','event','resize-end');
+    document.body.innerHTML += window.__html__['utils/event/emit.html'];
+    document.body.innerHTML += window.__html__['utils/event/off-event.html'];
+    document.body.innerHTML += window.__html__['utils/event/on-event.html'];
+    document.body.innerHTML += window.__html__['utils/event/ready.html'];
+    document.body.innerHTML += window.__html__['utils/event/resize-end.html'];
+
+    var elEmit = document.getElementById('css-demo-event-emit');
+    var elEmitCustom = document.getElementById('css-demo-event-emit-custom');
+    var elOff = document.getElementById('css-demo-event-off');
+    var elOn = document.getElementById('css-demo-event-on');
+    var elResizeEnd = document.getElementById('css-demo-event-resizeend');
+
+    function updateEventEmit(){
+        elEmit.innerHTML = 'now my throat is sore';
+        event.emit(elEmitCustom,'demoCustomEmit');
+    }
+
+    function updateEventEmitCustom(){
+        elEmitCustom.innerHTML = ' ....shhh.';
+    }
+    function updateEventOff(){
+        event.off(document.getElementById('css-demo-event-on'), 'click', window.updateEventOn);
+    }
+    function updateEventOn(){
+        elOn.innerHTML = 'now i\'m on.';
+    }
+    function updateEventReady(){
+        document.getElementById('css-demo-event-ready').innerHTML = 'Woah, document loaded.';
+    }
+    function updateEventResizeEnd(){
+        elResizeEnd.innerHTML = 'boom. resized.';
+    }
+
+    event.on(window,'resizeend',updateEventResizeEnd);
+    event.ready(updateEventReady);
+    event.on(elOn,'click',updateEventOn);
+    event.on(elEmit,'click',updateEventEmit);
+    event.on(elEmitCustom,'demoCustomEmit',updateEventEmitCustom);
+    event.on(elOff,'click', updateEventOff);
 
     window.globalskycom = {
         browserSupport: {

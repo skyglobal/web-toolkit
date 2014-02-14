@@ -6,11 +6,8 @@ function responsiveImagesSpec(responsiveImages, event) {
         event = toolkit.event;
     }
 
-    addScript('utils','responsive-images','using');
-    var fixtures = {
-        'demo-responsive-images': document.getElementById('demo-responsive-images').outerHTML
-    };
-
+    document.body.innerHTML += window.__html__['utils/responsive-images/using.html'];
+    responsiveImages.init(document.getElementById('demo-responsive-images'));
 
     describe(describeSpec, function () {
         var origMatchMedia;

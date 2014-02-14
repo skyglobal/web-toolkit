@@ -2,10 +2,12 @@ function videoSpec(Video) {
 
     var describeSpec = 'Video module';
 
-    addScript('components','video','default');
-    var fixtures = {
-        'demo-video': document.getElementById('demo-video').outerHTML
-    };
+    document.body.innerHTML += window.__html__['components/video/default.html'];
+
+    $('#demo-video.video-container').video({
+        token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85", //this token should be unique to your team
+        displayAdverts:false
+    });
 
     var $container = $('#demo-video'),
         $wrapper, $overlay, $close;

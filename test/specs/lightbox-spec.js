@@ -7,16 +7,23 @@ function lightboxSpec(lightbox, focus, hash) {
         hash = toolkit.hashManager;
     }
 
+    document.body.innerHTML += window.__html__['components/lightbox/ajax.html'];
+    document.body.innerHTML += window.__html__['components/lightbox/default.html'];
+    document.body.innerHTML += window.__html__['components/lightbox/small.html'];
 
-    addScript('components','lightbox','default');
-    addScript('components','lightbox','ajax');
-    addScript('components','lightbox','small');
-    var fixtures = {
-        'ajax-lightbox': document.getElementsByClassName('ajax-lightbox')[0].outerHTML,
-        'lightbox-demo-link': document.getElementById('lightbox-demo-link').outerHTML,
-        'lightbox-demo-link-with-callbacks': document.getElementById('lightbox-demo-link-with-callbacks').outerHTML,
-        'lightbox-small-demo-link': document.getElementById('lightbox-small-demo-link').outerHTML
-    };
+    $('.ajax-lightbox').lightbox({closeButtonColour: 'black'});
+    $('#lightbox-demo-link').lightbox();
+    $('#lightbox-small-demo-link').lightbox({size:'small'});
+
+    //JS for default lightbox with callbacks (onShow and onClose)
+    $('#lightbox-demo-link-with-callbacks').lightbox({
+        onShow: function(){
+            $('[data-function=carousel]').trigger("pause");
+            $('#lightbox-demo-with-callbacks').trigger('my-lightbox-opened');
+        }, onClose: function(){
+            $('#lightbox-demo-with-callbacks').trigger('my-lightbox-closed');
+        }
+    });
 
     var $demo = $('#lightbox-demo-source').clone();
     var $links = $('#open-links-source').clone();

@@ -2,12 +2,10 @@ function datePickerSpec(datePicker) {
 
     var describeSpec = 'Datepicker module';
 
+    document.body.innerHTML += window.__html__['components/form/default.html'];
 
-    addScript('components','form','default');
-    var fixtures = {
-        'date-picker': document.getElementsByClassName('date-picker')[0].outerHTML,
-        'sky-form': document.getElementsByClassName('sky-form')[0].outerHTML
-    };
+    $('.date-picker').datePicker();
+    $('.sky-form').validation();
 
     function setDate(day, month, year) {
         $('#demo-date-picker-one.date-picker .day').val(day).trigger('keyup').trigger('blur');

@@ -1,9 +1,8 @@
-function detectSpec(detect, event) {
+function detectSpec(detect) {
 
     var describeSpec = 'Detect module can use JS and HTML to know';
 
     if (!detect) { //for in page test runs
-        event = toolkit.event;
         detect = toolkit.detect;
     }
 
@@ -14,19 +13,54 @@ function detectSpec(detect, event) {
             deviceType: function (){}
         }
     };
-    addScript('utils','detect','css');
-    addScript('utils','detect','orientation');
-    addScript('utils','detect','touch');
-    addScript('utils','detect','view');
+    document.body.innerHTML += window.__html__['utils/detect/css.html'];
+    document.body.innerHTML += window.__html__['utils/detect/orientation.html'];
+    document.body.innerHTML += window.__html__['utils/detect/touch.html'];
+    document.body.innerHTML += window.__html__['utils/detect/view.html'];
 
-    function resize(){
-        try{ //phantomJS doent understand this :(
-            console.log('phantomJS doent understand this emit.resize. fix me.');
-            event.emit(window,'resize');
-        } catch (e) {
-            detect.updateDetectionStates();
-        }
+    function updateDetectCSS(){
+        var demoTransition = document.getElementById('css-demo-transition');
+        var demo3D = document.getElementById('css-demo-support3D');
+        var demoTransform = document.getElementById('css-demo-transform');
+        var returnTransform = document.getElementById('css-demo-return-transform');
+
+        var transition = detect.css('transition');
+        var support3D = detect.css('support3D');
+        var transform = detect.css('transform');
+
+        demoTransition.innerHTML = transition;
+        demo3D.innerHTML = support3D;
+        demoTransform.innerHTML = transform;
+
+        returnTransform.innerHTML = detect.css(demoTransition, 'transition');
     }
+    function updateOrientation(){
+        var orientation = detect.orientation();
+        var isPortrait = detect.orientation('portrait');
+        var isLandscape = detect.orientation('landscape');
+        $('#orientation-demo').text(orientation);
+        $('#orientation-demo-is-landscape').text(isLandscape);
+        $('#orientation-demo-is-portrait').text(isPortrait);
+    }
+    function updateView(){
+        var view = detect.view();
+        var desktop = detect.view('desktop');
+        var mobile = detect.view('mobile');
+        $('#view-demo').text(view);
+        $('#view-demo-is-desktop').text(desktop);
+        $('#view-demo-is-mobile').text(mobile);
+    }
+    function resize(){
+        detect.updateDetectionStates();
+    }
+    updateOrientation();
+    updateDetectCSS();
+    updateView();
+    $(window).on('resize',function(){updateView();});
+    $(window).on('resize',function(){updateOrientation();});
+
+    var touch = detect.touch();
+    $('#touch-demo').text(touch);
 
     describe(describeSpec, function () {
 
@@ -138,8 +172,7 @@ function detectSpec(detect, event) {
 }
 
 if (window.define) {
-
-    define(['chai','utils/detect', 'utils/event'], function (chai, detect, event) {
+    define(['chai','utils/detect'], function (chai, detect) {
         window.chai = chai;
         window.assert = chai.assert;
         window.expect = chai.expect;

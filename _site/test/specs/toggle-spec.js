@@ -6,13 +6,15 @@ function toggleSpec(toggle) {
         toggle = toolkit.toggle;
     }
 
+    document.body.innerHTML += window.__html__['utils/toggle/closed-element.html'];
+    document.body.innerHTML += window.__html__['utils/toggle/open-element.html'];
 
-    addScript('utils','toggle','closed-element');
-    addScript('utils','toggle','open-element');
-    var fixtures = {
-        'toggle-by-element-closed': document.getElementById('toggle-by-element-closed').outerHTML,
-        'toggle-by-element': document.getElementById('toggle-by-element').outerHTML
-    };
+    $('#toggle-by-element-closed .toggle-link').on('click', function() {
+        toggle({$elClicked:$(this)});
+    });
+    $('#toggle-by-element .toggle-link').on('click', function() {
+        toggle({$elClicked:$(this)});
+    });
 
     describe(describeSpec, function () {
 

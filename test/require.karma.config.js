@@ -13,25 +13,32 @@ window.turnOffAnimation = function(selector){
         $('.turnOffAnimation').remove();
     }
 };
-window.clearBody = true;
+window.testCount = 0;
+window.testFeature = '';
 window.addCSS = function(item){
     var css = document.createElement('link');
     css.rel = "stylesheet";
     css.href = 'base/_site/dist/stylesheets/' + item + '.css';
     document.head.appendChild(css);
 };
-window.addScript = function(route, feature, item){
-    var script = document.createElement('script');
+
+window.addFixture = function(route, feature, item){
+//    var script = document.createElement('script');
     var path = '_site/_includes/' + route + '/' + feature + '/' + item ;
-    script.src = 'base/' + path + '.js';
-    document.head.appendChild(script);
-    if (window.clearBody){
-        document.body.innerHTML = '';
-        clearBody = false;
-    }
-    if (window.__html__){ //sort out karma
+//    script.src = 'base/' + path + '.js';
+//    document.head.appendChild(script);
+//    if (window.testCount === 0){
+//        document.body.innerHTML = '';
+//        clearBody = false;
+//    }
+//    if (window.__html__){ //sort out karma
         document.body.innerHTML += window.__html__[path + '.html'];
-    }
+//    }
+//    if (window.testFeature != route +'/' + feature){
+//        testCount++;
+//        window.testFeature = route +'/' + feature;
+//        console.log(testCount, ': adding scripts for ' + testFeature);
+//    }
 };
 
 requirejs.config({
