@@ -16,9 +16,9 @@ function carouselSpec() {
         }
     };
 
-    document.body.innerHTML += window.__html__['components/carousel/default.html'];
-    document.body.innerHTML += window.__html__['components/carousel/single-slide.html'];
-    document.body.innerHTML += window.__html__['components/carousel/skinny.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/components/carousel/default.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/components/carousel/single-slide.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/components/carousel/skinny.html'];
     $('#hero').skycom_carousel({
         autoplay: true,
         videoAds: false

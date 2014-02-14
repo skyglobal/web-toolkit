@@ -6,11 +6,11 @@ function eventSpec(event) {
         event = toolkit.event;
     }
 
-    document.body.innerHTML += window.__html__['utils/event/emit.html'];
-    document.body.innerHTML += window.__html__['utils/event/off-event.html'];
-    document.body.innerHTML += window.__html__['utils/event/on-event.html'];
-    document.body.innerHTML += window.__html__['utils/event/ready.html'];
-    document.body.innerHTML += window.__html__['utils/event/resize-end.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/utils/event/emit.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/utils/event/off-event.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/utils/event/on-event.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/utils/event/ready.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/utils/event/resize-end.html'];
 
     var elEmit = document.getElementById('css-demo-event-emit');
     var elEmitCustom = document.getElementById('css-demo-event-emit-custom');

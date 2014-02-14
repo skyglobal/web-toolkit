@@ -174,7 +174,7 @@ module.exports = function(grunt) {
                     '_site/dist/stylesheets/*.css',
                     '_site/static/fonts/fonts.css',
                     {pattern: 'grunt/js/**/*.js', included: false},
-                    {pattern: 'test/specs/*-spec.js', included: false},
+                    {pattern: 'test/specs/accordion-spec.js', included: false},
                     {pattern: 'test/libraries/*.js', included: false},
                     {pattern: '_site/_includes/**/*.js', included: false},
                     {pattern: '_site/_includes/**/*.html', watched: false},
@@ -199,7 +199,7 @@ module.exports = function(grunt) {
                 reporters: 'dots'
             },
             run: {
-                browsers: ['PhantomJS', 'Chrome', 'Firefox'], //, 'Chrome', 'Firefox'
+                browsers: ['PhantomJS'], //, 'Chrome', 'Firefox'
                 singleRun: true
             },
             debug: {

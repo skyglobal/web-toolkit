@@ -2,7 +2,7 @@ function datePickerSpec(datePicker) {
 
     var describeSpec = 'Datepicker module';
 
-    document.body.innerHTML += window.__html__['components/form/default.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/components/form/default.html'];
 
     $('.date-picker').datePicker();
     $('.sky-form').validation();

@@ -6,7 +6,7 @@ function responsiveImagesSpec(responsiveImages, event) {
         event = toolkit.event;
     }
 
-    document.body.innerHTML += window.__html__['utils/responsive-images/using.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/utils/responsive-images/using.html'];
     responsiveImages.init(document.getElementById('demo-responsive-images'));
 
     describe(describeSpec, function () {

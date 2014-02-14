@@ -6,8 +6,8 @@ function toggleSpec(toggle) {
         toggle = toolkit.toggle;
     }
 
-    document.body.innerHTML += window.__html__['utils/toggle/closed-element.html'];
-    document.body.innerHTML += window.__html__['utils/toggle/open-element.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/utils/toggle/closed-element.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/utils/toggle/open-element.html'];
 
     $('#toggle-by-element-closed .toggle-link').on('click', function() {
         toggle({$elClicked:$(this)});

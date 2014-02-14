@@ -13,10 +13,10 @@ function detectSpec(detect) {
             deviceType: function (){}
         }
     };
-    document.body.innerHTML += window.__html__['utils/detect/css.html'];
-    document.body.innerHTML += window.__html__['utils/detect/orientation.html'];
-    document.body.innerHTML += window.__html__['utils/detect/touch.html'];
-    document.body.innerHTML += window.__html__['utils/detect/view.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/utils/detect/css.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/utils/detect/orientation.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/utils/detect/touch.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/utils/detect/view.html'];
 
     function updateDetectCSS(){
         var demoTransition = document.getElementById('css-demo-transition');

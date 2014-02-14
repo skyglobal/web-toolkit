@@ -7,9 +7,9 @@ function lightboxSpec(lightbox, focus, hash) {
         hash = toolkit.hashManager;
     }
 
-    document.body.innerHTML += window.__html__['components/lightbox/ajax.html'];
-    document.body.innerHTML += window.__html__['components/lightbox/default.html'];
-    document.body.innerHTML += window.__html__['components/lightbox/small.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/components/lightbox/ajax.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/components/lightbox/default.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/components/lightbox/small.html'];
 
     $('.ajax-lightbox').lightbox({closeButtonColour: 'black'});
     $('#lightbox-demo-link').lightbox();

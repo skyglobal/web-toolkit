@@ -2,7 +2,7 @@ function accordionSpec() {
 
     var describeSpec = 'Accordion module should';
 
-    document.body.innerHTML += window.__html__['components/accordion/default.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/components/accordion/default.html'];
     $('.accordion').accordion();
 
     describe(describeSpec, function () {

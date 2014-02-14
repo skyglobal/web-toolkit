@@ -2,7 +2,7 @@ function tooltipSpec(tooltip) {
 
     var describeSpec = 'Tooltip shows and disappears';
 
-    document.body.innerHTML += window.__html__['components/tooltip/default.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/components/tooltip/default.html'];
 
     describe(describeSpec, function () {
 

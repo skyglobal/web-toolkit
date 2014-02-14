@@ -54,5 +54,9 @@ requirejs.config({
     deps: tests,
 
     // start test run, once Require.js is done loading specs and everything
-    callback: window.__karma__.start
+    callback: function(){
+        setTimeout(function(){
+            window.__karma__.start();
+        },1500);
+    }
 });

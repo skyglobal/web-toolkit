@@ -6,7 +6,7 @@ function hashManagerSpec(hashManager) {
         hashManager = toolkit.hashManager;
     }
 
-    document.body.innerHTML += window.__html__['utils/hash-manager/default.html'];
+    document.body.innerHTML += window.__html__['_site/_includes/utils/hash-manager/default.html'];
 
     function myHashCallback() {
         $('#currentHash').text(location.hash);
