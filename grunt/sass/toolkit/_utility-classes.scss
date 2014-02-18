@@ -1,4 +1,4 @@
-@mixin ellipses {
+@mixin ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -89,7 +89,18 @@
   @include pointer($direction, $color, $size, true);
 }
 
-
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+a{
+  text-decoration:none;
+}
+a:hover{
+  text-decoration:underline;
+}
 
 //visibility classses
 body .visible-touch,
@@ -108,7 +119,7 @@ body .visible{
   border: 0;
 }
 .ellipsis{
-  @include ellipses;
+  @include ellipsis;
 }
 .clearfix{
   @include clearfix;
@@ -160,7 +171,7 @@ html{
     @include sticky;
   }
   .ellipsis-desktop {
-    @include ellipses;
+    @include ellipsis;
   }
   .speak-desktop{
     @include speak;
@@ -178,7 +189,7 @@ html{
     @include sticky;
   }
   .ellipsis-mobile {
-    @include ellipses;
+    @include ellipsis;
   }
   .speak-mobile{
     @include speak;

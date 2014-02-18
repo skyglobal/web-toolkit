@@ -1,12 +1,7 @@
-Web Toolkit
+[Web Toolkit](http://skyglobal.github.io/web-toolkit/) [![Build Status](https://circleci.com/gh/skyglobal/web-toolkit.png?circle-token=24eeba25d7352dec038ea9fa25b22671ba28be5e)](https://circleci.com/gh/skyglobal/web-toolkit) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 ========================
-[![Build Status](https://circleci.com/gh/skyglobal/web-toolkit.png?circle-token=24eeba25d7352dec038ea9fa25b22671ba28be5e)](https://circleci.com/gh/skyglobal/web-toolkit)
 
-Look and feel for sky.com
-
-Soon you will find an exciting and wonderful array of widgets that can be inserted directly into your site!
-
-See the [reference page](http://skyglobal.github.io/web-toolkit/) for a description of each component.
+> Sky branded front end web framework and style guide.
 
 
 ## Building the Toolkit locally
@@ -17,84 +12,114 @@ See the [reference page](http://skyglobal.github.io/web-toolkit/) for a descript
 - npm
 
 ### Setup
-1. Fork the repository from Github onto your local machine
-2. Install npm
-  - echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bashrc
-  - . ~/.bashrc
-  - mkdir /usr/local
-  - mkdir ~/node-latest-install
-  - cd ~/node-latest-install
-  - curl http://nodejs.org/dist/node-latest.tar.gz | tar xz --strip-components=1
-  - ./configure --prefix=/usr/local
-  - make install # ok, fine, this step probably takes more than 30 seconds...
-  - curl https://npmjs.org/install.sh | sh
-3. Install grunt either globally, or run the following to use the bundled project grunt
-  - npm install
-
-### Code structure
-- grunt/
-  Dev area - get stuck into css and js here
-
-- dist/
-  Compiled code (via grunt)
-
-- _includes/
-  Source documentation for using the toolkit.
-
-- _site/
-  Compiled documentation (via jekyll) for using the API.
-
-- test/
-  the unit tests for the toolkit
-
-- circle.yml
-  Configuration for the CI server
-
-- Gruntfile.js
-  Configuration for grunt tasks - to do with compiling the javascript
-
-### Testing
-These tests are automatically run on the CircleCI server upon pushing to Github
-  - `grunt test` for unit (using [mocha](http://visionmedia.github.io/mocha/) and [chai](http://chaijs.com/‎))
-
-*Please note: jQuery 'show' and 'hide' dont work well, please add and remove the class 'hidden' instead.*
+1. Fork the web-toolkit repository from this skyglobal user into your own user area (fork button, top right)
+2. clone your new repo onto your local machine (get the clone url from the right menu also)
+  - `git clone [CLONE-URL]`
+  - `git remote add upstream https://github.com/skyglobal/web-toolkit.git`
+3. Install npm on your achine
+  - `echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bashrc`
+  - `. ~/.bashrc`
+  - `mkdir /usr/local`
+  - `mkdir ~/node-latest-install`
+  - `cd ~/node-latest-install`
+  - `curl http://nodejs.org/dist/node-latest.tar.gz | tar xz --strip-components=1`
+  - `./configure --prefix=/usr/local`
+  - `make install`
+  - `curl https://npmjs.org/install.sh | sh`
+4. Install grunt either globally, or run the following to use the bundled project grunt
+  - `npm install`
+5. Install the require gems using Bundler
+  - `bundle install`
 
 ### Running
 
+Grunt is our friend here, he will take of reloading the jekyll project whenever a file is edited.
+
 1. In the root of the project, run the following:
-  - bundle
-  - jekyll serve --watch
+  - `jekyll serve`
 2. In another terminal run:
-  - grunt watch (add '--beautify' to help when debugging)
+  - `grunt spy` (add ` --beautify` to help when debugging)
 3. Browse to
-  - http://localhost:4000
+  - `http://localhost:4000`
+
+## Contributing 
+
+###Building A New/Updated Feature
+  - Write code in a new branch.
+  - Before you start a feature, ensure your code is up to date. Run:
+    - `git pull upstream master`
+  - Write tests as you go
+  - Refactor so the code is self documenting
+  - If you would like the feature to go live sooner, mention this in the comments/commit.  We will provide a temporary live url that will allow you to carry on without getting blocked.
+
+### Testing
+  - Tests are automatically run on the CircleCI server upon pushing to Github.
+  - `grunt test` for unit (using [mocha](http://visionmedia.github.io/mocha/) and [chai](http://chaijs.com/‎))
+  - Tests include code coverage, please keep this above 80%
+  - Code coverage does not work on 'beautified' code.
+
+###Committing
+
+Before you submit your pull request, run :
+  - `git pull upstream master` to ensure your code is up to date and merged correctly
+  - `grunt test-cross-browser`. You will need to set up a [Browser Stack](http://www.browserstack.com) account.
 
 
-### Contributing 
+## Code structure
 
-####Fork the repository
-  - Using `git` you should fork a version of the toolkit (using github). Clone the fork locally ready to build your new/upgraded feature.
-  `git clone` _italic_ clone url _italic_
+    $ tree
+    .
+    ├── _includes       => Source code for the toolkit documentation. Your demo html goes here
+    │   └── allIncludes.html => a single file referencing all includes. used for demo and test page
+    ├── _layouts        => layout for the index and test html pages
+    ├── _site           => content generated by Jekyll
+    ├── dist            => content generated by Grunt
+    ├── grunt           => dev area for source code. get stuck in
+    │   ├── fonts       => templates used to generate the font icons (skycons)
+    │   ├── icons       => icons that are multi coloured and used within scss for spriting (not yet converted to svg's)
+    │   ├── js          => place for source JS files
+    │   ├── sass        => place for source SCSS files
+    │   └── svgs        => retina ready multi-coloured icons.
+    ├── node_modules    => npm plugins
+    ├── static          => home of the unchanging and non-generated code
+    │   ├── deprecated  => code moved from the masthead project
+    │   ├── font-svgs   => src svg files used to generate font icons (skycons)
+    │   ├── fonts       => Sky Text Fonts
+    │   ├── images      => images not for spriting
+    │   └── lib         => untouched third-party files
+    ├── test
+    │   ├── libararies  => Third-party src files for testing
+    │   ├── specs       => place for *-spec.js files
+    │   ├── config.js   => RequireJS and Mocha config file
+    │   └── runner.js   => explitly call each spec file for `grunt test` to run
+    ├── wiki-images     => images used for demos in the wiki
+    ├── config.yml      => Jekyll config file
+    ├── changes.html    => Page for users to see changes between toolkit version
+    ├── circle.yml      => CircleCI config file
+    ├── gemfile
+    ├── gruntfile.js    => grunt config file
+    ├── index.html      => Main demo page
+    ├── package.json    => NodeJS config file
+    ├── rakefile        => build script
+    ├── test.html       => used by `grunt test` to run all tests at once
+    └── README.md
     
-  - Dont forget to set the upstream using:
-  `git remote add upstream https://github.com/skyglobal/web-toolkit.git`
-    
-####Building A New/Updated Feature
-  - It is best to code in a new branch allowing you to commit multiple branches/features without having a dependency on the previous request.
-    
-  - Before you start a feature you should ensure your code is up to date by running:
-  `git pull upstream master`
-
-####Committing
-  - Before you submit your pull request ensure your code is up to date and merged by running:
-  `git pull upstream master`
-
-
-### Deployment
+## Deployments
 To release a new version with:
-  - Code changes -  increment the version number (described below) in _config.yml. This will update gh-pages and the S3.
-  - Documentation changes - Dont increment the version number. This will update gh-pages branch only.
-  - Release Candidate changes - Add 'rc' to the end of the version number e.g. '1.0.1rc2'. this will update the S3 only
+  - Code changes
+    -  increment the version number (described below) in _config.yml.
+    - This will update gh-pages and the S3.
+  - Documentation changes
+    - Don't increment the version number.
+    - This will update gh-pages branch only.
+  - Release Candidate changes
+    - Ensure that the code is committed in a branch that starts with `rc-xxx111`. Where xxx is feature and 111 is the version number
+    - Add '-rc' to the end of the version number e.g. `1.0.1-rc2`.
+    - This will update the S3 only.
+  - Feature releases
+    - Ensure that the code is committed in a branch that starts with `feature-xxx`. Where xxx is feature.
+    - Add '-feature-xxx' to the end of the version number e.g. '1.0.1-feature-fancy-carousel'.
+    - This will update the S3 only
 
 #### Versioning
 This library should follow the [Semantic versioning specification](http://semver.org/).
@@ -112,7 +137,7 @@ Version: X.Y.Z(-rc)?
 - **Patches or bug fixes** that are backwards compatible should increment the
   Z value.
 
-- rc Represents 'release candidates'.  This is to create a public available url for testing purposes.
+- -rc Represents 'release candidates'.  This is to create a public available url for testing purposes.
 
 Upon commiting and pushing your code to Github, the CI server will run through
 the functional tests and - if there are no errors - a new version of the library

@@ -2,15 +2,10 @@
 layout: test
 title: Sky Web Toolkit
 ---
-
-<h1 class="demo-header section-title clearfix">
-    <img src="static/images/sky-logo.png" alt="" height="52" width="82">
-    <span>Toolkit</span>
-</h1>
-
-{% include allIncludes.html %}
-
-<div id="mocha"></div>
-<script type="text/javascript">
-    require(['runner']);
+<script src="test/libraries/blanket.js" data-cover-flags="branchTracking" data-cover-only="toolkit.js"></script>
+<script>
+    if (window.PHANTOMJS) {
+        blanket.options("reporter", "test/libraries/grunt-reporter.js");
+    }
 </script>
+{% include allIncludes.html %}

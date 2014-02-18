@@ -18,7 +18,19 @@ def version_already_exists?
 end
 
 def version_is_release_candidate?
-  latest_version_number.include? 'rc'
+  latest_version_number.include? '-rc'
+end
+
+def is_feature_branch?
+  branchName.include? 'feature'
+end
+
+def is_feature_version?
+  latest_version_number.include? 'feature'
+end
+
+def branchName
+  `git branch | sed -n '/\* /s///p'`
 end
 
 
@@ -28,7 +40,7 @@ end
 
 def assets_to_upload
   ["stylesheets/toolkit.css",
-    "fonts/skycons.css", "fonts/skycons.eot", "fonts/skycons.svg", "fonts/skycons.ttf",
+    "fonts/skycons.css", "fonts/skycons.eot", "fonts/skycons.ttf",
     "scripts/toolkit.js",
     "images/icon.png"]
 end
@@ -72,16 +84,17 @@ def emptyGitCache
 end
 
 def tagBuild
-  puts "*** Tagging Version #{latest_version_number} ***"
 
-  system "git config user.email 'circleci@bskyb.com'"
-  system "git config user.name 'CircleCI'"
+  puts "*** Tagging Version #{latest_version_number} ***"
+  `git config --global user.email "dl-skycom@bskyb.com"`
+  `git config --global user.name "Rake file"`
   system "git tag -a v#{latest_version_number} -m \"Rake deploy: auto tag on #{getDate}\""
   system "git push origin master v#{latest_version_number}"
 end
 
 def pushToAmazonS3
   puts "*** Pushing to the AmazonS3 ***"
+  system "grunt"
   doc_resources = []
   puts 'Uploading assets'
   cd "dist"
@@ -99,51 +112,96 @@ def pushToAmazonS3
   end
 end
 
-def pushToAmazonS3LatestDir
-  puts "*** Pushing to the AmazonS3 Latest Dir ***"
-  doc_resources = []
-  puts 'Uploading assets'
-  cd "dist"
-  assets_to_upload.each do |file|
-    doc_resources << bucket.objects["latest/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
-  end
-  cd ".."
-  puts 'Uploading template files'
-  templates_to_upload.each do |file|
-    doc_resources << bucket.objects["latest/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
-  end
+
+
+
+def fetchGHPages
+  puts "*** Fecthing GH Pages ***"
+  `git fetch origin gh-pages`
+  `git checkout gh-pages`
+  `git pull origin gh-pages`
+  `git rebase master`
 end
 
-def buildDistributionFiles
-  puts "*** Grunting Distribution files ***"
-  system "grunt"
-  system "jekyll build"
+def updateGHPages
+  puts "*** Pushing to github.io ***"
+  system "git checkout gh-pages"
+  system "git push origin master:gh-pages"
+  system "git checkout master"
+end
+
+
+def updateBranch branch
+  puts "*** push branch: #{branch} ***"
+  system "git push origin HEAD:" + branch
 end
 
 def getDate
   `date +'%d-%m-%Y'`
 end
 
-desc 'Removes previously cached directories that were in git but are now in .gitIgnore'
-task :emptyGitCache do
-  emptyGitCache
-end
 
-desc 'Deploys a new version to the CDN'
+desc 'Deploys a new version to the CDN and skyglobal.github.io/web-toolkit'
 task :deploy do
+
+
+  if is_feature_version?
+    puts "*** version is a feature '#{latest_version_number}'.  Please commit in a feature branch. ***"
+    fail
+  end
+  if version_is_release_candidate?
+    puts "*** version is a Release Candidate '#{latest_version_number}'.  Please commit in a -rc branch. ***"
+    fail
+  end
 
   if version_already_exists?
     puts "Version #{latest_version_number} exists so exiting."
     next
   end
 
-  buildDistributionFiles
+  pushToAmazonS3
+  fetchGHPages
+  updateGHPages
+  tagBuild
+end
+
+
+
+desc 'Deploys a new feature to the CDN'
+task :deploy_feature do
+
+  if !is_feature_version?
+    puts "*** version is not a feature '#{latest_version_number}' ***"
+    fail
+  end
+
+  updateBranch branchName
+
+  if version_already_exists?
+    puts "Version #{latest_version_number} exists so exiting."
+    next
+  end
 
   pushToAmazonS3
 
+end
+
+
+desc 'Deploys a release candidate to the CDN'
+task :deploy_rc do
+
   if !version_is_release_candidate?
-    pushToAmazonS3LatestDir
-    tagBuild
+    puts "*** version is not a Release Candidate '#{latest_version_number}' ***"
+    fail
   end
+
+  updateBranch branchName
+
+  if version_already_exists?
+    puts "Version #{latest_version_number} exists so exiting."
+    next
+  end
+
+  pushToAmazonS3
 
 end

@@ -1,6 +1,6 @@
 {
     "name": "grunt-for-toolkit",
-    "version": "1.0.3",
+    "version": "1.0.6",
 	"repository" : {
         "type": "git",
         "url": "https://github.com/skyglobal/web-toolkit.git"
@@ -8,19 +8,20 @@
     "devDependencies": {
 		"grunt": "latest"
 	    ,"grunt-contrib-jshint": "latest"
-	    ,"grunt-contrib-nodeunit": "latest"
 	    ,"grunt-contrib-uglify": "latest"
 	    ,"grunt-contrib-clean": "latest"
 	    ,"grunt-contrib-compass": "latest"
 	    ,"grunt-contrib-requirejs": "latest"
 	    ,"grunt-contrib-watch": "latest"
+	    ,"grunt-contrib-connect": "latest"
+	    ,"grunt-exec": "latest"
 	    ,"grunt-mocha": "latest"
-	    ,"grunt-webfont": "latest"
+	    ,"grunt-blanket-mocha": "latest"
+	    ,"grunt-webfont": "0.2.2"
 	    ,"grunt-svgmin": "latest"
 	    ,"grunt-grunticon": "latest"
-    },
-    "scripts": {
-        "test": "grunt test"
+	    ,"grunt-jekyll": "latest"
+        ,"browserstack-test": "latest"
     },
     "engines": {
         "node": "0.10.24"
