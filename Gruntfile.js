@@ -8,6 +8,8 @@ module.exports = function(grunt) {
         type: String
     };
 
+    require('time-grunt')(grunt);
+
     require('load-grunt-config')(grunt, {
         init: true, //auto grunt.initConfig
         config: { //additional config vars
