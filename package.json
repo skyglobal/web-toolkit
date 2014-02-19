@@ -7,6 +7,7 @@
     },
     "devDependencies": {
 		"grunt": "latest"
+	    ,"load-grunt-config": "latest"
 	    ,"grunt-contrib-jshint": "latest"
 	    ,"grunt-contrib-uglify": "latest"
 	    ,"grunt-contrib-clean": "latest"
