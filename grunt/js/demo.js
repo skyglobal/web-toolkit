@@ -1,5 +1,5 @@
 if (typeof demo==='undefined') demo={};
-demo.main = (function(DisplayCode,ss, menu, tests, skycons, hash, inPageNav) {
+demo.main = (function(DisplayCode,ss, menu, tests, skycons, hash) {
 
     function bindEvents() {
         hash.register('code/*',showCode);
@@ -54,10 +54,9 @@ if (typeof window.define === "function" && window.define.amd){
         'demo/menu',
         'demo/tests',
         'demo/skycons',
-        'utils/hash-manager',
-        'components/in-page-nav'], function(displayCode, scrollspy, menu, tests, skycons, hashManager, inPageNav) {
-        return demo.main(displayCode, scrollspy, menu, tests, skycons, hashManager, inPageNav);
+        'utils/hash-manager'], function(displayCode, scrollspy, menu, tests, skycons, hashManager) {
+        return demo.main(displayCode, scrollspy, menu, tests, skycons, hashManager);
     });
 } else {
-    demo.main(demo.displayCode, scrollspy, demo.menu, demo.tests, demo.skycons, toolkit.hashManager, toolkit.inPageNav);
+    demo.main(demo.displayCode, scrollspy, demo.menu, demo.tests, demo.skycons, toolkit.hashManager);
 }
