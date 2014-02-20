@@ -2852,15 +2852,14 @@ toolkit.hashManager.register(['hash', 'anotherHash', 'wildcard/*'], myHashCallba
 
 
 
-        </div>
-    </div>
-    <script>
-        require(
+<script>
+    require(
             {   baseUrl:'dist/scripts',
-                paths: {suite: '../../test/suite',
-                        specs: '../../test/specs'}
+                paths: {
+                    suite: '../../test/suite',
+                    specs: '../../test/specs'}
             },
-            ["toolkit"],
+            ["toolkit.min"],
             function(main) {
                 require(["suite"], function(TestLoader) {
                     setTimeout(function(){
@@ -2868,7 +2867,9 @@ toolkit.hashManager.register(['hash', 'anotherHash', 'wildcard/*'], myHashCallba
                     },2000); //wait for blanket
                 });
             }
-        );
-    </script>
+    );
+</script>
+        </div>
+    </div>
 </body>
 </html>
