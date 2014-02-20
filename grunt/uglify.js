@@ -6,11 +6,6 @@ module.exports = function(grunt){
                 grunt.template.today("yyyy-mm-dd") + ' */\n'
         },
         min: {
-            options:{
-                beautify: true,
-                mangle: false,
-                compress: false
-            },
             files: {
                 'dist/scripts/toolkit.min.js': ['dist/scripts/toolkit.js']
             }
