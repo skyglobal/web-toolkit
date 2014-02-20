@@ -36,11 +36,7 @@
 Grunt is our friend here, he will take of reloading the jekyll project whenever a file is edited.
 
 1. In the root of the project, run the following:
-  - `jekyll serve`
-2. In another terminal run:
-  - `grunt spy` (add ` --beautify` to help when debugging)
-3. Browse to
-  - `http://localhost:4000`
+  - `grunt server` (add ` --beautify` to help when debugging)
 
 ## Contributing 
 
@@ -54,9 +50,11 @@ Grunt is our friend here, he will take of reloading the jekyll project whenever 
 
 ### Testing
   - Tests are automatically run on the CircleCI server upon pushing to Github.
-  - `grunt test` for unit (using [mocha](http://visionmedia.github.io/mocha/) and [chai](http://chaijs.com/‎))
-  - Tests include code coverage, please keep this above 80%
-  - Code coverage does not work on 'beautified' code.
+  - Two sets of tests are run:
+    - first run is on production ready 'minified' code
+    - second run on 'beautified' code with code coverage reporting, please keep this above 80%
+  - Run `grunt test` for unit (using [mocha](http://visionmedia.github.io/mocha/) and [chai](http://chaijs.com/‎))
+
 
 ###Committing
 
