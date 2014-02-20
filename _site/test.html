@@ -2854,13 +2854,13 @@ toolkit.hashManager.register(['hash', 'anotherHash', 'wildcard/*'], myHashCallba
     </section>
 
 
-        </div>
-    </div>
-    <script>
-        require(
+
+<script>
+    require(
             {   baseUrl:'dist/scripts',
-                paths: {suite: '../../test/suite',
-                        specs: '../../test/specs'}
+                paths: {
+                    suite: '../../test/suite',
+                    specs: '../../test/specs'}
             },
             ["toolkit"],
             function(main) {
@@ -2870,7 +2870,9 @@ toolkit.hashManager.register(['hash', 'anotherHash', 'wildcard/*'], myHashCallba
                     },2000); //wait for blanket
                 });
             }
-        );
-    </script>
+    );
+</script>
+        </div>
+    </div>
 </body>
 </html>
