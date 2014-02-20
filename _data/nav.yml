@@ -175,11 +175,20 @@ Utils:
       - example : Default
         js_file : true
   Libraries :
-    design_notes : The toolkit provides static urls to a number of external libraries i.e jQuery + RequireJS.
+    design_notes : The toolkit provides static urls to a number of external libraries.
     examples :
-      - example : JQuery
+      - example : jQuery
+        title : jQuery
+        design_notes : You can include jQuery of different versions.
+        code_view_only : true
       - example : RequireJS
+        title : RequireJS
+        design_notes : You can include RequireJS.
+        code_view_ : true
       - example : Other
+        title : Other
+        design_notes : You can include RequireJS.
+        code_view_only : true
   Responsive Images :
     has_tests : true
     examples :
