@@ -104,6 +104,11 @@ Components :
         js_file : true
         design_notes : >
           This module should be used when only a small section of the page changes after an item click.
+      - example : Whole Page Nav
+        developer_notes_file : true
+        js_file : true
+        design_notes : >
+          This module should be used when the entire (or most of) the page changes after an item click.
   Lightbox :
     has_tests : true
     design_notes : >
