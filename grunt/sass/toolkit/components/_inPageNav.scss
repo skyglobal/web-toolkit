@@ -18,6 +18,7 @@
 
   position: absolute;
   right: 0;
+  top: 0;
   z-index:10;
 
   @include box-sizing(border-box);
@@ -28,7 +29,7 @@
     padding: 0 10px;
     text-decoration: none;
   }
-  > a {
+  .selector {
     font-family: $font-family-medium;
     font-size:32px;
     line-height: 31px;
@@ -41,6 +42,8 @@
     border:1px solid transparent;
     border-top:0;
     color:$secondary;
+
+    cursor: pointer;
 
     @include box-sizing(border-box);
 
@@ -76,6 +79,10 @@
       color:$link;
       cursor: pointer;
       float:none;
+    }
+
+    &.dropped {
+      display: none;
     }
   }
 }
@@ -117,10 +124,21 @@
         color:$link;
       }
     }
+    &.dropped,
+    &.dropped-during-interaction {
+      width: 0;
+      padding-right: 0;
+
+      &.given-focus {
+        width: auto;
+        padding-right: 30px;
+      }
+    }
+
     &.selected {
       height: 45px;
 
-      a{
+      a {
         font-family: $font-family-medium;
         border-bottom: 2px solid #0073c5;
       }
