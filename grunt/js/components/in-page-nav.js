@@ -17,7 +17,6 @@ toolkit.inPageNav = (function(hash, event) {
         this.$moreTabsContainer = $element.find('.dropdown-tab-select');
         this.$moreTabsLink = $element.find('.more-tabs');
         this.numberOfTabsToShow = 0;
-
         this.saveTabOrder();
         this.bindEvents();
         this.initTabs();
@@ -39,9 +38,12 @@ toolkit.inPageNav = (function(hash, event) {
         },
 
         getHashList: function() {
-            var arrHash = [];
+            var arrHash = [], hash;
             this.$tabs.each(function(){
-                arrHash.push($(this).attr('aria-controls'));
+                hash=this.getAttribute('aria-controls');
+                if(hash) {
+                    arrHash.push(hash);
+                }
             });
             return arrHash;
         },
@@ -55,7 +57,7 @@ toolkit.inPageNav = (function(hash, event) {
         initTabs: function(){
             this.moveTabsToList();
             this.moveTabsToDropdown();
-            if (!this.$tabTargets.filter('.selected').length){
+            if (this.$tabTargets.size() > 0 && !this.$tabTargets.filter('.selected').length){
                 this.changeTab(this.$tabTargets.first()[0].id);
             }
         },
