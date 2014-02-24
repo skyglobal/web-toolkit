@@ -11,7 +11,6 @@ toolkit.inPageNav = (function(hash, event) {
 
     function InPageNav($element){
         this.$tabContainer = $element;
-        this.$tabList = $element.find('ul.tabs');
         this.$tabs = $element.find('li[role=tab]');
         this.$tabTargets = $element.find('div[role=tabpanel]');
         this.$showMore = $element.find('.dropdown-tab-select .selector');
@@ -35,7 +34,6 @@ toolkit.inPageNav = (function(hash, event) {
         },
 
         bindEvents: function(){
-
             var self = this;
             hash.register(this.getHashList(), this.changeTab.bind(self));
 

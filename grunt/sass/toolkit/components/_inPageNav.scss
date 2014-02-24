@@ -18,7 +18,7 @@
 
   position: absolute;
   right: 0;
-  top: 0;
+  top: 1px;
   z-index:10;
 
   @include box-sizing(border-box);
