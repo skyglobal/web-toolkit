@@ -21,16 +21,25 @@ toolkit.inPageNav = (function(hash, event) {
 
         this.tabSizes = {};
 
-        this.saveTabOrder();
+        this.getTabSizes();
         this.bindEvents();
         this.initTabs();
     }
 
     InPageNav.prototype = {
-        bindEvents : function(){
+        getTabSizes: function(){
+            var self = this;
+            this.$tabs.each(function(){
+                self.tabSizes[this.id] = $(this).outerWidth(true);
+            });
+        },
+
+        bindEvents: function(){
+
             var self = this;
             hash.register(this.getHashList(), this.changeTab.bind(self));
-            this.$tabs.on('click', function(e){
+
+            this.$tabs.on('click', function(){
                 self.changeTab($(this).find('a').attr('href'));
             });
 
@@ -38,32 +47,43 @@ toolkit.inPageNav = (function(hash, event) {
                 var target = $(this).closest('li');
 
                 if (target.hasClass('dropped')) {
-                    var widthNeeded = self.tabSizes[target.attr('id')];
-                    var widthGained = 0;
-
-                    $.each(self.tabSizes,function(i,n) {
-                        widthGained += n;
-
-                        self.$tabs.filter('#'+i).addClass('dropped-during-interaction');
-
-                        if (widthGained >= widthNeeded)  {
-                            return false;
-                        }
-                    });
+                    self.dropTabsDuringInteraction(target.attr('id'));
                 }
                 target.addClass('given-focus');
 
             }).on('blur', function() {
                 $(this).closest('li').removeClass('given-focus');
                 self.$tabs.filter('.dropped-during-interaction').removeClass('dropped-during-interaction');
+
+                if(self.$tabs.filter('.selected.dropped').length) {
+                    self.dropTabsDuringInteraction(self.$tabs.filter('.selected.dropped').attr('id'));
+                }
             });
 
             this.$showMore.on('click', function(e){
                 e.preventDefault();
                 self.toggleShowMore();
             });
+
             $('body').on('click', this.hideMore.bind(self));
-            event.on(window,'resizeend',  this.initTabs.bind(self));
+
+            event.on(window,'resizeend', this.initTabs.bind(self));
+        },
+
+        initTabs: function(){
+            this.numberOfTabsToShow = this.getNumberOfTabsToShow();
+
+            console.log(this.$tabs.length);
+            console.log(this.numberOfTabsToShow);
+
+            if(this.$tabs.length > this.numberOfTabsToShow) {
+                this.replicateTabsForDropdown();
+                this.setTabVisibility();
+            }
+
+            if (!this.$tabTargets.filter('.selected').length){
+                this.changeTab(this.$tabTargets.first()[0].id);
+            }
         },
 
         getHashList: function() {
@@ -77,36 +97,23 @@ toolkit.inPageNav = (function(hash, event) {
             return arrHash;
         },
 
-        saveTabOrder: function(){
-            var self = this;
-            this.$tabs.each(function(i){
-
-                self.tabSizes[this.id] = $(this).outerWidth(true);
-
-                $(this).attr('data-position', i);
-            });
-
-            console.log(this.tabSizes);
-        },
-
-        initTabs: function(){
-            this.numberOfTabsToShow = this.getNumberOfTabsToShow();
-            this.replicateTabsForDropdown();
-
-            this.setTabVisibility();
-
-//            if (!this.$tabTargets.filter('.selected').length){
-//                this.changeTab(this.$tabTargets.first()[0].id);
-//            }
-        },
-
         changeTab: function(controlId){
             controlId = controlId.replace('#!','');
-            var $thisTab = $("#" + controlId.replace('-tab-contents','') + "-tab"),
-                $thisTabTarget = $("#" + controlId);
+
+            var $thisTab = $("#" + controlId.replace('-tab-contents','') + "-tab");
+            var $thisTabTarget = $("#" + controlId);
+
+            this.$tabs.filter('.dropped-during-interaction').removeClass('dropped-during-interaction');
             this.$tabTargets.add(this.$tabs).removeClass("selected");
+
+            console.log(controlId);
+
             $thisTab.add($thisTabTarget).addClass('selected');
-            this.initTabs();
+
+            if ($thisTab.hasClass('dropped')) {
+                this.dropTabsDuringInteraction(controlId+"-tab");
+            }
+
         },
 
         hideMore: function(e){
@@ -122,39 +129,51 @@ toolkit.inPageNav = (function(hash, event) {
         getNumberOfTabsToShow: function() {
             var containerWidth = this.$tabContainer.outerWidth(true) -
                     this.$moreTabsContainer.show().outerWidth(true) -
-                    this.$tabs.filter('.selected').outerWidth(true),
-                totalWidth = 0,
-                numberOfTabs = 0;
-            this.$tabs.not('.selected').attr('style','float:left').each(function () {
-                totalWidth += ($(this).outerWidth(true));
-                if (totalWidth > containerWidth) { return ; }
+                    this.$tabs.filter('.selected').outerWidth(true);
+            var totalWidth = 0;
+            var numberOfTabs = 0;
+
+            $.each(this.tabSizes,function(i,n) {
+                totalWidth += n;
+
+                if (totalWidth > containerWidth) {
+                    return false;
+                }
+
                 numberOfTabs++;
             });
+
             this.$tabs.add(this.$moreTabsContainer).removeAttr('style');
+
             return numberOfTabs;
         },
 
         replicateTabsForDropdown: function() {
-          this.$moreTabsLink.append(this.$tabs.clone(true));
+          this.$moreTabsLink.empty().append(this.$tabs.clone(true));
           this.$moreTabsContainer.show();
         },
 
         setTabVisibility: function() {
           this.$tabList.find('li:gt('+this.numberOfTabsToShow+')').addClass('dropped');
           this.$moreTabsLink.find('li:lt('+(this.numberOfTabsToShow+1)+')').addClass('dropped');
+        },
+
+        dropTabsDuringInteraction: function(id) {
+            var self = this;
+            var widthNeeded = self.tabSizes[id];
+            var widthGained = 0;
+
+            $.each(self.tabSizes,function(i,n) {
+                widthGained += n;
+
+                self.$tabs.filter('#'+i).addClass('dropped-during-interaction');
+
+                if (widthGained >= widthNeeded)  {
+                    return false;
+                }
+            });
         }
     };
-
-    function sortTabs($el) {
-        var list = [];
-        $el.find('li').each(function () {
-            list.push($(this).attr('data-position'));
-        });
-        list.sort();
-        $.each(list, function () {
-            $el.find('li[data-position="'+this+'"]').appendTo($el);
-        });
-    }
 
     $.fn.inPageNav = function() {
         return this.each(function() {
