@@ -138,6 +138,9 @@
     &.selected {
       height: 45px;
 
+      width: auto;
+      padding-right: 30px;
+
       a {
         font-family: $font-family-medium;
         border-bottom: 2px solid #0073c5;
