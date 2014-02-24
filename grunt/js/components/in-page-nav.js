@@ -39,10 +39,6 @@ toolkit.inPageNav = (function(hash, event) {
             var self = this;
             hash.register(this.getHashList(), this.changeTab.bind(self));
 
-            this.$tabs.on('click', function(){
-                self.changeTab($(this).find('a').attr('href'));
-            });
-
             this.$tabs.find('a').on('focus', function() {
                 var target = $(this).closest('li');
 
@@ -106,14 +102,12 @@ toolkit.inPageNav = (function(hash, event) {
             this.$tabs.filter('.dropped-during-interaction').removeClass('dropped-during-interaction');
             this.$tabTargets.add(this.$tabs).removeClass("selected");
 
-            console.log(controlId);
-
             $thisTab.add($thisTabTarget).addClass('selected');
 
             if ($thisTab.hasClass('dropped')) {
-                this.dropTabsDuringInteraction(controlId+"-tab");
+                this.numberOfTabsToShow = this.getNumberOfTabsToShow();
+                this.setTabVisibility();
             }
-
         },
 
         hideMore: function(e){
@@ -154,8 +148,10 @@ toolkit.inPageNav = (function(hash, event) {
         },
 
         setTabVisibility: function() {
-          this.$tabList.find('li:gt('+this.numberOfTabsToShow+')').addClass('dropped');
-          this.$moreTabsLink.find('li:lt('+(this.numberOfTabsToShow+1)+')').addClass('dropped');
+          this.$tabs.filter('.dropped').removeClass('dropped');
+
+          this.$tabs.filter(':gt('+(this.numberOfTabsToShow-1)+')').addClass('dropped');
+          this.$moreTabsLink.find('li:lt('+(this.numberOfTabsToShow)+')').addClass('dropped');
         },
 
         dropTabsDuringInteraction: function(id) {
