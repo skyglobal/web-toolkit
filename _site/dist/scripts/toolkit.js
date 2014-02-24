@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.1.4 - 2014-02-20 */
+/*! web-toolkit - v2.1.4 - 2014-02-24 */
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
@@ -751,9 +751,12 @@ toolkit.inPageNav = function(hash, event) {
             event.on(window, "resizeend", this.initTabs.bind(self));
         },
         getHashList: function() {
-            var arrHash = [];
+            var arrHash = [], hash;
             this.$tabs.each(function() {
-                arrHash.push($(this).attr("aria-controls"));
+                hash = this.getAttribute("aria-controls");
+                if (hash) {
+                    arrHash.push(hash);
+                }
             });
             return arrHash;
         },
@@ -765,7 +768,7 @@ toolkit.inPageNav = function(hash, event) {
         initTabs: function() {
             this.moveTabsToList();
             this.moveTabsToDropdown();
-            if (!this.$tabTargets.filter(".selected").length) {
+            if (this.$tabTargets.size() > 0 && !this.$tabTargets.filter(".selected").length) {
                 this.changeTab(this.$tabTargets.first()[0].id);
             }
         },
