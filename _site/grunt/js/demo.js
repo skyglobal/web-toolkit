@@ -1,5 +1,5 @@
 if (typeof demo==='undefined') demo={};
-demo.main = (function(DisplayCode,ss, menu, tests, skycons, hash, inPageNav) {
+demo.main = (function(DisplayCode,ss, menu, tests, skycons, hash) {
 
     function bindEvents() {
         hash.register('code/*',showCode);
@@ -20,8 +20,13 @@ demo.main = (function(DisplayCode,ss, menu, tests, skycons, hash, inPageNav) {
             dir = '../_includes';
         }
         var featureFiles, codeBase, route;
-        featureFiles = $('a[href*="#' + feature + '"]').attr('data-diff-demos').trim();
-        codeBase = $('a[href*="#' + feature + '"]').attr('data-diff').trim();
+        var $tag = $('a[href*="#' + feature + '"]');
+        if (!$tag.length) {
+            // probably using-the-toolkit's special case
+            $tag = $lightboxLink;
+        }
+        featureFiles = $tag.attr('data-diff-demos').trim();
+        codeBase = $tag.attr('data-diff').trim();
         route = host + '/' + version + '/' + dir + '/' + codeBase;
         new DisplayCode({
             header: $lightboxLink.parent().text().replace($lightboxLink.text(),'').trim(),
@@ -54,10 +59,9 @@ if (typeof window.define === "function" && window.define.amd){
         'demo/menu',
         'demo/tests',
         'demo/skycons',
-        'utils/hash-manager',
-        'components/in-page-nav'], function(displayCode, scrollspy, menu, tests, skycons, hashManager, inPageNav) {
-        return demo.main(displayCode, scrollspy, menu, tests, skycons, hashManager, inPageNav);
+        'utils/hash-manager'], function(displayCode, scrollspy, menu, tests, skycons, hashManager) {
+        return demo.main(displayCode, scrollspy, menu, tests, skycons, hashManager);
     });
 } else {
-    demo.main(demo.displayCode, scrollspy, demo.menu, demo.tests, demo.skycons, toolkit.hashManager, toolkit.inPageNav);
+    demo.main(demo.displayCode, scrollspy, demo.menu, demo.tests, demo.skycons, toolkit.hashManager);
 }

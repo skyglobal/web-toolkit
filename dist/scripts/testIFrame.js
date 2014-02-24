@@ -1,1 +1,67 @@
-"undefined"==typeof testIFrame&&(testIFrame={}),testIFrame.main=function(){function e(){var e=$(window.parent.document).find("#"+i.replace("/","--").replace(/\//," #")+" .example");return e.length?void e.each(function(){{var e=$(this).attr("data-example");$(this).find("script").length}n(i,e,"html").always(function(e){o++,$("#fixtures").append($(e)),t()})}):($(".spinner-blue").remove(),void $("#fixtures").append("No demos found. [$(#"+i.replace("/","--").replace(/\//," #")+" .example)]"))}function n(e,n,t){return s++,$.ajax({crossDomain:!0,cache:!1,dataType:"html",url:"_includes/"+e+"/"+n+"."+t})}function t(){s===o&&require(["specs/"+r],function(e){mocha.grep(e),setTimeout(a,2e3)})}function a(){$(".spinner-blue").remove(),mocha.run(function(){document.location.hash=i,window.parent&&window.parent.demo&&window.parent.demo.tests.updateTestsResults({failures:$(".failures em").text(),spec:r})})}var i=document.location.hash.replace(/#/,""),r=i.split("/")[1]+"-spec",o=0,s=0;require([i],e)}(),define("testIFrame",function(){});
+if (typeof testIFrame === 'undefined') testIFrame={};
+testIFrame.main = (function() {
+
+    var item = document.location.hash.replace(/#/,'');
+    var spec = item.split('/')[1] + '-spec';
+    var filesReceived=0;
+    var exampleCount=0;
+
+    function getBlanket(callback){
+        var script = document.createElement('script');
+        script.src = "test/libraries/blanket.js";
+        script.setAttribute("data-cover-never", "specs");
+        script.setAttribute("data-cover-only", item);
+        script.onload =  callback;
+        document.head.appendChild(script);
+    }
+    function getFixtures(){
+//        var $examples = $('#' + item.replace('/',' #')).find('.example');
+        var $examples = $(window.parent.document).find('#' + item.replace('/','--').replace(/\//,' #') + ' .example');
+        if (!$examples.length){
+            $('.spinner-blue').remove();
+            $('#fixtures').append('No demos found. [$(#' + item.replace('/','--').replace(/\//,' #') + ' .example)]');
+            return;
+        }
+        $examples.each(function(){
+            var example = $(this).attr('data-example');
+            var init = $(this).find('script').length;
+            getCode(item, example, 'html').always(function(data){
+                filesReceived++;
+                $('#fixtures').append($(data));
+                getTests();
+            });
+        });
+    }
+    function getCode(item, example, ext){
+        exampleCount++;
+        return $.ajax({
+            crossDomain: true,
+            cache: false,
+            dataType: 'html',
+            url: '_includes/' + item + '/' + example + '.' + ext
+        });
+    }
+    function getTests(){
+        if (exampleCount !== filesReceived){ return ; }
+        require(['specs/' + spec], function(specDescription){
+            mocha.grep(specDescription);
+            setTimeout(runMocha,2000);
+        });
+    }
+    function runMocha(){
+        $('.spinner-blue').remove();
+        mocha.run(function (){
+            document.location.hash = item;
+            if (window.parent && window.parent.demo){
+                window.parent.demo.tests.updateTestsResults({ failures:$('.failures em').text(), spec:spec});
+            }
+        });
+    }
+
+    require([item], getFixtures);
+
+})();
+
+
+define("testIFrame", function(){});
+

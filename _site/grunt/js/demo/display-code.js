@@ -1,5 +1,5 @@
 if (typeof demo==='undefined') demo={};
-demo.displayCode = (function( hljs){
+demo.displayCode = (function( hljs, inPageNav){
 
     function DisplayCode(options){
         this.header = options.header;
@@ -128,9 +128,9 @@ demo.displayCode = (function( hljs){
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('demo/display-code', ['lib/highlight'],function( hljs) {
-        return demo.displayCode(hljs);
+    define('demo/display-code', ['lib/highlight', 'components/in-page-nav'],function( hljs, inPageNav) {
+        return demo.displayCode(hljs, inPageNav);
     });
 } else {
-    demo.displayCode = demo.displayCode(hljs);
+    demo.displayCode = demo.displayCode(hljs,toolkit.inPageNav);
 }
