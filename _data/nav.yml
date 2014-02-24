@@ -192,7 +192,7 @@ Utils:
         code_view_ : true
       - example : Other
         title : Other
-        design_notes : You can include RequireJS.
+        design_notes : We also host versions of SessionCam and Test & Target javascript files.
         code_view_only : true
   Responsive Images :
     has_tests : true

@@ -1735,10 +1735,6 @@ $('.sky-form').validation();
                     <div class="example" data-example="sleek-nav">
                         
                         
-                            
-                                
-                            
-                        
                         <h4 class="demo-h4 pod-title smaller">Sleek Nav</h4>
                         
                         
@@ -1853,6 +1849,71 @@ $('.sky-form').validation();
                                 if (window.environment=="demo") {
                                     require(['toolkit'], function(){
                                         $('#demo-inpage-nav-tabs').inPageNav();
+                                    });
+                                }
+                            </script>
+                        
+                    </div>
+                
+                    
+                    
+                    
+                    
+                    <div class="example" data-example="whole-page-nav">
+                        
+                        
+                            
+                        
+                        <h4 class="demo-h4 pod-title smaller">Whole Page Nav</h4>
+                        
+                        
+                            <p class="designer-notes skycom-7 alpha">This module should be used when the entire (or most of) the page changes after an item click.
+</p>
+                        
+                        
+                        <div class="demo clearfix">
+                            <section class="module clearfix tabs-container page-nav whole-page" data-function="tabs" id='demo-whole-page-nav-tabs'>
+
+    <h2 class="speak">This is a screenreader header for tabs</h2>
+
+    <ul class="tabs clearfix" role="tablist">
+        <li id="whole-page-first-tab" aria-label="first" role="tab" class="tab selected">
+            <a href="#!whole-page-first" class="ellipsis internal-link"><span>First</span></a>
+        </li>
+        <li id="whole-page-second-tab" aria-label="second" role="tab" class="tab" >
+            <a href="#!whole-page-second" class="ellipsis internal-link"><span>SecondSecond</span></a>
+        </li>
+        <li id="whole-page-third-tab" aria-label="third" role="tab" class="tab" >
+            <a href="#!whole-page-third" class="ellipsis internal-link"><span>Praesent ullamcorper tincidunt fermentum primis in faucibus orci luctus</span></a>
+        </li>
+        <li id="whole-page-fourth-tab" aria-label="fourth" role="tab" class="tab" >
+            <a href="#!whole-page-fourth" class="ellipsis internal-link"><span>FourthFourth</span></a>
+        </li>
+        <li id="whole-page-fifth-tab" aria-label="fifth" role="tab" class="tab">
+            <a href="#!whole-page-fifth" class="ellipsis internal-link"><span>FifthFifthFifthFifth</span></a>
+        </li>
+        <li id="whole-page-sixth-tab" aria-label="sixth" role="tab" class="tab" >
+            <a href="#!whole-page-sixth" class="ellipsis internal-link"><span>Sixth</span></a>
+        </li>
+        <li id="whole-page-seventh-tab" aria-label="seventh" role="tab" class="tab">
+            <a href="#!whole-page-seventh" class="ellipsis internal-link"><span>Praesent ullamcorper tincidunt fermentum primis in faucibus orci luctus</span></a>
+        </li>
+        <div class="dropdown-tab-select">
+            <a href="#!whole-page-" aria-controls="dropdown" aria-label="more tabs" class="medium">&hellip;</a>
+            <ul class="more-tabs">
+
+            </ul>
+        </div>
+    </ul>
+</section>
+                        </div>
+                        
+                        
+                            
+                            <script>
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        $('#demo-whole-page-nav-tabs').inPageNav();
                                     });
                                 }
                             </script>
@@ -2722,7 +2783,7 @@ toolkit.hashManager.register(['hash', 'anotherHash', 'wildcard/*'], myHashCallba
                         <h4 class="demo-h4 pod-title smaller">Other</h4>
                         
                         
-                            <p class="designer-notes skycom-7 alpha">You can include RequireJS.</p>
+                            <p class="designer-notes skycom-7 alpha">We also host versions of SessionCam and Test & Target javascript files.</p>
                         
                         
                         
