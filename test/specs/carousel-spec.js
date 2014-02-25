@@ -151,6 +151,15 @@ function carouselSpec() {
                         done();
                     },100);
                 });
+
+                it('hovering anywhere on the slide will underline the title and tagline', function () {
+                    var $slide  = $('#hero').find('.skycom-carousel-container > .active');
+                    var $link = $slide.find('figcaption a');
+                    $slide.trigger('mouseenter');
+                    expect($link.hasClass('hover')).to.be.true;
+                    $slide.trigger('mouseleave')
+                    expect($link.hasClass('hover')).to.be.false;
+                });
             });
         });
 
