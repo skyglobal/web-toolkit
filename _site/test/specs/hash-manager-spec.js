@@ -42,6 +42,34 @@ function hashManagerSpec(hash) {
             location.hash = 'unregistered-hash-link';
         });
 
+        it('Will execute an undo function when the hash is changed back', function(done) {
+            hash.change('');
+            var callbackCount= 0,undoCallbackCount= 0,
+                callback1 = function (hash) {
+                    callbackCount++;
+                },
+                undoCallback = function (hash) {
+                    undoCallbackCount++;
+                };
+            setTimeout(function(){
+                hash.register(['test-undo-callback'], callback1, undoCallback);
+                hash.change('test-undo-callback');
+                setTimeout(function(){
+                    expect(callbackCount).to.equal(1);
+                    expect(undoCallbackCount).to.equal(0);
+                    expect(location.hash).to.equal('#!test-undo-callback');
+                    hash.remove();
+                    setTimeout(function(){
+                        expect(callbackCount).to.equal(1);
+                        expect(undoCallbackCount).to.equal(1);
+                        expect(location.hash).to.equal('');
+                        done();
+                    },5);
+                },5);
+            },5);
+        });
+
+
         it('Will execute an assigned function when the documents current hash is registered later', function(done){
             hash.change('page-load-hash');
             var count = 0,
@@ -202,6 +230,33 @@ function hashManagerSpec(hash) {
                         }, 5);
                     }, 5);
                 }, 5);
+            });
+
+            it('Will execute the correct undo callback for a wildcard hash', function(done) {
+                hash.change('');
+                var callbackCount= 0,undoCallbackCount= 0,
+                    callback1 = function (hash) {
+                        callbackCount++;
+                    },
+                    undoCallback = function (hash) {
+                        undoCallbackCount++;
+                    };
+                setTimeout(function(){
+                    hash.register(['test-undo/*'], callback1, undoCallback);
+                    hash.change('test-undo/exact');
+                    setTimeout(function(){
+                        expect(callbackCount).to.equal(1);
+                        expect(undoCallbackCount).to.equal(0);
+                        expect(location.hash).to.equal('#!test-undo/exact');
+                        hash.remove();
+                        setTimeout(function(){
+                            expect(callbackCount).to.equal(1);
+                            expect(undoCallbackCount).to.equal(1);
+                            expect(location.hash).to.equal('');
+                            done();
+                        },5);
+                    },5);
+                },5);
             });
         });
     });

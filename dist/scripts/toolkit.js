@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.1.4 - 2014-02-24 */
+/*! web-toolkit - v2.1.4 - 2014-02-25 */
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
@@ -437,7 +437,7 @@ toolkit.hashManager = function() {
             fn = "callback";
             vars.lastExecutor = hash;
         } else if (vars.lastExecutor) {
-            evt = vars.globalHashList[vars.lastExecutor];
+            evt = getHashEvent(vars.lastExecutor);
             fn = "undo";
         }
         if (evt && typeof evt[fn] === "function") {
