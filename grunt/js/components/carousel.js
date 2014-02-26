@@ -9,7 +9,7 @@ toolkit.carousel = (function(video, detect) {
         this.options = options;
         this.$viewport = element;
         this.$slideContainer = element.find('.skycom-carousel-container');
-        this.$slides = this.$slideContainer.find('>');
+        this.$slides = this.$slideContainer.find('.slide');
         this.currentIndex = 0;
         this.slideCount = this.$slides.length;
         this.timerId = false;
@@ -40,8 +40,8 @@ toolkit.carousel = (function(video, detect) {
                 document.location = $(this).closest('.slide').find('figcaption a').attr('href');
             });
 
-            this.$slideContainer.on('hover', '.slide figure', function (e) {
-                $(this).closest('.slide').find('figcaption a').toggleClass('hover', e.type === 'mouseenter');
+            this.$slideContainer.on('mouseenter mouseleave', '.slide', function (e) {
+                $(this).find('figcaption a').toggleClass('hover', e.type === 'mouseenter');
             });
         },
         unbindEvents: function() {

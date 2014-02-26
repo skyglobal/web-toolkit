@@ -5,21 +5,25 @@
 <!--[if IE 9]>         <html class="lt-ie10" > <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 <!--end css conditionals-->
-	<head>
+<head>
+    <title>Mocha Tests - with code coverage</title>
 
-        {% include head.html %}
+    {% include head.html %}
 
-        <script src="test/libraries/mocha.js"></script>
-        <script src="http://web-toolkit.global.sky.com/static/lib/require-2.1.9.min.js" data-main='dist/scripts/toolkit'></script>
-        <script src="test/config.js" ></script>
+    <script src="test/libraries/mocha.js"></script>
+    <script src="test/libraries/mocha-browserstack.js"></script>
+    <script src="test/libraries/chai.js"></script>
+    <script src="test/libraries/require.js"></script>
 
-	</head>
-	<body class="grid-1140" >
+    <script src="test/config.js"></script>
 
-        <div class="skycom-container clearfix">
-			<div class="alpha skycom-12">
-				{{ content }}
-			</div>
-		</div>
-	</body>
+</head>
+<body class="grid-1140" >
+    <div id="mocha"></div>
+    <div class="skycom-container clearfix">
+        <div class="alpha skycom-12">
+            {{ content }}
+        </div>
+    </div>
+</body>
 </html>

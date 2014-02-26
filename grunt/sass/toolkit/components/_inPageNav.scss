@@ -90,6 +90,10 @@
     padding-right: 46px;
     border-bottom: solid 1px #dcdcdc;
     border-top: solid 1px #dcdcdc;
+
+  }
+  &.whole-page .tabs {
+    border-top: 0;
   }
 
   .tabs > .tab {
@@ -103,9 +107,9 @@
       line-height: 44px;
       text-decoration: none;
       border-bottom: 2px solid transparent;
+      display: block;
     }
     &:hover{
-      margin-bottom:-1px;
       height: 45px;
 
       a{
@@ -114,7 +118,6 @@
       }
     }
     &.selected {
-      margin-bottom:-1px;
       height: 45px;
 
       a{

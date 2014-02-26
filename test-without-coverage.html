@@ -1,0 +1,25 @@
+---
+layout: test
+title: Sky Web Toolkit
+---
+
+{% include allIncludes.html %}
+
+<script>
+    require(
+            {   baseUrl:'dist/scripts',
+                paths: {
+                    toolkit: 'toolkit.min',
+                    suite: '../../test/suite',
+                    specs: '../../test/specs'}
+            },
+            ["toolkit"],
+            function(main) {
+                require(["suite"], function(TestLoader) {
+                    setTimeout(function(){
+                        mocha.run();
+                    },2000); //wait for blanket
+                });
+            }
+    );
+</script>

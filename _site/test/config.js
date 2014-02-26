@@ -1,92 +1,4 @@
-requirejs.config({
-    baseUrl: 'dist/scripts/',
-    paths: {
-        mocha: '../../test/libraries/mocha',
-        chai: '../../test/libraries/chai',
-        smoax: '../../test/libraries/smoax',
-        runner: '../../test/runner',
-        specs: '../../test/specs/'
-    },
-    shim: {
-        smoax: {
-            exports: 'Smoax'
-        }
-    },
-    urlArgs: 'v=' + new Date().getTime()
-});
-
-define('setup',['chai', 'smoax'], function(chai, smoax) {
-
-    function uiSetup(headElement) {
-        var styles = ['test/libraries/mocha.css'];
-        var body = document.getElementsByTagName('body').item(0);
-        var linkElement, i;
-
-        for (i in styles) {
-            linkElement = document.createElement('link');
-            linkElement.setAttribute('rel', 'stylesheet');
-            linkElement.setAttribute('href', styles[i]);
-            headElement.appendChild(linkElement);
-        }
-    }
-    //phantomjs doesnt support .bind, so need to polyfill
-    if (!Function.prototype.bind) {
-        Function.prototype.bind = function (oThis) {
-            if (typeof this !== "function") {
-                // closest thing possible to the ECMAScript 5 internal IsCallable function
-                throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
-            }
-
-            var aArgs = Array.prototype.slice.call(arguments, 1),
-                fToBind = this,
-                fNOP = function () {},
-                fBound = function () {
-                    return fToBind.apply(this instanceof fNOP && oThis
-                        ? this
-                        : oThis,
-                        aArgs.concat(Array.prototype.slice.call(arguments)));
-                };
-
-            fNOP.prototype = this.prototype;
-            fBound.prototype = new fNOP();
-
-            return fBound;
-        };
-    }
-
-    // change PhantomJS to a reasonable resolution
-    console.log(JSON.stringify({
-        action: 'viewportSize',
-        width: '960',
-        height: '960'
-    }));
-    // screenshotting function for in tests
-    window.screenshot = function(component, aspect, container) {
-        // de-jQuery container
-        container = container.first ? container[0] : container;
-        // we communicate with PhantomJS through their listener of console.log
-        console.log(JSON.stringify({
-            action: 'render',
-            filename: 'screenshots/' + component + '-' + aspect + '-v2.png',
-            clipRect: container.getBoundingClientRect()
-        }));
-    }
-
-    // PhantomJS had some problem if should is set as a global variable and was timing out
-    // window.should = should
-
-    window.chai = chai;
-    window.assert = chai.assert;
-    window.expect = chai.expect;
-    window.to = chai.to;
-
-    uiSetup(document.getElementsByTagName('head')[0]);
-    mocha.setup('bdd');
-    mocha.setup({ignoreLeaks: true}); //otherwise mocha complains about jquery and moment being globals
-});
-
-
-require(['setup']);
+window.environment = 'test';
 
 window.turnOffAnimation = function(selector){
     var offTime = '10ms'; //can't be zero as we still need the 'end' events to fire.
@@ -96,3 +8,17 @@ window.turnOffAnimation = function(selector){
         $('.turnOffAnimation').remove();
     }
 };
+
+window.addScript = function(route, feature, item){
+    var script = document.createElement('script');
+    script.src = '_includes/' + route + '/' + feature + '/' + item + '.js';
+    document.head.appendChild(script);
+};
+
+window.chai = chai;
+window.assert = chai.assert;
+window.expect = chai.expect;
+window.to = chai.to;
+
+mocha.setup({ignoreLeaks: true});
+mocha.ui('bdd');

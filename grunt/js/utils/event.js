@@ -1,5 +1,5 @@
 if (typeof toolkit==='undefined') toolkit={};
-toolkit.event = (function (detect) {
+toolkit.event = (function () {
     "use strict";
     var timeout = {
         resize : null
@@ -38,7 +38,9 @@ toolkit.event = (function (detect) {
 
     function emitResizeEnd(){
         emit(window,'resizeend'); // raw JS version
-        $(window).trigger('resizeend'); // jQuery version
+        if (typeof $ !== 'undefined'){
+            $(window).trigger('resizeend'); // jQuery version
+        }
     }
 
     function on(el, eventName, exec){
@@ -51,6 +53,22 @@ toolkit.event = (function (detect) {
         }
     }
 
+    function off(el, eventName, exec) {
+        var browserSpecificEventName = browserSpecificEvents[eventName.toLowerCase()];
+        eventName = browserSpecificEventName ||  eventName;
+        if (el.removeEventListener)
+            el.removeEventListener(eventName, exec, false);
+        else
+            el.detachEvent('on' + eventName, exec);
+    }
+//todo : compare
+// if (document.createEvent) {
+//    event = document.createEvent('HTMLEvents')
+//    event.initEvent('change', true, false)
+//    el.dispatchEvent(event)
+//} else {
+//    el.fireEvent('onchange')
+//}
     function emit(el, eventName) {
         var event;
         if (document.createEvent) {
@@ -75,6 +93,7 @@ toolkit.event = (function (detect) {
 
     return {
         on: on,
+        off: off,
         emit: emit,
         ready: ready
     };
@@ -82,10 +101,11 @@ toolkit.event = (function (detect) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/event', ['utils/detect'], function(detect) {
+    define('utils/event', function() {
         'use strict';
-        return toolkit.event(detect);
+        toolkit.event = toolkit.event();
+        return toolkit.event;
     });
 } else {
-    toolkit.event = toolkit.event(toolkit.detect);
+    toolkit.event = toolkit.event();
 }
