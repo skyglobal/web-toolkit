@@ -32,17 +32,23 @@ toolkit.inPageNav = (function(hash, event) {
                 self.tabSizes[this.id] = $(this).outerWidth(true);
 
                 var obj = $(this);
-
-                self.$moreTabsLink.append(obj.clone(true));
+                var dropdownObj = obj.clone(true)
+                    .removeClass('selected')
+                    .removeAttr('aria-controls')
+                    .removeAttr('aria-label')
+                    .removeAttr('role')
+                    .attr('aria-hidden','true');
 
                 self.tabStates.push({
                   id: this.id,
                   obj: obj,
-                  dropdownObj: self.$moreTabsLink.find('li').last(),
+                  dropdownObj: dropdownObj,
                   size: obj.outerWidth(true),
                   selected: obj.hasClass('selected'),
                   dropped: false
                 });
+
+                self.$moreTabsLink.append(dropdownObj);
             });
         },
 
@@ -107,6 +113,10 @@ toolkit.inPageNav = (function(hash, event) {
             var self = this;
             hash.register(this.getHashList(), this.changeTab.bind(self));
 
+            this.$tabs.on('click', function(){
+                self.changeTab($(this).find('a').attr('href'));
+            });
+
             this.$tabs.find('a').on('focus', function() {
                 var target = $(this).closest('li');
 
@@ -150,8 +160,6 @@ toolkit.inPageNav = (function(hash, event) {
 
         changeTab: function(controlId){
             controlId = controlId.replace('#!','');
-
-//            console.log('changing to ' + controlId);
 
             var $thisTab = $("#" + controlId.replace('-tab-contents','') + "-tab");
             var $thisTabTarget = $("#" + controlId);
