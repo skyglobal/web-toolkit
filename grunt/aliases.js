@@ -16,8 +16,9 @@ module.exports = {
     "test-without-coverage": ['mocha'],
     "test-cross-browser": ['jekyll:build','connect:cross-browser', 'exec:browserstack'],
     "test-cross-browser-live": ['jekyll:build','connect:cross-browser', 'exec:browserstack-live'],
+    "screenshot" : ['screenshot-compare', 'screenshot-compare-verify'],
 
-    //  alias
+//  alias
     "server": ['serve'],
     "test": ['build', 'test-without-coverage', 'test-with-coverage'],
     "default": ['build']

@@ -15,10 +15,31 @@ window.addScript = function(route, feature, item){
     document.head.appendChild(script);
 };
 
+
+console.log("hi!!");
+
+// change PhantomJS to a reasonable resolution
+console.log(JSON.stringify({
+    action: 'viewportSize',
+    width: '960',
+    height: '960'
+}));
+// screenshotting function for in tests
+window.screenshot = function(component, aspect, container) {
+    // de-jQuery container
+    container = container.first ? container[0] : container;
+    // we communicate with PhantomJS through their listener of console.log
+    console.log(JSON.stringify({
+        action: 'render',
+        filename: 'screenshots/' + component + '-' + aspect + '-v2.png',
+        clipRect: container.getBoundingClientRect()
+    }));
+}
+
 window.chai = chai;
 window.assert = chai.assert;
 window.expect = chai.expect;
 window.to = chai.to;
 
-mocha.setup({ignoreLeaks: true});
 mocha.ui('bdd');
+mocha.setup({ignoreLeaks: true});

@@ -1,32 +1,35 @@
 {
-    "name": "web-toolkit",
-    "version": "2.1.4",
-	"repository" : {
-        "type": "git",
-        "url": "https://github.com/skyglobal/web-toolkit.git"
+    "name":"web-toolkit",
+    "version":"2.1.4",
+    "repository":{
+        "type":"git",
+        "url":"https://github.com/skyglobal/web-toolkit.git"
     },
-    "devDependencies": {
-		"grunt": "latest"
-	    ,"load-grunt-config": "latest"
-	    ,"time-grunt": "latest"
-	    ,"grunt-contrib-jshint": "latest"
-	    ,"grunt-contrib-uglify": "latest"
-	    ,"grunt-contrib-clean": "latest"
-	    ,"grunt-contrib-compass": "latest"
-	    ,"grunt-contrib-requirejs": "latest"
-	    ,"grunt-contrib-watch": "latest"
-	    ,"grunt-contrib-connect": "latest"
-	    ,"grunt-exec": "latest"
-        ,"grunt-open": "latest"
-	    ,"grunt-mocha": "latest"
-	    ,"grunt-blanket-mocha": "latest"
-	    ,"grunt-webfont": "0.2.2"
-	    ,"grunt-svgmin": "latest"
-	    ,"grunt-grunticon": "latest"
-	    ,"grunt-jekyll": "latest"
-        ,"browserstack-test": "latest"
+    "devDependencies":{
+        "grunt":"latest",
+        "load-grunt-config":"latest",
+        "time-grunt":"latest",
+        "grunt-contrib-jshint":"latest",
+        "grunt-contrib-uglify":"latest",
+        "grunt-contrib-clean":"latest",
+        "grunt-contrib-compass":"latest",
+        "grunt-contrib-requirejs":"latest",
+        "grunt-contrib-watch":"latest",
+        "grunt-contrib-connect":"latest",
+        "grunt-exec":"latest",
+        "grunt-open":"latest",
+        "grunt-mocha":"latest",
+        "grunt-blanket-mocha":"latest",
+        "grunt-webfont":"0.2.2",
+        "grunt-svgmin":"latest",
+        "grunt-grunticon":"latest",
+        "grunt-jekyll":"latest",
+        "browserstack-test":"latest",
+        "grunt-screenshot-compare":"latest",
+        "grunt-mocha-screenshot":"latest"
+
     },
-    "engines": {
-        "node": "0.10.24"
+    "engines":{
+        "node":"0.10.24"
     }
 }
