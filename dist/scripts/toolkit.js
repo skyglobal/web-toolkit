@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.1.4 - 2014-02-25 */
+/*! web-toolkit - v2.1.4 - 2014-02-26 */
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
@@ -113,7 +113,8 @@ toolkit.event = function() {
     function emit(el, eventName) {
         var event;
         if (document.createEvent) {
-            event = new Event(eventName);
+            event = document.createEvent("CustomEvent");
+            event.initCustomEvent(eventName, false, false, null);
             el.dispatchEvent(event);
         } else {
             event = document.createEventObject();
@@ -1657,8 +1658,8 @@ toolkit.carousel = function(video, detect) {
                 }
                 document.location = $(this).closest(".slide").find("figcaption a").attr("href");
             });
-            this.$slideContainer.on("hover", ".slide figure", function(e) {
-                $(this).closest(".slide").find("figcaption a").toggleClass("hover", e.type === "mouseenter");
+            this.$slideContainer.on("mouseenter mouseleave", ".slide", function(e) {
+                $(this).find("figcaption a").toggleClass("hover", e.type === "mouseenter");
             });
         },
         unbindEvents: function() {
