@@ -39,15 +39,20 @@ function accordionSpec() {
 
         it('be closed by default', function () {
             expect($('.view-container.toggle-hidden').length).to.equal(3);
+            screenshot('accordion', 'default', $first.closest('.sub-section'));
         });
 
-        it('open when clicked', function(){
+        it('open when clicked', function(done){
             expect($first.hasClass('toggle-hidden')).to.equal(true);
             expect($first.parent().find('> a i').hasClass('rotate-180')).to.equal(false);
             $firstLink.click();
             expect($first.hasClass('toggle-hidden')).to.equal(false);
             expect($first.parent().find('> a i').hasClass('rotate-180')).to.equal(true);
             expect($last.hasClass('toggle-hidden')).to.equal(true);
+            setTimeout(function() {
+                screenshot('accordion', 'open', $first.closest('.sub-section'));
+                done();
+            }, 1000);
         });
 
         it('open and close when a user clicks an accordion item twice', function () {

@@ -104,6 +104,11 @@ Components :
         js_file : true
         design_notes : >
           This module should be used when only a small section of the page changes after an item click.
+      - example : Whole Page Nav
+        developer_notes_file : true
+        js_file : true
+        design_notes : >
+          This module should be used when the entire (or most of) the page changes after an item click.
   Lightbox :
     has_tests : true
     design_notes : >
@@ -175,11 +180,20 @@ Utils:
       - example : Default
         js_file : true
   Libraries :
-    design_notes : The toolkit provides static urls to a number of external libraries i.e jQuery + RequireJS.
+    design_notes : The toolkit provides static urls to a number of external libraries.
     examples :
-      - example : JQuery
+      - example : jQuery
+        title : jQuery
+        design_notes : You can include jQuery of different versions.
+        code_view_only : true
       - example : RequireJS
+        title : RequireJS
+        design_notes : You can include RequireJS.
+        code_view_ : true
       - example : Other
+        title : Other
+        design_notes : We also host versions of SessionCam and Test & Target javascript files.
+        code_view_only : true
   Responsive Images :
     has_tests : true
     examples :

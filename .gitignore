@@ -13,3 +13,6 @@ build.txt
 .rakeTasks
 vendor
 .bundle
+screenshot/*-v2.png
+screenshot/*-v1-v2-diff.png
+screenshot/v2-v1-diff.json

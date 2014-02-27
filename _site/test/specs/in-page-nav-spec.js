@@ -7,6 +7,7 @@ function inPageNavSpec(hash, tabs) {
     };
 
     addScript('components','in-page-nav','sleek-nav');
+    addScript('components','in-page-nav','whole-page-nav');
 
     describe(describeSpec, function () {
 
@@ -23,6 +24,23 @@ function inPageNavSpec(hash, tabs) {
             expect($('#demo-inpage-nav-tabs .tab.selected').length).to.equal(1);
             $('#fourth-tab').click();
             expect($('#demo-inpage-nav-tabs .tab.selected').length).to.equal(1);
+        });
+
+        describe('Whole Page Navigation', function() {
+            it('change tab look when changing tabs', function () {
+                $('#whole-page-first-tab').click();
+                expect($('#whole-page-first-tab').hasClass('selected')).to.equal(true);
+                expect($('#whole-page-fourth-tab').hasClass('selected')).to.equal(false);
+                $('#whole-page-fourth-tab').click();
+                expect($('#whole-page-fourth-tab').hasClass('selected')).to.equal(true);
+                expect($('#whole-page-first-tab').hasClass('selected')).to.equal(false);
+            });
+            it('will only have one tab selected at a time', function () {
+                $('#whole-page-first-tab').click();
+                expect($('#demo-whole-page-nav-tabs .tab.selected').length).to.equal(1);
+                $('#whole-page-fourth-tab').click();
+                expect($('#demo-whole-page-nav-tabs .tab.selected').length).to.equal(1);
+            });
         });
     });
 

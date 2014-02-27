@@ -43,9 +43,11 @@
                         {% if example.design_notes %}
                             <p class="designer-notes skycom-7 alpha">{{ example.design_notes }}</p>
                         {% endif %}
+                        {% if example.code_view_only != true %}
                         <div class="demo clearfix">
                             {% include {{html_path}} %}
                         </div>
+                        {% endif %}
                         {%if example.js_file%}
                             {% capture js_path %}{{ primary_link_url }}/{{ secondary_link_url }}/{{ url }}.js{% endcapture %}
                             <script>

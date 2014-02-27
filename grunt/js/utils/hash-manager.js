@@ -37,7 +37,7 @@ toolkit.hashManager = (function() {
             fn = 'callback';
             vars.lastExecutor = hash;
         } else if (vars.lastExecutor) {
-            evt = vars.globalHashList[vars.lastExecutor];
+            evt = getHashEvent(vars.lastExecutor);
             fn = 'undo';
         }
         if (evt && typeof evt[fn] === 'function') {

@@ -25,21 +25,5 @@
             {{ content }}
         </div>
     </div>
-    <script>
-        require(
-            {   baseUrl:'dist/scripts',
-                paths: {suite: '../../test/suite',
-                        specs: '../../test/specs'}
-            },
-            ["toolkit"],
-            function(main) {
-                require(["suite"], function(TestLoader) {
-                    setTimeout(function(){
-                        mocha.run();
-                    },2000); //wait for blanket
-                });
-            }
-        );
-    </script>
 </body>
 </html>
