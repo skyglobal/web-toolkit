@@ -115,13 +115,13 @@ To release a new version with:
     - Ensure that the code is committed in a branch that starts with `feature-xxx`. Where xxx is feature.
     - Add `-feature-xxx` to the end of the version number e.g. `1.0.1-feature-fancy-carousel`.
     - This will update the S3 only
-    - The deployed feature will be available within http://web-toolkit.global.sky.com/version-feature-xxx/
   - Release Candidate changes
     - To be used when new features/bugs fixes have been merged and is ready to be integration test by toolkit owners.
     - Commit the code into a branch that starts with `rc-111`. Where 111 is the version number.
     - Add `-rc-111` to the end of the version number e.g. `1.0.1-rc-2`.
     - This will update the S3 only.
-    - The deployed RC will be available within http://web-toolkit.global.sky.com/version-rc111/
+
+Feature and RC releases will be available by going to http://web-toolkit.global.sky.com/ and adding either `x.x.x-feature-111/` or `x.x.x-rc-111`. where x.x.x is the current toolkit version number.  Please give the contributor the full URL in a comment along side their pull request / issue.
 
 #### Versioning
 This library should follow the [Semantic versioning specification](http://semver.org/).
