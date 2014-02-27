@@ -119,7 +119,7 @@ To release a new version with:
   - Release Candidate changes
     - To be used when new features/bugs fixes have been merged and is ready to be integration test by toolkit owners.
     - Commit the code into a branch that starts with `rc-111`. Where 111 is the version number.
-    - Add `-rc` to the end of the version number e.g. `1.0.1-rc2`.
+    - Add `-rc-111` to the end of the version number e.g. `1.0.1-rc-2`.
     - This will update the S3 only.
     - The deployed RC will be available within http://web-toolkit.global.sky.com/version-rc111/
 
