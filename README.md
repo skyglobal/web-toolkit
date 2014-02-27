@@ -105,19 +105,23 @@ Before you submit your pull request, run :
 ## Deployments
 To release a new version with:
   - Code changes
-    -  increment the version number (described below) in _config.yml.
+    - increment the version number in _config.yml. versioning described below.
     - This will update gh-pages and the S3.
   - Documentation changes
     - Don't increment the version number.
     - This will update gh-pages branch only.
-  - Release Candidate changes
-    - Ensure that the code is committed in a branch that starts with `rc-xxx111`. Where xxx is feature and 111 is the version number
-    - Add '-rc' to the end of the version number e.g. `1.0.1-rc2`.
-    - This will update the S3 only.
   - Feature releases
+    - To be used when contributers want to integration test a new feature/proposed pull requrest.
     - Ensure that the code is committed in a branch that starts with `feature-xxx`. Where xxx is feature.
-    - Add '-feature-xxx' to the end of the version number e.g. '1.0.1-feature-fancy-carousel'.
+    - Add `-feature-xxx` to the end of the version number e.g. `1.0.1-feature-fancy-carousel`.
     - This will update the S3 only
+    - The deployed feature will be available within http://web-toolkit.global.sky.com/version-feature-xxx/
+  - Release Candidate changes
+    - To be used when new features/bugs fixes have been merged and is ready to be integration test by toolkit owners.
+    - Commit the code into a branch that starts with `rc-111`. Where 111 is the version number.
+    - Add `-rc` to the end of the version number e.g. `1.0.1-rc2`.
+    - This will update the S3 only.
+    - The deployed RC will be available within http://web-toolkit.global.sky.com/version-rc111/
 
 #### Versioning
 This library should follow the [Semantic versioning specification](http://semver.org/).
