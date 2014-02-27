@@ -612,43 +612,6 @@ if (typeof window.define === "function" && window.define.amd){
     demo.tests = demo.tests(toolkit.hashManager);
 }
 ;
-if (typeof demo==='undefined') demo={};
-demo.skycons = (function() {
-
-
-    function sortSkyconsTable(){
-        var skycons = [];
-        var rows = $('#wiki-skycons tbody tr');
-        rows.each(function(i){
-            skycons.push({i:i, skycon:$(this).find('td').first().text().trim()});
-        });
-        skycons.sort(function (a, b) {
-            if (a.skycon > b.skycon) {
-                return 1;
-            } else if (a.skycon < b.skycon) {
-                return -1;
-            } else {
-                return 0;
-            }
-        });
-        $('#wiki-skycons tbody tr').remove();
-        for (var i=0; i<skycons.length; i++){
-            $('#wiki-skycons tbody').append($(rows[skycons[i].i]));
-        }
-    }
-
-    sortSkyconsTable();
-
-});
-
-if (typeof window.define === "function" && window.define.amd){
-    define('demo/skycons',  [],function() {
-        return demo.skycons();
-    });
-} else {
-    demo.skycons = demo.skycons();
-}
-;
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.event = (function () {
     
@@ -965,12 +928,11 @@ if (typeof window.define === "function" && window.define.amd){
         'lib/jquery.scrollspy',
         'demo/menu',
         'demo/tests',
-        'demo/skycons',
         'utils/hash-manager',
-        'components/in-page-nav'], function(displayCode, scrollspy, menu, tests, skycons, hashManager, inPageNav) {
-        return demo.main(displayCode, scrollspy, menu, tests, skycons, hashManager, inPageNav);
+        'components/in-page-nav'], function(displayCode, scrollspy, menu, tests, hashManager, inPageNav) {
+        return demo.main(displayCode, scrollspy, menu, tests, hashManager, inPageNav);
     });
 } else {
-    demo.main(demo.displayCode, scrollspy, demo.menu, demo.tests, demo.skycons, toolkit.hashManager, toolkit.inPageNav);
+    demo.main(demo.displayCode, scrollspy, demo.menu, demo.tests, toolkit.hashManager, toolkit.inPageNav);
 }
 ;

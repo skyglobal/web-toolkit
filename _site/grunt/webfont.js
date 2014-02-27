@@ -4,7 +4,7 @@ module.exports = {
         dest: 'dist/fonts',
         destCss: 'dist/fonts',
         options: {
-            ie7:true,
+            ie7:false,
             font : 'skycons',
             template : 'grunt/fonts/template/skycon-template.css',
             htmlDemoTemplate : 'grunt/fonts/template/skycon-template.html',
