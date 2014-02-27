@@ -414,7 +414,7 @@ toolkit.hashManager = (function() {
             fn = 'callback';
             vars.lastExecutor = hash;
         } else if (vars.lastExecutor) {
-            evt = vars.globalHashList[vars.lastExecutor];
+            evt = getHashEvent(vars.lastExecutor);
             fn = 'undo';
         }
         if (evt && typeof evt[fn] === 'function') {
@@ -724,7 +724,8 @@ toolkit.event = (function () {
     function emit(el, eventName) {
         var event;
         if (document.createEvent) {
-            event = new Event(eventName);
+            event = document.createEvent('CustomEvent'); // MUST be 'CustomEvent'
+            event.initCustomEvent(eventName, false, false, null);
             el.dispatchEvent(event);
         } else {
             event = document.createEventObject();
@@ -913,9 +914,12 @@ toolkit.inPageNav = (function(hash, event) {
         },
 
         getHashList: function() {
-            var arrHash = [];
+            var arrHash = [], hash;
             this.$tabs.each(function(){
-                arrHash.push($(this).attr('aria-controls'));
+                hash=this.getAttribute('aria-controls');
+                if(hash) {
+                    arrHash.push(hash);
+                }
             });
             return arrHash;
         },
@@ -1024,8 +1028,13 @@ demo.main = (function(DisplayCode,ss, menu, tests, skycons, hash, inPageNav) {
             dir = '../_includes';
         }
         var featureFiles, codeBase, route;
-        featureFiles = $('a[href*="#' + feature + '"]').attr('data-diff-demos').trim();
-        codeBase = $('a[href*="#' + feature + '"]').attr('data-diff').trim();
+        var $tag = $('a[href*="#' + feature + '"]');
+        if (!$tag.length) {
+            // probably using-the-toolkit's special case
+            $tag = $lightboxLink;
+        }
+        featureFiles = $tag.attr('data-diff-demos').trim();
+        codeBase = $tag.attr('data-diff').trim();
         route = host + '/' + version + '/' + dir + '/' + codeBase;
         new DisplayCode({
             header: $lightboxLink.parent().text().replace($lightboxLink.text(),'').trim(),

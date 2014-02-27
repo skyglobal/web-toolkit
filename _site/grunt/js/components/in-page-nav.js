@@ -151,9 +151,12 @@ toolkit.inPageNav = (function(hash, event) {
         },
 
         getHashList: function() {
-            var arrHash = [];
+            var arrHash = [], hash;
             this.$tabs.each(function(){
-                arrHash.push($(this).attr('aria-controls'));
+                hash=this.getAttribute('aria-controls');
+                if(hash) {
+                    arrHash.push(hash);
+                }
             });
             return arrHash;
         },

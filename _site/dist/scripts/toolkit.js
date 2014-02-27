@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.1.4 - 2014-02-26 */
+/*! web-toolkit - v2.1.4 - 2014-02-27 */
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
@@ -729,20 +729,95 @@ toolkit.inPageNav = function(hash, event) {
         this.$tabContainer = $element;
         this.$tabs = $element.find("li[role=tab]");
         this.$tabTargets = $element.find("div[role=tabpanel]");
-        this.$showMore = $element.find(".dropdown-tab-select > a");
+        this.$showMore = $element.find(".dropdown-tab-select .selector");
         this.$moreTabsContainer = $element.find(".dropdown-tab-select");
         this.$moreTabsLink = $element.find(".more-tabs");
-        this.numberOfTabsToShow = 0;
-        this.saveTabOrder();
+        this.tabSizes = {};
+        this.tabStates = [];
+        this.setTabStates();
         this.bindEvents();
         this.initTabs();
     }
     InPageNav.prototype = {
+        setTabStates: function() {
+            var self = this;
+            this.$tabs.each(function() {
+                self.tabSizes[this.id] = $(this).outerWidth(true);
+                var obj = $(this);
+                var dropdownObj = obj.clone(true).removeClass("selected").removeAttr("aria-controls").removeAttr("aria-label").removeAttr("role").attr("aria-hidden", "true");
+                self.tabStates.push({
+                    id: this.id,
+                    obj: obj,
+                    dropdownObj: dropdownObj,
+                    size: obj.outerWidth(true),
+                    selected: obj.hasClass("selected"),
+                    dropped: false
+                });
+                self.$moreTabsLink.append(dropdownObj);
+            });
+        },
+        getSelectedTab: function() {
+            var selected = null;
+            $.each(this.tabStates, function(i, tab) {
+                if (tab.selected) {
+                    selected = tab;
+                    return false;
+                }
+            });
+            return selected;
+        },
+        setSelectedTab: function(id) {
+            var selected = null;
+            $.each(this.tabStates, function(i, tab) {
+                tab.selected = tab.id == id;
+                if (tab.id == id) {
+                    selected = tab;
+                }
+            });
+            return selected;
+        },
+        getDroppedTabs: function() {
+            var selected = [];
+            $.each(this.tabStates, function(i, tab) {
+                if (tab.dropped) {
+                    selected.push(tab);
+                }
+            });
+            return selected;
+        },
+        setDroppedTabs: function() {
+            var containerWidth = this.$tabContainer.outerWidth(true) - this.$moreTabsContainer.show().outerWidth(true);
+            var totalWidth = 0;
+            if (this.getSelectedTab()) {
+                totalWidth += this.$tabs.filter("#" + this.getSelectedTab().id).outerWidth(true);
+            }
+            $.each(this.tabStates, function(i, n) {
+                if (!n.selected) {
+                    totalWidth += n.size;
+                    if (totalWidth > containerWidth) {
+                        n.dropped = true;
+                    }
+                }
+            });
+        },
         bindEvents: function() {
             var self = this;
             hash.register(this.getHashList(), this.changeTab.bind(self));
-            this.$tabs.on("click", function(e) {
+            this.$tabs.on("click", function() {
                 self.changeTab($(this).find("a").attr("href"));
+            });
+            this.$tabs.find("a").on("focus", function() {
+                var target = $(this).closest("li");
+                if (target.hasClass("dropped")) {
+                    self.dropTabsDuringInteraction(target.attr("id"));
+                }
+                target.addClass("given-focus");
+            }).on("blur", function() {
+                $(this).closest("li").removeClass("given-focus");
+                self.$tabs.filter(".dropped-during-interaction").removeClass("dropped-during-interaction");
+                if (self.$tabs.filter(".selected.dropped").length) {
+                    self.dropTabsDuringInteraction(self.$tabs.filter(".selected.dropped").attr("id"));
+                }
             });
             this.$showMore.on("click", function(e) {
                 e.preventDefault();
@@ -750,6 +825,11 @@ toolkit.inPageNav = function(hash, event) {
             });
             $("body").on("click", this.hideMore.bind(self));
             event.on(window, "resizeend", this.initTabs.bind(self));
+        },
+        initTabs: function() {
+            this.setDroppedTabs();
+            this.setTabVisibility();
+            this.setDropdownVisibility();
         },
         getHashList: function() {
             var arrHash = [], hash;
@@ -761,24 +841,18 @@ toolkit.inPageNav = function(hash, event) {
             });
             return arrHash;
         },
-        saveTabOrder: function() {
-            this.$tabs.each(function(i) {
-                $(this).attr("data-position", i);
-            });
-        },
-        initTabs: function() {
-            this.moveTabsToList();
-            this.moveTabsToDropdown();
-            if (this.$tabTargets.size() > 0 && !this.$tabTargets.filter(".selected").length) {
-                this.changeTab(this.$tabTargets.first()[0].id);
-            }
-        },
         changeTab: function(controlId) {
             controlId = controlId.replace("#!", "");
-            var $thisTab = $("#" + controlId.replace("-tab-contents", "") + "-tab"), $thisTabTarget = $("#" + controlId);
+            var $thisTab = $("#" + controlId.replace("-tab-contents", "") + "-tab");
+            var $thisTabTarget = $("#" + controlId);
+            this.$tabs.filter(".dropped-during-interaction").removeClass("dropped-during-interaction");
             this.$tabTargets.add(this.$tabs).removeClass("selected");
+            this.setSelectedTab(controlId + "-tab");
             $thisTab.add($thisTabTarget).addClass("selected");
-            this.initTabs();
+            if ($thisTab.hasClass("dropped")) {
+                this.setDroppedTabs();
+                this.setTabVisibility();
+            }
         },
         hideMore: function(e) {
             if ($(e.target).closest(this.$showMore).length) {
@@ -790,51 +864,40 @@ toolkit.inPageNav = function(hash, event) {
             var action = this.$moreTabsLink.hasClass("dropdown-tab-selected") || type === "hide" ? "remove" : "add";
             this.$showMore.add(this.$moreTabsLink)[action + "Class"]("dropdown-tab-selected");
         },
-        getNumberOfTabsToShow: function() {
-            var containerWidth = this.$tabContainer.outerWidth(true) - this.$moreTabsContainer.show().outerWidth(true) - this.$tabs.filter(".selected").outerWidth(true), totalWidth = 0, numberOfTabs = 0;
-            this.$tabs.not(".selected").attr("style", "float:left").each(function() {
-                totalWidth += $(this).outerWidth(true);
-                if (totalWidth > containerWidth) {
-                    return;
+        setTabVisibility: function() {
+            $.each(this.tabStates, function(i, tab) {
+                if (tab.dropped && !tab.selected) {
+                    tab.obj.addClass("dropped");
+                    tab.dropdownObj.removeClass("dropped");
+                } else {
+                    tab.obj.removeClass("dropped");
+                    tab.dropdownObj.addClass("dropped");
                 }
-                numberOfTabs++;
             });
-            this.$tabs.add(this.$moreTabsContainer).removeAttr("style");
-            return numberOfTabs;
         },
-        moveTabsToList: function() {
-            var self = this;
-            this.$tabs.each(function(i) {
-                $(this).appendTo(self.$tabContainer.find(".tabs"));
-            });
-            sortTabs(this.$tabContainer.find(".tabs"));
-            this.numberOfTabsToShow = this.getNumberOfTabsToShow();
+        setDropdownVisibility: function() {
+            if (this.getDroppedTabs().length) {
+                this.$moreTabsContainer.show();
+            } else {
+                this.$moreTabsContainer.hide();
+            }
         },
-        moveTabsToDropdown: function() {
+        dropTabsDuringInteraction: function(id) {
             var self = this;
-            this.$tabs.not(".selected").each(function(i) {
-                if (i < self.numberOfTabsToShow) {
-                    return;
+            var widthNeeded = self.tabSizes[id];
+            var widthGained = 0;
+            $.each(self.tabStates, function(i, tab) {
+                widthGained += tab.size;
+                tab.obj.addClass("dropped-during-interaction");
+                if (widthGained >= widthNeeded) {
+                    return false;
                 }
-                $(this).appendTo(self.$moreTabsLink);
-                self.$moreTabsContainer.show();
             });
-            sortTabs(this.$moreTabsLink);
         }
     };
-    function sortTabs($el) {
-        var list = [];
-        $el.find("li").each(function() {
-            list.push($(this).attr("data-position"));
-        });
-        list.sort();
-        $.each(list, function() {
-            $el.find('li[data-position="' + this + '"]').appendTo($el);
-        });
-    }
     $.fn.inPageNav = function() {
         return this.each(function() {
-            var inPageNav = new InPageNav($(this));
+            new InPageNav($(this));
         });
     };
 };
