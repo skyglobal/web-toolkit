@@ -18,7 +18,7 @@ def version_already_exists?
 end
 
 def version_is_release_candidate?
-  latest_version_number.include? '-rc'
+  latest_version_number.include? 'rc-'
 end
 
 def is_feature_branch?
@@ -26,7 +26,7 @@ def is_feature_branch?
 end
 
 def is_feature_version?
-  latest_version_number.include? 'feature'
+  latest_version_number.include? 'feature-'
 end
 
 def branchName
@@ -146,11 +146,11 @@ task :deploy do
 
 
   if is_feature_version?
-    puts "*** version is a feature '#{latest_version_number}'.  Please commit in a feature branch. ***"
+    puts "*** version is a feature '#{latest_version_number}'.  Please commit in a 'feature-xxx' branch. ***"
     fail
   end
   if version_is_release_candidate?
-    puts "*** version is a Release Candidate '#{latest_version_number}'.  Please commit in a -rc branch. ***"
+    puts "*** version is a Release Candidate '#{latest_version_number}'.  Please commit in a 'rc-xxx' branch. ***"
     fail
   end
 
