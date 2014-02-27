@@ -22,6 +22,6 @@ module.exports = {
 
     //  alias
     "server": ['serve'],
-    "test": ['build', 'test-without-coverage', 'compare-verify-screenshot', 'test-with-coverage'],
+    "test": ['build', 'test-without-coverage', 'test-with-coverage'],
     "default": ['build']
 };
