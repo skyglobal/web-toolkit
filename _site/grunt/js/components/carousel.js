@@ -40,8 +40,8 @@ toolkit.carousel = (function(video, detect) {
                 document.location = $(this).closest('.slide').find('figcaption a').attr('href');
             });
 
-            this.$slideContainer.on('hover', '.slide figure', function (e) {
-                $(this).closest('.slide').find('figcaption a').toggleClass('hover', e.type === 'mouseenter');
+            this.$slideContainer.on('mouseenter mouseleave', '.slide', function (e) {
+                $(this).find('figcaption a').toggleClass('hover', e.type === 'mouseenter');
             });
         },
         unbindEvents: function() {
