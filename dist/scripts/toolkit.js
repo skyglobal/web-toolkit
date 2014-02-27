@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.1.4 - 2014-02-26 */
+/*! web-toolkit - v2.1.4 - 2014-02-27 */
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
@@ -323,89 +323,6 @@ if (typeof window.define === "function" && window.define.amd) {
     });
 } else {
     toolkit.detect = toolkit.detect(toolkit.event);
-}
-
-if (typeof toolkit === "undefined") toolkit = {};
-
-toolkit.skycons = function(detect, event) {
-    var icons = {
-        "skycon-sky": "&#xf100;",
-        "skycon-chevron-down": "&#xf101;",
-        "skycon-info": "&#xf102;",
-        "skycon-arrow-right": "&#xf103;",
-        "skycon-plus-circle": "&#xf104;",
-        "skycon-sky-plus": "&#xf105;",
-        "skycon-tv": "&#xf106;",
-        "skycon-twitter-reply": "&#xf107;",
-        "skycon-arrow-down-left": "&#xf108;",
-        "skycon-chevron-up": "&#xf109;",
-        "skycon-chevron": "&#xf10a;",
-        "skycon-facebook": "&#xf10b;",
-        "skycon-tick": "&#xf10c;",
-        "skycon-remote-record": "&#xf10d;",
-        "skycon-warning": "&#xf10e;",
-        "skycon-carousel-play": "&#xf10f;",
-        "skycon-arrow-left": "&#xf110;",
-        "skycon-chevron-left": "&#xf111;",
-        "skycon-on-demand": "&#xf112;",
-        "skycon-user-profile": "&#xf113;",
-        "skycon-search": "&#xf114;",
-        "skycon-twitter-retweet": "&#xf115;",
-        "skycon-at": "&#xf116;",
-        "skycon-volume": "&#xf117;",
-        "skycon-twitter-favourite": "&#xf118;",
-        "skycon-expand": "&#xf119;",
-        "skycon-carousel-pause": "&#xf11a;",
-        "skycon-mouse": "&#xf11b;",
-        "skycon-share": "&#xf11c;",
-        "skycon-never-miss": "&#xf11d;",
-        "skycon-mail": "&#xf11e;",
-        "skycon-sky-go": "&#xf11f;",
-        "skycon-twitter-follow": "&#xf120;",
-        "skycon-pending": "&#xf121;",
-        "skycon-minify": "&#xf122;",
-        "skycon-twitter": "&#xf123;",
-        "skycon-close": "&#xf124;",
-        "skycon-menu": "&#xf125;",
-        "skycon-phone": "&#xf126;",
-        "skycon-cloud": "&#xf127;",
-        "skycon-video-play": "&#xf128;",
-        "skycon-google-plus": "&#xf129;"
-    };
-    function addWebfont(el, c) {
-        var html = el.innerHTML, entity = icons[c];
-        el.innerHTML = "<span style=\"font-style:normal;font-family: 'skycons'\">" + entity + "</span>" + html;
-    }
-    function init() {
-        if (detect.pseudo()) {
-            return;
-        }
-        var els = document.getElementsByTagName("*"), i, c, el;
-        for (i = 0; ;i += 1) {
-            el = els[i];
-            if (!el) {
-                break;
-            }
-            c = el.className;
-            c = c.match(/skycon-[^\s'"]+/);
-            if (c) {
-                addWebfont(el, c[0]);
-            }
-        }
-    }
-    event.ready(init);
-    return {
-        add: addWebfont
-    };
-};
-
-if (typeof window.define === "function" && window.define.amd) {
-    define("utils/skycons", [ "utils/detect", "utils/event" ], function(detect, event) {
-        toolkit.skycons = toolkit.skycons(detect, event);
-        return toolkit.skycons;
-    });
-} else {
-    toolkit.skycons = toolkit.skycons(toolkit.detect, toolkit.event);
 }
 
 if (typeof toolkit === "undefined") toolkit = {};
@@ -2027,11 +1944,10 @@ if (typeof window.define === "function" && window.define.amd) {
 }
 
 if (typeof window.define === "function" && window.define.amd) {
-    define("toolkit", [ "utils/polyfill", "utils/detect", "utils/skycons", "utils/hash-manager", "utils/popup", "utils/toggle", "utils/focus", "utils/event", "components/in-page-nav", "components/accordion", "components/form", "components/lightbox", "components/share", "components/tooltip", "components/video", "components/carousel" ], function(polyfill, detect, skycons, hashManager, popup, toggle, focus, validation, event, inPageNav, accordion, datePicker, lightbox, share, tooltip, video, carousel) {
+    define("toolkit", [ "utils/polyfill", "utils/detect", "utils/hash-manager", "utils/popup", "utils/toggle", "utils/focus", "utils/event", "components/in-page-nav", "components/accordion", "components/form", "components/lightbox", "components/share", "components/tooltip", "components/video", "components/carousel" ], function(polyfill, detect, hashManager, popup, toggle, focus, validation, event, inPageNav, accordion, datePicker, lightbox, share, tooltip, video, carousel) {
         return {
             polyfill: polyfill,
             detect: detect,
-            skycons: skycons,
             hashManager: hashManager,
             popup: popup,
             toggle: toggle,
