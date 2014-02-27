@@ -3,6 +3,18 @@ demo.main = (function(DisplayCode,ss, menu, tests, skycons, hash, inPageNav) {
 
     function bindEvents() {
         hash.register('code/*',showCode);
+        $('.page-nav.main-menu a[href*=#]').click(smoothScroll);
+    }
+
+    function smoothScroll() {
+        var href = $.attr(this, 'href');
+        href = href.substring(href.indexOf('#'));
+        $('html, body').animate({
+            scrollTop: $(href).offset().top - 100
+        }, 500, function () {
+            window.location.hash = href;
+        });
+        return false;
     }
 
     function showCode(hash){
