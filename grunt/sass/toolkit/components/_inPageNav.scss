@@ -34,7 +34,7 @@
     line-height: 31px;
     text-align: center;
     position:relative;
-    height:44px;
+    height: 46px;
     width:44px;
     margin-bottom: -1px;
     padding: 0;
@@ -49,11 +49,14 @@
       border-color:#dcdcdc;
       border-bottom-color: #fff;
       color: #0073c5;
+      z-index: 1;
       background-color: #fff;
+      .whole-page & {
+        border-top: 1px solid #DCDCDC;
+      }
     }
   }
 }
-
 .more-tabs {
   visibility: hidden;
   background: $white;
@@ -220,7 +223,7 @@
   a.dropdown-tab-selected{
     height:44px;
     border-radius: 5px 5px 0 0;
-    border-top:1px solid #dcdcdc;
+    border-top:2px solid #dcdcdc;
   }
   ul a{
     font-size: 16px;
