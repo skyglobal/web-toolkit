@@ -103,7 +103,7 @@ Before you submit your pull request, run :
     └── README.md
     
 ## Deployments
-Please ensure the version number in `package.json` and `_config.yml` are kept in sync.
+Please ensure the version number in `package.json` (used for commenting the JS files) and `_config.yml` (used withint the HTML files) are kept in sync.
 
 To release a new version with:
   - Code changes
