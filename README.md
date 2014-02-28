@@ -103,9 +103,11 @@ Before you submit your pull request, run :
     └── README.md
     
 ## Deployments
+Please ensure the version number in `package.json` and `_config.yml` are kept in sync.
+
 To release a new version with:
   - Code changes
-    - increment the version number in _config.yml. versioning described below.
+    - increment the version number following `semantic versioning` described below.
     - This will update gh-pages and the S3.
   - Documentation changes
     - Don't increment the version number.
