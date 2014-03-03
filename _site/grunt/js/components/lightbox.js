@@ -129,6 +129,9 @@ toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
                     e.preventDefault();
                     lightbox.close();
                 }
+                if ($target.attr('href')) {
+                    return true; // a link
+                }
                 if ($target.closest('.' + classes.content).length) {
                     return false;
                 }
