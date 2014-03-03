@@ -18,7 +18,7 @@
 	    ,"grunt-contrib-connect": "latest"
 	    ,"grunt-exec": "latest"
         ,"grunt-open": "latest"
-	    ,"grunt-mocha": "latest"
+        ,"grunt-mocha-screenshot": "latest"
 	    ,"grunt-blanket-mocha": "latest"
 	    ,"grunt-webfont": "0.2.2"
 	    ,"grunt-svgmin": "latest"
