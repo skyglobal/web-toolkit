@@ -19,7 +19,6 @@
 	    ,"grunt-exec": "latest"
         ,"grunt-open": "latest"
         ,"grunt-mocha-screenshot": "latest"
-        ,"grunt-screenshot-compare": "latest"
 	    ,"grunt-blanket-mocha": "latest"
 	    ,"grunt-webfont": "latest"
 	    ,"grunt-svgmin": "latest"
