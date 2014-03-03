@@ -35,13 +35,14 @@
     line-height: 31px;
     text-align: center;
     position:relative;
-    height:44px;
+    height:46px;
     width:44px;
     margin-bottom: -1px;
     padding: 0;
     border:1px solid transparent;
     border-top:0;
     color:$secondary;
+    z-index: 1;
 
     cursor: pointer;
 
@@ -53,6 +54,11 @@
       border-bottom-color: #fff;
       color: #0073c5;
       background-color: #fff;
+      border-bottom: 1px solid transparent;
+
+      .whole-page & {
+        border-top: 1px solid #dcdcdc;
+      }
     }
   }
 }
@@ -63,8 +69,11 @@
   border: 1px solid #dcdcdc;
   position: absolute;
   right: 0;
-  top: 44px;
-  width: 300px;
+  top: 45px;
+
+  .whole-page & {
+    top: 44px;
+  }
 
   @include box-sizing(border-box);
 
