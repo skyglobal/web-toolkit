@@ -1756,7 +1756,7 @@ toolkit.carousel = function(video, detect) {
             this[termsHidden ? "showTermsContent" : "hideTermsContent"]();
         },
         showTermsContent: function() {
-            this.hideTermsContent();
+            this.$viewport.next(".terms-content").find(".terms").remove();
             var $terms = $(this.$slides[this.currentIndex]).find(".terms");
             if ($terms.length) {
                 this.$viewport.next(".terms-content").append($terms.clone(true).removeClass("speak").attr("aria-hidden", "true")).fadeIn(200);
@@ -1995,7 +1995,7 @@ toolkit.carousel = function(video, detect) {
             },
             terms: function($element) {
                 var $termsLink = $('<a href="#!" class="terms-link carousel-content cushioned hidden black internal-link supportive" aria-hidden="true">Terms and Conditions</a>');
-                var $termsContent = $('<div class="terms-content carousel-content  cushioned hidden"></div>');
+                var $termsContent = $('<div class="terms-content carousel-content cushioned"></div>').hide();
                 if ($element.find(".terms").length) {
                     $element.append($termsLink);
                     $element.after($termsContent);
