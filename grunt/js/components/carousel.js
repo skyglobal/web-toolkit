@@ -37,7 +37,7 @@ toolkit.carousel = (function(video, detect) {
                 if (e.target.parentNode.className.indexOf('play-video') >= 0 || e.target.className.indexOf('play-video') >= 0) {
                     return;
                 }
-                document.location = $(this).closest('.slide').find('figcaption a').attr('href');
+                $(this).closest(".slide").find("figcaption a").trigger('click');
             });
 
             this.$slideContainer.on('mouseenter mouseleave', '.slide', function (e) {
