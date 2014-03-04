@@ -86,7 +86,7 @@ body.lt-ie9 {
   .skycom-6  .cushioned, .skycom-5  .cushioned,
   .skycom-4  .cushioned, .skycom-3  .cushioned,
   .skycom-2  .cushioned, .skycom-1  .cushioned {
-    padding:($gutter/(($column_plus_gutter * 12)- $gutter))*100%;
+    padding:($gutter/(($column-plus-gutter * 12)- $gutter))*100%;
   }
 
   .skycom-12-mobile, .skycom-11-mobile,
