@@ -1,3 +1,4 @@
+
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.polyfill = (function () {
     
@@ -397,9 +398,10 @@ toolkit.skycons = (function(detect, event) {
         'skycon-close' : "&#xf124;",
         'skycon-menu' : "&#xf125;",
         'skycon-phone' : "&#xf126;",
-        'skycon-cloud' : "&#xf127;",
-        'skycon-video-play' : "&#xf128;",
-        'skycon-google-plus' : "&#xf129;"
+        'skycon-speech-bubble' : "&#xf127;",
+        'skycon-cloud' : "&#xf128;",
+        'skycon-video-play' : "&#xf129;",
+        'skycon-google-plus' : "&#xf12a;"
     };
 
     function addWebfont(el, c){
