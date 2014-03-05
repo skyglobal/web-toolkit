@@ -1,3 +1,5 @@
+$tab-height: 45px;
+
 .tabpanel {
   display: none;
   width: 100%;
@@ -35,7 +37,7 @@
     line-height: 31px;
     text-align: center;
     position:relative;
-    height:46px;
+    height: $tab-height + 1px;
     width:44px;
     margin-bottom: -1px;
     padding: 0;
@@ -72,7 +74,7 @@
   top: 45px;
 
   .whole-page & {
-    top: 44px;
+    top: $tab-height - 1px;
   }
 
   @include box-sizing(border-box);
@@ -115,20 +117,18 @@
   .tabs > .tab {
     float: left;
     padding: 0 30px 0 0;
-    height: 44px;
+    height: $tab-height;
     max-width: 109%;
 
     @include box-sizing(border-box);
 
     a {
-      line-height: 44px;
+      line-height: $tab-height - 1px;
       text-decoration: none;
       border-bottom: 2px solid transparent;
       display: block;
     }
     &:hover{
-      height: 45px;
-
       a{
         border-bottom: 2px solid #0073c5;
         color:$link;
@@ -146,8 +146,6 @@
     }
 
     &.selected {
-      height: 45px;
-
       width: auto;
       padding-right: 30px;
 
@@ -251,8 +249,8 @@
       a {
         text-decoration: none;
         cursor: default;
-        height: 44px;
-        line-height: 44px;
+        height: $tab-height - 1px;
+        line-height: $tab-height - 1px;
       }
     }
 
@@ -268,10 +266,10 @@
 .classic .dropdown-tab-select{
   >a{
     border-top:1px solid transparent;
-    height:44px;
+    height:$tab-height - 1px;
   }
   a.dropdown-tab-selected{
-    height:44px;
+    height:$tab-height - 1px;
     border-radius: 5px 5px 0 0;
     border-top:1px solid #dcdcdc;
   }
@@ -281,5 +279,5 @@
 }
 .classic .more-tabs{
   z-index: 5;
-  top: 44px;
+  top: $tab-height - 1px;
 }
