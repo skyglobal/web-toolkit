@@ -216,6 +216,27 @@
       height: 32px;
       @include transition(background-color .25s);
     }
+
+    &.dropped,
+    &.dropped-during-interaction {
+      width: 0;
+      padding-right: 0;
+      border-width: 0;
+
+      a {
+        padding: 0;
+      }
+
+      &.given-focus {
+        width: auto;
+        border-width: 1px;
+
+        a {
+          padding: 0 40px;
+        }
+      }
+    }
+
     &.selected {
       margin-bottom: -1px;
       background-color: #fff;
