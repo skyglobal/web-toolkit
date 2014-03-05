@@ -101,10 +101,7 @@ toolkit.inPageNav = (function(hash, event) {
             $.each(this.tabStates,function(i,n) {
                 if (!n.selected) {
                     totalWidth += n.size;
-
-                    if (totalWidth > containerWidth) {
-                        n.dropped = true;
-                    }
+                    n.dropped = (totalWidth > containerWidth);
                 }
             });
         },
