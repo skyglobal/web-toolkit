@@ -141,7 +141,7 @@ body .visible{
 html{
   /* Orientation */
   &:before {
-    display:none;
+    @include speak;
     @media (orientation:portrait) {
       content: 'portrait';
       font-family:'portrait';
@@ -153,7 +153,7 @@ html{
   }
   /* view */
   &:after {
-    display:none;
+    @include speak;
     @media (max-width:$mobile-width) {
       content: 'mobile';
       font-family:'mobile';
