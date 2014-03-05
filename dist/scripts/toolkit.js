@@ -1023,7 +1023,7 @@ toolkit.datePicker = function() {
             datePicker.fillDays(daysInMonth(datePicker.calendarDate.month, datePicker.calendarDate.year), firstDay(datePicker.calendarDate.month, datePicker.calendarDate.year));
         },
         fillDays: function(noOfDaysInMonth, firstDay) {
-            var i = 1, date = 1, datePicker = this, calendarDate = datePicker.calendarDate, daysText = [], classNames = [], isToday = false, isInputDate = false, isPastDate = false, monthIsInPast = calendarDate.month < currentDate.month && calendarDate.year <= currentDate.year || calendarDate.year < currentDate.year, monthIsNow = calendarDate.month == currentDate.month && calendarDate.year == currentDate.year, monthIsInInput = calendarDate.month == datePicker.$month.val() && calendarDate.year == datePicker.$year.val();
+            var i = 0, date = 1, datePicker = this, calendarDate = datePicker.calendarDate, daysText = [], classNames = [], isToday = false, isInputDate = false, isPastDate = false, monthIsInPast = calendarDate.month < currentDate.month && calendarDate.year <= currentDate.year || calendarDate.year < currentDate.year, monthIsNow = calendarDate.month == currentDate.month && calendarDate.year == currentDate.year, monthIsInInput = calendarDate.month == datePicker.$month.val() && calendarDate.year == datePicker.$year.val();
             for (i; i < firstDay; i++) {
                 daysText.push("<span></span>");
             }

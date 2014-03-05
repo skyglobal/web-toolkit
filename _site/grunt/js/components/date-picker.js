@@ -99,7 +99,7 @@ toolkit.datePicker = (function () {
         },
 
         fillDays: function(noOfDaysInMonth, firstDay) {
-            var i= 1,
+            var i= 0,
                 date = 1,
                 datePicker = this,
                 calendarDate = datePicker.calendarDate,
