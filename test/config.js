@@ -42,7 +42,7 @@ window.screenshot = function(component, aspect, container) {
         filename: 'screenshots/' + component + '-' + aspect + '-v2.png',
         clipRect: container.getBoundingClientRect()
     }));
-}
+};
 
 mocha.setup({ignoreLeaks: true});
 mocha.ui('bdd');
