@@ -153,7 +153,12 @@ toolkit.detect = (function (event) {
         if (!el) { return; }
         var offset = {left: el.offsetLeft, top: el.offsetTop};
         var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        return (offset.top + $(el).height() <= scrollTop + document.documentElement.clientHeight); //grr.. jquery
+        //todo: replace with .classList when pollyfill confirmed as working in ie8
+        el.className += ' visible';
+        var height = el.getBoundingClientRect().height;
+        var lIndex = el.className.lastIndexOf(' visible');
+        el.className = el.className.substring(0, lIndex);
+        return (offset.top + height <= scrollTop + document.documentElement.clientHeight);
     }
 
     attachClasses();
