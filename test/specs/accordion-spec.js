@@ -39,7 +39,7 @@ function accordionSpec() {
 
         it('be closed by default', function () {
             expect($('.view-container.toggle-hidden').length).to.equal(3);
-            screenshot('accordion', 'default', $first.closest('.sub-section'));
+//            screenshot('accordion', 'default', $first.closest('.sub-section'));
         });
 
         it('open when clicked', function(done){
@@ -50,7 +50,7 @@ function accordionSpec() {
             expect($first.parent().find('> a i').hasClass('rotate-180')).to.equal(true);
             expect($last.hasClass('toggle-hidden')).to.equal(true);
             setTimeout(function() {
-                screenshot('accordion', 'open', $first.closest('.sub-section'));
+//                screenshot('accordion', 'open', $first.closest('.sub-section'));
                 done();
             }, 1000);
         });

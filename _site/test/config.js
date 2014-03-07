@@ -29,8 +29,13 @@ console.log(JSON.stringify({
 
 // screenshotting function for in tests
 window.screenshot = function(component, aspect, container) {
+//    todo: should container be $container if its a jQuery element?
+//    todo: log if container can not be found instead of calling getBoundingClientRect on undefined?
+
     // de-jQuery container
+//    todo: if you dont want a jQuery element, don't accept one.
     container = container.first ? container[0] : container;
+
     // we communicate with PhantomJS through their listener of console.log
     console.log(JSON.stringify({
         action: 'render',
