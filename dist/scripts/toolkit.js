@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.1.4 - 2014-03-05 */
+/*! web-toolkit - v2.2.1 - 2014-03-07 */
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
@@ -2043,6 +2043,7 @@ toolkit.carousel = function(video, detect) {
             }).on("goto", function(e, slideIndex) {
                 carousel.goto(slideIndex, true);
             }).on("refresh", function(e, slideIndex) {
+                carousel.$slideContainer = carousel.$viewport.find(".skycom-carousel-container");
                 carousel.$slides = carousel.$slideContainer.find(">");
                 carousel.slideCount = carousel.$slides.length;
                 $this.find(".indicators").remove();
