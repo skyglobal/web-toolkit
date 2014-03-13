@@ -68,4 +68,5 @@ DEPENDENCIES
   aws-sdk
   compass
   jekyll
+  json
   rake

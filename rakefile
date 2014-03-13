@@ -1,5 +1,6 @@
 require 'aws-sdk'
 require 'cgi'
+require 'json'
 
 def s3
   $s3 ||= AWS::S3.new(access_key_id: ENV["S3_ACCESS_KEY_ID"] , secret_access_key: ENV["S3_ACCESS_KEY"], region: 'eu-west-1')
@@ -10,7 +11,7 @@ def bucket
 end
 
 def latest_version_number
-  $latest_version_number ||= File.open('_config.yml').read.match(/version:(.+)/)[1].strip
+  $latest_version_number ||= JSON.parse(File.open('./package.json').read)["version"]
 end
 
 def version_already_exists?

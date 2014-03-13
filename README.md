@@ -97,17 +97,16 @@ Before you submit your pull request, run :
     ├── gemfile
     ├── gruntfile.js    => grunt config file
     ├── index.html      => Main demo page
-    ├── package.json    => NodeJS config file
+    ├── package.json    => NodeJS config file, includes version number for toolkit
     ├── rakefile        => build script
     ├── test.html       => used by `grunt test` to run all tests at once
     └── README.md
     
 ## Deployments
-Please ensure the version number in `package.json` (used for commenting the JS files) and `_config.yml` (used withint the HTML files) are kept in sync.
 
 To release a new version with:
   - Code changes
-    - increment the version number following `semantic versioning` described below.
+    - increment the version number in package.json following `semantic versioning` described below.
     - This will update gh-pages and the S3.
   - Documentation changes
     - Don't increment the version number.
@@ -146,5 +145,5 @@ Version: X.Y.Z(-rc)?
 Upon commiting and pushing your code to Github, the CI server will run through
 the functional tests and - if there are no errors - a new version of the library
 will be deployed to the CDN using the version number specified in the
-_config.yml file.
+package.json file.
 
