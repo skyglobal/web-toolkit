@@ -42,7 +42,7 @@
       .skycon-chevron {
         color: #0070a5;
         font-size:12px;
-        margin-top:1px;
+        margin-top:0px;
         margin-left:1px;
         float: left;
       }
@@ -71,6 +71,12 @@
       }
       span{
         margin-top: 0;
+      }
+      .skycon-chevron {
+        -moz-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        transform:rotate(180deg);
       }
     }
   }

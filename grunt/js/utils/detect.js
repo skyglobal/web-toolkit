@@ -150,15 +150,16 @@ toolkit.detect = (function (event) {
     }
 
     function elementVisibleBottom(el) {
-        if (!el) { return; }
-        var offset = {left: el.offsetLeft, top: el.offsetTop};
+        if (el.length < 1)
+            return;
+
+        var elementOffset =  {
+            top: el.getBoundingClientRect().top + window.pageYOffset - document.documentElement.clientTop,
+            left: el.getBoundingClientRect().left + window.pageXOffset - document.documentElement.clientLeft
+        };
+
         var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        //todo: replace with .classList when pollyfill confirmed as working in ie8
-        el.className += ' visible';
-        var height = el.getBoundingClientRect().height;
-        var lIndex = el.className.lastIndexOf(' visible');
-        el.className = el.className.substring(0, lIndex);
-        return (offset.top + height <= scrollTop + document.documentElement.clientHeight);
+        return (elementOffset.top + el.offsetHeight <= scrollTop + document.documentElement.clientHeight);
     }
 
     attachClasses();
