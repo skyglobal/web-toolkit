@@ -1,0 +1,26 @@
+{
+    "name": "toolkit",
+    "version": "2.2.2",
+    "main": [
+        "dist/scripts/toolkit.min.js",
+        "dist/stylesheets/toolkit.css",
+        "dist/fonts/skycons.css"],
+    "ignore": [
+        ".sass-cache",
+        "_data",
+        "_includes",
+        "_layouts",
+        "_plugins",
+        "_site",
+        "grunt",
+        "node_modules",
+        "screenshots",
+        "static",
+        "test",
+        "wiki_images",
+        "**/*.txt"
+    ],
+    "dependencies": {
+        "jquery": ">=1.8.3"
+    }
+}
