@@ -31,9 +31,9 @@ toolkit.carousel = (function(video, detect) {
         },
         bindEvents: function() {
             this.bindTouchEvents();
-            this.$slideContainer.find('a').on('click', this.pause.bind(this));
+            this.$slideContainer.on('click','a', this.pause.bind(this));
 
-            this.$slideContainer.find('figure').on('click', function (e) {
+            this.$slideContainer.on('click', 'figure', function (e) {
                 if (e.target.parentNode.className.indexOf('play-video') >= 0 || e.target.className.indexOf('play-video') >= 0) {
                     return;
                 }
@@ -47,6 +47,7 @@ toolkit.carousel = (function(video, detect) {
         unbindEvents: function() {
             this.unbindTouchEvents();
             this.$slideContainer.find('a').off('click');
+            this.$slideContainer.find('figure').off('click');
         },
         setOffset: function(percent, animate) {
             var $container = this.$slideContainer.removeClass("animate");
