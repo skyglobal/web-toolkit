@@ -46,8 +46,8 @@ toolkit.carousel = (function(video, detect) {
         },
         unbindEvents: function() {
             this.unbindTouchEvents();
-            this.$slideContainer.find('a').off('click');
-            this.$slideContainer.find('figure').off('click');
+            this.$slideContainer.off('click','a');
+            this.$slideContainer.off('click', 'figure');
         },
         setOffset: function(percent, animate) {
             var $container = this.$slideContainer.removeClass("animate");
@@ -376,7 +376,6 @@ toolkit.carousel = (function(video, detect) {
             }).on('goto',function(e, slideIndex) {
                 carousel.goto(slideIndex, true);
             }).on('refresh',function(e, slideIndex) {
-                carousel.$slideContainer = carousel.$viewport.find('.skycom-carousel-container');
                 carousel.$slides = carousel.$slideContainer.find('>');
                 carousel.slideCount = carousel.$slides.length;
                 $this.find('.indicators').remove();
@@ -407,6 +406,7 @@ toolkit.carousel = (function(video, detect) {
             }
         });
     };
+
 });
 
 if (typeof window.define === "function" && window.define.amd) {
