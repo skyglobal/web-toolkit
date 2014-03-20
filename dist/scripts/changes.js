@@ -17,10 +17,10 @@ changes.diff = (function(hljs){
         clear();
         $('a[data-diff]').each(function(){
             var demo, newFile, oldFile,
-                dir = $(this).attr('data-diff');
-            var demos = $(this).attr('data-diff-demos') || '';
+                dir = $(this).attr('data-diff').replace(/\s/g, '');
+            var demos = $(this).attr('data-diff-demos').replace(/\s/g, '') || '';
             var arrDemos = demos.split(',');
-            var componentName = dir.split('/')[1];
+            var componentName = dir.indexOf('/') === -1 ? dir : dir.split('/')[1];
             for (var i in arrDemos){
                 demo = arrDemos[i];
                 newFile = newRoute + '/' + dir + (demo ? '/' + demo : '');
@@ -133,6 +133,8 @@ changes.diff = (function(hljs){
     CompareCodeBase.prototype.getCode = function(){
         this.getFileByExtension('new','html');
         this.getFileByExtension('old','html');
+//        this.getFileByExtension('new','notes.html');
+//        this.getFileByExtension('old','notes.html');
         this.getFileByExtension('new','js');
         this.getFileByExtension('old','js');
     };

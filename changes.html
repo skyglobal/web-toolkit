@@ -5,9 +5,12 @@ title: Sky Web Toolkit
 
 <section class="demo-section" id=changes-page>
     <h2>Changes</h2>
-    <div >
+    <p>
         The earliest version this tool will work from is 2.0.0.  To see the changes from 1.0.0 to 2.0.0 please <a href="http://web-toolkit.global.sky.com/2.0.0alpha.rc1/_site/changes.html">check here</a>.
-    </div>
+    </p>
+    <p>
+        In 2.1.0 most files had their paths and names changed. This utility will therefore report a full code change if compared with a 2.0.x version.
+    </p>
     <h3 class="smaller">Major Changes <small>(v1.x - v2.0.0)</small></h3>
     <ul>
         <li><span class="medium">Typography</span> Headings now have default margins + mobile sizes adjusted</li>
@@ -44,4 +47,6 @@ title: Sky Web Toolkit
         $('.warning').removeClass('hidden');
     }
 </script>
-<script src="dist/scripts/changes.js"></script>
+<script>
+    require(['changes']);
+</script>
