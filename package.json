@@ -24,6 +24,7 @@
 	    ,"grunt-svgmin": "latest"
 	    ,"grunt-grunticon": "latest"
 	    ,"grunt-jekyll": "latest"
+	    ,"grunt-version-sync": "latest"
         ,"browserstack-test": "latest"
     },
     "engines": {

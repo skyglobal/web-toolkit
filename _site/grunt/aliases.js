@@ -3,7 +3,7 @@ module.exports = {
     "dev-spy": ['dev-build', 'watch'],
 
     //  standard build tasks that lints your JS
-    "build": ['jshint', 'dev-build'],
+    "build": ['jshint', 'version_sync', 'dev-build'],
     "spy": ['jshint', 'dev-spy'],
     "serve": ['build','connect:app', 'open:app', 'watch'],
 

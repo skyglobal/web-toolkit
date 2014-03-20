@@ -117,7 +117,7 @@ demo.displayCode = (function( hljs){
         var codeDom = document.getElementById(id + ext + '-container'),
             code = this[id + ext];
 
-        var $code = $(code.replace(/{% version_number %}/g,$('#current-version').text()));
+        var $code = $(code.replace(/{{ site.version }}/g,$('#current-version').text()));
         if (ext.indexOf('js')>-1){
             $code = $.parseHTML($code);
         }
