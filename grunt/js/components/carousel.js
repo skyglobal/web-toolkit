@@ -376,6 +376,7 @@ toolkit.carousel = (function(video, detect) {
             }).on('goto',function(e, slideIndex) {
                 carousel.goto(slideIndex, true);
             }).on('refresh',function(e, slideIndex) {
+                carousel.$slideContainer = carousel.$viewport.find('.skycom-carousel-container');
                 carousel.$slides = carousel.$slideContainer.find('>');
                 carousel.slideCount = carousel.$slides.length;
                 $this.find('.indicators').remove();
@@ -385,6 +386,8 @@ toolkit.carousel = (function(video, detect) {
                 slideIndex = (isNaN(slideIndex) || slideIndex < 0) ? 0 : slideIndex;
                 slideIndex = (slideIndex > (carousel.slideCount - 1)) ?  carousel.slideCount - 1 : slideIndex;
                 carousel.goto(slideIndex, true);
+                carousel.unbindEvents();
+                carousel.bindEvents();
                 createMarkup(carousel);
             }).on('keyup',function(e){
                 switch(e.keyCode){
