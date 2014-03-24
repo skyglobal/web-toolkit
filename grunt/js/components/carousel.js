@@ -132,9 +132,7 @@ toolkit.carousel = (function(video, detect) {
             return indexToShow;
         },
         goto: function(slideIndex, pause, callback) {
-            if (pause !== false) {
-                this.pause();
-            }
+            if (pause !== false)  this.pause();
 
             if (slideIndex > this.currentIndex) {
                 this.moveSlide({
