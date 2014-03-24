@@ -343,11 +343,7 @@ toolkit.carousel = (function(video, detect) {
                 markup.indicators($this, {
                     count: carousel.slideCount,
                     onclick: function(index) {
-                        if (index !== carousel.currentIndex) {
-                            carousel.goto(index, true);
-                        } else {
-                            carousel.pause();
-                        }
+                        carousel.goto(index);
                     }
                 })
                 .terms($this)

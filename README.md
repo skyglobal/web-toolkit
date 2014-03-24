@@ -16,7 +16,7 @@
 2. clone your new repo onto your local machine (get the clone url from the right menu also)
   - `git clone [CLONE-URL]`
   - `git remote add upstream https://github.com/skyglobal/web-toolkit.git`
-3. Install npm on your machine
+3. Install npm on your achine
   - `echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bashrc`
   - `. ~/.bashrc`
   - `mkdir /usr/local`
