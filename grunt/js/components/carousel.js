@@ -132,33 +132,14 @@ toolkit.carousel = (function(video, detect) {
             return indexToShow;
         },
         goto: function(slideIndex, pause, callback) {
-            if (pause !== false) {
-                this.pause();
-            }
+            if (pause !== false) this.pause();
+            if (slideIndex===this.currentIndex) { return; }
 
-            if (slideIndex > this.currentIndex) {
-                this.moveSlide({
-                    index: slideIndex,
-                    start: 0,
-                    end: -50,
-                    callback: callback
-                });
-            } else if (slideIndex < this.currentIndex) {
-                this.moveSlide({
-                    index: slideIndex,
-                    start: -50,
-                    end: 0,
-                    callback: callback
-                });
-            } else {
-                this.moveSlide({
-                    index: slideIndex,
-                    start: 0,
-                    end: 0,
-                    callback: callback
-                });
+            if ((slideIndex>this.currentIndex)) {
+                this.moveSlide({index: slideIndex, start:0, end:-50, callback:callback});
+            } else{
+                this.moveSlide({index: slideIndex, start:-50, end: 0, callback:callback});
             }
-            
             return this;
         },
         next: function(pause, callback) {
