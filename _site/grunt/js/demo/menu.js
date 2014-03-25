@@ -1,14 +1,26 @@
 if (typeof demo==='undefined') demo={};
-demo.menu = (function(){
+demo.menu = (function(inPageNav){
 
     var menuIsSticky = false;
     var offset = $('#toolkit-menu-tabs').offset().top;
     var hideSubMenuTimeout;
 
+    function initMenu($el) {
+        if ($('.more-tabs li', $el).length === 0) {
+            $el.inPageNav(); // called only once using the above if condition (is indempodent)
+        }
+    }
+
+    function initVisibleMenus() {
+        initMenu($('#toolkit-menu-tabs .page-nav.primary'));
+        initMenu($('#toolkit-menu-tabs .selected .page-nav.secondary'));
+    }
+
     function bindEvents() {
         $(window).on('scroll', stickMenuToTop);
-        $('#toolkit-menu-tabs [role=tablist] li').on('mouseenter mouseleave', toggleSubMenu);
-        $('#toolkit-menu-tabs .tabpanel').on('mouseenter mouseleave', toggleSubMenu);
+        $('#toolkit-menu-tabs .primary .tab').on('mouseenter activate', toggleSubMenu); // activate is from jquery's scrollspy plugin (see jquery.scrollspy.js)
+//        $('#toolkit-menu-tabs').on('mouseleave', toggleSubMenu);
+        $('#toolkit-menu-tabs a[href*=#]').click(smoothScroll);
     }
 
     function toggleSubMenu(e){
@@ -32,10 +44,28 @@ demo.menu = (function(){
         if (!$el.length){ return; }
         hideAllSubMenus();
         $el.addClass('selected');
+        initMenu($el);
     }
 
     function showSeletcedSubMenu(){
-        $('#toolkit-menu-tabs .tabpanel li.selected').closest('.tabpanel').addClass('selected');
+        $el = $('#toolkit-menu-tabs .tabpanel li.selected').closest('.tabpanel');
+        $el.addClass('selected');
+        initMenu($el);
+    }
+
+    function smoothScroll() {
+        var href = $.attr(this, 'href');
+        href = href.replace(/[#!]/g, "");
+//        var menuHeight = href.indexOf('--') === -1 ? 60 : 100; // note: the height of the navigation menu at this time
+        var menuHeight = ($('#toolkit-menu-tabs').outerHeight() || 90) + 5;
+        $('html, body').animate({
+            scrollTop: $('#' + href).offset().top - menuHeight
+        }, 500, function () {
+            var $href = $('#' + href);
+            $href.attr('id', ''); // diffuse it for the href change
+            window.location.hash = href;
+            $href.attr('id', href);
+        });
     }
 
     function stickMenuToTop(){
@@ -52,14 +82,18 @@ demo.menu = (function(){
         }
     }
 
+    $(stickMenuToTop); // run on page load
+
+    $(initVisibleMenus);
+
     bindEvents();
 
 });
 
 if (typeof window.define === "function" && window.define.amd){
-    define('demo/menu', [], function() {
-        return demo.menu();
+    define('demo/menu', ['components/in-page-nav'], function(inPageNav) {
+        return demo.menu(inPageNav);
     });
 } else {
-    demo.menu = demo.menu();
+    demo.menu = demo.menu(toolkit.inPageNav);
 }
