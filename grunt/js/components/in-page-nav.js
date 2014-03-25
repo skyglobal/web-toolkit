@@ -39,11 +39,18 @@ toolkit.inPageNav = (function(hash, event) {
                     .removeAttr('role')
                     .attr('aria-hidden','true');
 
+                // text is wider with 'selected' class
+                // and therefore the maximum width is with this 'selected' class
+                var selected = obj.hasClass('selected');
+                obj.addClass('selected');
+                var maximumWidth = obj.outerWidth(true);
+                obj.toggleClass('selected', selected);
+
                 self.tabStates.push({
                   id: this.id,
                   obj: obj,
                   dropdownObj: dropdownObj,
-                  size: obj.outerWidth(true),
+                  size: maximumWidth,
                   selected: obj.hasClass('selected'),
                   dropped: false
                 });
@@ -92,7 +99,7 @@ toolkit.inPageNav = (function(hash, event) {
 
         setDroppedTabs: function() {
             var dropDownIconWidth = this.$moreTabsContainer.show().outerWidth(true) || 44;
-            var containerWidth = this.$tabContainer.outerWidth(true) - dropDownIconWidth - 2;
+            var containerWidth = this.$tabContainer.outerWidth(true) - dropDownIconWidth;
             var totalWidth = 0;
 
             if (this.getSelectedTab()) {
