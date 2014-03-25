@@ -31,7 +31,7 @@
             <div class="alpha skycom-12">
 
                 <h1 class="demo-header section-title clearfix">
-                    <img src="static/images/sky-logo.png" alt="" height="52" width="82">
+                    <a href="."><img src="static/images/sky-logo.png" alt="" height="52" width="82"></a>
                     <span>Toolkit</span>
                     <a href="#!code/using-the-toolkit" class="code-download" data-diff="using-the-toolkit" data-diff-demos="accessibility,coding-practices,contributing,getting-started,trouble-shooting">[ How To &hellip; ]</a>
                 </h1>
@@ -39,13 +39,7 @@
             </div>
         </div>
 
-        {% include menu.html %}
-
-        <div class="skycom-container clearfix">
-			<div class="alpha skycom-12">
-				{{ content }}
-			</div>
-		</div>
+        {{ content }}
 
         {% include footer.html %}
 
