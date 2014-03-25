@@ -91,7 +91,8 @@ toolkit.inPageNav = (function(hash, event) {
         },
 
         setDroppedTabs: function() {
-            var containerWidth = this.$tabContainer.outerWidth(true) - this.$moreTabsContainer.show().outerWidth(true);
+            var dropDownIconWidth = this.$moreTabsContainer.show().outerWidth(true) || 44;
+            var containerWidth = this.$tabContainer.outerWidth(true) - dropDownIconWidth - 2;
             var totalWidth = 0;
 
             if (this.getSelectedTab()) {
@@ -111,6 +112,10 @@ toolkit.inPageNav = (function(hash, event) {
             hash.register(this.getHashList(), this.changeTab.bind(self));
 
             this.$tabs.on('click', function(){
+                self.changeTab($(this).find('a').attr('href'));
+            });
+
+            this.$moreTabsContainer.find('li').on('click', function(){
                 self.changeTab($(this).find('a').attr('href'));
             });
 
@@ -159,7 +164,7 @@ toolkit.inPageNav = (function(hash, event) {
         },
 
         changeTab: function(controlId){
-            controlId = controlId.replace('#!','');
+            controlId = controlId.replace(/^#!{0,1}/,'');
 
             var $thisTab = $("#" + controlId.replace('-tab-contents','') + "-tab");
             var $thisTabTarget = $("#" + controlId);
