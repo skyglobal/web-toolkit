@@ -85,31 +85,27 @@ var scrollspy = (function ($) { "use strict";
 
         for (i = offsets.length; i--;) {
             activeTarget != targets[i]
-                && scrollTop >= offsets[i]
-                && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+                && scrollTop >= offsets[i] - 100 // note: the 100 is the height of the whole navigation menu
+                && (!offsets[i + 1] || scrollTop <= offsets[i + 1] - 100) // note: the 100 is the height of the whole navigation menu
             && this.activate( targets[i] )
         }
     }
 
     ScrollSpy.prototype.activate = function (target) {
-        this.activeTarget = target
-
-        var selector = this.selector
-            + '[data-target="' + target + '"],'
-            + this.selector + '[href="' + target + '"]'
-
-        $(this.selector)
-            .parents('.selected')
-            .removeClass('selected')
-
-        var active = $(selector)
-            .parents('li')
-            .addClass('selected')
-
-        $('#toolkit-menu-tabs').find('[role=tablist] .selected').removeClass('selected');
-        active = $('#' + active.parent().parent().parent().addClass('selected').attr('aria-labeledby')).addClass('selected');
-
-        active.trigger('activate')
+        this.activeTarget = this.activeTarget || {};
+        var splits = target.split('--');
+        var selectedMainTab = splits[0];
+        var selectedSubTab = splits.length > 1 ? splits[1] : null;
+        if (this.activeTarget.selectedMainTab !== selectedMainTab) {
+            $('.tabs a[href="' + selectedMainTab + '"]').parent()
+                .trigger('click')// for in-page-nav, in particular to deal with drop down menu
+                .trigger('activate'); // for demo's menu to show/hide appropriate submenu
+            this.activeTarget = selectedMainTab;
+        }
+        if (this.activeTarget.selectedSubTab !== selectedSubTab) {
+            $('.tabs a[href="' + selectedMainTab + '--' + selectedSubTab + '"]').parent().trigger('click');
+            this.activeTarget = selectedSubTab;
+        }
     }
 
 

@@ -1,50 +1,61 @@
 <section class="clearfix tabs-container page-nav main-menu sticky" data-function="tabs" id='toolkit-menu-tabs'>
     <div class="skycom-container clearfix">
         <div class="alpha skycom-12">
+
             <h2 class="speak">Main Navigation</h2>
-            <ul class="tabs clearfix" role="tablist">
-                {% for primary_link in site.data.nav %}
-                    {% assign primary_link_name = primary_link[0] %}
-                    {% assign primary_link_url = primary_link_name | downcase | replace: ' ','-' %}
-                    <li id='{{primary_link_url}}-tab' aria-controls="{{primary_link_url}}-tab-contents" role="tab" class="tab
-                    {% if forloop.first %}
-                        selected
-                    {% endif %}
-                    "><a href="index.html#{{primary_link_url}}" class="intro ellipsis internal-link">{{primary_link_name}}</a></li>
-                {% endfor %}
-                <li id="changes-tab" aria-controls="changes-tab-contents" role="tab" class="tab">
-                    <a href="changes.html" class="intro ellipsis internal-link">Changes</a>
-                </li>
-            </ul>
+
+            <section class="tabcontents tabs-container page-nav primary">
+                <ul class="nav tabs clearfix" role="tablist">
+                    {% for primary_link in site.data.nav %}
+                        {% assign primary_link_name = primary_link[0] %}
+                        {% assign primary_link_url = primary_link_name | downcase | replace: ' ','-' %}
+                    <li id='{{primary_link_url}}-tab' aria-controls="{{primary_link_url}}-tab-contents" role="tab" class="tab {% if forloop.first %} selected {% endif %}">
+                        <a href="#{{primary_link_url}}" class="intro ellipsis internal-link">{{primary_link_name}}</a>
+                    </li>
+                    {% endfor %}
+                    <li id="changes-tab" aria-controls="changes-tab-contents" role="tab" class="tab">
+                        <a href="changes.html" class="intro ellipsis internal-link">Changes</a>
+                    </li>
+                </ul>
+                <div class="dropdown-tab-select">
+                    <div href="#" aria-hidden="true" class="medium selector">&hellip;</div>
+                    <ul class="nav more-tabs">
+
+                    </ul>
+                </div>
+            </section>
 
             {% assign secondary_selected = "selected" %}
             {% for primary_link in site.data.nav %}
             {% assign primary_link_name = primary_link[0] %}
             {% assign primary_link_url = primary_link_name | downcase | replace: ' ','-' %}
-                <div id="{{primary_link_url}}-tab-contents" class="tabpanel
-                {% if forloop.first %}
-                selected
-                {% endif %}
-                " aria-labeledby="{{primary_link_url}}-tab" role="tabpanel" >
-                    <section class="tabcontents tabs-container page-nav">
-                        <ul class="nav tabs clearfix">
-                            {% for secondary_link in primary_link[1] %}
-                                {% assign secondary_link_name = secondary_link[0] %}
-                                {% assign secondary_link_url = secondary_link_name | downcase | replace: ' ','-' %}
-                            <li class="tab {{secondary_selected}}">
-                                {% assign secondary_selected = "" %}
-                                <a href="index.html#{{primary_link_url}}--{{secondary_link_url}}" class="ellipsis internal-link" data-diff="{{primary_link_url}}/{{secondary_link_url}}" data-diff-demos="
-                                {% for example in secondary_link[1].examples %}
-                                    {% assign url = example.example | downcase | replace: ' ','-' %}
-                                    {{url}}{% unless forloop.last %},{% endunless %}
-                                {% endfor %}
-                                ">{{secondary_link_name}}</a>
-                            </li>
+            <div id="{{primary_link_url}}-tab-contents" class="tabpanel {% if forloop.first %} selected {% endif %}" aria-labeledby="{{primary_link_url}}-tab" role="tabpanel">
+                <section class="tabcontents tabs-container page-nav secondary">
+                    <ul class="nav tabs clearfix" role="tablist">
+                        {% for secondary_link in primary_link[1] %}
+                            {% assign secondary_link_name = secondary_link[0] %}
+                            {% assign secondary_link_url = secondary_link_name | downcase | replace: ' ','-' %}
+                        <li role="tab" class="tab {{secondary_selected}}" id='{{primary_link_url}}--{{secondary_link_url}}-tab' aria-controls="{{primary_link_url}}--{{secondary_link_url}}-tab-contents">
+                            {% assign secondary_selected = "" %}
+                            <a href="#{{primary_link_url}}--{{secondary_link_url}}" class="ellipsis internal-link" data-diff="{{primary_link_url}}/{{secondary_link_url}}" data-diff-demos="
+                            {% for example in secondary_link[1].examples %}
+                                {% assign url = example.example | downcase | replace: ' ','-' %}
+                                {{url}}{% unless forloop.last %},{% endunless %}
                             {% endfor %}
+                            ">{{secondary_link_name}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="dropdown-tab-select">
+                        <div aria-hidden="true" class="medium selector">&hellip;</div>
+                        <ul class="nav more-tabs">
+
                         </ul>
-                    </section>
-                </div>
+                    </div>
+                </section>
+            </div>
             {% endfor %}
+
         </div>
     </div>
 </section>

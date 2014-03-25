@@ -1,4 +1,4 @@
-.main-menu.tabs-container.main-menu [role=tablist]{
+.main-menu.tabs-container.main-menu .primary [role=tablist]{
   margin-bottom: 0;
   > li.selected a,
   > li:hover a{
@@ -66,3 +66,19 @@ body {
     }
   }
 }
+
+//#toolkit-menu-tabs .tabpanel {
+//  @include transition(max-height 0.5s);
+//  display: block;
+//  max-height: 0px;
+//  position: absolute;
+//  overflow: hidden;
+//  background-color: #fff;
+//  &.selected {
+//    max-height: 200px;
+//  }
+//}
+//
+//#toolkit-menu-tabs > *, #toolkit-menu-tabs > * > * {
+//  position: relative;
+//}

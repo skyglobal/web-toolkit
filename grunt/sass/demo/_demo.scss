@@ -164,3 +164,7 @@ pre code{
   max-height: 400px;
   max-width: 100%;
 }
+
+.demo-section {
+  min-height: 100vh; /* any section should be a page-height */
+}
