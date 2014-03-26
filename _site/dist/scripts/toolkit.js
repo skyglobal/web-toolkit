@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.2.5 - 2014-03-20 */
+/*! web-toolkit - v2.2.5 - 2014-03-26 */
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
@@ -1625,7 +1625,7 @@ toolkit.video = function(window, $, event) {
                 e.preventDefault();
             }
             var video = this;
-            event.off(window, "resizeend", video.resizeContainer);
+            event.off(window, "resizeend", video.resizeListener);
             sky.html5player.close(this.$wrapper);
             this.hideCanvas();
         },
@@ -1640,7 +1640,8 @@ toolkit.video = function(window, $, event) {
                 $container.animate({
                     height: height
                 }, animationSpeed, function() {
-                    event.on(window, "resizeend", $.proxy(video.resizeContainer, video));
+                    video.resizeListener = video.resizeContainer.bind(video);
+                    event.on(window, "resizeend", video.resizeListener);
                     $wrapper.show();
                     $overlay.fadeOut(animationSpeed);
                     callback();
@@ -1815,9 +1816,6 @@ toolkit.carousel = function(video, detect) {
         },
         "goto": function(slideIndex, pause, callback) {
             if (pause !== false) this.pause();
-            if (slideIndex === this.currentIndex) {
-                return;
-            }
             if (slideIndex > this.currentIndex) {
                 this.moveSlide({
                     index: slideIndex,
@@ -1825,10 +1823,17 @@ toolkit.carousel = function(video, detect) {
                     end: -50,
                     callback: callback
                 });
-            } else {
+            } else if (slideIndex < this.currentIndex) {
                 this.moveSlide({
                     index: slideIndex,
                     start: -50,
+                    end: 0,
+                    callback: callback
+                });
+            } else {
+                this.moveSlide({
+                    index: slideIndex,
+                    start: 0,
                     end: 0,
                     callback: callback
                 });
@@ -2016,7 +2021,11 @@ toolkit.carousel = function(video, detect) {
                 markup.indicators($this, {
                     count: carousel.slideCount,
                     onclick: function(index) {
-                        carousel.goto(index);
+                        if (index !== carousel.currentIndex) {
+                            carousel.goto(index, true);
+                        } else {
+                            carousel.pause();
+                        }
                     }
                 }).terms($this).actions($this, {
                     count: carousel.slideCount,
