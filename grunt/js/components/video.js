@@ -75,7 +75,7 @@ toolkit.video = (function (window, $, event) {
         stop:function (e) {
             if(e) { e.preventDefault(); }
             var video = this;
-            event.off(window, 'resizeend', video.resizeContainer);
+            $(window).off("resizeend");
             sky.html5player.close(this.$wrapper);
             this.hideCanvas();
         },
@@ -96,7 +96,7 @@ toolkit.video = (function (window, $, event) {
                 $close.addClass('active');
                 height = video.calculateHeight();
                 $container.animate({ height:height }, animationSpeed, function () {
-                    event.on(window, 'resizeend', $.proxy(video.resizeContainer, video));
+                    $(window).on("resizeend", $.proxy(video.resizeContainer, video));
                     $wrapper.show();
                     $overlay.fadeOut(animationSpeed);
                     callback();
