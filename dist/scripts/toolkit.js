@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.2.5 - 2014-03-26 */
+/*! web-toolkit - v2.2.5 - 2014-03-28 */
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
@@ -747,11 +747,15 @@ toolkit.inPageNav = function(hash, event) {
                 self.tabSizes[this.id] = $(this).outerWidth(true);
                 var obj = $(this);
                 var dropdownObj = obj.clone(true).removeClass("selected").removeAttr("aria-controls").removeAttr("aria-label").removeAttr("role").attr("aria-hidden", "true");
+                var selected = obj.hasClass("selected");
+                obj.addClass("selected");
+                var maximumWidth = obj.outerWidth(true);
+                obj.toggleClass("selected", selected);
                 self.tabStates.push({
                     id: this.id,
                     obj: obj,
                     dropdownObj: dropdownObj,
-                    size: obj.outerWidth(true),
+                    size: maximumWidth,
                     selected: obj.hasClass("selected"),
                     dropped: false
                 });
@@ -788,7 +792,8 @@ toolkit.inPageNav = function(hash, event) {
             return selected;
         },
         setDroppedTabs: function() {
-            var containerWidth = this.$tabContainer.outerWidth(true) - this.$moreTabsContainer.show().outerWidth(true);
+            var dropDownIconWidth = this.$moreTabsContainer.show().outerWidth(true) || 44;
+            var containerWidth = this.$tabContainer.outerWidth(true) - dropDownIconWidth;
             var totalWidth = 0;
             if (this.getSelectedTab()) {
                 totalWidth += this.$tabs.filter("#" + this.getSelectedTab().id).outerWidth(true);
@@ -804,6 +809,9 @@ toolkit.inPageNav = function(hash, event) {
             var self = this;
             hash.register(this.getHashList(), this.changeTab.bind(self));
             this.$tabs.on("click", function() {
+                self.changeTab($(this).find("a").attr("href"));
+            });
+            this.$moreTabsContainer.find("li").on("click", function() {
                 self.changeTab($(this).find("a").attr("href"));
             });
             this.$tabs.find("a").on("focus", function() {
@@ -842,7 +850,7 @@ toolkit.inPageNav = function(hash, event) {
             return arrHash;
         },
         changeTab: function(controlId) {
-            controlId = controlId.replace("#!", "");
+            controlId = controlId.replace(/^#!{0,1}/, "");
             var $thisTab = $("#" + controlId.replace("-tab-contents", "") + "-tab");
             var $thisTabTarget = $("#" + controlId);
             this.$tabs.filter(".dropped-during-interaction").removeClass("dropped-during-interaction");
@@ -1497,7 +1505,7 @@ if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.tooltip = function(detect) {
     function bindEvents() {
-        $(document).on("mouseenter mouseleave", "[data-tooltip]", hover);
+        ($(".tooltip-container") || $(document)).on("mouseenter mouseleave", "[data-tooltip]", hover);
         $("[data-tooltip] .tooltip-content").on("click", preventClicksToParent);
     }
     function preventClicksToParent(event) {

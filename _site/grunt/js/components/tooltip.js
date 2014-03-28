@@ -3,7 +3,7 @@ toolkit.tooltip = (function (detect) {
 
 
     function bindEvents() {
-        $(document).on('mouseenter mouseleave', '[data-tooltip]', hover);
+        ($(".tooltip-container") || $(document)).on('mouseenter mouseleave', '[data-tooltip]', hover);
         $("[data-tooltip] .tooltip-content").on('click', preventClicksToParent);
     }
 
