@@ -1,10 +1,23 @@
+version: 2.2.5
 destination: _site
-exclude: [
-  node_modules, test, README.md,
-  Gemfile, Gemfile.lock, rakefile,
-  Web-toolkit.iml,web-toolkit.iml, web-toolkit.ipr, web-toolkit.iws,circle.yml, Gruntfile.js,package.json,
-  build.txt,
-  vendor,
-  deprecated]
-include: [_includes, test]
+exclude:
+  - node_modules
+  - test
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - rakefile
+  - Web-toolkit.iml
+  - web-toolkit.iml
+  - web-toolkit.ipr
+  - web-toolkit.iws
+  - circle.yml
+  - Gruntfile.js
+  - package.json
+  - build.txt
+  - vendor
+  - deprecated
+include:
+  - _includes
+  - test
 port: 4000
