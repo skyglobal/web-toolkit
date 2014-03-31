@@ -62,6 +62,37 @@ function detectSpec(detect, event) {
             expect(detect.elementVisibleBottom(elementTwo)).to.equal(true);
         });
 
+
+        it('elementVisibleRight should return false, when right of an element is not visible', function () {
+
+            var element = {
+                offsetWidth: 10000,
+                getBoundingClientRect : function(){
+                    return {
+                        top : 100000,
+                        left: 100000
+                    };
+                }
+            }
+
+            expect(detect.elementVisibleRight(element)).to.equal(false);
+        });
+
+        it('elementVisibleRight should return true, when right of an element is visible', function () {
+
+            var elementTwo = {
+                offsetWidth: -1000,
+                getBoundingClientRect : function(){
+                    return {
+                        top : 2,
+                        left: 3
+                    };
+                }
+            }
+
+            expect(detect.elementVisibleRight(elementTwo)).to.equal(true);
+        });
+
         it('when you are in desktop view', function () {
             var css =$("<style type='text/css'> html:after{ content:'desktop'} </style>");
             css.appendTo("head");

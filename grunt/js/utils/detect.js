@@ -149,17 +149,27 @@ toolkit.detect = (function (event) {
         return state.touch;
     }
 
+    function getElementOffset(el) {
+        return {
+            top: el.getBoundingClientRect().top + window.pageYOffset - document.documentElement.clientTop,
+            left: el.getBoundingClientRect().left + window.pageXOffset - document.documentElement.clientLeft
+        };
+    }
+
     function elementVisibleBottom(el) {
         if (el.length < 1)
             return;
 
-        var elementOffset =  {
-            top: el.getBoundingClientRect().top + window.pageYOffset - document.documentElement.clientTop,
-            left: el.getBoundingClientRect().left + window.pageXOffset - document.documentElement.clientLeft
-        };
-
+        var elementOffset =  getElementOffset(el);
         var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         return (elementOffset.top + el.offsetHeight <= scrollTop + document.documentElement.clientHeight);
+    }
+
+    function elementVisibleRight(el) {
+        if (el.length < 1)
+            return;
+        var elementOffset =  getElementOffset(el);
+        return (elementOffset.left + el.offsetWidth <= document.documentElement.clientWidth);
     }
 
     attachClasses();
@@ -173,6 +183,7 @@ toolkit.detect = (function (event) {
         pseudo: pseudo,
         state: state,
         elementVisibleBottom: elementVisibleBottom,
+        elementVisibleRight: elementVisibleRight,
         updateDetectionStates: updateDetectionStates //just expose this while phantomJS doesnt understand event.emit(window,'resize');
     };
 

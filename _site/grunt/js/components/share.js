@@ -10,16 +10,12 @@ toolkit.share = (function(detect) {
     function toggleSharePopover(e) {
         e.preventDefault();
         var $section = $(this).parent(),
+            $popover = $section.parent().find('.popover'),
             triggerEvents = 'keypress ' + ('ontouchend' in document.documentElement ? 'touchend' : 'click');
         if(e.type === 'click' || e.type === 'touchend' || (e.type === 'keypress' && e.which === 13)) {
             $section.toggleClass('active');
-            var $popover = $(this).parent().find('.popover');
-            if(detect.elementVisibleBottom($popover[0]) === false) {
-                 $popover.addClass("top");
-
-            } else {
-                $popover.removeClass("top");
-            }
+            $popover.toggleClass("top", !detect.elementVisibleBottom($popover[0]));
+            $popover.toggleClass("left", !detect.elementVisibleRight($popover[0]));
 
             $document.on(triggerEvents, function hidePopover(e) {
                 if(!$.contains($section[0], e.target)) {
