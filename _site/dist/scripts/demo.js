@@ -61,6 +61,7 @@ demo.displayCode = (function( hljs){
         this.addCode(featureFile, ext, styled);
         if (this.fileCount === this.filesReceived){
             $('#code-' + this.feature).inPageNav();
+            this.$tabList.find('.tab').first().click();
             this.$lightboxLink.lightbox({closeButtonColour: 'black'});
         }
     };
