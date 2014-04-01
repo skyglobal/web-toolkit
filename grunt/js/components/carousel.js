@@ -4,6 +4,7 @@ toolkit.carousel = (function(video, detect) {
 
     var has3d = detect.css('support3D');
     var hasTransform = detect.css('transform');
+    var hasTransition = detect.css('transition');
 
     function Carousel(element, options) {
         this.options = options;
@@ -54,7 +55,7 @@ toolkit.carousel = (function(video, detect) {
             if (animate) $container.addClass("animate");
             if (has3d) {
                 $container.css("transform", "translate3d("+ percent +"%,0,0) scale3d(1,1,1)");
-            } else if (hasTransform) {
+            } else if (hasTransform && hasTransition) {
                 $container.css("transform", "translate("+ percent +"%,0)");
             } else if (animate) {
                 $container.animate({'left': (percent*2) + '%'}, 600);
@@ -156,7 +157,7 @@ toolkit.carousel = (function(video, detect) {
                     callback: callback
                 });
             }
-            
+
             return this;
         },
         next: function(pause, callback) {

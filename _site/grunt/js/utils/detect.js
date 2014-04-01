@@ -43,17 +43,25 @@ toolkit.detect = (function (event) {
         html.className = arrClasses.join(' ');
     }
 
-    function support3D(){
-        var property = 'transform';
-        var style = html.style;
-        for(var i=0; i<vendorPrefix.length; i++) {
-            style[vendorPrefix[i] + property] = 'translate3D(0,0,0)';
-            if (style[vendorPrefix[i] + property] === 'translate3D(0,0,0)'){
-                state.css.support3D = true;
-                return state.css.support3D;
+    function support3D() {
+        var transforms = {
+                'webkitTransform': '-webkit-transform',
+                'OTransform': '-o-transform',
+                'msTransform': '-ms-transform',
+                'MozTransform': '-moz-transform',
+                'transform': 'transform'
+            },
+            has3d,
+            t;
+        for (t in transforms) {
+            if (transforms.hasOwnProperty(t)) {
+                if (html.style[t] !== undefined) {
+                    html.style[t] = "translate3d(1px,1px,1px)";
+                    has3d = window.getComputedStyle(html).getPropertyValue(transforms[t]);
+                }
             }
         }
-        state.css.support3D = false;
+        state.css.support3D = (has3d !== undefined && has3d.length > 0 && has3d !== "none");
         return state.css.support3D;
     }
 
