@@ -1,4 +1,4 @@
-version: 2.2.6
+version: 2.2.7
 destination: _site
 exclude:
   - node_modules
