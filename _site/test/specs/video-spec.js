@@ -9,7 +9,9 @@ function videoSpec(Video) {
     addScript('components','video','default');
 
     var $container = $('#demo-video'),
-        $wrapper, $overlay, $close;
+        $wrapper,
+        $overlay,
+        $close;
 
     if (!window.sky){ //needed for grunt test.
         window.sky = { html5player : { close: function(){}, play: function(){}}};
@@ -29,28 +31,40 @@ function videoSpec(Video) {
             updateElements();
         });
 
-        afterEach(function(){
+        afterEach(function (){
             $('#demo-video .close.active').click();
             $.fx.off = false; //todo: change this for css animation
         });
 
-//        todo: unskip. was working before coverage update.
-        it.skip('will play the video when play is clicked', function () {
+        it('will play the video when play is clicked', function () {
             expect($wrapper.length).to.equal(0);
             expect($overlay.length).to.equal(0);
-            $('#demo-video .play-video ').click();
+            $('#demo-video .play-video').click();
             updateElements();
             expect($wrapper.hasClass('playing-video')).to.equal(true);
             expect($container.find('.playing-video').length).to.equal(1);
             expect($wrapper.length).to.equal(1);
             expect($overlay.length).to.equal(1);
-
             expect($close.hasClass('active')).to.equal(true);
+        });
+
+        it('will stop + fade out when the ad and video have played', function () {
+            $('#demo-video .play-video').click();
+            updateElements();
+            $('video').trigger('onSlotStarted');
+            expect($container.find('.playing-video').length).to.equal(1);
+            $('video').trigger('ended');
+            expect($container.find('.playing-video').length).to.equal(1);
+            $('video').trigger('onSlotEnded');
+            expect($container.find('.playing-video').length).to.equal(1);
+            $('video').trigger('playing');
+            $('video').trigger('ended');
+            expect($container.find('.playing-video').length).to.equal(0);
         });
 
         it('will stop + fade out when the close button is clicked', function () {
             expect($container.find('playing-video').length).to.equal(0);
-            $('#demo-video .play-video ').click();
+            $('#demo-video .play-video').click();
             updateElements();
             $('#demo-video .close.active').click();
             updateElements();
@@ -60,7 +74,7 @@ function videoSpec(Video) {
 
         it('will stop + fade out when the video finishes', function () {
             expect($container.find('playing-video').length).to.equal(0);
-            $('#demo-video .play-video ').click();
+            $('#demo-video .play-video').click();
             updateElements();
             $('video').trigger('ended');
             expect($container.find('playing-video').length).to.equal(0);
