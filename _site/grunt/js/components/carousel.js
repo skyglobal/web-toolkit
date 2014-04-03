@@ -411,6 +411,7 @@ toolkit.carousel = (function(video, detect) {
                 carousel.unbindEvents();
                 carousel.bindEvents();
                 createMarkup(carousel);
+                carousel[options.autoplay === true ? 'play' : 'pause'](false, options.interval);
             }).on('keyup',function(e){
                 switch(e.keyCode){
                     case 9: carousel.pause(); break; //tab

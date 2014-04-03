@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.2.9 - 2014-04-02 */
+/*! web-toolkit - v2.2.10 - 2014-04-03 */
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
@@ -2088,6 +2088,7 @@ toolkit.carousel = function(video, detect) {
                 carousel.unbindEvents();
                 carousel.bindEvents();
                 createMarkup(carousel);
+                carousel[options.autoplay === true ? "play" : "pause"](false, options.interval);
             }).on("keyup", function(e) {
                 switch (e.keyCode) {
                   case 9:
