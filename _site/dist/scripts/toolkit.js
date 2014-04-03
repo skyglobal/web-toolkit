@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.2.10 - 2014-04-03 */
+/*! web-toolkit - v2.2.11 - 2014-04-03 */
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
@@ -202,15 +202,17 @@ toolkit.detect = function(event) {
             msTransform: "-ms-transform",
             MozTransform: "-moz-transform",
             transform: "transform"
-        }, has3d, t;
+        }, has3d, div = document.createElement("div"), t;
+        document.body.insertBefore(div, null);
         for (t in transforms) {
             if (transforms.hasOwnProperty(t)) {
-                if (html.style[t] !== undefined) {
-                    html.style[t] = "translate3d(1px,1px,1px)";
-                    has3d = window.getComputedStyle(html).getPropertyValue(transforms[t]);
+                if (div.style[t] !== undefined) {
+                    div.style[t] = "translate3d(1px,1px,1px)";
+                    has3d = window.getComputedStyle(div).getPropertyValue(transforms[t]);
                 }
             }
         }
+        document.body.removeChild(div);
         state.css.support3D = has3d !== undefined && has3d.length > 0 && has3d !== "none";
         return state.css.support3D;
     }
