@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.2.11 - 2014-04-03 */
+/*! web-toolkit - v2.2.12-rc-1 - 2014-04-04 */
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
@@ -2077,6 +2077,7 @@ toolkit.carousel = function(video, detect) {
             }).on("goto", function(e, slideIndex) {
                 carousel.goto(slideIndex, true);
             }).on("refresh", function(e, slideIndex) {
+                var playing = $this.hasClass("playing");
                 carousel.$slideContainer = carousel.$viewport.find(".skycom-carousel-container");
                 carousel.$slides = carousel.$slideContainer.find(">");
                 carousel.slideCount = carousel.$slides.length;
@@ -2090,7 +2091,7 @@ toolkit.carousel = function(video, detect) {
                 carousel.unbindEvents();
                 carousel.bindEvents();
                 createMarkup(carousel);
-                carousel[options.autoplay === true ? "play" : "pause"](false, options.interval);
+                carousel[playing ? "play" : "pause"](false, options.interval);
             }).on("keyup", function(e) {
                 switch (e.keyCode) {
                   case 9:

@@ -398,6 +398,7 @@ toolkit.carousel = (function(video, detect) {
             }).on('goto',function(e, slideIndex) {
                 carousel.goto(slideIndex, true);
             }).on('refresh',function(e, slideIndex) {
+                var playing = $this.hasClass('playing');
                 carousel.$slideContainer = carousel.$viewport.find('.skycom-carousel-container');
                 carousel.$slides = carousel.$slideContainer.find('>');
                 carousel.slideCount = carousel.$slides.length;
@@ -411,7 +412,7 @@ toolkit.carousel = (function(video, detect) {
                 carousel.unbindEvents();
                 carousel.bindEvents();
                 createMarkup(carousel);
-                carousel[options.autoplay === true ? 'play' : 'pause'](false, options.interval);
+                carousel[playing ? 'play' : 'pause'](false, options.interval);
             }).on('keyup',function(e){
                 switch(e.keyCode){
                     case 9: carousel.pause(); break; //tab
