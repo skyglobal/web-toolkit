@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.2.11 - 2014-04-07 */
+/*! web-toolkit - v2.2.11 - 2014-04-08 */
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
@@ -1605,6 +1605,16 @@ toolkit.video = function(window, $, event) {
             $("body").one("keydown", video.stopOnEscape.bind(video));
             video.$wrapper.one("click touchstart", ".close", video.stop.bind(video));
             video.$player.one("ended webkitendfullscreen", video.stop.bind(video));
+            if (video.options.freewheel) {
+                video.$player.on("onSlotStarted", function() {
+                    video.$player.off("ended webkitendfullscreen");
+                    video.$player.one("onSlotEnded", function() {
+                        video.$player.one("playing", function() {
+                            video.$player.one("ended webkitendfullscreen", video.stop.bind(video));
+                        });
+                    });
+                });
+            }
         },
         createWrapper: function() {
             this.options.$wrapperLocation.append('<div class="video-wrapper">' + '<a href="#!" class="close"><i class="skycon-close" aria-hidden=true></i><span class="speak">Close</span></a>' + '<div class="videocontrolcontainer"><video></video><img class="posterFrame"/></div>' + "</div>");
@@ -1730,7 +1740,12 @@ toolkit.carousel = function(video, detect) {
         this.timerId = false;
         this.touchReset();
         this.bindEvents();
-        this.initialiseVideos();
+        if (!this.options.video) {
+            this.options.video = {
+                displayAdverts: false
+            };
+        }
+        this.initialiseVideos(this.options.video);
     }
     Carousel.prototype = {
         unbindTouchEvents: function() {
@@ -1803,12 +1818,12 @@ toolkit.carousel = function(video, detect) {
             this.$viewport.find(".terms-link").fadeOut(200);
             this.hideTermsContent();
         },
-        initialiseVideos: function() {
+        initialiseVideos: function(options) {
             var carousel = this;
             this.$slides.video({
                 $wrapperLocation: carousel.$viewport,
-                token: "8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-                displayAdverts: false,
+                token: options.token || "8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
+                displayAdverts: options.displayAdverts,
                 onPlay: function() {
                     carousel.pause();
                     carousel.$viewport.find(".actions, .indicators, .terms-link").fadeOut(500);

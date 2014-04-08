@@ -16,7 +16,10 @@ toolkit.carousel = (function(video, detect) {
         this.timerId = false;
         this.touchReset();
         this.bindEvents();
-        this.initialiseVideos();
+        if (!this.options.video) {
+            this.options.video = { displayAdverts: false };
+        }
+        this.initialiseVideos(this.options.video);
     }
 
     Carousel.prototype = {
@@ -92,12 +95,12 @@ toolkit.carousel = (function(video, detect) {
             this.$viewport.find('.terms-link').fadeOut(200);
             this.hideTermsContent();
         },
-        initialiseVideos: function() {
+        initialiseVideos: function(options) {
             var carousel = this;
             this.$slides.video({
                 $wrapperLocation: carousel.$viewport,
-                token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-                displayAdverts: false, //disable ads
+                token: options.token || "8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
+                displayAdverts: options.displayAdverts,
                 onPlay: function() {
                     carousel.pause();
                     carousel.$viewport.find('.actions, .indicators, .terms-link').fadeOut(500);
@@ -157,7 +160,7 @@ toolkit.carousel = (function(video, detect) {
                     callback: callback
                 });
             }
-
+            
             return this;
         },
         next: function(pause, callback) {

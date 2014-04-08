@@ -32,6 +32,17 @@ toolkit.video = (function (window, $, event) {
             $('body').one('keydown', video.stopOnEscape.bind(video));
             video.$wrapper.one('click touchstart', '.close', video.stop.bind(video));
             video.$player.one('ended webkitendfullscreen', video.stop.bind(video));
+
+            if (video.options.freewheel) {
+                video.$player.on('onSlotStarted', function () {
+                    video.$player.off('ended webkitendfullscreen');
+                    video.$player.one('onSlotEnded', function () {
+                        video.$player.one('playing', function() {
+                            video.$player.one('ended webkitendfullscreen', video.stop.bind(video));
+                        });
+                    });
+                });
+            }
         },
         createWrapper:function () {
             this.options.$wrapperLocation.append('<div class="video-wrapper">' +
