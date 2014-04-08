@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.2.11 - 2014-04-07 */
+/*! web-toolkit - v2.2.11 - 2014-04-08 */
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
@@ -1606,7 +1606,6 @@ toolkit.video = function(window, $, event) {
             video.$wrapper.one("click touchstart", ".close", video.stop.bind(video));
             video.$player.one("ended webkitendfullscreen", video.stop.bind(video));
             if (video.options.freewheel) {
-                console.log("IN!!", video.options);
                 video.$player.on("onSlotStarted", function() {
                     video.$player.off("ended webkitendfullscreen");
                     video.$player.one("onSlotEnded", function() {
@@ -1823,7 +1822,7 @@ toolkit.carousel = function(video, detect) {
             var carousel = this;
             this.$slides.video({
                 $wrapperLocation: carousel.$viewport,
-                token: options.token,
+                token: options.token || "8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
                 displayAdverts: options.displayAdverts,
                 onPlay: function() {
                     carousel.pause();

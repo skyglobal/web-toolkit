@@ -34,7 +34,6 @@ toolkit.video = (function (window, $, event) {
             video.$player.one('ended webkitendfullscreen', video.stop.bind(video));
 
             if (video.options.freewheel) {
-                console.log("IN!!", video.options);
                 video.$player.on('onSlotStarted', function () {
                     video.$player.off('ended webkitendfullscreen');
                     video.$player.one('onSlotEnded', function () {

@@ -99,7 +99,7 @@ toolkit.carousel = (function(video, detect) {
             var carousel = this;
             this.$slides.video({
                 $wrapperLocation: carousel.$viewport,
-                token: options.token,
+                token: options.token || "8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
                 displayAdverts: options.displayAdverts,
                 onPlay: function() {
                     carousel.pause();
