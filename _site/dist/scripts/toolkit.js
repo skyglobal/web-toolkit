@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.2.11 - 2014-04-08 */
+/*! web-toolkit - v2.2.12 - 2014-04-10 */
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
