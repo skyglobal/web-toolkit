@@ -30,6 +30,8 @@
   - `npm install`
 5. Install the require gems using Bundler
   - `bundle install`
+6. Install Grunt CLI 
+  - `npm install -g grunt-cli`
 
 ### Running
 
