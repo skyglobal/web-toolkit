@@ -1318,7 +1318,7 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
         </div>
 
         <div data-video-id="clip-00ovbt3u"
-             class="slide clearfix skycom-12 alpha  light-scheme"
+             class="slide clearfix skycom-12 alpha light-scheme"
              data-tracking-other="Sky News"
              data-tracking-pod="tile-2"
              data-tracking-label="Introducing Sky Entertainment Extra+"
@@ -1381,7 +1381,9 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
                                     require(['toolkit'], function(){
                                         $('#hero').skycom_carousel({
     autoplay: true,
-    videoAds: false
+    video: {
+      token: '8D5B12D4-E1E6-48E8-AF24-F7B13050EE85'
+    }
 });
                                     });
                                 }
@@ -1448,7 +1450,9 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
                                     require(['toolkit'], function(){
                                         $('#empty-hero').skycom_carousel({
     autoplay: true,
-    videoAds: false
+    video: {
+      token: '8D5B12D4-E1E6-48E8-AF24-F7B13050EE85'
+    }
 });
                                     });
                                 }
@@ -1572,7 +1576,9 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
                                     require(['toolkit'], function(){
                                         $('#hero-skinny').skycom_carousel({
     autoplay: true,
-    videoAds: false
+    video: {
+      token: '8D5B12D4-E1E6-48E8-AF24-F7B13050EE85'
+    }
 });
                                     });
                                 }
@@ -2316,8 +2322,8 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
                                 if (window.environment=="demo") {
                                     require(['toolkit'], function(){
                                         $('#demo-video.video-container').video({
-    token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85", //this token should be unique to your team
-    displayAdverts:false ,
+    token: '8D5B12D4-E1E6-48E8-AF24-F7B13050EE85', //this token should be unique to your team
+    displayAdverts: true,
     onPlay: function() { //optional
         //stuff to do before video plays
     },
@@ -2325,6 +2331,7 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
         //stuff to do after video closes
     }
 });
+
                                     });
                                 }
                             </script>
