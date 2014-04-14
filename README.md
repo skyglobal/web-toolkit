@@ -10,6 +10,7 @@
 - RVM
 - Ruby (version 1.9.3 or later)
 - npm
+- grunt
 
 ### Setup
 1. Fork the web-toolkit repository from this skyglobal user into your own user area (fork button, top right)
