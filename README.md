@@ -84,13 +84,14 @@ Before you submit your pull request, run :
     │   ├── font-svgs   => src svg files used to generate font icons (skycons)
     │   ├── fonts       => Sky Text Fonts
     │   ├── images      => images not for spriting
-    │   └── lib         => untouched third-party files
+    │   ├── lib         => untouched third-party files
+    |   └── wiki-images => images used for demos in the wiki
     ├── test
     │   ├── libararies  => Third-party src files for testing
     │   ├── specs       => place for *-spec.js files
+    │   ├── screenshots
     │   ├── config.js   => RequireJS and Mocha config file
     │   └── runner.js   => explitly call each spec file for `grunt test` to run
-    ├── wiki-images     => images used for demos in the wiki
     ├── config.yml      => Jekyll config file
     ├── changes.html    => Page for users to see changes between toolkit version
     ├── circle.yml      => CircleCI config file
