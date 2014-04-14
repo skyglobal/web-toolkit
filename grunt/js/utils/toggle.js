@@ -52,7 +52,16 @@ toolkit.toggle = (function(detect, event) {
             .append($el.clone().attr('style', '').removeClass(hiddenClass + ' transition ')));
         $('#toggle-tmp-height > div').append('<div class="toggle-clearfix-div clearfix clear" style="padding:1px"></div> ');
         $('#toggle-tmp-height > div').prepend('<div class="toggle-clearfix-div clearfix clear" style="padding:1px"></div> ');
+        
         var openHeight  = $('#toggle-tmp-height > div').height() - 2;
+
+        if($el.find('img').length > 0){
+            var originalHeightWithImages = $el.find('.accordion-content').outerHeight() - 2;
+            if(openHeight < originalHeightWithImages){
+                openHeight = originalHeightWithImages;
+            }
+        }
+
         $el.data('openHeight', openHeight);
         $('#toggle-tmp-height').remove();
         $('.toggle-clearfix-div').remove();
