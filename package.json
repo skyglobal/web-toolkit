@@ -1,6 +1,6 @@
 {
     "name": "web-toolkit",
-    "version": "2.2.12-rc-2",
+    "version": "2.2.12-rc-3",
 	"repository" : {
         "type": "git",
         "url": "https://github.com/skyglobal/web-toolkit.git"
