@@ -41,7 +41,7 @@ bundle install
 
 ### Building/Running the Toolkit
 
-Update the toolkit by making your change and testing the it within the demo site.
+Update the toolkit by making your change and testing it within the demo site.
 
  * `grunt server` : Grunt will spin up the [Jekyll](http://jekyllrb.com/docs/github-pages/) server, watch for code changes and rebuild on the fly.
  * `grunt server --beautify` : To help when debugging.
