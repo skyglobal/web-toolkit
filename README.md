@@ -16,6 +16,10 @@ To build the toolkit locally, you'll need to install:
  * [grunt cli](http://gruntjs.com/getting-started),
  * [Bundler](http://bundler.io)
 
+To check you have these tools with the correct versions, run:
+ * `which node && which npm && which grunt && which ruby && which bundle`
+ * `bundle check && npm update`
+
 ### Setup
 
 Clone the repository and install the dependencies
