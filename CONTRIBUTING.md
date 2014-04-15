@@ -1,5 +1,4 @@
 # Contributing
-========================
 
 Please contribute!  But first, read the [ReadMe](https://github.com/skyglobal/web-toolkit#setup).
 
@@ -17,6 +16,8 @@ Please contribute!  But first, read the [ReadMe](https://github.com/skyglobal/we
  6. Push your branch to github
    * `git push origin feature-my-new-stuff`
  7. open a Pull request within github.
+
+If you would like the feature to go live sooner, mention this in the comments/commit. We will provide a temporary live url that will allow you to carry on without getting blocked.
 
 You can also run the cross-browser suite yourself if you have a Browsers Stack account. See `test/README.md`.
 
