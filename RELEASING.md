@@ -1,5 +1,7 @@
 # Releasing the Web Toolkit
 
+Always update the [HISTORY.md](./HISTORY.md) with a summary of changes!!
+
 To release a new version with:
   - Code changes
     - increment the version number in package.json following `semantic versioning` described below.

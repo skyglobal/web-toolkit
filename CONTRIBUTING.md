@@ -13,9 +13,10 @@ Please contribute!  But first, read the [ReadMe](https://github.com/skyglobal/we
  4. Keep the code clean and self documenting
  5. Make sure you are still up to date with master
    * `git pull upstream master`
- 6. Push your branch to github
+ 6. Make sure [HISTORY.md](./HISTORY.md) includes a summary of your changes in a new version number heading
+ 7. Push your branch to github
    * `git push origin feature-my-new-stuff`
- 7. open a Pull request within github.
+ 8. open a Pull request within github.
 
 If you would like the feature to go live sooner, mention this in the comments/commit. We will provide a temporary live url that will allow you to carry on without getting blocked.
 
