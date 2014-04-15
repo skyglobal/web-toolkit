@@ -1,7 +1,5 @@
 # Releasing the Web Toolkit
 
-## Checklists
-
 To release a new version with:
   - Code changes
     - increment the version number in package.json following `semantic versioning` described below.
