@@ -14,6 +14,7 @@ function accordionSpec() {
         var $firstContent = $('#first-accordion-content');
         var $last = $('.view-container').last();
         var $lastLink = $('.accordion-heading').last();
+        var $lastContent = $('#fourth-accordion-content');
 
         function closeAllAccordians(){
             if (!$first.hasClass('toggle-hidden')){
@@ -38,7 +39,7 @@ function accordionSpec() {
         });
 
         it('be closed by default', function () {
-            expect($('.view-container.toggle-hidden').length).to.equal(3);
+            expect($('.view-container.toggle-hidden').length).to.equal(4);
 //            screenshot('accordion', 'default', $first.closest('.sub-section'));
         });
 
@@ -53,6 +54,14 @@ function accordionSpec() {
 //                screenshot('accordion', 'open', $first.closest('.sub-section'));
                 done();
             }, 1000);
+        });
+
+        it('keep markup when open and then closed', function() {
+            expect($firstLink.first().find('strong').length).to.equal(1);
+            $firstLink.click();
+            expect($firstLink.first().find('strong').length).to.equal(1);
+            $firstLink.click();
+            expect($firstLink.first().find('strong').length).to.equal(1);
         });
 
         it('open and close when a user clicks an accordion item twice', function () {
@@ -74,6 +83,14 @@ function accordionSpec() {
             expect($last.hasClass('toggle-hidden')).to.equal(true);
             expect($last.parent().find('> a i').hasClass('rotate-180')).to.equal(false);
         });
+
+        it('allow images inside of the content area and display these without cropping', function(done){
+            $lastLink.click();
+            setTimeout(function(){
+                expect($('#fourth-accordion-content').height()).to.equal(20 + 340 + 16 + 2);
+                done();
+            }, 1000);
+        })
 
         it('open to the height of its content', function (done) {
             var css =$("<style type='text/css'> #first-accordion-content .accordion-content{ height: 600px; margin:10px 0; padding:8px; border:1px} </style>");
