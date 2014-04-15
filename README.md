@@ -1,92 +1,46 @@
 [Web Toolkit](http://skyglobal.github.io/web-toolkit/) [![Build Status](https://circleci.com/gh/skyglobal/web-toolkit.png?circle-token=24eeba25d7352dec038ea9fa25b22671ba28be5e)](https://circleci.com/gh/skyglobal/web-toolkit) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 ========================
 
-> Sky branded front end web framework and style guide.
+> Sky branded CSS, JavaScript utilities, and UI components
 
-## About
-
-<http://skyglobal.github.io/web-toolkit/>
-
-Sky Web Toolkit is a set of Sky branded base CSS styles, UI components and JavaScript utility functions
-to use on Sky branded web sites.
-
-The project contains the toolkit itself and the documentation/demo site built using [Jekyll](http://jekyllrb.com).
-See code structure below for details.
+The project contains the toolkit itself and the [demo site](http://skyglobal.github.io/web-toolkit/) built using
+[Jekyll](http://jekyllrb.com/docs/github-pages/).
 
 ## Getting started
 
-### Dependencies
+### Prerequisites
 
-To build the toolkit locally, you'll need [ruby](https://www.ruby-lang.org/) (version 1.9.3 or later), [node.js](http://nodejs.org), [npm](https://www.npmjs.org) and [grunt](https://www.npmjs.org).
+To build the toolkit locally, you'll need to install:
+ * [ruby](https://www.ruby-lang.org/) (version 1.9.3 or later),
+ * [node.js](http://nodejs.org),
+ * [npm](https://www.npmjs.org) and
+ * [grunt cli](http://gruntjs.com/getting-started)
+ * [Bundler](http://bundler.io)
 
 ### Setup
 
-Clone the repository
+Clone the repository and install the dependencies
 
-`git clone https://github.com/skyglobal/web-toolkit.git`
+```bash
+git clone https://github.com/skyglobal/web-toolkit.git
+cd web-toolkit
+git add remote upstream https://github.com/skyglobal/web-toolkit.git
+npm install
+bundle install
+```
 
-Install npm modules
+### Building/Running the Toolkit
 
-`npm install`
+ * `grunt server` : Grunt will spin up the Jekyll server, watch for code changes and rebuild on the fly.
+ * `grunt server --beautify` : To help when debugging.
+ * `grunt test` : Runs the unit tests
+ * `grunt fonts` : Only needed to rebuild the Icon Fonts (skycons).
 
-Install the require gems using [Bundler](http://bundler.io)
-
-`bundle install`
-
-And finally install the Grunt CLI
-
-`npm install -g grunt-cli`
-
-You can now run all the grunt tasks automating various tasks when working with the toolkit.
-
-### Build the toolkit
-
-To build the toolkit, run
-
-`grunt build`
-
-in the root of the project. That will compile Sass source files (with support for [Compass] mixins),
-assemble the javascript sources and minify the output. Resulting files can be found in the `/dist`
-folder.
-
-Build task will also build the toolkit website using Jekyll.
-
-### Run tests
-
-To run unit tests (using [mocha](http://visionmedia.github.io/mocha/) and [chai](http://chaijs.com/‎)) locally, run
-
-`grunt test`
-
-that will build the toolkit and run tests twice: once on the minified code, once on the original including test
-coverage. Coverage limit is set to 80%, so please make sure your changes keep it where it is or improve it.
-
-You can also run cross browser tests in the cloud using [Browser Stack](http://www.browserstack.com), but you will need a browserstack account. If you have one, you can run
-
-`grunt test-cross-browser` with the following environment variables set:
-
-*  `BROWSERSTACK_USERNAME`
-*  `BROWSERSTACK_PASS`
-*  `BROWSERSTACK_AUTHKEY`
-
-### Run the grunt server
-
-To make changes to the toolkit it is best to run the website locally and make grunt watch for
-code changes using
-
-`grunt server`
-
-in the root of the project (add ` --beautify` to help when debugging). The website should
-open in your browser. Grunt will now monitor the files for changes and rebuild on the fly.
+For more details about the available commands please see `/grunt/README.md`
 
 ## Code overview
 
-The web-toolkit repository contains two main components: the Web Toolkit source code itself
-and the documentation site source files. The repository also contains the build output of both
-of them (`dist` and `_site` directories, respectively).
-
-### The Web Toolkit
-
-Sources for the toolkit are in subdirectories of the `grunt` directory, organized by type
+The repository contains two main components; the Web Toolkit and the demo site.
 
 *  Sass files are in `grunt/sass` and compiled output is saved into `dist/stylesheets`
 *  JavaScript code is in `grunt/js` and contains four modules which are output to `dist/scripts`
@@ -94,23 +48,8 @@ Sources for the toolkit are in subdirectories of the `grunt` directory, organize
   *  `demo` provides demo support for the website
   *  `changes` provides support for the changes page of the website
   *  `testIframe` provides support for running unit tests online on the website
-*  Icon fonts are in `static` directory on the top level. The static files get minified and
-   output into `grunt/fronts/min`. They are then used to generate the font CSS from a template
-   in `fonts/template`. You can run this build using `grunt fonts`
-
-### The documentation website
-
-The documentation website is built using Jekyll. The site is basically a single page built up of modules in `_includes` directory, wrapped in `_layouts/default.html`.
-
-The site is also able to run unit tests online.
-
-The output is written into the `_site` directory, where it's picked up by Github pages and served at <skyglobal.github.io/web-toolkit>.
-
-### Tests
-
-All the tests ar in the `test` directory. Tests themselves are inside `test/specs`.
-
-TODO describe to what level cross browser testing is done.
+ * HTML files are in `_includes`
+*  Skycons are in the `static/font-svgs` and minified into `grunt/fronts/min`.
 
 ### Complete file structure
 
@@ -152,30 +91,11 @@ TODO describe to what level cross browser testing is done.
     ├── test.html       => used by `grunt test` to run all tests at once
     └── README.md
 
-## Contributing your changes
-
-First fork the project, clone and add an upstream
-
-`git add remote upstream https://github.com/skyglobal/web-toolkit.git`
-
-Make sure the code is up to date
-
-`git pull upstream master`
-
-Then add your feature in a new branch (`git checkout -b my-amazing-feature`). Write tests
-as you go, keep the code clean and self documenting and the test coverage above 80%.
-
-When you are done, make sure you are still up to date with master
-
-`git pull upstream master`
-
-push your branch to github
-
-`git push origin my-amazing-feature`
-
-and open a Pull request. Tests will be run on it by CircleCI. You can run the cross browser
-suite yourself if you have a Browsers Stack account. See above.
 
 ## Versioning and Releases
 
-see `RELEASE.md`
+See `RELEASE.md`
+
+## Troubleshooting
+
+See `TROUBLESHOOTING.md`
