@@ -3,11 +3,11 @@
 
 > Sky branded CSS, JavaScript utilities, and UI components.
 
-> Save time by using the toolkit to set your base styles, have headings and buttons styled correctly within seconds.
+> Save time by using the toolkit to set your base styles. Create Sky styled headings and buttons within seconds.
 
-> The toolkit can help you quickly build robust components like accordions and carousels.
+> The toolkit can also help you quickly build robust components like accordions and carousels.
 
-> Component functionality (as described by BDD style tests) are directly visible by the business within the demo site.
+> Business descriptions of component functionality is visible from directly within the demo site (created from the actual unit-test reports)
 
 ## Getting started
 
