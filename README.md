@@ -36,7 +36,8 @@ bundle install
 
  * `grunt server` : Grunt will spin up the [Jekyll](http://jekyllrb.com/docs/github-pages/) server, watch for code changes and rebuild on the fly.
  * `grunt server --beautify` : To help when debugging.
- * `grunt test` : Runs the unit tests
+ * `grunt test` : Runs the unit tests in [PhantomJS](http://phantomjs.org/)
+ * `grunt test-cross-browser` : Runs the unit tests using multiple browsers remotely.
  * `grunt fonts` : Only needed to rebuild the Icon Fonts (skycons).
 
 For more details about the available commands please see [grunt/README.md](./grunt#web-toolkit-grunt)
