@@ -51,7 +51,7 @@ The repository contains two main components; the Web Toolkit and the demo site.
   *  `demo` provides demo support for the website
   *  `changes` provides support for the changes page of the website
   *  `testIframe` provides support for running unit tests online on the website
- * HTML files are in `_includes`
+* HTML files are in `_includes`
 *  Skycons are in the `static/font-svgs` and minified into `grunt/fronts/min`.
 
 ### Complete file structure
