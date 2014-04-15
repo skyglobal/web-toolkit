@@ -95,6 +95,10 @@ The repository contains two main components; the Web Toolkit and the demo site.
     └── README.md
 
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md)
+
 ## Versioning and Releases
 
 See [RELEASING.md](RELEASING.md)
