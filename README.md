@@ -3,8 +3,7 @@
 
 > Sky branded CSS, JavaScript utilities, and UI components
 
-The project contains the toolkit itself and the [demo site](http://skyglobal.github.io/web-toolkit/) built using
-[Jekyll](http://jekyllrb.com/docs/github-pages/).
+The project contains the code to generate the toolkit itself and the [demo site](http://skyglobal.github.io/web-toolkit/).
 
 ## Getting started
 
@@ -13,8 +12,8 @@ The project contains the toolkit itself and the [demo site](http://skyglobal.git
 To build the toolkit locally, you'll need to install:
  * [ruby](https://www.ruby-lang.org/) (version 1.9.3 or later),
  * [node.js](http://nodejs.org),
- * [npm](https://www.npmjs.org) and
- * [grunt cli](http://gruntjs.com/getting-started)
+ * [npm](https://www.npmjs.org),
+ * [grunt cli](http://gruntjs.com/getting-started),
  * [Bundler](http://bundler.io)
 
 ### Setup
@@ -36,7 +35,7 @@ bundle install
  * `grunt test` : Runs the unit tests
  * `grunt fonts` : Only needed to rebuild the Icon Fonts (skycons).
 
-For more details about the available commands please see `/grunt/README.md`
+For more details about the available commands please see [grunt/README.md](./grunt#web-toolkit-grunt)
 
 ## Code overview
 
@@ -94,8 +93,8 @@ The repository contains two main components; the Web Toolkit and the demo site.
 
 ## Versioning and Releases
 
-See `RELEASE.md`
+See [RELEASING.md](RELEASING.md)
 
 ## Troubleshooting
 
-See `TROUBLESHOOTING.md`
+See [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
