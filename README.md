@@ -45,14 +45,14 @@ For more details about the available commands please see [grunt/README.md](./gru
 
 The repository contains two main components; the Web Toolkit and the demo site.
 
-*  Sass files are in `grunt/sass` and compiled output is saved into `dist/stylesheets`
-*  JavaScript code is in `grunt/js` and contains four modules which are output to `dist/scripts`
+*  Sass files are in [`grunt/sass`](./grunt/sass) and compiled output is saved into [`dist/stylesheets`](./dist/stylesheets)
+*  JavaScript code is in [`grunt/js`](.grunt/js) and contains four modules which are output to [`dist/scripts`](./dist/scripts)
   *  `toolkit` contains the JS utilities and toolkit UI components code
   *  `demo` provides demo support for the website
   *  `changes` provides support for the changes page of the website
   *  `testIframe` provides support for running unit tests online on the website
-* HTML files are in `_includes`
-*  Skycons are in the `static/font-svgs` and minified into `grunt/fronts/min`.
+* HTML files are in [`_includes`](./_includes)
+*  Skycons are in the [`static/font-svgs`](./static/font-svgs) and minified into [`grunt/fonts/min`](./grunt/fonts/min).
 
 ### Complete file structure
 
