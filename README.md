@@ -1,11 +1,18 @@
 [Web Toolkit](http://skyglobal.github.io/web-toolkit/) [![Build Status](https://circleci.com/gh/skyglobal/web-toolkit.png?circle-token=24eeba25d7352dec038ea9fa25b22671ba28be5e)](https://circleci.com/gh/skyglobal/web-toolkit) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 ========================
 
-> Sky branded CSS, JavaScript utilities, and UI components
+> Sky branded CSS, JavaScript utilities, and UI components.
 
-The project contains the code to generate the toolkit itself and the [demo site](http://skyglobal.github.io/web-toolkit/).
+> Save time by using the toolkit to set your base styles, have headings and buttons styled correctly within seconds.
+
+> The toolkit can help you quickly build robust components like accordions and carousels.
+
+> Component functionality (as described by BDD style tests) are directly visible by the business within the demo site.
 
 ## Getting started
+
+This project contains the code to generate the `toolkit` files, e.g. `toolkit.js` + `toolkit.css`.
+The code to generate the [demo site](http://skyglobal.github.io/web-toolkit/) is also here.
 
 ### Prerequisites
 
@@ -33,6 +40,8 @@ bundle install
 ```
 
 ### Building/Running the Toolkit
+
+Update the toolkit by making your change and testing the it within the demo site.
 
  * `grunt server` : Grunt will spin up the [Jekyll](http://jekyllrb.com/docs/github-pages/) server, watch for code changes and rebuild on the fly.
  * `grunt server --beautify` : To help when debugging.
