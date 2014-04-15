@@ -1,5 +1,4 @@
-[Web Toolkit](http://skyglobal.github.io/web-toolkit/) Grunt
-========================
+# [Grunt](http://gruntjs.com/)
 
 The toolkit uses a number of grunt commands in order to build, serve, watch and rebuild the site.
 
