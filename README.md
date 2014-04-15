@@ -49,6 +49,8 @@ Update the toolkit by making your change and testing the it within the demo site
  * `grunt test-cross-browser` : Runs the unit tests using multiple browsers remotely.
  * `grunt fonts` : Only needed to rebuild the Icon Fonts (skycons).
 
+Please help us out by contributing any changes you make locally back into the source project. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
 For more details about the available commands please see [grunt/README.md](./grunt#web-toolkit-grunt)
 
 ## Code overview
