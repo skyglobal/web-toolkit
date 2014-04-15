@@ -34,7 +34,7 @@ bundle install
 
 ### Building/Running the Toolkit
 
- * `grunt server` : Grunt will spin up the Jekyll server, watch for code changes and rebuild on the fly.
+ * `grunt server` : Grunt will spin up the [Jekyll](http://jekyllrb.com/docs/github-pages/) server, watch for code changes and rebuild on the fly.
  * `grunt server --beautify` : To help when debugging.
  * `grunt test` : Runs the unit tests
  * `grunt fonts` : Only needed to rebuild the Icon Fonts (skycons).
