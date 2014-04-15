@@ -3,70 +3,116 @@
 
 > Sky branded front end web framework and style guide.
 
+## About
 
-## Building the Toolkit locally
-### Prerequisites
+<http://skyglobal.github.io/web-toolkit/>
 
-- RVM
-- Ruby (version 1.9.3 or later)
-- npm
-- grunt
+Sky Web Toolkit is a set of Sky branded base CSS styles, UI components and JavaScript utility functions
+to use on Sky branded web sites.
+
+The project contains the toolkit itself and the documentation/demo site built using [Jekyll](http://jekyllrb.com).
+See code structure below for details.
+
+## Getting started
+
+### Dependencies
+
+To build the toolkit locally, you'll need [ruby](https://www.ruby-lang.org/) (version 1.9.3 or later), [node.js](http://nodejs.org), [npm](https://www.npmjs.org) and [grunt](https://www.npmjs.org).
 
 ### Setup
-1. Fork the web-toolkit repository from this skyglobal user into your own user area (fork button, top right)
-2. clone your new repo onto your local machine (get the clone url from the right menu also)
-  - `git clone [CLONE-URL]`
-  - `git remote add upstream https://github.com/skyglobal/web-toolkit.git`
-3. Install npm on your machine
-  - `echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bashrc`
-  - `. ~/.bashrc`
-  - `mkdir /usr/local`
-  - `mkdir ~/node-latest-install`
-  - `cd ~/node-latest-install`
-  - `curl http://nodejs.org/dist/node-latest.tar.gz | tar xz --strip-components=1`
-  - `./configure --prefix=/usr/local`
-  - `make install`
-  - `curl https://npmjs.org/install.sh | sh`
-4. Install grunt either globally, or run the following to use the bundled project grunt
-  - `npm install`
-5. Install the require gems using Bundler
-  - `bundle install`
-6. Install Grunt CLI 
-  - `npm install -g grunt-cli`
 
-### Running
+Clone the repository
 
-Grunt is our friend here, he will take of reloading the jekyll project whenever a file is edited.
+`git clone https://github.com/skyglobal/web-toolkit.git`
 
-1. In the root of the project, run the following:
-  - `grunt server` (add ` --beautify` to help when debugging)
+Install npm modules
 
-## Contributing 
+`npm install`
 
-###Building A New/Updated Feature
-  - Write code in a new branch.
-  - Before you start a feature, ensure your code is up to date. Run:
-    - `git pull upstream master`
-  - Write tests as you go
-  - Refactor so the code is self documenting
-  - If you would like the feature to go live sooner, mention this in the comments/commit.  We will provide a temporary live url that will allow you to carry on without getting blocked.
+Install the require gems using [Bundler](http://bundler.io)
 
-### Testing
-  - Tests are automatically run on the CircleCI server upon pushing to Github.
-  - Two sets of tests are run:
-    - first run is on production ready 'minified' code
-    - second run on 'beautified' code with code coverage reporting, please keep this above 80%
-  - Run `grunt test` for unit (using [mocha](http://visionmedia.github.io/mocha/) and [chai](http://chaijs.com/‎))
+`bundle install`
 
+And finally install the Grunt CLI
 
-###Committing
+`npm install -g grunt-cli`
 
-Before you submit your pull request, run :
-  - `git pull upstream master` to ensure your code is up to date and merged correctly
-  - `grunt test-cross-browser`. You will need to set up a [Browser Stack](http://www.browserstack.com) account.
+You can now run all the grunt tasks automating various tasks when working with the toolkit.
 
+### Build the toolkit
 
-## Code structure
+To build the toolkit, run
+
+`grunt build`
+
+in the root of the project. That will compile Sass source files (with support for [Compass] mixins),
+assemble the javascript sources and minify the output. Resulting files can be found in the `/dist`
+folder.
+
+Build task will also build the toolkit website using Jekyll.
+
+### Run tests
+
+To run unit tests (using [mocha](http://visionmedia.github.io/mocha/) and [chai](http://chaijs.com/‎)) locally, run
+
+`grunt test`
+
+that will build the toolkit and run tests twice: once on the minified code, once on the original including test
+coverage. Coverage limit is set to 80%, so please make sure your changes keep it where it is or improve it.
+
+You can also run cross browser tests in the cloud using [Browser Stack](http://www.browserstack.com), but you will need a browserstack account. If you have one, you can run
+
+`grunt test-cross-browser` with the following environment variables set:
+
+*  `BROWSERSTACK_USERNAME`
+*  `BROWSERSTACK_PASS`
+*  `BROWSERSTACK_AUTHKEY`
+
+### Run the grunt server
+
+To make changes to the toolkit it is best to run the website locally and make grunt watch for
+code changes using
+
+`grunt server`
+
+in the root of the project (add ` --beautify` to help when debugging). The website should
+open in your browser. Grunt will now monitor the files for changes and rebuild on the fly.
+
+## Code overview
+
+The web-toolkit repository contains two main components: the Web Toolkit source code itself
+and the documentation site source files. The repository also contains the build output of both
+of them (`dist` and `_site` directories, respectively).
+
+### The Web Toolkit
+
+Sources for the toolkit are in subdirectories of the `grunt` directory, organized by type
+
+*  Sass files are in `grunt/sass` and compiled output is saved into `dist/stylesheets`
+*  JavaScript code is in `grunt/js` and contains four modules which are output to `dist/scripts`
+  *  `toolkit` contains the JS utilities and toolkit UI components code
+  *  `demo` provides demo support for the website
+  *  `changes` provides support for the changes page of the website
+  *  `testIframe` provides support for running unit tests online on the website
+*  Icon fonts are in `static` directory on the top level. The static files get minified and
+   output into `grunt/fronts/min`. They are then used to generate the font CSS from a template
+   in `fonts/template`. You can run this build using `grunt fonts`
+
+### The documentation website
+
+The documentation website is built using Jekyll. The site is basically a single page built up of modules in `_includes` directory, wrapped in `_layouts/default.html`.
+
+The site is also able to run unit tests online.
+
+The output is written into the `_site` directory, where it's picked up by Github pages and served at <skyglobal.github.io/web-toolkit>.
+
+### Tests
+
+All the tests ar in the `test` directory. Tests themselves are inside `test/specs`.
+
+TODO describe to what level cross browser testing is done.
+
+### Complete file structure
 
     $ tree
     .
@@ -105,49 +151,31 @@ Before you submit your pull request, run :
     ├── rakefile        => build script
     ├── test.html       => used by `grunt test` to run all tests at once
     └── README.md
-    
-## Deployments
 
-To release a new version with:
-  - Code changes
-    - increment the version number in package.json following `semantic versioning` described below.
-    - This will update gh-pages and the S3.
-  - Documentation changes
-    - Don't increment the version number.
-    - This will update gh-pages branch only.
-  - Feature releases
-    - To be used when contributers want to integration test a new feature/proposed pull requrest.
-    - Ensure that the code is committed in a branch that starts with `feature-xxx`. Where xxx is feature.
-    - Add `-feature-xxx` to the end of the version number e.g. `1.0.1-feature-fancy-carousel`.
-    - This will update the S3 only
-  - Release Candidate changes
-    - To be used when new features/bugs fixes have been merged and is ready to be integration test by toolkit owners.
-    - Commit the code into a branch that starts with `rc-111`. Where 111 is the version number.
-    - Add `-rc-111` to the end of the version number e.g. `1.0.1-rc-2`.
-    - This will update the S3 only.
+## Contributing your changes
 
-Feature and RC releases will be available by going to http://web-toolkit.global.sky.com/ and adding either `x.x.x-feature-111/` or `x.x.x-rc-111`. where x.x.x is the current toolkit version number.  Please give the contributor the full URL in a comment along side their pull request / issue.
+First fork the project, clone and add an upstream
 
-#### Versioning
-This library should follow the [Semantic versioning specification](http://semver.org/).
-In short, that means the following:
+`git add remote upstream https://github.com/skyglobal/web-toolkit.git`
 
-Version: X.Y.Z(-rc)?
+Make sure the code is up to date
 
-- API changes that are **not backwards compatible**, and break existing
-  calls using the API must increment the X value.
+`git pull upstream master`
 
-- API changes that introduce **new backwards compatible changes**, or **change the
-  internals**, but not the interface, of existing methods will increment the
-  Y value.
+Then add your feature in a new branch (`git checkout -b my-amazing-feature`). Write tests
+as you go, keep the code clean and self documenting and the test coverage above 80%.
 
-- **Patches or bug fixes** that are backwards compatible should increment the
-  Z value.
+When you are done, make sure you are still up to date with master
 
-- -rc Represents 'release candidates'.  This is to create a public available url for testing purposes.
+`git pull upstream master`
 
-Upon commiting and pushing your code to Github, the CI server will run through
-the functional tests and - if there are no errors - a new version of the library
-will be deployed to the CDN using the version number specified in the
-package.json file.
+push your branch to github
 
+`git push origin my-amazing-feature`
+
+and open a Pull request. Tests will be run on it by CircleCI. You can run the cross browser
+suite yourself if you have a Browsers Stack account. See above.
+
+## Versioning and Releases
+
+see `RELEASE.md`
