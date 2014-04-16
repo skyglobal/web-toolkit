@@ -115,6 +115,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 See [RELEASING.md](RELEASING.md)
 
+## Change Log
+
+See [CHANGELOG.md](CHANGELOG.md)
+
 ## Troubleshooting
 
 See [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
