@@ -1,0 +1,108 @@
+/* tabs layout */
+
+.tabs {
+  position: relative;
+  font-family: $font-family;
+  font-size: 1.25em;
+  margin: 20px 0;
+  border-bottom: solid 1px #d7d5d5;
+}
+
+.tab  {
+  // font-size: 1.25em;
+  float: left;
+  margin-right: 4px;
+  position: relative;
+  border: solid 1px #bbbbbb;
+  background: #eee;
+  border-radius: 5px 5px 0 0;
+  border-bottom: 0;
+  position: relative;
+  bottom: -11px;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 1.5%;
+    width: 97%;
+    height: 14px;
+    background: rgba(255, 255, 255, 0.7);
+    @include background(linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5)));
+    background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.5));
+    @include border-radius(0 0 20px 20px);
+    @include transition(opacity .25s);
+  }
+
+  &:hover,
+  &:focus {
+    &:before {
+      opacity: 0;
+    }
+  }
+}
+
+.tab a {
+  position: relative;
+  color: #333;
+  display: block;
+  text-align: center;
+  padding: 0 40px;
+  line-height: 32px;
+  height: 32px;
+  @include transition(background-color .25s);
+}
+
+.tabpanel {
+  display: none;
+
+  &.selected {
+    display: block;
+  }
+
+  @media (max-width: $mobile-width) {
+    width: 100%;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.tabcontents {
+  @media (min-width: $mobile-width) {
+    width: 1140px;
+    overflow-y: hidden;
+  }
+}
+
+/* tabs theme */
+.tab.selected {
+  margin-bottom: -1px;
+  background-color: #fff;
+  bottom: 0;
+  font-size: 1.2em;
+
+  &:before {
+    background: rgba(255, 255, 255, 0.25);
+    @include background(linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.05)));
+  }
+
+  &.with-nipple:after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -10px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    z-index: 1;
+    border-top-color: #0073c5;
+  }
+
+  a {
+    text-decoration: none;
+    cursor: default;
+    height: 44px;
+    line-height: 44px;
+  }
+}

@@ -1,0 +1,498 @@
+@function em($target, $context: 16) {
+    @return ($target / $context) * 1em;
+}
+
+.skycom-carousel {
+  @include transform(translate3d(0, 0, 0));
+  overflow: hidden;
+  position:relative;
+
+  &:hover .actions {
+    .next,
+    .previous {
+      .semi-circle{
+        background: #777;
+        background: rgba(0,0,0,0.35);
+      }
+    }
+  }
+
+  &.paused .actions .play,
+  &.playing .actions .pause {
+    display: block;
+    @media all and (max-width: 768px) {
+        display: none;
+    }
+  }
+
+  .skycom-carousel-container {
+    @include transform(translate3d(0, 0, 0));
+    @include backface-visibility(hidden);
+    position: relative;
+    height:100%;
+    width: 200%;
+    z-index: 1;
+    > div {
+      display:none;
+      height:100%;
+      width:50%;
+      clear: none;
+      &:first-child{
+        display:block;
+      }
+    }
+
+    &.animate {
+      @include single-transition(all, .3s, linear);
+    }
+    > * {
+      @include transform(translate3d(0%, 0, 0));
+      @include transform-style(preserve-3d);
+      position: relative;
+      float: left;
+    }
+  }
+
+  .dark-scheme {
+    color: #fff;
+    a, i {
+      color: #fff;
+    }
+    &.bg-shading .shade {
+      display: block;
+      background-image: -ms-linear-gradient(right, rgba(0,0,0,0) 60%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0.7) 100%);
+      @include background-image(linear-gradient(right, rgba(0,0,0,0) 60%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0.7) 100%));
+      filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#b3000000', endColorstr='#00000000',GradientType=1);
+    }
+  }
+
+  .light-scheme {
+    color: #333;
+    a {
+      color: #333;
+    }
+    &.bg-shading .shade {
+      display: block;
+      background-image: -ms-linear-gradient(right, rgba(255,255,255,0) 60%, rgba(255,255,255,0.6) 80%, rgba(255,255,255,0.7) 100%);
+      @include background-image(linear-gradient(right, rgba(255,255,255,0) 60%, rgba(255,255,255,0.6) 80%, rgba(255,255,255,0.7) 100%));
+      filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#b3ffffff', endColorstr='#00ffffff',GradientType=1);
+    }
+  }
+
+  .shade{
+    display: none;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  .poster,
+  .poster img{
+    width:100%;
+    max-height: 100%;
+    display: block;
+    z-index: -1;
+  }
+
+  .actions {
+    z-index: 3;
+    a{
+      position: absolute;
+      color: #333;
+    }
+    .play,
+    .pause {
+      bottom: 10px;
+      display: none;
+      right: 50px;
+      z-index: 2;
+      i {
+        font-size: 20px;
+        line-height: 20px;
+        margin-top: 0;
+        margin-right: 5px;
+      }
+    }
+    .previous,
+    .next {
+      height: 85%;
+      top: 0;
+      width: 50px;
+      z-index: 3;
+      .skycom-touch & {
+        display: none;
+      }
+      .semi-circle {
+        position: absolute;
+        top: 50%;
+        display: block;
+        width: 36px;
+        border-radius: 36px;
+        line-height: 36px;
+        margin: -15px 5px 0;
+        padding: 14px;
+        @include transition(background 0.3s ease-in);
+        text-shadow: 0px 0px 0px black;
+        i{
+          font-size: 30px;
+          color: #ddd;
+        }
+      }
+      &:hover{
+        .semi-circle{
+          background: rgb(0,0,0);
+          background: rgba(0,0,0,0.7);
+        }
+      }
+    }
+    .next {
+      right: 0;
+      .semi-circle {
+        left: 10px;
+        i{
+          margin-left: -5px;
+        }
+      }
+    }
+    .previous {
+      left: 0;
+      .semi-circle {
+        right: 10px;
+      }
+      i{
+        margin-left: 22px;
+      }
+    }
+  }
+  .indicators {
+    position: relative;
+    line-height: 2.5em;
+    height: 2.5em;
+    top:auto;
+    margin-bottom: 0;
+    float:left;
+    left: 50%;
+    z-index: 3;
+
+    .container{
+      cursor: default;
+      position: relative;
+      margin-left:-50%;
+    }
+    .container > span {
+      @include border-radius(5px);
+      @include inline-block;
+      background:#bbb;
+      cursor:pointer;
+      height:10px;
+      width:10px;
+      margin:5px;
+      &:hover {
+        background: #777;
+      }
+      &.active {
+        background:#0073c5;
+      }
+    }
+  }
+
+  .carousel-content {
+    position: absolute;
+    top:0;
+    left: 0;
+    bottom:auto;
+  }
+
+  h3 {
+    margin: 0 0 1px 0;
+  }
+
+  p {
+    margin: 0 0 10px 0;
+  }
+
+  figure{
+    position: relative;
+    margin: 0;
+    * {
+      cursor: pointer;
+    }
+  }
+  figcaption {
+    display: block;
+    max-width: 100%;
+    box-sizing: border-box;
+    z-index: 2;
+    @include transform(translateZ(0)); /*to stop the text flashing on hover on safari*/
+
+    a.hover {
+      text-decoration: underline;
+      p {
+        text-decoration: underline;
+      }
+    }
+
+    h3 {
+      white-space: pre-line;
+    }
+  }
+
+  .channel-logo {
+    @include inline-block;
+    position: relative;
+    z-index: 0;
+    margin-bottom: 6px;
+  }
+
+  .terms-link {
+    z-index: 2;
+    position:absolute; bottom:10px; top:auto;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.terms-content{
+  padding-top: 0!important;
+  padding-bottom: 0!important;
+  p{
+    margin: 0;
+  }
+}
+
+
+.skycom-notouch .skycom-carousel a{
+  cursor: pointer;
+}
+
+
+.skycom-carousel {
+
+  @media all and (max-width: 900px) {
+    .channel-logo{
+      margin-bottom: 4px;
+    }
+    h3.section-title{
+      font-size: em(24);
+      line-height: 1em;
+    }
+  }
+
+  @media all and (max-width: 768px) {
+    .channel-logo{
+      max-height: 26px;
+      max-width: 140px;
+    }
+    .indicators{
+      background: none;
+      .active {
+        border-width: 0px;
+        width: 10px;
+        height: 10px;
+      }
+    }
+    .actions{
+      a{
+        color: #333;
+      }
+    }
+    .poster{
+      min-height: 110px;
+    }
+  }
+
+  @media all and (max-width: 630px) {
+    h3.section-title {
+      font-size: em(16);
+    }
+  }
+
+  @media all and (max-width: 600px) {
+    h3.section-title {
+      font-family: SkyTextMedium;
+    }
+    .shade{
+      display: none!important;
+    }
+    .carousel-content{
+      position: relative;
+    }
+    .skycom-carousel-container > *,
+    .skycom-carousel-container a,
+    .actions a{
+      color: #333!important;
+    }
+    .skycom-5{
+      width: 100%;
+    }
+    .ellipsis{
+      white-space: normal;
+    }
+    .actions{
+      width:100%;
+      a{
+        position: relative;
+        display: block;
+      }
+      .next,
+      .previous{
+        position: absolute;
+        height: 75px;
+        top:-37px;
+        margin-top:16%;
+        margin-top:16vw;
+      }
+      .previous{
+        float: left;
+      }
+      .next{
+        float: right;
+      }
+    }
+    .skycom-carousel-container > *{
+      margin-bottom:2em;
+    }
+    figcaption.carousel-content{
+      padding-bottom:0;
+    }
+    .indicators{
+      background: none;
+      position: absolute;
+      bottom: 0;
+      height:1.5em;
+      line-height:1.5em;
+      z-index: 1;
+    }
+    .terms-link {
+      bottom: 2px;
+    }
+    &.has-terms{
+      padding-bottom: 1em;
+      .indicators{
+        bottom: 1.25em;
+      }
+      .terms-link{
+        position: absolute;
+        bottom: 0;
+      }
+      p{
+        margin: 0;
+      }
+    }
+  }
+  @media all and (max-width: 319px) {
+    .actions .next,
+    .actions .previous {
+      margin-top: 50px;
+    }
+  }
+}
+
+
+.skycom-notouch {
+  .skycom-carousel .play-video{
+    left:50px;
+  }
+  .carousel-content{
+    padding-left:50px;
+  }
+
+  @media all and (max-width: 600px) {
+    .carousel-content{
+      padding-left:3.15789%;
+    }
+  }
+}
+
+.skycom-touch {
+  .play-video{
+    left:5px;
+  }
+}
+.lt-ie10{
+  .skycom-carousel {
+    .shade {
+      width: 66%; /* filter goes across whole slide, so stop it a little bit before */
+    }
+    .next, .previous{
+      .semi-circle{
+        background: rgba(0,0,0,0.35);
+      }
+    }
+  }
+}
+.lt-ie9{
+  .carousel-content {
+      padding-left:50px;
+  }
+}
+.lt-ie8{
+  .skycom-carousel {
+    .actions .play,
+    .actions .pause{
+      bottom:12px;
+    }
+    .indicators{
+      width:100%;
+      text-align: center;
+      left:0;
+      .container{
+        margin-left: 0;
+        span{
+          margin-top:12px;
+        }
+      }
+    }
+  }
+}
+
+/* Hero ratio 3:1 */
+.skycom-carousel.hero-3-1 {
+  .poster{
+    min-height: 325px;
+    max-height: 325px;
+    @media all and (max-width: 1212px) {
+      min-height: 27vw;
+      max-height: 31vw;
+    }
+    @media all and (max-width: 767px) {
+      min-height: 110px;
+    }
+  }
+
+  .channel-logo {
+    max-height: 34px;
+    max-width: 180px;
+  }
+}
+.grid-1140 .skycom-carousel.hero-3-1 {
+  .poster{
+    min-height: 380px;
+    max-height: 380px;
+    @media all and (max-width: 1212px) {
+      min-height: 31vw;
+      max-height: 32vw;
+    }
+
+    @media all and (max-width: $mobile-width) {
+      .poster{
+        min-height: 110px;
+      }
+    }
+  }
+}
+
+.grid-1140 .skycom-carousel.hero-mobile-16-9 {
+  @media all and (max-width: $mobile-carousel-width) {
+    .poster{
+      min-height: 169px;
+      max-height: 52vw;
+    }
+    .actions .next, .actions .previous {
+      top: -6px;
+    }
+  }
+}

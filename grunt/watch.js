@@ -4,11 +4,11 @@ module.exports =  {
             tasks: ['build']
         },
         'js': {
-            files: [ 'grunt/js/**/*.js' ],
+            files: [ 'src/js/**/*.js' ],
             tasks: ['jshint','requirejs:toolkit','jekyll:build']
         },
         'scss': {
-            files: [ 'grunt/sass/**/*.scss'],
+            files: [ 'src/sass/**/*.scss'],
             tasks: ['compass', 'jekyll:build']
         },
         'jekyll': {

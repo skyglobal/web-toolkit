@@ -1,8 +1,8 @@
 module.exports = {
         toolkit: ['Gruntfile.js',
-                  'grunt/js/components/*.js',
-                  'grunt/js/utils/*.js',
-                  'grunt/js/demo/*.js'],
+                  'src/js/components/*.js',
+                  'src/js/utils/*.js',
+                  'src/js/demo/*.js'],
 //        'test/specs/**/*.js',
         others: ['Gruntfile.js'],
         options: {
