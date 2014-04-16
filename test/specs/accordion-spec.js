@@ -55,6 +55,14 @@ function accordionSpec() {
             }, 1000);
         });
 
+        it('keep markup when open and then closed', function() {
+            expect($firstLink.first().find('strong').length).to.equal(1);
+            $firstLink.click();
+            expect($firstLink.first().find('strong').length).to.equal(1);
+            $firstLink.click();
+            expect($firstLink.first().find('strong').length).to.equal(1);
+        });
+
         it('open and close when a user clicks an accordion item twice', function () {
             $firstLink.click();
             expect($first.hasClass('toggle-hidden')).to.equal(false);

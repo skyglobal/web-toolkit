@@ -626,11 +626,25 @@ toolkit.toggle = function(detect, event) {
         $(".toggle-clearfix-div").remove();
         return openHeight;
     }
+    function containsSafeHtmlTags(text) {
+        var allTags = /<\w+>.+?<\/\w+>|<.+\/?>/;
+        var $text = $(text);
+        if (($text.html().match(allTags) || []).length === $text.find("strong", "b", "i", "em").length) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     function updateText($elClicked) {
         var $spans = $elClicked.find("span");
         var $textElement = $spans.length > 0 ? $spans.first() : $elClicked;
-        var oldText = $textElement.text();
-        $textElement.text($elClicked.attr("data-toggle-text"));
+        var oldText = containsSafeHtmlTags($textElement) ? $textElement.html() : $textElement.text();
+        if (containsSafeHtmlTags($textElement) === true) {
+            $textElement.html($elClicked.attr("data-toggle-text"));
+        } else {
+            $textElement.text($elClicked.attr("data-toggle-text"));
+        }
+        $textElement.html($elClicked.attr("data-toggle-text"));
         $elClicked.attr("data-toggle-text", oldText).attr("data-tracking-label", oldText);
     }
     function show($elToToggle) {
