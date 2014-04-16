@@ -39,7 +39,7 @@ window.screenshot = function(component, aspect, container) {
     // we communicate with PhantomJS through their listener of console.log
     console.log(JSON.stringify({
         action: 'render',
-        filename: 'screenshots/' + component + '-' + aspect + '-v2.png',
+        filename: 'test/screenshots/' + component + '-' + aspect + '-v2.png',
         clipRect: container.getBoundingClientRect()
     }));
 };

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*! web-toolkit - v2.2.12 - 2014-04-16 */
+=======
+/*! web-toolkit - v2.2.12 - 2014-04-14 */
+>>>>>>> edd721e0577255e25e91d50c85ee8889d77f74e7
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
