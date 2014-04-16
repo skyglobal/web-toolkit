@@ -9,7 +9,22 @@
 
 > Business descriptions of component functionality is visible from directly within the demo site (created from the actual unit-test reports)
 
-## Getting started
+
+## Contents
+
+ 1. [Getting Started](#getting-started)
+  1. [Prerequisites](#prerequisites)
+  2. [Setup](#setup)
+  3. [Building/Running the Toolkit](#buildingrunning-the-toolkit)
+ 2. [Code Overview](#code-overview)
+  1. [Folder Structure](#folder-structure) 
+ 3. [Contributing](CONTRIBUTING.md)
+ 4. [Versioning and Releases](RELEASING.md)
+ 5. [Change log](CHANGELOG.md)
+ 6. [Troubleshooting](TROUBLESHOOTING.md)
+
+
+## Getting Started
 
 This project contains the code to generate the `toolkit` files, e.g. `toolkit.js` + `toolkit.css`.
 The code to generate the [demo site](http://skyglobal.github.io/web-toolkit/) is also here.
@@ -53,7 +68,7 @@ Please help us out by contributing any changes you make locally back into the so
 
 For more details about the available commands please see [grunt/README.md](./grunt#web-toolkit-grunt)
 
-## Code overview
+## Code Overview
 
 The repository contains two main components; the Web Toolkit and the demo site.
 
@@ -66,7 +81,7 @@ The repository contains two main components; the Web Toolkit and the demo site.
 * HTML files are in [`_includes`](./_includes)
 *  Skycons are in the [`static/font-svgs`](./static/font-svgs) and minified into [`grunt/fonts/min`](./grunt/fonts/min).
 
-### Complete file structure
+### Folder Structure
 
     $ tree
     .
@@ -105,20 +120,5 @@ The repository contains two main components; the Web Toolkit and the demo site.
     ├── rakefile        => build script
     ├── test.html       => used by `grunt test` to run all tests at once
     └── README.md
-
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md)
-
-## Versioning and Releases
-
-See [RELEASING.md](RELEASING.md)
-
-## Change Log
-
-See [CHANGELOG.md](CHANGELOG.md)
-
-## Troubleshooting
-
-See [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+    
+[^ back to contents](#contents)
