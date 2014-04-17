@@ -4,5 +4,8 @@ module.exports = {
     },
     'browserstack-live':{
         cmd: 'java -jar test/libraries/BrowserStackTunnel.jar $BROWSERSTACK_AUTHKEY localhost,4000,0'
+    },
+    'move-dist': {
+        cmd: 'mv dist _site/'
     }
 };

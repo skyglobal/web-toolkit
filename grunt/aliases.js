@@ -1,12 +1,12 @@
 module.exports = {
-    "dev-build": ['clean:toolkit', 'compass:toolkit', 'requirejs:toolkit', 'uglify', 'jekyll:build'],
+    "dev-build": ['clean', 'fonts', 'compass:toolkit', 'requirejs:toolkit', 'uglify', 'jekyll:build', 'exec:move-dist'],
 
     //  standard build tasks that lints your JS
     "build": ['jshint', 'version_sync', 'dev-build'],
     "serve": ['build','connect:app', 'open:app', 'watch'],
 
     //  misc tasks
-    "fonts": ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit'],
+    "fonts": ['svgmin:fonts', 'webfont'],
     "svgs": ['svgmin:icons', 'grunticon'],
 
     //  testing tasks

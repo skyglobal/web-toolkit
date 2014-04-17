@@ -9,7 +9,7 @@ module.exports = {
             htmlDemoTemplate : 'src/fonts/template/skycon-template.html',
             htmlDemo : true,
 //                    engine : 'node',
-            destHtml : '_includes/base-styles/icons',
+            destHtml : 'jekyll/_includes/base-styles/icons',
             hashes : false,
             embed : true
         }
