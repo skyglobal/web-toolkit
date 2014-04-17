@@ -1,0 +1,93 @@
+#skycom-breadcrumb {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0;
+
+  ul{
+    background: #f4f4f4;
+    @include clearfix;
+    line-height: 1.2em;
+    list-style: none;
+    margin: 0;
+    padding: 8px 10px 0px 21px;
+    font-size: 0.812em;
+    line-height: 1.2em;
+    min-height: 32px;
+    font-family: skytextregular, helvetica, arial;
+    @include box-sizing(border-box);
+
+    li {
+      float: left;
+      height: 1.7em;
+      a {
+        color:#333;
+        -webkit-transition: width 1.5s ease-in;
+        -moz-transition: width 1.5s ease-in;
+        -ms-transition: width 1s ease-in;
+        -o-transition: width 1s ease-in;
+        transition: width 1.5s ease-in;
+        white-space: nowrap;
+        padding:0;
+        height: 15px;
+        letter-spacing: 0px;
+        display:inline-block;
+        padding:0 0.5pc;
+        outline:0;
+        float: left;
+        &.has-focus{
+          color: #fff;
+        }
+      }
+
+      .skycon-chevron {
+        color: #0070a5;
+        font-size:12px;
+        margin-top:0px;
+        margin-left:1px;
+        float: left;
+      }
+    }
+
+    li:first-child {
+
+      .skycon-chevron {
+        display:none;
+      }
+
+      a {
+        padding-left: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: $mobile-width) {
+  #skycom-breadcrumb ul {
+    padding-left:10px;
+    li {
+      display: none;
+      &:nth-last-child(2) {
+        display: block;
+      }
+      span{
+        margin-top: 0;
+      }
+      .skycon-chevron {
+        -moz-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        transform:rotate(180deg);
+      }
+    }
+  }
+}
+
+.lt-ie9{
+  #skycom-breadcrumb ul{
+    line-height: 2.25em;
+    padding: 0 10px 0;
+    .skycon-chevron{
+      margin-top:8px;
+    }
+  }
+}

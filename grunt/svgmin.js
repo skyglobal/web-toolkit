@@ -10,7 +10,7 @@ module.exports =  {
         fonts: {                         // Target
             files: [{                   // Dictionary of files
                 expand: true,           // Enable dynamic expansion.
-                cwd: 'jekyll/static/font-svgs/',    // Src matches are relative to this path.
+                cwd: 'static/font-svgs/',    // Src matches are relative to this path.
                 src: ['*.svg'],      // Actual pattern(s) to match.
                 dest: 'src/fonts/min/', // Destination path prefix.
                 ext: '.svg'         // Dest filepaths will have this extension.
