@@ -1,7 +1,7 @@
 module.exports = {
     options: {                          // Universal options
         bundleExec: true,
-        src: 'jekyll',
+        src: 'src/html',
         dest: '_site'
     },
     build:{
