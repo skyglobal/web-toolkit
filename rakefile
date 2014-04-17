@@ -10,7 +10,7 @@ def bucket
 end
 
 def latest_version_number
-  $latest_version_number ||= File.open('_config.yml').read.match(/version:(.+)/)[1].strip
+  $latest_version_number ||= File.open('app/_config.yml').read.match(/version:(.+)/)[1].strip
 end
 
 def version_already_exists?
@@ -35,7 +35,7 @@ end
 
 
 def static_to_upload
-  Dir.glob("static/**/*.*")
+  Dir.glob("app/static/**/*.*")
 end
 
 def assets_to_upload
@@ -76,11 +76,9 @@ def content_type(file)
 end
 
 def emptyGitCache
-  system "git rm --cached src/fonts/min -r"
+  system "git rm --cached app/fonts/min -r"
   system "git rm --cached _site -r"
-  system "git rm --cached dist/images -r"
-  system "git rm --cached dist/scripts -r"
-  system "git rm --cached dist/stylesheets -r"
+  system "git rm --cached dist -r"
 end
 
 def tagBuild
@@ -97,7 +95,7 @@ def pushToAmazonS3
   system "grunt"
   doc_resources = []
   puts 'Uploading assets'
-  cd "dist"
+  cd "_site/dist"
   assets_to_upload.each do |file|
     doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
