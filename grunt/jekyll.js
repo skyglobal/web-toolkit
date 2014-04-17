@@ -1,7 +1,7 @@
 module.exports = {
     options: {                          // Universal options
         bundleExec: true,
-        src: 'src/html',
+        src: 'app',
         dest: '_site'
     },
     build:{

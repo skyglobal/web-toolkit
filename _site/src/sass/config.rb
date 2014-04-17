@@ -2,7 +2,7 @@
 http_path = "../"
 https_path = "../"
 generated_images_path = "dist/images/"
-sprite_load_path = "src/"
+sprite_load_path = "app/src/"
 
 # Make a copy of sprites with a name that has no uniqueness of the hash.
 on_sprite_saved do |filename|

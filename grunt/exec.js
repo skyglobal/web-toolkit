@@ -8,12 +8,6 @@ module.exports = {
     'move-dist': {
         cmd: 'mv dist _site/'
     },
-    'copy-src': {
-        cmd: 'cp -r src _site/'
-    },
-    'copy-static': {
-        cmd: 'cp -r static _site/'
-    },
     'copy-test': {
         cmd: 'cp -r test _site/'
     }

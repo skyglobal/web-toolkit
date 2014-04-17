@@ -2,7 +2,7 @@ module.exports = function(grunt){
     return {
         options: {
             preserveLicenseComments: false,
-            baseUrl: "src/js",
+            baseUrl: "app/src/js",
             dir: "dist/scripts",
             removeCombined: true,
             generateSourceMaps: false,

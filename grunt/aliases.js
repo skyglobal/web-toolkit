@@ -10,7 +10,7 @@ module.exports = {
     "svgs": ['svgmin:icons', 'grunticon'],
 
     // for toolkit website with runnable tests
-    "prepare-site": ['exec:move-dist', 'exec:copy-src', 'exec:copy-static', 'exec:copy-test'],
+    "prepare-site": ['exec:move-dist', 'exec:copy-test'],
 
     //  testing tasks
     "test-with-coverage": ['blanket_mocha'],
