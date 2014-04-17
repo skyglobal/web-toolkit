@@ -8,6 +8,9 @@ module.exports = {
     'move-dist': {
         cmd: 'mv dist _site/'
     },
+    'copy-skycons': {
+        cmd: 'cp -r generated-skycons _site/dist/fonts'
+    },
     'copy-test': {
         cmd: 'cp -r test _site/'
     }
