@@ -3,12 +3,12 @@
 ## 2.2.12 (next release)
 
  * Skycons
-    * [Added] Camera icon used for galleries.
+    * [added]  Camera icon used for galleries.
  * Video
-    * [Added] configurable option `token`.
+    * [added]  Configurable option `token`.
  * Accordion
-    * [changed] Allow simple html in title: `b`, `strong`, `i` and `em`
-    * [fixed] allow `img` tags in content panel
+    * [update] Allow simple html in title: `b`, `strong`, `i` and `em`
+    * [fixed]  Allow `img` tags in content panel
 
 ## 2.2.11
 
