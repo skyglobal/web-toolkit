@@ -1,6 +1,6 @@
 # Contributing
 
-Please contribute!  But first, read the [ReadMe](https://github.com/skyglobal/web-toolkit#setup).
+Please contribute!  But first, read the [ReadMe](./README.md#setup), especially around [browser support](./README.md#supported-browsers).
 
 ## Contributing your changes
 
@@ -24,13 +24,24 @@ You can also run the cross-browser suite yourself if you have a Browsers Stack a
 
 ## Coding Rules
 
- * CSS: Use hyphens '-' within all class, ID and name attribute. Never camelCase or underscore.
- * JS: Where possible, use 'camelCase' for function/variable names.
- * Files / Directories: Where possible, use 'camelCase'.
- * JQuery: Where possible, please don't rely on jQuery. To be lean, Toolkit is working towards freeing itself of jQuery dependency.
- * Events: We suggest using Toolkit's own events module: toolkit.event
- * Variable Names: If name refers to a jQuery object/element always prefix the name with $ i.e. $container
- * Animations: Use CSS3 animations/transitions where possible over jQuery and JavaScript. This will improve performance, especially for mobile devices.
+### CSS
+ * Use hyphens '-' within all class, ID and name attribute. 
+ * Never camelCase or underscore.
+
+### JS
+ * Where possible, use 'camelCase' for function/variable names.
+
+### Files / Directories: 
+ * Where possible, use 'camelCase'.
+ 
+### JQuery
+ * Where possible, please don't rely on jQuery. 
+ * Be lean, the Toolkit is working towards freeing itself of jQuery dependency. help us!
+ * For events, We suggest using Toolkit's own events module: `toolkit.event`
+ * JQuery Variable Names (a jQuery object/element) should always be prefixed with `$` i.e. `$container`
+
+### Animations
+  * Use CSS3 animations/transitions where possible over jQuery or JavaScript. This will improve performance, especially for mobile devices.
 
 ## Accessibility
 
