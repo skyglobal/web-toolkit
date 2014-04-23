@@ -18,6 +18,8 @@
   3. [Building/Running the Toolkit](#buildingrunning-the-toolkit)
  2. [Code Overview](#code-overview)
   1. [Folder Structure](#folder-structure) 
+ 3. [Feature Requests & Bugs](#feature-requests--bugs)
+  1. [Supported Browsers](#supported-browsers)
  3. [Contributing](CONTRIBUTING.md)
  4. [Versioning and Releases](RELEASING.md)
  5. [Change log](CHANGELOG.md)
@@ -123,4 +125,22 @@ The repository contains two main components; the Web Toolkit and the demo site.
     ├── rakefile        => build script
     └── README.md
     
+
+## Feature Requests + Bugs
+
+Please take a look through currently open and closed issues to see if your feature/bug has already been discussed.  If not, feel free to open new issues and let us know about any bugs that you find. 
+
+This project is currently maintained out of the hard work from a very few contributers who are working on other projects at the same time. If you could write any updates and submit pull requests (see [Contributing](CONTRIBUTING.md)) this would be amazing (and you would get your request looked at much faster!).  
+
+### Supported Browsers
+
+* Latest Chrome (Win8, Mavericks, Android)
+* Latest Firefox (Win8, Mavericks)
+* Safari 7 (Mavericks, iOS 7)
+* IE 11 (Win 8)
+* IE 10 (Win 7)
+* IE 9 (Vista)
+* IE 8 (Vista)
+
+
 [^ back to contents](#contents)
