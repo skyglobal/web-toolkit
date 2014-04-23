@@ -52,7 +52,16 @@ toolkit.toggle = (function(detect, event) {
             .append($el.clone().attr('style', '').removeClass(hiddenClass + ' transition ')));
         $('#toggle-tmp-height > div').append('<div class="toggle-clearfix-div clearfix clear" style="padding:1px"></div> ');
         $('#toggle-tmp-height > div').prepend('<div class="toggle-clearfix-div clearfix clear" style="padding:1px"></div> ');
+        
         var openHeight  = $('#toggle-tmp-height > div').height() - 2;
+
+        if($el.find('img').length > 0){
+            var originalHeightWithImages = $el.find('.accordion-content').outerHeight() - 2;
+            if(openHeight < originalHeightWithImages){
+                openHeight = originalHeightWithImages;
+            }
+        }
+
         $el.data('openHeight', openHeight);
         $('#toggle-tmp-height').remove();
         $('.toggle-clearfix-div').remove();
@@ -60,11 +69,29 @@ toolkit.toggle = (function(detect, event) {
         return openHeight;
     }
 
+    function containsSafeHtmlTags(text){
+        var allTags = /<\w+>.+?<\/\w+>|<.+\/?>/;
+        var $text = $(text);
+        if(($text.html().match(allTags) || []).length === $text.find('strong','b','i','em').length) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     function updateText($elClicked) {
         var $spans =  $elClicked.find('span');
         var $textElement = $spans.length > 0 ? $spans.first() : $elClicked;
-        var oldText = $textElement.text();
-        $textElement.text($elClicked.attr('data-toggle-text'));
+
+        var oldText = containsSafeHtmlTags($textElement) ? $textElement.html() : $textElement.text();
+        
+        if(containsSafeHtmlTags($textElement) === true){ 
+            $textElement.html($elClicked.attr('data-toggle-text'));
+        } else { 
+            $textElement.text($elClicked.attr('data-toggle-text'));
+        }
+        
+        $textElement.html($elClicked.attr('data-toggle-text'));
         $elClicked
             .attr('data-toggle-text', oldText)
             .attr('data-tracking-label', oldText);
