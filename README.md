@@ -1,144 +1,146 @@
 [Web Toolkit](http://skyglobal.github.io/web-toolkit/) [![Build Status](https://circleci.com/gh/skyglobal/web-toolkit.png?circle-token=24eeba25d7352dec038ea9fa25b22671ba28be5e)](https://circleci.com/gh/skyglobal/web-toolkit) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 ========================
 
-> Sky branded front end web framework and style guide.
+> Sky branded CSS, JavaScript utilities, and UI components.
+
+> Save time by using the toolkit to set your base styles. Create Sky styled headings and buttons within seconds.
+
+> The toolkit can also help you quickly build robust components like accordions and carousels.
+
+> Business descriptions of component functionality is visible from directly within the demo site (created from the actual unit-test reports)
 
 
-## Building the Toolkit locally
+## Contents
+
+ 1. [Getting Started](#getting-started)
+  1. [Prerequisites](#prerequisites)
+  2. [Setup](#setup)
+  3. [Building/Running the Toolkit](#buildingrunning-the-toolkit)
+ 2. [Code Overview](#code-overview)
+  1. [Folder Structure](#folder-structure) 
+ 3. [Feature Requests & Bugs](#feature-requests--bugs)
+  1. [Supported Browsers](#supported-browsers)
+ 3. [Contributing](CONTRIBUTING.md)
+ 4. [Versioning and Releases](RELEASING.md)
+ 5. [Change log](CHANGELOG.md)
+ 6. [Troubleshooting](TROUBLESHOOTING.md)
+
+
+## Getting Started
+
+This project contains the code to generate the `toolkit` files, e.g. `toolkit.js` + `toolkit.css`.
+The code to generate the [demo site](http://skyglobal.github.io/web-toolkit/) is also here.
+
 ### Prerequisites
 
-- RVM
-- Ruby (version 1.9.3 or later)
-- npm
+To build the toolkit locally, you'll need to install:
+ * [ruby](https://www.ruby-lang.org/) (version 1.9.3 or later),
+ * [node.js](http://nodejs.org),
+ * [npm](https://www.npmjs.org),
+ * [grunt cli](http://gruntjs.com/getting-started),
+ * [Bundler](http://bundler.io)
+
+To check you have these tools with the correct versions, run:
+ * `which node && which npm && which grunt && which ruby && which bundle`
+ * `bundle check && npm update`
 
 ### Setup
-1. Fork the web-toolkit repository from this skyglobal user into your own user area (fork button, top right)
-2. clone your new repo onto your local machine (get the clone url from the right menu also)
-  - `git clone [CLONE-URL]`
-  - `git remote add upstream https://github.com/skyglobal/web-toolkit.git`
-3. Install npm on your achine
-  - `echo 'export PATH=/usr/local/bin:$PATH' >> ~/.bashrc`
-  - `. ~/.bashrc`
-  - `mkdir /usr/local`
-  - `mkdir ~/node-latest-install`
-  - `cd ~/node-latest-install`
-  - `curl http://nodejs.org/dist/node-latest.tar.gz | tar xz --strip-components=1`
-  - `./configure --prefix=/usr/local`
-  - `make install`
-  - `curl https://npmjs.org/install.sh | sh`
-4. Install grunt either globally, or run the following to use the bundled project grunt
-  - `npm install`
-5. Install the require gems using Bundler
-  - `bundle install`
 
-### Running
+Clone the repository and install the dependencies
 
-Grunt is our friend here, he will take of reloading the jekyll project whenever a file is edited.
+```bash
+git clone https://github.com/skyglobal/web-toolkit.git
+cd web-toolkit
+git add remote upstream https://github.com/skyglobal/web-toolkit.git
+npm install
+bundle install
+```
 
-1. In the root of the project, run the following:
-  - `grunt server` (add ` --beautify` to help when debugging)
+### Building/Running the Toolkit
 
-## Contributing 
+Update the toolkit by making your change and testing it within the demo site.
 
-###Building A New/Updated Feature
-  - Write code in a new branch.
-  - Before you start a feature, ensure your code is up to date. Run:
-    - `git pull upstream master`
-  - Write tests as you go
-  - Refactor so the code is self documenting
-  - If you would like the feature to go live sooner, mention this in the comments/commit.  We will provide a temporary live url that will allow you to carry on without getting blocked.
+ * `grunt server` : Grunt will spin up the [Jekyll](http://jekyllrb.com/docs/github-pages/) server, watch for code changes and rebuild on the fly.
+ * `grunt server --beautify` : To help when debugging.
+ * `grunt test` : Runs the unit tests in [PhantomJS](http://phantomjs.org/)
+ * `grunt test-cross-browser` : Runs the unit tests using multiple browsers remotely.
+ * `grunt fonts` : Only needed to rebuild the Icon Fonts (skycons).
 
-### Testing
-  - Tests are automatically run on the CircleCI server upon pushing to Github.
-  - Two sets of tests are run:
-    - first run is on production ready 'minified' code
-    - second run on 'beautified' code with code coverage reporting, please keep this above 80%
-  - Run `grunt test` for unit (using [mocha](http://visionmedia.github.io/mocha/) and [chai](http://chaijs.com/‎))
+Please help us out by contributing any changes you make locally back into the source project. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
+For more details about the available commands please see [grunt/README.md](./grunt#web-toolkit-grunt)
 
-###Committing
+## Code Overview
 
-Before you submit your pull request, run :
-  - `git pull upstream master` to ensure your code is up to date and merged correctly
-  - `grunt test-cross-browser`. You will need to set up a [Browser Stack](http://www.browserstack.com) account.
+The repository contains two main components; the Web Toolkit and the demo site.
 
+*  Sass files are in [`app/src/sass`](./app/src/sass) and compiled output is saved into [`dist/stylesheets`](./_site/dist/stylesheets)
+*  JavaScript code is in [`app/src/js`](./app/src/js) and contains four modules which are output to [`_site/dist/scripts`](./_site/dist/scripts)
+  *  `toolkit` contains the JS utilities and toolkit UI components code
+  *  `demo` provides demo support for the website
+  *  `changes` provides support for the changes page of the website
+  *  `testIframe` provides support for running unit tests online on the website
+* HTML files are in [`app/_includes`](./app/_includes)
+*  Skycons are in the [`app/static/font-svgs`](./app/static/font-svgs) and minified into [`grunt/fonts/min`](./grunt/fonts/min).
 
-## Code structure
+### Folder Structure
 
     $ tree
     .
-    ├── _includes       => Source code for the toolkit documentation. Your demo html goes here
-    │   └── allIncludes.html => a single file referencing all includes. used for demo and test page
-    ├── _layouts        => layout for the index and test html pages
     ├── _site           => content generated by Jekyll
-    ├── dist            => content generated by Grunt
-    ├── grunt           => dev area for source code. get stuck in
-    │   ├── fonts       => templates used to generate the font icons (skycons)
-    │   ├── icons       => icons that are multi coloured and used within scss for spriting (not yet converted to svg's)
-    │   ├── js          => place for source JS files
-    │   ├── sass        => place for source SCSS files
-    │   └── svgs        => retina ready multi-coloured icons.
+    │   ├── dist        => content generated by Grunt
+    ├── app             => dev area for source code. get stuck in
+    │   ├── _includes   => Source code for the toolkit documentation. Your demo html goes here
+    │   │   └── allIncludes.html => a single file referencing all includes. used for demo and test page
+    │   ├── src
+    │   │   ├── fonts   => templates used to generate the font icons (skycons)
+    │   │   ├── icons   => multi coloured icons used within scss for spriting (not yet converted to svg's)
+    │   │   ├── js      => place for source JS files
+    │   │   ├── sass    => place for source SCSS files
+    │   │   └── svgs    => retina ready multi-coloured icons.
+    │   ├── _layouts    => layout for the index and test html pages
+    │   ├── static          => home of the unchanging and non-generated code
+    │   │   ├── deprecated  => code moved from the masthead project
+    │   │   ├── font-svgs   => src svg files used to generate font icons (skycons)
+    │   │   ├── fonts       => Sky Text Fonts
+    │   │   ├── images      => images not for spriting
+    │   │   ├── lib         => untouched third-party files
+    │   |   └── wiki-images => images used for demos in the wiki
+    │   ├── changes.html    => Page for users to see changes between toolkit version
+    │   ├── index.html      => Main demo page
+    │   └── test.html       => used by `grunt test` to run all tests at once
+    ├── grunt           => grunt config files live here
     ├── node_modules    => npm plugins
-    ├── static          => home of the unchanging and non-generated code
-    │   ├── deprecated  => code moved from the masthead project
-    │   ├── font-svgs   => src svg files used to generate font icons (skycons)
-    │   ├── fonts       => Sky Text Fonts
-    │   ├── images      => images not for spriting
-    │   └── lib         => untouched third-party files
     ├── test
     │   ├── libararies  => Third-party src files for testing
     │   ├── specs       => place for *-spec.js files
+    │   ├── screenshots
     │   ├── config.js   => RequireJS and Mocha config file
     │   └── runner.js   => explitly call each spec file for `grunt test` to run
-    ├── wiki-images     => images used for demos in the wiki
     ├── config.yml      => Jekyll config file
-    ├── changes.html    => Page for users to see changes between toolkit version
     ├── circle.yml      => CircleCI config file
     ├── gemfile
     ├── gruntfile.js    => grunt config file
-    ├── index.html      => Main demo page
-    ├── package.json    => NodeJS config file
+    ├── package.json    => NodeJS config file, includes version number for toolkit
     ├── rakefile        => build script
-    ├── test.html       => used by `grunt test` to run all tests at once
     └── README.md
     
-## Deployments
-To release a new version with:
-  - Code changes
-    -  increment the version number (described below) in _config.yml.
-    - This will update gh-pages and the S3.
-  - Documentation changes
-    - Don't increment the version number.
-    - This will update gh-pages branch only.
-  - Release Candidate changes
-    - Ensure that the code is committed in a branch that starts with `rc-xxx111`. Where xxx is feature and 111 is the version number
-    - Add '-rc' to the end of the version number e.g. `1.0.1-rc2`.
-    - This will update the S3 only.
-  - Feature releases
-    - Ensure that the code is committed in a branch that starts with `feature-xxx`. Where xxx is feature.
-    - Add '-feature-xxx' to the end of the version number e.g. '1.0.1-feature-fancy-carousel'.
-    - This will update the S3 only
 
-#### Versioning
-This library should follow the [Semantic versioning specification](http://semver.org/).
-In short, that means the following:
+## Feature Requests + Bugs
 
-Version: X.Y.Z(-rc)?
+Please take a look through currently open and closed issues to see if your feature/bug has already been discussed.  If not, feel free to open new issues and let us know about any bugs that you find. 
 
-- API changes that are **not backwards compatible**, and break existing
-  calls using the API must increment the X value.
+This project is currently maintained out of the hard work from a very few contributers who are working on other projects at the same time. If you could write any updates and submit pull requests (see [Contributing](CONTRIBUTING.md)) this would be amazing (and you would get your request looked at much faster!).  
 
-- API changes that introduce **new backwards compatible changes**, or **change the
-  internals**, but not the interface, of existing methods will increment the
-  Y value.
+### Supported Browsers
 
-- **Patches or bug fixes** that are backwards compatible should increment the
-  Z value.
+* Latest Chrome (Win8, Mavericks, Android)
+* Latest Firefox (Win8, Mavericks)
+* Safari 7 (Mavericks, iOS 7)
+* IE 11 (Win 8)
+* IE 10 (Win 7)
+* IE 9 (Vista)
+* IE 8 (Vista)
 
-- -rc Represents 'release candidates'.  This is to create a public available url for testing purposes.
 
-Upon commiting and pushing your code to Github, the CI server will run through
-the functional tests and - if there are no errors - a new version of the library
-will be deployed to the CDN using the version number specified in the
-_config.yml file.
-
+[^ back to contents](#contents)

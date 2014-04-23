@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.1.4 - 2014-02-27 */
+/*! web-toolkit - v2.2.12 - 2014-04-23 */
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
@@ -40,9 +40,11 @@ toolkit.polyfill = function() {
             return -1;
         };
     }
+    function classList() {}
     functionBind();
     stringTtrim();
     arrayIndexOf();
+    classList();
 };
 
 if (typeof window.define === "function" && window.define.amd) {
@@ -194,16 +196,24 @@ toolkit.detect = function(event) {
         html.className = arrClasses.join(" ");
     }
     function support3D() {
-        var property = "transform";
-        var style = html.style;
-        for (var i = 0; i < vendorPrefix.length; i++) {
-            style[vendorPrefix[i] + property] = "translate3D(0,0,0)";
-            if (style[vendorPrefix[i] + property] === "translate3D(0,0,0)") {
-                state.css.support3D = true;
-                return state.css.support3D;
+        var transforms = {
+            webkitTransform: "-webkit-transform",
+            OTransform: "-o-transform",
+            msTransform: "-ms-transform",
+            MozTransform: "-moz-transform",
+            transform: "transform"
+        }, has3d, div = document.createElement("div"), t;
+        document.body.insertBefore(div, null);
+        for (t in transforms) {
+            if (transforms.hasOwnProperty(t)) {
+                if (div.style[t] !== undefined) {
+                    div.style[t] = "translate3d(1px,1px,1px)";
+                    has3d = window.getComputedStyle(div).getPropertyValue(transforms[t]);
+                }
             }
         }
-        state.css.support3D = false;
+        document.body.removeChild(div);
+        state.css.support3D = has3d !== undefined && has3d.length > 0 && has3d !== "none";
         return state.css.support3D;
     }
     function supportsPseudo() {
@@ -291,16 +301,22 @@ toolkit.detect = function(event) {
         state.touch = typeof window.ontouchstart !== "undefined";
         return state.touch;
     }
-    function elementVisibleBottom(el) {
-        if (!el) {
-            return;
-        }
-        var offset = {
-            left: el.offsetLeft,
-            top: el.offsetTop
+    function getElementOffset(el) {
+        return {
+            top: el.getBoundingClientRect().top + window.pageYOffset - document.documentElement.clientTop,
+            left: el.getBoundingClientRect().left + window.pageXOffset - document.documentElement.clientLeft
         };
+    }
+    function elementVisibleBottom(el) {
+        if (el.length < 1) return;
+        var elementOffset = getElementOffset(el);
         var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        return offset.top + $(el).height() <= scrollTop + document.documentElement.clientHeight;
+        return elementOffset.top + el.offsetHeight <= scrollTop + document.documentElement.clientHeight;
+    }
+    function elementVisibleRight(el) {
+        if (el.length < 1) return;
+        var elementOffset = getElementOffset(el);
+        return elementOffset.left + el.offsetWidth <= document.documentElement.clientWidth;
     }
     attachClasses();
     bindEvents();
@@ -312,6 +328,7 @@ toolkit.detect = function(event) {
         pseudo: pseudo,
         state: state,
         elementVisibleBottom: elementVisibleBottom,
+        elementVisibleRight: elementVisibleRight,
         updateDetectionStates: updateDetectionStates
     };
 };
@@ -323,6 +340,91 @@ if (typeof window.define === "function" && window.define.amd) {
     });
 } else {
     toolkit.detect = toolkit.detect(toolkit.event);
+}
+
+if (typeof toolkit === "undefined") toolkit = {};
+
+toolkit.skycons = function(detect, event) {
+    var icons = {
+        "skycon-arrow-down-left": "&#xf100;",
+        "skycon-arrow-left": "&#xf101;",
+        "skycon-arrow-right": "&#xf102;",
+        "skycon-at": "&#xf103;",
+        "skycon-carousel-pause": "&#xf104;",
+        "skycon-carousel-play": "&#xf105;",
+        "skycon-chevron-down": "&#xf106;",
+        "skycon-chevron-left": "&#xf107;",
+        "skycon-chevron-up": "&#xf108;",
+        "skycon-chevron": "&#xf109;",
+        "skycon-close": "&#xf10a;",
+        "skycon-cloud": "&#xf10b;",
+        "skycon-download": "&#xf10c;",
+        "skycon-expand": "&#xf10d;",
+        "skycon-facebook": "&#xf10e;",
+        "skycon-google-plus": "&#xf10f;",
+        "skycon-info": "&#xf110;",
+        "skycon-mail": "&#xf111;",
+        "skycon-menu": "&#xf112;",
+        "skycon-minify": "&#xf113;",
+        "skycon-mouse": "&#xf114;",
+        "skycon-never-miss": "&#xf115;",
+        "skycon-on-demand": "&#xf116;",
+        "skycon-pending": "&#xf117;",
+        "skycon-phone": "&#xf118;",
+        "skycon-plus-circle": "&#xf119;",
+        "skycon-remote-record": "&#xf11a;",
+        "skycon-search": "&#xf11b;",
+        "skycon-share": "&#xf11c;",
+        "skycon-sky-go": "&#xf11d;",
+        "skycon-sky-plus": "&#xf11e;",
+        "skycon-sky": "&#xf11f;",
+        "skycon-speech-bubble": "&#xf120;",
+        "skycon-tick": "&#xf121;",
+        "skycon-tv": "&#xf122;",
+        "skycon-twitter-favourite": "&#xf123;",
+        "skycon-twitter-follow": "&#xf124;",
+        "skycon-twitter-reply": "&#xf125;",
+        "skycon-twitter-retweet": "&#xf126;",
+        "skycon-twitter": "&#xf127;",
+        "skycon-user-profile": "&#xf128;",
+        "skycon-video-play": "&#xf129;",
+        "skycon-volume": "&#xf12a;",
+        "skycon-warning": "&#xf12b;"
+    };
+    function addWebfont(el, c) {
+        var html = el.innerHTML, entity = icons[c];
+        el.innerHTML = "<span style=\"font-style:normal;font-family: 'skycons'\">" + entity + "</span>" + html;
+    }
+    function init() {
+        if (detect.pseudo()) {
+            return;
+        }
+        var els = document.getElementsByTagName("*"), i, c, el;
+        for (i = 0; ;i += 1) {
+            el = els[i];
+            if (!el) {
+                break;
+            }
+            c = el.className;
+            c = c.match(/skycon-[^\s'"]+/);
+            if (c) {
+                addWebfont(el, c[0]);
+            }
+        }
+    }
+    event.ready(init);
+    return {
+        add: addWebfont
+    };
+};
+
+if (typeof window.define === "function" && window.define.amd) {
+    define("utils/skycons", [ "utils/detect", "utils/event" ], function(detect, event) {
+        toolkit.skycons = toolkit.skycons(detect, event);
+        return toolkit.skycons;
+    });
+} else {
+    toolkit.skycons = toolkit.skycons(toolkit.detect, toolkit.event);
 }
 
 if (typeof toolkit === "undefined") toolkit = {};
@@ -519,15 +621,36 @@ toolkit.toggle = function(detect, event) {
         $("#toggle-tmp-height > div").append('<div class="toggle-clearfix-div clearfix clear" style="padding:1px"></div> ');
         $("#toggle-tmp-height > div").prepend('<div class="toggle-clearfix-div clearfix clear" style="padding:1px"></div> ');
         var openHeight = $("#toggle-tmp-height > div").height() - 2;
+        if ($el.find("img").length > 0) {
+            var originalHeightWithImages = $el.find(".accordion-content").outerHeight() - 2;
+            if (openHeight < originalHeightWithImages) {
+                openHeight = originalHeightWithImages;
+            }
+        }
         $el.data("openHeight", openHeight);
         $("#toggle-tmp-height").remove();
         $(".toggle-clearfix-div").remove();
         return openHeight;
     }
+    function containsSafeHtmlTags(text) {
+        var allTags = /<\w+>.+?<\/\w+>|<.+\/?>/;
+        var $text = $(text);
+        if (($text.html().match(allTags) || []).length === $text.find("strong", "b", "i", "em").length) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     function updateText($elClicked) {
-        var $textElement = $elClicked.find("span").length > 0 ? $elClicked.find("span") : $elClicked;
-        var oldText = $textElement.text();
-        $textElement.text($elClicked.attr("data-toggle-text"));
+        var $spans = $elClicked.find("span");
+        var $textElement = $spans.length > 0 ? $spans.first() : $elClicked;
+        var oldText = containsSafeHtmlTags($textElement) ? $textElement.html() : $textElement.text();
+        if (containsSafeHtmlTags($textElement) === true) {
+            $textElement.html($elClicked.attr("data-toggle-text"));
+        } else {
+            $textElement.text($elClicked.attr("data-toggle-text"));
+        }
+        $textElement.html($elClicked.attr("data-toggle-text"));
         $elClicked.attr("data-toggle-text", oldText).attr("data-tracking-label", oldText);
     }
     function show($elToToggle) {
@@ -646,20 +769,101 @@ toolkit.inPageNav = function(hash, event) {
         this.$tabContainer = $element;
         this.$tabs = $element.find("li[role=tab]");
         this.$tabTargets = $element.find("div[role=tabpanel]");
-        this.$showMore = $element.find(".dropdown-tab-select > a");
+        this.$showMore = $element.find(".dropdown-tab-select .selector");
         this.$moreTabsContainer = $element.find(".dropdown-tab-select");
         this.$moreTabsLink = $element.find(".more-tabs");
-        this.numberOfTabsToShow = 0;
-        this.saveTabOrder();
+        this.tabSizes = {};
+        this.tabStates = [];
+        this.setTabStates();
         this.bindEvents();
         this.initTabs();
     }
     InPageNav.prototype = {
+        setTabStates: function() {
+            var self = this;
+            this.$tabs.each(function() {
+                self.tabSizes[this.id] = $(this).outerWidth(true);
+                var obj = $(this);
+                var dropdownObj = obj.clone(true).removeClass("selected").removeAttr("aria-controls").removeAttr("aria-label").removeAttr("role").attr("aria-hidden", "true");
+                var selected = obj.hasClass("selected");
+                obj.addClass("selected");
+                var maximumWidth = obj.outerWidth(true);
+                obj.toggleClass("selected", selected);
+                self.tabStates.push({
+                    id: this.id,
+                    obj: obj,
+                    dropdownObj: dropdownObj,
+                    size: maximumWidth,
+                    selected: obj.hasClass("selected"),
+                    dropped: false
+                });
+                self.$moreTabsLink.append(dropdownObj);
+            });
+        },
+        getSelectedTab: function() {
+            var selected = null;
+            $.each(this.tabStates, function(i, tab) {
+                if (tab.selected) {
+                    selected = tab;
+                    return false;
+                }
+            });
+            return selected;
+        },
+        setSelectedTab: function(id) {
+            var selected = null;
+            $.each(this.tabStates, function(i, tab) {
+                tab.selected = tab.id == id;
+                if (tab.id == id) {
+                    selected = tab;
+                }
+            });
+            return selected;
+        },
+        getDroppedTabs: function() {
+            var selected = [];
+            $.each(this.tabStates, function(i, tab) {
+                if (tab.dropped) {
+                    selected.push(tab);
+                }
+            });
+            return selected;
+        },
+        setDroppedTabs: function() {
+            var dropDownIconWidth = this.$moreTabsContainer.show().outerWidth(true) || 44;
+            var containerWidth = this.$tabContainer.outerWidth(true) - dropDownIconWidth;
+            var totalWidth = 0;
+            if (this.getSelectedTab()) {
+                totalWidth += this.$tabs.filter("#" + this.getSelectedTab().id).outerWidth(true);
+            }
+            $.each(this.tabStates, function(i, n) {
+                if (!n.selected) {
+                    totalWidth += n.size;
+                    n.dropped = totalWidth > containerWidth;
+                }
+            });
+        },
         bindEvents: function() {
             var self = this;
             hash.register(this.getHashList(), this.changeTab.bind(self));
-            this.$tabs.on("click", function(e) {
+            this.$tabs.on("click", function() {
                 self.changeTab($(this).find("a").attr("href"));
+            });
+            this.$moreTabsContainer.find("li").on("click", function() {
+                self.changeTab($(this).find("a").attr("href"));
+            });
+            this.$tabs.find("a").on("focus", function() {
+                var target = $(this).closest("li");
+                if (target.hasClass("dropped")) {
+                    self.dropTabsDuringInteraction(target.attr("id"));
+                }
+                target.addClass("given-focus");
+            }).on("blur", function() {
+                $(this).closest("li").removeClass("given-focus");
+                self.$tabs.filter(".dropped-during-interaction").removeClass("dropped-during-interaction");
+                if (self.$tabs.filter(".selected.dropped").length) {
+                    self.dropTabsDuringInteraction(self.$tabs.filter(".selected.dropped").attr("id"));
+                }
             });
             this.$showMore.on("click", function(e) {
                 e.preventDefault();
@@ -667,6 +871,11 @@ toolkit.inPageNav = function(hash, event) {
             });
             $("body").on("click", this.hideMore.bind(self));
             event.on(window, "resizeend", this.initTabs.bind(self));
+        },
+        initTabs: function() {
+            this.setDroppedTabs();
+            this.setTabVisibility();
+            this.setDropdownVisibility();
         },
         getHashList: function() {
             var arrHash = [], hash;
@@ -678,24 +887,18 @@ toolkit.inPageNav = function(hash, event) {
             });
             return arrHash;
         },
-        saveTabOrder: function() {
-            this.$tabs.each(function(i) {
-                $(this).attr("data-position", i);
-            });
-        },
-        initTabs: function() {
-            this.moveTabsToList();
-            this.moveTabsToDropdown();
-            if (this.$tabTargets.size() > 0 && !this.$tabTargets.filter(".selected").length) {
-                this.changeTab(this.$tabTargets.first()[0].id);
-            }
-        },
         changeTab: function(controlId) {
-            controlId = controlId.replace("#!", "");
-            var $thisTab = $("#" + controlId.replace("-tab-contents", "") + "-tab"), $thisTabTarget = $("#" + controlId);
+            controlId = controlId.replace(/^#!{0,1}/, "");
+            var $thisTab = $("#" + controlId.replace("-tab-contents", "") + "-tab");
+            var $thisTabTarget = $("#" + controlId);
+            this.$tabs.filter(".dropped-during-interaction").removeClass("dropped-during-interaction");
             this.$tabTargets.add(this.$tabs).removeClass("selected");
+            this.setSelectedTab(controlId + "-tab");
             $thisTab.add($thisTabTarget).addClass("selected");
-            this.initTabs();
+            if ($thisTab.hasClass("dropped")) {
+                this.setDroppedTabs();
+                this.setTabVisibility();
+            }
         },
         hideMore: function(e) {
             if ($(e.target).closest(this.$showMore).length) {
@@ -707,51 +910,40 @@ toolkit.inPageNav = function(hash, event) {
             var action = this.$moreTabsLink.hasClass("dropdown-tab-selected") || type === "hide" ? "remove" : "add";
             this.$showMore.add(this.$moreTabsLink)[action + "Class"]("dropdown-tab-selected");
         },
-        getNumberOfTabsToShow: function() {
-            var containerWidth = this.$tabContainer.outerWidth(true) - this.$moreTabsContainer.show().outerWidth(true) - this.$tabs.filter(".selected").outerWidth(true), totalWidth = 0, numberOfTabs = 0;
-            this.$tabs.not(".selected").attr("style", "float:left").each(function() {
-                totalWidth += $(this).outerWidth(true);
-                if (totalWidth > containerWidth) {
-                    return;
+        setTabVisibility: function() {
+            $.each(this.tabStates, function(i, tab) {
+                if (tab.dropped && !tab.selected) {
+                    tab.obj.addClass("dropped");
+                    tab.dropdownObj.removeClass("dropped");
+                } else {
+                    tab.obj.removeClass("dropped");
+                    tab.dropdownObj.addClass("dropped");
                 }
-                numberOfTabs++;
             });
-            this.$tabs.add(this.$moreTabsContainer).removeAttr("style");
-            return numberOfTabs;
         },
-        moveTabsToList: function() {
-            var self = this;
-            this.$tabs.each(function(i) {
-                $(this).appendTo(self.$tabContainer.find(".tabs"));
-            });
-            sortTabs(this.$tabContainer.find(".tabs"));
-            this.numberOfTabsToShow = this.getNumberOfTabsToShow();
+        setDropdownVisibility: function() {
+            if (this.getDroppedTabs().length) {
+                this.$moreTabsContainer.show();
+            } else {
+                this.$moreTabsContainer.hide();
+            }
         },
-        moveTabsToDropdown: function() {
+        dropTabsDuringInteraction: function(id) {
             var self = this;
-            this.$tabs.not(".selected").each(function(i) {
-                if (i < self.numberOfTabsToShow) {
-                    return;
+            var widthNeeded = self.tabSizes[id];
+            var widthGained = 0;
+            $.each(self.tabStates, function(i, tab) {
+                widthGained += tab.size;
+                tab.obj.addClass("dropped-during-interaction");
+                if (widthGained >= widthNeeded) {
+                    return false;
                 }
-                $(this).appendTo(self.$moreTabsLink);
-                self.$moreTabsContainer.show();
             });
-            sortTabs(this.$moreTabsLink);
         }
     };
-    function sortTabs($el) {
-        var list = [];
-        $el.find("li").each(function() {
-            list.push($(this).attr("data-position"));
-        });
-        list.sort();
-        $.each(list, function() {
-            $el.find('li[data-position="' + this + '"]').appendTo($el);
-        });
-    }
     $.fn.inPageNav = function() {
         return this.each(function() {
-            var inPageNav = new InPageNav($(this));
+            new InPageNav($(this));
         });
     };
 };
@@ -876,7 +1068,7 @@ toolkit.datePicker = function() {
             datePicker.fillDays(daysInMonth(datePicker.calendarDate.month, datePicker.calendarDate.year), firstDay(datePicker.calendarDate.month, datePicker.calendarDate.year));
         },
         fillDays: function(noOfDaysInMonth, firstDay) {
-            var i = 1, date = 1, datePicker = this, calendarDate = datePicker.calendarDate, daysText = [], classNames = [], isToday = false, isInputDate = false, isPastDate = false, monthIsInPast = calendarDate.month < currentDate.month && calendarDate.year <= currentDate.year || calendarDate.year < currentDate.year, monthIsNow = calendarDate.month == currentDate.month && calendarDate.year == currentDate.year, monthIsInInput = calendarDate.month == datePicker.$month.val() && calendarDate.year == datePicker.$year.val();
+            var i = 0, date = 1, datePicker = this, calendarDate = datePicker.calendarDate, daysText = [], classNames = [], isToday = false, isInputDate = false, isPastDate = false, monthIsInPast = calendarDate.month < currentDate.month && calendarDate.year <= currentDate.year || calendarDate.year < currentDate.year, monthIsNow = calendarDate.month == currentDate.month && calendarDate.year == currentDate.year, monthIsInInput = calendarDate.month == datePicker.$month.val() && calendarDate.year == datePicker.$year.val();
             for (i; i < firstDay; i++) {
                 daysText.push("<span></span>");
             }
@@ -1218,6 +1410,9 @@ toolkit.lightbox = function($, keyboardFocus, hash, event, detect) {
                     e.preventDefault();
                     lightbox.close();
                 }
+                if ($target.attr("href")) {
+                    return true;
+                }
                 if ($target.closest("." + classes.content).length) {
                     return false;
                 }
@@ -1313,15 +1508,11 @@ toolkit.share = function(detect) {
     }
     function toggleSharePopover(e) {
         e.preventDefault();
-        var $section = $(this).parent(), triggerEvents = "keypress " + ("ontouchend" in document.documentElement ? "touchend" : "click");
+        var $section = $(this).parent(), $popover = $section.parent().find(".popover"), triggerEvents = "keypress " + ("ontouchend" in document.documentElement ? "touchend" : "click");
         if (e.type === "click" || e.type === "touchend" || e.type === "keypress" && e.which === 13) {
             $section.toggleClass("active");
-            var $popover = $(this).parent().find(".popover");
-            if (detect.elementVisibleBottom($popover[0]) === false) {
-                $popover.addClass("top");
-            } else {
-                $popover.removeClass("top");
-            }
+            $popover.toggleClass("top", !detect.elementVisibleBottom($popover[0]));
+            $popover.toggleClass("left", !detect.elementVisibleRight($popover[0]));
             $document.on(triggerEvents, function hidePopover(e) {
                 if (!$.contains($section[0], e.target)) {
                     $section.removeClass("active");
@@ -1348,7 +1539,7 @@ if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.tooltip = function(detect) {
     function bindEvents() {
-        $(document).on("mouseenter mouseleave", "[data-tooltip]", hover);
+        ($(".tooltip-container") || $(document)).on("mouseenter mouseleave", "[data-tooltip]", hover);
         $("[data-tooltip] .tooltip-content").on("click", preventClicksToParent);
     }
     function preventClicksToParent(event) {
@@ -1434,6 +1625,16 @@ toolkit.video = function(window, $, event) {
             $("body").one("keydown", video.stopOnEscape.bind(video));
             video.$wrapper.one("click touchstart", ".close", video.stop.bind(video));
             video.$player.one("ended webkitendfullscreen", video.stop.bind(video));
+            if (video.options.freewheel) {
+                video.$player.on("onSlotStarted", function() {
+                    video.$player.off("ended webkitendfullscreen");
+                    video.$player.one("onSlotEnded", function() {
+                        video.$player.one("playing", function() {
+                            video.$player.one("ended webkitendfullscreen", video.stop.bind(video));
+                        });
+                    });
+                });
+            }
         },
         createWrapper: function() {
             this.options.$wrapperLocation.append('<div class="video-wrapper">' + '<a href="#!" class="close"><i class="skycon-close" aria-hidden=true></i><span class="speak">Close</span></a>' + '<div class="videocontrolcontainer"><video></video><img class="posterFrame"/></div>' + "</div>");
@@ -1476,7 +1677,7 @@ toolkit.video = function(window, $, event) {
                 e.preventDefault();
             }
             var video = this;
-            event.off(window, "resizeend", video.resizeContainer);
+            event.off(window, "resizeend", video.resizeListener);
             sky.html5player.close(this.$wrapper);
             this.hideCanvas();
         },
@@ -1491,7 +1692,8 @@ toolkit.video = function(window, $, event) {
                 $container.animate({
                     height: height
                 }, animationSpeed, function() {
-                    event.on(window, "resizeend", $.proxy(video.resizeContainer, video));
+                    video.resizeListener = video.resizeContainer.bind(video);
+                    event.on(window, "resizeend", video.resizeListener);
                     $wrapper.show();
                     $overlay.fadeOut(animationSpeed);
                     callback();
@@ -1547,6 +1749,7 @@ if (typeof toolkit === "undefined") toolkit = {};
 toolkit.carousel = function(video, detect) {
     var has3d = detect.css("support3D");
     var hasTransform = detect.css("transform");
+    var hasTransition = detect.css("transition");
     function Carousel(element, options) {
         this.options = options;
         this.$viewport = element;
@@ -1557,7 +1760,12 @@ toolkit.carousel = function(video, detect) {
         this.timerId = false;
         this.touchReset();
         this.bindEvents();
-        this.initialiseVideos();
+        if (!this.options.video) {
+            this.options.video = {
+                displayAdverts: false
+            };
+        }
+        this.initialiseVideos(this.options.video);
     }
     Carousel.prototype = {
         unbindTouchEvents: function() {
@@ -1568,8 +1776,8 @@ toolkit.carousel = function(video, detect) {
         },
         bindEvents: function() {
             this.bindTouchEvents();
-            this.$slideContainer.find("a").on("click", this.pause.bind(this));
-            this.$slideContainer.find("figure").on("click", function(e) {
+            this.$slideContainer.on("click", "a", this.pause.bind(this));
+            this.$slideContainer.on("click", "figure", function(e) {
                 if (e.target.parentNode.className.indexOf("play-video") >= 0 || e.target.className.indexOf("play-video") >= 0) {
                     return;
                 }
@@ -1581,14 +1789,15 @@ toolkit.carousel = function(video, detect) {
         },
         unbindEvents: function() {
             this.unbindTouchEvents();
-            this.$slideContainer.find("a").off("click");
+            this.$slideContainer.off("click", "a");
+            this.$slideContainer.off("click", "figure");
         },
         setOffset: function(percent, animate) {
             var $container = this.$slideContainer.removeClass("animate");
             if (animate) $container.addClass("animate");
             if (has3d) {
                 $container.css("transform", "translate3d(" + percent + "%,0,0) scale3d(1,1,1)");
-            } else if (hasTransform) {
+            } else if (hasTransform && hasTransition) {
                 $container.css("transform", "translate(" + percent + "%,0)");
             } else if (animate) {
                 $container.animate({
@@ -1607,7 +1816,7 @@ toolkit.carousel = function(video, detect) {
             this[termsHidden ? "showTermsContent" : "hideTermsContent"]();
         },
         showTermsContent: function() {
-            this.hideTermsContent();
+            this.$viewport.next(".terms-content").find(".terms").remove();
             var $terms = $(this.$slides[this.currentIndex]).find(".terms");
             if ($terms.length) {
                 this.$viewport.next(".terms-content").append($terms.clone(true).removeClass("speak").attr("aria-hidden", "true")).fadeIn(200);
@@ -1629,12 +1838,12 @@ toolkit.carousel = function(video, detect) {
             this.$viewport.find(".terms-link").fadeOut(200);
             this.hideTermsContent();
         },
-        initialiseVideos: function() {
+        initialiseVideos: function(options) {
             var carousel = this;
             this.$slides.video({
                 $wrapperLocation: carousel.$viewport,
-                token: "8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
-                displayAdverts: false,
+                token: options.token || "8D5B12D4-E1E6-48E8-AF24-F7B13050EE85",
+                displayAdverts: options.displayAdverts,
                 onPlay: function() {
                     carousel.pause();
                     carousel.$viewport.find(".actions, .indicators, .terms-link").fadeOut(500);
@@ -1665,9 +1874,6 @@ toolkit.carousel = function(video, detect) {
         },
         "goto": function(slideIndex, pause, callback) {
             if (pause !== false) this.pause();
-            if (slideIndex === this.currentIndex) {
-                return;
-            }
             if (slideIndex > this.currentIndex) {
                 this.moveSlide({
                     index: slideIndex,
@@ -1675,10 +1881,17 @@ toolkit.carousel = function(video, detect) {
                     end: -50,
                     callback: callback
                 });
-            } else {
+            } else if (slideIndex < this.currentIndex) {
                 this.moveSlide({
                     index: slideIndex,
                     start: -50,
+                    end: 0,
+                    callback: callback
+                });
+            } else {
+                this.moveSlide({
+                    index: slideIndex,
+                    start: 0,
                     end: 0,
                     callback: callback
                 });
@@ -1846,7 +2059,7 @@ toolkit.carousel = function(video, detect) {
             },
             terms: function($element) {
                 var $termsLink = $('<a href="#!" class="terms-link carousel-content cushioned hidden black internal-link supportive" aria-hidden="true">Terms and Conditions</a>');
-                var $termsContent = $('<div class="terms-content carousel-content  cushioned hidden"></div>');
+                var $termsContent = $('<div class="terms-content carousel-content cushioned"></div>').hide();
                 if ($element.find(".terms").length) {
                     $element.append($termsLink);
                     $element.after($termsContent);
@@ -1866,7 +2079,11 @@ toolkit.carousel = function(video, detect) {
                 markup.indicators($this, {
                     count: carousel.slideCount,
                     onclick: function(index) {
-                        carousel.goto(index);
+                        if (index !== carousel.currentIndex) {
+                            carousel.goto(index, true);
+                        } else {
+                            carousel.pause();
+                        }
                     }
                 }).terms($this).actions($this, {
                     count: carousel.slideCount,
@@ -1895,6 +2112,7 @@ toolkit.carousel = function(video, detect) {
             }).on("goto", function(e, slideIndex) {
                 carousel.goto(slideIndex, true);
             }).on("refresh", function(e, slideIndex) {
+                carousel.$slideContainer = carousel.$viewport.find(".skycom-carousel-container");
                 carousel.$slides = carousel.$slideContainer.find(">");
                 carousel.slideCount = carousel.$slides.length;
                 $this.find(".indicators").remove();
@@ -1904,7 +2122,10 @@ toolkit.carousel = function(video, detect) {
                 slideIndex = isNaN(slideIndex) || slideIndex < 0 ? 0 : slideIndex;
                 slideIndex = slideIndex > carousel.slideCount - 1 ? carousel.slideCount - 1 : slideIndex;
                 carousel.goto(slideIndex, true);
+                carousel.unbindEvents();
+                carousel.bindEvents();
                 createMarkup(carousel);
+                carousel[options.autoplay === true ? "play" : "pause"](false, options.interval);
             }).on("keyup", function(e) {
                 switch (e.keyCode) {
                   case 9:
@@ -1944,10 +2165,11 @@ if (typeof window.define === "function" && window.define.amd) {
 }
 
 if (typeof window.define === "function" && window.define.amd) {
-    define("toolkit", [ "utils/polyfill", "utils/detect", "utils/hash-manager", "utils/popup", "utils/toggle", "utils/focus", "utils/event", "components/in-page-nav", "components/accordion", "components/form", "components/lightbox", "components/share", "components/tooltip", "components/video", "components/carousel" ], function(polyfill, detect, hashManager, popup, toggle, focus, validation, event, inPageNav, accordion, datePicker, lightbox, share, tooltip, video, carousel) {
+    define("toolkit", [ "utils/polyfill", "utils/detect", "utils/skycons", "utils/hash-manager", "utils/popup", "utils/toggle", "utils/focus", "utils/event", "components/in-page-nav", "components/accordion", "components/form", "components/lightbox", "components/share", "components/tooltip", "components/video", "components/carousel" ], function(polyfill, detect, skycons, hashManager, popup, toggle, focus, validation, event, inPageNav, accordion, datePicker, lightbox, share, tooltip, video, carousel) {
         return {
             polyfill: polyfill,
             detect: detect,
+            skycons: skycons,
             hashManager: hashManager,
             popup: popup,
             toggle: toggle,

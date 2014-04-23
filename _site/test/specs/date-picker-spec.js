@@ -68,6 +68,16 @@ function datePickerSpec(datePicker) {
             expect(parseInt($('#demo-date-picker-one.date-picker .year').val(),10)).to.equal(2035);
         });
 
+        it('Dates are shown against the correct day', function () {
+            setDate(5, 3, 2014);
+            $('#demo-date-picker-one.date-picker .day').focus();
+            expect($('#demo-date-picker-one .day-container>span').size()).to.equal(36);
+            expect($('#demo-date-picker-one .day-container>span.date').size()).to.equal(31);
+            expect($('#demo-date-picker-one .day-container>span')[0].innerText).to.equal("");
+            expect($('#demo-date-picker-one .day-container>span')[5].innerText).to.equal("1");
+
+        });
+
         it('Correctly sets a date after clicking on day input', function () {
             setDate(1, 1, 2035);
             $('#demo-date-picker-one.date-picker .day').focus();
@@ -192,6 +202,7 @@ function datePickerSpec(datePicker) {
             setDate(1, 2, 2012);
             expect($('#demo-date-picker-one.date-picker').find('.date:contains("29")').text()).to.equal('29');
         });
+
 
     });
 

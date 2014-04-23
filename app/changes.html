@@ -1,0 +1,56 @@
+---
+layout: default
+title: Sky Web Toolkit
+---
+
+<div class="skycom-container clearfix">
+    <div class="alpha skycom-12">
+        <section class="demo-section" id=changes-page>
+            <h2>Changes</h2>
+            <p>
+                The earliest version this tool will work from is 2.0.0.  To see the changes from 1.0.0 to 2.0.0 please <a href="http://web-toolkit.global.sky.com/2.0.0alpha.rc1/_site/changes.html">check here</a>.
+            </p>
+            <p>
+                In 2.1.0 most files had their paths and names changed. This utility will therefore report a full code change if compared with a 2.0.x version.
+            </p>
+            <h3 class="smaller">Major Changes <small>(v1.x - v2.0.0)</small></h3>
+            <ul>
+                <li><span class="medium">Typography</span> Headings now have default margins + mobile sizes adjusted</li>
+                <li><span class="medium">Skycons</span> <code>colour</code> class should now be on the skycon element</li>
+                <li><span class="medium">carousel</span> JS options object doesnt need to be wrapped in a <code>carousel</code> object</li>
+                <li><span class="medium">carousel</span> please add the class <code>slide</code> to the slides within the carousel</li>
+                <li><span class="medium">carousel</span> <a href="https://github.com/skyglobal/web-toolkit/issues/21">bug 21</a> has been fixed which means you  may need to get rid of some extra click events.</li>
+            </ul>
+            <div class="sub-section ">
+                <form class="sky-form sky-well hidden" data-diff-container>
+                    <div class="row">
+                        <label for="version">Which version are you using?</label>
+                        <input id="version" type="text" placeholder="eg. 2.0.0" required="required"/>
+                    </div>
+                    <div class="error row">
+
+                    </div>
+                    <div class="row">
+                        <label >&nbsp;</label>
+                        <button id="check" class="btn primary" type="submit">Check</button>
+                        <a id="return" class="btn secondary" href='http://skyglobal.github.io/web-toolkit'>return to skyglobal.github.io</a>
+                    </div>
+                </form>
+                <div class="warning error sky-well hidden" >
+                    To workout changes we must go to
+                    <a href="http://web-toolkit.global.sky.com/{{ site.version }}/_site/changes.html">here</a>.
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<script>
+    if (document.location.host === "web-toolkit.global.sky.com" || document.location.host.indexOf('local')>=0){
+        $('.sky-form').removeClass('hidden');
+    } else {
+        $('.warning').removeClass('hidden');
+    }
+</script>
+<script>
+    require(['changes']);
+</script>

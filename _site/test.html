@@ -31,90 +31,7 @@
     document.createElement('figure');
     document.createElement('figcaption');
 </script><![endif]-->
-<script>
-    var responsiveImages = (function () {
 
-    var containers = [];
-
-    function loadImage(container) {
-
-        var w = window,
-            ps = container.getElementsByTagName("div"),
-            i = 0, il = ps.length,
-            j = 0, jl = ps.length,
-            sources, matches, media, picImg, newSrc;
-
-        for (; i < il; i++) {
-            if (ps[ i ].getAttribute("data-picture") !== null) {
-
-                sources = ps[ i ].getElementsByTagName("div");
-                matches = [];
-
-                // See if which sources match
-                for (j = 0, jl = sources.length; j < jl; j++) {
-                    media = sources[ j ].getAttribute("data-media");
-                    // if there's no media specified, OR w.matchMedia is supported
-                    if (!media || ( w.matchMedia && w.matchMedia(media).matches )) {
-                        matches.push(sources[ j ]);
-                    }
-                }
-
-                // Find any existing img element in the picture element
-                picImg = ps[ i ].getElementsByTagName("img")[ 0 ];
-
-                if (matches.length) {
-                    if (!picImg) {
-                        picImg = w.document.createElement("img");
-                        picImg.alt = ps[ i ].getAttribute("data-alt");
-                        ps[ i ].appendChild(picImg);
-                    }
-                    newSrc = matches.pop().getAttribute("data-src");
-                    if (picImg.src !== newSrc) {
-                        picImg.src = newSrc;
-                    }
-                }
-                else if (picImg) {
-                    ps[ i ].removeChild(picImg);
-                }
-            }
-        }
-    }
-
-
-    function on(el, eventName, exec){
-        if (el.addEventListener) {
-            el.addEventListener(eventName, exec, false);
-        } else {
-            el.attachEvent(eventName, exec);
-        }
-    }
-
-
-    function bindOnResize() {
-        on(window, "resizeend", function () {
-            var i, n=containers.length;
-            for (i=0;i< n;i++) {
-                loadImage(containers[i]);
-            }
-        });
-    }
-
-    function init(container) {
-        if(container) {
-            loadImage(container);
-            containers.push(container);
-        }
-    }
-
-    bindOnResize();
-
-    return {
-        init:init,
-        bindOnResize:bindOnResize
-    };
-})();
-
-</script>
 
     <script src="test/libraries/mocha.js"></script>
     <script src="test/libraries/mocha-browserstack.js"></script>
@@ -634,23 +551,23 @@
                         <div class="demo clearfix">
                             <div class="skycom-2 alpha demo-colour-block ">
     <div class="white  demo-original cushioned">Original</div>
-    <div class="demo-hex secondary">#d92231</div>
-</div>
-<div class="skycom-2 demo-colour-block ">
-    <div class="white  demo-family cushioned">Family</div>
     <div class="demo-hex secondary">#ff6000</div>
 </div>
 <div class="skycom-2 demo-colour-block ">
+    <div class="white  demo-family cushioned">Family</div>
+    <div class="demo-hex secondary">#1998f2</div>
+</div>
+<div class="skycom-2 demo-colour-block ">
     <div class="white  demo-movies cushioned">Movies</div>
-    <div class="demo-hex secondary">#78184c</div>
+    <div class="demo-hex secondary">#a51d4d</div>
 </div>
 <div class="skycom-2 demo-colour-block">
     <div class="white  demo-sports cushioned">Sports</div>
-    <div class="demo-hex secondary">#00549a</div>
+    <div class="demo-hex secondary">#d92231</div>
 </div>
 <div class="skycom-2 demo-colour-block">
     <div class=" demo-complete cushioned">Complete</div>
-    <div class="demo-hex secondary">#00549a</div>
+    <div class="demo-hex secondary">#29c1ad</div>
 </div>
                         </div>
                         
@@ -887,89 +804,95 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
     </thead>
     <tbody>
     
-        <tr ><td> skycon-arrow-down-left</td><td class="icon"><i class=" skycon-arrow-down-left" aria-hidden=true></i></td><td class="icon"><i class=" skycon-arrow-down-left colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-arrow-down-left" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/arrow-down-left.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        <tr ><td> skycon-carousel-pause</td><td class="icon"><i class=" skycon-carousel-pause" aria-hidden=true></i></td><td class="icon"><i class=" skycon-carousel-pause colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-carousel-pause" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/carousel-pause.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
         <tr ><td> skycon-arrow-left</td><td class="icon"><i class=" skycon-arrow-left" aria-hidden=true></i></td><td class="icon"><i class=" skycon-arrow-left colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-arrow-left" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/arrow-left.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
-        <tr ><td> skycon-arrow-right</td><td class="icon"><i class=" skycon-arrow-right" aria-hidden=true></i></td><td class="icon"><i class=" skycon-arrow-right colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-arrow-right" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/arrow-right.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-at</td><td class="icon"><i class=" skycon-at" aria-hidden=true></i></td><td class="icon"><i class=" skycon-at colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-at" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/at.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-carousel-pause</td><td class="icon"><i class=" skycon-carousel-pause" aria-hidden=true></i></td><td class="icon"><i class=" skycon-carousel-pause colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-carousel-pause" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/carousel-pause.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-carousel-play</td><td class="icon"><i class=" skycon-carousel-play" aria-hidden=true></i></td><td class="icon"><i class=" skycon-carousel-play colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-carousel-play" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/carousel-play.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-chevron-down</td><td class="icon"><i class=" skycon-chevron-down" aria-hidden=true></i></td><td class="icon"><i class=" skycon-chevron-down colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-chevron-down" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/chevron-down.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        <tr ><td> skycon-arrow-down-left</td><td class="icon"><i class=" skycon-arrow-down-left" aria-hidden=true></i></td><td class="icon"><i class=" skycon-arrow-down-left colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-arrow-down-left" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/arrow-down-left.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
         <tr ><td> skycon-chevron-left</td><td class="icon"><i class=" skycon-chevron-left" aria-hidden=true></i></td><td class="icon"><i class=" skycon-chevron-left colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-chevron-left" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/chevron-left.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
-        <tr ><td> skycon-chevron-up</td><td class="icon"><i class=" skycon-chevron-up" aria-hidden=true></i></td><td class="icon"><i class=" skycon-chevron-up colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-chevron-up" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/chevron-up.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        <tr ><td> skycon-cloud</td><td class="icon"><i class=" skycon-cloud" aria-hidden=true></i></td><td class="icon"><i class=" skycon-cloud colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-cloud" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/cloud.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
-        <tr ><td> skycon-chevron</td><td class="icon"><i class=" skycon-chevron" aria-hidden=true></i></td><td class="icon"><i class=" skycon-chevron colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-chevron" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/chevron.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        <tr ><td> skycon-at</td><td class="icon"><i class=" skycon-at" aria-hidden=true></i></td><td class="icon"><i class=" skycon-at colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-at" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/at.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-never-miss</td><td class="icon"><i class=" skycon-never-miss" aria-hidden=true></i></td><td class="icon"><i class=" skycon-never-miss colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-never-miss" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/never-miss.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-mouse</td><td class="icon"><i class=" skycon-mouse" aria-hidden=true></i></td><td class="icon"><i class=" skycon-mouse colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-mouse" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/mouse.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
         <tr ><td> skycon-close</td><td class="icon"><i class=" skycon-close" aria-hidden=true></i></td><td class="icon"><i class=" skycon-close colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-close" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/close.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
-        <tr ><td> skycon-cloud</td><td class="icon"><i class=" skycon-cloud" aria-hidden=true></i></td><td class="icon"><i class=" skycon-cloud colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-cloud" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/cloud.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        <tr ><td> skycon-plus-circle</td><td class="icon"><i class=" skycon-plus-circle" aria-hidden=true></i></td><td class="icon"><i class=" skycon-plus-circle colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-plus-circle" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/plus-circle.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-chevron-up</td><td class="icon"><i class=" skycon-chevron-up" aria-hidden=true></i></td><td class="icon"><i class=" skycon-chevron-up colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-chevron-up" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/chevron-up.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
         <tr ><td> skycon-expand</td><td class="icon"><i class=" skycon-expand" aria-hidden=true></i></td><td class="icon"><i class=" skycon-expand colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-expand" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/expand.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
-        <tr ><td> skycon-facebook</td><td class="icon"><i class=" skycon-facebook" aria-hidden=true></i></td><td class="icon"><i class=" skycon-facebook colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-facebook" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/facebook.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        <tr ><td> skycon-user-profile</td><td class="icon"><i class=" skycon-user-profile" aria-hidden=true></i></td><td class="icon"><i class=" skycon-user-profile colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-user-profile" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/user-profile.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-twitter-follow</td><td class="icon"><i class=" skycon-twitter-follow" aria-hidden=true></i></td><td class="icon"><i class=" skycon-twitter-follow colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-follow" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/twitter-follow.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-sky-plus</td><td class="icon"><i class=" skycon-sky-plus" aria-hidden=true></i></td><td class="icon"><i class=" skycon-sky-plus colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-sky-plus" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/sky-plus.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-tick</td><td class="icon"><i class=" skycon-tick" aria-hidden=true></i></td><td class="icon"><i class=" skycon-tick colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-tick" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/tick.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-arrow-right</td><td class="icon"><i class=" skycon-arrow-right" aria-hidden=true></i></td><td class="icon"><i class=" skycon-arrow-right colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-arrow-right" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/arrow-right.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-volume</td><td class="icon"><i class=" skycon-volume" aria-hidden=true></i></td><td class="icon"><i class=" skycon-volume colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-volume" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/volume.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-video-play</td><td class="icon"><i class=" skycon-video-play" aria-hidden=true></i></td><td class="icon"><i class=" skycon-video-play colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-video-play" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/video-play.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-mail</td><td class="icon"><i class=" skycon-mail" aria-hidden=true></i></td><td class="icon"><i class=" skycon-mail colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-mail" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/mail.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-twitter-retweet</td><td class="icon"><i class=" skycon-twitter-retweet" aria-hidden=true></i></td><td class="icon"><i class=" skycon-twitter-retweet colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-retweet" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/twitter-retweet.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-search</td><td class="icon"><i class=" skycon-search" aria-hidden=true></i></td><td class="icon"><i class=" skycon-search colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-search" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/search.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-warning</td><td class="icon"><i class=" skycon-warning" aria-hidden=true></i></td><td class="icon"><i class=" skycon-warning colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-warning" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/warning.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
         <tr ><td> skycon-google-plus</td><td class="icon"><i class=" skycon-google-plus" aria-hidden=true></i></td><td class="icon"><i class=" skycon-google-plus colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-google-plus" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/google-plus.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
-        <tr ><td> skycon-info</td><td class="icon"><i class=" skycon-info" aria-hidden=true></i></td><td class="icon"><i class=" skycon-info colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-info" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/info.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        <tr ><td> skycon-chevron</td><td class="icon"><i class=" skycon-chevron" aria-hidden=true></i></td><td class="icon"><i class=" skycon-chevron colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-chevron" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/chevron.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
-        <tr ><td> skycon-mail</td><td class="icon"><i class=" skycon-mail" aria-hidden=true></i></td><td class="icon"><i class=" skycon-mail colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-mail" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/mail.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        <tr ><td> skycon-chevron-down</td><td class="icon"><i class=" skycon-chevron-down" aria-hidden=true></i></td><td class="icon"><i class=" skycon-chevron-down colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-chevron-down" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/chevron-down.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-download</td><td class="icon"><i class=" skycon-download" aria-hidden=true></i></td><td class="icon"><i class=" skycon-download colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-download" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/download.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-on-demand</td><td class="icon"><i class=" skycon-on-demand" aria-hidden=true></i></td><td class="icon"><i class=" skycon-on-demand colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-on-demand" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/on-demand.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-facebook</td><td class="icon"><i class=" skycon-facebook" aria-hidden=true></i></td><td class="icon"><i class=" skycon-facebook colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-facebook" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/facebook.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-twitter-favourite</td><td class="icon"><i class=" skycon-twitter-favourite" aria-hidden=true></i></td><td class="icon"><i class=" skycon-twitter-favourite colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-favourite" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/twitter-favourite.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-carousel-play</td><td class="icon"><i class=" skycon-carousel-play" aria-hidden=true></i></td><td class="icon"><i class=" skycon-carousel-play colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-carousel-play" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/carousel-play.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
         <tr ><td> skycon-menu</td><td class="icon"><i class=" skycon-menu" aria-hidden=true></i></td><td class="icon"><i class=" skycon-menu colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-menu" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/menu.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
         <tr ><td> skycon-minify</td><td class="icon"><i class=" skycon-minify" aria-hidden=true></i></td><td class="icon"><i class=" skycon-minify colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-minify" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/minify.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
-        <tr ><td> skycon-mouse</td><td class="icon"><i class=" skycon-mouse" aria-hidden=true></i></td><td class="icon"><i class=" skycon-mouse colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-mouse" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/mouse.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-never-miss</td><td class="icon"><i class=" skycon-never-miss" aria-hidden=true></i></td><td class="icon"><i class=" skycon-never-miss colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-never-miss" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/never-miss.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-on-demand</td><td class="icon"><i class=" skycon-on-demand" aria-hidden=true></i></td><td class="icon"><i class=" skycon-on-demand colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-on-demand" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/on-demand.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-pending</td><td class="icon"><i class=" skycon-pending" aria-hidden=true></i></td><td class="icon"><i class=" skycon-pending colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-pending" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/pending.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-phone</td><td class="icon"><i class=" skycon-phone" aria-hidden=true></i></td><td class="icon"><i class=" skycon-phone colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-phone" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/phone.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-plus-circle</td><td class="icon"><i class=" skycon-plus-circle" aria-hidden=true></i></td><td class="icon"><i class=" skycon-plus-circle colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-plus-circle" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/plus-circle.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-remote-record</td><td class="icon"><i class=" skycon-remote-record" aria-hidden=true></i></td><td class="icon"><i class=" skycon-remote-record colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-remote-record" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/remote-record.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-search</td><td class="icon"><i class=" skycon-search" aria-hidden=true></i></td><td class="icon"><i class=" skycon-search colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-search" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/search.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-share</td><td class="icon"><i class=" skycon-share" aria-hidden=true></i></td><td class="icon"><i class=" skycon-share colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-share" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/share.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-sky-go</td><td class="icon"><i class=" skycon-sky-go" aria-hidden=true></i></td><td class="icon"><i class=" skycon-sky-go colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-sky-go" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/sky-go.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-sky-plus</td><td class="icon"><i class=" skycon-sky-plus" aria-hidden=true></i></td><td class="icon"><i class=" skycon-sky-plus colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-sky-plus" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/sky-plus.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
         <tr ><td> skycon-sky</td><td class="icon"><i class=" skycon-sky" aria-hidden=true></i></td><td class="icon"><i class=" skycon-sky colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-sky" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/sky.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
-        <tr ><td> skycon-tick</td><td class="icon"><i class=" skycon-tick" aria-hidden=true></i></td><td class="icon"><i class=" skycon-tick colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-tick" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/tick.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-tv</td><td class="icon"><i class=" skycon-tv" aria-hidden=true></i></td><td class="icon"><i class=" skycon-tv colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-tv" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/tv.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-twitter-favourite</td><td class="icon"><i class=" skycon-twitter-favourite" aria-hidden=true></i></td><td class="icon"><i class=" skycon-twitter-favourite colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-favourite" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/twitter-favourite.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-twitter-follow</td><td class="icon"><i class=" skycon-twitter-follow" aria-hidden=true></i></td><td class="icon"><i class=" skycon-twitter-follow colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-follow" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/twitter-follow.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-twitter-reply</td><td class="icon"><i class=" skycon-twitter-reply" aria-hidden=true></i></td><td class="icon"><i class=" skycon-twitter-reply colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-reply" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/twitter-reply.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
-    
-        <tr ><td> skycon-twitter-retweet</td><td class="icon"><i class=" skycon-twitter-retweet" aria-hidden=true></i></td><td class="icon"><i class=" skycon-twitter-retweet colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-retweet" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/twitter-retweet.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        <tr ><td> skycon-gallery</td><td class="icon"><i class=" skycon-gallery" aria-hidden=true></i></td><td class="icon"><i class=" skycon-gallery colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-gallery" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/gallery.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
         <tr ><td> skycon-twitter</td><td class="icon"><i class=" skycon-twitter" aria-hidden=true></i></td><td class="icon"><i class=" skycon-twitter colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/twitter.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
-        <tr ><td> skycon-user-profile</td><td class="icon"><i class=" skycon-user-profile" aria-hidden=true></i></td><td class="icon"><i class=" skycon-user-profile colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-user-profile" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/user-profile.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        <tr ><td> skycon-info</td><td class="icon"><i class=" skycon-info" aria-hidden=true></i></td><td class="icon"><i class=" skycon-info colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-info" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/info.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
-        <tr ><td> skycon-video-play</td><td class="icon"><i class=" skycon-video-play" aria-hidden=true></i></td><td class="icon"><i class=" skycon-video-play colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-video-play" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/video-play.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        <tr ><td> skycon-remote-record</td><td class="icon"><i class=" skycon-remote-record" aria-hidden=true></i></td><td class="icon"><i class=" skycon-remote-record colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-remote-record" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/remote-record.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
-        <tr ><td> skycon-volume</td><td class="icon"><i class=" skycon-volume" aria-hidden=true></i></td><td class="icon"><i class=" skycon-volume colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-volume" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/volume.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        <tr ><td> skycon-sky-go</td><td class="icon"><i class=" skycon-sky-go" aria-hidden=true></i></td><td class="icon"><i class=" skycon-sky-go colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-sky-go" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/sky-go.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
-        <tr ><td> skycon-warning</td><td class="icon"><i class=" skycon-warning" aria-hidden=true></i></td><td class="icon"><i class=" skycon-warning colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-warning" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/warning.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+        <tr ><td> skycon-speech-bubble</td><td class="icon"><i class=" skycon-speech-bubble" aria-hidden=true></i></td><td class="icon"><i class=" skycon-speech-bubble colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-speech-bubble" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/speech-bubble.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-pending</td><td class="icon"><i class=" skycon-pending" aria-hidden=true></i></td><td class="icon"><i class=" skycon-pending colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-pending" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/pending.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-tv</td><td class="icon"><i class=" skycon-tv" aria-hidden=true></i></td><td class="icon"><i class=" skycon-tv colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-tv" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/tv.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-phone</td><td class="icon"><i class=" skycon-phone" aria-hidden=true></i></td><td class="icon"><i class=" skycon-phone colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-phone" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/phone.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-share</td><td class="icon"><i class=" skycon-share" aria-hidden=true></i></td><td class="icon"><i class=" skycon-share colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-share" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/share.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
+    
+        <tr ><td> skycon-twitter-reply</td><td class="icon"><i class=" skycon-twitter-reply" aria-hidden=true></i></td><td class="icon"><i class=" skycon-twitter-reply colour" aria-hidden=true></i></td><td class="icon hover-colour"><i class=" skycon-twitter-reply" aria-hidden=true></i></td><td class="icon"><a href="static/font-svgs/twitter-reply.svg" target="_new" title="Right click and 'Save as...'">view</a> </td></tr>
     
     </tbody>
 </table>
@@ -1158,7 +1081,7 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
                             <ul class="accordion">
     <li>
         <a class="accordion-heading" data-toggle-state="hidden"  data-toggle="#first-accordion-content" href="#first-accordion-content">
-            <span>First Accordion Item</span> <i class="skycon-chevron-down colour"></i>
+            <span>First Accordion <strong>Item</strong></span> <i class="skycon-chevron-down colour"></i>
         </a>
         <div id="first-accordion-content" class="view-container toggle-hidden">
             <div class=accordion-content>
@@ -1183,6 +1106,17 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
         <div id="third-accordion-content" class="view-container toggle-hidden">
             <div class=accordion-content>
                 <p style="margin: 0;">Third Accordion content</p>
+            </div>
+        </div>
+    </li>
+    <li>
+        <a class="accordion-heading" data-toggle-state="hidden"  data-toggle="#fourth-accordion-content" href="#fourth-accordion-content">
+            <span>Fourth Accordion Item</span> <i class="skycon-chevron-down colour"></i>
+        </a>
+        <div id="fourth-accordion-content" class="view-container toggle-hidden">
+            <div class=accordion-content>
+                <p style="margin: 0;">Fourth Accordion content with picture</p>
+                <img style="display:block;" src="http://www.craveonline.com/images/stories/2011/2012/May/Comedy/movies-now-starring-nicolas-cage/nic-cage-twilight.jpg" />
             </div>
         </div>
     </li>
@@ -1292,7 +1226,7 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
             <figure >
                 <div class="shade"   data-tracking></div>
                 <div class="poster" >
-                    <img src="wiki_images/carousel/beckham.jpg"
+                    <img src="static/wiki_images/carousel/beckham.jpg"
                          alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
                 </div>
                 <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
@@ -1315,7 +1249,7 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
         </div>
 
         <div data-video-id="clip-00ovbt3u"
-             class="slide clearfix skycom-12 alpha  light-scheme"
+             class="slide clearfix skycom-12 alpha light-scheme"
              data-tracking-other="Sky News"
              data-tracking-pod="tile-2"
              data-tracking-label="Introducing Sky Entertainment Extra+"
@@ -1324,7 +1258,7 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
             <figure >
                 <div class="shade"></div>
                 <div class="poster">
-                    <img src="wiki_images/carousel/cube.jpg"  data-tracking
+                    <img src="static/wiki_images/carousel/cube.jpg"  data-tracking
                          alt="Cube showing Sky Entertainment Extra Plus upgrade from £5 extra a month">
                 </div>
                 <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
@@ -1355,7 +1289,7 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
             <figure >
                 <div class="shade" data-tracking></div>
                 <div class="poster">
-                    <img src="wiki_images/carousel/avengers.jpg" alt="Heroes">
+                    <img src="static/wiki_images/carousel/avengers.jpg" alt="Heroes">
                 </div>
                 <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
                     <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb1409.png'
@@ -1378,7 +1312,9 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
                                     require(['toolkit'], function(){
                                         $('#hero').skycom_carousel({
     autoplay: true,
-    videoAds: false
+    video: {
+      token: '8D5B12D4-E1E6-48E8-AF24-F7B13050EE85'
+    }
 });
                                     });
                                 }
@@ -1413,7 +1349,7 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
             <figure>
                 <div class="shade"></div>
                 <div class="poster">
-                    <img src="wiki_images/carousel/beckham.jpg"
+                    <img src="static/wiki_images/carousel/beckham.jpg"
                          alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
                 </div>
                 <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
@@ -1445,7 +1381,9 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
                                     require(['toolkit'], function(){
                                         $('#empty-hero').skycom_carousel({
     autoplay: true,
-    videoAds: false
+    video: {
+      token: '8D5B12D4-E1E6-48E8-AF24-F7B13050EE85'
+    }
 });
                                     });
                                 }
@@ -1485,7 +1423,7 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
             <figure>
                 <div class="shade"></div>
                 <div class="poster">
-                    <img src="wiki_images/carousel/169-half-price.jpg"
+                    <img src="static/wiki_images/carousel/169-half-price.jpg"
                          alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
                 </div>
                 <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
@@ -1513,7 +1451,7 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
             <figure>
                 <div class="shade"></div>
                 <div class="poster">
-                    <img src="wiki_images/carousel/169-offers.jpg"
+                    <img src="static/wiki_images/carousel/169-offers.jpg"
                          alt="Cube showing Sky Entertainment Extra Plus upgrade from £5 extra a month">
                 </div>
                 <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
@@ -1538,7 +1476,7 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
             <figure>
                 <div class="shade"></div>
                 <div class="poster">
-                    <img src="wiki_images/carousel/169-box-sets.jpg" alt="Heroes">
+                    <img src="static/wiki_images/carousel/169-box-sets.jpg" alt="Heroes">
                 </div>
                 <figcaption class="skycom-5 skycom-6-mobile alpha cushioned overlay carousel-content">
                     <img src='http://epgstatic.sky.com/epgdata/1.0/newchanlogos/250/34/skychb1409.png'
@@ -1569,7 +1507,9 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
                                     require(['toolkit'], function(){
                                         $('#hero-skinny').skycom_carousel({
     autoplay: true,
-    videoAds: false
+    video: {
+      token: '8D5B12D4-E1E6-48E8-AF24-F7B13050EE85'
+    }
 });
                                     });
                                 }
@@ -1772,19 +1712,20 @@ $('.sky-form').validation();
         <li id="seventh-tab" aria-controls="seventh" aria-label="seventh" role="tab" class="tab">
             <a href="#!seventh" class="ellipsis internal-link"><span>Praesent ullamcorper tincidunt fermentum primis in faucibus orci luctus</span></a>
         </li>
-        <div class="dropdown-tab-select">
-            <a href="#!" aria-controls="dropdown" aria-label="more tabs" class="medium">&hellip;</a>
-            <ul class="more-tabs">
-
-            </ul>
-        </div>
     </ul>
+
+    <div class="dropdown-tab-select">
+        <div href="#!" aria-hidden="true" class="medium selector">&hellip;</div>
+        <ul class="more-tabs">
+
+        </ul>
+    </div>
 
     <div id="first" class="tabpanel selected" aria-labeledby="first-tab" role="tabpanel">
         <section class="tabcontents clearfix">
             <h2 class="speak">Screen reader header for First tab contents</h2>
             <div class="skycom-12 alpha">
-                <img src="wiki_images/beckham.jpg" alt="beckham looking for help">
+                <img src="static/wiki_images/beckham.jpg" alt="beckham looking for help">
             </div>
         </section>
     </div>
@@ -1793,7 +1734,7 @@ $('.sky-form').validation();
         <section class="tabcontents clearfix">
             <h2 class="speak">Screen reader header for Second tab contents</h2>
             <div class="skycom-12 alpha">
-                <img src="wiki_images/smash.jpg" alt="something else">
+                <img src="static/wiki_images/smash.jpg" alt="something else">
             </div>
         </section>
     </div>
@@ -1802,7 +1743,7 @@ $('.sky-form').validation();
         <section class="tabcontents clearfix">
             <h2 class="speak">Screen reader header for Third tab contents</h2>
             <div class="skycom-12 alpha">
-                <img src="wiki_images/beckham.jpg" alt="something else">
+                <img src="static/wiki_images/beckham.jpg" alt="something else">
             </div>
         </section>
     </div>
@@ -1811,7 +1752,7 @@ $('.sky-form').validation();
         <section class="tabcontents clearfix">
             <h2 class="speak">Screen reader header for Fourth tab contents</h2>
             <div class="skycom-12 alpha">
-                <img src="wiki_images/smash.jpg" alt="something else">
+                <img src="static/wiki_images/smash.jpg" alt="something else">
             </div>
         </section>
     </div>
@@ -1820,7 +1761,7 @@ $('.sky-form').validation();
         <section class="tabcontents clearfix">
             <h2 class="speak">Screen reader header for Fifth tab contents</h2>
             <div class="skycom-12 alpha">
-                <img src="wiki_images/beckham.jpg" alt="something else">
+                <img src="static/wiki_images/beckham.jpg" alt="something else">
             </div>
         </section>
     </div>
@@ -1829,7 +1770,7 @@ $('.sky-form').validation();
         <section class="tabcontents clearfix">
             <h2 class="speak">Screen reader header for Sixth tab contents</h2>
             <div class="skycom-12 alpha">
-                <img src="wiki_images/smash.jpg" alt="something else">
+                <img src="static/wiki_images/smash.jpg" alt="something else">
             </div>
         </section>
     </div>
@@ -1838,7 +1779,7 @@ $('.sky-form').validation();
         <section class="tabcontents clearfix">
             <h2 class="speak">Screen reader header for Seventh tab contents</h2>
             <div class="skycom-12 alpha">
-                <img src="wiki_images/beckham.jpg" alt="something else">
+                <img src="static/wiki_images/beckham.jpg" alt="something else">
             </div>
         </section>
     </div>
@@ -1901,13 +1842,13 @@ $('.sky-form').validation();
         <li id="whole-page-seventh-tab" aria-label="seventh" role="tab" class="tab">
             <a href="#!whole-page-seventh" class="ellipsis internal-link"><span>Praesent ullamcorper tincidunt fermentum primis in faucibus orci luctus</span></a>
         </li>
-        <div class="dropdown-tab-select">
-            <a href="#!whole-page-" aria-controls="dropdown" aria-label="more tabs" class="medium">&hellip;</a>
-            <ul class="more-tabs">
-
-            </ul>
-        </div>
     </ul>
+    <div class="dropdown-tab-select">
+        <div aria-hidden="true" class="medium selector">&hellip;</div>
+        <ul class="more-tabs">
+
+        </ul>
+    </div>
 </section>
                         </div>
                         
@@ -1961,7 +1902,7 @@ $('.sky-form').validation();
 <a id="lightbox-demo-link-with-callbacks" href="#!lightbox/demo/with-callbacks" tabindex="101">Show Lightbox with callback</a>
 
 <article id="lightbox-demo" class='hidden' aria-labelledby="lightbox-demo-link">
-    <img src="wiki_images/bling-ring.jpg" height="380" width="1140" style="width:100%;height:auto;" />
+    <img src="static/wiki_images/bling-ring.jpg" height="380" width="1140" style="width:100%;height:auto;" />
 
     <!-- Note you can use the sky-grid in lightboxes -->
     <div class="skycom-container clearfix">
@@ -1995,6 +1936,7 @@ $('.sky-form').validation();
                 <li><a href="#"><i class="skycon-chevron colour"></i>Consectetur adipisicing elit</a></li>
                 <li><a href="#"><i class="skycon-chevron colour"></i>Sed do eiusmod</a></li>
                 <li><a href="#"><i class="skycon-chevron colour"></i>Tempor incididunt</a></li>
+                <li><a href="//www.sky.com"><i class="skycon-chevron colour"></i>Sky Homepage (external link)</a></li>
             </ul>
         </div>
     </div>
@@ -2081,7 +2023,7 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
                             <a id="lightbox-small-demo-link" href="#!lightbox/small-demo" >Show a small Lightbox from DOM</a>
 
 <article id="lightbox-small-demo" class='hidden' aria-labelledby="lightbox-demo-link">
-    <img src="wiki_images/bling-ring.jpg" height="380" width="1140" style="width:100%;height:auto;" />
+    <img src="static/wiki_images/bling-ring.jpg" height="380" width="1140" style="width:100%;height:auto;" />
 
     <!-- Note you can use the sky-grid in lightboxes -->
     <div class="skycom-container clearfix">
@@ -2242,13 +2184,17 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
                         
                         
                         <div class="demo clearfix">
-                            <div id="demo-tooltip" data-tooltip>
-    <i class="skycon-info"></i><span>Hover</span>
-    <div class="tooltip-content">
-        <i class="skycon-remote-record colour"></i> <strong>Remote Record</strong>
-        <a href="http://www.google.com">Record Great Sky Content!</a>
+                            <div class="tooltip-container">
+    <div id="demo-tooltip" data-tooltip>
+        <i class="skycon-info"></i><span>Hover</span>
+
+        <div class="tooltip-content">
+            <i class="skycon-remote-record colour"></i> <strong>Remote Record</strong>
+            <a href="http://www.google.com">Record Great Sky Content!</a>
+        </div>
     </div>
 </div>
+
                         </div>
                         
                         
@@ -2290,7 +2236,7 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
                         
                         <div class="demo clearfix">
                             <div id="demo-video" class="video-container" data-video-id="clip-00i9rvth">
-    <img src="wiki_images/bling-ring.jpg"
+    <img src="static/wiki_images/bling-ring.jpg"
          alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
 
     <a href="#!" class="play-video internal-link"
@@ -2307,8 +2253,8 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
                                 if (window.environment=="demo") {
                                     require(['toolkit'], function(){
                                         $('#demo-video.video-container').video({
-    token:"8D5B12D4-E1E6-48E8-AF24-F7B13050EE85", //this token should be unique to your team
-    displayAdverts:false ,
+    token: '8D5B12D4-E1E6-48E8-AF24-F7B13050EE85', //this token should be unique to your team
+    displayAdverts: true,
     onPlay: function() { //optional
         //stuff to do before video plays
     },
@@ -2316,6 +2262,7 @@ $('#lightbox-demo-link-with-callbacks').lightbox({
         //stuff to do after video closes
     }
 });
+
                                     });
                                 }
                             </script>
@@ -2827,12 +2774,12 @@ toolkit.hashManager.register(['hash', 'anotherHash', 'wildcard/*'], myHashCallba
                         <div class="demo clearfix">
                             <div id="demo-responsive-images">
     <div data-picture data-alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
-        <div data-src="wiki_images/carousel/beckham.jpg"></div>
+        <div data-src="static/wiki_images/carousel/beckham.jpg"></div>
 
-        <div data-src="wiki_images/carousel/davinci-mobile.jpg"
+        <div data-src="static/wiki_images/carousel/davinci-mobile.jpg"
              data-media="(max-width: 600px)"></div>
         <noscript>
-            <img src="wiki_images/carousel/beckham.jpg"
+            <img src="static/wiki_images/carousel/beckham.jpg"
                  alt="David Beckham with Sky Sports Living for Sport participants Adam Brown, Eden Anderson, Michele Meola, Maariyah Atta, Conor Greensmith and Nahida Begum">
         </noscript>
     </div>
@@ -2844,7 +2791,89 @@ toolkit.hashManager.register(['hash', 'anotherHash', 'wildcard/*'], myHashCallba
                             <script>
                                 if (window.environment=="demo") {
                                     require(['toolkit'], function(){
-                                        responsiveImages.init(document.getElementById('demo-responsive-images'));
+                                        var responsiveImages = (function () {
+
+    var containers = [];
+
+    function loadImage(container) {
+
+        var w = window,
+            ps = container.getElementsByTagName("div"),
+            i = 0, il = ps.length,
+            j = 0, jl = ps.length,
+            sources, matches, media, picImg, newSrc;
+
+        for (; i < il; i++) {
+            if (ps[ i ].getAttribute("data-picture") !== null) {
+
+                sources = ps[ i ].getElementsByTagName("div");
+                matches = [];
+
+                // See if which sources match
+                for (j = 0, jl = sources.length; j < jl; j++) {
+                    media = sources[ j ].getAttribute("data-media");
+                    // if there's no media specified, OR w.matchMedia is supported
+                    if (!media || ( w.matchMedia && w.matchMedia(media).matches )) {
+                        matches.push(sources[ j ]);
+                    }
+                }
+
+                // Find any existing img element in the picture element
+                picImg = ps[ i ].getElementsByTagName("img")[ 0 ];
+
+                if (matches.length) {
+                    if (!picImg) {
+                        picImg = w.document.createElement("img");
+                        picImg.alt = ps[ i ].getAttribute("data-alt");
+                        ps[ i ].appendChild(picImg);
+                    }
+                    newSrc = matches.pop().getAttribute("data-src");
+                    if (picImg.src !== newSrc) {
+                        picImg.src = newSrc;
+                    }
+                }
+                else if (picImg) {
+                    ps[ i ].removeChild(picImg);
+                }
+            }
+        }
+    }
+
+
+    function on(el, eventName, exec){
+        if (el.addEventListener) {
+            el.addEventListener(eventName, exec, false);
+        } else {
+            el.attachEvent(eventName, exec);
+        }
+    }
+
+
+    function bindOnResize() {
+        on(window, "resizeend", function () {
+            var i, n=containers.length;
+            for (i=0;i< n;i++) {
+                loadImage(containers[i]);
+            }
+        });
+    }
+
+    function init(container) {
+        if(container) {
+            loadImage(container);
+            containers.push(container);
+        }
+    }
+
+    bindOnResize();
+
+    return {
+        init:init,
+        bindOnResize:bindOnResize
+    };
+})();
+
+responsiveImages.init(document.getElementById('demo-responsive-images'));
 
                                     });
                                 }

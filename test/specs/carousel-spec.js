@@ -222,9 +222,12 @@ function carouselSpec() {
         describe('can handle having slides changed on the fly', function () {
 
             it('re-renders markup and behaves correctly when slide is added to carousel', function () {
+                $('#hero').trigger('play');
                 $('#hero .skycom-carousel-container > div').first().clone().appendTo('#hero .skycom-carousel-container');
                 expect($('#hero .indicators span').length).to.equal(3);
+                expect($('#hero.skycom-carousel.paused').length).to.equal(0);
                 $('#hero').trigger('refresh');
+                expect($('#hero.skycom-carousel.paused').length).to.equal(0);
                 expect($('#hero .indicators span').length).to.equal(4);
             });
 

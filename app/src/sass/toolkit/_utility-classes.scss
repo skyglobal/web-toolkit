@@ -1,0 +1,201 @@
+@mixin ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  display: inline-block;
+  max-width: 100%;
+}
+
+@mixin clearfix {
+  display: block;
+  _height: 1px;
+  zoom: 1;
+
+  &:before,
+  &:after {
+    content: '\0020';
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin speak{
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  padding:0 ;
+  border:0 ;
+  height: 1px ;
+  width: 1px ;
+  overflow: hidden;
+  display: block;
+}
+
+@mixin sticky{
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 25;
+  background: #fff;
+}
+
+@mixin pointer($direction, $color, $size: 10px, $bordered: false) {
+  position: relative;
+
+  $middle-axis: top;
+  @if $direction == top or $direction == bottom {
+    $middle-axis: left;
+  }
+
+  $psuedo: before;
+  $offset: -$size;
+  $border-size: $size;
+  $z-index: 1;
+  @if $bordered {
+    $psuedo: after;
+    $offset: (-$size + 1px);
+    $border-size: ($size - 1px);
+    $z-index: 2;
+  }
+
+  &:#{$psuedo} {
+    content: "";
+    position: absolute;
+    #{opposite-position($direction)}: 100%;
+    #{$middle-axis}: 50%;
+    margin-#{$middle-axis}: $offset;
+    width: 0;
+    height: 0;
+    border: $border-size solid transparent;
+    border-#{opposite-position($direction)}-color: $color;
+    z-index: $z-index;
+  }
+}
+
+@mixin pointer-bordered($direction, $color, $border-color, $size: 10px) {
+  @include pointer($direction, $border-color, $size);
+  @include pointer($direction, $color, $size, true);
+}
+
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+a{
+  text-decoration:none;
+}
+a:hover{
+  text-decoration:underline;
+}
+
+//visibility classses
+body .visible-touch,
+body .hidden{
+  display:none !important;
+}
+body .touch-device .visible-touch,
+body .visible{
+  display: inherit;
+}
+
+
+.internal-link{
+  color: $primary;
+  outline: 0!important;
+  border: 0;
+}
+.ellipsis{
+  @include ellipsis;
+}
+.clearfix{
+  @include clearfix;
+}
+.sticky{
+  @include clearfix;
+}
+.speak{
+  @include speak;
+}
+
+.rotate-180 {
+  @include transform(rotate(180deg));
+  .lt-ie9 & {
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+  }
+}
+
+html{
+  /* Orientation */
+  &:before {
+    @include speak;
+    @media (orientation:portrait) {
+      content: 'portrait';
+      font-family:'portrait';
+    }
+    @media (orientation:landscape) {
+      content: 'landscape';
+      font-family:'landscape';
+    }
+  }
+  /* view */
+  &:after {
+    @include speak;
+    @media (max-width:$mobile-width) {
+      content: 'mobile';
+      font-family:'mobile';
+    }
+    @media (min-width:$mobile-width+1) {
+      content: 'desktop';
+      font-family:'desktop';
+    }
+  }
+}
+
+//DESKTOP ONLY CLASSES
+@media (min-width: $mobile-width+1) {
+  .sticky-desktop {
+    @include sticky;
+  }
+  .ellipsis-desktop {
+    @include ellipsis;
+  }
+  .speak-desktop{
+    @include speak;
+   }
+  .visible-mobile,
+  .hidden-desktop{
+    display:none!important;
+  }
+
+}
+
+//MOBILE ONLY CLASSES
+@media (max-width: $mobile-width) {
+  body .sticky-mobile{
+    @include sticky;
+  }
+  .ellipsis-mobile {
+    @include ellipsis;
+  }
+  .speak-mobile{
+    @include speak;
+  }
+  .visible-desktop,
+  .hidden-mobile{
+    display:none!important;
+  }
+}

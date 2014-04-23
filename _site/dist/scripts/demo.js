@@ -61,6 +61,7 @@ demo.displayCode = (function( hljs){
         this.addCode(featureFile, ext, styled);
         if (this.fileCount === this.filesReceived){
             $('#code-' + this.feature).inPageNav();
+            this.$tabList.find('.tab').first().click();
             this.$lightboxLink.lightbox({closeButtonColour: 'black'});
         }
     };
@@ -231,31 +232,27 @@ var scrollspy = (function ($) {
 
         for (i = offsets.length; i--;) {
             activeTarget != targets[i]
-                && scrollTop >= offsets[i]
-                && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+                && scrollTop >= offsets[i] - 100 // note: the 100 is the height of the whole navigation menu
+                && (!offsets[i + 1] || scrollTop <= offsets[i + 1] - 100) // note: the 100 is the height of the whole navigation menu
             && this.activate( targets[i] )
         }
     }
 
     ScrollSpy.prototype.activate = function (target) {
-        this.activeTarget = target
-
-        var selector = this.selector
-            + '[data-target="' + target + '"],'
-            + this.selector + '[href="' + target + '"]'
-
-        $(this.selector)
-            .parents('.selected')
-            .removeClass('selected')
-
-        var active = $(selector)
-            .parents('li')
-            .addClass('selected')
-
-        $('#toolkit-menu-tabs').find('[role=tablist] .selected').removeClass('selected');
-        active = $('#' + active.parent().parent().parent().addClass('selected').attr('aria-labeledby')).addClass('selected');
-
-        active.trigger('activate')
+        this.activeTarget = this.activeTarget || {};
+        var splits = target.split('--');
+        var selectedMainTab = splits[0];
+        var selectedSubTab = splits.length > 1 ? splits[1] : null;
+        if (this.activeTarget.selectedMainTab !== selectedMainTab) {
+            $('.tabs a[href="' + selectedMainTab + '"]').parent()
+                .trigger('click')// for in-page-nav, in particular to deal with drop down menu
+                .trigger('activate'); // for demo's menu to show/hide appropriate submenu
+            this.activeTarget = selectedMainTab;
+        }
+        if (this.activeTarget.selectedSubTab !== selectedSubTab) {
+            $('.tabs a[href="' + selectedMainTab + '--' + selectedSubTab + '"]').parent().trigger('click');
+            this.activeTarget = selectedSubTab;
+        }
     }
 
 
@@ -308,72 +305,6 @@ if (typeof window.define === "function" && window.define.amd) {
 } else {
     scrollspy(jQuery);
 };
-if (typeof demo==='undefined') demo={};
-demo.menu = (function(){
-
-    var menuIsSticky = false;
-    var offset = $('#toolkit-menu-tabs').offset().top;
-    var hideSubMenuTimeout;
-
-    function bindEvents() {
-        $(window).on('scroll', stickMenuToTop);
-        $('#toolkit-menu-tabs [role=tablist] li').on('mouseenter mouseleave', toggleSubMenu);
-        $('#toolkit-menu-tabs .tabpanel').on('mouseenter mouseleave', toggleSubMenu);
-    }
-
-    function toggleSubMenu(e){
-
-        if (e.type==='mouseleave'){
-            hideSubMenuTimeout = setTimeout(function(){
-                hideAllSubMenus();
-                showSeletcedSubMenu();
-            },250);
-        } else {
-            clearTimeout(hideSubMenuTimeout);
-            showHoveredSubMenu($('#' + $(this).attr('aria-controls')));
-        }
-    }
-
-    function hideAllSubMenus(){
-        $('#toolkit-menu-tabs .tabpanel').removeClass('selected');
-    }
-
-    function showHoveredSubMenu($el){
-        if (!$el.length){ return; }
-        hideAllSubMenus();
-        $el.addClass('selected');
-    }
-
-    function showSeletcedSubMenu(){
-        $('#toolkit-menu-tabs .tabpanel li.selected').closest('.tabpanel').addClass('selected');
-    }
-
-    function stickMenuToTop(){
-//        todo: if position:sticky is not supported
-        var top = window.scrollY;
-        if (menuIsSticky && top<offset){
-            menuIsSticky = false;
-            $('#toolkit-menu-tabs').removeClass('stick');
-            $('h1.demo-header').removeAttr('style');
-        } else if (!menuIsSticky && top>offset) {
-            menuIsSticky = true;
-            $('#toolkit-menu-tabs').addClass('stick');
-            $('h1.demo-header').attr('style','padding-bottom:' + $('#toolkit-menu-tabs').height() + 'px');
-        }
-    }
-
-    bindEvents();
-
-});
-
-if (typeof window.define === "function" && window.define.amd){
-    define('demo/menu', [], function() {
-        return demo.menu();
-    });
-} else {
-    demo.menu = demo.menu();
-}
-;
 /**
  purpose:
  to let 'anchor' tags do their job and change the hash in the url for internal links.
@@ -512,106 +443,6 @@ if (typeof window.define === "function" && window.define.amd) {
 } else {
     toolkit.hashManager =  toolkit.hashManager();
 };
-if (typeof demo==='undefined') demo={};
-demo.tests = (function(hashManager){
-
-    var timeout = {};
-
-    function runTest(hash){
-        var item = hash.replace(/test\//,'');
-        var spec = item.split('/')[1] + '-spec';
-        var $runTestLink = $('a[href*="#' + hash + '"]');
-        $runTestLink.removeAttr('href').attr('id', 'link-test-' + spec);
-        $('html, body').animate({
-            scrollTop: $runTestLink.parent().offset().top
-        }, 200);
-        var $testFrame = $("<iframe src='./iframe.html#" + item + "' style='width:100%'></iframe>");
-        $("body").append($testFrame);
-        createLightbox($testFrame, spec);
-        $runTestLink.on('click', function(){
-            showLightbox($('#' +  spec + '-lightbox'));
-        });
-        timeout[spec] = setInterval(function(){
-            $testFrame.height($testFrame.contents().find("body").height());
-        },100);
-    }
-
-    function updateTestsResults(results){
-        var spec = results.spec;
-        var failures = results.failures;
-        var $runTestLink = $('a[id="link-test-' + spec + '"]');
-        if(failures === '0'){
-            $runTestLink.prepend("<span class='dev-button result-summary'><i class='skycon-tick colour' aria-hidden='true'></i> Tests Passed</span>");
-        } else {
-            $runTestLink.prepend("<span class='dev-button result-summary error'><i class='skycon-warning colour' aria-hidden='true'></i> Tests Failed</span>");
-        }
-    }
-
-    function hideLightbox(e,$box){
-        e.preventDefault();
-        var hide =  $(e.target).hasClass('lightbox-close') ||
-            (!$(e.target).hasClass('lightbox-content') && !$(e.target).parents('.lightbox-content').length);
-        if ( hide){
-            $box.hide().removeClass('lightbox-open');
-        }
-    }
-
-    function showLightbox($box){
-        $box.show().addClass('lightbox-open');
-    }
-
-    function createLightbox($contents, spec){
-        //todo: make lightbox do this automatically
-        var lightboxDiv = document.createElement('div');
-        var container = document.createElement('div');
-        var article = document.createElement('article');
-        var $close = $('<a class="internal-link lightbox-close skycon-close black" href="#"><span class="speak">Close</span></a>');
-        lightboxDiv.className = 'lightbox';
-        lightboxDiv.id = spec + '-lightbox';
-        container.className = 'skycom-container lightbox-container clearfix';
-        article.className = 'lightbox-content skycom-10 skycom-offset1';
-        $(article).append($contents);
-        $(container).append($close);
-        $(container).append($(article));
-        $(lightboxDiv).append($(container));
-        $('body').append($(lightboxDiv));
-        showLightbox($('#' +  spec + '-lightbox'));
-        $close.add($(lightboxDiv)).on('click', function(e){
-            hideLightbox(e, $('#' +  spec + '-lightbox'));
-            clearInterval(timeout[spec]);
-        });
-    }
-
-    function registerTests(){
-        if (!window.require){
-            setTimeout(registerTests,250);
-            return;
-        }
-        var hashes = [];
-        $('.run-test').each(function(){
-            hashes.push($(this).attr('href').split('#')[1]);
-        });
-        hashManager.register(hashes, runTest);
-
-    }
-
-    registerTests();
-
-    return {
-        updateTestsResults: updateTestsResults
-    };
-
-});
-
-if (typeof window.define === "function" && window.define.amd){
-    define('demo/tests', ['utils/hash-manager'], function(hashManager) {
-        demo.tests = demo.tests(hashManager);
-        return demo.tests;
-    });
-} else {
-    demo.tests = demo.tests(toolkit.hashManager);
-}
-;
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.event = (function () {
     
@@ -738,28 +569,150 @@ toolkit.inPageNav = (function(hash, event) {
         this.$tabContainer = $element;
         this.$tabs = $element.find('li[role=tab]');
         this.$tabTargets = $element.find('div[role=tabpanel]');
-        this.$showMore = $element.find('.dropdown-tab-select > a');
+        this.$showMore = $element.find('.dropdown-tab-select .selector');
         this.$moreTabsContainer = $element.find('.dropdown-tab-select');
         this.$moreTabsLink = $element.find('.more-tabs');
-        this.numberOfTabsToShow = 0;
-        this.saveTabOrder();
+
+        this.tabSizes = {};
+        this.tabStates = [];
+
+        this.setTabStates();
         this.bindEvents();
         this.initTabs();
     }
 
     InPageNav.prototype = {
-        bindEvents : function(){
+        setTabStates: function(){
+            var self = this;
+            this.$tabs.each(function(){
+                self.tabSizes[this.id] = $(this).outerWidth(true);
+
+                var obj = $(this);
+                var dropdownObj = obj.clone(true)
+                    .removeClass('selected')
+                    .removeAttr('aria-controls')
+                    .removeAttr('aria-label')
+                    .removeAttr('role')
+                    .attr('aria-hidden','true');
+
+                // text is wider with 'selected' class
+                // and therefore the maximum width is with this 'selected' class
+                var selected = obj.hasClass('selected');
+                obj.addClass('selected');
+                var maximumWidth = obj.outerWidth(true);
+                obj.toggleClass('selected', selected);
+
+                self.tabStates.push({
+                  id: this.id,
+                  obj: obj,
+                  dropdownObj: dropdownObj,
+                  size: maximumWidth,
+                  selected: obj.hasClass('selected'),
+                  dropped: false
+                });
+
+                self.$moreTabsLink.append(dropdownObj);
+            });
+        },
+
+        getSelectedTab: function() {
+            var selected = null;
+
+            $.each(this.tabStates,function(i,tab) {
+                if (tab.selected) {
+                    selected = tab;
+                    return false;
+                }
+            });
+
+            return selected;
+        },
+
+        setSelectedTab: function(id) {
+            var selected = null;
+
+            $.each(this.tabStates,function(i,tab) {
+                tab.selected = tab.id == id;
+                if (tab.id == id) {
+                    selected = tab;
+                }
+            });
+
+            return selected;
+        },
+
+        getDroppedTabs: function() {
+            var selected = [];
+
+            $.each(this.tabStates,function(i,tab) {
+                if (tab.dropped) {
+                    selected.push(tab);
+                }
+            });
+
+            return selected;
+        },
+
+        setDroppedTabs: function() {
+            var dropDownIconWidth = this.$moreTabsContainer.show().outerWidth(true) || 44;
+            var containerWidth = this.$tabContainer.outerWidth(true) - dropDownIconWidth;
+            var totalWidth = 0;
+
+            if (this.getSelectedTab()) {
+                totalWidth += this.$tabs.filter('#'+this.getSelectedTab().id).outerWidth(true);
+            }
+
+            $.each(this.tabStates,function(i,n) {
+                if (!n.selected) {
+                    totalWidth += n.size;
+                    n.dropped = (totalWidth > containerWidth);
+                }
+            });
+        },
+
+        bindEvents: function(){
             var self = this;
             hash.register(this.getHashList(), this.changeTab.bind(self));
-            this.$tabs.on('click', function(e){
+
+            this.$tabs.on('click', function(){
                 self.changeTab($(this).find('a').attr('href'));
             });
+
+            this.$moreTabsContainer.find('li').on('click', function(){
+                self.changeTab($(this).find('a').attr('href'));
+            });
+
+            this.$tabs.find('a').on('focus', function() {
+                var target = $(this).closest('li');
+
+                if (target.hasClass('dropped')) {
+                    self.dropTabsDuringInteraction(target.attr('id'));
+                }
+                target.addClass('given-focus');
+
+            }).on('blur', function() {
+                $(this).closest('li').removeClass('given-focus');
+                self.$tabs.filter('.dropped-during-interaction').removeClass('dropped-during-interaction');
+
+                if(self.$tabs.filter('.selected.dropped').length) {
+                    self.dropTabsDuringInteraction(self.$tabs.filter('.selected.dropped').attr('id'));
+                }
+            });
+
             this.$showMore.on('click', function(e){
                 e.preventDefault();
                 self.toggleShowMore();
             });
+
             $('body').on('click', this.hideMore.bind(self));
-            event.on(window,'resizeend',  this.initTabs.bind(self));
+
+            event.on(window,'resizeend', this.initTabs.bind(self));
+        },
+
+        initTabs: function(){
+            this.setDroppedTabs();
+            this.setTabVisibility();
+            this.setDropdownVisibility();
         },
 
         getHashList: function() {
@@ -773,27 +726,23 @@ toolkit.inPageNav = (function(hash, event) {
             return arrHash;
         },
 
-        saveTabOrder: function(){
-            this.$tabs.each(function(i){
-                $(this).attr('data-position', i);
-            });
-        },
-
-        initTabs: function(){
-            this.moveTabsToList();
-            this.moveTabsToDropdown();
-            if (this.$tabTargets.size() > 0 && !this.$tabTargets.filter('.selected').length){
-                this.changeTab(this.$tabTargets.first()[0].id);
-            }
-        },
-
         changeTab: function(controlId){
-            controlId = controlId.replace('#!','');
-            var $thisTab = $("#" + controlId.replace('-tab-contents','') + "-tab"),
-                $thisTabTarget = $("#" + controlId);
+            controlId = controlId.replace(/^#!{0,1}/,'');
+
+            var $thisTab = $("#" + controlId.replace('-tab-contents','') + "-tab");
+            var $thisTabTarget = $("#" + controlId);
+
+            this.$tabs.filter('.dropped-during-interaction').removeClass('dropped-during-interaction');
             this.$tabTargets.add(this.$tabs).removeClass("selected");
+
+            this.setSelectedTab(controlId+'-tab');
+
             $thisTab.add($thisTabTarget).addClass('selected');
-            this.initTabs();
+
+            if ($thisTab.hasClass('dropped')) {
+                this.setDroppedTabs();
+                this.setTabVisibility();
+            }
         },
 
         hideMore: function(e){
@@ -806,55 +755,46 @@ toolkit.inPageNav = (function(hash, event) {
             this.$showMore.add(this.$moreTabsLink)[action + 'Class']('dropdown-tab-selected');
         },
 
-        getNumberOfTabsToShow: function() {
-            var containerWidth = this.$tabContainer.outerWidth(true) -
-                    this.$moreTabsContainer.show().outerWidth(true) -
-                    this.$tabs.filter('.selected').outerWidth(true),
-                totalWidth = 0,
-                numberOfTabs = 0;
-            this.$tabs.not('.selected').attr('style','float:left').each(function () {
-                totalWidth += ($(this).outerWidth(true));
-                if (totalWidth > containerWidth) { return ; }
-                numberOfTabs++;
+        setTabVisibility: function() {
+            $.each(this.tabStates,function(i,tab) {
+                if (tab.dropped && !tab.selected) {
+                    tab.obj.addClass('dropped');
+                    tab.dropdownObj.removeClass('dropped');
+                } else {
+                    tab.obj.removeClass('dropped');
+                    tab.dropdownObj.addClass('dropped');
+                }
             });
-            this.$tabs.add(this.$moreTabsContainer).removeAttr('style');
-            return numberOfTabs;
         },
 
-        moveTabsToList: function() {
-            var self = this;
-            this.$tabs.each(function (i) {
-                $(this).appendTo(self.$tabContainer.find('.tabs'));
-            });
-            sortTabs(this.$tabContainer.find('.tabs'));
-            this.numberOfTabsToShow = this.getNumberOfTabsToShow();
+        setDropdownVisibility: function() {
+            if (this.getDroppedTabs().length) {
+                this.$moreTabsContainer.show();
+            } else {
+                this.$moreTabsContainer.hide();
+            }
         },
 
-        moveTabsToDropdown: function() {
+        dropTabsDuringInteraction: function(id) {
             var self = this;
-            this.$tabs.not('.selected').each(function (i) {
-                if(i < self.numberOfTabsToShow) { return ; }
-                $(this).appendTo(self.$moreTabsLink);
-                self.$moreTabsContainer.show();
+            var widthNeeded = self.tabSizes[id];
+            var widthGained = 0;
+
+            $.each(self.tabStates,function(i,tab) {
+                widthGained += tab.size;
+
+                tab.obj.addClass('dropped-during-interaction');
+
+                if (widthGained >= widthNeeded)  {
+                    return false;
+                }
             });
-            sortTabs(this.$moreTabsLink);
         }
     };
 
-    function sortTabs($el) {
-        var list = [];
-        $el.find('li').each(function () {
-            list.push($(this).attr('data-position'));
-        });
-        list.sort();
-        $.each(list, function () {
-            $el.find('li[data-position="'+this+'"]').appendTo($el);
-        });
-    }
-
     $.fn.inPageNav = function() {
         return this.each(function() {
-            var inPageNav = new InPageNav($(this));
+            new InPageNav($(this));
         });
     };
 
@@ -868,6 +808,243 @@ if (typeof window.define === "function" && window.define.amd) {
 } else {
     toolkit.inPageNav = toolkit.inPageNav(toolkit.hashManager, toolkit.event);
 };
+if (typeof demo==='undefined') demo={};
+demo.menu = (function(inPageNav){
+
+    var menuIsSticky = false;
+    var offset = $('#toolkit-menu-tabs').offset().top;
+    var hideSubMenuTimeout;
+
+    function initMenu($el) {
+        if ($('.more-tabs li', $el).length === 0) {
+            $el.inPageNav(); // called only once using the above if condition (is indempodent)
+        }
+    }
+
+    function initVisibleMenus() {
+        initMenu($('#toolkit-menu-tabs .page-nav.primary'));
+        initMenu($('#toolkit-menu-tabs .selected .page-nav.secondary'));
+    }
+
+    function bindEvents() {
+        $(window).on('scroll', stickMenuToTop);
+        $('#toolkit-menu-tabs .primary .tab').on('mouseenter activate', toggleSubMenu); // activate is from jquery's scrollspy plugin (see jquery.scrollspy.js)
+//        $('#toolkit-menu-tabs').on('mouseleave', toggleSubMenu);
+        $('#toolkit-menu-tabs a[href*=#]').click(smoothScroll);
+    }
+
+    function toggleSubMenu(e){
+
+        if (e.type==='mouseleave'){
+            hideSubMenuTimeout = setTimeout(function(){
+                hideAllSubMenus();
+                showSeletcedSubMenu();
+            },250);
+        } else {
+            clearTimeout(hideSubMenuTimeout);
+            showHoveredSubMenu($('#' + $(this).attr('aria-controls')));
+        }
+    }
+
+    function hideAllSubMenus(){
+        $('#toolkit-menu-tabs .tabpanel').removeClass('selected');
+    }
+
+    function showHoveredSubMenu($el){
+        if (!$el.length){ return; }
+        hideAllSubMenus();
+        $el.addClass('selected');
+        initMenu($el);
+    }
+
+    function showSeletcedSubMenu(){
+        $el = $('#toolkit-menu-tabs .tabpanel li.selected').closest('.tabpanel');
+        $el.addClass('selected');
+        initMenu($el);
+    }
+
+    function smoothScroll() {
+        var href = $.attr(this, 'href');
+        href = href.replace(/[#!]/g, "");
+//        var menuHeight = href.indexOf('--') === -1 ? 60 : 100; // note: the height of the navigation menu at this time
+        var menuHeight = ($('#toolkit-menu-tabs').outerHeight() || 90) + 5;
+        $('html, body').animate({
+            scrollTop: $('#' + href).offset().top - menuHeight
+        }, 500, function () {
+            var $href = $('#' + href);
+            $href.attr('id', ''); // diffuse it for the href change
+            window.location.hash = href;
+            $href.attr('id', href);
+        });
+    }
+
+    function stickMenuToTop(){
+//        todo: if position:sticky is not supported
+        var top = window.scrollY;
+        if (menuIsSticky && top<offset){
+            menuIsSticky = false;
+            $('#toolkit-menu-tabs').removeClass('stick');
+            $('h1.demo-header').removeAttr('style');
+        } else if (!menuIsSticky && top>offset) {
+            menuIsSticky = true;
+            $('#toolkit-menu-tabs').addClass('stick');
+            $('h1.demo-header').attr('style','padding-bottom:' + $('#toolkit-menu-tabs').height() + 'px');
+        }
+    }
+
+    $(stickMenuToTop); // run on page load
+
+    $(initVisibleMenus);
+
+    bindEvents();
+
+});
+
+if (typeof window.define === "function" && window.define.amd){
+    define('demo/menu', ['components/in-page-nav'], function(inPageNav) {
+        return demo.menu(inPageNav);
+    });
+} else {
+    demo.menu = demo.menu(toolkit.inPageNav);
+}
+;
+if (typeof demo==='undefined') demo={};
+demo.tests = (function(hashManager){
+
+    var timeout = {};
+
+    function runTest(hash){
+        var item = hash.replace(/test\//,'');
+        var spec = item.split('/')[1] + '-spec';
+        var $runTestLink = $('a[href*="#' + hash + '"]');
+        $runTestLink.removeAttr('href').attr('id', 'link-test-' + spec);
+        $('html, body').animate({
+            scrollTop: $runTestLink.parent().offset().top
+        }, 200);
+        var $testFrame = $("<iframe src='./iframe.html#" + item + "' style='width:100%'></iframe>");
+        $("body").append($testFrame);
+        createLightbox($testFrame, spec);
+        $runTestLink.on('click', function(){
+            showLightbox($('#' +  spec + '-lightbox'));
+        });
+        timeout[spec] = setInterval(function(){
+            $testFrame.height($testFrame.contents().find("body").height());
+        },100);
+    }
+
+    function updateTestsResults(results){
+        var spec = results.spec;
+        var failures = results.failures;
+        var $runTestLink = $('a[id="link-test-' + spec + '"]');
+        if(failures === '0'){
+            $runTestLink.prepend("<span class='dev-button result-summary'><i class='skycon-tick colour' aria-hidden='true'></i> Tests Passed</span>");
+        } else {
+            $runTestLink.prepend("<span class='dev-button result-summary error'><i class='skycon-warning colour' aria-hidden='true'></i> Tests Failed</span>");
+        }
+    }
+
+    function hideLightbox(e,$box){
+        e.preventDefault();
+        var hide =  $(e.target).hasClass('lightbox-close') ||
+            (!$(e.target).hasClass('lightbox-content') && !$(e.target).parents('.lightbox-content').length);
+        if ( hide){
+            $box.hide().removeClass('lightbox-open');
+        }
+    }
+
+    function showLightbox($box){
+        $box.show().addClass('lightbox-open');
+    }
+
+    function createLightbox($contents, spec){
+        //todo: make lightbox do this automatically
+        var lightboxDiv = document.createElement('div');
+        var container = document.createElement('div');
+        var article = document.createElement('article');
+        var $close = $('<a class="internal-link lightbox-close skycon-close black" href="#"><span class="speak">Close</span></a>');
+        lightboxDiv.className = 'lightbox';
+        lightboxDiv.id = spec + '-lightbox';
+        container.className = 'skycom-container lightbox-container clearfix';
+        article.className = 'lightbox-content skycom-10 skycom-offset1';
+        $(article).append($contents);
+        $(container).append($close);
+        $(container).append($(article));
+        $(lightboxDiv).append($(container));
+        $('body').append($(lightboxDiv));
+        showLightbox($('#' +  spec + '-lightbox'));
+        $close.add($(lightboxDiv)).on('click', function(e){
+            hideLightbox(e, $('#' +  spec + '-lightbox'));
+            clearInterval(timeout[spec]);
+        });
+    }
+
+    function registerTests(){
+        if (!window.require){
+            setTimeout(registerTests,250);
+            return;
+        }
+        var hashes = [];
+        $('.run-test').each(function(){
+            hashes.push($(this).attr('href').split('#')[1]);
+        });
+        hashManager.register(hashes, runTest);
+
+    }
+
+    registerTests();
+
+    return {
+        updateTestsResults: updateTestsResults
+    };
+
+});
+
+if (typeof window.define === "function" && window.define.amd){
+    define('demo/tests', ['utils/hash-manager'], function(hashManager) {
+        demo.tests = demo.tests(hashManager);
+        return demo.tests;
+    });
+} else {
+    demo.tests = demo.tests(toolkit.hashManager);
+}
+;
+if (typeof demo==='undefined') demo={};
+demo.skycons = (function() {
+
+
+    function sortSkyconsTable(){
+        var skycons = [];
+        var rows = $('#wiki-skycons tbody tr');
+        rows.each(function(i){
+            skycons.push({i:i, skycon:$(this).find('td').first().text().trim()});
+        });
+        skycons.sort(function (a, b) {
+            if (a.skycon > b.skycon) {
+                return 1;
+            } else if (a.skycon < b.skycon) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+        $('#wiki-skycons tbody tr').remove();
+        for (var i=0; i<skycons.length; i++){
+            $('#wiki-skycons tbody').append($(rows[skycons[i].i]));
+        }
+    }
+
+    sortSkyconsTable();
+
+});
+
+if (typeof window.define === "function" && window.define.amd){
+    define('demo/skycons',  [],function() {
+        return demo.skycons();
+    });
+} else {
+    demo.skycons = demo.skycons();
+}
+;
 if (typeof demo==='undefined') demo={};
 demo.main = (function(DisplayCode,ss, menu, tests, skycons, hash, inPageNav) {
 
@@ -928,11 +1105,12 @@ if (typeof window.define === "function" && window.define.amd){
         'lib/jquery.scrollspy',
         'demo/menu',
         'demo/tests',
+        'demo/skycons',
         'utils/hash-manager',
-        'components/in-page-nav'], function(displayCode, scrollspy, menu, tests, hashManager, inPageNav) {
-        return demo.main(displayCode, scrollspy, menu, tests, hashManager, inPageNav);
+        'components/in-page-nav'], function(displayCode, scrollspy, menu, tests, skycons, hashManager, inPageNav) {
+        return demo.main(displayCode, scrollspy, menu, tests, skycons, hashManager, inPageNav);
     });
 } else {
-    demo.main(demo.displayCode, scrollspy, demo.menu, demo.tests, toolkit.hashManager, toolkit.inPageNav);
+    demo.main(demo.displayCode, scrollspy, demo.menu, demo.tests, demo.skycons, toolkit.hashManager, toolkit.inPageNav);
 }
 ;

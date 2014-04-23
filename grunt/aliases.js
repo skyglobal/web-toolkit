@@ -1,15 +1,16 @@
 module.exports = {
-    "dev-build": ['clean:toolkit', 'compass:toolkit', 'requirejs:toolkit', 'uglify', 'jekyll:build'],
-    "dev-spy": ['dev-build', 'watch'],
+    "dev-build": ['clean:toolkit', 'compass:toolkit', 'requirejs:toolkit', 'uglify', 'jekyll:build', 'prepare-site', 'clean:dist'],
 
     //  standard build tasks that lints your JS
-    "build": ['jshint', 'dev-build'],
-    "spy": ['jshint', 'dev-spy'],
+    "build": ['jshint', 'version_sync', 'dev-build'],
     "serve": ['build','connect:app', 'open:app', 'watch'],
 
     //  misc tasks
     "fonts": ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit'],
     "svgs": ['svgmin:icons', 'grunticon'],
+
+    // for toolkit website with runnable tests
+    "prepare-site": ['copy:dist', 'copy:test', 'copy:skycons'],
 
     //  testing tasks
     "test-with-coverage": ['blanket_mocha'],
@@ -17,11 +18,8 @@ module.exports = {
     "test-cross-browser": ['jekyll:build','connect:cross-browser', 'exec:browserstack'],
     "test-cross-browser-live": ['jekyll:build','connect:cross-browser', 'exec:browserstack-live'],
 
-    //  screenshot comparison and verification task
-    "compare-verify-screenshot": ['screenshot-compare', 'screenshot-compare-verify'],
-
     //  alias
     "server": ['serve'],
-    "test": ['build', 'test-without-coverage', 'compare-verify-screenshot', 'test-with-coverage'],
+    "test": ['build', 'test-without-coverage', 'test-with-coverage'],
     "default": ['build']
 };
