@@ -1,15 +1,15 @@
 module.exports = {
     icons: {
-        src: 'grunt/fonts/min/*.svg',
-        dest: 'dist/fonts',
-        destCss: 'dist/fonts',
+        src: 'app/src/fonts/min/*.svg',
+        dest: 'generated-skycons',
+        destCss: 'generated-skycons',
         options: {
             font : 'skycons',
-            template : 'grunt/fonts/template/skycon-template.css',
-            htmlDemoTemplate : 'grunt/fonts/template/skycon-template.html',
+            template : 'app/src/fonts/template/skycon-template.css',
+            htmlDemoTemplate : 'app/src/fonts/template/skycon-template.html',
             htmlDemo : true,
 //                    engine : 'node',
-            destHtml : '_includes/base-styles/icons',
+            destHtml : 'app/_includes/base-styles/icons',
             hashes : false,
             embed : true
         }

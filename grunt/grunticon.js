@@ -1,7 +1,7 @@
 module.exports = {
         colourSVG: {
             options: {
-                src: "grunt/svgs/min",
+                src: "app/src/svgs/min",
                 dest: "dist/svgs/"
             }
         }
