@@ -1,6 +1,6 @@
 {
     "name": "web-toolkit",
-    "version": "2.2.12",
+    "version": "2.2.12-feature-ignore-site",
 	"repository" : {
         "type": "git",
         "url": "https://github.com/skyglobal/web-toolkit.git"
