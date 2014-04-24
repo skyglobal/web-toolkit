@@ -35,7 +35,7 @@ end
 
 
 def static_to_upload
-  cd "app"
+  cd "_site"
   Dir.glob("static/**/*.*")
   cd ".."
 end
@@ -108,7 +108,7 @@ def pushToAmazonS3
     puts "Uploading _site file: #{file}"
     doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
-  cd "app"
+  cd "_site"
   puts 'Uploading static files'
   static_to_upload.each do |file|
     puts "Uploading static file: #{file}"
