@@ -25,6 +25,8 @@ module.exports = function(grunt){
             options: {
                 dir: "dist/demo/scripts",
                 modules: [{
+                    name: 'toolkit'
+                },{
                     name: 'demo', exclude: ['toolkit', 'tests']
                 },{
                     name: 'tests', exclude: ['toolkit']
