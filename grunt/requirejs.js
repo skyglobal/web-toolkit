@@ -21,13 +21,13 @@ module.exports = function(grunt){
                 }]
             }
         },
-        website: {
+        demo: {
             options: {
                 optimize: "none",
                 modules: [{
-                    name: 'demo'
+                    name: 'demo', exclude: ['toolkit', 'tests']
                 },{
-                    name: 'tests'
+                    name: 'tests', exclude: ['toolkit']
                 },{
                     name: 'changes'
                 }]
