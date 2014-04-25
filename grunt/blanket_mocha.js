@@ -3,7 +3,7 @@ module.exports = {
     options : {
         reporter: 'Spec',
         threshold : 75, // <- each file has to have this much coverage
-        globalThreshold : 90, // <- average coverage
+        globalThreshold : 80, // <- average coverage
         // the below is temporary, there is an issue on GitHub to get them up to 75
         customThreshold: {
             './src/js/toolkit/components/tooltip.js': 41,
