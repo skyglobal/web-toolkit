@@ -28,7 +28,7 @@ demo.skycons = (function() {
 });
 
 if (typeof window.define === "function" && window.define.amd){
-    define('demo/skycons',  function() {
+    define([], function() {
         return demo.skycons();
     });
 } else {

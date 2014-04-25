@@ -220,7 +220,7 @@ changes.diff = (function(hljs){
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('changes/diff', ['lib/highlight'], function(hljs) {
+    define(['highlight'], function(hljs) {
         return changes.diff(hljs);
     });
 } else {

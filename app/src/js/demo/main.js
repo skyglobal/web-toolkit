@@ -16,7 +16,7 @@ demo.main = (function(DisplayCode,ss, menu, tests, skycons, hash, inPageNav) {
             host = 'http://' + location.host;
             dir = '../_includes';
         } else if (document.location.host === "skyglobal.github.io"){
-            host = 'http://skyglobal.github.io/web-toolkit',
+            host = 'http://skyglobal.github.io/web-toolkit';
             dir = '../_includes';
         }
         var featureFiles, codeBase, route;
@@ -54,11 +54,12 @@ demo.main = (function(DisplayCode,ss, menu, tests, skycons, hash, inPageNav) {
 });
 
 if (typeof window.define === "function" && window.define.amd){
-    define('demo', ['demo/display-code',
-        'lib/jquery.scrollspy',
-        'demo/menu',
-        'demo/tests',
-        'demo/skycons',
+    define([
+        './display-code',
+        './scrollspy',
+        './menu',
+        'tests',
+        './skycons',
         'utils/hash-manager',
         'components/in-page-nav'], function(displayCode, scrollspy, menu, tests, skycons, hashManager, inPageNav) {
         return demo.main(displayCode, scrollspy, menu, tests, skycons, hashManager, inPageNav);

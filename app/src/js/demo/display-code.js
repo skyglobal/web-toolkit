@@ -129,7 +129,7 @@ demo.displayCode = (function( hljs){
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('demo/display-code', ['lib/highlight'],function( hljs) {
+    define(['highlight'],function(hljs) {
         return demo.displayCode(hljs);
     });
 } else {
