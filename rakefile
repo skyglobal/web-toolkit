@@ -35,9 +35,9 @@ end
 
 
 def static_to_upload
-  cd "_site"
-  Dir.glob("static/**/*.*")
-  cd ".."
+  Dir.chdir("_site") do
+    Dir.glob("static/**/*.*")
+  end
 end
 
 def assets_to_upload
@@ -97,24 +97,24 @@ def pushToAmazonS3
   system "grunt"
   doc_resources = []
   puts 'Uploading dist files'
-  cd "_site/dist"
-  assets_to_upload.each do |file|
-    puts "Uploading dist file: #{file}"
-    doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+  Dir.chdir("_site/dist") do
+    assets_to_upload.each do |file|
+      puts "Uploading dist file: #{file}"
+      doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+    end
   end
-  cd "../.."
   puts 'Uploading _site files'
   templates_to_upload.each do |file|
     puts "Uploading _site file: #{file}"
     doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
-  cd "_site"
   puts 'Uploading static files'
-  static_to_upload.each do |file|
-    puts "Uploading static file: #{file}"
-    doc_resources << bucket.objects["#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+  Dir.chdir("_site") do
+    static_to_upload.each do |file|
+      puts "Uploading static file: #{file}"
+      doc_resources << bucket.objects["#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+    end
   end
-  cd ".."
 end
 
 
