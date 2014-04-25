@@ -16,7 +16,7 @@ demo.main = (function(DisplayCode,ss, menu, tests, skycons, hash, inPageNav) {
             host = 'http://' + location.host;
             dir = '../_includes';
         } else if (document.location.host === "skyglobal.github.io"){
-            host = 'http://skyglobal.github.io/web-toolkit',
+            host = 'http://skyglobal.github.io/web-toolkit';
             dir = '../_includes';
         }
         var featureFiles, codeBase, route;
@@ -56,9 +56,9 @@ demo.main = (function(DisplayCode,ss, menu, tests, skycons, hash, inPageNav) {
 if (typeof window.define === "function" && window.define.amd){
     define([
         './display-code',
-        './lib/jquery.scrollspy',
+        './scrollspy',
         './menu',
-        './tests',
+        'tests',
         './skycons',
         'utils/hash-manager',
         'components/in-page-nav'], function(displayCode, scrollspy, menu, tests, skycons, hashManager, inPageNav) {

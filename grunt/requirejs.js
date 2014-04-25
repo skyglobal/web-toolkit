@@ -6,14 +6,20 @@ module.exports = function(grunt){
             dir: "dist/scripts",
             removeCombined: true,
             generateSourceMaps: false,
-            modules:[{
+            paths: {
+                utils: "toolkit/utils",
+                components: "toolkit/components",
+                highlight: "vendor/highlight"
+            },
+            packages: [ 'toolkit', 'demo', 'tests', 'changes' ],
+            modules: [{
                 name: 'toolkit'
             },{
                 name: 'demo'
             },{
-                name: 'changes'
+                name: 'tests'
             },{
-                name: 'testIFrame'
+                name: 'changes'
             }]
         },
         toolkit: {
