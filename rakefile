@@ -35,12 +35,14 @@ end
 
 
 def static_to_upload
+  puts "Working out static files to upload. Working directory: #{Dir.getwd}"
   Dir.chdir("_site") do
     Dir.glob("static/**/*.*")
   end
 end
 
 def assets_to_upload
+  puts "Working out dist files to upload. Working directory: #{Dir.getwd}"
   ["stylesheets/toolkit.css",
     "fonts/skycons.css", "fonts/skycons.eot", "fonts/skycons.ttf",
     "scripts/toolkit.js", "scripts/toolkit.min.js",
@@ -48,6 +50,7 @@ def assets_to_upload
 end
 
 def templates_to_upload
+  puts "Working out _site files to upload. Working directory: #{Dir.getwd}"
   Dir.glob("_site/**/*.*")
 end
 
@@ -97,6 +100,7 @@ def pushToAmazonS3
   system "grunt"
   doc_resources = []
   puts 'Uploading dist files'
+  puts "Working directory: #{Dir.getwd}"
   Dir.chdir("_site/dist") do
     assets_to_upload.each do |file|
       puts "Uploading dist file: #{file}"
@@ -104,11 +108,13 @@ def pushToAmazonS3
     end
   end
   puts 'Uploading _site files'
+  puts "Working directory: #{Dir.getwd}"
   templates_to_upload.each do |file|
     puts "Uploading _site file: #{file}"
     doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
   puts 'Uploading static files'
+  puts "Working directory: #{Dir.getwd}"
   Dir.chdir("_site") do
     static_to_upload.each do |file|
       puts "Uploading static file: #{file}"
