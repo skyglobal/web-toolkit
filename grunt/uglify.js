@@ -5,12 +5,9 @@ module.exports = function(grunt){
             banner: '/*! ' + pkg.name + ' - v' + pkg.version + ' - ' +
                 grunt.template.today("yyyy-mm-dd") + ' */\n'
         },
-        min: {
+        uglify: {
             files: {
-                'dist/scripts/toolkit.js': ['dist/scripts/toolkit/main.js'],
-                'dist/scripts/demo.js': ['dist/scripts/demo/main.js'],
-                'dist/scripts/tests.js': ['dist/scripts/tests/main.js'],
-                'dist/scripts/changes.js': ['dist/scripts/changes/main.js']
+                'dist/scripts/toolkit.min.js': ['dist/toolkit/scripts/toolkit/main.js']
             }
         },
         beauty: {
@@ -20,10 +17,7 @@ module.exports = function(grunt){
               compress: false
             },
             files: {
-                'dist/scripts/toolkit.js': ['dist/scripts/toolkit/main.js'],
-                'dist/scripts/demo.js': ['dist/scripts/demo/main.js'],
-                'dist/scripts/tests.js': ['dist/scripts/tests/main.js'],
-                'dist/scripts/changes.js': ['dist/scripts/changes/main.js']
+                'dist/scripts/toolkit.js': ['dist/toolkit/scripts/toolkit/main.js']
             }
         }
     };

@@ -3,19 +3,19 @@ module.exports = function(grunt){
         options: {
             preserveLicenseComments: false,
             baseUrl: "app/src/js",
-            dir: "dist/scripts",
             removeCombined: true,
             generateSourceMaps: false,
+            optimize: "none",
+            packages: [ 'toolkit', 'demo', 'tests', 'changes' ],
             paths: {
                 utils: "toolkit/utils",
                 components: "toolkit/components",
                 highlight: "vendor/highlight"
-            },
-            packages: [ 'toolkit', 'demo', 'tests', 'changes' ]
+            }
         },
         toolkit: {
             options: {
-                optimize: "none",
+                dir: "dist/toolkit/scripts",
                 modules: [{
                     name: 'toolkit'
                 }]
@@ -23,7 +23,7 @@ module.exports = function(grunt){
         },
         demo: {
             options: {
-                optimize: "none",
+                dir: "dist/demo/scripts",
                 modules: [{
                     name: 'demo', exclude: ['toolkit', 'tests']
                 },{
@@ -31,16 +31,6 @@ module.exports = function(grunt){
                 },{
                     name: 'changes'
                 }]
-            }
-        },
-        beautify: {
-            options: {
-                optimize: "none"
-            }
-        },
-        uglify: {
-            options: {
-                optimize: "uglify2"
             }
         }
     }
