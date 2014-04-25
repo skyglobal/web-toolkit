@@ -1,8 +1,10 @@
 # Releasing the Web Toolkit
 
 Always update the [CHANGELOG.md](./CHANGELOG.md) with a summary of changes!! Please use the following format:
- * Component - [added/changed/removed] short description
-
+```
+ * Component 
+   * [added/update/removed/fixed] short description
+```
 To release a new version with:
   - Code changes
     - increment the version number in package.json following `semantic versioning` described below.
