@@ -2,6 +2,9 @@
 
 ## 2.2.12 (next release)
 
+ * Spinners
+    * [update]  Spinner Icon now has shading.
+    * [Added]  Large Spinner icon i.e. just like shop!
  * Skycons
     * [added]  Camera icon used for galleries.
  * Video
