@@ -35,12 +35,14 @@ end
 
 
 def static_to_upload
-  cd "app"
-  Dir.glob("static/**/*.*")
-  cd ".."
+  puts "Working out static files to upload. Working directory: #{Dir.getwd}"
+  Dir.chdir("_site") do
+    Dir.glob("static/**/*.*")
+  end
 end
 
 def assets_to_upload
+  puts "Working out dist files to upload. Working directory: #{Dir.getwd}"
   ["stylesheets/toolkit.css",
     "fonts/skycons.css", "fonts/skycons.eot", "fonts/skycons.ttf",
     "scripts/toolkit.js", "scripts/toolkit.min.js",
@@ -48,6 +50,7 @@ def assets_to_upload
 end
 
 def templates_to_upload
+  puts "Working out _site files to upload. Working directory: #{Dir.getwd}"
   Dir.glob("_site/**/*.*")
 end
 
@@ -96,25 +99,33 @@ def pushToAmazonS3
   puts "*** Pushing to the AmazonS3 ***"
   system "grunt"
   doc_resources = []
+  asset_files = assets_to_upload
   puts 'Uploading dist files'
-  cd "_site/dist"
-  assets_to_upload.each do |file|
-    puts "Uploading dist file: #{file}"
-    doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+  puts "Working directory: #{Dir.getwd}"
+  Dir.chdir("_site/dist") do
+    puts "Working directory: #{Dir.getwd}"
+    asset_files.each do |file|
+      puts "Uploading dist file: #{file}"
+      doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+    end
   end
-  cd "../.."
+  site_files = templates_to_upload
   puts 'Uploading _site files'
-  templates_to_upload.each do |file|
+  puts "Working directory: #{Dir.getwd}"
+  site_files.each do |file|
     puts "Uploading _site file: #{file}"
     doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
-  cd "app"
+  static_files = static_to_upload
   puts 'Uploading static files'
-  static_to_upload.each do |file|
-    puts "Uploading static file: #{file}"
-    doc_resources << bucket.objects["#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+  puts "Working directory: #{Dir.getwd}"
+  Dir.chdir("_site") do
+    puts "Working directory: #{Dir.getwd}"
+    static_files.each do |file|
+      puts "Uploading static file: #{file}"
+      doc_resources << bucket.objects["#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+    end
   end
-  cd ".."
 end
 
 
