@@ -99,24 +99,29 @@ def pushToAmazonS3
   puts "*** Pushing to the AmazonS3 ***"
   system "grunt"
   doc_resources = []
+  asset_files = assets_to_upload
   puts 'Uploading dist files'
   puts "Working directory: #{Dir.getwd}"
   Dir.chdir("_site/dist") do
-    assets_to_upload.each do |file|
+    puts "Working directory: #{Dir.getwd}"
+    asset_files.each do |file|
       puts "Uploading dist file: #{file}"
       doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
     end
   end
+  site_files = templates_to_upload
   puts 'Uploading _site files'
   puts "Working directory: #{Dir.getwd}"
-  templates_to_upload.each do |file|
+  site_files.each do |file|
     puts "Uploading _site file: #{file}"
     doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
+  static_files = static_to_upload
   puts 'Uploading static files'
   puts "Working directory: #{Dir.getwd}"
   Dir.chdir("_site") do
-    static_to_upload.each do |file|
+    puts "Working directory: #{Dir.getwd}"
+    static_files.each do |file|
       puts "Uploading static file: #{file}"
       doc_resources << bucket.objects["#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
     end
