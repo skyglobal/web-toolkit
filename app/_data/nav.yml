@@ -173,6 +173,8 @@ Utils:
         title : Off
       - example : Resize End
         js_file : true
+      - example : Emit
+        js_file : true
   Hash Manager :
     design_notes : This is useful for maintaining state i.e. ensuring clicks, page refreshes and bookmarked links all arrive in the same state.
     has_tests : true

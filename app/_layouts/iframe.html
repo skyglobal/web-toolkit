@@ -1,0 +1,59 @@
+<!doctype html>
+<!--To put correct ie classes on document root to essentially enable css conditionals-->
+<!--[if IE 7]>         <html class="lt-ie10 lt-ie9 lt-ie8" > <![endif]-->
+<!--[if IE 8]>         <html class="lt-ie10 lt-ie9" > <![endif]-->
+<!--[if IE 9]>         <html class="lt-ie10" > <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
+<!--end css conditionals-->
+<head>
+    {% include head.html %}
+    <style>
+        #fixtures-container{
+            height:0;
+            overflow: hidden;
+        }
+        #fixtures{
+            height: auto;
+            overflow: visible;
+        }
+        html{
+            padding: 0;
+        }
+    </style>
+</head>
+<body class="grid-1140" >
+    <div class="skycom-container clearfix">
+        <div class="alpha skycom-12">
+            <h1>Testing &hellip;</h1>
+            <div class="spinner-blue">
+                <p>Please wait...</p>
+            </div>
+            
+            <div id="mocha" class="mocha-container"></div>
+            <div id="blanket-main" class="blanket-container"></div>
+            <div id="fixtures-container">
+                <div id="fixtures">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="test/libraries/mocha.js"></script>
+    <script src="test/libraries/chai.js"></script>
+    <script src="test/libraries/require.js"></script>
+
+    <script src="test/libraries/blanket.js" data-cover-never="specs" data-cover-flags="branchTracking"></script>
+    <script src="test/config.js"></script>
+
+<script>
+    requirejs.config({
+        baseUrl: "./src/js/toolkit/",
+        paths: {
+            specs: '../../../test/specs'
+        }
+    });
+    </script>
+    <script src="dist/scripts/tests/testIFrame.js"></script>
+
+</body>
+</html>

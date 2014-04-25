@@ -7,9 +7,11 @@ title: Sky Web Toolkit
 
 <script>
     require(
-            {   baseUrl:'dist/scripts',
+            {   baseUrl: 'dist/scripts',
+                packages: ['toolkit'],
                 paths: {
-                    toolkit: 'toolkit.min',
+                    utils: 'toolkit/utils',
+                    components: 'toolkit/components',
                     suite: '../../test/suite',
                     specs: '../../test/specs'}
             },
