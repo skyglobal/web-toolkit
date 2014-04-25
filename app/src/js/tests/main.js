@@ -90,7 +90,7 @@ demo.tests = (function(hashManager){
 });
 
 if (typeof window.define === "function" && window.define.amd){
-    define('demo/tests', ['utils/hash-manager'], function(hashManager) {
+    define(['utils/hash-manager'], function(hashManager) {
         demo.tests = demo.tests(hashManager);
         return demo.tests;
     });

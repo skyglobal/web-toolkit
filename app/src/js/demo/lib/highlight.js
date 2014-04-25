@@ -4,7 +4,7 @@ var hljs=new function(){function k(v){return v.replace(/&/gm,"&amp;").replace(/<
 //modified for AMD/RequireJS.
 //by Peter Mouland
 if (typeof window.define === "function" && window.define.amd) {
-    define('lib/highlight', function() {
+    define([], function() {
         return hljs;
     });
 }

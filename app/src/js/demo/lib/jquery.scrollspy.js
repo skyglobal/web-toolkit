@@ -152,7 +152,7 @@ var scrollspy = (function ($) { "use strict";
 //modified for AMD/RequireJS.
 //by Peter Mouland
 if (typeof window.define === "function" && window.define.amd) {
-    define('lib/jquery.scrollspy', function() {
+    define([], function() {
         return scrollspy(jQuery);
     });
 } else {
