@@ -11,20 +11,26 @@ module.exports = function(grunt){
                 components: "toolkit/components",
                 highlight: "vendor/highlight"
             },
-            packages: [ 'toolkit', 'demo', 'tests', 'changes' ],
-            modules: [{
-                name: 'toolkit'
-            },{
-                name: 'demo'
-            },{
-                name: 'tests'
-            },{
-                name: 'changes'
-            }]
+            packages: [ 'toolkit', 'demo', 'tests', 'changes' ]
         },
         toolkit: {
             options: {
-                optimize: "none"
+                optimize: "none",
+                modules: [{
+                    name: 'toolkit'
+                }]
+            }
+        },
+        website: {
+            options: {
+                optimize: "none",
+                modules: [{
+                    name: 'demo'
+                },{
+                    name: 'tests'
+                },{
+                    name: 'changes'
+                }]
             }
         },
         beautify: {

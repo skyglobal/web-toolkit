@@ -7,7 +7,7 @@ module.exports = function(grunt){
         },
         min: {
             files: {
-                'dist/scripts/toolkit.min.js': ['dist/scripts/toolkit.js']
+                'dist/scripts/toolkit.min.js': ['dist/scripts/toolkit/main.js']
             }
         },
         beauty: {
@@ -17,7 +17,7 @@ module.exports = function(grunt){
               compress: false
             },
             files: {
-                'dist/scripts/toolkit.js': ['dist/scripts/toolkit.js']
+                'dist/scripts/toolkit.js': ['dist/scripts/toolkit/main.js']
             }
         }
     };
