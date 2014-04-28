@@ -129,22 +129,21 @@ def pushToAmazonS3
   puts "Uploaded. See http://web-toolkit.global.sky.com/#{latest_version_number}/_site/index.html"
 end
 
-
-
-
-def fetchGHPages
-  puts "*** Fecthing GH Pages ***"
+def updateGHPages
+  puts "*** Updating GH Pages and Pushing to github.io ***"
   `git fetch origin gh-pages`
   `git checkout gh-pages`
   `git pull origin gh-pages`
-  `git rebase master`
-end
-
-def updateGHPages
-  puts "*** Pushing to github.io ***"
-  system "git checkout gh-pages"
-  system "git push origin master:gh-pages"
-  system "git checkout master"
+  `git merge master -X theirs` # make sure conflicts are resolved according to what master says
+  puts "Merged master into GH Pages"
+  `grunt`
+  `sed -i '/^_site$/d' .gitignore` # make sure .gitignore does not ignore _site
+  `grunt add .gitignore`
+  `grunt add _site`
+  `git commit -m "#{latest_version_number} version"`
+  `git push origin gh-pages`
+  puts "Committed and pushed to GH Pages"
+  `git checkout master`
 end
 
 
@@ -173,11 +172,11 @@ task :deploy do
 
   if version_already_exists?
     puts "Version #{latest_version_number} exists so exiting."
-    next
+    # tip: this "next" command can be commented out to force a push to s3 and gh-pages
+    # next
   end
 
   pushToAmazonS3
-  fetchGHPages
   updateGHPages
   tagBuild
 end
