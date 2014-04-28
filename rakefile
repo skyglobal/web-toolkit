@@ -138,8 +138,8 @@ def updateGHPages
   puts "Merged master into GH Pages"
   `grunt`
   `sed -i '/^_site$/d' .gitignore` # make sure .gitignore does not ignore _site
-  `grunt add .gitignore`
-  `grunt add _site`
+  `git add .gitignore`
+  `git add _site`
   `git commit -m "#{latest_version_number} version"`
   `git push origin gh-pages`
   puts "Committed and pushed to GH Pages"
