@@ -80,6 +80,11 @@ def content_type(file)
     content_type
 end
 
+def configGit
+  `git config --global user.email "dl-skycom@bskyb.com"`
+  `git config --global user.name "Rake file"`
+end
+
 def emptyGitCache
   system "git rm --cached app/fonts/min -r"
   system "git rm --cached _site -r"
@@ -87,10 +92,8 @@ def emptyGitCache
 end
 
 def tagBuild
-
   puts "*** Tagging Version #{latest_version_number} ***"
-  `git config --global user.email "dl-skycom@bskyb.com"`
-  `git config --global user.name "Rake file"`
+  configGit
   system "git tag -a v#{latest_version_number} -m \"Rake deploy: auto tag on #{getDate}\""
   system "git push origin master v#{latest_version_number}"
 end
@@ -140,6 +143,7 @@ def updateGHPages
   `sed -i '/^_site$/d' .gitignore` # make sure .gitignore does not ignore _site
   `git add .gitignore`
   `git add _site`
+  configGit
   `git commit -m "#{latest_version_number} version"`
   `git push origin gh-pages`
   puts "Committed and pushed to GH Pages"
