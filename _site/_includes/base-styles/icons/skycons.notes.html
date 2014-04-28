@@ -1,0 +1,25 @@
+<ul class="notes">
+    <li>
+        Dont forget to include <code>http://web-toolkit.global.sky.com/{{ site.version }}/fonts/skycons.css</code>
+    </li>
+    <li>
+        Ensure <code>aria-hidden</code> is used on your <code>skycon</code> tags.
+    </li>
+    <li>
+        To make the icon have a colour, add the class <code>colour</code>.
+    </li>
+    <li>
+        To make the icon have a colour on hover, add the class <code>colour-hover</code> to the parent.
+    </li>
+    <li>
+        To Create Fonts:
+        <ul class="notes">
+            <li>save font into <code>static/font-svgs</code> folder</li>
+            <li>Run `<code>grunt fonts</code>`</li>
+            <li>copy the icons JS from the skycons.css over the icons var in skycons.js</li>
+            <li>Add your default colour and hover-colour into <code>_colours.scss</code> if required</li>
+            <li>Run `<code>grunt</code>`</li>
+            <li>Check your font before doing a pull request!!</li>
+        </ul>
+    </li>
+</ul>
