@@ -1,3 +1,8 @@
+/**
+ * IMPORTANT NOTE!!!
+ * Please note that this is a heavily modified version for Sky Global's Toolkit.
+ */
+
 /* ========================================================================
  * Bootstrap: scrollspy.js v3.0.2
  * http://getbootstrap.com/javascript/#scrollspy
@@ -152,7 +157,7 @@ var scrollspy = (function ($) { "use strict";
 //modified for AMD/RequireJS.
 //by Peter Mouland
 if (typeof window.define === "function" && window.define.amd) {
-    define('lib/jquery.scrollspy', function() {
+    define([], function() {
         return scrollspy(jQuery);
     });
 } else {

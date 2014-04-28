@@ -46,7 +46,7 @@ changes.main = (function(diff) {
 });
 
 if (typeof window.define === "function" && window.define.amd){
-    define('changes', ['changes/diff'], function(diff) {
+    define(['./diff'], function(diff) {
         return changes.main(diff);
     });
 } else {

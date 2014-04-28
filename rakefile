@@ -126,6 +126,7 @@ def pushToAmazonS3
       doc_resources << bucket.objects["#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
     end
   end
+  puts "Uploaded. See http://web-toolkit.global.sky.com/#{latest_version_number}/_site/index.html"
 end
 
 

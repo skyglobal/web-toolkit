@@ -1,10 +1,6 @@
 module.exports = {
-        toolkit: ['Gruntfile.js',
-                  'app/src/js/components/*.js',
-                  'app/src/js/utils/*.js',
-                  'app/src/js/demo/*.js'],
-//        'test/specs/**/*.js',
-        others: ['Gruntfile.js'],
+//        all: ['Gruntfile.js', 'app/src/js/**/*.js', 'test/spec/**/*.js'],
+        all: ['Gruntfile.js', 'app/src/js/toolkit/**/*.js'],
         options: {
             "globals": {
                 document: false,

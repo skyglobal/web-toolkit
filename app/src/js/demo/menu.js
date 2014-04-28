@@ -91,7 +91,7 @@ demo.menu = (function(inPageNav){
 });
 
 if (typeof window.define === "function" && window.define.amd){
-    define('demo/menu', ['components/in-page-nav'], function(inPageNav) {
+    define(['components/in-page-nav'], function(inPageNav) {
         return demo.menu(inPageNav);
     });
 } else {

@@ -3,32 +3,36 @@ module.exports = function(grunt){
         options: {
             preserveLicenseComments: false,
             baseUrl: "app/src/js",
-            dir: "dist/scripts",
             removeCombined: true,
             generateSourceMaps: false,
-            modules:[{
-                name: 'toolkit'
-            },{
-                name: 'demo'
-            },{
-                name: 'changes'
-            },{
-                name: 'testIFrame'
-            }]
+            optimize: "none",
+            packages: [ 'toolkit', 'demo', 'tests', 'changes' ],
+            paths: {
+                utils: "toolkit/utils",
+                components: "toolkit/components",
+                highlight: "vendor/highlight"
+            }
         },
         toolkit: {
             options: {
-                optimize: "none"
+                dir: "dist/toolkit/scripts",
+                modules: [{
+                    name: 'toolkit'
+                }]
             }
         },
-        beautify: {
+        demo: {
             options: {
-                optimize: "none"
-            }
-        },
-        uglify: {
-            options: {
-                optimize: "uglify2"
+                dir: "dist/demo/scripts",
+                modules: [{
+                    name: 'toolkit'
+                },{
+                    name: 'demo', exclude: ['toolkit', 'tests']
+                },{
+                    name: 'tests', exclude: ['toolkit']
+                },{
+                    name: 'changes'
+                }]
             }
         }
     }
