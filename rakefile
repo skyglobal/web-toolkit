@@ -173,8 +173,7 @@ task :deploy do
 
   if version_already_exists?
     puts "Version #{latest_version_number} exists so exiting."
-    # temp removal to get 2/2/12 to the s3 and gh-pages
-    # next
+    next
   end
 
   pushToAmazonS3
