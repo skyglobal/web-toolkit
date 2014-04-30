@@ -135,6 +135,7 @@ end
 def updateGHPages
   puts "*** Updating GH Pages and Pushing to github.io ***"
   `cp -r _site /tmp`
+  `git clean -f`
   `git stash`
   `git checkout gh-pages`
   `git pull origin gh-pages`
