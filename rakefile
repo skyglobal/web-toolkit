@@ -132,6 +132,13 @@ def pushToAmazonS3
   puts "Uploaded. See http://web-toolkit.global.sky.com/#{latest_version_number}/_site/index.html"
 end
 
+def syncGHPages
+  puts "*** Syncing GH Pages ***"
+  `git checkout gh-pages`
+  `git pull`
+  `git checkout master`
+end
+
 def updateGHPages
   puts "*** Updating GH Pages and Pushing to github.io ***"
   `git checkout gh-pages`
@@ -173,6 +180,7 @@ task :deploy do
     # next
   end
 
+  syncGHPages
   pushToAmazonS3
   updateGHPages
   tagBuild
