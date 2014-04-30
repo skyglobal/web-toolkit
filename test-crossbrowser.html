@@ -45,11 +45,8 @@
     <div id="mocha"></div>
     <div class="skycom-container clearfix">
         <div class="alpha skycom-12">
-            <script src="test/libraries/blanket.js" data-cover-flags="branchTracking" data-cover-only="//toolkit/.*/"></script>
-<script>
-    if (window.PHANTOMJS) {
-        blanket.options("reporter", "test/libraries/grunt-reporter.js");
-    }
+            <script>
+    mocha.reporter(Mocha.BrowserStack);
 </script>
 
     
@@ -759,6 +756,18 @@ When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, 
     <p class="black">Text on light background is black</p>
     <a href="#" class="black"><i class="skycon-chevron"></i>Links next to normal text need chevrons</a>
 </div>
+
+
+<ul class="grey-bullets">
+    <li>List with grey bullet points</li>
+    <li>List with grey bullet points</li>
+    <li>List with grey bullet points</li>
+</ul>
+<ol class="decimal">
+    <li>Ordered list item 1</li>
+    <li>Ordered list item 2</li>
+    <li>Ordered list item 3</li>
+</ol>
                         </div>
                         
                         
@@ -3086,15 +3095,12 @@ responsiveImages.init(document.getElementById('demo-responsive-images'));
 
 <script>
     require(
-            {   baseUrl: 'src/js',
-                packages: ["toolkit", "tests"],
+            {   baseUrl:'dist/scripts',
                 paths: {
-                    utils: 'toolkit/utils',
-                    components: 'toolkit/components',
-                    suite: '../../../test/suite',
-                    specs: '../../../test/specs'}
+                    suite: '../../test/suite',
+                    specs: '../../test/specs'}
             },
-            ["toolkit"],
+            ["toolkit.min"],
             function(main) {
                 require(["suite"], function(TestLoader) {
                     setTimeout(function(){
@@ -3104,7 +3110,6 @@ responsiveImages.init(document.getElementById('demo-responsive-images'));
             }
     );
 </script>
-
         </div>
     </div>
 </body>
