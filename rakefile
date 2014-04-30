@@ -150,6 +150,7 @@ def updateGHPages
   puts "Committed and pushed to GH Pages"
   `git checkout master`
   `git stash pop`
+  puts "Uploaded. See http://skyglobal.github.io/web-toolkit"
 end
 
 
