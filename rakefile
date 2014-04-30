@@ -135,7 +135,7 @@ end
 def syncGHPages
   puts "*** Syncing GH Pages ***"
   `git checkout gh-pages`
-  `git pull`
+  `git pull origin`
   `git checkout master`
 end
 
