@@ -134,14 +134,7 @@ end
 
 def updateGHPages
   puts "*** Updating GH Pages and Pushing to github.io ***"
-  `git fetch origin gh-pages`
   `git checkout gh-pages`
-  `git pull origin gh-pages`
-  `git merge master -X theirs` # make sure conflicts are resolved according to what master says
-  puts "Merged master into GH Pages"
-  `grunt`
-  `sed -i '/^_site$/d' .gitignore` # make sure .gitignore does not ignore _site
-  `git add .gitignore`
   `git add _site`
   configGit
   `git commit -m "#{latest_version_number} version"`
