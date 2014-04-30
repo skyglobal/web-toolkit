@@ -134,9 +134,11 @@ end
 
 def syncGHPages
   puts "*** Syncing GH Pages ***"
+  `git stash`
   `git checkout gh-pages`
   `git pull origin gh-pages`
   `git checkout master`
+  `git stash pop`
 end
 
 def updateGHPages
