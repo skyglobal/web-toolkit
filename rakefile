@@ -134,13 +134,18 @@ end
 
 def updateGHPages
   puts "*** Updating GH Pages and Pushing to github.io ***"
-  `mv _site /tmp`
+  `cp -r _site /tmp`
   `git stash`
   `git checkout gh-pages`
   `git pull origin gh-pages`
-  `rm -rf _site`
-  `mv /tmp/_site .`
-  `git add _site`
+  `mv .gitignore /tmp`
+  `mv .nojekyll /tmp`
+  `rm -rf ./*`
+  `mv /tmp/_site/* .`
+  `rmdir /tmp/_site`
+  `mv /tmp/.gitignore .`
+  `mv /tmp/.nojekyll .`
+  `git add --all`
   configGit
   `git commit -m "#{latest_version_number} version"`
   `git push origin gh-pages`
