@@ -180,7 +180,7 @@ task :deploy do
   if version_already_exists?
     puts "Version #{latest_version_number} exists so exiting."
     # tip: this "next" command can be commented out to force a push to s3 and gh-pages
-    # next
+    next
   end
 
   pushToAmazonS3
