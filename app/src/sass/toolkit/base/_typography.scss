@@ -92,6 +92,15 @@ small {
   color: $secondary;
 }
 
+ol.decimal {
+  list-style: decimal;
+  list-style-position: outside;
+
+  li {
+    margin: 0 0 0.5em 1.2em;
+  }
+}
+
 ul.grey-bullets {
   list-style: none;
 
