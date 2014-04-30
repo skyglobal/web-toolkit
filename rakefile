@@ -139,13 +139,10 @@ def updateGHPages
   `git stash`
   `git checkout gh-pages`
   `git pull origin gh-pages`
-  `mv .gitignore /tmp`
-  `mv .nojekyll /tmp`
   `rm -rf ./*`
   `mv /tmp/_site/* .`
   `rmdir /tmp/_site`
-  `mv /tmp/.gitignore .`
-  `mv /tmp/.nojekyll .`
+  `touch .nojekyll`
   `git add --all`
   configGit
   `git commit -m "#{latest_version_number} version"`
