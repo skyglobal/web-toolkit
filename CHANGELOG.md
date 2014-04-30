@@ -2,6 +2,9 @@
 
 ## 2.2.12 (next release)
 
+ * Typography
+    * [added] Numbered list
+    * [updated] Bulleted list (re-added really as it went walkies from the demo page!)
  * Spinners
     * [update]  Spinner Icon now has shading.
     * [Added]  Large Spinner icon i.e. just like shop!
