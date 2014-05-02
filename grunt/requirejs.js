@@ -6,7 +6,6 @@ module.exports = function(grunt){
             removeCombined: true,
             generateSourceMaps: false,
             optimize: "none",
-            packages: [ 'toolkit', 'demo', 'tests', 'changes' ],
             paths: {
                 utils: "toolkit/utils",
                 components: "toolkit/components",

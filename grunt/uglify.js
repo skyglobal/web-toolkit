@@ -7,7 +7,7 @@ module.exports = function(grunt){
         },
         uglify: {
             files: {
-                'dist/scripts/toolkit.min.js': ['dist/toolkit/scripts/toolkit/main.js']
+                'dist/scripts/toolkit.min.js': ['dist/toolkit/scripts/toolkit.js']
             }
         },
         beauty: {
@@ -17,7 +17,7 @@ module.exports = function(grunt){
               compress: false
             },
             files: {
-                'dist/scripts/toolkit.js': ['dist/toolkit/scripts/toolkit/main.js']
+                'dist/scripts/toolkit.js': ['dist/toolkit/scripts/toolkit.js']
             }
         }
     };
