@@ -1,36 +1,63 @@
 # Releasing the Web Toolkit
 
+## CHANGELOG
+
 Always update the [CHANGELOG.md](./CHANGELOG.md) with a summary of changes!! Please use the following format:
 ```
  * Component 
    * [added/update/removed/fixed] short description
 ```
-To release a new version with:
+
+## Branches
+
+* `master` does nothing
+* `feature-*` and `rc-*` get deployed to CDN (http://web-toolkit.global.sky.com)
+* `stable` gets deployed to CDN and homepage (http://skyglobal.github.io/web-toolkit)
+
+## Process
+
+### 1. Development
+
+E.g., new mobile spinners:
+
+  * developers branch out `master` to `feature-mobile-spinners`
+  * developers develop and test
+  * developers change version in `package.json` to `2.2.13-feature-mobile-spinners-v1` (keep incrementing v1 for more deployments)
+    * version has to contain `-feature`
+    * version has to be unique for a deployment to S3
+  * developers commit and push
+  * developers check all's good on http://web-toolkit.global.sky.com/2.2.13-feature-mobile-spinners-v1/_site/index.html
+  * developers do a `pull request` to `master` when finished
+
+### 2. Release Candidate
+
+E.g., new 2.2.13 release:
+
+  * developers branch out `master` to `rc-2.2.13`
+  * developers change version in `package.json` to `2.2.13-rc-v1` (keep incrementing v1 for more deployments)
+  * developers commit and push
+  * developers check all's good on http://web-toolkit.global.sky.com/2.2.13-rc-v1/_site/index.html
+
+### 3. RELEASE!
+
+E.g., new 2.2.13 release:
+
+  * developers merge `rc-2.2.13` (from above) into `stable`
+  * developers change version in `package.json` to `2.2.13`
+  * developers commit and push
+  * developers check all's good on http://skyglobal.github.io/web-toolkit
+
+## Versioning Rules
+
   - Code changes
-    - increment the version number in package.json following `semantic versioning` described below.
-    - This will update gh-pages and the S3.
+    - increment the version number in `package.json` following `semantic versioning` described below.
   - Documentation changes
     - Don't increment the version number.
-    - This will update gh-pages branch only.
-  - Feature releases
-    - To be used when contributers want to integration test a new feature/proposed pull requrest.
-    - Ensure that the code is committed in a branch that starts with `feature-xxx`. Where xxx is feature.
-    - Add `-feature-xxx` to the end of the version number e.g. `1.0.1-feature-fancy-carousel`.
-    - This will update the S3 only
-  - Release Candidate changes
-    - To be used when new features/bugs fixes have been merged and is ready to be integration test by toolkit owners.
-    - Commit the code into a branch that starts with `rc-111`. Where 111 is the version number.
-    - Add `-rc-111` to the end of the version number e.g. `1.0.1-rc-2`.
-    - This will update the S3 only.
-
-Feature and RC releases will be available by going to http://web-toolkit.global.sky.com/ and adding either `x.x.x-feature-111/` or `x.x.x-rc-111`. where x.x.x is the current toolkit version number.  Please give the contributor the full URL in a comment along side their pull request / issue.
-
-## Versioning
 
 This library should follow the [Semantic versioning specification](http://semver.org/).
 In short, that means the following:
 
-Version: X.Y.Z(-rc)?
+Version: X.Y.Z
 
 - API changes that are **not backwards compatible**, and break existing
   calls using the API must increment the X value.
@@ -42,9 +69,7 @@ Version: X.Y.Z(-rc)?
 - **Patches or bug fixes** that are backwards compatible should increment the
   Z value.
 
-- -rc Represents 'release candidates'.  This is to create a public available url for testing purposes.
-
 Upon commiting and pushing your code to Github, the CI server will run through
 the functional tests and - if there are no errors - a new version of the library
 will be deployed to the CDN using the version number specified in the
-package.json file.
+`package.json` file.
