@@ -55,11 +55,11 @@ demo.main = (function(DisplayCode,ss, menu, tests, skycons, hash, inPageNav) {
 
 if (typeof window.define === "function" && window.define.amd){
     define([
-        './display-code',
-        './scrollspy',
-        './menu',
+        'demo/display-code',
+        'demo/scrollspy',
+        'demo/menu',
         'tests',
-        './skycons',
+        'demo/skycons',
         'utils/hash-manager',
         'components/in-page-nav'], function(displayCode, scrollspy, menu, tests, skycons, hashManager, inPageNav) {
         return demo.main(displayCode, scrollspy, menu, tests, skycons, hashManager, inPageNav);

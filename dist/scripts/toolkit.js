@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.2.12 - 2014-04-30 */
+/*! web-toolkit - v2.2.12 - 2014-05-02 */
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
@@ -2165,7 +2165,7 @@ if (typeof window.define === "function" && window.define.amd) {
 }
 
 if (typeof window.define === "function" && window.define.amd) {
-    define("toolkit/main", [ "utils/polyfill", "utils/detect", "utils/skycons", "utils/hash-manager", "utils/popup", "utils/toggle", "utils/focus", "utils/event", "components/in-page-nav", "components/accordion", "components/form", "components/lightbox", "components/share", "components/tooltip", "components/video", "components/carousel" ], function(polyfill, detect, skycons, hashManager, popup, toggle, focus, validation, event, inPageNav, accordion, datePicker, lightbox, share, tooltip, video, carousel) {
+    define("toolkit", [ "utils/polyfill", "utils/detect", "utils/skycons", "utils/hash-manager", "utils/popup", "utils/toggle", "utils/focus", "utils/event", "components/in-page-nav", "components/accordion", "components/form", "components/lightbox", "components/share", "components/tooltip", "components/video", "components/carousel" ], function(polyfill, detect, skycons, hashManager, popup, toggle, focus, validation, event, inPageNav, accordion, datePicker, lightbox, share, tooltip, video, carousel) {
         return {
             polyfill: polyfill,
             detect: detect,
@@ -2188,6 +2188,3 @@ if (typeof window.define === "function" && window.define.amd) {
     });
 }
 
-define("toolkit", [ "toolkit/main" ], function(main) {
-    return main;
-});

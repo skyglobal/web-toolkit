@@ -2693,7 +2693,7 @@ if (typeof window.define === "function" && window.define.amd) {
 }
 ;
 if (typeof window.define === "function" && window.define.amd) {
-    define('toolkit/main',[
+    define('toolkit',[
         'utils/polyfill',
         'utils/detect',
         'utils/skycons',
@@ -2734,5 +2734,3 @@ if (typeof window.define === "function" && window.define.amd) {
     });
 }
 ;
-define('toolkit', ['toolkit/main'], function (main) { return main; });
-

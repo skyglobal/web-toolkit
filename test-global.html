@@ -38,8 +38,7 @@
     <div id="mocha"></div>
     <div class="skycom-container clearfix">
         <div class="alpha skycom-12">
-            <script src="test/libraries/require.js"></script>
-<script src="test/config.js"></script>
+            <script src="test/config.js"></script>
 
 
     
@@ -3086,24 +3085,13 @@ responsiveImages.init(document.getElementById('demo-responsive-images'));
 
 
 
+<script src="dist/scripts/toolkit.js"></script>
+<script src="test/specs/global-spec.js"></script>
 <script>
-    require(
-            {   baseUrl: 'src/js',
-                paths: {
-                    utils: 'toolkit/utils',
-                    components: 'toolkit/components',
-                    suite: '../../../test/suite',
-                    specs: '../../../test/specs'}
-            },
-            ["toolkit"],
-            function(main) {
-                require(["suite"], function(TestLoader) {
-                    setTimeout(function(){
-                        mocha.run();
-                    },2000); //wait for blanket
-                });
-            }
-    );
+    if (navigator.userAgent.indexOf('PhantomJS') < 0) {
+        // not in a test run so let's run it ourselves
+        mocha.run();
+    }
 </script>
 
         </div>

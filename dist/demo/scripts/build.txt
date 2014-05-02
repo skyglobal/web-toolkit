@@ -1,5 +1,5 @@
 
-toolkit/main.js
+toolkit.js
 ----------------
 toolkit/utils/polyfill.js
 toolkit/utils/event.js
@@ -19,23 +19,23 @@ toolkit/components/share.js
 toolkit/components/tooltip.js
 toolkit/components/video.js
 toolkit/components/carousel.js
-toolkit/main.js
+toolkit.js
 
-demo/main.js
+demo.js
 ----------------
 vendor/highlight.js
 demo/display-code.js
 demo/scrollspy.js
 demo/menu.js
 demo/skycons.js
-demo/main.js
+demo.js
 
-tests/main.js
+tests.js
 ----------------
-tests/main.js
+tests.js
 
-changes/main.js
+changes.js
 ----------------
 vendor/highlight.js
 changes/diff.js
-changes/main.js
+changes.js

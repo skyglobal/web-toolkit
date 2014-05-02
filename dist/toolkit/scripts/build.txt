@@ -1,5 +1,5 @@
 
-toolkit/main.js
+toolkit.js
 ----------------
 toolkit/utils/polyfill.js
 toolkit/utils/event.js
@@ -19,4 +19,4 @@ toolkit/components/share.js
 toolkit/components/tooltip.js
 toolkit/components/video.js
 toolkit/components/carousel.js
-toolkit/main.js
+toolkit.js

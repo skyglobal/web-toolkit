@@ -286,12 +286,10 @@ changes.main = (function(diff) {
 });
 
 if (typeof window.define === "function" && window.define.amd){
-    define('changes/main',['./diff'], function(diff) {
+    define('changes',['changes/diff'], function(diff) {
         return changes.main(diff);
     });
 } else {
     changes.main(changes.diff);
 }
 ;
-define('changes', ['changes/main'], function (main) { return main; });
-

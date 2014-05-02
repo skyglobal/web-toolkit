@@ -90,7 +90,7 @@ demo.tests = (function(hashManager){
 });
 
 if (typeof window.define === "function" && window.define.amd){
-    define('tests/main',['utils/hash-manager'], function(hashManager) {
+    define('tests',['utils/hash-manager'], function(hashManager) {
         demo.tests = demo.tests(hashManager);
         return demo.tests;
     });
@@ -98,5 +98,3 @@ if (typeof window.define === "function" && window.define.amd){
     demo.tests = demo.tests(toolkit.hashManager);
 }
 ;
-define('tests', ['tests/main'], function (main) { return main; });
-
