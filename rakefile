@@ -17,6 +17,10 @@ def version_already_exists?
   bucket.objects.any?{|obj|obj.key.include? latest_version_number}
 end
 
+def is_release_version?
+  latest_version_number.match /^[0-9.]*$/
+end
+
 def version_is_release_candidate?
   latest_version_number.include? 'rc-'
 end
@@ -95,7 +99,7 @@ def tagBuild
   puts "*** Tagging Version #{latest_version_number} ***"
   configGit
   system "git tag -a v#{latest_version_number} -m \"Rake deploy: auto tag on #{getDate}\""
-  system "git push origin master v#{latest_version_number}"
+  system "git push origin #{branchName} v#{latest_version_number}"
 end
 
 def pushToAmazonS3
@@ -137,6 +141,7 @@ def updateGHPages
   `cp -r _site /tmp`
   `git clean -fdx`
   `git stash`
+  origBranchName = branchName
   `git checkout gh-pages`
   `git pull origin gh-pages`
   `rm -rf ./*`
@@ -148,7 +153,7 @@ def updateGHPages
   `git commit -m "#{latest_version_number} version"`
   `git push origin gh-pages`
   puts "Committed and pushed to GH Pages"
-  `git checkout master`
+  `git checkout #{origBranchName}`
   `git stash pop`
   puts "Uploaded. See http://skyglobal.github.io/web-toolkit"
 end
@@ -167,13 +172,17 @@ end
 desc 'Deploys a new version to the CDN and skyglobal.github.io/web-toolkit'
 task :deploy do
 
-
   if is_feature_version?
     puts "*** version is a feature '#{latest_version_number}'.  Please commit in a 'feature-xxx' branch. ***"
     fail
   end
   if version_is_release_candidate?
     puts "*** version is a Release Candidate '#{latest_version_number}'.  Please commit in a 'rc-xxx' branch. ***"
+    fail
+  end
+
+  if !is_release_version?
+    puts "*** version is not a release version '#{latest_version_number}' ***"
     fail
   end
 
@@ -188,9 +197,7 @@ task :deploy do
   tagBuild
 end
 
-
-
-desc 'Deploys a new feature to the CDN'
+desc 'Deploys feature to the CDN'
 task :deploy_feature do
 
   if !is_feature_version?
@@ -210,7 +217,7 @@ task :deploy_feature do
 end
 
 
-desc 'Deploys a release candidate to the CDN'
+desc 'Deploys release candidate to the CDN'
 task :deploy_rc do
 
   if !version_is_release_candidate?

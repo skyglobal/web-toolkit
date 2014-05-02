@@ -1,6 +1,6 @@
 deployment:
   production:
-    branch: master
+    branch: stable
     commands:
       - bundle exec rake deploy
   feature:
@@ -19,4 +19,4 @@ test:
 #    - bundle exec grunt test-cross-browser
 machine:
   ruby:
-    version: ruby-1.9.3-p392
+    version: ruby-2.1.1
