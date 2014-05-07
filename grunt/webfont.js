@@ -4,7 +4,7 @@ module.exports = {
         dest: 'generated-skycons',
         destCss: 'generated-skycons',
         options: {
-            ie7 : false,
+            ie7 : true,
             font : 'skycons',
             template : 'app/src/fonts/template/skycon-template.css',
             htmlDemoTemplate : 'app/src/fonts/template/skycon-template.html',
