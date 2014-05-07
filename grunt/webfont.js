@@ -4,14 +4,13 @@ module.exports = {
         dest: 'generated-skycons',
         destCss: 'generated-skycons',
         options: {
-            engine : 'fontforge',
-            ie7 : true,
+            ie7 : false,
             font : 'skycons',
             template : 'app/src/fonts/template/skycon-template.css',
             htmlDemoTemplate : 'app/src/fonts/template/skycon-template.html',
             htmlDemo : true,
             ligatures : false,
-//                    engine : 'node',
+            engine : 'node', //'fontforge',
             destHtml : 'app/_includes/base-styles/icons',
             hashes : false,
             embed : true
