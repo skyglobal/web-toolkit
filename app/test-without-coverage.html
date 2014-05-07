@@ -2,16 +2,19 @@
 layout: test
 title: Sky Web Toolkit
 ---
+<script src="test/libraries/require.js"></script>
+<script src="test/config.js"></script>
 
 {% include allIncludes.html %}
 
 <script>
     require(
-            {   baseUrl:'dist/scripts',
+            {   baseUrl: 'src/js',
                 paths: {
-                    toolkit: 'toolkit.min',
-                    suite: '../../test/suite',
-                    specs: '../../test/specs'}
+                    utils: 'toolkit/utils',
+                    components: 'toolkit/components',
+                    suite: '../../../test/suite',
+                    specs: '../../../test/specs'}
             },
             ["toolkit"],
             function(main) {

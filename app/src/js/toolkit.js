@@ -1,6 +1,5 @@
 if (typeof window.define === "function" && window.define.amd) {
-//    explicitly call all js files here to ensure all files are available
-    define('toolkit',[
+    define([
         'utils/polyfill',
         'utils/detect',
         'utils/hash-manager',
@@ -18,7 +17,6 @@ if (typeof window.define === "function" && window.define.amd) {
         'components/carousel'], function(
             polyfill, detect, hashManager, popup,toggle, focus, validation, event,
             inPageNav, accordion, datePicker, lightbox, share, tooltip, video, carousel){
-
         return {
             polyfill: polyfill,
             detect: detect,

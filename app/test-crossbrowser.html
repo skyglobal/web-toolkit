@@ -2,9 +2,13 @@
 layout: test
 title: Sky Web Toolkit
 ---
+<script src="test/libraries/require.js"></script>
+<script src="test/libraries/mocha-browserstack.js"></script>
 <script>
     mocha.reporter(Mocha.BrowserStack);
 </script>
+<script src="test/config.js"></script>
+
 {% include allIncludes.html %}
 
 <script>

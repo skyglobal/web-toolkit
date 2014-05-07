@@ -1,9 +1,15 @@
 module.exports = {
-    // IMPORTANT NOTE:
-    // grunt-mocha-screenshot is grunt-mocha with screenshotting support
-    // so if grunt-mocha needs to be updated, merge (pull) grunt-mocha-screenshot
-    all : ['_site/test-without-coverage.html'],
-    options : {
-        reporter: 'Spec'
+    options: {
+        reporter: 'Spec',
+        logErrors: true // get test run to fail if browser throws any JS errors
+    },
+    amd: {
+        src: ['_site/test-without-coverage.html']
+    },
+    global: {
+        src: ['_site/test-global.html'],
+        options: {
+            run: true
+        }
     }
 };
