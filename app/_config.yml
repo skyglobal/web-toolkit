@@ -1,4 +1,4 @@
-version: 2.2.12-feature-webfont-0.4
+version: 2.2.12-feature-webfont-0.4-rc2
 include:
   - _includes
 port: 4000
