@@ -8,8 +8,6 @@
     position: relative;
     margin-top: 4px;
     font-size: 20px;
-    line-height: 20px;
-    color: $primary;
     line-height: 32px;
     color: inherit;
     background-color: $background-light;
@@ -28,7 +26,7 @@
     right: 10px;
     top: 50%;
     margin-top: -5px;
-    height: 10px;
+    height: 11px;
     margin-bottom: 3px;
     @include transition(all 0.5s ease-in-out);
   }
