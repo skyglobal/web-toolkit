@@ -17,3 +17,4 @@ screenshot/*-v1-v2-diff.png
 screenshot/v2-v1-diff.json
 Gemfile.lock
 _site
+/dist

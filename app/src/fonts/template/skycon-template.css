@@ -120,6 +120,6 @@ li[class*=" <%= classPrefix %>"].<%= classPrefix %>large:before {
 /*
 COPY THIS INTO src/js/toolkit/utils/skycons.js
 var icons = {<% for (var glyphIdx = 0; glyphIdx < glyphs.length; glyphIdx++) { %>
-    'skycon-<%= glyphs[glyphIdx] %>' : "&#x<% if (ligatures) { %><%= glyphs[glyphIdx] %><% } else { %><%= (61696+glyphIdx).toString(16) %><% } %>;",<% } %>
+    'skycon-<%= glyphs[glyphIdx] %>' : "&#x<% if (addLigatures) { %><%= glyphs[glyphIdx] %><% } else { %><%= codepoints[glyphIdx] %><% } %>;",<% } %>
 };
 */
