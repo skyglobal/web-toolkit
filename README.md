@@ -51,7 +51,7 @@ Clone the repository and install the dependencies
 ```bash
 git clone https://github.com/skyglobal/web-toolkit.git
 cd web-toolkit
-git add remote upstream https://github.com/skyglobal/web-toolkit.git
+git remote add upstream https://github.com/skyglobal/web-toolkit.git
 npm install
 bundle install
 ```

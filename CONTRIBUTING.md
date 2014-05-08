@@ -1,6 +1,6 @@
 # Contributing
 
-Please contribute!  But first, read the [ReadMe](./README.md#setup), especially around [browser support](./README.md#supported-browsers).
+Please contribute!  But first, make sure you have [Set Up](./README.md#setup) the project correctly, and understand our [Supported Browsers](./README.md#supported-browsers).
 
 ## Contributing your changes
 
