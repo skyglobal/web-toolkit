@@ -1,8 +1,8 @@
 module.exports = {
     icons: {
         src: 'app/src/fonts/min/*.svg',
-        dest: 'generated-skycons',
-        destCss: 'generated-skycons',
+        dest: '_site/dist/fonts/',
+        destCss: '_site/dist/fonts/',
         options: {
             ie7 : true,
             font : 'skycons',
