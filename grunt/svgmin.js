@@ -12,7 +12,7 @@ module.exports =  {
                 expand: true,           // Enable dynamic expansion.
                 cwd: 'app/static/font-svgs/',    // Src matches are relative to this path.
                 src: ['*.svg'],      // Actual pattern(s) to match.
-                dest: 'app/src/fonts/min/', // Destination path prefix.
+                dest: 'generated-skycons/min/', // Destination path prefix.
                 ext: '.svg'         // Dest filepaths will have this extension.
             }]
         },
