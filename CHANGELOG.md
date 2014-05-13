@@ -4,6 +4,7 @@
 
  * Skycons
     * [updated] Pending icon improved (a clock instead of one that looks like reload).
+    * [added] Edit icon.
 
 ## 2.2.12
 
