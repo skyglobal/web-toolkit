@@ -56,6 +56,8 @@ Base Styles :
         developer_notes_file: true
       - example : Secondary
         developer_notes_file: true
+      - example : Large
+        developer_notes_file: false
   Spinners :
     examples :
       - example : Default

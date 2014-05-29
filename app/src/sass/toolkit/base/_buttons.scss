@@ -52,6 +52,19 @@ a.btn,
     }
   }
 
+  &.large {
+    height: 50px;
+    line-height: 1;
+    font-size: 30px;
+
+    &:before {
+      left: 1%;
+      width: 98%;
+      height: 20px;
+      z-index: -1;
+    }
+  }
+
   &:last-child {
     margin-right: 0;
   }
