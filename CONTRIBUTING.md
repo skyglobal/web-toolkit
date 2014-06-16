@@ -22,6 +22,15 @@ If you would like the feature to go live sooner, mention this in the comments/co
 
 You can also run the cross-browser suite yourself if you have a Browsers Stack account. See `test/README.md`.
 
+## Fonts/SVGs
+
+When adding a new icon:
+1. put the .svg in the `app/static/font-svgs` folder
+2. run `grunt fonts`
+3. *MOST IMPORTANT* copy JS code from `generated-skycons/skycons.css` into `app/src/js/toolkit/utils/skycons.js` for IE support
+4. run `grunt && grunt serve` and verify that the icon appears
+5. commit away and do a pull request. :)
+
 ## Coding Rules
 
 ### CSS
