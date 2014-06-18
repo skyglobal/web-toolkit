@@ -7,15 +7,12 @@
 <!--end css conditionals-->
 <head>
     <title>Toolkit Load before Body</title>
+<!--jquery-->
+<!--[if lt IE 9]> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-1.10.2.js" ></script> <![endif]-->
+<!--[if gte IE 9]><!--> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
+<!--end-jquery-->
     <script src="dist/scripts/toolkit.min.js"></script>
-    {% include head.html %}
 </head>
-<body class="grid-1140" >
-    <div id="mocha"></div>
-    <div class="skycom-container clearfix">
-        <div class="alpha skycom-12">
-            {% include allIncludes.html %}
-        </div>
-    </div>
+<body>
 </body>
 </html>
