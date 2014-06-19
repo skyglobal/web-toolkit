@@ -51,10 +51,11 @@ toolkit.detect = (function (event) {
                 'MozTransform': '-moz-transform',
                 'transform': 'transform'
             },
+            body = document.body || document.documentElement,
             has3d,
             div = document.createElement('div'),
             t;
-        document.body.insertBefore(div, null);
+        body.insertBefore(div, null);
         for (t in transforms) {
             if (transforms.hasOwnProperty(t)) {
                 if (div.style[t] !== undefined) {
@@ -63,14 +64,15 @@ toolkit.detect = (function (event) {
                 }
             }
         }
-        document.body.removeChild(div);
+        body.removeChild(div);
         state.css.support3D = (has3d !== undefined && has3d.length > 0 && has3d !== "none");
         return state.css.support3D;
     }
 
     function supportsPseudo(){
 //        if (state.css.pseudo){ return state.css.pseudo; }
-        var paraBefore = document.createElement('p'),
+        var body = document.body || document.documentElement,
+            paraBefore = document.createElement('p'),
             styleBefore = document.createElement('style'),
             heightBefore,
             selectorsBefore = '#testbefore:before { content: "before"; }';
@@ -83,11 +85,11 @@ toolkit.detect = (function (event) {
             styleBefore.appendChild(document.createTextNode(selectorsBefore));
         }
 
-        document.body.appendChild(styleBefore);
-        document.body.appendChild(paraBefore);
+        body.appendChild(styleBefore);
+        body.appendChild(paraBefore);
         heightBefore = document.getElementById('testbefore').offsetHeight;
-        document.body.removeChild(styleBefore);
-        document.body.removeChild(paraBefore);
+        body.removeChild(styleBefore);
+        body.removeChild(paraBefore);
 
         state.css.pseudo =(heightBefore >= 1);
         return state.css.pseudo;
