@@ -3,8 +3,10 @@
 ## 2.2.13 (next release)
 
  * Skycons
-    * [updated] Pending icon improved (a clock instead of one that looks like reload).
-    * [added] Edit icon.
+    * [added] Toolkit can now be loaded before the body tag (e.g., in the head tag) without any JS errors
+    * [updated] Updated skycons JS module with the latest icons (for IE support)
+    * [updated] Pending icon improved (a clock instead of one that looks like reload)
+    * [added] Calendar, edit and home icons
 
 ## 2.2.12
 
