@@ -6,7 +6,7 @@ module.exports = {
     "serve": ['build','connect:app', 'open:app', 'watch'],
 
     //  misc tasks
-    "fonts": ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit'],
+    "fonts": ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit', 'copy:skyconscss', 'cssmin:skycons'],
     "svgs": ['svgmin:icons', 'grunticon'],
 
     // for toolkit website with runnable tests
