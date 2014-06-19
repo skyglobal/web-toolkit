@@ -168,3 +168,8 @@ pre code{
 .demo-section {
   min-height: 100vh; /* any section should be a page-height */
 }
+
+a, img {
+    border: none;
+    outline: none;
+}
