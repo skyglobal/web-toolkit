@@ -2,8 +2,15 @@
 
 ## 2.2.13 (next release)
 
- * Skycons
+  * Libraries
+    * [added] RequireJS version 2.1.14 (demo page upgraded to use 2.1.14 from 2.1.9)
+  * Toolkit
     * [added] Toolkit can now be loaded before the body tag (e.g., in the head tag) without any JS errors
+  * Responsive Images
+    * [updated] Better unit tests for responsive images
+  * Tooltip
+    * [fixed] Tooltip will now show when at the bottom of the window
+ * Skycons
     * [updated] Updated skycons JS module with the latest icons (for IE support)
     * [updated] Pending icon improved (a clock instead of one that looks like reload)
     * [added] Calendar, edit and home icons
