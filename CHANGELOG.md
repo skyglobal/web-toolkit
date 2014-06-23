@@ -10,8 +10,6 @@
     * [added] Toolkit can now be loaded before the body tag (e.g., in the head tag) without any JS errors
   * Responsive Images
     * [updated] Better unit tests for responsive images
-  * Tooltip
-    * [fixed] Tooltip will now show when at the bottom of the window
   * Skycons
     * [updated] Updated skycons JS module with the latest icons (for IE support)
     * [updated] Pending icon improved (a clock instead of one that looks like reload)
