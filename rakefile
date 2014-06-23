@@ -14,7 +14,7 @@ def latest_version_number
 end
 
 def version_already_exists?
-  bucket.objects.any?{|obj|obj.key.include? latest_version_number}
+  bucket.objects.any? { |obj| obj.key == latest_version_number }
 end
 
 def is_release_version?
