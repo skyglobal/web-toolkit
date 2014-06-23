@@ -383,10 +383,11 @@ toolkit.detect = (function (event) {
                 'MozTransform': '-moz-transform',
                 'transform': 'transform'
             },
+            body = document.body || document.documentElement,
             has3d,
             div = document.createElement('div'),
             t;
-        document.body.insertBefore(div, null);
+        body.insertBefore(div, null);
         for (t in transforms) {
             if (transforms.hasOwnProperty(t)) {
                 if (div.style[t] !== undefined) {
@@ -395,14 +396,15 @@ toolkit.detect = (function (event) {
                 }
             }
         }
-        document.body.removeChild(div);
+        body.removeChild(div);
         state.css.support3D = (has3d !== undefined && has3d.length > 0 && has3d !== "none");
         return state.css.support3D;
     }
 
     function supportsPseudo(){
 //        if (state.css.pseudo){ return state.css.pseudo; }
-        var paraBefore = document.createElement('p'),
+        var body = document.body || document.documentElement,
+            paraBefore = document.createElement('p'),
             styleBefore = document.createElement('style'),
             heightBefore,
             selectorsBefore = '#testbefore:before { content: "before"; }';
@@ -415,11 +417,11 @@ toolkit.detect = (function (event) {
             styleBefore.appendChild(document.createTextNode(selectorsBefore));
         }
 
-        document.body.appendChild(styleBefore);
-        document.body.appendChild(paraBefore);
+        body.appendChild(styleBefore);
+        body.appendChild(paraBefore);
         heightBefore = document.getElementById('testbefore').offsetHeight;
-        document.body.removeChild(styleBefore);
-        document.body.removeChild(paraBefore);
+        body.removeChild(styleBefore);
+        body.removeChild(paraBefore);
 
         state.css.pseudo =(heightBefore >= 1);
         return state.css.pseudo;
@@ -548,51 +550,55 @@ if (typeof window.define === "function" && window.define.amd) {
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.skycons = (function(detect, event) {
 
-   var icons = {
-    'skycon-arrow-down-left' : "&#xf100;",
-    'skycon-arrow-left' : "&#xf101;",
-    'skycon-arrow-right' : "&#xf102;",
-    'skycon-at' : "&#xf103;",
-    'skycon-carousel-pause' : "&#xf104;",
-    'skycon-carousel-play' : "&#xf105;",
-    'skycon-chevron-down' : "&#xf106;",
-    'skycon-chevron-left' : "&#xf107;",
-    'skycon-chevron-up' : "&#xf108;",
-    'skycon-chevron' : "&#xf109;",
-    'skycon-close' : "&#xf10a;",
-    'skycon-cloud' : "&#xf10b;",
-    'skycon-download' : "&#xf10c;",
-    'skycon-expand' : "&#xf10d;",
-    'skycon-facebook' : "&#xf10e;",
-    'skycon-google-plus' : "&#xf10f;",
-    'skycon-info' : "&#xf110;",
-    'skycon-mail' : "&#xf111;",
-    'skycon-menu' : "&#xf112;",
-    'skycon-minify' : "&#xf113;",
-    'skycon-mouse' : "&#xf114;",
-    'skycon-never-miss' : "&#xf115;",
-    'skycon-on-demand' : "&#xf116;",
-    'skycon-pending' : "&#xf117;",
-    'skycon-phone' : "&#xf118;",
-    'skycon-plus-circle' : "&#xf119;",
-    'skycon-remote-record' : "&#xf11a;",
-    'skycon-search' : "&#xf11b;",
-    'skycon-share' : "&#xf11c;",
-    'skycon-sky-go' : "&#xf11d;",
-    'skycon-sky-plus' : "&#xf11e;",
-    'skycon-sky' : "&#xf11f;",
-    'skycon-speech-bubble' : "&#xf120;",
-    'skycon-tick' : "&#xf121;",
-    'skycon-tv' : "&#xf122;",
-    'skycon-twitter-favourite' : "&#xf123;",
-    'skycon-twitter-follow' : "&#xf124;",
-    'skycon-twitter-reply' : "&#xf125;",
-    'skycon-twitter-retweet' : "&#xf126;",
-    'skycon-twitter' : "&#xf127;",
-    'skycon-user-profile' : "&#xf128;",
-    'skycon-video-play' : "&#xf129;",
-    'skycon-volume' : "&#xf12a;",
-    'skycon-warning' : "&#xf12b;",
+    var icons = {
+        'skycon-arrow-down-left' : "&#xf102;",
+        'skycon-arrow-left' : "&#xf101;",
+        'skycon-arrow-right' : "&#xf112;",
+        'skycon-at' : "&#xf105;",
+        'skycon-calender' : "&#xf108;",
+        'skycon-carousel-pause' : "&#xf100;",
+        'skycon-carousel-play' : "&#xf120;",
+        'skycon-chevron' : "&#xf11a;",
+        'skycon-chevron-down' : "&#xf11b;",
+        'skycon-chevron-left' : "&#xf103;",
+        'skycon-chevron-up' : "&#xf10b;",
+        'skycon-close' : "&#xf109;",
+        'skycon-cloud' : "&#xf104;",
+        'skycon-download' : "&#xf11c;",
+        'skycon-edit' : "&#xf125;",
+        'skycon-expand' : "&#xf10c;",
+        'skycon-facebook' : "&#xf11e;",
+        'skycon-gallery' : "&#xf124;",
+        'skycon-google-plus' : "&#xf119;",
+        'skycon-home' : "&#xf111;",
+        'skycon-info' : "&#xf127;",
+        'skycon-mail' : "&#xf115;",
+        'skycon-menu' : "&#xf121;",
+        'skycon-minify' : "&#xf122;",
+        'skycon-mouse' : "&#xf107;",
+        'skycon-never-miss' : "&#xf106;",
+        'skycon-on-demand' : "&#xf11d;",
+        'skycon-pending' : "&#xf12b;",
+        'skycon-phone' : "&#xf12d;",
+        'skycon-plus-circle' : "&#xf10a;",
+        'skycon-remote-record' : "&#xf128;",
+        'skycon-search' : "&#xf117;",
+        'skycon-share' : "&#xf12e;",
+        'skycon-sky' : "&#xf123;",
+        'skycon-sky-go' : "&#xf129;",
+        'skycon-sky-plus' : "&#xf10f;",
+        'skycon-speech-bubble' : "&#xf12a;",
+        'skycon-tick' : "&#xf110;",
+        'skycon-tv' : "&#xf12c;",
+        'skycon-twitter' : "&#xf126;",
+        'skycon-twitter-favourite' : "&#xf11f;",
+        'skycon-twitter-follow' : "&#xf10e;",
+        'skycon-twitter-reply' : "&#xf12f;",
+        'skycon-twitter-retweet' : "&#xf116;",
+        'skycon-user-profile' : "&#xf10d;",
+        'skycon-video-play' : "&#xf114;",
+        'skycon-volume' : "&#xf113;",
+        'skycon-warning' : "&#xf118;"
     };
 
     function addWebfont(el, c){
@@ -628,7 +634,8 @@ if (typeof window.define === "function" && window.define.amd) {
     });
 } else {
     toolkit.skycons = toolkit.skycons(toolkit.detect,toolkit.event);
-};
+}
+;
 /**
  purpose:
  to let 'anchor' tags do their job and change the hash in the url for internal links.
@@ -2092,13 +2099,16 @@ toolkit.video = (function (window, $, event) {
         this.options = {
             token : options.token,
             freewheel : options.displayAdverts,
-            animationSpeed : (options.animationSpeed !== undefined ) ? options.animationSpeed : 500,
             autoplay : false,
-            videoId : $container.attr('data-video-id'),
+            videoId : $container.attr('data-video-id')
+        };
+        this.toolkitOptions = {
+            animationSpeed: (options.animationSpeed !== undefined ) ? options.animationSpeed : 500,
             onPlay: options.onPlay,
             closeCallback: options.closeCallback,
             $wrapperLocation: options.$wrapperLocation || this.$container
         };
+
         this.bindEvents();
     }
 
@@ -2128,29 +2138,29 @@ toolkit.video = (function (window, $, event) {
             }
         },
         createWrapper:function () {
-            this.options.$wrapperLocation.append('<div class="video-wrapper">' +
+            this.toolkitOptions.$wrapperLocation.append('<div class="video-wrapper">' +
                 '<a href="#!" class="close"><i class="skycon-close" aria-hidden=true></i><span class="speak">Close</span></a>' +
                 '<div class="videocontrolcontainer"><video></video><img class="posterFrame"/></div>' +
             '</div>');
-            this.options.$wrapperLocation.find('.posterFrame').on('error', function () {
+            this.toolkitOptions.$wrapperLocation.find('.posterFrame').on('error', function () {
                 this.src = options.placeHolderImage;
             });
-            this.options.$wrapperLocation.append('<div class="video-overlay"></div>');
-            this.$player = this.options.$wrapperLocation.parent().find('video');
-            this.$wrapper = this.options.$wrapperLocation.find('.video-wrapper');
+            this.toolkitOptions.$wrapperLocation.append('<div class="video-overlay"></div>');
+            this.$player = this.toolkitOptions.$wrapperLocation.parent().find('video');
+            this.$wrapper = this.toolkitOptions.$wrapperLocation.find('.video-wrapper');
             this.$wrapper.attr('id', 'video-' + this.options.videoId);
             this.bindWrapperEvents();
         },
         removeWrapper: function(){
             this.$wrapper.removeClass('playing-video').remove();
-            this.options.$wrapperLocation.find('.video-overlay').remove();
+            this.toolkitOptions.$wrapperLocation.find('.video-overlay').remove();
         },
 
         play:function(e) {
             if(e) { e.preventDefault(); }
             var video = this;
-            if(video.options.onPlay) {
-                video.options.onPlay();
+            if(video.toolkitOptions.onPlay) {
+                video.toolkitOptions.onPlay();
             }
             this.showCanvas(function () {
             video.$player.sky_html5player(video.options); //todo: move to main video function
@@ -2176,12 +2186,12 @@ toolkit.video = (function (window, $, event) {
         showCanvas:function (callback) {
             var height,
                 $container = this.$container,
-                $wrapperLocation = this.options.$wrapperLocation,
+                $wrapperLocation = this.toolkitOptions.$wrapperLocation,
                 $overlay = $wrapperLocation.find('.video-overlay'),
                 $wrapper = $wrapperLocation.find('.video-wrapper'),
                 $play = $container.find('.play-video'),
                 $close = $wrapper.find('.close'),
-                animationSpeed = (this.options.animationSpeed === 0) ? 0 : this.options.animationSpeed || 500,
+                animationSpeed = (this.toolkitOptions.animationSpeed === 0) ? 0 : this.toolkitOptions.animationSpeed || 500,
                 video = this;
             this.originalHeight = $container.height();
             $wrapper.addClass('playing-video');
@@ -2207,20 +2217,20 @@ toolkit.video = (function (window, $, event) {
         hideCanvas:function () {
             var video = this,
                 $container = this.$container,
-                $wrapperLocation = this.options.$wrapperLocation,
+                $wrapperLocation = this.toolkitOptions.$wrapperLocation,
                 $overlay = $wrapperLocation.find('.video-overlay'),
                 $wrapper = $wrapperLocation.find('.video-wrapper'),
                 $play = $container.find('.play-video'),
                 $close = $wrapper.find('.close'),
-                animationSpeed = (this.options.animationSpeed === 0) ? 0 : this.options.animationSpeed || 500,
+                animationSpeed = (this.toolkitOptions.animationSpeed === 0) ? 0 : this.toolkitOptions.animationSpeed || 500,
                 originalHeight = this.originalHeight;
 
             $overlay.fadeIn(animationSpeed, function () {
                 $close.removeClass('active');
                 $container.animate({ height:originalHeight }, animationSpeed, function () {
                     $container.css({ height:'auto' });
-                    if (video.options.closeCallback) {
-                        video.options.closeCallback();
+                    if (video.toolkitOptions.closeCallback) {
+                        video.toolkitOptions.closeCallback();
                     }
                     $play.fadeIn(animationSpeed);
                     $overlay.hide();
@@ -2243,7 +2253,8 @@ if (typeof window.define === "function" && window.define.amd) {
     });
 } else {
     toolkit.video =  toolkit.video(window, jQuery, toolkit.event);
-};
+}
+;
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.carousel = (function(video, detect) {
     

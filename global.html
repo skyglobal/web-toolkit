@@ -1,0 +1,18 @@
+<!doctype html>
+<!--To put correct ie classes on document root to essentially enable css conditionals-->
+<!--[if IE 7]>         <html class="lt-ie10 lt-ie9 lt-ie8" > <![endif]-->
+<!--[if IE 8]>         <html class="lt-ie10 lt-ie9" > <![endif]-->
+<!--[if IE 9]>         <html class="lt-ie10" > <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
+<!--end css conditionals-->
+<head>
+    <title>Toolkit Load before Body</title>
+<!--jquery-->
+<!--[if lt IE 9]> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-1.10.2.js" ></script> <![endif]-->
+<!--[if gte IE 9]><!--> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-2.0.3.js" ></script> <!--<![endif]-->
+<!--end-jquery-->
+    <script src="dist/scripts/toolkit.js"></script>
+</head>
+<body>
+</body>
+</html>

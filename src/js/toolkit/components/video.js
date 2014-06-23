@@ -9,13 +9,16 @@ toolkit.video = (function (window, $, event) {
         this.options = {
             token : options.token,
             freewheel : options.displayAdverts,
-            animationSpeed : (options.animationSpeed !== undefined ) ? options.animationSpeed : 500,
             autoplay : false,
-            videoId : $container.attr('data-video-id'),
+            videoId : $container.attr('data-video-id')
+        };
+        this.toolkitOptions = {
+            animationSpeed: (options.animationSpeed !== undefined ) ? options.animationSpeed : 500,
             onPlay: options.onPlay,
             closeCallback: options.closeCallback,
             $wrapperLocation: options.$wrapperLocation || this.$container
         };
+
         this.bindEvents();
     }
 
@@ -45,29 +48,29 @@ toolkit.video = (function (window, $, event) {
             }
         },
         createWrapper:function () {
-            this.options.$wrapperLocation.append('<div class="video-wrapper">' +
+            this.toolkitOptions.$wrapperLocation.append('<div class="video-wrapper">' +
                 '<a href="#!" class="close"><i class="skycon-close" aria-hidden=true></i><span class="speak">Close</span></a>' +
                 '<div class="videocontrolcontainer"><video></video><img class="posterFrame"/></div>' +
             '</div>');
-            this.options.$wrapperLocation.find('.posterFrame').on('error', function () {
+            this.toolkitOptions.$wrapperLocation.find('.posterFrame').on('error', function () {
                 this.src = options.placeHolderImage;
             });
-            this.options.$wrapperLocation.append('<div class="video-overlay"></div>');
-            this.$player = this.options.$wrapperLocation.parent().find('video');
-            this.$wrapper = this.options.$wrapperLocation.find('.video-wrapper');
+            this.toolkitOptions.$wrapperLocation.append('<div class="video-overlay"></div>');
+            this.$player = this.toolkitOptions.$wrapperLocation.parent().find('video');
+            this.$wrapper = this.toolkitOptions.$wrapperLocation.find('.video-wrapper');
             this.$wrapper.attr('id', 'video-' + this.options.videoId);
             this.bindWrapperEvents();
         },
         removeWrapper: function(){
             this.$wrapper.removeClass('playing-video').remove();
-            this.options.$wrapperLocation.find('.video-overlay').remove();
+            this.toolkitOptions.$wrapperLocation.find('.video-overlay').remove();
         },
 
         play:function(e) {
             if(e) { e.preventDefault(); }
             var video = this;
-            if(video.options.onPlay) {
-                video.options.onPlay();
+            if(video.toolkitOptions.onPlay) {
+                video.toolkitOptions.onPlay();
             }
             this.showCanvas(function () {
             video.$player.sky_html5player(video.options); //todo: move to main video function
@@ -93,12 +96,12 @@ toolkit.video = (function (window, $, event) {
         showCanvas:function (callback) {
             var height,
                 $container = this.$container,
-                $wrapperLocation = this.options.$wrapperLocation,
+                $wrapperLocation = this.toolkitOptions.$wrapperLocation,
                 $overlay = $wrapperLocation.find('.video-overlay'),
                 $wrapper = $wrapperLocation.find('.video-wrapper'),
                 $play = $container.find('.play-video'),
                 $close = $wrapper.find('.close'),
-                animationSpeed = (this.options.animationSpeed === 0) ? 0 : this.options.animationSpeed || 500,
+                animationSpeed = (this.toolkitOptions.animationSpeed === 0) ? 0 : this.toolkitOptions.animationSpeed || 500,
                 video = this;
             this.originalHeight = $container.height();
             $wrapper.addClass('playing-video');
@@ -124,20 +127,20 @@ toolkit.video = (function (window, $, event) {
         hideCanvas:function () {
             var video = this,
                 $container = this.$container,
-                $wrapperLocation = this.options.$wrapperLocation,
+                $wrapperLocation = this.toolkitOptions.$wrapperLocation,
                 $overlay = $wrapperLocation.find('.video-overlay'),
                 $wrapper = $wrapperLocation.find('.video-wrapper'),
                 $play = $container.find('.play-video'),
                 $close = $wrapper.find('.close'),
-                animationSpeed = (this.options.animationSpeed === 0) ? 0 : this.options.animationSpeed || 500,
+                animationSpeed = (this.toolkitOptions.animationSpeed === 0) ? 0 : this.toolkitOptions.animationSpeed || 500,
                 originalHeight = this.originalHeight;
 
             $overlay.fadeIn(animationSpeed, function () {
                 $close.removeClass('active');
                 $container.animate({ height:originalHeight }, animationSpeed, function () {
                     $container.css({ height:'auto' });
-                    if (video.options.closeCallback) {
-                        video.options.closeCallback();
+                    if (video.toolkitOptions.closeCallback) {
+                        video.toolkitOptions.closeCallback();
                     }
                     $play.fadeIn(animationSpeed);
                     $overlay.hide();
