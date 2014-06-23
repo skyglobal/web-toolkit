@@ -5,7 +5,7 @@
   * Libraries
     * [added] RequireJS version 2.1.14 (demo page upgraded to use 2.1.14 from 2.1.9)
   * Tooltip 
-    * [updated] Now shows on top of hover area if any of the tooltip area is off the screen
+    * [fixed] Now shows on top of hover area if any of the tooltip area is off the screen
   * Toolkit
     * [added] Toolkit can now be loaded before the body tag (e.g., in the head tag) without any JS errors
   * Responsive Images
