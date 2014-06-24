@@ -1,4 +1,5 @@
-if (typeof toolkit==='undefined') toolkit={};
+/*global toolit define*/
+if (typeof toolkit==='undefined') { toolkit={}; }
 toolkit.carousel = (function(video, detect) {
     'use strict';
 
@@ -55,7 +56,7 @@ toolkit.carousel = (function(video, detect) {
         },
         setOffset: function(percent, animate) {
             var $container = this.$slideContainer.removeClass("animate");
-            if (animate) $container.addClass("animate");
+            if (animate) { $container.addClass("animate"); }
             if (has3d) {
                 $container.css("transform", "translate3d("+ percent +"%,0,0) scale3d(1,1,1)");
             } else if (hasTransform && hasTransition) {
@@ -121,7 +122,7 @@ toolkit.carousel = (function(video, detect) {
 
             $slides.filter(':not(:eq(' + this.currentIndex + '))').hide();
             $slides.eq(this.currentIndex).css('float', cssFloat);
-            $slides.eq(indexToShow).show().css('float', cssFloat == 'left' ? 'right' : 'left');
+            $slides.eq(indexToShow).show().css('float', cssFloat === 'left' ? 'right' : 'left');
 
             this.setOffset(opts.start, false);
             if (typeof opts.end !== 'undefined'){
@@ -131,7 +132,7 @@ toolkit.carousel = (function(video, detect) {
                     self.$viewport.trigger('change', indexToShow);
                 }, 20);
                 this.currentIndex = indexToShow;
-                if (typeof opts.callback == 'function') opts.callback(indexToShow);
+                if (typeof opts.callback === 'function') { opts.callback(indexToShow); }
             }
             return indexToShow;
         },
@@ -187,14 +188,14 @@ toolkit.carousel = (function(video, detect) {
             }, delay || this.options.onPlayDelay);
 
             this.$viewport.trigger('playing');
-            if (typeof callback == 'function') callback();
+            if (typeof callback === 'function') { callback(); }
             return this;
         },
         pause: function(callback) {
             clearTimeout(this.timerId);
 
             this.$viewport.trigger('paused');
-            if (typeof callback == 'function') callback();
+            if (typeof callback === 'function') { callback(); }
             return this;
         },
         touchstart: function(e) {
@@ -211,17 +212,17 @@ toolkit.carousel = (function(video, detect) {
                 slideIndex = xDifference<0?this.currentIndex+1:this.currentIndex- 1,
                 positionAsPercentage;
 
-            if (!swipe.start || scrollingCarousel===false) return;
+            if (!swipe.start || scrollingCarousel===false) { return; }
             e.preventDefault();
 
             positionAsPercentage = (xDifference / this.$slideContainer.outerWidth(true)) * 100;
-            if (xDifference>0) positionAsPercentage -=50;
+            if (xDifference>0) { positionAsPercentage -=50; }
             this.swipe.positionAsPercentage = positionAsPercentage;
 
             this.moveSlide({index:slideIndex,start:positionAsPercentage});
         },
         touchend: function(e) {
-            if (!this.swipe.start) return;
+            if (!this.swipe.start) { return; }
             var swipe = this.swipe,
                 position = swipe.positionAsPercentage,
                 touch = e.originalEvent.changedTouches[0],
@@ -296,10 +297,10 @@ toolkit.carousel = (function(video, detect) {
         // generating default markup
         var markup = {
             actions: function($element, options){
-                var html = '', id, label, i, extraClass, icon, action,circle,
+                var html = '', id, label, i, extraClass, icon, action,
                     actions = options.actions,
                     onclick = options.onclick;
-                if(options.count <= 1) return this;
+                if(options.count <= 1) { return this; }
 
                 for (i=0;i<actions.length;i++) {
                     action = actions[i];
@@ -383,7 +384,7 @@ toolkit.carousel = (function(video, detect) {
 
             createMarkup(carousel);
 
-            $this.on('click', '.terms-link', function(e) {
+            $this.on('click', '.terms-link', function() {
                 carousel.toggleTermsContent();
             }).on('change',function(e, index) {
                 index = index || 0;
@@ -421,7 +422,7 @@ toolkit.carousel = (function(video, detect) {
                     case 37: carousel.previous(); break; //left arrow
                     case 39: carousel.next(); break; //right arrow
                 }
-            }).find('.toggle-terms').on('click', function(e) {
+            }).find('.toggle-terms').on('click', function() {
                 carousel.$viewport.toggleClass('showing-tandcs');
             });
             if(carousel.slideCount > 1) {
