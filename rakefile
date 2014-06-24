@@ -100,7 +100,7 @@ def tagBuild
   puts "*** Tagging Version #{latest_version_number} ***"
   configGit
   system "git tag -a v#{latest_version_number} -m \"Rake deploy: auto tag on #{getDate}\""
-  system "git push origin #{branchName} v#{latest_version_number}"
+  system "git push origin master v#{latest_version_number}"
 end
 
 def pushToAmazonS3
