@@ -47,8 +47,8 @@ toolkit.toggle = (function(detect, event) {
             return $el.data('openHeight');
         }
 
-        $('body')
-            .append($('<div id="toggle-tmp-height" class="skycom-container"></div>')
+        $el.parent()
+            .append($('<div id="toggle-tmp-height"></div>')
             .append($el.clone().attr('style', '').removeClass(hiddenClass + ' transition ')));
         $('#toggle-tmp-height > div').append('<div class="toggle-clearfix-div clearfix clear" style="padding:1px"></div> ');
         $('#toggle-tmp-height > div').prepend('<div class="toggle-clearfix-div clearfix clear" style="padding:1px"></div> ');
@@ -63,6 +63,7 @@ toolkit.toggle = (function(detect, event) {
         }
 
         $el.data('openHeight', openHeight);
+
         $('#toggle-tmp-height').remove();
         $('.toggle-clearfix-div').remove();
 
