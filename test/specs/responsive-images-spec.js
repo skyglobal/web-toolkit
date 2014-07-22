@@ -13,19 +13,62 @@ function responsiveImagesSpec(responsiveImages, event) {
     addScript('utils','responsive-images','using');
 
     describe(describeSpec, function () {
+
         var origMatchMedia;
 
         before(function() {
-            origMatchMedia = window.matchMedia;
+            var container = document.getElementById('demo-responsive-images');
+            toolkit.responsiveImages.init(container);
+            if (!window.PHANTOMJS) {
+                origMatchMedia = window.matchMedia;
+            }
         });
 
         after(function() {
-            window.matchMedia = origMatchMedia;
+            if (window.PHANTOMJS) {
+                console.log(JSON.stringify({
+                    action: 'viewportSize',
+                    width: '960',
+                    height: '960'
+                }));
+            } else {
+                window.matchMedia = origMatchMedia;
+            }
+        });
+
+        it('shows a desktop image in desktop view', function () {
+            // a test for PhantomJS where width can be specified through a special console log listener that PhantomJS has
+            if (window.PHANTOMJS) {
+                console.log(JSON.stringify({
+                    action: 'viewportSize',
+                    width: '960',
+                    height: '960'
+                }));
+                event.emit(window, 'resizeend');
+                if (!window.blanket) {
+                    expect($('#demo-responsive-images').find('img').attr('src')).to.contain('beckham.jpg');
+                }
+            }
+        });
+
+        it('shows a mobile image in mobile view', function () {
+            // a test for PhantomJS where width can be specified through a special console log listener that PhantomJS has
+            if (window.PHANTOMJS) {
+                console.log(JSON.stringify({
+                    action: 'viewportSize',
+                    width: '480',
+                    height: '960'
+                }));
+                event.emit(window, 'resizeend');
+                if (!window.blanket) {
+                    expect($('#demo-responsive-images').find('img').attr('src')).to.contain('davinci-mobile.jpg');
+                }
+            }
         });
 
         it('shows a desktop image in desktop view and then changes to mobile on resize if the media query matches', function () {
-            if(window.outerWidth > 0) { //doesnt work in gruntcli for some reason
-                console.log('grunt cli doent like responsive images. fix me.');
+            // a test for actual browsers where width needs to be mocked through modifying the matchMedia function
+            if (!window.PHANTOMJS) {
                 window.matchMedia = function() { return { matches: false }; };
                 event.emit(window, 'resizeend');
                 expect($('#demo-responsive-images').find('img').attr('src')).to.contain('beckham.jpg');
@@ -34,7 +77,6 @@ function responsiveImagesSpec(responsiveImages, event) {
                 expect($('#demo-responsive-images').find('img').attr('src')).to.contain('davinci-mobile.jpg');
             }
         });
-
 
     });
 
