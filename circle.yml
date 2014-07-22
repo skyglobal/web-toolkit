@@ -18,5 +18,7 @@ test:
     - bundle exec grunt test
 #    - bundle exec grunt test-cross-browser
 machine:
+  node:
+    version: v0.10.24
   ruby:
     version: ruby-2.1.1
