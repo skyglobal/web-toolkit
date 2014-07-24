@@ -51,6 +51,7 @@ toolkit.skycons = (function(detect, event) {
         'skycon-twitter-reply' : "&#xf12f;",
         'skycon-twitter-retweet' : "&#xf116;",
         'skycon-user-profile' : "&#xf10d;",
+        'skycon-remote-download' : "&#xf12e;",
         'skycon-video-play' : "&#xf114;",
         'skycon-volume' : "&#xf113;",
         'skycon-warning' : "&#xf118;"
