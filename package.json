@@ -1,6 +1,6 @@
 {
     "name": "web-toolkit",
-    "version": "2.2.12",
+    "version": "2.2.14",
 	"repository" : {
         "type": "git",
         "url": "https://github.com/skyglobal/web-toolkit.git"
@@ -17,6 +17,7 @@
 	    ,"grunt-contrib-requirejs": "0.4.3"
 	    ,"grunt-contrib-watch": "0.6.1"
 	    ,"grunt-contrib-connect": "0.7.1"
+	    ,"grunt-contrib-cssmin": "0.10.0"
 	    ,"grunt-exec": "0.4.5"
         ,"grunt-open": "0.2.3"
         ,"grunt-mocha-screenshot": "0.4.10"
