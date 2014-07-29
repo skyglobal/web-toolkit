@@ -3,8 +3,19 @@ toolkit.tooltip = (function (detect) {
 
 
     function bindEvents() {
-        ($(".tooltip-container") || $(document)).on('mouseenter mouseleave', '[data-tooltip]', hover);
-        $("[data-tooltip] .tooltip-content").on('click', preventClicksToParent);
+        ($(document)).on("mouseenter mouseleave", "[data-tooltip]", hover);
+
+        ($(document)).on("click", "[data-tooltip] .tooltip-content", preventClicksToParent);
+
+        ($(document)).on("touchstart", "[data-tooltip]", toggleTooltip);
+    }
+
+    function toggleTooltip(event) {
+        event.preventDefault();
+
+        var $tooltipContent = $(this).find(".tooltip-content");
+
+        $(this).find(".tooltip-content").toggleClass('show fade');
     }
 
     function preventClicksToParent(event) {
