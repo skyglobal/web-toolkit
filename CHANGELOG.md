@@ -6,7 +6,7 @@
     * [added] Underscore.js and Backbone.js to CDN
   * DatePicker
     * Fixed issue with wrong day being selected
- * Skycons
+  * Skycons
     * [updated] warning icon clipping
 
 ## 2.2.13
