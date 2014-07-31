@@ -4,16 +4,21 @@
 
   * Libraries
     * [added] RequireJS version 2.1.14 (demo page upgraded to use 2.1.14 from 2.1.9)
+    * [added] Underscore.js and Backbone.js to CDN
   * Toolkit
     * [added] Toolkit can now be loaded before the body tag (e.g., in the head tag) without any JS errors
   * Responsive Images
     * [updated] Better unit tests for responsive images
   * Tooltip
     * [fixed] Tooltip will now show when at the bottom of the window
+  * DatePicker
+    * Fixed issue with wrong day being selected
  * Skycons
     * [updated] Updated skycons JS module with the latest icons (for IE support)
     * [updated] Pending icon improved (a clock instead of one that looks like reload)
+    * [updated] warning icon clipping
     * [added] Calendar, edit and home icons
+
 
 ## 2.2.12
 
