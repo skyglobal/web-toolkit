@@ -1,13 +1,13 @@
 module.exports = {
     icons: {
-        src: 'generated-skycons/min/*.svg',
-        dest: 'generated-skycons',
-        destCss: 'generated-skycons',
+        src: 'build/minified/skycons/*.svg',
+        dest: 'dist/fonts/',
+        destCss: 'dist/fonts/',
         options: {
             ie7 : true,
             font : 'skycons',
-            template : 'app/src/webfont-templates/skycon-template.css',
-            htmlDemoTemplate : 'app/src/webfont-templates/skycon-template.html',
+            template : 'app/src/skycons/skycon-template.css',
+            htmlDemoTemplate : 'app/src/skycons/skycon-template.html',
             htmlDemo : true,
             ligatures : false,
             engine : 'node', //'fontforge',

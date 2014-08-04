@@ -1,16 +1,16 @@
 module.exports = {
-    "dev-build": ['clean:toolkit', 'clean:dist', 'compass:toolkit', 'requirejs', 'uglify', 'jekyll:build', 'prepare-site'],
+    "dev-build": ['clean', 'compass', 'requirejs', 'fonts', 'svgs', 'uglify', 'jekyll:build', 'prepare-site'],
 
     //  standard build tasks that lints your JS
     "build": ['jshint', 'version_sync', 'dev-build'],
     "serve": ['build','connect:app', 'open:app', 'watch'],
 
     //  misc tasks
-    "fonts": ['clean:css', 'clean:fonts', 'svgmin:fonts', 'webfont', 'compass:toolkit', 'cssmin:skycons'],
-    "svgs": ['svgmin:icons', 'grunticon'],
+    "fonts": ['clean:fonts-min', 'clean:fonts', 'svgmin:fonts', 'webfont', 'cssmin:skycons'],
+    "svgs": ['clean:svgs-min', 'clean:svgs', 'svgmin:icons', 'grunticon'],
 
     // for toolkit website with runnable tests
-    "prepare-site": ['copy:dist', 'copy:test', 'copy:skycons'],
+    "prepare-site": ['copy:dist', 'copy:test'],
 
     //  testing tasks
     "test-with-coverage": ['blanket_mocha'],

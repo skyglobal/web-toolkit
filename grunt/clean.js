@@ -1,8 +1,8 @@
 module.exports =  {
-    toolkit: ['dist/images','dist/scripts','dist/stylesheets'],
-    js: ['dist/scripts'],
-    css: ['dist/images','dist/stylesheets'],
-    fonts: ['app/src/fonts/min','generated-skycons'],
-    'fonts-min': ['generated-skycons/min'],
+    fonts: ['dist/fonts'],
+    'fonts-min': ['build/minified/skycons'],
+    svgs: ['dist/svgs'],
+    'svgs-min': ['build/minified/svgs'],
+    build: ['build'],
     dist: ['dist']
 };
