@@ -1,6 +1,12 @@
 # Change Log
 
-## 2.2.13 (next release)
+## 2.2.14
+
+  * Skycons
+    * [added] Remote Download icon
+    * [fixed] Warning and Info icons truncated on Windows at certain sizes
+
+## 2.2.13
 
   * Libraries
     * [added] RequireJS version 2.1.14 (demo page upgraded to use 2.1.14 from 2.1.9)
