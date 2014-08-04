@@ -2,6 +2,9 @@
 
 ## 2.2.14
 
+  * Libraries
+    * [added] Underscore 1.6.0
+    * [added] Backbone 1.1.2
   * Skycons
     * [added] Remote Download icon
     * [fixed] Warning and Info icons truncated on Windows at certain sizes
