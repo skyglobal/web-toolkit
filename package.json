@@ -22,7 +22,7 @@
         ,"grunt-open": "0.2.3"
         ,"grunt-mocha-screenshot": "0.4.10"
 	    ,"grunt-blanket-mocha": "0.4.0"
-	    ,"grunt-webfont": "0.2.2"
+	    ,"grunt-webfont": "0.4.4"
 	    ,"grunt-svgmin": "0.4.0"
 	    ,"grunt-grunticon": "1.0.0"
 	    ,"grunt-jekyll": "0.4.1"

@@ -41,6 +41,26 @@ toolkit.polyfill = (function () {
         };
     }
 
+    function arrayForEach(){
+
+        if (typeof Array.prototype.forEach !== 'undefined')    {  return; }
+        Array.prototype.forEach = function(fun /*, thisArg */)        {
+            if (this === void 0 || this === null)
+                throw new TypeError();
+
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (typeof fun !== "function")
+                throw new TypeError();
+
+            var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
+            for (var i = 0; i < len; i++)            {
+                if (i in t)
+                    fun.call(thisArg, t[i], i, t);
+            }
+        };
+    }
+
     function classList(){
         /*
          * classList.js: Cross-browser full element.classList implementation.
@@ -207,6 +227,7 @@ toolkit.polyfill = (function () {
     stringTtrim();
     arrayIndexOf();
     classList();
+    arrayForEach();
 
 });
 

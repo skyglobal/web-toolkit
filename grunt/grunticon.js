@@ -1,8 +1,10 @@
 module.exports = {
-        colourSVG: {
-            options: {
-                src: "app/src/svgs/min",
-                dest: "dist/svgs/"
-            }
+        svgs: {
+            files: [{
+                expand: true,
+                cwd: 'build/minified/svgs',
+                src: ['*.svg'],
+                dest: 'dist/svgs/'
+            }]
         }
 };
