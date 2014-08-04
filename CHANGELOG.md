@@ -1,17 +1,22 @@
 # Change Log
 
-## 2.2.14
+## 2.2.15
 
   * Toggle (affects Accordion)
     * [updated] Use parent element's width rather than document's width
+  * Tooltip
+    * [added] Touch events support
+  * Skycons
+    * [fixed] Warning and Info icons truncated on Windows at certain sizes
+    * [added] Remote Download icon
   * Libraries
     * [added] Underscore 1.6.0
     * [added] Backbone 1.1.2
-  * Skycons
-    * [added] Remote Download icon
-    * [fixed] Warning and Info icons truncated on Windows at certain sizes
-  * Tooltip
-    * [added] Touch events support
+
+## 2.2.14
+
+  * Form
+    * [fixed] Date Picker date selection issue
 
 ## 2.2.13
 
