@@ -138,7 +138,7 @@ Components :
         developer_notes_file : true
   Tooltip :
     has_tests : true
-    design_notes : A tooltip should be used when providing auxiliary information that doesn't need all of the users attention. Activated via a hover over an element.
+    design_notes : A tooltip should be used when providing auxiliary information that doesn't need all of the users attention. Activated via a hover over or a touch on an element.
     examples :
       - example : Default
   Video :

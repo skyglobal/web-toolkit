@@ -8,6 +8,8 @@
   * Skycons
     * [added] Remote Download icon
     * [fixed] Warning and Info icons truncated on Windows at certain sizes
+  * Tooltip
+    * [added] Touch events support
 
 ## 2.2.13
 
