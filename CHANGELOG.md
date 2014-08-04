@@ -2,6 +2,8 @@
 
 ## 2.2.14
 
+  * Toggle (affects Accordion)
+    * [updated] Use parent element's width rather than document's width
   * Libraries
     * [added] Underscore 1.6.0
     * [added] Backbone 1.1.2
