@@ -81,6 +81,10 @@ toolkit.toggle = (function(detect, event) {
     }
 
     function updateText($elClicked) {
+        if (!$elClicked.attr('data-toggle-text')) {
+            return;
+        }
+
         var $spans =  $elClicked.find('span');
         var $textElement = $spans.length > 0 ? $spans.first() : $elClicked;
 
