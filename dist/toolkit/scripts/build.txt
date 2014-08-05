@@ -4,7 +4,6 @@ toolkit.js
 toolkit/utils/polyfill.js
 toolkit/utils/event.js
 toolkit/utils/detect.js
-toolkit/utils/skycons.js
 toolkit/utils/hash-manager.js
 toolkit/utils/popup.js
 toolkit/utils/toggle.js

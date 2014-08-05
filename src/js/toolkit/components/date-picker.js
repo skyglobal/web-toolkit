@@ -1,4 +1,4 @@
-if (typeof toolkit==='undefined') toolkit={};
+if (typeof toolkit==='undefined') toolkit = {};
 toolkit.datePicker = (function () {
 
     var monthNames=["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ],
@@ -14,7 +14,7 @@ toolkit.datePicker = (function () {
 
     function firstDay(month, year) {
         var day = new Date(year, month - 1, 1).getDay();
-        return (day === 0) ? 7 : day - 1;
+        return (day === 0) ? 7 : day;
     }
 
     function isLeapYear(year) {
@@ -99,7 +99,7 @@ toolkit.datePicker = (function () {
         },
 
         fillDays: function(noOfDaysInMonth, firstDay) {
-            var i= 0,
+            var i= 1,
                 date = 1,
                 datePicker = this,
                 calendarDate = datePicker.calendarDate,

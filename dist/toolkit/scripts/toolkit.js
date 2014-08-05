@@ -41,6 +41,26 @@ toolkit.polyfill = (function () {
         };
     }
 
+    function arrayForEach(){
+
+        if (typeof Array.prototype.forEach !== 'undefined')    {  return; }
+        Array.prototype.forEach = function(fun /*, thisArg */)        {
+            if (this === void 0 || this === null)
+                throw new TypeError();
+
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (typeof fun !== "function")
+                throw new TypeError();
+
+            var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
+            for (var i = 0; i < len; i++)            {
+                if (i in t)
+                    fun.call(thisArg, t[i], i, t);
+            }
+        };
+    }
+
     function classList(){
         /*
          * classList.js: Cross-browser full element.classList implementation.
@@ -207,6 +227,7 @@ toolkit.polyfill = (function () {
     stringTtrim();
     arrayIndexOf();
     classList();
+    arrayForEach();
 
 });
 
@@ -545,99 +566,6 @@ if (typeof window.define === "function" && window.define.amd) {
 };
 /**
  purpose:
- Needed for IE7
- **/
-if (typeof toolkit==='undefined') toolkit={};
-toolkit.skycons = (function(detect, event) {
-
-    var icons = {
-        'skycon-arrow-down-left' : "&#xf102;",
-        'skycon-arrow-left' : "&#xf101;",
-        'skycon-arrow-right' : "&#xf112;",
-        'skycon-at' : "&#xf105;",
-        'skycon-calender' : "&#xf108;",
-        'skycon-carousel-pause' : "&#xf100;",
-        'skycon-carousel-play' : "&#xf120;",
-        'skycon-chevron' : "&#xf11a;",
-        'skycon-chevron-down' : "&#xf11b;",
-        'skycon-chevron-left' : "&#xf103;",
-        'skycon-chevron-up' : "&#xf10b;",
-        'skycon-close' : "&#xf109;",
-        'skycon-cloud' : "&#xf104;",
-        'skycon-download' : "&#xf11c;",
-        'skycon-edit' : "&#xf125;",
-        'skycon-expand' : "&#xf10c;",
-        'skycon-facebook' : "&#xf11e;",
-        'skycon-gallery' : "&#xf124;",
-        'skycon-google-plus' : "&#xf119;",
-        'skycon-home' : "&#xf111;",
-        'skycon-info' : "&#xf127;",
-        'skycon-mail' : "&#xf115;",
-        'skycon-menu' : "&#xf121;",
-        'skycon-minify' : "&#xf122;",
-        'skycon-mouse' : "&#xf107;",
-        'skycon-never-miss' : "&#xf106;",
-        'skycon-on-demand' : "&#xf11d;",
-        'skycon-pending' : "&#xf12b;",
-        'skycon-phone' : "&#xf12d;",
-        'skycon-plus-circle' : "&#xf10a;",
-        'skycon-remote-record' : "&#xf128;",
-        'skycon-search' : "&#xf117;",
-        'skycon-share' : "&#xf12e;",
-        'skycon-sky' : "&#xf123;",
-        'skycon-sky-go' : "&#xf129;",
-        'skycon-sky-plus' : "&#xf10f;",
-        'skycon-speech-bubble' : "&#xf12a;",
-        'skycon-tick' : "&#xf110;",
-        'skycon-tv' : "&#xf12c;",
-        'skycon-twitter' : "&#xf126;",
-        'skycon-twitter-favourite' : "&#xf11f;",
-        'skycon-twitter-follow' : "&#xf10e;",
-        'skycon-twitter-reply' : "&#xf12f;",
-        'skycon-twitter-retweet' : "&#xf116;",
-        'skycon-user-profile' : "&#xf10d;",
-        'skycon-video-play' : "&#xf114;",
-        'skycon-volume' : "&#xf113;",
-        'skycon-warning' : "&#xf118;"
-    };
-
-    function addWebfont(el, c){
-        var html = el.innerHTML,
-            entity = icons[c];
-        el.innerHTML = '<span style="font-style:normal;font-family: \'skycons\'">' + entity + '</span>' + html;
-    }
-
-    function init(){
-        if (detect.pseudo()){ return; }
-        var els = document.getElementsByTagName('*'),
-            i, c, el;
-        for (i = 0; ; i += 1) {
-            el = els[i];
-            if(!el) { break; }
-            c = el.className;
-            c = c.match(/skycon-[^\s'"]+/);
-            if (c) { addWebfont(el, c[0]); }
-        }
-    }
-
-    event.ready(init);
-
-    return {
-        add: addWebfont
-    };
-});
-
-if (typeof window.define === "function" && window.define.amd) {
-    define('utils/skycons', ['utils/detect','utils/event'], function(detect,event) {
-        toolkit.skycons = toolkit.skycons(detect,event);
-        return toolkit.skycons;
-    });
-} else {
-    toolkit.skycons = toolkit.skycons(toolkit.detect,toolkit.event);
-}
-;
-/**
- purpose:
  to let 'anchor' tags do their job and change the hash in the url for internal links.
  this will execute the associated callback with that hash.
  no onclick events needed.
@@ -862,8 +790,8 @@ toolkit.toggle = (function(detect, event) {
             return $el.data('openHeight');
         }
 
-        $('body')
-            .append($('<div id="toggle-tmp-height" class="skycom-container"></div>')
+        $el.parent()
+            .append($('<div id="toggle-tmp-height"></div>')
             .append($el.clone().attr('style', '').removeClass(hiddenClass + ' transition ')));
         $('#toggle-tmp-height > div').append('<div class="toggle-clearfix-div clearfix clear" style="padding:1px"></div> ');
         $('#toggle-tmp-height > div').prepend('<div class="toggle-clearfix-div clearfix clear" style="padding:1px"></div> ');
@@ -878,6 +806,7 @@ toolkit.toggle = (function(detect, event) {
         }
 
         $el.data('openHeight', openHeight);
+
         $('#toggle-tmp-height').remove();
         $('.toggle-clearfix-div').remove();
 
@@ -895,6 +824,10 @@ toolkit.toggle = (function(detect, event) {
     }
 
     function updateText($elClicked) {
+        if (!$elClicked.attr('data-toggle-text')) {
+            return;
+        }
+
         var $spans =  $elClicked.find('span');
         var $textElement = $spans.length > 0 ? $spans.first() : $elClicked;
 
@@ -1336,7 +1269,7 @@ if (typeof window.define === "function" && window.define.amd) {
     toolkit.accordion = toolkit.accordion(toolkit.toggle);
 }
 ;
-if (typeof toolkit==='undefined') toolkit={};
+if (typeof toolkit==='undefined') toolkit = {};
 toolkit.datePicker = (function () {
 
     var monthNames=["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ],
@@ -1352,7 +1285,7 @@ toolkit.datePicker = (function () {
 
     function firstDay(month, year) {
         var day = new Date(year, month - 1, 1).getDay();
-        return (day === 0) ? 7 : day - 1;
+        return (day === 0) ? 7 : day;
     }
 
     function isLeapYear(year) {
@@ -1437,7 +1370,7 @@ toolkit.datePicker = (function () {
         },
 
         fillDays: function(noOfDaysInMonth, firstDay) {
-            var i= 0,
+            var i= 1,
                 date = 1,
                 datePicker = this,
                 calendarDate = datePicker.calendarDate,
@@ -2025,10 +1958,20 @@ if (typeof window.define === "function" && window.define.amd) {
 if (typeof toolkit === 'undefined') toolkit = {};
 toolkit.tooltip = (function (detect) {
 
-
     function bindEvents() {
-        ($(".tooltip-container") || $(document)).on('mouseenter mouseleave', '[data-tooltip]', hover);
-        $("[data-tooltip] .tooltip-content").on('click', preventClicksToParent);
+        ($(document)).on("mouseenter mouseleave", "[data-tooltip]", hover);
+
+        ($(document)).on("click", "[data-tooltip] .tooltip-content", preventClicksToParent);
+
+        ($(document)).on("touchstart", "[data-tooltip]", toggleTooltip);
+    }
+
+    function toggleTooltip(event) {
+        event.preventDefault();
+
+        var $tooltipContent = $(this).find(".tooltip-content");
+
+        $(this).find(".tooltip-content").toggleClass('show fade');
     }
 
     function preventClicksToParent(event) {
@@ -2255,7 +2198,8 @@ if (typeof window.define === "function" && window.define.amd) {
     toolkit.video =  toolkit.video(window, jQuery, toolkit.event);
 }
 ;
-if (typeof toolkit==='undefined') toolkit={};
+/*global toolit define*/
+if (typeof toolkit==='undefined') { toolkit={}; }
 toolkit.carousel = (function(video, detect) {
     
 
@@ -2312,7 +2256,7 @@ toolkit.carousel = (function(video, detect) {
         },
         setOffset: function(percent, animate) {
             var $container = this.$slideContainer.removeClass("animate");
-            if (animate) $container.addClass("animate");
+            if (animate) { $container.addClass("animate"); }
             if (has3d) {
                 $container.css("transform", "translate3d("+ percent +"%,0,0) scale3d(1,1,1)");
             } else if (hasTransform && hasTransition) {
@@ -2378,7 +2322,7 @@ toolkit.carousel = (function(video, detect) {
 
             $slides.filter(':not(:eq(' + this.currentIndex + '))').hide();
             $slides.eq(this.currentIndex).css('float', cssFloat);
-            $slides.eq(indexToShow).show().css('float', cssFloat == 'left' ? 'right' : 'left');
+            $slides.eq(indexToShow).show().css('float', cssFloat === 'left' ? 'right' : 'left');
 
             this.setOffset(opts.start, false);
             if (typeof opts.end !== 'undefined'){
@@ -2388,7 +2332,7 @@ toolkit.carousel = (function(video, detect) {
                     self.$viewport.trigger('change', indexToShow);
                 }, 20);
                 this.currentIndex = indexToShow;
-                if (typeof opts.callback == 'function') opts.callback(indexToShow);
+                if (typeof opts.callback === 'function') { opts.callback(indexToShow); }
             }
             return indexToShow;
         },
@@ -2444,14 +2388,14 @@ toolkit.carousel = (function(video, detect) {
             }, delay || this.options.onPlayDelay);
 
             this.$viewport.trigger('playing');
-            if (typeof callback == 'function') callback();
+            if (typeof callback === 'function') { callback(); }
             return this;
         },
         pause: function(callback) {
             clearTimeout(this.timerId);
 
             this.$viewport.trigger('paused');
-            if (typeof callback == 'function') callback();
+            if (typeof callback === 'function') { callback(); }
             return this;
         },
         touchstart: function(e) {
@@ -2468,17 +2412,17 @@ toolkit.carousel = (function(video, detect) {
                 slideIndex = xDifference<0?this.currentIndex+1:this.currentIndex- 1,
                 positionAsPercentage;
 
-            if (!swipe.start || scrollingCarousel===false) return;
+            if (!swipe.start || scrollingCarousel===false) { return; }
             e.preventDefault();
 
             positionAsPercentage = (xDifference / this.$slideContainer.outerWidth(true)) * 100;
-            if (xDifference>0) positionAsPercentage -=50;
+            if (xDifference>0) { positionAsPercentage -=50; }
             this.swipe.positionAsPercentage = positionAsPercentage;
 
             this.moveSlide({index:slideIndex,start:positionAsPercentage});
         },
         touchend: function(e) {
-            if (!this.swipe.start) return;
+            if (!this.swipe.start) { return; }
             var swipe = this.swipe,
                 position = swipe.positionAsPercentage,
                 touch = e.originalEvent.changedTouches[0],
@@ -2553,10 +2497,10 @@ toolkit.carousel = (function(video, detect) {
         // generating default markup
         var markup = {
             actions: function($element, options){
-                var html = '', id, label, i, extraClass, icon, action,circle,
+                var html = '', id, label, i, extraClass, icon, action,
                     actions = options.actions,
                     onclick = options.onclick;
-                if(options.count <= 1) return this;
+                if(options.count <= 1) { return this; }
 
                 for (i=0;i<actions.length;i++) {
                     action = actions[i];
@@ -2640,7 +2584,7 @@ toolkit.carousel = (function(video, detect) {
 
             createMarkup(carousel);
 
-            $this.on('click', '.terms-link', function(e) {
+            $this.on('click', '.terms-link', function() {
                 carousel.toggleTermsContent();
             }).on('change',function(e, index) {
                 index = index || 0;
@@ -2678,7 +2622,7 @@ toolkit.carousel = (function(video, detect) {
                     case 37: carousel.previous(); break; //left arrow
                     case 39: carousel.next(); break; //right arrow
                 }
-            }).find('.toggle-terms').on('click', function(e) {
+            }).find('.toggle-terms').on('click', function() {
                 carousel.$viewport.toggleClass('showing-tandcs');
             });
             if(carousel.slideCount > 1) {
@@ -2707,7 +2651,6 @@ if (typeof window.define === "function" && window.define.amd) {
     define('toolkit',[
         'utils/polyfill',
         'utils/detect',
-        'utils/skycons',
         'utils/hash-manager',
         'utils/popup',
         'utils/toggle',
@@ -2721,12 +2664,11 @@ if (typeof window.define === "function" && window.define.amd) {
         'components/tooltip',
         'components/video',
         'components/carousel'], function(
-            polyfill, detect, skycons, hashManager, popup,toggle, focus, validation, event,
+            polyfill, detect, hashManager, popup,toggle, focus, validation, event,
             inPageNav, accordion, datePicker, lightbox, share, tooltip, video, carousel){
         return {
             polyfill: polyfill,
             detect: detect,
-            skycons: skycons,
             hashManager: hashManager,
             popup: popup,
             toggle: toggle,

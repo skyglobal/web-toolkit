@@ -2,7 +2,6 @@ if (typeof window.define === "function" && window.define.amd) {
     define([
         'utils/polyfill',
         'utils/detect',
-        'utils/skycons',
         'utils/hash-manager',
         'utils/popup',
         'utils/toggle',
@@ -16,12 +15,11 @@ if (typeof window.define === "function" && window.define.amd) {
         'components/tooltip',
         'components/video',
         'components/carousel'], function(
-            polyfill, detect, skycons, hashManager, popup,toggle, focus, validation, event,
+            polyfill, detect, hashManager, popup,toggle, focus, validation, event,
             inPageNav, accordion, datePicker, lightbox, share, tooltip, video, carousel){
         return {
             polyfill: polyfill,
             detect: detect,
-            skycons: skycons,
             hashManager: hashManager,
             popup: popup,
             toggle: toggle,
