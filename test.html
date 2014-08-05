@@ -5,8 +5,9 @@
 <!--[if IE 9]>         <html class="lt-ie10" > <![endif]-->
 <!--[if gt IE 9]><!--> <html lang="en" > <!--<![endif]-->
 <!--end css conditionals-->
-	<head>
-        <meta charset="UTF-8"/>
+<head>
+    <title>Tests</title>
+    <meta charset="UTF-8"/>
 
 <!--jquery-->
 <!--[if lt IE 9]> <script src="http://web-toolkit.global.sky.com/static/lib/jquery-1.10.2.js" ></script> <![endif]-->
@@ -30,500 +31,23 @@
     document.createElement('figcaption');
 </script><![endif]-->
 
-
-        <!--to help prevent 'font flash'-->
-        <link href='//web-toolkit.global.sky.com/static/fonts/sky_regular.ttf' rel='prefetch'>
-        <link href='//web-toolkit.global.sky.com/static/fonts/sky_regular.svg' rel='prefetch'>
-        <link href='//web-toolkit.global.sky.com/static/fonts/sky_medium.ttf' rel='prefetch'>
-        <link href='//web-toolkit.global.sky.com/static/fonts/sky_medium.svg' rel='prefetch'>
-        <!--end prevent 'font flash'-->
-
-        <!--We recommend that you use these files from the toolkit static lib folder: '//web-toolkit.global.sky.com/static/lib/' -->
-        <script src="static/lib/require-2.1.14.min.js"></script>
-        <script>
-            window.environment = 'demo';
-            require({ baseUrl: "./dist/demo/scripts", paths: { utils: "toolkit/utils", components: "toolkit/components" }}, ["toolkit"]);
-        </script>
-
-        <link rel="stylesheet" href="//player.sky.com/css/styles.min.css"/>
-        <script src="//player.sky.com/plugin/jquery.omniture.js"></script>
-        <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
-	</head>
-	<body class="grid-1140" data-spy="scroll" data-target="#toolkit-menu-tabs">
-        <div class="skycom-container clearfix">
-            <div class="alpha skycom-12">
-
-                <h1 class="demo-header section-title clearfix">
-                    <a href="."><img src="static/images/sky-logo.png" alt="" height="52" width="82"></a>
-                    <span>Toolkit</span>
-                    <a href="#!code/using-the-toolkit" class="code-download" data-diff="using-the-toolkit" data-diff-demos="getting-started">[ Getting Started &hellip; ]</a>
-                </h1>
-
-            </div>
-        </div>
-
-        <section class="clearfix tabs-container page-nav main-menu sticky" data-function="tabs" id='toolkit-menu-tabs'>
+    <script src="test/libraries/mocha.js"></script>
+    <script src="test/libraries/chai.js"></script>
+</head>
+<body class="grid-1140" >
+    <div id="mocha"></div>
     <div class="skycom-container clearfix">
         <div class="alpha skycom-12">
+            <script src="test/libraries/require.js"></script>
+<script src="test/libraries/blanket.js" data-cover-flags="branchTracking" data-cover-only="//toolkit/.*/"></script>
+<script>
+    if (window.PHANTOMJS) {
+        blanket.options("reporter", "test/libraries/grunt-reporter.js");
+    }
+</script>
+<script src="test/config.js"></script>
 
-            <h2 class="speak">Main Navigation</h2>
 
-            <section class="tabcontents tabs-container page-nav primary">
-                <ul class="nav tabs clearfix" role="tablist">
-                    
-                        
-                        
-                    <li id='base-styles-tab' aria-controls="base-styles-tab-contents" role="tab" class="tab  selected ">
-                        <a href="#base-styles" class="intro ellipsis internal-link">Base Styles</a>
-                    </li>
-                    
-                        
-                        
-                    <li id='components-tab' aria-controls="components-tab-contents" role="tab" class="tab ">
-                        <a href="#components" class="intro ellipsis internal-link">Components</a>
-                    </li>
-                    
-                        
-                        
-                    <li id='utils-tab' aria-controls="utils-tab-contents" role="tab" class="tab ">
-                        <a href="#utils" class="intro ellipsis internal-link">Utils</a>
-                    </li>
-                    
-                        
-                        
-                    <li id='examples-tab' aria-controls="examples-tab-contents" role="tab" class="tab ">
-                        <a href="#examples" class="intro ellipsis internal-link">Examples</a>
-                    </li>
-                    
-                    <li id="changes-tab" aria-controls="changes-tab-contents" role="tab" class="tab">
-                        <a href="changes.html" class="intro ellipsis internal-link">Changes</a>
-                    </li>
-                </ul>
-                <div class="dropdown-tab-select">
-                    <div href="#" aria-hidden="true" class="medium selector">&hellip;</div>
-                    <ul class="nav more-tabs">
-
-                    </ul>
-                </div>
-            </section>
-
-            
-            
-            
-            
-            <div id="base-styles-tab-contents" class="tabpanel  selected " aria-labeledby="base-styles-tab" role="tabpanel">
-                <section class="tabcontents tabs-container page-nav secondary">
-                    <ul class="nav tabs clearfix" role="tablist">
-                        
-                            
-                            
-                        <li role="tab" class="tab selected" id='base-styles--grid-tab' aria-controls="base-styles--grid-tab-contents">
-                            
-                            <a href="#base-styles--grid" class="ellipsis internal-link" data-diff="base-styles/grid" data-diff-demos="
-                            
-                                
-                                974,
-                            
-                                
-                                1140,
-                            
-                                
-                                lightbox,
-                            
-                                
-                                tablet-portrait
-                            
-                            ">Grid</a>
-                        </li>
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='base-styles--colours-tab' aria-controls="base-styles--colours-tab-contents">
-                            
-                            <a href="#base-styles--colours" class="ellipsis internal-link" data-diff="base-styles/colours" data-diff-demos="
-                            
-                                
-                                backgrounds,
-                            
-                                
-                                buttons-icons,
-                            
-                                
-                                channels,
-                            
-                                
-                                shop,
-                            
-                                
-                                typography,
-                            
-                                
-                                v3-brand
-                            
-                            ">Colours</a>
-                        </li>
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='base-styles--typography-tab' aria-controls="base-styles--typography-tab-contents">
-                            
-                            <a href="#base-styles--typography" class="ellipsis internal-link" data-diff="base-styles/typography" data-diff-demos="
-                            
-                                
-                                all
-                            
-                            ">Typography</a>
-                        </li>
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='base-styles--icons-tab' aria-controls="base-styles--icons-tab-contents">
-                            
-                            <a href="#base-styles--icons" class="ellipsis internal-link" data-diff="base-styles/icons" data-diff-demos="
-                            
-                                
-                                skycons,
-                            
-                                
-                                sprite
-                            
-                            ">Icons</a>
-                        </li>
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='base-styles--buttons-tab' aria-controls="base-styles--buttons-tab-contents">
-                            
-                            <a href="#base-styles--buttons" class="ellipsis internal-link" data-diff="base-styles/buttons" data-diff-demos="
-                            
-                                
-                                primary,
-                            
-                                
-                                secondary
-                            
-                            ">Buttons</a>
-                        </li>
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='base-styles--spinners-tab' aria-controls="base-styles--spinners-tab-contents">
-                            
-                            <a href="#base-styles--spinners" class="ellipsis internal-link" data-diff="base-styles/spinners" data-diff-demos="
-                            
-                                
-                                default
-                            
-                            ">Spinners</a>
-                        </li>
-                        
-                    </ul>
-                    <div class="dropdown-tab-select">
-                        <div aria-hidden="true" class="medium selector">&hellip;</div>
-                        <ul class="nav more-tabs">
-
-                        </ul>
-                    </div>
-                </section>
-            </div>
-            
-            
-            
-            <div id="components-tab-contents" class="tabpanel " aria-labeledby="components-tab" role="tabpanel">
-                <section class="tabcontents tabs-container page-nav secondary">
-                    <ul class="nav tabs clearfix" role="tablist">
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='components--accordion-tab' aria-controls="components--accordion-tab-contents">
-                            
-                            <a href="#components--accordion" class="ellipsis internal-link" data-diff="components/accordion" data-diff-demos="
-                            
-                                
-                                default
-                            
-                            ">Accordion</a>
-                        </li>
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='components--breadcrumbs-tab' aria-controls="components--breadcrumbs-tab-contents">
-                            
-                            <a href="#components--breadcrumbs" class="ellipsis internal-link" data-diff="components/breadcrumbs" data-diff-demos="
-                            
-                                
-                                default
-                            
-                            ">Breadcrumbs</a>
-                        </li>
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='components--carousel-tab' aria-controls="components--carousel-tab-contents">
-                            
-                            <a href="#components--carousel" class="ellipsis internal-link" data-diff="components/carousel" data-diff-demos="
-                            
-                                
-                                default,
-                            
-                                
-                                single-slide,
-                            
-                                
-                                skinny
-                            
-                            ">Carousel</a>
-                        </li>
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='components--form-tab' aria-controls="components--form-tab-contents">
-                            
-                            <a href="#components--form" class="ellipsis internal-link" data-diff="components/form" data-diff-demos="
-                            
-                                
-                                default
-                            
-                            ">Form</a>
-                        </li>
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='components--in-page-nav-tab' aria-controls="components--in-page-nav-tab-contents">
-                            
-                            <a href="#components--in-page-nav" class="ellipsis internal-link" data-diff="components/in-page-nav" data-diff-demos="
-                            
-                                
-                                sleek-nav,
-                            
-                                
-                                whole-page-nav
-                            
-                            ">In-page Nav</a>
-                        </li>
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='components--lightbox-tab' aria-controls="components--lightbox-tab-contents">
-                            
-                            <a href="#components--lightbox" class="ellipsis internal-link" data-diff="components/lightbox" data-diff-demos="
-                            
-                                
-                                default,
-                            
-                                
-                                ajax,
-                            
-                                
-                                small
-                            
-                            ">Lightbox</a>
-                        </li>
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='components--share-tab' aria-controls="components--share-tab-contents">
-                            
-                            <a href="#components--share" class="ellipsis internal-link" data-diff="components/share" data-diff-demos="
-                            
-                                
-                                bar,
-                            
-                                
-                                popup
-                            
-                            ">Share</a>
-                        </li>
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='components--tooltip-tab' aria-controls="components--tooltip-tab-contents">
-                            
-                            <a href="#components--tooltip" class="ellipsis internal-link" data-diff="components/tooltip" data-diff-demos="
-                            
-                                
-                                default
-                            
-                            ">Tooltip</a>
-                        </li>
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='components--video-tab' aria-controls="components--video-tab-contents">
-                            
-                            <a href="#components--video" class="ellipsis internal-link" data-diff="components/video" data-diff-demos="
-                            
-                                
-                                default
-                            
-                            ">Video</a>
-                        </li>
-                        
-                    </ul>
-                    <div class="dropdown-tab-select">
-                        <div aria-hidden="true" class="medium selector">&hellip;</div>
-                        <ul class="nav more-tabs">
-
-                        </ul>
-                    </div>
-                </section>
-            </div>
-            
-            
-            
-            <div id="utils-tab-contents" class="tabpanel " aria-labeledby="utils-tab" role="tabpanel">
-                <section class="tabcontents tabs-container page-nav secondary">
-                    <ul class="nav tabs clearfix" role="tablist">
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='utils--detect-tab' aria-controls="utils--detect-tab-contents">
-                            
-                            <a href="#utils--detect" class="ellipsis internal-link" data-diff="utils/detect" data-diff-demos="
-                            
-                                
-                                css,
-                            
-                                
-                                touch,
-                            
-                                
-                                orientation,
-                            
-                                
-                                view
-                            
-                            ">Detect</a>
-                        </li>
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='utils--event-tab' aria-controls="utils--event-tab-contents">
-                            
-                            <a href="#utils--event" class="ellipsis internal-link" data-diff="utils/event" data-diff-demos="
-                            
-                                
-                                ready,
-                            
-                                
-                                on-event,
-                            
-                                
-                                off-event,
-                            
-                                
-                                resize-end,
-                            
-                                
-                                emit
-                            
-                            ">Event</a>
-                        </li>
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='utils--hash-manager-tab' aria-controls="utils--hash-manager-tab-contents">
-                            
-                            <a href="#utils--hash-manager" class="ellipsis internal-link" data-diff="utils/hash-manager" data-diff-demos="
-                            
-                                
-                                default
-                            
-                            ">Hash Manager</a>
-                        </li>
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='utils--libraries-tab' aria-controls="utils--libraries-tab-contents">
-                            
-                            <a href="#utils--libraries" class="ellipsis internal-link" data-diff="utils/libraries" data-diff-demos="
-                            
-                                
-                                jquery,
-                            
-                                
-                                requirejs,
-                            
-                                
-                                other
-                            
-                            ">Libraries</a>
-                        </li>
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='utils--responsive-images-tab' aria-controls="utils--responsive-images-tab-contents">
-                            
-                            <a href="#utils--responsive-images" class="ellipsis internal-link" data-diff="utils/responsive-images" data-diff-demos="
-                            
-                                
-                                using
-                            
-                            ">Responsive Images</a>
-                        </li>
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='utils--toggle-tab' aria-controls="utils--toggle-tab-contents">
-                            
-                            <a href="#utils--toggle" class="ellipsis internal-link" data-diff="utils/toggle" data-diff-demos="
-                            
-                                
-                                closed-element,
-                            
-                                
-                                open-element
-                            
-                            ">Toggle</a>
-                        </li>
-                        
-                    </ul>
-                    <div class="dropdown-tab-select">
-                        <div aria-hidden="true" class="medium selector">&hellip;</div>
-                        <ul class="nav more-tabs">
-
-                        </ul>
-                    </div>
-                </section>
-            </div>
-            
-            
-            
-            <div id="examples-tab-contents" class="tabpanel " aria-labeledby="examples-tab" role="tabpanel">
-                <section class="tabcontents tabs-container page-nav secondary">
-                    <ul class="nav tabs clearfix" role="tablist">
-                        
-                            
-                            
-                        <li role="tab" class="tab " id='examples--error-page-tab' aria-controls="examples--error-page-tab-contents">
-                            
-                            <a href="#examples--error-page" class="ellipsis internal-link" data-diff="examples/error-page" data-diff-demos="
-                            
-                                
-                                default
-                            
-                            ">Error Page</a>
-                        </li>
-                        
-                    </ul>
-                    <div class="dropdown-tab-select">
-                        <div aria-hidden="true" class="medium selector">&hellip;</div>
-                        <ul class="nav more-tabs">
-
-                        </ul>
-                    </div>
-                </section>
-            </div>
-            
-
-        </div>
-    </div>
-</section>
-
-<div class="skycom-container clearfix">
-    <div class="alpha skycom-12">
-
-        
     
     
     <section class="demo-section" id="base-styles">
@@ -3575,36 +3099,27 @@ responsiveImages.init(document.getElementById('demo-responsive-images'));
 
 
 
-    </div>
-</div>
-
 <script>
-    require(['demo']);
+    require(
+            {   baseUrl: 'src/js',
+                paths: {
+                    utils: 'toolkit/utils',
+                    components: 'toolkit/components',
+                    suite: '../../../test/suite',
+                    specs: '../../../test/specs'}
+            },
+            ["toolkit"],
+            function(main) {
+                require(["suite"], function(TestLoader) {
+                    setTimeout(function(){
+                        mocha.run();
+                    },2000); //wait for blanket
+                });
+            }
+    );
 </script>
 
-        <div class="nav-container secondary-menu secondary">
-    <div class="skycom-container">
-        <ul class="alpha skycom-12">
-            <li >
-                <a target="_guidelines"  href="http://storage.sky.com/other/GlobalGuides.pdf">Global Guidelines PDF</a>
-            </li>
-            <li >
-                <a target="_fonts"  href="http://font.nb.sky.com/">Font Dragr for Sky</a>
-            </li>
-            <li >
-                <a target="_accessibility" href="http://assets.nb.sky.com/accessibility/index.html">Nomensa Accessibility</a>
-            </li>
-            <li >
-                <a target="_github" href="https://github.com/skyglobal/web-toolkit/issues">Bugs / Feature Requests</a>
-            </li>
-            <li class="right meta-data" >
-                <div class="intro">Toolkit v<span id="current-version">2.2.13</span></div>
-                <small class="right">Updated: 24-06-2014</small>
-            </li>
-        </ul>
+        </div>
     </div>
-</div>
-
-
-	</body>
+</body>
 </html>
