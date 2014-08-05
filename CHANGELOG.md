@@ -12,6 +12,8 @@
   * Libraries
     * [added] Underscore 1.6.0
     * [added] Backbone 1.1.2
+  * Spinners
+    * [updated] Added more spacing between spinning icon and text
 
 ## 2.2.14
 
