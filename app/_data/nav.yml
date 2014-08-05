@@ -191,15 +191,15 @@ Utils:
       - example : RequireJS
         title : RequireJS
         design_notes : You can include RequireJS.
-        code_view_ : true
+        code_view_only : true
       - example : BackboneJS
         title : BackboneJS
         design_notes : You can include BackboneJS.
-        code_view_ : true
+        code_view_only : true
       - example : UnderscoreJS
         title : UnderscoreJS
         design_notes : You can include UnderscoreJS.
-        code_view_ : true
+        code_view_only : true
       - example : Other
         title : Other
         design_notes : We also host versions of SessionCam and Test & Target javascript files.
