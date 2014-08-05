@@ -2,6 +2,8 @@
 
 ## 2.2.15
 
+  * Accordion
+    * [updated] Allows headers with more complicated HTML markups
   * Toggle (affects Accordion)
     * [updated] Use parent element's width rather than document's width
   * Tooltip
