@@ -146,7 +146,38 @@ function lightboxSpec(lightbox, focus, hash) {
             // then
             expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(true);
         });
+        
+        it('does not block link click inside of the lightbox', function() {
+            openLightboxWithClick();
 
+            var aToClick = $('#lightbox-demo a:has(span)'),
+                spanToClick = $('span', aToClick),
+                isClickEventBubbled = false;
+            
+            $(document).on('click.lightbox.link.test', function() {
+                isClickEventBubbled = true;
+            });
+
+            aToClick.click(function() {
+                isClickEventBubbled = false;
+            });
+
+            spanToClick.click(function() {
+                isClickEventBubbled = false;
+            });
+            
+            // when: click <a> tag
+            aToClick.click();
+            // then
+            expect(isClickEventBubbled).to.equal(true);
+
+            // when: click a child tag inside of <a> tag
+            spanToClick.click();
+            // then
+            expect(isClickEventBubbled).to.equal(true);
+
+            $(document).off('click.lightbox.link.test');
+        });
 
         it('hides the double scrollbar from the body element', function (done) {
             openLightboxWithClick();
