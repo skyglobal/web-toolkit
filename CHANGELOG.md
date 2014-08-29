@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.2.16
+  * Colours
+    * [updated] tweaked shop colours (+ added 'variety' + removed 'Complete')
+  * Lightbox
+    * [fixed] Allow <span> tags to be used inside links within the lightbox
+
 ## 2.2.15
 
   * Accordion
