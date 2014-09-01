@@ -173,19 +173,21 @@ toolkit.inPageNav = (function(hash, event) {
         changeTab: function(controlId){
             controlId = controlId.replace(/^#!{0,1}/,'');
 
-            var $thisTab = $("#" + controlId.replace('-tab-contents','') + "-tab");
-            var $thisTabTarget = $("#" + controlId);
+            if (controlId.indexOf('/') === -1) {
+                var $thisTab = $("#" + controlId.replace('-tab-contents','') + "-tab");
+                var $thisTabTarget = $("#" + controlId);
 
-            this.$tabs.filter('.dropped-during-interaction').removeClass('dropped-during-interaction');
-            this.$tabTargets.add(this.$tabs).removeClass("selected");
+                this.$tabs.filter('.dropped-during-interaction').removeClass('dropped-during-interaction');
+                this.$tabTargets.add(this.$tabs).removeClass("selected");
 
-            this.setSelectedTab(controlId+'-tab');
+                this.setSelectedTab(controlId+'-tab');
 
-            $thisTab.add($thisTabTarget).addClass('selected');
+                $thisTab.add($thisTabTarget).addClass('selected');
 
-            if ($thisTab.hasClass('dropped')) {
-                this.setDroppedTabs();
-                this.setTabVisibility();
+                if ($thisTab.hasClass('dropped')) {
+                    this.setDroppedTabs();
+                    this.setTabVisibility();
+                }
             }
         },
 
