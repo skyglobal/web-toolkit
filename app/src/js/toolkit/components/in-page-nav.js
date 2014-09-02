@@ -118,12 +118,18 @@ toolkit.inPageNav = (function(hash, event) {
             var self = this;
             hash.register(this.getHashList(), this.changeTab.bind(self));
 
-            this.$tabs.on('click', function(){
-                self.changeTab($(this).find('a').attr('href'));
+            var changeTabIfValid = function(controlId){
+                if (controlId.indexOf('/') === -1) {
+                    self.changeTab(controlId);
+                }
+            };
+
+            this.$tabs.on('click', function() {
+                changeTabIfValid($(this).find('a').attr('href'));
             });
 
-            this.$moreTabsContainer.find('li').on('click', function(){
-                self.changeTab($(this).find('a').attr('href'));
+            this.$moreTabsContainer.find('li').on('click', function() {
+                changeTabIfValid($(this).find('a').attr('href'));
             });
 
             this.$tabs.find('a').on('focus', function() {
@@ -173,21 +179,19 @@ toolkit.inPageNav = (function(hash, event) {
         changeTab: function(controlId){
             controlId = controlId.replace(/^#!{0,1}/,'');
 
-            if (controlId.indexOf('/') === -1) {
-                var $thisTab = $("#" + controlId.replace('-tab-contents','') + "-tab");
-                var $thisTabTarget = $("#" + controlId);
+            var $thisTab = $("#" + controlId.replace('-tab-contents','') + "-tab");
+            var $thisTabTarget = $("#" + controlId);
 
-                this.$tabs.filter('.dropped-during-interaction').removeClass('dropped-during-interaction');
-                this.$tabTargets.add(this.$tabs).removeClass("selected");
+            this.$tabs.filter('.dropped-during-interaction').removeClass('dropped-during-interaction');
+            this.$tabTargets.add(this.$tabs).removeClass("selected");
 
-                this.setSelectedTab(controlId+'-tab');
+            this.setSelectedTab(controlId+'-tab');
 
-                $thisTab.add($thisTabTarget).addClass('selected');
+            $thisTab.add($thisTabTarget).addClass('selected');
 
-                if ($thisTab.hasClass('dropped')) {
-                    this.setDroppedTabs();
-                    this.setTabVisibility();
-                }
+            if ($thisTab.hasClass('dropped')) {
+                this.setDroppedTabs();
+                this.setTabVisibility();
             }
         },
 
