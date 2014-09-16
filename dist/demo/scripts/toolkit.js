@@ -598,6 +598,10 @@ toolkit.hashManager = (function() {
     function onHashChange(hash) {
         var evt, fn;
         hash = cleanHash((typeof hash === 'string') ? hash : location.hash);
+
+        if (hash.indexOf('?') > 1) {
+            hash = hash.split('?')[0];
+        }
         evt = getHashEvent(hash);
         if (hash && evt) {
             fn = 'callback';
@@ -1091,12 +1095,18 @@ toolkit.inPageNav = (function(hash, event) {
             var self = this;
             hash.register(this.getHashList(), this.changeTab.bind(self));
 
-            this.$tabs.on('click', function(){
-                self.changeTab($(this).find('a').attr('href'));
+            var changeTabIfValid = function(controlId){
+                if (controlId.indexOf('/') === -1) {
+                    self.changeTab(controlId);
+                }
+            };
+
+            this.$tabs.on('click', function() {
+                changeTabIfValid($(this).find('a').attr('href'));
             });
 
-            this.$moreTabsContainer.find('li').on('click', function(){
-                self.changeTab($(this).find('a').attr('href'));
+            this.$moreTabsContainer.find('li').on('click', function() {
+                changeTabIfValid($(this).find('a').attr('href'));
             });
 
             this.$tabs.find('a').on('focus', function() {
@@ -1806,7 +1816,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
                     e.preventDefault();
                     lightbox.close();
                 }
-                if ($target.attr('href')) {
+                if ($target.closest('a[href]').length) {
                     return true; // a link
                 }
                 if ($target.closest('.' + classes.content).length) {

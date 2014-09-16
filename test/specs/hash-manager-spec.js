@@ -259,6 +259,36 @@ function hashManagerSpec(hash) {
                 },5);
             });
         });
+
+        describe("Query string in hashmanager support", function () {
+
+            it("using a query string in the hashbang does the callback", function (done) {
+                hash.change('');
+
+                var count = 0,
+                    callback = function () {
+                        count++;
+                    };
+
+                var hashName = 'tileTitle',
+                    queryString = '?pid=3434&altpid=3444';
+                hash.register(hashName, callback);
+
+                hash.change(hashName + queryString);
+
+                setTimeout(function() {
+                    expect(location.hash).to.equal('#!' + hashName + queryString);
+
+                    expect(count > 0).to.equal(true);
+
+                    done();
+                }, 5);
+
+
+            });
+        });
+
+
     });
 
     return describeSpec;
