@@ -1,4 +1,4 @@
-version: 2.3.0-rc1
+version: 2.3.0-rc-1
 include:
   - _includes
 port: 4000
