@@ -5,6 +5,8 @@
     * [updated] tweaked shop colours (+ added 'variety' + removed 'Complete')
   * Lightbox
     * [fixed] Allow <span> tags to be used inside links within the lightbox
+  * In-page Nav
+    * [updated] now allows navigation away from the page  
 
 ## 2.2.15
 
