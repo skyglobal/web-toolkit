@@ -1,10 +1,16 @@
 # Change Log
 
+## 2.3.0 - breaking change
+ * Skycons
+   * [updated] Rendering engine updated (to 'node') meaning slight changes might be spotted
+
 ## 2.2.16
   * Colours
     * [updated] tweaked shop colours (+ added 'variety' + removed 'Complete')
   * Lightbox
     * [fixed] Allow <span> tags to be used inside links within the lightbox
+  * In-page Nav
+    * [updated] now allows navigation away from the page  
 
 ## 2.2.15
 
