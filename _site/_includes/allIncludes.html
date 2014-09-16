@@ -1,0 +1,66 @@
+{% for primary_link in site.data.nav %}
+    {% assign primary_link_name = primary_link[0] %}
+    {% assign primary_link_url = primary_link_name | downcase | replace: ' ','-' %}
+    <section class="demo-section" id="{{primary_link_url}}">
+        <h2>{{ primary_link_name }}</h2>
+        {% for secondary_link in primary_link[1] %}
+            {% assign secondary_link_name = secondary_link[0] %}
+            {% assign secondary_link_url = secondary_link_name | downcase | replace: ' ','-' %}
+            <div class="sub-section" id="{{primary_link_url}}--{{ secondary_link_url }}">
+                <h3 class="demo-h3 section-title smaller">
+                    {{secondary_link_name}}
+                    <a href="#!code/{{ primary_link_url }}--{{ secondary_link_url }}" class="code-download">Code</a>
+                    {% if secondary_link[1].has_tests %}
+                        <a href="#test/{{ primary_link_url }}/{{ secondary_link_url }}" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
+                    {% endif %}
+                </h3>
+                {% if secondary_link[1].warning %}
+                    <p class="designer-notes skycom-7 alpha error">{{ secondary_link[1].warning }}</p>
+                {% endif %}
+                {% if secondary_link[1].design_notes %}
+                    <p class="designer-notes skycom-7 alpha">{{ secondary_link[1].design_notes }}</p>
+                {% endif %}
+                {% for example in secondary_link[1].examples %}
+                    {% assign title = example.example %}
+                    {% if example.title %}
+                        {% assign title = example.title %}
+                    {% endif %}
+                    {% assign url = example.example | downcase | replace: ' ','-' %}
+                    {% capture html_path %}{{ primary_link_url }}/{{ secondary_link_url }}/{{ url }}.html{% endcapture %}
+                    <div class="example" data-example="{{ url }}">
+                        {% capture header %}<h4 class="demo-h4 pod-title smaller">{{ title }}</h4>{% endcapture %}
+                        {% if forloop.last %}
+                            {% if forloop.first %}
+                                {% unless example.design_notes %}
+                                    {% capture header %}{% endcapture %}
+                                {% endunless %}
+                            {% endif %}
+                        {% endif %}
+                        {{ header }}
+                        {% if example.warning %}
+                            <p class="designer-notes skycom-7 alpha error">{{ example.warning }}</p>
+                        {% endif %}
+                        {% if example.design_notes %}
+                            <p class="designer-notes skycom-7 alpha">{{ example.design_notes }}</p>
+                        {% endif %}
+                        {% if example.code_view_only != true %}
+                        <div class="demo clearfix">
+                            {% include {{html_path}} %}
+                        </div>
+                        {% endif %}
+                        {%if example.js_file%}
+                            {% capture js_path %}{{ primary_link_url }}/{{ secondary_link_url }}/{{ url }}.js{% endcapture %}
+                            <script>
+                                if (window.environment=="demo") {
+                                    require(['toolkit'], function(){
+                                        {% include {{js_path}} %}
+                                    });
+                                }
+                            </script>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </section>
+{% endfor %}
