@@ -16,8 +16,5 @@ screenshot/*-v2.png
 screenshot/*-v1-v2-diff.png
 screenshot/v2-v1-diff.json
 Gemfile.lock
-dist
-_site
-/dist
 /build
 build
