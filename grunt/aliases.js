@@ -1,5 +1,5 @@
 module.exports = {
-    "dev-build": [ 'compass', 'requirejs', 'svgs', 'uglify', 'jekyll:build', 'prepare-site'],
+    "dev-build": ['clean', 'compass', 'requirejs', 'fonts', 'svgs', 'uglify', 'jekyll:build', 'prepare-site'],
 
     //  standard build tasks that lints your JS
     "build": ['jshint', 'version_sync', 'dev-build'],

@@ -16,5 +16,11 @@ body {
       color: $this-color;
     }
   }
-
+  /* font size overrides */
+  .skycon-sky,
+  .skycon-chevron-down,
+  .skycon-chevron-up,
+  .skycon-menu{
+    font-size:10px;
+  }
 }
