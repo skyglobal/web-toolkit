@@ -2,7 +2,8 @@
 
 ## 2.3.0 - breaking change
  * Skycons
-   * [updated] Rendering engine updated (to 'node') meaning slight changes might be spotted
+   * [updated] Rendering engine updated (to 'node') meaning slight changes might be spotted.
+   * If you need the previous skycons, please use [2.2.14/fonts/skycons.css](http://web-toolkit.global.sky.com/2.2.14/fonts/skycons.css)
  * Accordion
    * [fixed] underline on chevron no longer shows on hover
 
