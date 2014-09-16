@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.3.0 - breaking change
+ * Skycons
+   * [updated] Rendering engine updated (to 'node') meaning slight changes might be spotted
+
 ## 2.2.16
   * Colours
     * [updated] tweaked shop colours (+ added 'variety' + removed 'Complete')
