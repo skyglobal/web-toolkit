@@ -140,6 +140,7 @@ end
 def updateGHPages
   puts "*** Updating GH Pages and Pushing to github.io ***"
   `cp -r _site /tmp`
+  configGit
   `git clean -fdx`
   `git stash`
   origBranchName = branchName
@@ -150,7 +151,6 @@ def updateGHPages
   `rmdir /tmp/_site`
   `touch .nojekyll`
   `git add --all`
-  configGit
   `git commit -m "#{latest_version_number} version"`
   `git push origin gh-pages`
   puts "Committed and pushed to GH Pages"
