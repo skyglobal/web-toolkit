@@ -118,12 +118,18 @@ toolkit.inPageNav = (function(hash, event) {
             var self = this;
             hash.register(this.getHashList(), this.changeTab.bind(self));
 
-            this.$tabs.on('click', function(){
-                self.changeTab($(this).find('a').attr('href'));
+            var changeTabIfValid = function(controlId){
+                if (controlId.indexOf('/') === -1) {
+                    self.changeTab(controlId);
+                }
+            };
+
+            this.$tabs.on('click', function() {
+                changeTabIfValid($(this).find('a').attr('href'));
             });
 
-            this.$moreTabsContainer.find('li').on('click', function(){
-                self.changeTab($(this).find('a').attr('href'));
+            this.$moreTabsContainer.find('li').on('click', function() {
+                changeTabIfValid($(this).find('a').attr('href'));
             });
 
             this.$tabs.find('a').on('focus', function() {
