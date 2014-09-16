@@ -32,6 +32,10 @@ toolkit.hashManager = (function() {
     function onHashChange(hash) {
         var evt, fn;
         hash = cleanHash((typeof hash === 'string') ? hash : location.hash);
+
+        if (hash.indexOf('?') > 1) {
+            hash = hash.split('?')[0];
+        }
         evt = getHashEvent(hash);
         if (hash && evt) {
             fn = 'callback';
