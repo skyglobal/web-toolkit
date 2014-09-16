@@ -10,7 +10,7 @@ module.exports = {
             htmlDemoTemplate : 'app/src/skycons/skycon-template.html',
             htmlDemo : true,
             ligatures : false,
-            engine : 'node', //'fontforge',
+            engine : 'fontforge',
             destHtml : 'app/_includes/base-styles/icons',
             hashes : false,
             embed : true
