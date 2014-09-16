@@ -3,6 +3,8 @@
 ## 2.3.0 - breaking change
  * Skycons
    * [updated] Rendering engine updated (to 'node') meaning slight changes might be spotted
+ * Accordion
+   * [fixed] underline on chevron no longer shows on hover
 
 ## 2.2.16
   * Colours
