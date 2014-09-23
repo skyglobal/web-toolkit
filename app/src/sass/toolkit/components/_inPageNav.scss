@@ -107,9 +107,6 @@ $tab-height: 45px;
     border-top: solid 1px #dcdcdc;
 
   }
-  &.whole-page .tabs {
-    border-top: 0;
-  }
 
   .tabs > .tab {
     @include box-sizing(border-box);
