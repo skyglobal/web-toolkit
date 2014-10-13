@@ -1,5 +1,10 @@
 # Change Log
 
+## 2.3.1 ##
+ * Lightbox
+   * Removed broken `focusOnLightboxLink` function
+   * Added support for FORM submission
+
 ## 2.3.0 - breaking change
  * Skycons
    * [updated] Rendering engine updated (to 'node') meaning slight changes might be spotted.
@@ -41,7 +46,7 @@
 
   * Libraries
     * [added] RequireJS version 2.1.14 (demo page upgraded to use 2.1.14 from 2.1.9)
-  * Tooltip 
+  * Tooltip
     * [fixed] Now shows on top of hover area if any of the tooltip area is off the screen
   * Toolkit
     * [added] Toolkit can now be loaded before the body tag (e.g., in the head tag) without any JS errors
