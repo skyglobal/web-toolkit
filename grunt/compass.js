@@ -7,7 +7,8 @@ module.exports = function(grunt) {
                 cssDir: 'dist/stylesheets/',
                 outputStyle: grunt.option('beautify') ? "expanded" : "compressed" ,
                 noLineComments: true,
-                trace: true
+                trace: true,
+                bundleExec: true
             }
         }
     };
