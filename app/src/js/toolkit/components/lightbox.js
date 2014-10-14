@@ -55,6 +55,10 @@ toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
         $container.find('*[tabindex]').each(enableElementTabIndex);
     }
 
+    function focusOnLightboxLink(link){
+        if (!link) { return; }
+        link.focus();
+    }
     function focusOnCloseButton($lightboxLink, $closeIcon){
         if ($lightboxLink.hasClass(keyboardFocus.className)) {
             keyboardFocus.apply($closeIcon[0]);
@@ -200,6 +204,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
             var lightbox = this;
             if (!lightbox.$container.hasClass(classes.closing)) { return; }
             lightbox.$container.removeClass(classes.open + ' ' + classes.closing);
+            focusOnLightboxLink(lightbox.$lightboxLink);
             showBodyScrollBar();
             enablePageTabbing($('body'));
             if (lightbox.options.onClose){

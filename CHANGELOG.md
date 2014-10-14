@@ -2,7 +2,6 @@
 
 ## 2.3.1 ##
  * Lightbox
-   * Removed broken `focusOnLightboxLink` function
    * Added support for FORM submission
 
 ## 2.3.0 - breaking change
