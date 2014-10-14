@@ -2431,7 +2431,10 @@ $('.sky-form').validation();
                 occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>
 
-            Text: <input id="lightboxInput" type="text" placeholder="focusable input">
+            <form action="http://search.sky.com/skycom/search" class="sky-form">
+                Text: <input id="lightboxInput" name="term" type="text" placeholder="focusable input">
+                <button type="submit" class="btn">Search</button>
+            </form>
 
             <p style="margin-bottom: 16px;">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -2459,6 +2462,7 @@ $('.sky-form').validation();
 <article id="lightbox-demo-with-callbacks" class='hidden cushioned' aria-labelledby="lightbox-demo-link-with-callbacks">
     empty lightbox just to show JS callbacks in action.
 </article>
+
                         </div>
                         
                         
@@ -3648,8 +3652,8 @@ responsiveImages.init(document.getElementById('demo-responsive-images'));
                 <a target="_github" href="https://github.com/skyglobal/web-toolkit/issues">Bugs / Feature Requests</a>
             </li>
             <li class="right meta-data" >
-                <div class="intro">Toolkit v<span id="current-version">2.3.0</span></div>
-                <small class="right">Updated: 16-09-2014</small>
+                <div class="intro">Toolkit v<span id="current-version">2.3.1</span></div>
+                <small class="right">Updated: 14-10-2014</small>
             </li>
         </ul>
     </div>

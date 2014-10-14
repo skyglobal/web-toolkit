@@ -1816,8 +1816,9 @@ toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
                     e.preventDefault();
                     lightbox.close();
                 }
-                if ($target.closest('a[href]').length) {
-                    return true; // a link
+
+                if ($target.closest('a[href], [type="submit"]').length) {
+                    return true;
                 }
                 if ($target.closest('.' + classes.content).length) {
                     return false;
@@ -1921,7 +1922,8 @@ if (typeof window.define === "function" && window.define.amd) {
     });
 } else {
     toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager, toolkit.event, toolkit.detect);
-};
+}
+;
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.share = (function(detect) {
 

@@ -146,14 +146,14 @@ function lightboxSpec(lightbox, focus, hash) {
             // then
             expect($('#lightbox-demo').closest('.lightbox').hasClass('lightbox-open')).to.equal(true);
         });
-        
+
         it('does not block link click inside of the lightbox', function() {
             openLightboxWithClick();
 
             var aToClick = $('#lightbox-demo a:has(span)'),
                 spanToClick = $('span', aToClick),
                 isClickEventBubbled = false;
-            
+
             $(document).on('click.lightbox.link.test', function() {
                 isClickEventBubbled = true;
             });
@@ -165,7 +165,7 @@ function lightboxSpec(lightbox, focus, hash) {
             spanToClick.click(function() {
                 isClickEventBubbled = false;
             });
-            
+
             // when: click <a> tag
             aToClick.click();
             // then
@@ -177,6 +177,27 @@ function lightboxSpec(lightbox, focus, hash) {
             expect(isClickEventBubbled).to.equal(true);
 
             $(document).off('click.lightbox.link.test');
+        });
+
+        it('does not block form submission inside of the lightbox', function() {
+            openLightboxWithClick();
+
+            var isClickEventBubbled = false;
+
+            $('#lightbox-demo').on('click', function(e) {
+                if ($(e.target).closest('[type="submit"]').length) {
+                    isClickEventBubbled = true;
+                    e.preventDefault();
+                };
+            });
+
+            // when: click <a> tag
+            $('#lightbox-demo').find('[type="submit"]').click();
+            // then
+            expect(isClickEventBubbled).to.equal(true);
+
+            $('#lightbox-demo').off('click');
+
         });
 
         it('hides the double scrollbar from the body element', function (done) {

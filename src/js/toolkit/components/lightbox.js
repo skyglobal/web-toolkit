@@ -129,8 +129,9 @@ toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
                     e.preventDefault();
                     lightbox.close();
                 }
-                if ($target.closest('a[href]').length) {
-                    return true; // a link
+
+                if ($target.closest('a[href], [type="submit"]').length) {
+                    return true;
                 }
                 if ($target.closest('.' + classes.content).length) {
                     return false;

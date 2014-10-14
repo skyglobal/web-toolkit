@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.3.0 - 2014-09-16 */
+/*! web-toolkit - v2.3.1 - 2014-10-14 */
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
@@ -1352,7 +1352,7 @@ toolkit.lightbox = function($, keyboardFocus, hash, event, detect) {
                     e.preventDefault();
                     lightbox.close();
                 }
-                if ($target.closest("a[href]").length) {
+                if ($target.closest('a[href], [type="submit"]').length) {
                     return true;
                 }
                 if ($target.closest("." + classes.content).length) {
