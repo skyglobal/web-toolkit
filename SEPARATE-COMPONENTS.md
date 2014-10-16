@@ -34,3 +34,9 @@ Please, no mention of `toolkit`!
 If you decide to use gulp-gh-pages (which is amazing and highly recommended) for demo page releases.  Please follow the instructions the plugins instructions before manually creating a gh-pages branch.
 
 https://www.npmjs.org/package/gulp-gh-pages
+
+## First Bower Release
+
+The following step only needs to be done the first time you release to Bower:
+
+`bower register bskyb-component-name git@github.com:skyglobal/component-name.git`
