@@ -21,3 +21,10 @@
 * Any dependencies are also made into separate components too
 
 The `grunt` command mentioned in the above is optional.   Feel free to use `gulp` if it fits your needs better.
+
+### Naming Conventions
+
+Within bower.json and package.json use :
+ * bskyb-**component-name**
+
+Please, no mention of `toolkit`!
