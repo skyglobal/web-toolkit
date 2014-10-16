@@ -20,7 +20,7 @@
    * i.e. `bower install --save-dev bskyb-component`
 * Any dependencies are also made into separate components too
 
-The `grunt` command mentioned in the above is optional.   Feel free to use `gulp` if it fits your needs better.
+The `grunt` command mentioned in the above is optional.   Feel free to use `gulp` if it fits your needs better, but please keep `test`, `serve`, `release:bower` and `release:gh-pages`.
 
 ### Naming Conventions
 
