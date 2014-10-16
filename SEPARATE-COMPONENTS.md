@@ -9,7 +9,7 @@
 * A demopage using gh-pages branch is visible 
    * i.e. skyglobal.github.io/component
 * The component is tested and can be run locally 
-   * 'grunt test'
+   * `grunt test`
 * The project can be run locally using port 3456 and the command serve 
    * `grunt serve`
 * The component can be released to bower  
