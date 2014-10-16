@@ -19,3 +19,5 @@
 * The finished component is made available on bower 
    * i.e. `bower install --save-dev bskyb-component`
 * Any dependencies are also made into separate components too
+
+The `grunt` command mentioned in the above is optional.   Feel free to use `gulp` if it fits your needs better.
