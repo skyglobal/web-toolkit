@@ -28,3 +28,9 @@ Within bower.json and package.json use :
  * bskyb-**component-name**
 
 Please, no mention of `toolkit`!
+
+## First gh-pages Release
+
+If you decide to use gulp-gh-pages (which is amazing and highly recommended) for demo page releases.  Please follow the instructions the plugins instructions before manually creating a gh-pages branch.
+
+https://www.npmjs.org/package/gulp-gh-pages
