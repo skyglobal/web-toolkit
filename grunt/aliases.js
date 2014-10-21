@@ -3,6 +3,7 @@ module.exports = {
 
     //  standard build tasks that lints your JS
     "build": ['jshint', 'version_sync', 'dev-build'],
+    "dev": ['dev-build'],
     "serve": ['build','connect:app', 'open:app', 'watch'],
 
     //  misc tasks

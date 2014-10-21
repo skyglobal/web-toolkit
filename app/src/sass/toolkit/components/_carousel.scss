@@ -23,11 +23,13 @@
     @media all and (max-width: 768px) {
         display: none;
     }
+
   }
 
   .skycom-carousel-container {
     @include transform(translate3d(0, 0, 0));
     @include backface-visibility(hidden);
+    @include transition(opacity 0.3s ease-in);
     position: relative;
     height:100%;
     width: 200%;
@@ -40,6 +42,19 @@
       &:first-child{
         display:block;
       }
+    }
+
+    &.skycom-carousel-container--transparent {
+      /* IE 8 */
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+      /* IE 5-7 */
+      filter: alpha(opacity=0);
+      /* Netscape */
+      -moz-opacity: 0.0;
+      /* Safari 1.x */
+      -khtml-opacity: 0.0;
+      /* Good browsers */
+      opacity: 0.0;
     }
 
     &.animate {
