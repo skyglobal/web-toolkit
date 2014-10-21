@@ -29,7 +29,7 @@
   .skycom-carousel-container {
     @include transform(translate3d(0, 0, 0));
     @include backface-visibility(hidden);
-    @include transition(opacity 0.3s ease-in);
+    @include transition(opacity 0.1s ease-in);
     position: relative;
     height:100%;
     width: 200%;
@@ -44,7 +44,7 @@
       }
     }
 
-    &.skycom-carousel-container--transparent {
+    &.skycom-carousel-transparent {
       /* IE 8 */
       -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
       /* IE 5-7 */
