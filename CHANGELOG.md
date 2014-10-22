@@ -1,8 +1,12 @@
 # Change Log
 
+## 2.3.2 ##
+ * Carousel
+   * [added] Capability to specify which slide to start the carousel with
+
 ## 2.3.1 ##
  * Lightbox
-   * Added support for FORM submission
+   * [added] Support for FORM submission
 
 ## 2.3.0 - breaking change
  * Skycons
