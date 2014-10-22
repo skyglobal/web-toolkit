@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.3.1 - 2014-10-14 */
+/*! web-toolkit - v2.3.2 - 2014-10-22 */
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.polyfill = function() {
@@ -1710,6 +1710,7 @@ toolkit.carousel = function(video, detect) {
         this.currentIndex = 0;
         this.slideCount = this.$slides.length;
         this.timerId = false;
+        this.animate = options.animate || false;
         this.touchReset();
         this.bindEvents();
         if (!this.options.video) {
@@ -1817,7 +1818,11 @@ toolkit.carousel = function(video, detect) {
             this.setOffset(opts.start, false);
             if (typeof opts.end !== "undefined") {
                 setTimeout(function() {
-                    self.setOffset(opts.end, true);
+                    self.setOffset(opts.end, self.animate);
+                    if (!self.animate) {
+                        self.$slideContainer.removeClass("skycom-carousel-transparent");
+                        self.animate = true;
+                    }
                     self.showTermsLink(indexToShow);
                     self.$viewport.trigger("change", indexToShow);
                 }, 20);
