@@ -9,7 +9,9 @@
             <div class="sub-section" id="{{primary_link_url}}--{{ secondary_link_url }}">
                 <h3 class="demo-h3 section-title smaller">
                     {{secondary_link_name}}
-                    <a href="#!code/{{ primary_link_url }}--{{ secondary_link_url }}" class="code-download">Code</a>
+                    {% if secondary_link[1].hide_code_button != true %}
+                        <a href="#!code/{{ primary_link_url }}--{{ secondary_link_url }}" class="code-download">Code</a>
+                    {% endif %}
                     {% if secondary_link[1].has_tests %}
                         <a href="#test/{{ primary_link_url }}/{{ secondary_link_url }}" class="run-test"><i class="skycon-carousel-play" title="run tests"></i></a>
                     {% endif %}

@@ -41,9 +41,9 @@ Base Styles :
       - example : all
         developer_notes_file : true
   Icons :
+    hide_code_button : true
     examples :
       - example : Skycons
-        developer_notes_file : true
         design_notes : >
           These icons will look good on Retina devices and can be any size or (single) colour.
       - example : Sprite

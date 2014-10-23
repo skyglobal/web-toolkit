@@ -1,0 +1,18 @@
+{
+    "name": "bskyb-webtoolkit",
+    "version": "0.0.0",
+    "homepage": "https://github.com/skyglobal/web-toolkit",
+    "authors": [
+        "BSkyB"
+    ],
+    "description": "A collection of brand approved elements for use across Sky.com",
+    "main": "dist",
+    "license": "MIT",
+    "ignore": [
+        "**/*",
+        "!dist/**/*"
+    ],
+    "devDependencies": {
+        "bskyb-skycons": "~0.0.4"
+    }
+}

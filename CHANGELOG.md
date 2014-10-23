@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.3.3 ##
+ * Skycons
+   * [updated] Now using the [Skycons component](https://github.com/skyglobal/skycons)
+   
 ## 2.3.2 ##
  * Carousel
    * [added] Capability to specify which slide to start the carousel with
