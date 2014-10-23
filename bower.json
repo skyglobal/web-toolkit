@@ -14,6 +14,7 @@
     ],
     "devDependencies": {
         "bskyb-skycons": "~0.0.4",
+        "bskyb-buttons": "~0.0.5",
         "bskyb-colours": "~0.0.6"
     }
 }

@@ -41,12 +41,9 @@ Base Styles :
         design_notes : >
           These are not likely to look good on Retina devices
   Buttons :
-    developer_notes_file: true
+    hide_code_button : true
     examples :
-      - example : Primary
-        developer_notes_file: true
-      - example : Secondary
-        developer_notes_file: true
+      - example : example
   Spinners :
     examples :
       - example : Default
