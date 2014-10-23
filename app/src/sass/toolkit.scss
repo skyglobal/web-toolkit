@@ -2,6 +2,8 @@
 
 @import url("../../static/fonts/fonts.css");
 
+@import "bskyb-colours/scss/colours";
+
 @import "toolkit/configurations";
 @import "toolkit/variables";
 @import "toolkit/utility-classes";
@@ -25,5 +27,4 @@
 
 @import "toolkit/utils/toggle";
 
-@import "toolkit/base/colours";
 @import "toolkit/base/accessibility";

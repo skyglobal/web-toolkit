@@ -20,18 +20,9 @@ Base Styles :
       - example : Tablet Portrait
         title : Grid on a Portrait Tablet 696px
   Colours :
-    design_notes : >
-      These colours are for designer reference only.
-      For accessibility reasons, please also note the colour of the text being used.
+    hide_code_button : true
     examples :
-      - example : Backgrounds
-        title : Backgrounds + Key Line
-      - example : Buttons Icons
-        title : Buttons + Icons
-      - example : Channels
-      - example : Shop
-      - example : Typography
-      - example : V3 Brand
+      - example : example
   Typography :
     design_notes : |
       Only a single <code>Page Title</code> can exist on a page at one time. All other titles can be used multiple times.

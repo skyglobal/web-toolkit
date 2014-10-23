@@ -8,11 +8,14 @@ module.exports = {
     dest: '_site/'
   },
   bower_fonts: {
-      expand: true,
-      cwd: 'bower_components/',
-      src: 'bskyb-skycons/dist/**',
-      flatten: true,
-      filter: 'isFile',
-      dest: 'dist/fonts/'
+      files: [
+        {   expand: true,
+            cwd: 'bower_components/',
+            src: 'bskyb-skycons/dist/**',
+            flatten: true,
+            filter: 'isFile',
+            dest: 'dist/fonts/'
+        }
+      ]
   }
 };
