@@ -16,7 +16,8 @@
     * [added] Backbone 1.1.2
   * Spinners
     * [updated] Added more spacing between spinning icon and text
-
+  * Carousel
+    * [updated] Added an animate configuration option to disable/enable animation of slides. 
 ## 2.2.14
 
   * Form
