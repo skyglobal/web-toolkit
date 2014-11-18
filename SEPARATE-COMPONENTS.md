@@ -9,18 +9,20 @@
 * A demopage using gh-pages branch is visible 
    * i.e. skyglobal.github.io/component
 * The component is tested and can be run locally 
-   * `grunt test`
+   * `gulp test`
 * The project can be run locally using port 3456 and the command serve 
-   * `grunt serve`
+   * `gulp serve`
 * The component can be released to bower  
-   * `grunt release:bower` 
-* The component demo page can be updated easily using 
-   * `grunt release:gh-pages` 
+   * `gulp release:bower` 
+* The component demo page can be updated easily 
+   * `gulp release:gh-pages` 
+* The component should be on a cdn (available behind akamai) 
+   * `gulp release:cdn` 
 * The finished component is made available on bower 
    * i.e. `bower install --save-dev bskyb-component`
 * Any dependencies are also made into separate components too
 
-The `grunt` command mentioned in the above is optional.   Feel free to use `gulp` if it fits your needs better, but please keep `test`, `serve`, `release:bower` and `release:gh-pages`.
+The `gulp` command mentioned in the above is optional.   Feel free to use `grunt` if it fits your needs better, but please keep `test`, `serve`, `release:bower`, `release:gh-pages` and `release:cdn`.
 
 ### Naming Conventions
 
