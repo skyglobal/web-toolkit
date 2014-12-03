@@ -24,13 +24,10 @@ Base Styles :
     examples :
       - example : example
   Typography :
-    design_notes : |
-      Only a single <code>Page Title</code> can exist on a page at one time. All other titles can be used multiple times.
-      <code>Helvetica/Arial/Verdana</code> should be used as fallback for when Sky fonts aren't available within the browser.
-      When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, <code>Medium</code> should always come first.
+    hide_code_button : true
     examples :
       - example : all
-        developer_notes_file : true
+        developer_notes_file : false
   Icons :
     hide_code_button : true
     examples :
