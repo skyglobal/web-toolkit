@@ -4,13 +4,13 @@
 
 @import "bskyb-colours/scss/colours";
 @import "bskyb-buttons/scss/buttons";
+@import "bskyb-typography/dist/scss/main";
 
 @import "toolkit/configurations";
 @import "toolkit/variables";
 @import "toolkit/utility-classes";
 
 @import "toolkit/base/grid";
-@import "toolkit/base/typography";
 @import "toolkit/base/icons";
 @import "toolkit/base/spinner";
 @import "toolkit/base/well";
