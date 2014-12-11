@@ -47,10 +47,7 @@ end
 
 def assets_to_upload
   puts "Working out dist files to upload. Working directory: #{Dir.getwd}"
-  ["stylesheets/toolkit.css",
-    "fonts/skycons.css", "fonts/skycons.min.css",
-    "fonts/skycons.eot", "fonts/skycons.ttf",
-    "scripts/toolkit.js", "scripts/toolkit.min.js",
+  ["stylesheets/toolkit.css",  "scripts/toolkit.js", "scripts/toolkit.min.js",
     "images/icon.png"]
 end
 

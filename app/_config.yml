@@ -1,4 +1,4 @@
-version: 2.3.2
+version: 2.3.2-feature-bower-components-v3
 include:
   - _includes
 port: 4000
