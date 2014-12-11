@@ -1,14 +1,11 @@
 @import "compass";
 
-@import url("../../static/fonts/fonts.css");
-
 @import "bskyb-colours/dist/scss/colours";
 @import "bskyb-buttons/dist/scss/buttons";
 @import "bskyb-typography/dist/scss/typography";
+@import "bskyb-skycons/dist/scss/skycons";
 @import "bskyb-grid/dist/scss/grid";
 
-@import "toolkit/configurations";
-@import "toolkit/variables";
 @import "toolkit/utility-classes";
 
 @import "toolkit/base/icons";
