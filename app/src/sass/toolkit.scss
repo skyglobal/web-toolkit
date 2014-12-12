@@ -1,16 +1,15 @@
 @import "compass";
 
-@import url("../../static/fonts/fonts.css");
+@import "bskyb-colours/dist/scss/colours";
+@import "bskyb-buttons/dist/scss/buttons";
+@import "bskyb-typography/dist/scss/typography";
+@import "bskyb-skycons/dist/scss/skycons";
+@import "bskyb-grid/dist/scss/grid";
 
-@import "toolkit/configurations";
-@import "toolkit/variables";
 @import "toolkit/utility-classes";
 
-@import "toolkit/base/grid";
-@import "toolkit/base/typography";
 @import "toolkit/base/icons";
-@import "toolkit/base/spinner";
-@import "toolkit/base/buttons";
+@import "bskyb-spinners/dist/scss/spinners";
 @import "toolkit/base/well";
 
 @import "toolkit/components/breadcrumb";
@@ -25,5 +24,4 @@
 
 @import "toolkit/utils/toggle";
 
-@import "toolkit/base/colours";
 @import "toolkit/base/accessibility";
