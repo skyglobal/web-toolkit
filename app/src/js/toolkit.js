@@ -1,6 +1,6 @@
 if (typeof window.define === "function" && window.define.amd) {
     define([
-        'bower_components/bskyb-polyfill/dist/js/polyfill',
+        'bower_components/bskyb-polyfill/dist/js/polyfill.toolkit',
         'utils/detect',
         'utils/hash-manager',
         'utils/popup',
