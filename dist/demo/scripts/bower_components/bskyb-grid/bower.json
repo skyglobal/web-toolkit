@@ -1,0 +1,19 @@
+{
+    "name": "bskyb-grid",
+    "version": "0.0.3",
+    "homepage": "https://github.com/skyglobal/grid",
+    "authors": [
+        "Peter Mouland <peter.mouland@gmail.com>",
+        "Sky.com <dl-skycom@bskyb.com>"
+    ],
+    "description": "grid for use across Sky.com",
+    "main": "dist",
+    "license": "MIT",
+    "ignore": [
+        "**/*",
+        "!dist/**/*"
+    ],
+    "devDependencies": {
+        "bskyb-typography": "~0.0.4"
+    }
+}

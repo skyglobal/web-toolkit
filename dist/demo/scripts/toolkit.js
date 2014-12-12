@@ -1,32 +1,47 @@
-if (typeof toolkit==='undefined') toolkit={};
-toolkit.polyfill = (function () {
-    
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+require('./polyfills/Array')();
+require('./polyfills/events')();
+require('./polyfills/Function')();
+require('./polyfills/hasOwnProperty')();
+require('./polyfills/String')();
+require('./polyfills/whichIE')();
+},{"./polyfills/Array":3,"./polyfills/Function":4,"./polyfills/String":5,"./polyfills/events":6,"./polyfills/hasOwnProperty":7,"./polyfills/whichIE":8}],2:[function(require,module,exports){
+var polyfill = require('./polyfill');
 
-    function functionBind(){
-        if (typeof Function.prototype.bind !=='undefined') { return; }
-        Function.prototype.bind = function (oThis) {
-            var aArgs = Array.prototype.slice.call(arguments, 1),
-                fToBind = this,
-                FNOP = function () {},
-                fBound = function () {
-                    return fToBind.apply(this instanceof FNOP && oThis ? this : oThis,
-                        aArgs.concat(Array.prototype.slice.call(arguments)));
-                };
-            FNOP.prototype = this.prototype;
-            fBound.prototype = new FNOP();
-            return fBound;
+if (typeof toolkit === "undefined") window.toolkit = {};
+if (typeof window.define === "function" && window.define.amd) {
+    define('bower_components/bskyb-polyfill/dist/js/polyfill.toolkit', [], function() {
+        
+        return polyfill;
+    });
+} else {
+    toolkit.polyfill = polyfill;
+}
+},{"./polyfill":1}],3:[function(require,module,exports){
+
+module.exports = function(){
+
+    // ES5 15.4.4.18 Array.prototype.forEach ( callbackfn [ , thisArg ] )
+    // From https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/forEach
+    if (!Array.prototype.forEach) {
+        Array.prototype.forEach = function (fun /*, thisp */) {
+            if (this === void 0 || this === null) { throw TypeError(); }
+
+            var t = Object(this);
+            var len = t.length >>> 0;
+            if (typeof fun !== "function") { throw TypeError(); }
+
+            var thisp = arguments[1], i;
+            for (i = 0; i < len; i++) {
+                if (i in t) {
+                    fun.call(thisp, t[i], i, t);
+                }
+            }
         };
     }
 
-    function stringTtrim(){
-        if(typeof String.prototype.trim !== 'undefined') { return; }
-        String.prototype.trim = function() {
-            return this.replace(/^\s+|\s+$/g, '');
-        };
-    }
 
-    function arrayIndexOf(){
-        if (typeof Array.prototype.indexOf !== 'undefined') { return; }
+    if (!Array.prototype.indexOf){
         Array.prototype.indexOf = function(elt) {
             var len = this.length >>> 0;
             var from = Number(arguments[1]) || 0;
@@ -40,206 +55,116 @@ toolkit.polyfill = (function () {
             return -1;
         };
     }
+};
+},{}],4:[function(require,module,exports){
 
-    function arrayForEach(){
+module.exports = function(){
 
-        if (typeof Array.prototype.forEach !== 'undefined')    {  return; }
-        Array.prototype.forEach = function(fun /*, thisArg */)        {
-            if (this === void 0 || this === null)
-                throw new TypeError();
+    if (!Function.prototype.bind) {
+        Function.prototype.bind = function (oThis) {
+            var aArgs = Array.prototype.slice.call(arguments, 1),
+                fToBind = this,
+                FNOP = function () {},
+                fBound = function () {
+                    return fToBind.apply(this instanceof FNOP && oThis ? this : oThis,
+                        aArgs.concat(Array.prototype.slice.call(arguments)));
+                };
+            FNOP.prototype = this.prototype;
+            fBound.prototype = new FNOP();
+            return fBound;
+        };
+    }
+};
+},{}],5:[function(require,module,exports){
 
-            var t = Object(this);
-            var len = t.length >>> 0;
-            if (typeof fun !== "function")
-                throw new TypeError();
+module.exports = function() {
 
-            var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
-            for (var i = 0; i < len; i++)            {
-                if (i in t)
-                    fun.call(thisArg, t[i], i, t);
-            }
+    if (typeof String.prototype.trim !== 'function') {
+        String.prototype.trim = function () {
+            return this.replace(/^\s+|\s+$/g, '');
         };
     }
 
-    function classList(){
-        /*
-         * classList.js: Cross-browser full element.classList implementation.
-         * 2014-01-31
-         *
-         * By Eli Grey, http://eligrey.com
-         * Public Domain.
-         * NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
-         */
-
-        /*global self, document, DOMException */
-
-        /*! @source http://purl.eligrey.com/github/classList.js/blob/master/classList.js*/
-
-//        if ("document" in self && !("classList" in document.createElement("_"))) {
-//
-//            (function (view) {
-//
-//                if (!('Element' in view)) return;
-//
-//                var classListProp = "classList",
-//                    protoProp = "prototype",
-//                    elemCtrProto = view.Element[protoProp],
-//                    objCtr = Object,
-//                    strTrim = String[protoProp].trim || function () {
-//                        return this.replace(/^\s+|\s+$/g, "");
-//                    },
-//                    arrIndexOf = Array[protoProp].indexOf || function (item) {
-//                        var i = 0,
-//                            len = this.length;
-//                        for (; i < len; i++) {
-//                            if (i in this && this[i] === item) {
-//                                return i;
-//                            }
-//                        }
-//                        return -1;
-//                    },
-//                // Vendors: please allow content code to instantiate DOMExceptions
-//                    DOMEx = function (type, message) {
-//                        this.name = type;
-//                        this.code = DOMException[type];
-//                        this.message = message;
-//                    },
-//                    checkTokenAndGetIndex = function (classList, token) {
-//                        if (token === "") {
-//                            throw new DOMEx(
-//                                "SYNTAX_ERR",
-//                                "An invalid or illegal string was specified"
-//                            );
-//                        }
-//                        if (/\s/.test(token)) {
-//                            throw new DOMEx(
-//                                "INVALID_CHARACTER_ERR",
-//                                "String contains an invalid character"
-//                            );
-//                        }
-//                        return arrIndexOf.call(classList, token);
-//                    },
-//                    ClassList = function (elem) {
-//                        var
-//                            trimmedClasses = strTrim.call(elem.getAttribute("class") || ""),
-//                            classes = trimmedClasses ? trimmedClasses.split(/\s+/) : [],
-//                            i = 0,
-//                            len = classes.length;
-//                        for (; i < len; i++) {
-//                            this.push(classes[i]);
-//                        }
-//                        this._updateClassName = function () {
-//                            elem.setAttribute("class", this.toString());
-//                        };
-//                    },
-//                    classListProto = ClassList[protoProp] = [],
-//                    classListGetter = function () {
-//                        return new ClassList(this);
-//                    };
-//// Most DOMException implementations don't allow calling DOMException's toString()
-//// on non-DOMExceptions. Error's toString() is sufficient here.
-//                DOMEx[protoProp] = Error[protoProp];
-//                classListProto.item = function (i) {
-//                    return this[i] || null;
-//                };
-//                classListProto.contains = function (token) {
-//                    token += "";
-//                    return checkTokenAndGetIndex(this, token) !== -1;
-//                };
-//                classListProto.add = function () {
-//                    var tokens = arguments,
-//                        i = 0,
-//                        l = tokens.length,
-//                        token,
-//                        updated = false;
-//                    do {
-//                        token = tokens[i] + "";
-//                        if (checkTokenAndGetIndex(this, token) === -1) {
-//                            this.push(token);
-//                            updated = true;
-//                        }
-//                    }
-//                    while (++i < l);
-//
-//                    if (updated) {
-//                        this._updateClassName();
-//                    }
-//                };
-//                classListProto.remove = function () {
-//                    var tokens = arguments,
-//                        i = 0,
-//                        l = tokens.length,
-//                        token,
-//                        updated = false;
-//                    do {
-//                        token = tokens[i] + "";
-//                        var index = checkTokenAndGetIndex(this, token);
-//                        if (index !== -1) {
-//                            this.splice(index, 1);
-//                            updated = true;
-//                        }
-//                    }
-//                    while (++i < l);
-//
-//                    if (updated) {
-//                        this._updateClassName();
-//                    }
-//                };
-//                classListProto.toggle = function (token, force) {
-//                    token += "";
-//
-//                    var result = this.contains(token),
-//                        method = result ? force !== true && "remove" : force !== false && "add";
-//
-//                    if (method) {
-//                        this[method](token);
-//                    }
-//
-//                    return !result;
-//                };
-//                classListProto.toString = function () {
-//                    return this.join(" ");
-//                };
-//
-//                if (objCtr.defineProperty) {
-//                    var classListPropDesc = {
-//                        get: classListGetter,
-//                        enumerable: true,
-//                        configurable: true
-//                    };
-//                    try {
-//                        objCtr.defineProperty(elemCtrProto, classListProp, classListPropDesc);
-//                    } catch (ex) { // IE 8 doesn't support enumerable:true
-//                        if (ex.number === -0x7FF5EC54) {
-//                            classListPropDesc.enumerable = false;
-//                            objCtr.defineProperty(elemCtrProto, classListProp, classListPropDesc);
-//                        }
-//                    }
-//                } else if (objCtr[protoProp].__defineGetter__) {
-//                    elemCtrProto.__defineGetter__(classListProp, classListGetter);
-//                }
-//
-//            }(self));
-//        }
+    if (typeof String.prototype.endsWith !== 'function') {
+        String.prototype.endsWith = function (suffix) {
+            return this.indexOf(suffix, this.length - suffix.length) !== -1;
+        };
     }
 
-    functionBind();
-    stringTtrim();
-    arrayIndexOf();
-    classList();
-    arrayForEach();
+}
+},{}],6:[function(require,module,exports){
+module.exports = function(){
 
-});
+    // from Jonathan Neal's Gist https://gist.github.com/jonathantneal/3748027
+    !window.addEventListener && (function (WindowPrototype, DocumentPrototype, ElementPrototype, addEventListener, removeEventListener, dispatchEvent, registry) {
+        WindowPrototype[addEventListener] = DocumentPrototype[addEventListener] = ElementPrototype[addEventListener] = function (type, listener) {
+            var target = this;
 
-if (typeof window.define === "function" && window.define.amd) {
-    define('utils/polyfill', [], function() {
-        
-        toolkit.polyfill = toolkit.polyfill();
-        return toolkit.polyfill;
-    });
-} else {
-    toolkit.polyfill = toolkit.polyfill();
+            if (type === 'DOMContentLoaded') {
+                type = 'readystatechange';
+            }
+
+            registry.unshift([target, type, listener, function (event) {
+                event.currentTarget = target;
+                event.preventDefault = function () { event.returnValue = false };
+                event.stopPropagation = function () { event.cancelBubble = true };
+                event.target = event.srcElement || target;
+
+                listener.call(target, event);
+            }]);
+
+            this.attachEvent("on" + type, registry[0][3]);
+        };
+
+        WindowPrototype[removeEventListener] = DocumentPrototype[removeEventListener] = ElementPrototype[removeEventListener] = function (type, listener) {
+            for (var index = 0, register; register = registry[index]; ++index) {
+                if (register[0] == this && register[1] == type && register[2] == listener) {
+                    return this.detachEvent("on" + type, registry.splice(index, 1)[0][3]);
+                }
+            }
+        };
+
+        WindowPrototype[dispatchEvent] = DocumentPrototype[dispatchEvent] = ElementPrototype[dispatchEvent] = function (eventObject) {
+            return this.fireEvent("on" + eventObject.type, eventObject);
+        };
+    })(Window.prototype, HTMLDocument.prototype, Element.prototype, "addEventListener", "removeEventListener", "dispatchEvent", []);
+
+
 };
+},{}],7:[function(require,module,exports){
+
+module.exports = function() {
+    window.hasOwnProperty = window.hasOwnProperty || Object.prototype.hasOwnProperty;
+}
+},{}],8:[function(require,module,exports){
+
+module.exports = function() {
+
+    var nav = navigator.appName,
+        version = navigator.appVersion,
+        ie = (nav == 'Microsoft Internet Explorer');
+    if (ie) {
+        var match = navigator.userAgent.match(/MSIE ([0-9]{1,}[\.0-9]{0,})/);
+        version = match ? parseFloat(match[1]) : 0;
+    }
+    var ieObj = {
+        name: nav,
+        version: version,
+        ie: ie,
+        ie12: false,
+        ie11: false,
+        ie10: false,
+        ie9: false,
+        ie8: false,
+        ie7: false,
+        ie6: false
+    };
+    ieObj['ie' + parseInt(version,10)] = ie;
+    window.whichIE = ieObj;
+
+};
+},{}]},{},[2]);
+
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.event = (function () {
     
@@ -2666,7 +2591,7 @@ if (typeof window.define === "function" && window.define.amd) {
 ;
 if (typeof window.define === "function" && window.define.amd) {
     define('toolkit',[
-        'utils/polyfill',
+        'bower_components/bskyb-polyfill/dist/js/polyfill.toolkit',
         'utils/detect',
         'utils/hash-manager',
         'utils/popup',

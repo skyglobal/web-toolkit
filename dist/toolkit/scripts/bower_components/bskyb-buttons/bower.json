@@ -1,0 +1,19 @@
+{
+  "name": "bskyb-buttons",
+  "version": "0.0.7",
+  "homepage": "https://github.com/skyglobal/buttons",
+  "authors": [
+    "Peter Mouland <peter.mouland@gmail.com>"
+  ],
+  "description": "A collection of brand approved buttons for use across Sky.com",
+  "main": "dist/scss/buttons.scss",
+  "license": "MIT",
+  "ignore": [
+    "**/*",
+    "!dist/**/*"
+  ],
+  "devDependencies": {
+    "bskyb-colours": "~0.0.8",
+    "bskyb-typography": "~0.0.3"
+  }
+}

@@ -1,0 +1,12 @@
+//grid
+$container-width-thin: 974px;
+$container-width: 1140px;
+$gutter: 36px;
+$column: 62px;
+$textIndent: 20px;
+$width-thin-plus-gutters: $container-width-thin + $gutter + $gutter;
+$width-plus-gutters: $container-width + $gutter + $gutter;
+$column-plus-gutter: $column + $gutter;
+
+//mobile
+$mobile-width: 767px;

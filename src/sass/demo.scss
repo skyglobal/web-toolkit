@@ -1,6 +1,9 @@
 @import "compass";
 
-@import "toolkit/variables";
+@import "bskyb-colours/dist/scss/colours";
+@import "bskyb-grid/dist/scss/grid";
+@import "bskyb-typography/dist/scss/typography";
+@import "bskyb-spinners/dist/scss/spinners";
 
 @import "demo/menu";
 @import "demo/demo";

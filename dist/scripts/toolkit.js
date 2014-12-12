@@ -1,76 +1,183 @@
-/*! web-toolkit - v2.3.2 - 2014-10-22 */
-if (typeof toolkit === "undefined") toolkit = {};
-
-toolkit.polyfill = function() {
-    function functionBind() {
-        if (typeof Function.prototype.bind !== "undefined") {
-            return;
-        }
-        Function.prototype.bind = function(oThis) {
-            var aArgs = Array.prototype.slice.call(arguments, 1), fToBind = this, FNOP = function() {}, fBound = function() {
-                return fToBind.apply(this instanceof FNOP && oThis ? this : oThis, aArgs.concat(Array.prototype.slice.call(arguments)));
+/*! web-toolkit - v2.3.3 - 2014-12-12 */
+(function e(t, n, r) {
+    function s(o, u) {
+        if (!n[o]) {
+            if (!t[o]) {
+                var a = typeof require == "function" && require;
+                if (!u && a) return a(o, !0);
+                if (i) return i(o, !0);
+                var f = new Error("Cannot find module '" + o + "'");
+                throw f.code = "MODULE_NOT_FOUND", f;
+            }
+            var l = n[o] = {
+                exports: {}
             };
-            FNOP.prototype = this.prototype;
-            fBound.prototype = new FNOP();
-            return fBound;
-        };
-    }
-    function stringTtrim() {
-        if (typeof String.prototype.trim !== "undefined") {
-            return;
+            t[o][0].call(l.exports, function(e) {
+                var n = t[o][1][e];
+                return s(n ? n : e);
+            }, l, l.exports, e, t, n, r);
         }
-        String.prototype.trim = function() {
-            return this.replace(/^\s+|\s+$/g, "");
-        };
+        return n[o].exports;
     }
-    function arrayIndexOf() {
-        if (typeof Array.prototype.indexOf !== "undefined") {
-            return;
+    var i = typeof require == "function" && require;
+    for (var o = 0; o < r.length; o++) s(r[o]);
+    return s;
+})({
+    1: [ function(require, module, exports) {
+        require("./polyfills/Array")();
+        require("./polyfills/events")();
+        require("./polyfills/Function")();
+        require("./polyfills/hasOwnProperty")();
+        require("./polyfills/String")();
+        require("./polyfills/whichIE")();
+    }, {
+        "./polyfills/Array": 3,
+        "./polyfills/Function": 4,
+        "./polyfills/String": 5,
+        "./polyfills/events": 6,
+        "./polyfills/hasOwnProperty": 7,
+        "./polyfills/whichIE": 8
+    } ],
+    2: [ function(require, module, exports) {
+        var polyfill = require("./polyfill");
+        if (typeof toolkit === "undefined") window.toolkit = {};
+        if (typeof window.define === "function" && window.define.amd) {
+            define("bower_components/bskyb-polyfill/dist/js/polyfill.toolkit", [], function() {
+                return polyfill;
+            });
+        } else {
+            toolkit.polyfill = polyfill;
         }
-        Array.prototype.indexOf = function(elt) {
-            var len = this.length >>> 0;
-            var from = Number(arguments[1]) || 0;
-            from = from < 0 ? Math.ceil(from) : Math.floor(from);
-            if (from < 0) {
-                from += len;
+    }, {
+        "./polyfill": 1
+    } ],
+    3: [ function(require, module, exports) {
+        module.exports = function() {
+            if (!Array.prototype.forEach) {
+                Array.prototype.forEach = function(fun) {
+                    if (this === void 0 || this === null) {
+                        throw TypeError();
+                    }
+                    var t = Object(this);
+                    var len = t.length >>> 0;
+                    if (typeof fun !== "function") {
+                        throw TypeError();
+                    }
+                    var thisp = arguments[1], i;
+                    for (i = 0; i < len; i++) {
+                        if (i in t) {
+                            fun.call(thisp, t[i], i, t);
+                        }
+                    }
+                };
             }
-            for (;from < len; from++) {
-                if (from in this && this[from] === elt) return from;
+            if (!Array.prototype.indexOf) {
+                Array.prototype.indexOf = function(elt) {
+                    var len = this.length >>> 0;
+                    var from = Number(arguments[1]) || 0;
+                    from = from < 0 ? Math.ceil(from) : Math.floor(from);
+                    if (from < 0) {
+                        from += len;
+                    }
+                    for (;from < len; from++) {
+                        if (from in this && this[from] === elt) return from;
+                    }
+                    return -1;
+                };
             }
-            return -1;
         };
-    }
-    function arrayForEach() {
-        if (typeof Array.prototype.forEach !== "undefined") {
-            return;
-        }
-        Array.prototype.forEach = function(fun) {
-            if (this === void 0 || this === null) throw new TypeError();
-            var t = Object(this);
-            var len = t.length >>> 0;
-            if (typeof fun !== "function") throw new TypeError();
-            var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
-            for (var i = 0; i < len; i++) {
-                if (i in t) fun.call(thisArg, t[i], i, t);
+    }, {} ],
+    4: [ function(require, module, exports) {
+        module.exports = function() {
+            if (!Function.prototype.bind) {
+                Function.prototype.bind = function(oThis) {
+                    var aArgs = Array.prototype.slice.call(arguments, 1), fToBind = this, FNOP = function() {}, fBound = function() {
+                        return fToBind.apply(this instanceof FNOP && oThis ? this : oThis, aArgs.concat(Array.prototype.slice.call(arguments)));
+                    };
+                    FNOP.prototype = this.prototype;
+                    fBound.prototype = new FNOP();
+                    return fBound;
+                };
             }
         };
-    }
-    function classList() {}
-    functionBind();
-    stringTtrim();
-    arrayIndexOf();
-    classList();
-    arrayForEach();
-};
-
-if (typeof window.define === "function" && window.define.amd) {
-    define("utils/polyfill", [], function() {
-        toolkit.polyfill = toolkit.polyfill();
-        return toolkit.polyfill;
-    });
-} else {
-    toolkit.polyfill = toolkit.polyfill();
-}
+    }, {} ],
+    5: [ function(require, module, exports) {
+        module.exports = function() {
+            if (typeof String.prototype.trim !== "function") {
+                String.prototype.trim = function() {
+                    return this.replace(/^\s+|\s+$/g, "");
+                };
+            }
+            if (typeof String.prototype.endsWith !== "function") {
+                String.prototype.endsWith = function(suffix) {
+                    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+                };
+            }
+        };
+    }, {} ],
+    6: [ function(require, module, exports) {
+        module.exports = function() {
+            !window.addEventListener && function(WindowPrototype, DocumentPrototype, ElementPrototype, addEventListener, removeEventListener, dispatchEvent, registry) {
+                WindowPrototype[addEventListener] = DocumentPrototype[addEventListener] = ElementPrototype[addEventListener] = function(type, listener) {
+                    var target = this;
+                    if (type === "DOMContentLoaded") {
+                        type = "readystatechange";
+                    }
+                    registry.unshift([ target, type, listener, function(event) {
+                        event.currentTarget = target;
+                        event.preventDefault = function() {
+                            event.returnValue = false;
+                        };
+                        event.stopPropagation = function() {
+                            event.cancelBubble = true;
+                        };
+                        event.target = event.srcElement || target;
+                        listener.call(target, event);
+                    } ]);
+                    this.attachEvent("on" + type, registry[0][3]);
+                };
+                WindowPrototype[removeEventListener] = DocumentPrototype[removeEventListener] = ElementPrototype[removeEventListener] = function(type, listener) {
+                    for (var index = 0, register; register = registry[index]; ++index) {
+                        if (register[0] == this && register[1] == type && register[2] == listener) {
+                            return this.detachEvent("on" + type, registry.splice(index, 1)[0][3]);
+                        }
+                    }
+                };
+                WindowPrototype[dispatchEvent] = DocumentPrototype[dispatchEvent] = ElementPrototype[dispatchEvent] = function(eventObject) {
+                    return this.fireEvent("on" + eventObject.type, eventObject);
+                };
+            }(Window.prototype, HTMLDocument.prototype, Element.prototype, "addEventListener", "removeEventListener", "dispatchEvent", []);
+        };
+    }, {} ],
+    7: [ function(require, module, exports) {
+        module.exports = function() {
+            window.hasOwnProperty = window.hasOwnProperty || Object.prototype.hasOwnProperty;
+        };
+    }, {} ],
+    8: [ function(require, module, exports) {
+        module.exports = function() {
+            var nav = navigator.appName, version = navigator.appVersion, ie = nav == "Microsoft Internet Explorer";
+            if (ie) {
+                var match = navigator.userAgent.match(/MSIE ([0-9]{1,}[\.0-9]{0,})/);
+                version = match ? parseFloat(match[1]) : 0;
+            }
+            var ieObj = {
+                name: nav,
+                version: version,
+                ie: ie,
+                ie12: false,
+                ie11: false,
+                ie10: false,
+                ie9: false,
+                ie8: false,
+                ie7: false,
+                ie6: false
+            };
+            ieObj["ie" + parseInt(version, 10)] = ie;
+            window.whichIE = ieObj;
+        };
+    }, {} ]
+}, {}, [ 2 ]);
 
 if (typeof toolkit === "undefined") toolkit = {};
 
@@ -2138,7 +2245,7 @@ if (typeof window.define === "function" && window.define.amd) {
 }
 
 if (typeof window.define === "function" && window.define.amd) {
-    define("toolkit", [ "utils/polyfill", "utils/detect", "utils/hash-manager", "utils/popup", "utils/toggle", "utils/focus", "utils/event", "components/in-page-nav", "components/accordion", "components/form", "components/lightbox", "components/share", "components/tooltip", "components/video", "components/carousel" ], function(polyfill, detect, hashManager, popup, toggle, focus, validation, event, inPageNav, accordion, datePicker, lightbox, share, tooltip, video, carousel) {
+    define("toolkit", [ "bower_components/bskyb-polyfill/dist/js/polyfill.toolkit", "utils/detect", "utils/hash-manager", "utils/popup", "utils/toggle", "utils/focus", "utils/event", "components/in-page-nav", "components/accordion", "components/form", "components/lightbox", "components/share", "components/tooltip", "components/video", "components/carousel" ], function(polyfill, detect, hashManager, popup, toggle, focus, validation, event, inPageNav, accordion, datePicker, lightbox, share, tooltip, video, carousel) {
         return {
             polyfill: polyfill,
             detect: detect,

@@ -1,0 +1,18 @@
+{
+  "name": "bskyb-colours",
+  "version": "0.0.8",
+  "homepage": "https://github.com/skyglobal/colours",
+  "authors": [
+    "Peter Mouland <peter.mouland@gmail.com>"
+  ],
+  "description": "A collection of brand approved colours for use across Sky.com",
+  "main": "dist/scss/colours.scss",
+  "license": "MIT",
+  "ignore": [
+    "**/*",
+    "!dist/**/*"
+  ],
+  "devDependencies": {
+    "bskyb-typography": "~0.0.1"
+  }
+}

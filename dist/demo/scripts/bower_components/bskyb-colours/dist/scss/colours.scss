@@ -1,0 +1,63 @@
+$mobile-width: 767px;
+$mobile-carousel-width: 600px;
+
+$font-family: SkyTextRegular, Helvetica, Arial, sans-serif;
+$font-family-medium: SkyTextMedium, Helvetica, Arial, sans-serif;
+
+//grid
+$container-width-thin: 974px;
+$container-width: 1140px;
+$gutter: 36px;
+$column: 62px;
+$textIndent: 20px;
+$width-thin-plus-gutters: $container-width-thin + $gutter + $gutter;
+$width-plus-gutters: $container-width + $gutter + $gutter;
+$column-plus-gutter: $column + $gutter;
+
+// colours
+$link: #0070a5;
+
+$primary: #333333;
+$white: #fff;
+$secondary: #666666;
+$inactive: #999999;
+$error: #D21717;
+
+$primary-button: #0073c5;
+$secondary-button: #eaeaea;
+$success-icon: #6dbb00;
+
+$background-dark: #eaeaea;
+$background-light: #f4f4f4;
+$background-focus: #004ac5;
+
+$key-line: #dcdcdc;
+
+$colour-sky-1: #0076be;
+$colour-sky-atlantic: #003663;
+$colour-sky-arts: #734993;
+$colour-sky-living: #87a0af;
+$colour-sky-movies: #a51d4d;
+
+$colour-v3-red: #ed1c24;
+$colour-v3-pink: #ed0677;
+$colour-v3-yellow: #fdb913;
+$colour-v3-green: #a6ce39;
+$colour-v3-blue: #00aeef;
+
+$colour-original: #f05423;
+$colour-variety: #7d9d33;
+$colour-family: #2b93d1;
+$colour-movies: #b11d55;
+$colour-sports: #d92027;
+
+$colour-google-plus: #dd4c38;
+$colour-twitter: #25a8e0;
+$colour-facebook: #3b5998;
+$colour-sky-go: #44ad3a;
+$colour-remote-record: #ed1c24;
+$colour-never-miss: #0077ae;
+
+@function em($target, $context: 16) {
+  @return ($target / $context) * 1em;
+}

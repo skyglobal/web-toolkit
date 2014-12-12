@@ -1,0 +1,26 @@
+{
+  "name": "bskyb-polyfill",
+  "version": "0.0.10",
+  "description": "Provides facilities that are not built into a web browser. It implements technology that a developer expects the browser to provide natively providing a more uniform API landscape.",
+  "main": "dist/js/polyfill.min.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "skyglobal",
+    "toolkit",
+    "polyfill"
+  ],
+  "authors": [
+    "Ben Fletcher <bjfletcher@gmail.com>",
+    "Peter Mouland <peter.mouland@gmail.com>"
+  ],
+  "ignore": [
+    "**/*",
+    "!dist/**/*"
+  ],
+  "devDependencies": {
+    "bskyb-typography": "~0.0.4",
+    "bskyb-colours": "~0.0.8"
+  }
+}

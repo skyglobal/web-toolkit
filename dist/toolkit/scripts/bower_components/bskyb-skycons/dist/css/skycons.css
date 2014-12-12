@@ -1,0 +1,164 @@
+
+@font-face {
+  font-family: "skycons";
+  src: url('../fonts/skycons.eot');
+  src: url('../fonts/skycons.eot?#iefix') format('eot'), url('../fonts/skycons.woff') format('woff'), url('../fonts/skycons.ttf') format('truetype'), url('../fonts/skycons.svg#skycons') format('svg'); }
+[class^="skycon-"] {
+  color: #333;
+  font-size: 16px;
+  line-height: 1.125em; }
+[class^="skycon-"]:before, [class*="skycon-"]:before {
+  font-family: "skycons";
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+  font-weight: normal;
+  font-style: normal;
+  speak: none;
+  text-decoration: inherit;
+  text-transform: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+.skycon-arrow-down-left:before {
+  content: "\E001"; }
+.skycon-arrow-left:before {
+  content: "\E002"; }
+.skycon-arrow-right:before {
+  content: "\E003"; }
+.skycon-at:before {
+  content: "\E004"; }
+.skycon-calender:before {
+  content: "\E005"; }
+.skycon-carousel-pause:before {
+  content: "\E006"; }
+.skycon-carousel-play:before {
+  content: "\E007"; }
+.skycon-chevron-down:before {
+  content: "\E008"; }
+.skycon-chevron-left:before {
+  content: "\E009"; }
+.skycon-chevron-up:before {
+  content: "\E00A"; }
+.skycon-chevron:before {
+  content: "\E00B"; }
+.skycon-close:before {
+  content: "\E00C"; }
+.skycon-cloud:before {
+  content: "\E00D"; }
+.skycon-download:before {
+  content: "\E00E"; }
+.skycon-edit:before {
+  content: "\E00F"; }
+.skycon-expand:before {
+  content: "\E010"; }
+.skycon-facebook:before {
+  content: "\E011"; }
+.skycon-gallery:before {
+  content: "\E012"; }
+.skycon-google-plus:before {
+  content: "\E013"; }
+.skycon-home:before {
+  content: "\E014"; }
+.skycon-info:before {
+  content: "\E015"; }
+.skycon-mail:before {
+  content: "\E016"; }
+.skycon-menu:before {
+  content: "\E017"; }
+.skycon-minify:before {
+  content: "\E018"; }
+.skycon-mouse:before {
+  content: "\E019"; }
+.skycon-never-miss:before {
+  content: "\E01A"; }
+.skycon-on-demand:before {
+  content: "\E01B"; }
+.skycon-pending:before {
+  content: "\E01C"; }
+.skycon-phone:before {
+  content: "\E01D"; }
+.skycon-plus-circle:before {
+  content: "\E01E"; }
+.skycon-remote-download:before {
+  content: "\E01F"; }
+.skycon-remote-record:before {
+  content: "\E020"; }
+.skycon-search:before {
+  content: "\E021"; }
+.skycon-share:before {
+  content: "\E022"; }
+.skycon-sky-go:before {
+  content: "\E023"; }
+.skycon-sky-plus:before {
+  content: "\E024"; }
+.skycon-sky:before {
+  content: "\E025"; }
+.skycon-speech-bubble:before {
+  content: "\E026"; }
+.skycon-tick:before {
+  content: "\E027"; }
+.skycon-tv:before {
+  content: "\E028"; }
+.skycon-twitter-favourite:before {
+  content: "\E029"; }
+.skycon-twitter-follow:before {
+  content: "\E02A"; }
+.skycon-twitter-reply:before {
+  content: "\E02B"; }
+.skycon-twitter-retweet:before {
+  content: "\E02C"; }
+.skycon-twitter:before {
+  content: "\E02D"; }
+.skycon-user-profile:before {
+  content: "\E02E"; }
+.skycon-video-play:before {
+  content: "\E02F"; }
+.skycon-volume:before {
+  content: "\E030"; }
+.skycon-warning:before {
+  content: "\E031"; }
+.skycon-whatsapp:before {
+  content: "\E032"; }
+body .hover-colour:hover .skycon-sky-go, body .colour.skycon-sky-go {
+  color: #44ad3a; }
+body .hover-colour:hover .skycon-remote-record, body .colour.skycon-remote-record {
+  color: #ed1c24; }
+body .hover-colour:hover .skycon-never-miss, body .colour.skycon-never-miss {
+  color: #0077ae; }
+body .hover-colour:hover .skycon-warning, body .colour.skycon-warning {
+  color: #D21717; }
+body .hover-colour:hover .skycon-google-plus, body .colour.skycon-google-plus {
+  color: #dd4c38; }
+body .hover-colour:hover .skycon-twitter, body .colour.skycon-twitter {
+  color: #25a8e0; }
+body .hover-colour:hover .skycon-facebook, body .colour.skycon-facebook {
+  color: #3b5998; }
+body .hover-colour:hover .skycon-tick, body .colour.skycon-tick {
+  color: #6dbb00; }
+body .hover-colour:hover .skycon-chevron, body .colour.skycon-chevron {
+  color: #0070a5; }
+body .hover-colour:hover .skycon-chevron-up, body .colour.skycon-chevron-up {
+  color: #0070a5; }
+body .hover-colour:hover .skycon-chevron-down, body .colour.skycon-chevron-down {
+  color: #0070a5; }
+body .hover-colour:hover .skycon-at, body .colour.skycon-at {
+  color: #0073c5; }
+body .hover-colour:hover .skycon-cloud, body .colour.skycon-cloud {
+  color: #0073c5; }
+body .hover-colour:hover .skycon-on-demand, body .colour.skycon-on-demand {
+  color: #0073c5; }
+body .hover-colour:hover .skycon-sky-plus, body .colour.skycon-sky-plus {
+  color: #0073c5; }
+body .hover-colour:hover .skycon-mouse, body .colour.skycon-mouse {
+  color: #0073c5; }
+body .hover-colour:hover .skycon-tv, body .colour.skycon-tv {
+  color: #0073c5; }
+body .hover-colour:hover .skycon-phone, body .colour.skycon-phone {
+  color: #0073c5; }
+body .hover-colour:hover .skycon-edit, body .colour.skycon-edit {
+  color: #0073c5; }
+body .hover-colour:hover .skycon-pending, body .colour.skycon-pending {
+  color: #6dbb00; }
+body .hover-colour:hover .skycon-whatsapp, body .colour.skycon-whatsapp {
+  color: #34AF23; }
