@@ -1,8 +1,20 @@
 # Change Log
 
 ## 2.3.3 ##
+ * Polyfill
+   * [updated] Now using the [Polyfill component](https://github.com/skyglobal/polyfill)
  * Skycons
    * [updated] Now using the [Skycons component](https://github.com/skyglobal/skycons)
+ * Colours
+   * [updated] Now using the [Colours component](https://github.com/skyglobal/colours)
+ * Typography
+   * [updated] Now using the [Typography component](https://github.com/skyglobal/typography)
+ * Buttons
+   * [updated] Now using the [Buttons component](https://github.com/skyglobal/buttons)
+ * Grid
+   * [updated] Now using the [Grid component](https://github.com/skyglobal/grid)
+ * Spinners
+   * [updated] Now using the [Spinners component](https://github.com/skyglobal/spinners)
    
 ## 2.3.2 ##
  * Carousel
