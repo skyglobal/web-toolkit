@@ -1,12 +1,14 @@
 if (typeof window.define === "function" && window.define.amd) {
     define([
         'bower_components/bskyb-polyfill/dist/js/polyfill.toolkit',
-        'utils/detect',
+        'bower_components/bskyb-detect/dist/js/detect.toolkit',
+//        'utils/detect',
         'utils/hash-manager',
         'utils/popup',
         'utils/toggle',
         'utils/focus',
-        'utils/event',
+//        'utils/event',
+        'bower_components/bskyb-event/dist/js/event.toolkit',
         'components/in-page-nav',
         'components/accordion',
         'components/form',
