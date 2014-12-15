@@ -1,3 +1,4 @@
+$mobile-carousel-width: 600px;
 @function em($target, $context: 16) {
     @return ($target / $context) * 1em;
 }
