@@ -11,7 +11,7 @@ module.exports = function(grunt) {
                 trace: true,
                 bundleExec: true,
                 relativeAssets: true,
-                importPath: ['bower_components']
+                importPath: ['bower_components', '.']
             }
         }
     };
