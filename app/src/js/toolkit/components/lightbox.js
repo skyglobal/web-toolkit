@@ -228,11 +228,11 @@ if (typeof window.define === "function" && window.define.amd) {
             ['utils/focus',
             'utils/hash-manager',
             'utils/event',
-            'utils/detect'
+            'bower_components/bskyb-detect/dist/js/detect.requirejs'
             ], function(focus, hash, event, detect) {
         'use strict';
         return toolkit.lightbox(jQuery, focus, hash, event, detect);
     });
 } else {
-    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager, toolkit.event, toolkit.detect);
+    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager, toolkit.event, skyComponents.detect);
 }
