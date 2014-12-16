@@ -227,12 +227,12 @@ if (typeof window.define === "function" && window.define.amd) {
     define('components/lightbox',
             ['utils/focus',
             'utils/hash-manager',
-            'utils/event',
+            'bower_components/bskyb-event/dist/js/event.requirejs',
             'bower_components/bskyb-detect/dist/js/detect.requirejs'
             ], function(focus, hash, event, detect) {
         'use strict';
         return toolkit.lightbox(jQuery, focus, hash, event, detect);
     });
 } else {
-    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager, toolkit.event, skyComponents.detect);
+    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager, skyComponents.event, skyComponents.detect);
 }
