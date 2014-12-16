@@ -3,7 +3,7 @@ function detectSpec(detect, event) {
     var describeSpec = 'Detect module can use JS and HTML to know';
 
     if (!detect) { //for in page test runs
-        event = toolkit.event;
+        event = skyComponents.event;
         detect = toolkit.detect;
     }
 

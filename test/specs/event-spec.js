@@ -3,7 +3,7 @@ function eventSpec(event) {
     var describeSpec = 'Event module';
 
     if (!event) { //for in-page test runs
-        event = toolkit.event;
+        event = skyComponents.event;
     }
 
     addScript('utils','event','emit');

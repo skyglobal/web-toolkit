@@ -3,7 +3,7 @@ function responsiveImagesSpec(responsiveImages, event) {
     var describeSpec = 'Responsive Images';
 
     if (!event){//needed for running test in demo page
-        event = toolkit.event;
+        event = skyComponents.event;
     }
 
     var fixtures = {
