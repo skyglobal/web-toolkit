@@ -139,14 +139,8 @@ Utils:
   Detect :
     has_tests : true
     examples :
-      - example : CSS
-        js_file : true
-      - example : Touch
-        js_file : true
-      - example : Orientation
-        js_file : true
-      - example : View
-        js_file : true
+      - example : features
+        js_file : false
   Event :
     has_tests : true
     examples :
