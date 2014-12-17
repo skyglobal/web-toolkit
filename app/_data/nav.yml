@@ -21,8 +21,12 @@ Base Styles :
         title : Grid on a Portrait Tablet 696px
   Colours :
     hide_code_button : true
+    examples :
+      - example : example
   Typography :
     hide_code_button : true
+    examples :
+      - example : example
   Icons :
     hide_code_button : true
     examples :
@@ -34,8 +38,12 @@ Base Styles :
           These are not likely to look good on Retina devices
   Buttons :
     hide_code_button : true
+    examples :
+      - example : example
   Spinners :
     hide_code_button : true
+    examples :
+      - example : example
 
 
 Components :
@@ -129,8 +137,21 @@ Components :
 Utils:
   Detect :
     hide_code_button : true
+    examples :
+      - example : example
   Event :
     hide_code_button : true
+    examples :
+      - example : Ready
+        js_file : true
+      - example : On event
+        title : On
+      - example : Off event
+        title : Off
+      - example : Resize End
+        js_file : true
+      - example : Emit
+        js_file : true
   Hash Manager :
     design_notes : This is useful for maintaining state i.e. ensuring clicks, page refreshes and bookmarked links all arrive in the same state.
     has_tests : true
