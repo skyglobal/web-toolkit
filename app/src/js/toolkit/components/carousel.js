@@ -3,7 +3,7 @@ if (typeof toolkit==='undefined') { toolkit={}; }
 toolkit.carousel = (function(video, detect) {
     'use strict';
 
-    var has3d = detect.css('support3D');
+    var has3d = detect.css('translate3d');
     var hasTransform = detect.css('transform');
     var hasTransition = detect.css('transition');
 

@@ -26,8 +26,7 @@ Base Styles :
   Typography :
     hide_code_button : true
     examples :
-      - example : all
-        developer_notes_file : false
+      - example : example
   Icons :
     hide_code_button : true
     examples :
@@ -42,9 +41,9 @@ Base Styles :
     examples :
       - example : example
   Spinners :
+    hide_code_button : true
     examples :
-      - example : Default
-        developer_notes_file : true
+      - example : example
 
 
 Components :
@@ -137,12 +136,11 @@ Components :
 
 Utils:
   Detect :
-    has_tests : true
+    hide_code_button : true
     examples :
-      - example : features
-        js_file : false
+      - example : example
   Event :
-    has_tests : true
+    hide_code_button : true
     examples :
       - example : event
   Hash Manager :

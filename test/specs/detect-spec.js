@@ -88,7 +88,7 @@ function detectSpec(detect, event) {
                         left: 3
                     };
                 }
-            }
+            };
 
             expect(detect.elementVisibleRight(elementTwo)).to.equal(true);
         });
@@ -115,7 +115,7 @@ function detectSpec(detect, event) {
 
         it('that a css property is supported', function () {
             expect(detect.css('transition')).to.equal(true);
-            expect(detect.css('support3D')).to.equal(false);
+            expect(detect.css('translate3d')).to.equal(true);
         });
 
         it('that a css property is not supported', function () {
