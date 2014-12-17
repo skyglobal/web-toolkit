@@ -95,7 +95,7 @@ function lightboxSpec(lightbox, focus, hash) {
             },100);
         });
 
-        it.skip('closes when the close icon is clicked', function (done) {
+        it('closes when the close icon is clicked', function (done) {
             openLightboxWithClick();
             // when
             $("#lightbox-demo").prev('.lightbox-close').click();
