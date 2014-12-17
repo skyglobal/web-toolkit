@@ -1,12 +1,12 @@
 if (typeof window.define === "function" && window.define.amd) {
     define([
-        'bower_components/bskyb-polyfill/dist/js/polyfill.toolkit',
+        'bower_components/bskyb-polyfill/dist/js/polyfill.requirejs',
         'bower_components/bskyb-detect/dist/js/detect.requirejs',
         'utils/hash-manager',
         'utils/popup',
         'utils/toggle',
         'utils/focus',
-//        'utils/event',
+        'utils/validation',
         'bower_components/bskyb-event/dist/js/event.requirejs',
         'components/in-page-nav',
         'components/accordion',
@@ -18,6 +18,11 @@ if (typeof window.define === "function" && window.define.amd) {
         'components/carousel'], function(
             polyfill, detect, hashManager, popup,toggle, focus, validation, event,
             inPageNav, accordion, datePicker, lightbox, share, tooltip, video, carousel){
+
+        toolkit.detect = detect;
+        toolkit.event = event;
+        toolkit.polyfill = polyfill;
+
         return {
             polyfill: polyfill,
             detect: detect,

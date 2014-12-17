@@ -13,7 +13,7 @@
         "!dist/**/*"
     ],
     "devDependencies": {
-        "bskyb-polyfill": "~0.0.11",
+        "bskyb-polyfill": "~0.1.0",
         "bskyb-grid": "~0.0.4",
         "bskyb-skycons": "~0.1.1",
         "bskyb-buttons": "~0.0.8",
