@@ -1,6 +1,13 @@
 # Change Log
 
-## 2.3.3 ##
+## 2.3.4
+
+  * Detect
+   * [updated] Now using the [Detect component](https://github.com/skyglobal/detect)
+  * Event
+   * [updated] Now using the [Event component](https://github.com/skyglobal/event)
+
+## 2.3.3
  * Polyfill
    * [updated] Now using the [Polyfill component](https://github.com/skyglobal/polyfill)
  * Skycons
@@ -16,11 +23,11 @@
  * Spinners
    * [updated] Now using the [Spinners component](https://github.com/skyglobal/spinners)
    
-## 2.3.2 ##
+## 2.3.2
  * Carousel
    * [added] Capability to specify which slide to start the carousel with
 
-## 2.3.1 ##
+## 2.3.1
  * Lightbox
    * [added] Support for FORM submission
 
