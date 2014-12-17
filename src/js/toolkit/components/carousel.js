@@ -3,7 +3,7 @@ if (typeof toolkit==='undefined') { toolkit={}; }
 toolkit.carousel = (function(video, detect) {
     'use strict';
 
-    var has3d = detect.css('support3D');
+    var has3d = detect.css('translate3d');
     var hasTransform = detect.css('transform');
     var hasTransition = detect.css('transition');
 
@@ -445,9 +445,9 @@ toolkit.carousel = (function(video, detect) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/carousel', ['components/video', 'utils/detect'], function(video, detect) {
+    define('components/carousel', ['components/video', 'bower_components/bskyb-detect/dist/js/detect.requirejs'], function(video, detect) {
         return toolkit.carousel(video, detect);
     });
 } else {
-    toolkit.carousel = toolkit.carousel(toolkit.video, toolkit.detect);
+    toolkit.carousel = toolkit.carousel(toolkit.video, skyComponents.detect);
 }

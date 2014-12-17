@@ -66,10 +66,10 @@ toolkit.tooltip = (function (detect) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/tooltip', ['utils/detect'], function (detect) {
+    define('components/tooltip', ['bower_components/bskyb-detect/dist/js/detect.requirejs'], function (detect) {
         toolkit.tooltip = toolkit.tooltip(detect);
         return toolkit.tooltip;
     });
 } else {
-    toolkit.tooltip = toolkit.tooltip(toolkit.detect);
+    toolkit.tooltip = toolkit.tooltip(skyComponents.detect);
 }

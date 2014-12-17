@@ -37,17 +37,17 @@ bower_components/bskyb-typography/dist/css/typography.css
 
 toolkit.js
 ----------------
-bower_components/bskyb-polyfill/dist/js/polyfill.toolkit.js
-toolkit/utils/event.js
-toolkit/utils/detect.js
+bower_components/bskyb-polyfill/dist/js/polyfill.requirejs.js
+bower_components/bskyb-detect/dist/js/detect.requirejs.js
 toolkit/utils/hash-manager.js
 toolkit/utils/popup.js
+bower_components/bskyb-event/dist/js/event.requirejs.js
 toolkit/utils/toggle.js
 toolkit/utils/focus.js
+toolkit/utils/validation.js
 toolkit/components/in-page-nav.js
 toolkit/components/accordion.js
 toolkit/components/date-picker.js
-toolkit/utils/validation.js
 toolkit/components/form.js
 toolkit/components/lightbox.js
 toolkit/components/share.js

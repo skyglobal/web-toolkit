@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.3.3 - 2014-12-12 */
+/*! web-toolkit - v2.3.4 - 2014-12-17 */
 (function e(t, n, r) {
     function s(o, u) {
         if (!n[o]) {
@@ -30,6 +30,8 @@
         require("./polyfills/hasOwnProperty")();
         require("./polyfills/String")();
         require("./polyfills/whichIE")();
+        if (typeof skyComponents === "undefined") window.skyComponents = {};
+        skyComponents.polyfill = {};
     }, {
         "./polyfills/Array": 3,
         "./polyfills/Function": 4,
@@ -40,13 +42,10 @@
     } ],
     2: [ function(require, module, exports) {
         var polyfill = require("./polyfill");
-        if (typeof toolkit === "undefined") window.toolkit = {};
         if (typeof window.define === "function" && window.define.amd) {
-            define("bower_components/bskyb-polyfill/dist/js/polyfill.toolkit", [], function() {
+            define("bower_components/bskyb-polyfill/dist/js/polyfill.requirejs", [], function() {
                 return polyfill;
             });
-        } else {
-            toolkit.polyfill = polyfill;
         }
     }, {
         "./polyfill": 1
@@ -179,291 +178,147 @@
     }, {} ]
 }, {}, [ 2 ]);
 
-if (typeof toolkit === "undefined") toolkit = {};
-
-toolkit.event = function() {
-    var timeout = {
-        resize: null
-    };
-    var state = {};
-    var browserSpecificEvents = {
-        transitionend: check("transition", "end"),
-        animationend: check("animation", "end")
-    };
-    function capitalise(str) {
-        return str.replace(/\b[a-z]/g, function() {
-            return arguments[0].toUpperCase();
-        });
-    }
-    function check(eventName, type) {
-        var result = false, eventType = eventName.toLowerCase() + type.toLowerCase(), eventTypeCaps = capitalise(eventName.toLowerCase()) + capitalise(type.toLowerCase());
-        if (state[eventType]) {
-            return state[eventType];
-        }
-        if ("on" + eventType in window) {
-            result = eventType;
-        } else if ("onwebkit" + eventType in window) {
-            result = "webkit" + eventTypeCaps;
-        } else if ("ono" + eventType in document.documentElement) {
-            result = "o" + eventTypeCaps;
-        }
-        return result;
-    }
-    function bindEvents() {
-        on(window, "resize", function() {
-            clearTimeout(timeout.resize);
-            timeout.resize = setTimeout(emitResizeEnd, 200);
-        });
-    }
-    function emitResizeEnd() {
-        emit(window, "resizeend");
-        if (typeof $ !== "undefined") {
-            $(window).trigger("resizeend");
-        }
-    }
-    function on(el, eventName, exec) {
-        var browserSpecificEventName = browserSpecificEvents[eventName.toLowerCase()];
-        eventName = browserSpecificEventName || eventName;
-        if (el.addEventListener) {
-            el.addEventListener(eventName, exec, false);
-        } else {
-            el.attachEvent(eventName, exec);
-        }
-    }
-    function off(el, eventName, exec) {
-        var browserSpecificEventName = browserSpecificEvents[eventName.toLowerCase()];
-        eventName = browserSpecificEventName || eventName;
-        if (el.removeEventListener) el.removeEventListener(eventName, exec, false); else el.detachEvent("on" + eventName, exec);
-    }
-    function emit(el, eventName) {
-        var event;
-        if (document.createEvent) {
-            event = document.createEvent("CustomEvent");
-            event.initCustomEvent(eventName, false, false, null);
-            el.dispatchEvent(event);
-        } else {
-            event = document.createEventObject();
-            el.fireEvent("on" + eventName, event);
-        }
-    }
-    function ready(exec) {
-        if (/in/.test(document.readyState)) {
-            setTimeout(function() {
-                ready(exec);
-            }, 9);
-        } else {
-            exec();
-        }
-    }
-    bindEvents();
-    return {
-        on: on,
-        off: off,
-        emit: emit,
-        ready: ready
-    };
-};
-
-if (typeof window.define === "function" && window.define.amd) {
-    define("utils/event", [], function() {
-        toolkit.event = toolkit.event();
-        return toolkit.event;
-    });
-} else {
-    toolkit.event = toolkit.event();
-}
-
-if (typeof toolkit === "undefined") toolkit = {};
-
-toolkit.detect = function(event) {
-    var state = {
-        css: {}
-    };
-    var html = document.documentElement;
-    var toolkitClasses = [ "no-touch", "touch-device", "mobile-view", "desktop-view", "landscape", "portrait" ];
-    var vendorPrefix = [ "Moz", "Webkit", "Khtml", "O", "ms" ];
-    var touchClasses = {
-        hasNot: toolkitClasses[0],
-        has: toolkitClasses[1]
-    };
-    var viewClasses = {
-        mobile: toolkitClasses[2],
-        desktop: toolkitClasses[3]
-    };
-    var orientationClasses = {
-        landscape: toolkitClasses[4],
-        portrait: toolkitClasses[5]
-    };
-    function bindEvents() {
-        event.on(window, "resize", updateDetectionStates);
-    }
-    function updateDetectionStates() {
-        removeClasses();
-        attachClasses();
-    }
-    function removeClasses() {
-        var arrClasses = html.className.split(" ");
-        for (var i in toolkitClasses) {
-            var indexToRemove = arrClasses.indexOf(toolkitClasses[i]);
-            if (indexToRemove > -1) {
-                arrClasses.splice(indexToRemove, 1);
+(function e(t, n, r) {
+    function s(o, u) {
+        if (!n[o]) {
+            if (!t[o]) {
+                var a = typeof require == "function" && require;
+                if (!u && a) return a(o, !0);
+                if (i) return i(o, !0);
+                var f = new Error("Cannot find module '" + o + "'");
+                throw f.code = "MODULE_NOT_FOUND", f;
             }
+            var l = n[o] = {
+                exports: {}
+            };
+            t[o][0].call(l.exports, function(e) {
+                var n = t[o][1][e];
+                return s(n ? n : e);
+            }, l, l.exports, e, t, n, r);
         }
-        html.className = arrClasses.join(" ");
+        return n[o].exports;
     }
-    function attachClasses() {
-        var arrClasses = html.className.split(" ");
-        arrClasses.push(touch() ? touchClasses.has : touchClasses.hasNot);
-        arrClasses.push(view("mobile") ? viewClasses.mobile : viewClasses.desktop);
-        arrClasses.push(orientation("landscape") ? orientationClasses.landscape : orientationClasses.portrait);
-        html.className = arrClasses.join(" ");
-    }
-    function support3D() {
-        var transforms = {
-            webkitTransform: "-webkit-transform",
-            OTransform: "-o-transform",
-            msTransform: "-ms-transform",
-            MozTransform: "-moz-transform",
-            transform: "transform"
-        }, body = document.body || document.documentElement, has3d, div = document.createElement("div"), t;
-        body.insertBefore(div, null);
-        for (t in transforms) {
-            if (transforms.hasOwnProperty(t)) {
-                if (div.style[t] !== undefined) {
-                    div.style[t] = "translate3d(1px,1px,1px)";
-                    has3d = window.getComputedStyle(div).getPropertyValue(transforms[t]);
+    var i = typeof require == "function" && require;
+    for (var o = 0; o < r.length; o++) s(r[o]);
+    return s;
+})({
+    1: [ function(require, module, exports) {
+        var state = {
+            css: {}
+        };
+        var html = document.documentElement;
+        var toolkitClasses = [ "no-touch", "touch-device" ];
+        var vendorPrefix = [ "Moz", "Webkit", "Khtml", "O", "ms" ];
+        var classes = {
+            hasNot: toolkitClasses[0],
+            has: toolkitClasses[1]
+        };
+        function attachClasses() {
+            var arrClasses = html.className.split(" ");
+            arrClasses.push(touch() ? classes.has : classes.hasNot);
+            html.className = arrClasses.join(" ");
+        }
+        function translate3d() {
+            var transforms = {
+                webkitTransform: "-webkit-transform",
+                OTransform: "-o-transform",
+                msTransform: "-ms-transform",
+                MozTransform: "-moz-transform",
+                transform: "transform"
+            }, body = document.body || document.documentElement, has3d, div = document.createElement("div"), t;
+            body.insertBefore(div, null);
+            for (t in transforms) {
+                if (transforms.hasOwnProperty(t)) {
+                    if (div.style[t] !== undefined) {
+                        div.style[t] = "translate3d(1px,1px,1px)";
+                        has3d = window.getComputedStyle(div).getPropertyValue(transforms[t]);
+                    }
                 }
             }
+            body.removeChild(div);
+            state.css.translate3d = has3d !== undefined && has3d.length > 0 && has3d !== "none";
+            return state.css.translate3d;
         }
-        body.removeChild(div);
-        state.css.support3D = has3d !== undefined && has3d.length > 0 && has3d !== "none";
-        return state.css.support3D;
-    }
-    function supportsPseudo() {
-        var body = document.body || document.documentElement, paraBefore = document.createElement("p"), styleBefore = document.createElement("style"), heightBefore, selectorsBefore = '#testbefore:before { content: "before"; }';
-        styleBefore.type = "text/css";
-        paraBefore.id = "testbefore";
-        if (styleBefore.styleSheet) {
-            styleBefore.styleSheet.cssText = selectorsBefore;
-        } else {
-            styleBefore.appendChild(document.createTextNode(selectorsBefore));
-        }
-        body.appendChild(styleBefore);
-        body.appendChild(paraBefore);
-        heightBefore = document.getElementById("testbefore").offsetHeight;
-        body.removeChild(styleBefore);
-        body.removeChild(paraBefore);
-        state.css.pseudo = heightBefore >= 1;
-        return state.css.pseudo;
-    }
-    function pseudo(el, pos, property) {
-        if (!el) {
-            return supportsPseudo();
-        }
-        if (!window.getComputedStyle) {
-            return false;
-        }
-        var css = window.getComputedStyle(el, ":" + pos);
-        var str = css.getPropertyValue(property);
-        if (str && (str.indexOf("'") === 0 || str.indexOf('"') === 0)) {
-            str = str.substring(1, str.length - 1);
-        }
-        return str;
-    }
-    function getHtmlPseudo(pos) {
-        var content = pseudo(html, pos, "content");
-        var fontFamily = pseudo(html, pos, "font-family");
-        return content && content != "normal" ? content : fontFamily;
-    }
-    function supportsCSS(property) {
-        if (state.css[property]) {
-            return state.css[property];
-        }
-        if (property === "support3D") {
-            return support3D(property);
-        }
-        var style = html.style;
-        if (typeof style[property] == "string") {
-            state.css[property] = true;
-            return true;
-        }
-        property = property.charAt(0).toUpperCase() + property.substr(1);
-        for (var i = 0; i < vendorPrefix.length; i++) {
-            if (typeof style[vendorPrefix[i] + property] == "string") {
-                state.css[property] = true;
+        function supportsCSS(property) {
+            if (state.css[property]) {
                 return state.css[property];
             }
+            if (property === "translate3d") {
+                return translate3d(property);
+            }
+            var style = html.style;
+            if (typeof style[property] == "string") {
+                state.css[property] = true;
+                return true;
+            }
+            property = property.charAt(0).toUpperCase() + property.substr(1);
+            for (var i = 0; i < vendorPrefix.length; i++) {
+                if (typeof style[vendorPrefix[i] + property] == "string") {
+                    state.css[property] = true;
+                    return state.css[property];
+                }
+            }
+            state.css[property] = false;
+            return state.css[property];
         }
-        state.css[property] = false;
-        return state.css[property];
-    }
-    function css(el, property) {
-        if (!property) {
-            return supportsCSS(el);
+        function css(el, property) {
+            if (!property) {
+                return supportsCSS(el);
+            }
+            var strValue = "";
+            if (document.defaultView && document.defaultView.getComputedStyle) {
+                strValue = document.defaultView.getComputedStyle(el, "").getPropertyValue(property);
+            } else if (el.currentStyle) {
+                property = property.replace(/\-(\w)/g, function(strMatch, p1) {
+                    return p1.toUpperCase();
+                });
+                strValue = el.currentStyle[property];
+            }
+            return strValue;
         }
-        var strValue = "";
-        if (document.defaultView && document.defaultView.getComputedStyle) {
-            strValue = document.defaultView.getComputedStyle(el, "").getPropertyValue(property);
-        } else if (el.currentStyle) {
-            property = property.replace(/\-(\w)/g, function(strMatch, p1) {
-                return p1.toUpperCase();
-            });
-            strValue = el.currentStyle[property];
+        function touch() {
+            state.touch = typeof window.ontouchstart !== "undefined";
+            return state.touch;
         }
-        return strValue;
-    }
-    function view(type) {
-        state.view = getHtmlPseudo("after") || "desktop";
-        return type ? state.view == type : state.view;
-    }
-    function orientation(type) {
-        state.orientation = getHtmlPseudo("before") || "landscape";
-        return type ? state.orientation == type : state.orientation;
-    }
-    function touch() {
-        state.touch = typeof window.ontouchstart !== "undefined";
-        return state.touch;
-    }
-    function getElementOffset(el) {
-        return {
-            top: el.getBoundingClientRect().top + window.pageYOffset - document.documentElement.clientTop,
-            left: el.getBoundingClientRect().left + window.pageXOffset - document.documentElement.clientLeft
+        function getElementOffset(el) {
+            return {
+                top: el.getBoundingClientRect().top + window.pageYOffset - document.documentElement.clientTop,
+                left: el.getBoundingClientRect().left + window.pageXOffset - document.documentElement.clientLeft
+            };
+        }
+        function elementVisibleBottom(el) {
+            if (el.length < 1) return;
+            var elementOffset = getElementOffset(el);
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            return elementOffset.top + el.offsetHeight <= scrollTop + document.documentElement.clientHeight;
+        }
+        function elementVisibleRight(el) {
+            if (el.length < 1) return;
+            var elementOffset = getElementOffset(el);
+            return elementOffset.left + el.offsetWidth <= document.documentElement.clientWidth;
+        }
+        attachClasses();
+        module.exports = {
+            css: css,
+            touch: touch,
+            state: state,
+            elementVisibleBottom: elementVisibleBottom,
+            elementVisibleRight: elementVisibleRight
         };
-    }
-    function elementVisibleBottom(el) {
-        if (el.length < 1) return;
-        var elementOffset = getElementOffset(el);
-        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        return elementOffset.top + el.offsetHeight <= scrollTop + document.documentElement.clientHeight;
-    }
-    function elementVisibleRight(el) {
-        if (el.length < 1) return;
-        var elementOffset = getElementOffset(el);
-        return elementOffset.left + el.offsetWidth <= document.documentElement.clientWidth;
-    }
-    attachClasses();
-    bindEvents();
-    return {
-        css: css,
-        touch: touch,
-        orientation: orientation,
-        view: view,
-        pseudo: pseudo,
-        state: state,
-        elementVisibleBottom: elementVisibleBottom,
-        elementVisibleRight: elementVisibleRight,
-        updateDetectionStates: updateDetectionStates
-    };
-};
-
-if (typeof window.define === "function" && window.define.amd) {
-    define("utils/detect", [ "utils/event" ], function(event) {
-        toolkit.detect = toolkit.detect(event);
-        return toolkit.detect;
-    });
-} else {
-    toolkit.detect = toolkit.detect(toolkit.event);
-}
+        if (typeof skyComponents === "undefined") window.skyComponents = {};
+        skyComponents.detect = module.exports;
+    }, {} ],
+    2: [ function(require, module, exports) {
+        var detect = require("./detect");
+        if (typeof window.define === "function" && window.define.amd) {
+            define("bower_components/bskyb-detect/dist/js/detect.requirejs", [], function() {
+                return detect;
+            });
+        }
+    }, {
+        "./detect": 1
+    } ]
+}, {}, [ 2 ]);
 
 if (typeof toolkit === "undefined") toolkit = {};
 
@@ -621,6 +476,198 @@ if (typeof window.define === "function" && window.define.amd) {
     toolkit.popup = toolkit.popup();
 }
 
+(function e(t, n, r) {
+    function s(o, u) {
+        if (!n[o]) {
+            if (!t[o]) {
+                var a = typeof require == "function" && require;
+                if (!u && a) return a(o, !0);
+                if (i) return i(o, !0);
+                var f = new Error("Cannot find module '" + o + "'");
+                throw f.code = "MODULE_NOT_FOUND", f;
+            }
+            var l = n[o] = {
+                exports: {}
+            };
+            t[o][0].call(l.exports, function(e) {
+                var n = t[o][1][e];
+                return s(n ? n : e);
+            }, l, l.exports, e, t, n, r);
+        }
+        return n[o].exports;
+    }
+    var i = typeof require == "function" && require;
+    for (var o = 0; o < r.length; o++) s(r[o]);
+    return s;
+})({
+    1: [ function(require, module, exports) {
+        var utils = require("./utils");
+        var timeout = {
+            resize: null
+        };
+        NodeList.prototype.isNodeList = HTMLCollection.prototype.isNodeList = true;
+        function bindEvents() {
+            on(window, "resize", initResizeEnd);
+        }
+        function initResizeEnd() {
+            clearTimeout(timeout.resize);
+            timeout.resize = setTimeout(function triggerResizeEnd() {
+                trigger(window, "resizeend");
+                if (typeof $ !== "undefined") {
+                    $(window).trigger("resizeend");
+                }
+            }, 200);
+        }
+        function on(el, eventName, eventHandler, useCapture) {
+            if (el.isNodeList) {
+                Array.prototype.forEach.call(el, function(element, i) {
+                    utils.on(element, eventName, eventHandler, useCapture);
+                });
+            } else {
+                utils.on(el, eventName, eventHandler, useCapture);
+            }
+        }
+        function off(el, eventName, eventHandler, useCapture) {
+            if (el.isNodeList) {
+                Array.prototype.forEach.call(el, function(element, i) {
+                    utils.off(element, eventName, eventHandler, useCapture);
+                });
+            } else {
+                utils.off(el, eventName, eventHandler, useCapture);
+            }
+        }
+        function trigger(el, eventName) {
+            var event;
+            if (document.createEvent) {
+                event = document.createEvent("CustomEvent");
+                event.initCustomEvent(eventName, false, false, null);
+                el.dispatchEvent(event);
+            } else {
+                event = document.createEventObject();
+                el.fireEvent("on" + eventName, event);
+            }
+        }
+        function ready(exec) {
+            if (/in/.test(document.readyState)) {
+                setTimeout(function() {
+                    ready(exec);
+                }, 9);
+            } else {
+                exec();
+            }
+        }
+        function live(events, selector, eventHandler) {
+            events.split(" ").forEach(function(eventName) {
+                utils.attachEvent(eventName, selector, eventHandler);
+            });
+        }
+        bindEvents();
+        module.exports = {
+            live: live,
+            on: on,
+            off: off,
+            emit: trigger,
+            trigger: trigger,
+            ready: ready
+        };
+        if (typeof skyComponents === "undefined") window.skyComponents = {};
+        skyComponents.event = module.exports;
+    }, {
+        "./utils": 3
+    } ],
+    2: [ function(require, module, exports) {
+        var event = require("./event");
+        if (typeof window.define === "function" && window.define.amd) {
+            define("bower_components/bskyb-event/dist/js/event.requirejs", [], function() {
+                return event;
+            });
+        }
+    }, {
+        "./event": 1
+    } ],
+    3: [ function(require, module, exports) {
+        var eventRegistry = {};
+        var state = {};
+        var browserSpecificEvents = {
+            transitionend: "transition",
+            animationend: "animation"
+        };
+        function capitalise(str) {
+            return str.replace(/\b[a-z]/g, function() {
+                return arguments[0].toUpperCase();
+            });
+        }
+        function check(eventName) {
+            var type = "";
+            if (browserSpecificEvents[eventName]) {
+                eventName = browserSpecificEvents[eventName];
+                type = "end";
+            }
+            var result = false, eventType = eventName.toLowerCase() + type.toLowerCase(), eventTypeCaps = capitalise(eventName.toLowerCase()) + capitalise(type.toLowerCase());
+            if (state[eventType]) {
+                return state[eventType];
+            }
+            [ "ms", "moz", "webkit", "o", "" ].forEach(function(prefix) {
+                if ("on" + prefix + eventType in window || "on" + prefix + eventType in document.documentElement) {
+                    result = !!prefix ? prefix + eventTypeCaps : eventType;
+                }
+            });
+            state[eventType] = result;
+            return result;
+        }
+        function off(el, eventName, eventHandler) {
+            eventName = check(eventName) || eventName;
+            if (el.removeEventListener) {
+                el.removeEventListener(eventName, eventHandler, false);
+            } else {
+                el.detachEvent("on" + eventName, eventHandler);
+            }
+        }
+        function on(el, eventName, eventHandler, useCapture) {
+            eventName = check(eventName) || eventName;
+            if (el.addEventListener) {
+                el.addEventListener(eventName, eventHandler, !!useCapture);
+            } else {
+                el.attachEvent("on" + eventName, eventHandler);
+            }
+        }
+        function contains(el, child) {
+            return el !== child && el.contains(child);
+        }
+        function dispatchEvent(event) {
+            var targetElement = event.target;
+            eventRegistry[event.type].forEach(function(entry) {
+                var potentialElements = document.querySelectorAll(entry.selector);
+                var hasMatch = false;
+                Array.prototype.forEach.call(potentialElements, function(item) {
+                    if (contains(item, targetElement) || item === targetElement) {
+                        hasMatch = true;
+                        return;
+                    }
+                });
+                if (hasMatch) {
+                    entry.handler.call(targetElement, event);
+                }
+            }.bind(this));
+        }
+        function attachEvent(eventName, selector, eventHandler) {
+            if (!eventRegistry[eventName]) {
+                eventRegistry[eventName] = [];
+                on(document.documentElement, eventName, dispatchEvent, true);
+            }
+            eventRegistry[eventName].push({
+                selector: selector,
+                handler: eventHandler
+            });
+        }
+        module.exports = {
+            attachEvent: attachEvent,
+            on: on,
+            off: off
+        };
+    }, {} ]
+}, {}, [ 2 ]);
+
 if (typeof toolkit === "undefined") toolkit = {};
 
 toolkit.toggle = function(detect, event) {
@@ -750,12 +797,12 @@ toolkit.toggle = function(detect, event) {
 };
 
 if (typeof window.define === "function" && window.define.amd) {
-    define("utils/toggle", [ "utils/detect", "utils/event" ], function(detect, event) {
+    define("utils/toggle", [ "bower_components/bskyb-detect/dist/js/detect.requirejs", "bower_components/bskyb-event/dist/js/event.requirejs" ], function(detect, event) {
         toolkit.toggle = toolkit.toggle(detect, event);
         return toolkit.toggle;
     });
 } else {
-    toolkit.toggle = toolkit.toggle(toolkit.detect, toolkit.event);
+    toolkit.toggle = toolkit.toggle(skyComponents.detect, skyComponents.event);
 }
 
 if (typeof toolkit === "undefined") toolkit = {};
@@ -804,6 +851,155 @@ if (typeof window.define === "function" && window.define.amd) {
     });
 } else {
     toolkit.focus = toolkit.focus();
+}
+
+if (typeof toolkit === "undefined") toolkit = {};
+
+toolkit.validation = function() {
+    function isSafari() {
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.indexOf("safari") != -1) {
+            return ua.indexOf("chrome") === -1;
+        }
+        return false;
+    }
+    function getValue($el) {
+        var $radiosWithSameName = null;
+        return $el.is("[type=checkbox]") ? $el.is(":checked") : $el.is("[type=radio]") ? ($radiosWithSameName = $el.parents("form").find('input[name="' + $el.attr("name") + '"]')).filter(":checked").length > 0 : $el.val();
+    }
+    function InvalidInputHelper(input, options) {
+        if (options.emptyText) {
+            input.setCustomValidity(options.defaultText);
+        }
+        function changeOrInput() {
+            if (input.value === "") {
+                if (options.emptyText) {
+                    input.setCustomValidity(options.emptyText);
+                }
+            } else {
+                input.setCustomValidity("");
+            }
+        }
+        function invalid() {
+            if (input.value === "") {
+                if (options.emptyText) {
+                    input.setCustomValidity(options.emptyText);
+                }
+            } else if (options.invalidText) {
+                input.setCustomValidity(options.invalidText);
+            }
+        }
+        input.addEventListener("change", changeOrInput);
+        input.addEventListener("input", changeOrInput);
+        input.addEventListener("invalid", invalid);
+    }
+    var useCustomFormErrors = !("required" in document.createElement("input")) || !("pattern" in document.createElement("input")) || isSafari();
+    var canCustomiseHTML5Message = "setCustomValidity" in document.createElement("input");
+    function Validation($container) {
+        this.$container = $container;
+        this.$requiredInputs = $container.find("*[required]");
+        this.$patternInputs = $container.find("*[pattern]");
+        this.errors = [];
+        this.hasError = false;
+        this.customiseHTML5Messages();
+        this.bindEvents();
+    }
+    Validation.prototype = {
+        bindEvents: function() {
+            var validation = this;
+            if (useCustomFormErrors) {
+                validation.$container.on("submit", function(e) {
+                    validation.validate(e);
+                });
+            }
+        },
+        customiseHTML5Messages: function() {
+            if (!canCustomiseHTML5Message) return;
+            this.$container.find(".feedback[data-for]").each(function() {
+                var el = document.getElementById($(this).attr("data-for"));
+                new InvalidInputHelper(el, {
+                    invalidText: this.textContent || this.innerText
+                });
+            });
+        },
+        addErrorMessageToInput: function($input) {
+            var inputId = $input.attr("id"), $descriptor = this.$container.find("label[for=" + inputId + "]"), $feedbacks = this.$container.find(".feedback[data-for=" + inputId + "]");
+            this.hasError = true;
+            if ($feedbacks.length > 0) {
+                $feedbacks.removeClass("hidden");
+            } else {
+                $feedbacks = $('<span class="form-error feedback" data-for="' + $input.attr("id") + '">' + $descriptor.text() + " is required</span>").appendTo($input.closest(".row"));
+            }
+            if (!$input.hasClass("form-error")) {
+                $input.addClass("form-error");
+                $('<i class="form-error skycon-warning"></i>').insertAfter($input);
+            }
+            this.errors.push($feedbacks.first());
+        },
+        removeErrorsFromInput: function($input) {
+            var inputId = $input.attr("id"), $feedbacks = this.$container.find(".feedback[data-for=" + inputId + "]");
+            if ($input.hasClass("form-error")) {
+                $input.removeClass("form-error");
+                $input.next(".skycon-warning").remove();
+            }
+            $feedbacks.addClass("hidden");
+        },
+        createErrorsAtTop: function() {
+            var errorHtml = '<div id="feedback-list-container" class="row" aria-live="polite"><p><i class="form-error skycon-warning"></i>Please correct the highlighted fields below:</p><ul class="feedback-list">', i;
+            for (i = 0; i < this.errors.length; i++) {
+                errorHtml += '<li class="form-error">' + this.errors[i].text() + "</li>";
+            }
+            errorHtml += "</ul></div>";
+            this.$container.prepend(errorHtml);
+            window.location.href = window.location.href.split("#")[0] + "#feedback-list-container";
+        },
+        resetErrors: function() {
+            this.hasError = false;
+            this.errors = [];
+            this.$container.find("#feedback-list-container").remove();
+        },
+        validateRequired: function(index, input) {
+            var $input = $(input), validation = this;
+            if ($input.val() === "") {
+                validation.addErrorMessageToInput($input);
+            } else {
+                validation.removeErrorsFromInput($input);
+            }
+        },
+        validatePattern: function(index, input) {
+            var $input = $(input), validation = this, pattern = $input.attr("pattern"), re = new RegExp("^(?:" + pattern + ")$"), value = getValue($input);
+            if (value && !re.test(value)) {
+                validation.addErrorMessageToInput($input);
+            } else {
+                validation.removeErrorsFromInput($input);
+            }
+        },
+        validate: function(e) {
+            var validation = this;
+            validation.resetErrors();
+            this.$requiredInputs.each(this.validateRequired.bind(validation));
+            this.$patternInputs.each(this.validatePattern.bind(validation));
+            if (validation.hasError) {
+                e.preventDefault();
+                validation.createErrorsAtTop();
+            }
+        }
+    };
+    $.fn.validation = function() {
+        return this.each(function() {
+            var validation = new Validation($(this));
+        });
+    };
+    return Validation;
+};
+
+if (typeof window.define === "function" && window.define.amd) {
+    define("utils/validation", [], function() {
+        toolkit.validation = toolkit.validation();
+        return toolkit.validation;
+    });
+} else {
+    toolkit.validation = toolkit.validation();
 }
 
 if (typeof toolkit === "undefined") toolkit = {};
@@ -998,12 +1194,12 @@ toolkit.inPageNav = function(hash, event) {
 };
 
 if (typeof window.define === "function" && window.define.amd) {
-    define("components/in-page-nav", [ "utils/hash-manager", "utils/event" ], function(hash, event) {
+    define("components/in-page-nav", [ "utils/hash-manager", "bower_components/bskyb-event/dist/js/event.requirejs" ], function(hash, event) {
         toolkit.inPageNav = toolkit.inPageNav(hash, event);
         return toolkit.inPageNav;
     });
 } else {
-    toolkit.inPageNav = toolkit.inPageNav(toolkit.hashManager, toolkit.event);
+    toolkit.inPageNav = toolkit.inPageNav(toolkit.hashManager, skyComponents.event);
 }
 
 if (typeof toolkit === "undefined") toolkit = {};
@@ -1184,155 +1380,6 @@ if (typeof window.define === "function" && window.define.amd) {
     });
 } else {
     toolkit.datePicker = toolkit.datePicker();
-}
-
-if (typeof toolkit === "undefined") toolkit = {};
-
-toolkit.validation = function() {
-    function isSafari() {
-        var ua = navigator.userAgent.toLowerCase();
-        if (ua.indexOf("safari") != -1) {
-            return ua.indexOf("chrome") === -1;
-        }
-        return false;
-    }
-    function getValue($el) {
-        var $radiosWithSameName = null;
-        return $el.is("[type=checkbox]") ? $el.is(":checked") : $el.is("[type=radio]") ? ($radiosWithSameName = $el.parents("form").find('input[name="' + $el.attr("name") + '"]')).filter(":checked").length > 0 : $el.val();
-    }
-    function InvalidInputHelper(input, options) {
-        if (options.emptyText) {
-            input.setCustomValidity(options.defaultText);
-        }
-        function changeOrInput() {
-            if (input.value === "") {
-                if (options.emptyText) {
-                    input.setCustomValidity(options.emptyText);
-                }
-            } else {
-                input.setCustomValidity("");
-            }
-        }
-        function invalid() {
-            if (input.value === "") {
-                if (options.emptyText) {
-                    input.setCustomValidity(options.emptyText);
-                }
-            } else if (options.invalidText) {
-                input.setCustomValidity(options.invalidText);
-            }
-        }
-        input.addEventListener("change", changeOrInput);
-        input.addEventListener("input", changeOrInput);
-        input.addEventListener("invalid", invalid);
-    }
-    var useCustomFormErrors = !("required" in document.createElement("input")) || !("pattern" in document.createElement("input")) || isSafari();
-    var canCustomiseHTML5Message = "setCustomValidity" in document.createElement("input");
-    function Validation($container) {
-        this.$container = $container;
-        this.$requiredInputs = $container.find("*[required]");
-        this.$patternInputs = $container.find("*[pattern]");
-        this.errors = [];
-        this.hasError = false;
-        this.customiseHTML5Messages();
-        this.bindEvents();
-    }
-    Validation.prototype = {
-        bindEvents: function() {
-            var validation = this;
-            if (useCustomFormErrors) {
-                validation.$container.on("submit", function(e) {
-                    validation.validate(e);
-                });
-            }
-        },
-        customiseHTML5Messages: function() {
-            if (!canCustomiseHTML5Message) return;
-            this.$container.find(".feedback[data-for]").each(function() {
-                var el = document.getElementById($(this).attr("data-for"));
-                new InvalidInputHelper(el, {
-                    invalidText: this.textContent || this.innerText
-                });
-            });
-        },
-        addErrorMessageToInput: function($input) {
-            var inputId = $input.attr("id"), $descriptor = this.$container.find("label[for=" + inputId + "]"), $feedbacks = this.$container.find(".feedback[data-for=" + inputId + "]");
-            this.hasError = true;
-            if ($feedbacks.length > 0) {
-                $feedbacks.removeClass("hidden");
-            } else {
-                $feedbacks = $('<span class="form-error feedback" data-for="' + $input.attr("id") + '">' + $descriptor.text() + " is required</span>").appendTo($input.closest(".row"));
-            }
-            if (!$input.hasClass("form-error")) {
-                $input.addClass("form-error");
-                $('<i class="form-error skycon-warning"></i>').insertAfter($input);
-            }
-            this.errors.push($feedbacks.first());
-        },
-        removeErrorsFromInput: function($input) {
-            var inputId = $input.attr("id"), $feedbacks = this.$container.find(".feedback[data-for=" + inputId + "]");
-            if ($input.hasClass("form-error")) {
-                $input.removeClass("form-error");
-                $input.next(".skycon-warning").remove();
-            }
-            $feedbacks.addClass("hidden");
-        },
-        createErrorsAtTop: function() {
-            var errorHtml = '<div id="feedback-list-container" class="row" aria-live="polite"><p><i class="form-error skycon-warning"></i>Please correct the highlighted fields below:</p><ul class="feedback-list">', i;
-            for (i = 0; i < this.errors.length; i++) {
-                errorHtml += '<li class="form-error">' + this.errors[i].text() + "</li>";
-            }
-            errorHtml += "</ul></div>";
-            this.$container.prepend(errorHtml);
-            window.location.href = window.location.href.split("#")[0] + "#feedback-list-container";
-        },
-        resetErrors: function() {
-            this.hasError = false;
-            this.errors = [];
-            this.$container.find("#feedback-list-container").remove();
-        },
-        validateRequired: function(index, input) {
-            var $input = $(input), validation = this;
-            if ($input.val() === "") {
-                validation.addErrorMessageToInput($input);
-            } else {
-                validation.removeErrorsFromInput($input);
-            }
-        },
-        validatePattern: function(index, input) {
-            var $input = $(input), validation = this, pattern = $input.attr("pattern"), re = new RegExp("^(?:" + pattern + ")$"), value = getValue($input);
-            if (value && !re.test(value)) {
-                validation.addErrorMessageToInput($input);
-            } else {
-                validation.removeErrorsFromInput($input);
-            }
-        },
-        validate: function(e) {
-            var validation = this;
-            validation.resetErrors();
-            this.$requiredInputs.each(this.validateRequired.bind(validation));
-            this.$patternInputs.each(this.validatePattern.bind(validation));
-            if (validation.hasError) {
-                e.preventDefault();
-                validation.createErrorsAtTop();
-            }
-        }
-    };
-    $.fn.validation = function() {
-        return this.each(function() {
-            var validation = new Validation($(this));
-        });
-    };
-    return Validation;
-};
-
-if (typeof window.define === "function" && window.define.amd) {
-    define("utils/validation", [], function() {
-        toolkit.validation = toolkit.validation();
-        return toolkit.validation;
-    });
-} else {
-    toolkit.validation = toolkit.validation();
 }
 
 if (typeof toolkit === "undefined") toolkit = {};
@@ -1541,11 +1588,11 @@ toolkit.lightbox = function($, keyboardFocus, hash, event, detect) {
 };
 
 if (typeof window.define === "function" && window.define.amd) {
-    define("components/lightbox", [ "utils/focus", "utils/hash-manager", "utils/event", "utils/detect" ], function(focus, hash, event, detect) {
+    define("components/lightbox", [ "utils/focus", "utils/hash-manager", "bower_components/bskyb-event/dist/js/event.requirejs", "bower_components/bskyb-detect/dist/js/detect.requirejs" ], function(focus, hash, event, detect) {
         return toolkit.lightbox(jQuery, focus, hash, event, detect);
     });
 } else {
-    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager, toolkit.event, toolkit.detect);
+    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager, skyComponents.event, skyComponents.detect);
 }
 
 if (typeof toolkit === "undefined") toolkit = {};
@@ -1577,11 +1624,11 @@ toolkit.share = function(detect) {
 };
 
 if (typeof window.define === "function" && window.define.amd) {
-    define("components/share", [ "utils/detect" ], function(detect) {
+    define("components/share", [ "bower_components/bskyb-detect/dist/js/detect.requirejs" ], function(detect) {
         return toolkit.share(detect);
     });
 } else {
-    toolkit.share = toolkit.share(toolkit.detect);
+    toolkit.share = toolkit.share(skyComponents.detect);
 }
 
 if (typeof toolkit === "undefined") toolkit = {};
@@ -1638,12 +1685,12 @@ toolkit.tooltip = function(detect) {
 };
 
 if (typeof window.define === "function" && window.define.amd) {
-    define("components/tooltip", [ "utils/detect" ], function(detect) {
+    define("components/tooltip", [ "bower_components/bskyb-detect/dist/js/detect.requirejs" ], function(detect) {
         toolkit.tooltip = toolkit.tooltip(detect);
         return toolkit.tooltip;
     });
 } else {
-    toolkit.tooltip = toolkit.tooltip(toolkit.detect);
+    toolkit.tooltip = toolkit.tooltip(skyComponents.detect);
 }
 
 if (typeof toolkit === "undefined") toolkit = {};
@@ -1794,11 +1841,11 @@ toolkit.video = function(window, $, event) {
 };
 
 if (typeof window.define === "function" && window.define.amd) {
-    define("components/video", [ "utils/event" ], function(event) {
+    define("components/video", [ "bower_components/bskyb-event/dist/js/event.requirejs" ], function(event) {
         return toolkit.video(window, jQuery, event);
     });
 } else {
-    toolkit.video = toolkit.video(window, jQuery, toolkit.event);
+    toolkit.video = toolkit.video(window, jQuery, skyComponents.event);
 }
 
 if (typeof toolkit === "undefined") {
@@ -1806,7 +1853,7 @@ if (typeof toolkit === "undefined") {
 }
 
 toolkit.carousel = function(video, detect) {
-    var has3d = detect.css("support3D");
+    var has3d = detect.css("translate3d");
     var hasTransform = detect.css("transform");
     var hasTransition = detect.css("transition");
     function Carousel(element, options) {
@@ -2237,15 +2284,18 @@ toolkit.carousel = function(video, detect) {
 };
 
 if (typeof window.define === "function" && window.define.amd) {
-    define("components/carousel", [ "components/video", "utils/detect" ], function(video, detect) {
+    define("components/carousel", [ "components/video", "bower_components/bskyb-detect/dist/js/detect.requirejs" ], function(video, detect) {
         return toolkit.carousel(video, detect);
     });
 } else {
-    toolkit.carousel = toolkit.carousel(toolkit.video, toolkit.detect);
+    toolkit.carousel = toolkit.carousel(toolkit.video, skyComponents.detect);
 }
 
 if (typeof window.define === "function" && window.define.amd) {
-    define("toolkit", [ "bower_components/bskyb-polyfill/dist/js/polyfill.toolkit", "utils/detect", "utils/hash-manager", "utils/popup", "utils/toggle", "utils/focus", "utils/event", "components/in-page-nav", "components/accordion", "components/form", "components/lightbox", "components/share", "components/tooltip", "components/video", "components/carousel" ], function(polyfill, detect, hashManager, popup, toggle, focus, validation, event, inPageNav, accordion, datePicker, lightbox, share, tooltip, video, carousel) {
+    define("toolkit", [ "bower_components/bskyb-polyfill/dist/js/polyfill.requirejs", "bower_components/bskyb-detect/dist/js/detect.requirejs", "utils/hash-manager", "utils/popup", "utils/toggle", "utils/focus", "utils/validation", "bower_components/bskyb-event/dist/js/event.requirejs", "components/in-page-nav", "components/accordion", "components/form", "components/lightbox", "components/share", "components/tooltip", "components/video", "components/carousel" ], function(polyfill, detect, hashManager, popup, toggle, focus, validation, event, inPageNav, accordion, datePicker, lightbox, share, tooltip, video, carousel) {
+        toolkit.detect = detect;
+        toolkit.event = event;
+        toolkit.polyfill = polyfill;
         return {
             polyfill: polyfill,
             detect: detect,

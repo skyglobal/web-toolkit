@@ -1,6 +1,6 @@
 {
     "name": "bskyb-grid",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "homepage": "https://github.com/skyglobal/grid",
     "authors": [
         "Peter Mouland <peter.mouland@gmail.com>",
@@ -14,6 +14,6 @@
         "!dist/**/*"
     ],
     "devDependencies": {
-        "bskyb-typography": "~0.0.4"
+        "bskyb-typography": "~0.0.6"
     }
 }

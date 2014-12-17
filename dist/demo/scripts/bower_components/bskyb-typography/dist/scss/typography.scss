@@ -1,8 +1,12 @@
-@import 'bskyb-colours/dist/scss/colours';
+@import 'bower_components/bskyb-colours/dist/scss/colours';
 
 @import 'sky-text-regular';
 @import 'sky-text-medium';
 @import 'luna';
+
+$font-family: SkyTextRegular, Helvetica, Arial, sans-serif;
+$font-family-medium: SkyTextMedium, Helvetica, Arial, sans-serif;
+$mobile-width: 767px;
 
 body {
   font: 16px/20px $font-family;

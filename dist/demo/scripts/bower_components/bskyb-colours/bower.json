@@ -1,6 +1,6 @@
 {
   "name": "bskyb-colours",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "homepage": "https://github.com/skyglobal/colours",
   "authors": [
     "Peter Mouland <peter.mouland@gmail.com>"
@@ -13,6 +13,6 @@
     "!dist/**/*"
   ],
   "devDependencies": {
-    "bskyb-typography": "~0.0.1"
+    "bskyb-typography": "~0.0.4"
   }
 }

@@ -33,8 +33,8 @@ h1, h2, h3, h4, h5, h6 {
 p {
   line-height: 20px; }
 small {
-  font-size: 0.8125em;
-  line-height: 1em; }
+  font-size: em(13);
+  line-height: em(16); }
 ol, ul {
   margin: 0;
   padding: 0; }
