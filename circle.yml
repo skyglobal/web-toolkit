@@ -6,7 +6,7 @@ deployment:
   feature:
     branch: /feature-.*/
     commands:
-      - echo "hello"
+      - bundle exec rake deploy_feature
   release_candidate:
     branch: /rc-.*/
     commands:
