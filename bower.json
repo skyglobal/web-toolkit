@@ -21,6 +21,6 @@
         "bskyb-typography": "~0.0.6",
         "bskyb-spinners": "~0.0.3",
         "bskyb-detect": "~0.0.4",
-        "bskyb-event": "~0.1.2"
+        "bskyb-event": "~0.1.1"
     }
 }
