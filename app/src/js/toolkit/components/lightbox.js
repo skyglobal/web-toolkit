@@ -139,6 +139,7 @@ toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
 
                 lightbox.close();
             });
+
             event.on(this.$container[0], 'animationend', lightbox.onClose.bind(lightbox));
 		},
 

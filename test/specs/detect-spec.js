@@ -131,7 +131,7 @@ function detectSpec(detect, event) {
 }
 
 if (window.define) {
-    define('specs/detect-spec', ['bower_components/bskyb-detect/dist/js/detect.requirejs', 'utils/event'], function (detect, event) {
+    define('specs/detect-spec', ['bower_components/bskyb-detect/dist/js/detect.requirejs', 'bower_components/bskyb-event/dist/js/event.requirejs'], function (detect, event) {
         return detectSpec(detect, event);
     });
 }

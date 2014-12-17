@@ -84,7 +84,7 @@ function responsiveImagesSpec(responsiveImages, event) {
 }
 
 if (window.define) {
-    define('specs/responsive-images-spec', ['utils/responsive-images','utils/event'], function (responsiveImages, event) {
+    define('specs/responsive-images-spec', ['utils/responsive-images','bower_components/bskyb-event/dist/js/event.requirejs'], function (responsiveImages, event) {
         return responsiveImagesSpec(responsiveImages, event);
     });
 }
