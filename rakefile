@@ -47,8 +47,11 @@ end
 
 def assets_to_upload
   puts "Working out dist files to upload. Working directory: #{Dir.getwd}"
+  fonts = Dir.chdir("_site/dist") do
+    Dir.glob("fonts/*.*")
+  end
   ["stylesheets/toolkit.css",  "scripts/toolkit.js", "scripts/toolkit.min.js",
-    "images/icon.png"]
+    "images/icon.png"] + fonts
 end
 
 def templates_to_upload
