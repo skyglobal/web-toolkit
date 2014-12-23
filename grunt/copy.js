@@ -11,7 +11,7 @@ module.exports = {
       files: [
         {   expand: true,
             cwd: 'bower_components/',
-            src: 'bskyb-skycons/dist/**',
+            src: ['bskyb-skycons/dist/**', 'bskyb-typography/dist/**'],
             flatten: true,
             filter: 'isFile',
             dest: 'dist/fonts/'
