@@ -4,12 +4,11 @@
   margin-bottom: 0;
 
   ul{
-    background: #f4f4f4;
     @include clearfix;
     line-height: 1.2em;
     list-style: none;
     margin: 0;
-    padding: 8px 10px 0px 21px;
+    padding: 8px 10px 0px 0;
     font-size: 0.812em;
     line-height: 1.2em;
     min-height: 32px;
