@@ -1,21 +1,22 @@
 {
   "name": "bskyb-typography",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "homepage": "https://github.com/skyglobal/typography",
   "authors": [
     "Peter Mouland <peter.mouland@gmail.com>"
   ],
   "description": "A collection of brand approved fonts for use across Sky.com",
-  "main": "dist/scss/typography.scss",
-  "license": "MIT",
+  "main": "src/scss/typography.scss",
+  "license": "BSD3",
   "ignore": [
     "**/*",
-    "!dist/**/*"
+    "!dist/**/*",
+    "!src/**/*"
   ],
-  "dependencies": {
-    "bskyb-colours": "~0.0.9"
-  },
   "devDependencies": {
-    "bskyb-skycons": "~0.0.6"
+    "bskyb-grid": "~0.1.0"
+  },
+  "dependencies": {
+    "bskyb-colours": "~0.1.0"
   }
 }

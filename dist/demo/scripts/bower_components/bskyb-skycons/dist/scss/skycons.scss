@@ -1,4 +1,4 @@
-@import 'bower_components/bskyb-colours/dist/scss/colours';
+@import 'bower_components/bskyb-colours/src/scss/colours';
 
 @mixin set-skycon-content($skycon, $content){
   .skycon-#{$skycon}:before, //deprecate me in-favour of bem style
@@ -8,10 +8,10 @@
 }
 
 @mixin set-skycon-colour($skycon, $colour){
-  .hover-colour:hover .skycon-#{$skycon} ,//deprecate me in-favour of bem style
+  .hover-colour:hover .skycon-#{$skycon},//deprecate me in-favour of bem style
   .colour.skycon-#{$skycon},//deprecate me in-favour of bem style
-  .skycon--colour__hover:hover .skycon--#{$skycon},
-  .skycon--colour.skycon--#{$skycon} {
+  .skycon--hover:hover .skycon--#{$skycon},//not bem :s but helpful??
+  .skycon--#{$skycon}.skycon--active {
     color: $colour;
   }
 }
@@ -332,5 +332,4 @@ body {
 @include set-skycon-colour('mail', $primary-button);
 @include set-skycon-colour('pending', $success-icon);
 @include set-skycon-colour('whatsapp', #34AF23);
-
 }

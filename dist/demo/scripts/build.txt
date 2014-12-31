@@ -31,10 +31,6 @@ bower_components/bskyb-typography/dist/css/sky-text-regular.css
 ----------------
 bower_components/bskyb-typography/dist/css/sky-text-regular.css
 
-bower_components/bskyb-typography/dist/css/typography.css
-----------------
-bower_components/bskyb-typography/dist/css/typography.css
-
 toolkit.js
 ----------------
 bower_components/bskyb-polyfill/dist/js/polyfill.requirejs.js

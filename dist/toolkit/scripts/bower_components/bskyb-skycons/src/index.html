@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Icons</title>
+
+    <link rel="stylesheet" href="css/demo.css"/>
+    <link rel="stylesheet" href="css/skycons.css"/>
+</head>
+<body>
+<div class="skycom-container">
+
+    <h1>Skycons
+        <small class="text--secondary  demo-version">v{{ site.version }}
+            <a href="https://github.com/skyglobal/skycons" class="text--secondary">
+                <span class="demo-icon demo-icon--github"  aria-hidden=true></span>
+                <span class="speak">Github Repo</span>
+            </a></small>
+    </h1>
+
+    <table class="demo-icons-table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th class="demo-col">Default</th>
+            <th class="demo-col">Active</th>
+            <th class="demo-col">hover</th>
+            <th class="demo-col">SVG</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% _.each(glyphs, function(glyph) { %>
+        <tr >
+            <td>skycon-<%= glyph.name %></td>
+            <td class="demo-icon"><i class="skycon skycon--<%= glyph.name %>" aria-hidden=true></i></td>
+            <td class="demo-icon"><i class="skycon skycon--<%= glyph.name %> skycon--active" aria-hidden=true></i></td>
+            <td class="demo-icon skycon--hover"><i class="skycon skycon--<%= glyph.name %>" aria-hidden=true></i></td>
+            <td class="demo-icon"><a href="icons/<%= glyph.name %>.svg" target="_new" title="Right click and 'Save as...'">view...</a> </td>
+        </tr>
+        <% }); %>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

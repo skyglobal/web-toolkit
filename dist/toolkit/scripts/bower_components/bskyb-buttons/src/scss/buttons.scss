@@ -1,0 +1,91 @@
+@import "bower_components/bskyb-colours/src/scss/colours";
+
+$font-family: SkyTextRegular, Helvetica, Arial, sans-serif;
+$font-family-medium: SkyTextMedium, Helvetica, Arial, sans-serif;
+
+a.btn,
+.btn {
+  border-radius: 5px;
+  font: 16px/1em $font-family;
+  padding: 0 15px;
+  height: 32px;
+  line-height: 2em;
+  position: relative;
+  z-index: 2;
+  border: none;
+  border-top: 1px solid #0073c5;
+  background-color: $primary-button;
+  color: #fff;
+  display: inline-block;
+  box-sizing: border-box;
+  cursor: pointer;
+  margin-right: 20px;
+  text-decoration: none;
+
+  &:before {
+    background: rgba(255, 255, 255, 0.3);
+    background: linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+    background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
+
+    transition: opacity .25s;
+    border-radius: 0 0 20px 20px;
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 4%;
+    width: 93%;
+    height: 10px;
+  }
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    &:before {
+      opacity: 0.3;
+    }
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &[disabled] {
+    cursor: default;
+    opacity: 0.3;
+    &:hover:before {
+      opacity: 1;
+    }
+  }
+
+  &.secondary , //deprecate me at v1.0.0 in favour of bem
+  &.btn--secondary {
+    border: solid 1px #cfcfcf;
+    background: $secondary-button;
+    color: #333;
+
+    &:before {
+      background: rgba(255, 255, 255, 0.4);
+      background: linear-gradient(top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    }
+  }
+}
+
+.lt-ie9 {
+  .btn {
+    &:before {
+      left: 1px;
+      width: 99%;
+      background: #56a2d8;
+    }
+    &.secondary:before, //deprecate me at v1.0.0 in favour of bem
+    &.btn--secondary:before {
+      background: #fff;
+    }
+    &:hover:before {
+      background: none;
+    }
+  }
+}

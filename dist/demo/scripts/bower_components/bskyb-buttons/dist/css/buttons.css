@@ -40,19 +40,19 @@ a.btn, .btn {
     opacity: 0.3; }
     a.btn[disabled]:hover:before, .btn[disabled]:hover:before {
       opacity: 1; }
-.btn--secondary {
-  border: solid 1px #cfcfcf;
-  background: #eaeaea;
-  color: #333; }
-  .btn--secondary:before {
-    background: rgba(255, 255, 255, 0.4);
-    background: -webkit-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0));
-    background: linear-gradient(top, #ffffff, rgba(255, 255, 255, 0)); }
+  a.btn.secondary, a.btn.btn--secondary, .btn.secondary, .btn.btn--secondary {
+    border: solid 1px #cfcfcf;
+    background: #eaeaea;
+    color: #333; }
+    a.btn.secondary:before, a.btn.btn--secondary:before, .btn.secondary:before, .btn.btn--secondary:before {
+      background: rgba(255, 255, 255, 0.4);
+      background: -webkit-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0));
+      background: linear-gradient(top, #ffffff, rgba(255, 255, 255, 0)); }
 .lt-ie9 .btn:before {
   left: 1px;
   width: 99%;
   background: #56a2d8; }
-.lt-ie9 .btn.btn--secondary:before {
+.lt-ie9 .btn.secondary:before, .lt-ie9 .btn.btn--secondary:before {
   background: #fff; }
 .lt-ie9 .btn:hover:before {
   background: none; }
