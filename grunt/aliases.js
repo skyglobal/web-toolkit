@@ -4,6 +4,7 @@ module.exports = {
     //  standard build tasks that lints your JS
     "build": ['jshint', 'version_sync', 'dev-build'],
     "serve": ['build','connect:app', 'open:app', 'watch'],
+    "build-js": ['jshint', 'requirejs', 'uglify'],
 
     //  misc tasks
     "fonts": ['clean:fonts-min', 'clean:fonts', 'svgmin:fonts', 'webfont', 'cssmin:skycons'],

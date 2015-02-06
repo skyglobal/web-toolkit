@@ -17,7 +17,7 @@
   2. [Setup](#setup)
   3. [Building/Running the Toolkit](#buildingrunning-the-toolkit)
  2. [Code Overview](#code-overview)
-  1. [Folder Structure](#folder-structure) 
+  1. [Folder Structure](#folder-structure)
  3. [Feature Requests & Bugs](#feature-requests--bugs)
   1. [Supported Browsers](#supported-browsers)
  3. [Contributing](CONTRIBUTING.md)
@@ -65,6 +65,7 @@ Update the toolkit by making your change and testing it within the demo site.
  * `grunt test` : Runs the unit tests in [PhantomJS](http://phantomjs.org/)
  * `grunt test-cross-browser` : Runs the unit tests using multiple browsers remotely.
  * `grunt fonts` : Only needed to rebuild the Icon Fonts (skycons).
+ * `grunt build-js` : Just build the JS.
 
 Please help us out by contributing any changes you make locally back into the source project. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -124,11 +125,11 @@ The repository contains two main components; the Web Toolkit and the demo site.
     ├── package.json    => NodeJS config file, includes version number for toolkit
     ├── rakefile        => build script
     └── README.md
-    
+
 
 ## Feature Requests + Bugs
 
-Please take a look through currently open and closed issues to see if your feature/bug has already been discussed.  If not, feel free to open new issues and let us know about any bugs that you find. 
+Please take a look through currently open and closed issues to see if your feature/bug has already been discussed.  If not, feel free to open new issues and let us know about any bugs that you find.
 
 This project is currently maintained out of the hard work from a very few contributers who are working on other projects at the same time. If you could write any updates and submit pull requests (see [Contributing](CONTRIBUTING.md)) this would be amazing (and you would get your request looked at much faster!).  
 

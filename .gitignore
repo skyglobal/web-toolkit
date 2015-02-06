@@ -18,3 +18,4 @@ screenshot/v2-v1-diff.json
 Gemfile.lock
 /build
 build
+dist/
