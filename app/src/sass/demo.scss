@@ -1,6 +1,9 @@
 @import "compass";
 
-@import "toolkit/variables";
+@import "bskyb-colours/src/scss/colours";
+@import "bskyb-grid/dist/scss/grid";
+@import "bskyb-typography/src/scss/typography";
+@import "bskyb-spinners/dist/scss/spinners";
 
 @import "demo/menu";
 @import "demo/demo";
@@ -8,7 +11,6 @@
 
 @import "demo/skycons";
 @import "demo/toggle";
-@import "demo/typography";
 @import "demo/colours";
 @import "demo/grid";
 @import 'demo/video';

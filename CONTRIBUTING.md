@@ -45,7 +45,7 @@ When adding a new icon:
 ### JQuery
  * Where possible, please don't rely on jQuery. 
  * Be lean, the Toolkit is working towards freeing itself of jQuery dependency. help us!
- * For events, We suggest using Toolkit's own events module: `toolkit.event`
+ * For events, We suggest using Toolkit's own events component:  [`skyComponents.event`](https://github.com/skyglobal/event)
  * JQuery Variable Names (a jQuery object/element) should always be prefixed with `$` i.e. `$container`
 
 ### Animations

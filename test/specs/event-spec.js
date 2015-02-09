@@ -3,7 +3,7 @@ function eventSpec(event) {
     var describeSpec = 'Event module';
 
     if (!event) { //for in-page test runs
-        event = toolkit.event;
+        event = skyComponents.event;
     }
 
     addScript('utils','event','emit');
@@ -141,7 +141,7 @@ function eventSpec(event) {
 }
 
 if (window.define) {
-    define('specs/event-spec', ['utils/event'], function ( event) {
+    define('specs/event-spec', ['bower_components/bskyb-event/dist/js/event.requirejs'], function ( event) {
         return eventSpec(event);
     });
 }

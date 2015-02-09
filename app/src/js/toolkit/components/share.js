@@ -34,9 +34,9 @@ toolkit.share = (function(detect) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/share', ['utils/detect'], function(detect) {
+    define('components/share', ['bower_components/bskyb-detect/dist/js/detect.requirejs'], function(detect) {
         return toolkit.share(detect);
     });
 } else {
-    toolkit.share = toolkit.share(toolkit.detect);
+    toolkit.share = toolkit.share(skyComponents.detect);
 }

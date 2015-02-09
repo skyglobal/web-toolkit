@@ -1,0 +1,27 @@
+{
+  "name": "bskyb-webtoolkit",
+  "version": "0.0.0",
+  "homepage": "https://github.com/skyglobal/web-toolkit",
+  "authors": [
+    "BSkyB"
+  ],
+  "description": "A collection of brand approved elements for use across Sky.com",
+  "main": "dist",
+  "license": "MIT",
+  "ignore": [
+    "**/*",
+    "!dist/**/*"
+  ],
+  "devDependencies": {
+    "bskyb-polyfill": "~0.1.0",
+    "bskyb-grid": "~0.0.4",
+    "bskyb-skycons": "~0.2.0",
+    "bskyb-buttons": "~0.1.2",
+    "bskyb-typography": "~0.1.0",
+    "bskyb-spinners": "~0.0.3",
+    "bskyb-detect": "~0.0.4",
+    "bskyb-event": "~0.1.1",
+    "bskyb-colours": "~0.1.0",
+    "skyglobal-breadcrumb": "~0.1.5"
+  }
+}

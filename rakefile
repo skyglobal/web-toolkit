@@ -45,12 +45,15 @@ def static_to_upload
   end
 end
 
+def fonts_to_upload
+  puts "Working out font files to upload. Working directory: #{Dir.getwd}"
+  Dir.chdir("_site/dist") do
+    Dir.glob("fonts/*.*")
+  end
+end
 def assets_to_upload
   puts "Working out dist files to upload. Working directory: #{Dir.getwd}"
-  ["stylesheets/toolkit.css",
-    "fonts/skycons.css", "fonts/skycons.min.css",
-    "fonts/skycons.eot", "fonts/skycons.ttf",
-    "scripts/toolkit.js", "scripts/toolkit.min.js",
+  ["stylesheets/toolkit.css",  "scripts/toolkit.js", "scripts/toolkit.min.js",
     "images/icon.png"]
 end
 
@@ -97,15 +100,17 @@ def emptyGitCache
 end
 
 def tagBuild
-  puts "*** Tagging Version #{latest_version_number} ***"
+  version = "#{latest_version_number}"
+  puts "*** Tagging Version #{version} ***"
   configGit
-  system "git tag -a v#{latest_version_number} -m \"Rake deploy: auto tag on #{getDate}\""
-  system "git push origin master v#{latest_version_number}"
+  system "git tag -a v#{version} -m \"Rake deploy: auto tag on #{getDate}\""
+  system "git push origin master v#{version}"
 end
 
 def pushToAmazonS3
   puts "*** Pushing to the AmazonS3 ***"
   system "grunt"
+  version = "#{latest_version_number}"
   doc_resources = []
   asset_files = assets_to_upload
   puts 'Uploading dist files'
@@ -114,7 +119,7 @@ def pushToAmazonS3
     puts "Working directory: #{Dir.getwd}"
     asset_files.each do |file|
       puts "Uploading dist file: #{file}"
-      doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+      doc_resources << bucket.objects["#{version}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
     end
   end
   site_files = templates_to_upload
@@ -122,7 +127,7 @@ def pushToAmazonS3
   puts "Working directory: #{Dir.getwd}"
   site_files.each do |file|
     puts "Uploading _site file: #{file}"
-    doc_resources << bucket.objects["#{latest_version_number}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+    doc_resources << bucket.objects["#{version}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
   end
   static_files = static_to_upload
   puts 'Uploading static files'
@@ -134,7 +139,17 @@ def pushToAmazonS3
       doc_resources << bucket.objects["#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
     end
   end
-  puts "Uploaded. See http://web-toolkit.global.sky.com/#{latest_version_number}/_site/index.html"
+  font_files = fonts_to_upload
+  puts 'Uploading font files'
+  puts "Working directory: #{Dir.getwd}"
+  Dir.chdir("_site/dist") do
+    puts "Working directory: #{Dir.getwd}"
+    font_files.each do |file|
+      puts "Uploading font file: #{file}"
+      doc_resources << bucket.objects["#{version}/#{file}"].write(File.open(file).read, cache_control: 'public, max-age=2592000', content_type: content_type(file), acl: :public_read )
+    end
+  end
+  puts "Uploaded. See http://web-toolkit.global.sky.com/#{version}/_site/index.html"
 end
 
 def updateGHPages

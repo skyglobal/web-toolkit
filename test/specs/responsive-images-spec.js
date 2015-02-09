@@ -3,7 +3,7 @@ function responsiveImagesSpec(responsiveImages, event) {
     var describeSpec = 'Responsive Images';
 
     if (!event){//needed for running test in demo page
-        event = toolkit.event;
+        event = skyComponents.event;
     }
 
     var fixtures = {
@@ -84,7 +84,7 @@ function responsiveImagesSpec(responsiveImages, event) {
 }
 
 if (window.define) {
-    define('specs/responsive-images-spec', ['utils/responsive-images','utils/event'], function (responsiveImages, event) {
+    define('specs/responsive-images-spec', ['utils/responsive-images','bower_components/bskyb-event/dist/js/event.requirejs'], function (responsiveImages, event) {
         return responsiveImagesSpec(responsiveImages, event);
     });
 }

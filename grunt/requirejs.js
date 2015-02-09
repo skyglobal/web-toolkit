@@ -9,7 +9,8 @@ module.exports = function(grunt){
             paths: {
                 utils: "toolkit/utils",
                 components: "toolkit/components",
-                highlight: "vendor/highlight"
+                highlight: "vendor/highlight",
+                bower_components: "../../../bower_components"
             }
         },
         toolkit: {

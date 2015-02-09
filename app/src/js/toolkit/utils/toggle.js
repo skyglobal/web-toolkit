@@ -162,10 +162,10 @@ toolkit.toggle = (function(detect, event) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/toggle', ['utils/detect','utils/event'], function(detect,event) {
+    define('utils/toggle', ['bower_components/bskyb-detect/dist/js/detect.requirejs','bower_components/bskyb-event/dist/js/event.requirejs'], function(detect,event) {
         toolkit.toggle = toolkit.toggle(detect, event);
         return toolkit.toggle;
     });
 } else {
-    toolkit.toggle = toolkit.toggle(toolkit.detect, toolkit.event);
+    toolkit.toggle = toolkit.toggle(skyComponents.detect, skyComponents.event);
 }

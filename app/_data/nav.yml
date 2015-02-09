@@ -20,46 +20,30 @@ Base Styles :
       - example : Tablet Portrait
         title : Grid on a Portrait Tablet 696px
   Colours :
-    design_notes : >
-      These colours are for designer reference only.
-      For accessibility reasons, please also note the colour of the text being used.
+    hide_code_button : true
     examples :
-      - example : Backgrounds
-        title : Backgrounds + Key Line
-      - example : Buttons Icons
-        title : Buttons + Icons
-      - example : Channels
-      - example : Shop
-      - example : Typography
-      - example : V3 Brand
+      - example : example
   Typography :
-    design_notes : |
-      Only a single <code>Page Title</code> can exist on a page at one time. All other titles can be used multiple times.
-      <code>Helvetica/Arial/Verdana</code> should be used as fallback for when Sky fonts aren't available within the browser.
-      When mixing <code>SkyTextMedium</code> and <code>skyTextRegular</code> weights, <code>Medium</code> should always come first.
+    hide_code_button : true
     examples :
-      - example : all
-        developer_notes_file : true
+      - example : example
   Icons :
+    hide_code_button : true
     examples :
       - example : Skycons
-        developer_notes_file : true
         design_notes : >
           These icons will look good on Retina devices and can be any size or (single) colour.
       - example : Sprite
         design_notes : >
           These are not likely to look good on Retina devices
   Buttons :
-    developer_notes_file: true
+    hide_code_button : true
     examples :
-      - example : Primary
-        developer_notes_file: true
-      - example : Secondary
-        developer_notes_file: true
+      - example : example
   Spinners :
+    hide_code_button : true
     examples :
-      - example : Default
-        developer_notes_file : true
+      - example : example
 
 
 Components :
@@ -152,29 +136,13 @@ Components :
 
 Utils:
   Detect :
-    has_tests : true
+    hide_code_button : true
     examples :
-      - example : CSS
-        js_file : true
-      - example : Touch
-        js_file : true
-      - example : Orientation
-        js_file : true
-      - example : View
-        js_file : true
+      - example : example
   Event :
-    has_tests : true
+    hide_code_button : true
     examples :
-      - example : Ready
-        js_file : true
-      - example : On event
-        title : On
-      - example : Off event
-        title : Off
-      - example : Resize End
-        js_file : true
-      - example : Emit
-        js_file : true
+      - example : event
   Hash Manager :
     design_notes : This is useful for maintaining state i.e. ensuring clicks, page refreshes and bookmarked links all arrive in the same state.
     has_tests : true

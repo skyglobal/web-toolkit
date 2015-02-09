@@ -3,7 +3,7 @@ if (typeof toolkit==='undefined') { toolkit={}; }
 toolkit.carousel = (function(video, detect) {
     'use strict';
 
-    var has3d = detect.css('support3D');
+    var has3d = detect.css('translate3d');
     var hasTransform = detect.css('transform');
     var hasTransition = detect.css('transition');
 
@@ -15,6 +15,7 @@ toolkit.carousel = (function(video, detect) {
         this.currentIndex = 0;
         this.slideCount = this.$slides.length;
         this.timerId = false;
+        this.animate = options.animate || false; // this prop will be set to true after initial DOM rebuild.
         this.touchReset();
         this.bindEvents();
         if (!this.options.video) {
@@ -127,7 +128,11 @@ toolkit.carousel = (function(video, detect) {
             this.setOffset(opts.start, false);
             if (typeof opts.end !== 'undefined'){
                 setTimeout(function(){
-                    self.setOffset(opts.end, true);
+                    self.setOffset(opts.end, self.animate); // 2nd parameter true for animation
+                    if (!self.animate) {    // true just for initial repositioning
+                        self.$slideContainer.removeClass('skycom-carousel-transparent');
+                        self.animate = true;
+                    }
                     self.showTermsLink(indexToShow);
                     self.$viewport.trigger('change', indexToShow);
                 }, 20);
@@ -440,9 +445,9 @@ toolkit.carousel = (function(video, detect) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/carousel', ['components/video', 'utils/detect'], function(video, detect) {
+    define('components/carousel', ['components/video', 'bower_components/bskyb-detect/dist/js/detect.requirejs'], function(video, detect) {
         return toolkit.carousel(video, detect);
     });
 } else {
-    toolkit.carousel = toolkit.carousel(toolkit.video, toolkit.detect);
+    toolkit.carousel = toolkit.carousel(toolkit.video, skyComponents.detect);
 }
