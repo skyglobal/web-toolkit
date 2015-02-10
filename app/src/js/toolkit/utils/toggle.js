@@ -162,8 +162,8 @@ toolkit.toggle = (function(detect, event) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/toggle', ['bower_components/bskyb-detect/dist/js/detect.requirejs','bower_components/bskyb-event/dist/js/event.requirejs'], function(detect,event) {
-        toolkit.toggle = toolkit.toggle(detect, event);
+    define('utils/toggle', ['bower_components/bskyb-core/dist/scripts/core.requirejs'], function(core) {
+        toolkit.toggle = toolkit.toggle(core.detect, core.event);
         return toolkit.toggle;
     });
 } else {

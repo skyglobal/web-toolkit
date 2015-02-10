@@ -66,8 +66,8 @@ toolkit.tooltip = (function (detect) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/tooltip', ['bower_components/bskyb-detect/dist/js/detect.requirejs'], function (detect) {
-        toolkit.tooltip = toolkit.tooltip(detect);
+    define('components/tooltip', ['bower_components/bskyb-core/dist/scripts/core.requirejs'], function (core) {
+        toolkit.tooltip = toolkit.tooltip(core.detect);
         return toolkit.tooltip;
     });
 } else {

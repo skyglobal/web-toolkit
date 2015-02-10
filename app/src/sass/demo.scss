@@ -1,9 +1,8 @@
 @import "compass";
 
-@import "bskyb-colours/src/scss/colours";
-@import "bskyb-grid/src/scss/grid";
-@import "bskyb-typography/src/scss/typography";
-@import "bskyb-spinners/src/scss/spinners";
+@import "bskyb-core/src/styles/core";
+@import "bskyb-grid/src/styles/grid";
+@import "bskyb-spinners/src/styles/spinners";
 
 @import "demo/menu";
 @import "demo/demo";

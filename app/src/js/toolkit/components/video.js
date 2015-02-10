@@ -158,8 +158,8 @@ toolkit.video = (function (window, $, event) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/video', ['bower_components/bskyb-event/dist/js/event.requirejs'], function (event) {
-        return toolkit.video(window, jQuery, event);
+    define('components/video', ['bower_components/bskyb-core/dist/scripts/core.requirejs'], function (core) {
+        return toolkit.video(window, jQuery, core.event);
     });
 } else {
     toolkit.video =  toolkit.video(window, jQuery, skyComponents.event);

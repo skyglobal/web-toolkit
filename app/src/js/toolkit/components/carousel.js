@@ -445,8 +445,8 @@ toolkit.carousel = (function(video, detect) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/carousel', ['components/video', 'bower_components/bskyb-detect/dist/js/detect.requirejs'], function(video, detect) {
-        return toolkit.carousel(video, detect);
+    define('components/carousel', ['components/video', 'bower_components/bskyb-core/dist/scripts/core.requirejs'], function(video, core) {
+        return toolkit.carousel(video, core.detect);
     });
 } else {
     toolkit.carousel = toolkit.carousel(toolkit.video, skyComponents.detect);

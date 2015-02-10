@@ -13,16 +13,14 @@
     "!dist/**/*"
   ],
   "devDependencies": {
-    "bskyb-polyfill": "~0.1.0",
-    "bskyb-grid": "~0.1.0",
-    "bskyb-share": "~0.1.1",
-    "bskyb-skycons": "~0.2.0",
-    "bskyb-buttons": "~0.1.2",
-    "bskyb-typography": "~0.1.0",
-    "bskyb-spinners": "~0.1.0",
-    "bskyb-detect": "~0.1.0",
-    "bskyb-event": "~0.1.2",
-    "bskyb-colours": "~0.1.0",
-    "bskyb-breadcrumb": "~0.1.0"
+    "bskyb-polyfill": "~0.2.0",
+    "bskyb-grid": "~0.2.0",
+    "bskyb-share": "~0.3.0",
+    "bskyb-skycons": "~0.3.5",
+    "bskyb-buttons": "~0.2.1",
+    "bskyb-spinners": "~0.2.0",
+    "bskyb-core": "~0.0.4",
+    "bskyb-breadcrumb": "~0.2.0",
+    "bskyb-hash-manager": "~0.2.3"
   }
 }

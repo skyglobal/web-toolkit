@@ -1,36 +1,36 @@
 if (typeof window.define === "function" && window.define.amd) {
     define([
-        'bower_components/bskyb-polyfill/dist/js/polyfill.requirejs',
-        'bower_components/bskyb-detect/dist/js/detect.requirejs',
-        'utils/hash-manager',
+        'bower_components/bskyb-polyfill/dist/scripts/polyfill.requirejs',
+        'bower_components/bskyb-hash-manager/dist/scripts/hash-manager.requirejs',
         'utils/toggle',
         'utils/focus',
         'utils/validation',
-        'bower_components/bskyb-event/dist/js/event.requirejs',
+        'bower_components/bskyb-core/dist/scripts/core.requirejs',
         'components/in-page-nav',
         'components/accordion',
         'components/form',
         'components/lightbox',
-        'bower_components/bskyb-share/dist/js/share.requirejs',
+        'bower_components/bskyb-share/dist/scripts/share.requirejs',
         'components/tooltip',
         'components/video',
         'components/carousel'], function(
-            polyfill, detect, hashManager, toggle, focus, validation, event,
+            polyfill, hashManager, toggle, focus, validation, core,
             inPageNav, accordion, datePicker, lightbox, share, tooltip, video, carousel){
 
-        toolkit.detect = detect;
-        toolkit.event = event;
+        toolkit.detect = core.detect;
+        toolkit.event = core.event;
         toolkit.polyfill = polyfill;
+        toolkit.hashManager = hashManager;
         toolkit.share = share;
 
         return {
             polyfill: polyfill,
-            detect: detect,
+            detect: core.detect,
             hashManager: hashManager,
             toggle: toggle,
             focus: focus,
             validation: validation,
-            event: event,
+            event: core.event,
             inPageNav: inPageNav,
             accordion: accordion,
             datePicker: datePicker,

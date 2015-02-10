@@ -227,13 +227,12 @@ toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
 if (typeof window.define === "function" && window.define.amd) {
     define('components/lightbox',
             ['utils/focus',
-            'utils/hash-manager',
-            'bower_components/bskyb-event/dist/js/event.requirejs',
-            'bower_components/bskyb-detect/dist/js/detect.requirejs'
-            ], function(focus, hash, event, detect) {
+            'bower_components/bskyb-hash-manager/dist/scripts/hash-manager.requirejs',
+            'bower_components/bskyb-core/dist/scripts/core.requirejs'
+            ], function(focus, hash, core) {
         'use strict';
-        return toolkit.lightbox(jQuery, focus, hash, event, detect);
+        return toolkit.lightbox(jQuery, focus, hash, core.event, core.detect);
     });
 } else {
-    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager, skyComponents.event, skyComponents.detect);
+    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, skyComponents['hash-manager'], skyComponents.event, skyComponents.detect);
 }
