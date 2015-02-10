@@ -314,7 +314,7 @@ function lightboxSpec(lightbox, focus, hash) {
 }
 
 if (window.define) {
-    define('specs/lightbox-spec', ['components/lightbox', 'utils/focus', 'utils/hash-manager'],
+    define('specs/lightbox-spec', ['components/lightbox', 'utils/focus', 'bower_components/bskyb-hash-manager/dist/scripts/hash-manager.requirejs'],
         function (lightbox, focus, hash) {
             return lightboxSpec(lightbox, focus, hash);
         }
