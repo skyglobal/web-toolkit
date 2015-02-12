@@ -314,7 +314,7 @@ toolkit.carousel = (function(video, detect) {
                     extraClass = (id=='next' || id=='previous') ? ' hidden-touch ' : '';
                     icon = 'skycon-' + action.icon;
                     label = (action.speak) ? '<span class="speak">' + action.label + '</span>' : action.label;
-                    html += '<a href="#" class="skycom-internal supportive ' + extraClass + id + '" data-tracking-label="' + id + '">';
+                    html += '<a href="#" class="skycom-internal supportive ' + extraClass + id + '" data-tracking-label="' + action.label.toLowerCase() + '">';
                     html += '<span class="semi-circle"><i class="' + icon + '" aria-hidden="true"></i></span>' + label;
                     html += '</a>';
                 }
