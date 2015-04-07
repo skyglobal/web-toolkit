@@ -1,18 +1,28 @@
 .main-menu.tabs-container.main-menu .primary [role=tablist]{
   margin-bottom: 0;
+
   > li.selected a,
   > li:hover a{
     border:0;
   }
 }
-.main-menu.tabs-container.main-menu .tabs{
-  margin-top: 0;
-  margin-bottom: 0;
-  border:0;
+
+.main-menu.tabs-container.main-menu {
+  &,
+  .tabs-container,
+  .tabpanel {
+    margin: 0;
+  }
+
+  .tabs {
+    border: 0;
+  }
 }
+
 .main-menu .tabpanel{
   border-bottom: 1px solid #ccc;
 }
+
 .secondary-menu,
 #toolkit-menu-tabs.stick{
   position: fixed;
