@@ -9,3 +9,4 @@
 /build
 build.txt
 Gemfile.lock
+.DS_Store
