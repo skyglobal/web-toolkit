@@ -1,0 +1,19 @@
+{
+  "name": "bskyb-hash-manager",
+  "version": "0.2.3",
+  "homepage": "https://github.com/skyglobal/hash-manager",
+  "authors": [
+    "peter-mouland <peter.mouland@gmail.com>"
+  ],
+  "description": "hash-manager",
+  "main": "dist/scripts/hash-manager.js",
+  "license": "BSD3",
+  "ignore": [
+    "**/*",
+    "!dist/**/*",
+    "!src/**/*"
+  ],
+  "dependencies": {
+    "bskyb-core": "~0.0.3"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "bskyb-share",
+  "version": "0.3.2",
+  "homepage": "https://github.com/skyglobal/share",
+  "authors": [
+    "Peter Mouland <peter.mouland@gmail.com>"
+  ],
+  "description": "share",
+  "main": "src/share.js",
+  "license": "BSD3",
+  "ignore": [
+    "**/*",
+    "!dist/**/*",
+    "!src/**/*"
+  ],
+  "dependencies": {
+    "bskyb-core": "~0.0.3",
+    "bskyb-skycons": "~0.3.1"
+  }
+}

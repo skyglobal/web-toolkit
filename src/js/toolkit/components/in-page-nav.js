@@ -251,10 +251,13 @@ toolkit.inPageNav = (function(hash, event) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/in-page-nav', ['utils/hash-manager','bower_components/bskyb-event/dist/js/event.requirejs'], function(hash, event) {
-        toolkit.inPageNav = toolkit.inPageNav(hash, event);
-        return toolkit.inPageNav;
+    define('components/in-page-nav',
+        ['bower_components/bskyb-hash-manager/dist/scripts/hash-manager.requirejs',
+        'bower_components/bskyb-core/dist/scripts/core.requirejs'],
+        function(hash, core) {
+            toolkit.inPageNav = toolkit.inPageNav(hash, core.event);
+            return toolkit.inPageNav;
     });
 } else {
-    toolkit.inPageNav = toolkit.inPageNav(toolkit.hashManager, skyComponents.event);
+    toolkit.inPageNav = toolkit.inPageNav(skyComponents['hash-manager'], skyComponents.event);
 }

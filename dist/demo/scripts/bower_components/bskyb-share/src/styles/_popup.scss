@@ -1,0 +1,99 @@
+@import 'bower_components/bskyb-core/src/styles/modules/colours';
+@import 'utils';
+
+.share__popup {
+  position: relative;
+  margin-top: 10px;
+}
+
+.share__word {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.share__count {
+  font-family: Helvetica, Arial;
+  font-size: 0.75em;
+  color: #666;
+}
+.share__count--main {
+  color: $link;
+}
+
+.share__summary {
+  text-decoration: none;
+  float: left;
+  cursor: pointer;
+  height: 1em;
+  line-height: 1em;
+  padding-right: 10px;
+  position: relative;
+}
+
+.share__list--popup {
+  @include pointer-bordered(top, #FFF, #CCC);
+  position: absolute;
+  display: none;
+  height: 44px;
+  top: 1.8em;
+  z-index: 1;
+  padding-left: 16px;
+  background-color: #FFF;
+  border: 1px solid #dcdcdc;
+  min-width: 235px;
+  margin: 0;
+  li{
+    line-height: 46px;
+    margin-right: 16px;
+    margin-left: 0;
+  }
+  a{
+    padding: 8px;
+  }
+  &:before,
+  &:after {
+    left: 24px;
+  }
+}
+
+
+.share__popup--active,
+.share__summary:hover {
+  & .skycon-share {
+    color: #0073c5;
+  }
+
+  & .share-word {
+    text-decoration: underline;
+  }
+}
+
+
+
+.share__popup--active .share__list {
+  display: block;
+  box-shadow : 2px 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+
+
+.share__list--top {
+  box-shadow : -2px -1px 3px rgba(0, 0, 0, 0.15);
+  @include pointer-bordered(bottom, #FFF, #CCC);
+  top: auto;
+  bottom: 0.8em;
+  &:before,
+  &:after {
+    left: 24px;
+  }
+}
+
+.share__list--left {
+  left: auto;
+  right: 0;
+  &:before,
+  &:after {
+    left: auto;
+    right: 24px;
+  }
+}

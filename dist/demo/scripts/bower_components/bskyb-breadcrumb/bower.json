@@ -1,0 +1,24 @@
+{
+  "name": "bskyb-breadcrumb",
+  "version": "0.2.0",
+  "homepage": "https://github.com/skyglobal/breadcrumb",
+  "authors": [
+    "peter mouland <peter.mouland@gmail.com>",
+    "Sabeur Thabti <thabti.sabeur@gmail.com>",
+    "Hem Brahmbhatt <hamant.brahmbhatt@gmail.com>"
+  ],
+  "description": "breadcrumb",
+  "main": "dist/css/breadcrumb.css",
+  "license": "BSD3",
+  "ignore": [
+    "**/*",
+    "!dist/**/*",
+    "!src/**/*"
+  ],
+  "dependencies": {
+    "bskyb-skycons": "~0.3.2"
+  },
+  "devDependencies": {
+    "bskyb-core": "~0.0.3"
+  }
+}

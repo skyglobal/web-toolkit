@@ -1,11 +1,15 @@
+
+body {
+  margin: 0;
+  padding: 0; }
 .skycom-container {
   width: 94.05941%;
-  max-width: 974px;
+  max-width: 1140px;
   margin: 0 auto;
   clear: left;
   overflow: visible; }
-.grid-1140 .skycom_container, .grid-1140 .skycom-container {
-  max-width: 1140px; }
+.grid-974 .skycom-container {
+  max-width: 974px; }
 .skycom-12, .skycom-11, .skycom-10, .skycom-9, .skycom-8, .skycom-7, .skycom-6, .skycom-5, .skycom-4, .skycom-3, .skycom-2, .skycom-1 {
   float: left;
   margin-left: 3.15789%; }

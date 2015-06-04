@@ -172,7 +172,7 @@ if (typeof window.define === "function" && window.define.amd) {
  * ======================================================================== */
 
 
-var scrollspy = (function ($) { 
+var scrollspy = (function ($) { "use strict";
 
     // SCROLLSPY CLASS DEFINITION
     // ==========================
@@ -474,11 +474,11 @@ if (typeof window.define === "function" && window.define.amd){
         'demo/scrollspy',
         'demo/menu',
         'tests',
-        'utils/hash-manager',
+        'bower_components/bskyb-hash-manager/dist/scripts/hash-manager.requirejs',
         'components/in-page-nav'], function(displayCode, scrollspy, menu, tests, hashManager, inPageNav) {
         return demo.main(displayCode, scrollspy, menu, tests, hashManager, inPageNav);
     });
 } else {
-    demo.main(demo.displayCode, scrollspy, demo.menu, demo.tests, demo.skycons, toolkit.hashManager, toolkit.inPageNav);
+    demo.main(demo.displayCode, scrollspy, demo.menu, demo.tests, demo.skycons, skyComponents['hash-manager'], toolkit.inPageNav);
 }
 ;

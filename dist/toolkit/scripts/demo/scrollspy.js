@@ -23,7 +23,7 @@
  * ======================================================================== */
 
 
-var scrollspy = (function ($) { 
+var scrollspy = (function ($) { "use strict";
 
     // SCROLLSPY CLASS DEFINITION
     // ==========================

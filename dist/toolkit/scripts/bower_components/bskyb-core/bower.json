@@ -1,0 +1,16 @@
+{
+    "name": "bskyb-core",
+    "version": "0.0.4",
+    "homepage": "https://github.com/skyglobal/core",
+    "authors": [
+        "Peter Mouland <peter.mouland@gmail.com>"
+    ],
+    "description": "core",
+    "main": "dist",
+    "license": "BSD3",
+    "ignore": [
+        "**/*",
+        "!dist/**/*",
+        "!src/**/*"
+    ]
+}

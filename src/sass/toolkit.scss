@@ -1,25 +1,23 @@
 @import "compass";
 
-@import "bskyb-colours/src/scss/colours";
-@import "bskyb-buttons/src/scss/buttons";
-@import "bskyb-typography/src/scss/typography";
-@import "bskyb-skycons/dist/scss/skycons";
-@import "bskyb-grid/dist/scss/grid";
+@import "bskyb-core/src/styles/core";
+@import "bskyb-buttons/src/styles/buttons";
+@import "bskyb-skycons/src/styles/skycons";
+@import "bskyb-grid/src/styles/grid";
+@import "bskyb-spinners/src/styles/spinners";
+@import "bskyb-breadcrumb/src/styles/breadcrumb";
+@import "bskyb-share/src/styles/share";
 
 @import "toolkit/utility-classes";
-
 @import "toolkit/base/icons";
-@import "bskyb-spinners/dist/scss/spinners";
 @import "toolkit/base/well";
 
-@import "skyglobal-breadcrumb/src/scss/breadcrumb";
 @import "toolkit/components/inPageNav";
 @import "toolkit/components/form";
 @import "toolkit/components/lightbox";
 @import "toolkit/components/accordion";
 @import "toolkit/components/carousel";
 @import "toolkit/components/video";
-@import "toolkit/components/share";
 @import "toolkit/components/tooltip";
 
 @import "toolkit/utils/toggle";

@@ -1,22 +1,25 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 require('./polyfills/Array')();
+require('./polyfills/Element')();
 require('./polyfills/events')();
 require('./polyfills/Function')();
 require('./polyfills/hasOwnProperty')();
+require('./polyfills/Object')();
 require('./polyfills/String')();
 require('./polyfills/whichIE')();
+require('./polyfills/pageYOffset.js')();
 
+module.exports = {};
 
 if (typeof skyComponents === "undefined") window.skyComponents = {};
-skyComponents.polyfill = {
+skyComponents.polyfill = module.exports;
 
-};
-},{"./polyfills/Array":3,"./polyfills/Function":4,"./polyfills/String":5,"./polyfills/events":6,"./polyfills/hasOwnProperty":7,"./polyfills/whichIE":8}],2:[function(require,module,exports){
+},{"./polyfills/Array":3,"./polyfills/Element":4,"./polyfills/Function":5,"./polyfills/Object":6,"./polyfills/String":7,"./polyfills/events":8,"./polyfills/hasOwnProperty":9,"./polyfills/pageYOffset.js":10,"./polyfills/whichIE":11}],2:[function(require,module,exports){
 var polyfill = require('./polyfill');
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('bower_components/bskyb-polyfill/dist/js/polyfill.requirejs', [], function() {
-        
+    define('bower_components/bskyb-polyfill/dist/scripts/polyfill.requirejs', [], function() {
+        'use strict';
         return polyfill;
     });
 }
@@ -58,8 +61,326 @@ module.exports = function(){
             return -1;
         };
     }
+
+    if (!Array.isArray) {
+        Array.isArray = function(arg) {
+            return Object.prototype.toString.call(arg) === '[object Array]';
+        };
+    }
+
+    // Production steps of ECMA-262, Edition 5, 15.4.4.21
+    // Reference: http://es5.github.io/#x15.4.4.21
+    if (!Array.prototype.reduce) {
+      Array.prototype.reduce = function(callback /*, initialValue*/) {
+        'use strict';
+        if (this == null) {
+          throw new TypeError('Array.prototype.reduce called on null or undefined');
+        }
+        if (typeof callback !== 'function') {
+          throw new TypeError(callback + ' is not a function');
+        }
+        var t = Object(this), len = t.length >>> 0, k = 0, value;
+        if (arguments.length == 2) {
+          value = arguments[1];
+        } else {
+          while (k < len && !(k in t)) {
+            k++;
+          }
+          if (k >= len) {
+            throw new TypeError('Reduce of empty array with no initial value');
+          }
+          value = t[k++];
+        }
+        for (; k < len; k++) {
+          if (k in t) {
+            value = callback(value, t[k], k, t);
+          }
+        }
+        return value;
+      };
+    }
+
+    if (!Array.prototype.filter) {
+      Array.prototype.filter = function(fun/*, thisArg*/) {
+        'use strict';
+
+        if (this === void 0 || this === null) {
+          throw new TypeError();
+        }
+
+        var t = Object(this);
+        var len = t.length >>> 0;
+        if (typeof fun !== 'function') {
+          throw new TypeError();
+        }
+
+        var res = [];
+        var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
+        for (var i = 0; i < len; i++) {
+          if (i in t) {
+            var val = t[i];
+
+            // NOTE: Technically this should Object.defineProperty at
+            //       the next index, as push can be affected by
+            //       properties on Object.prototype and Array.prototype.
+            //       But that method's new, and collisions should be
+            //       rare, so use the more-compatible alternative.
+            if (fun.call(thisArg, val, i, t)) {
+              res.push(val);
+            }
+          }
+        }
+
+        return res;
+      };
+    }
 };
+
 },{}],4:[function(require,module,exports){
+/*
+ * classList.js: Cross-browser full element.classList implementation.
+ * 2014-07-23
+ *
+ * By Eli Grey, http://eligrey.com
+ * Public Domain.
+ * NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+ */
+
+/*global self, document, DOMException */
+
+/*! @source http://purl.eligrey.com/github/classList.js/blob/master/classList.js*/
+
+module.exports = function() {
+
+
+if ("document" in self) {
+
+// Full polyfill for browsers with no classList support
+if (!("classList" in document.createElement("_"))) {
+
+(function (view) {
+
+
+
+if (!('Element' in view)) return;
+
+var
+      classListProp = "classList"
+    , protoProp = "prototype"
+    , elemCtrProto = view.Element[protoProp]
+    , objCtr = Object
+    , strTrim = String[protoProp].trim || function () {
+        return this.replace(/^\s+|\s+$/g, "");
+    }
+    , arrIndexOf = Array[protoProp].indexOf || function (item) {
+        var
+              i = 0
+            , len = this.length
+        ;
+        for (; i < len; i++) {
+            if (i in this && this[i] === item) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    // Vendors: please allow content code to instantiate DOMExceptions
+    , DOMEx = function (type, message) {
+        this.name = type;
+        this.code = DOMException[type];
+        this.message = message;
+    }
+    , checkTokenAndGetIndex = function (classList, token) {
+        if (token === "") {
+            throw new DOMEx(
+                  "SYNTAX_ERR"
+                , "An invalid or illegal string was specified"
+            );
+        }
+        if (/\s/.test(token)) {
+            throw new DOMEx(
+                  "INVALID_CHARACTER_ERR"
+                , "String contains an invalid character"
+            );
+        }
+        return arrIndexOf.call(classList, token);
+    }
+    , ClassList = function (elem) {
+        var
+              trimmedClasses = strTrim.call(elem.getAttribute("class") || "")
+            , classes = trimmedClasses ? trimmedClasses.split(/\s+/) : []
+            , i = 0
+            , len = classes.length
+        ;
+        for (; i < len; i++) {
+            this.push(classes[i]);
+        }
+        this._updateClassName = function () {
+            elem.setAttribute("class", this.toString());
+        };
+    }
+    , classListProto = ClassList[protoProp] = []
+    , classListGetter = function () {
+        return new ClassList(this);
+    }
+;
+// Most DOMException implementations don't allow calling DOMException's toString()
+// on non-DOMExceptions. Error's toString() is sufficient here.
+DOMEx[protoProp] = Error[protoProp];
+classListProto.item = function (i) {
+    return this[i] || null;
+};
+classListProto.contains = function (token) {
+    token += "";
+    return checkTokenAndGetIndex(this, token) !== -1;
+};
+classListProto.add = function () {
+    var
+          tokens = arguments
+        , i = 0
+        , l = tokens.length
+        , token
+        , updated = false
+    ;
+    do {
+        token = tokens[i] + "";
+        if (checkTokenAndGetIndex(this, token) === -1) {
+            this.push(token);
+            updated = true;
+        }
+    }
+    while (++i < l);
+
+    if (updated) {
+        this._updateClassName();
+    }
+};
+classListProto.remove = function () {
+    var
+          tokens = arguments
+        , i = 0
+        , l = tokens.length
+        , token
+        , updated = false
+        , index
+    ;
+    do {
+        token = tokens[i] + "";
+        index = checkTokenAndGetIndex(this, token);
+        while (index !== -1) {
+            this.splice(index, 1);
+            updated = true;
+            index = checkTokenAndGetIndex(this, token);
+        }
+    }
+    while (++i < l);
+
+    if (updated) {
+        this._updateClassName();
+    }
+};
+classListProto.toggle = function (token, force) {
+    token += "";
+
+    var
+          result = this.contains(token)
+        , method = result ?
+            force !== true && "remove"
+        :
+            force !== false && "add"
+    ;
+
+    if (method) {
+        this[method](token);
+    }
+
+    if (force === true || force === false) {
+        return force;
+    } else {
+        return !result;
+    }
+};
+classListProto.toString = function () {
+    return this.join(" ");
+};
+
+if (objCtr.defineProperty) {
+    var classListPropDesc = {
+          get: classListGetter
+        , enumerable: true
+        , configurable: true
+    };
+    try {
+        objCtr.defineProperty(elemCtrProto, classListProp, classListPropDesc);
+    } catch (ex) { // IE 8 doesn't support enumerable:true
+        if (ex.number === -0x7FF5EC54) {
+            classListPropDesc.enumerable = false;
+            objCtr.defineProperty(elemCtrProto, classListProp, classListPropDesc);
+        }
+    }
+} else if (objCtr[protoProp].__defineGetter__) {
+    elemCtrProto.__defineGetter__(classListProp, classListGetter);
+}
+
+}(self));
+
+} else {
+// There is full or partial native classList support, so just check if we need
+// to normalize the add/remove and toggle APIs.
+
+(function () {
+    "use strict";
+
+    var testElement = document.createElement("_");
+
+    testElement.classList.add("c1", "c2");
+
+    // Polyfill for IE 10/11 and Firefox <26, where classList.add and
+    // classList.remove exist but support only one argument at a time.
+    if (!testElement.classList.contains("c2")) {
+        var createMethod = function(method) {
+            var original = DOMTokenList.prototype[method];
+
+            DOMTokenList.prototype[method] = function(token) {
+                var i, len = arguments.length;
+
+                for (i = 0; i < len; i++) {
+                    token = arguments[i];
+                    original.call(this, token);
+                }
+            };
+        };
+        createMethod('add');
+        createMethod('remove');
+    }
+
+    testElement.classList.toggle("c3", false);
+
+    // Polyfill for IE 10 and Firefox <24, where classList.toggle does not
+    // support the second argument.
+    if (testElement.classList.contains("c3")) {
+        var _toggle = DOMTokenList.prototype.toggle;
+
+        DOMTokenList.prototype.toggle = function(token, force) {
+            if (1 in arguments && !this.contains(token) === !force) {
+                return force;
+            } else {
+                return _toggle.call(this, token);
+            }
+        };
+
+    }
+
+    testElement = null;
+}());
+
+}
+
+}
+
+}
+
+},{}],5:[function(require,module,exports){
 
 module.exports = function(){
 
@@ -78,7 +399,52 @@ module.exports = function(){
         };
     }
 };
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
+// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+module.exports = function() {
+    if (!Object.keys) {
+        Object.keys = (function() {
+            'use strict';
+            var hasOwnProperty = Object.prototype.hasOwnProperty,
+            hasDontEnumBug = !({ toString: null }).propertyIsEnumerable('toString'),
+            dontEnums = [
+            'toString',
+            'toLocaleString',
+            'valueOf',
+            'hasOwnProperty',
+            'isPrototypeOf',
+            'propertyIsEnumerable',
+            'constructor'
+            ],
+            dontEnumsLength = dontEnums.length;
+
+            return function(obj) {
+                if (typeof obj !== 'object' && (typeof obj !== 'function' || obj === null)) {
+                    throw new TypeError('Object.keys called on non-object');
+                }
+
+                var result = [], prop, i;
+
+                for (prop in obj) {
+                    if (hasOwnProperty.call(obj, prop)) {
+                        result.push(prop);
+                    }
+                }
+
+                if (hasDontEnumBug) {
+                    for (i = 0; i < dontEnumsLength; i++) {
+                        if (hasOwnProperty.call(obj, dontEnums[i])) {
+                            result.push(dontEnums[i]);
+                        }
+                    }
+                }
+                return result;
+            };
+        }());
+    }
+}
+
+},{}],7:[function(require,module,exports){
 
 module.exports = function() {
 
@@ -95,7 +461,7 @@ module.exports = function() {
     }
 
 }
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 module.exports = function(){
 
     // from Jonathan Neal's Gist https://gist.github.com/jonathantneal/3748027
@@ -134,12 +500,21 @@ module.exports = function(){
 
 
 };
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 
 module.exports = function() {
     window.hasOwnProperty = window.hasOwnProperty || Object.prototype.hasOwnProperty;
 }
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
+module.exports = function() {
+    if (window.pageYOffset === undefined) {
+        Object.defineProperty(window, "pageYOffset", {
+            get : function () { return this.document.documentElement.scrollTop; }
+        });
+    }
+};
+
+},{}],11:[function(require,module,exports){
 
 module.exports = function() {
 
@@ -276,9 +651,10 @@ function elementVisibleRight(el) {
 attachClasses();
 
 module.exports = {
+    _attachClasses: attachClasses,
+    _state: state,
     css: css,
     touch: touch,
-    state: state,
     elementVisibleBottom: elementVisibleBottom,
     elementVisibleRight: elementVisibleRight
 };
@@ -286,201 +662,8 @@ module.exports = {
 if (typeof skyComponents === "undefined") window.skyComponents = {};
 skyComponents.detect = module.exports;
 },{}],2:[function(require,module,exports){
-var detect = require('./detect');
-
-if (typeof window.define === "function" && window.define.amd) {
-    define('bower_components/bskyb-detect/dist/js/detect.requirejs', [], function() {
-        
-        return detect;
-    });
-}
-},{"./detect":1}]},{},[2]);
-
-/**
- purpose:
- to let 'anchor' tags do their job and change the hash in the url for internal links.
- this will execute the associated callback with that hash.
- no onclick events needed.
- **/
-if (typeof toolkit==='undefined') toolkit={};
-toolkit.hashManager = (function() {
-
-    var vars = {
-        globalHashList: {},
-        eventsAlreadyBound: false,
-        lastExecutor: null,
-        hash: null
-    };
-
-    function bindEvents() {
-        $(window).on('hashchange', onHashChange);
-        var doc_mode = document.documentMode,
-        hashChangeSupport = 'onhashchange' in window && ( doc_mode === undefined || doc_mode > 7 );
-        if (!hashChangeSupport){ //IE7 support
-            vars.hash = document.location.hash;
-            setInterval(function(){
-                if (document.location.hash !== vars.hash){
-                    $(window).trigger('hashchange');
-                }
-            },200);
-        }
-        vars.eventsAlreadyBound = true;
-    }
-
-    function onHashChange(hash) {
-        var evt, fn;
-        hash = cleanHash((typeof hash === 'string') ? hash : location.hash);
-
-        if (hash.indexOf('?') > 1) {
-            hash = hash.split('?')[0];
-        }
-        evt = getHashEvent(hash);
-        if (hash && evt) {
-            fn = 'callback';
-            vars.lastExecutor = hash;
-        } else if (vars.lastExecutor) {
-            evt = getHashEvent(vars.lastExecutor);
-            fn = 'undo';
-        }
-        if (evt && typeof evt[fn] === 'function') {
-            evt[fn](hash);
-        }
-    }
-
-    function remove() {
-        var loc = window.location;
-        if ("pushState" in history) {
-            location.hash = '!';
-            history.pushState("", document.title, loc.pathname + loc.search);
-        } else {
-            location.hash = '!';
-        }
-    }
-
-    function change(hash){
-        location.hash = '!' + hash;
-    }
-
-    function getHashEvent(hash){
-        var globalHashList = vars.globalHashList,
-            registeredHash,
-            wildcardEvent,
-            exactMatchEvent;
-        for(registeredHash in globalHashList) {
-            if(matches(hash, registeredHash) || matches(registeredHash, hash)) {
-                if (registeredHash.indexOf('/*')>=0) {
-                    wildcardEvent = globalHashList[registeredHash];
-                } else {
-                    exactMatchEvent = globalHashList[registeredHash];
-                    break;
-                }
-            }
-        }
-        return exactMatchEvent || wildcardEvent;
-    }
-
-    function matches(hashWithoutWildCard, hashWithWildCard) {
-        hashWithoutWildCard = cleanHash(hashWithoutWildCard);
-        hashWithWildCard = cleanHash(hashWithWildCard);
-        var hashSections = hashWithWildCard.split('/*');
-        var hashMatched = ((hashWithoutWildCard.indexOf(hashSections[0]) === 0 && hashSections.length>1) ||
-            hashWithoutWildCard == hashWithWildCard);
-        return hashMatched;
-    }
-
-    function register(hashList, callback, undo){
-        if (typeof hashList === 'string') { hashList = [hashList];}
-        var hash,
-            i= 0,
-            len = hashList.length;
-        for (i;i<len;i++){
-            hash = cleanHash(hashList[i]);
-            if (vars.globalHashList[hash]){
-                var err = 'hashManager: hash (' + hash + ') already exists';
-                throw new Error(err);
-            }
-            vars.globalHashList[hash] = {
-                callback: callback,
-                undo: undo
-            };
-
-            if (vars.eventsAlreadyBound && matches(location.hash, hash)) {
-                onHashChange();
-            }
-        }
-    }
-
-    function resetHash() {
-        vars.globalHashList = [];
-    }
-
-    function cleanHash(hash) {
-        return hash.replace(/[#!]/g, '');
-    }
-
-    bindEvents();
-
-    return {
-        register: register,
-        change: change,
-        remove: remove,
-        onHashChange: onHashChange,
-        resetHash: resetHash,
-        cleanHash: cleanHash
-    };
-});
-
-if (typeof window.define === "function" && window.define.amd) {
-    define('utils/hash-manager', [], function() {
-        toolkit.hashManager =  toolkit.hashManager();
-        return toolkit.hashManager;
-    });
-} else {
-    toolkit.hashManager =  toolkit.hashManager();
-};
-if (typeof toolkit==='undefined') toolkit={};
-
-toolkit.popup = (function() {
-
-    function open(args) {
-        var url = args.url;
-        var width = args.width || 400;
-        var height = args.height || width;
-        var top = args.top || (screen.height/2)-(height/2);
-        var left = args.left || (screen.width/2)-(width/2);
-        var windowTitle = args.title || 'Sky';
-        return window.open(url, windowTitle, 'top=' + top + ',left=' + left + ',width=' + width + ',height='+ height);
-    }
-
-    function openThisLink(e) {
-        e.preventDefault();
-        var args = $.extend($(this).data('popup'), {url: $(this).attr('href')});
-        open(args);
-    }
-
-    function bindEvents() {
-        $(document).on('click', '[data-popup]', openThisLink);
-    }
-
-    bindEvents();
-
-    return {
-        open: open
-    };
-});
-
-if (typeof window.define === "function" && window.define.amd) {
-    define('utils/popup', [], function() {
-        toolkit.popup = toolkit.popup();
-        return toolkit.popup;
-    });
-} else {
-    toolkit.popup = toolkit.popup();
-};
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var utils = require('./utils');
+var utils = require('../utils/event-helpers');
 var timeout = { resize: null };
-NodeList.prototype.isNodeList = HTMLCollection.prototype.isNodeList = true;
 
 function bindEvents() {
     on(window, 'resize', initResizeEnd);
@@ -489,45 +672,10 @@ function bindEvents() {
 function initResizeEnd() {
     clearTimeout(timeout.resize);
     timeout.resize = setTimeout(function triggerResizeEnd() {
-        trigger(window, 'resizeend'); // raw JS version
-        if (typeof $ !== 'undefined') {
-            $(window).trigger('resizeend'); // jQuery version
-        }
+        trigger(window, 'resizeend');
     }, 200);
 }
 
-
-function on(el, eventName, eventHandler, useCapture){
-    if (el.isNodeList){
-        Array.prototype.forEach.call(el, function(element, i){
-            utils.on(element, eventName, eventHandler, useCapture)
-        });
-    } else {
-        utils.on(el, eventName, eventHandler, useCapture);
-    }
-}
-
-function off(el, eventName, eventHandler, useCapture) {
-    if (el.isNodeList){
-        Array.prototype.forEach.call(el, function(element, i){
-            utils.off(element, eventName, eventHandler, useCapture)
-        });
-    } else {
-        utils.off(el, eventName, eventHandler, useCapture)
-    }
-}
-
-function trigger(el, eventName) {
-    var event;
-    if (document.createEvent) {
-        event = document.createEvent('CustomEvent'); // MUST be 'CustomEvent'
-        event.initCustomEvent(eventName, false, false, null);
-        el.dispatchEvent(event);
-    } else {
-        event = document.createEventObject();
-        el.fireEvent('on' + eventName, event);
-    }
-}
 
 function ready(exec) {
     if (/in/.test(document.readyState)) {
@@ -539,9 +687,37 @@ function ready(exec) {
     }
 }
 
+function trigger(el, eventName) {
+    utils.dispatchEvent(el, eventName);
+}
+
 function live(events, selector, eventHandler){
     events.split(' ').forEach(function(eventName){
         utils.attachEvent(eventName, selector, eventHandler);
+    });
+}
+
+function off(el, eventNames, eventHandler) {
+    eventNames.split(' ').forEach(function(eventName) {
+        if (el.isNodeList) {
+            Array.prototype.forEach.call(el, function (element, i) {
+                utils.removeEventListener(element, eventName, eventHandler);
+            });
+        } else {
+            utils.removeEventListener(el, eventName, eventHandler);
+        }
+    });
+}
+
+function on(el, eventNames, eventHandler, useCapture) {
+    eventNames.split(' ').forEach(function(eventName) {
+        if (el.isNodeList){
+            Array.prototype.forEach.call(el, function(element, i){
+                utils.addEventListener(element, eventName, eventHandler, useCapture);
+            });
+        } else {
+            utils.addEventListener(el, eventName, eventHandler, useCapture);
+        }
     });
 }
 
@@ -559,22 +735,29 @@ module.exports = {
 if (typeof skyComponents === "undefined") window.skyComponents = {};
 skyComponents.event = module.exports;
 
-},{"./utils":3}],2:[function(require,module,exports){
-var event = require('./event');
+},{"../utils/event-helpers":4}],3:[function(require,module,exports){
+var version  = require('./utils/version');
+var event  = require('./api/event');
+var detect  = require('./api/detect');
 
-if (typeof window.define === "function" && window.define.amd) {
-    define('bower_components/bskyb-event/dist/js/event.requirejs', [], function() {
-        
-        return event;
-    });
+module.exports = {
+    version: version,
+    event: event,
+    detect: detect
 }
-},{"./event":1}],3:[function(require,module,exports){
+
+if (typeof skyComponents === "undefined") window.skyComponents = {};
+skyComponents['version'] = version;
+skyComponents['event'] = event;
+skyComponents['detect'] = detect;
+},{"./api/detect":1,"./api/event":2,"./utils/version":5}],4:[function(require,module,exports){
 var eventRegistry = {};
 var state = {    };
 var browserSpecificEvents = {
     'transitionend': 'transition',
     'animationend': 'animation'
 };
+NodeList.prototype.isNodeList = HTMLCollection.prototype.isNodeList = true;
 
 function capitalise(str) {
     return str.replace(/\b[a-z]/g, function () {
@@ -604,16 +787,20 @@ function check(eventName) {
     return result;
 }
 
-function off(el, eventName, eventHandler) {
+function dispatchEvent(el, eventName){
     eventName = check(eventName) || eventName;
-    if (el.removeEventListener) {
-        el.removeEventListener(eventName, eventHandler, false);
+    var event;
+    if (document.createEvent) {
+        event = document.createEvent('CustomEvent'); // MUST be 'CustomEvent'
+        event.initCustomEvent(eventName, false, false, null);
+        el.dispatchEvent(event);
     } else {
-        el.detachEvent('on' + eventName, eventHandler);
+        event = document.createEventObject();
+        el.fireEvent('on' + eventName, event);
     }
 }
 
-function on(el, eventName, eventHandler, useCapture) {
+function addEventListener(el, eventName, eventHandler, useCapture){
     eventName = check(eventName) || eventName;
     if (el.addEventListener) {
         el.addEventListener(eventName, eventHandler, !!useCapture);
@@ -622,18 +809,23 @@ function on(el, eventName, eventHandler, useCapture) {
     }
 }
 
-function contains(el, child){
-    return el !== child && el.contains(child);
+function removeEventListener(el, eventName, eventHandler){
+    eventName = check(eventName) || eventName;
+    if (el.removeEventListener) {
+        el.removeEventListener(eventName, eventHandler, false);
+    } else {
+        el.detachEvent('on' + eventName, eventHandler);
+    }
 }
 
-function dispatchEvent(event) {
+function dispatchLiveEvent(event) {
     var targetElement = event.target;
 
     eventRegistry[event.type].forEach(function (entry) {
         var potentialElements = document.querySelectorAll(entry.selector);
         var hasMatch = false;
-        Array.prototype.forEach.call(potentialElements, function(item){
-            if (contains(item, targetElement) || item === targetElement){
+        Array.prototype.forEach.call(potentialElements, function(el){
+            if (el.contains(targetElement) || el === targetElement){
                 hasMatch = true;
                 return;
             }
@@ -642,14 +834,14 @@ function dispatchEvent(event) {
         if (hasMatch) {
             entry.handler.call(targetElement, event);
         }
-    }.bind(this));
+    });
 
 }
 
 function attachEvent(eventName, selector, eventHandler){
     if (!eventRegistry[eventName]) {
         eventRegistry[eventName] = [];
-        on(document.documentElement, eventName, dispatchEvent, true);
+        addEventListener(document.documentElement, eventName, dispatchLiveEvent, true);
     }
 
     eventRegistry[eventName].push({
@@ -658,12 +850,482 @@ function attachEvent(eventName, selector, eventHandler){
     });
 }
 
+
 module.exports = {
+    dispatchEvent: dispatchEvent,
     attachEvent: attachEvent,
-    on: on,
-    off: off
+    addEventListener: addEventListener,
+    removeEventListener: removeEventListener
 };
-},{}]},{},[2]);
+},{}],5:[function(require,module,exports){
+module.exports = "0.2.2";
+},{}],6:[function(require,module,exports){
+var core = require('../../bower_components/bskyb-core/src/scripts/core');
+var event = core.event;
+
+var vars = {
+    globalHashList: {},
+    eventsAlreadyBound: false,
+    lastExecutor: null,
+    hash: null
+};
+
+function bindEvents() {
+    event.on(window, "hashchange", onHashChange);
+    var doc_mode = document.documentMode,
+        hashChangeSupport = 'onhashchange' in window && ( doc_mode === undefined || doc_mode > 7 );
+    if (!hashChangeSupport){ //IE7 support
+        vars.hash = document.location.hash;
+        setInterval(function(){
+            if (document.location.hash !== vars.hash){
+                event.trigger(window,'hashchange');
+            }
+        },200);
+    }
+    vars.eventsAlreadyBound = true;
+}
+
+function onHashChange(hash) {
+    var evt, fn;
+    hash = cleanHash((typeof hash === 'string') ? hash : location.hash);
+
+    if (hash.indexOf('?') > 1) {
+        hash = hash.split('?')[0];
+    }
+    evt = getHashEvent(hash);
+    if (hash && evt) {
+        fn = 'callback';
+        vars.lastExecutor = hash;
+    } else if (vars.lastExecutor) {
+        evt = getHashEvent(vars.lastExecutor);
+        fn = 'undo';
+    }
+    if (evt && typeof evt[fn] === 'function') {
+        evt[fn](hash);
+    }
+}
+
+function remove() {
+    var loc = window.location;
+    if ("pushState" in history) {
+        location.hash = '!';
+        history.pushState("", document.title, loc.pathname + loc.search);
+    } else {
+        location.hash = '!';
+    }
+}
+
+function change(hash){
+    location.hash = '!' + hash;
+}
+
+function getHashEvent(hash){
+    var globalHashList = vars.globalHashList,
+        registeredHash,
+        wildcardEvent,
+        exactMatchEvent;
+    for(registeredHash in globalHashList) {
+        if(matches(hash, registeredHash) || matches(registeredHash, hash)) {
+            if (registeredHash.indexOf('/*')>=0) {
+                wildcardEvent = globalHashList[registeredHash];
+            } else {
+                exactMatchEvent = globalHashList[registeredHash];
+                break;
+            }
+        }
+    }
+    return exactMatchEvent || wildcardEvent;
+}
+
+function matches(hashWithoutWildCard, hashWithWildCard) {
+    hashWithoutWildCard = cleanHash(hashWithoutWildCard);
+    hashWithWildCard = cleanHash(hashWithWildCard);
+    var hashSections = hashWithWildCard.split('/*');
+    var hashMatched = ((hashWithoutWildCard.indexOf(hashSections[0]) === 0 && hashSections.length>1) ||
+    hashWithoutWildCard == hashWithWildCard);
+    return hashMatched;
+}
+
+function register(hashList, callback, undo){
+    if (typeof hashList === 'string') { hashList = [hashList];}
+    var hash,
+        i= 0,
+        len = hashList.length;
+    for (i;i<len;i++){
+        hash = cleanHash(hashList[i]);
+        if (vars.globalHashList[hash]){
+            var err = 'hashManager: hash (' + hash + ') already exists';
+            throw new Error(err);
+        }
+        vars.globalHashList[hash] = {
+            callback: callback,
+            undo: undo
+        };
+
+        if (vars.eventsAlreadyBound && matches(location.hash, hash)) {
+            onHashChange();
+        }
+    }
+}
+
+function resetHash() {
+    vars.globalHashList = [];
+}
+
+function cleanHash(hash) {
+    return hash.replace(/[#!]/g, '');
+}
+
+bindEvents();
+
+module.exports = {
+    register: register,
+    change: change,
+    remove: remove,
+    onHashChange: onHashChange,
+    resetHash: resetHash,
+    cleanHash: cleanHash
+};
+
+if (typeof skyComponents === "undefined") window.skyComponents = {};
+skyComponents['hash-manager'] = module.exports;
+},{"../../bower_components/bskyb-core/src/scripts/core":3}],7:[function(require,module,exports){
+var local = {}; local['hash-manager'] = require('./hash-manager');
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('bower_components/bskyb-hash-manager/dist/scripts/hash-manager.requirejs', [], function() {
+        'use strict';
+        return local['hash-manager'];
+    });
+}
+},{"./hash-manager":6}]},{},[7]);
+
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var state = { css: {} };
+var html = document.documentElement;
+var toolkitClasses = ["no-touch", "touch-device"];
+var vendorPrefix = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'];
+var classes = { hasNot: toolkitClasses[0], has: toolkitClasses[1] };
+
+function attachClasses() {
+    var arrClasses = html.className.split(' ');
+    arrClasses.push(touch() ? classes.has : classes.hasNot);
+    html.className = arrClasses.join(' ');
+}
+
+function translate3d() {
+    var transforms = {
+            'webkitTransform': '-webkit-transform',
+            'OTransform': '-o-transform',
+            'msTransform': '-ms-transform',
+            'MozTransform': '-moz-transform',
+            'transform': 'transform'
+        },
+        body = document.body || document.documentElement,
+        has3d,
+        div = document.createElement('div'),
+        t;
+    body.insertBefore(div, null);
+    for (t in transforms) {
+        if (transforms.hasOwnProperty(t)) {
+            if (div.style[t] !== undefined) {
+                div.style[t] = "translate3d(1px,1px,1px)";
+                has3d = window.getComputedStyle(div).getPropertyValue(transforms[t]);
+            }
+        }
+    }
+    body.removeChild(div);
+    state.css.translate3d = (has3d !== undefined && has3d.length > 0 && has3d !== "none");
+    return state.css.translate3d;
+}
+
+function supportsCSS(property) {
+    if (state.css[property]) {
+        return state.css[property];
+    }
+    if (property === 'translate3d') {
+        return translate3d(property);
+    }
+    var style = html.style;
+    if (typeof style[property] == 'string') {
+        state.css[property] = true;
+        return true;
+    }
+    property = property.charAt(0).toUpperCase() + property.substr(1);
+    for (var i = 0; i < vendorPrefix.length; i++) {
+        if (typeof style[vendorPrefix[i] + property] == 'string') {
+            state.css[property] = true;
+            return state.css[property];
+        }
+    }
+    state.css[property] = false;
+    return state.css[property];
+}
+
+function css(el, property) {
+    if (!property) {
+        return supportsCSS(el);
+    }
+    var strValue = "";
+    if (document.defaultView && document.defaultView.getComputedStyle) {
+        strValue = document.defaultView.getComputedStyle(el, "").getPropertyValue(property);
+    } else if (el.currentStyle) {
+        property = property.replace(/\-(\w)/g, function (strMatch, p1) {
+            return p1.toUpperCase();
+        });
+        strValue = el.currentStyle[property];
+    }
+    return strValue;
+}
+
+function touch() {
+    state.touch = (typeof window.ontouchstart !== "undefined");
+    return state.touch;
+}
+
+function getElementOffset(el) {
+    return {
+        top: el.getBoundingClientRect().top + window.pageYOffset - document.documentElement.clientTop,
+        left: el.getBoundingClientRect().left + window.pageXOffset - document.documentElement.clientLeft
+    };
+}
+
+function elementVisibleBottom(el) {
+    if (el.length < 1)
+        return;
+    var elementOffset = getElementOffset(el);
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    return (elementOffset.top + el.offsetHeight <= scrollTop + document.documentElement.clientHeight);
+}
+
+function elementVisibleRight(el) {
+    if (el.length < 1)
+        return;
+    var elementOffset = getElementOffset(el);
+    return (elementOffset.left + el.offsetWidth <= document.documentElement.clientWidth);
+}
+
+attachClasses();
+
+module.exports = {
+    _attachClasses: attachClasses,
+    _state: state,
+    css: css,
+    touch: touch,
+    elementVisibleBottom: elementVisibleBottom,
+    elementVisibleRight: elementVisibleRight
+};
+
+if (typeof skyComponents === "undefined") window.skyComponents = {};
+skyComponents.detect = module.exports;
+},{}],2:[function(require,module,exports){
+var utils = require('../utils/event-helpers');
+var timeout = { resize: null };
+
+function bindEvents() {
+    on(window, 'resize', initResizeEnd);
+}
+
+function initResizeEnd() {
+    clearTimeout(timeout.resize);
+    timeout.resize = setTimeout(function triggerResizeEnd() {
+        trigger(window, 'resizeend');
+    }, 200);
+}
+
+
+function ready(exec) {
+    if (/in/.test(document.readyState)) {
+        setTimeout(function () {
+            ready(exec);
+        }, 9);
+    } else {
+        exec();
+    }
+}
+
+function trigger(el, eventName) {
+    utils.dispatchEvent(el, eventName);
+}
+
+function live(events, selector, eventHandler){
+    events.split(' ').forEach(function(eventName){
+        utils.attachEvent(eventName, selector, eventHandler);
+    });
+}
+
+function off(el, eventNames, eventHandler) {
+    eventNames.split(' ').forEach(function(eventName) {
+        if (el.isNodeList) {
+            Array.prototype.forEach.call(el, function (element, i) {
+                utils.removeEventListener(element, eventName, eventHandler);
+            });
+        } else {
+            utils.removeEventListener(el, eventName, eventHandler);
+        }
+    });
+}
+
+function on(el, eventNames, eventHandler, useCapture) {
+    eventNames.split(' ').forEach(function(eventName) {
+        if (el.isNodeList){
+            Array.prototype.forEach.call(el, function(element, i){
+                utils.addEventListener(element, eventName, eventHandler, useCapture);
+            });
+        } else {
+            utils.addEventListener(el, eventName, eventHandler, useCapture);
+        }
+    });
+}
+
+bindEvents();
+
+module.exports = {
+    live: live,
+    on: on,
+    off: off,
+    emit: trigger, //deprecate me
+    trigger: trigger,
+    ready: ready
+};
+
+if (typeof skyComponents === "undefined") window.skyComponents = {};
+skyComponents.event = module.exports;
+
+},{"../utils/event-helpers":5}],3:[function(require,module,exports){
+var version  = require('./utils/version');
+var event  = require('./api/event');
+var detect  = require('./api/detect');
+
+module.exports = {
+    version: version,
+    event: event,
+    detect: detect
+}
+
+if (typeof skyComponents === "undefined") window.skyComponents = {};
+skyComponents['version'] = version;
+skyComponents['event'] = event;
+skyComponents['detect'] = detect;
+},{"./api/detect":1,"./api/event":2,"./utils/version":6}],4:[function(require,module,exports){
+var local = {}; local['core'] = require('./core');
+
+if (typeof window.define === "function" && window.define.amd) {
+    define('bower_components/bskyb-core/dist/scripts/core.requirejs', [], function() {
+        'use strict';
+        return local['core'];
+    });
+}
+},{"./core":3}],5:[function(require,module,exports){
+var eventRegistry = {};
+var state = {    };
+var browserSpecificEvents = {
+    'transitionend': 'transition',
+    'animationend': 'animation'
+};
+NodeList.prototype.isNodeList = HTMLCollection.prototype.isNodeList = true;
+
+function capitalise(str) {
+    return str.replace(/\b[a-z]/g, function () {
+        return arguments[0].toUpperCase();
+    });
+}
+
+function check(eventName) {
+    var type = '';
+    if (browserSpecificEvents[eventName]){
+        eventName =  browserSpecificEvents[eventName];
+        type = 'end';
+    }
+    var result = false,
+        eventType = eventName.toLowerCase() + type.toLowerCase(),
+        eventTypeCaps = capitalise(eventName.toLowerCase()) + capitalise(type.toLowerCase());
+    if (state[eventType]) {
+        return state[eventType];
+    }
+    ['ms', 'moz', 'webkit', 'o', ''].forEach(function(prefix){
+        if (('on' + prefix + eventType in window) ||
+            ('on' + prefix + eventType in document.documentElement)) {
+            result = (!!prefix) ? prefix + eventTypeCaps : eventType;
+        }
+    });
+    state[eventType] = result;
+    return result;
+}
+
+function dispatchEvent(el, eventName){
+    eventName = check(eventName) || eventName;
+    var event;
+    if (document.createEvent) {
+        event = document.createEvent('CustomEvent'); // MUST be 'CustomEvent'
+        event.initCustomEvent(eventName, false, false, null);
+        el.dispatchEvent(event);
+    } else {
+        event = document.createEventObject();
+        el.fireEvent('on' + eventName, event);
+    }
+}
+
+function addEventListener(el, eventName, eventHandler, useCapture){
+    eventName = check(eventName) || eventName;
+    if (el.addEventListener) {
+        el.addEventListener(eventName, eventHandler, !!useCapture);
+    } else {
+        el.attachEvent('on' + eventName, eventHandler);
+    }
+}
+
+function removeEventListener(el, eventName, eventHandler){
+    eventName = check(eventName) || eventName;
+    if (el.removeEventListener) {
+        el.removeEventListener(eventName, eventHandler, false);
+    } else {
+        el.detachEvent('on' + eventName, eventHandler);
+    }
+}
+
+function dispatchLiveEvent(event) {
+    var targetElement = event.target;
+
+    eventRegistry[event.type].forEach(function (entry) {
+        var potentialElements = document.querySelectorAll(entry.selector);
+        var hasMatch = false;
+        Array.prototype.forEach.call(potentialElements, function(el){
+            if (el.contains(targetElement) || el === targetElement){
+                hasMatch = true;
+                return;
+            }
+        });
+
+        if (hasMatch) {
+            entry.handler.call(targetElement, event);
+        }
+    });
+
+}
+
+function attachEvent(eventName, selector, eventHandler){
+    if (!eventRegistry[eventName]) {
+        eventRegistry[eventName] = [];
+        addEventListener(document.documentElement, eventName, dispatchLiveEvent, true);
+    }
+
+    eventRegistry[eventName].push({
+        selector: selector,
+        handler: eventHandler
+    });
+}
+
+
+module.exports = {
+    dispatchEvent: dispatchEvent,
+    attachEvent: attachEvent,
+    addEventListener: addEventListener,
+    removeEventListener: removeEventListener
+};
+},{}],6:[function(require,module,exports){
+module.exports = "0.0.3";
+},{}]},{},[4]);
 
 /*
  returns toggle(); function
@@ -829,8 +1491,8 @@ toolkit.toggle = (function(detect, event) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('utils/toggle', ['bower_components/bskyb-detect/dist/js/detect.requirejs','bower_components/bskyb-event/dist/js/event.requirejs'], function(detect,event) {
-        toolkit.toggle = toolkit.toggle(detect, event);
+    define('utils/toggle', ['bower_components/bskyb-core/dist/scripts/core.requirejs'], function(core) {
+        toolkit.toggle = toolkit.toggle(core.detect, core.event);
         return toolkit.toggle;
     });
 } else {
@@ -839,7 +1501,7 @@ if (typeof window.define === "function" && window.define.amd) {
 ;
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.focus = (function () {
-    
+    "use strict";
 
     var tabKey = false;
     var focusClass = 'has-focus';
@@ -888,7 +1550,7 @@ toolkit.focus = (function () {
 
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/focus', [], function() {
-        
+        'use strict';
         toolkit.focus = toolkit.focus();
         return toolkit.focus;
     });
@@ -900,7 +1562,7 @@ if (typeof window.define === "function" && window.define.amd) {
 
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.validation = (function () {
-    
+    "use strict";
 
     function isSafari() {
         var ua = navigator.userAgent.toLowerCase();
@@ -1089,7 +1751,7 @@ toolkit.validation = (function () {
 });
 if (typeof window.define === "function" && window.define.amd) {
     define('utils/validation', [], function() {
-        
+        'use strict';
         toolkit.validation =  toolkit.validation();
         return toolkit.validation;
     });
@@ -1349,17 +2011,20 @@ toolkit.inPageNav = (function(hash, event) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/in-page-nav', ['utils/hash-manager','bower_components/bskyb-event/dist/js/event.requirejs'], function(hash, event) {
-        toolkit.inPageNav = toolkit.inPageNav(hash, event);
-        return toolkit.inPageNav;
+    define('components/in-page-nav',
+        ['bower_components/bskyb-hash-manager/dist/scripts/hash-manager.requirejs',
+        'bower_components/bskyb-core/dist/scripts/core.requirejs'],
+        function(hash, core) {
+            toolkit.inPageNav = toolkit.inPageNav(hash, core.event);
+            return toolkit.inPageNav;
     });
 } else {
-    toolkit.inPageNav = toolkit.inPageNav(toolkit.hashManager, skyComponents.event);
+    toolkit.inPageNav = toolkit.inPageNav(skyComponents['hash-manager'], skyComponents.event);
 };
 /*global jQuery:false */
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.accordion = (function (toggle) {
-    
+    "use strict";
 
     function Accordion($element){
         this.$container = $element;
@@ -1609,7 +2274,7 @@ if (typeof window.define === "function" && window.define.amd) {
 //todo: add 'flip' option for if a picture is clicked.
 if (typeof toolkit==='undefined') toolkit={};
 toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
-    
+    "use strict";
 	var scrollbarWidth,
         classes = {
             main: 'lightbox',
@@ -1834,60 +2499,469 @@ toolkit.lightbox = (function ($, keyboardFocus, hash, event, detect) {
 if (typeof window.define === "function" && window.define.amd) {
     define('components/lightbox',
             ['utils/focus',
-            'utils/hash-manager',
-            'bower_components/bskyb-event/dist/js/event.requirejs',
-            'bower_components/bskyb-detect/dist/js/detect.requirejs'
-            ], function(focus, hash, event, detect) {
-        
-        return toolkit.lightbox(jQuery, focus, hash, event, detect);
+            'bower_components/bskyb-hash-manager/dist/scripts/hash-manager.requirejs',
+            'bower_components/bskyb-core/dist/scripts/core.requirejs'
+            ], function(focus, hash, core) {
+        'use strict';
+        return toolkit.lightbox(jQuery, focus, hash, core.event, core.detect);
     });
 } else {
-    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, toolkit.hashManager, skyComponents.event, skyComponents.detect);
+    toolkit.lightbox = toolkit.lightbox(jQuery, toolkit.focus, skyComponents['hash-manager'], skyComponents.event, skyComponents.detect);
 }
 ;
-if (typeof toolkit==='undefined') toolkit={};
-toolkit.share = (function(detect) {
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var state = { css: {} };
+var html = document.documentElement;
+var toolkitClasses = ["no-touch", "touch-device"];
+var vendorPrefix = ['Moz', 'Webkit', 'Khtml', 'O', 'ms'];
+var classes = { hasNot: toolkitClasses[0], has: toolkitClasses[1] };
 
-    var $document = $(document);
+function attachClasses() {
+    var arrClasses = html.className.split(' ');
+    arrClasses.push(touch() ? classes.has : classes.hasNot);
+    html.className = arrClasses.join(' ');
+}
 
-    function bindEvents() {
-        $document.on('click keypress', '.share-popup .summary', toggleSharePopover);
-    }
-
-    function toggleSharePopover(e) {
-        e.preventDefault();
-        var $section = $(this).parent(),
-            $popover = $section.parent().find('.popover'),
-            triggerEvents = 'keypress ' + ('ontouchend' in document.documentElement ? 'touchend' : 'click');
-        if(e.type === 'click' || e.type === 'touchend' || (e.type === 'keypress' && e.which === 13)) {
-            $section.toggleClass('active');
-            $popover.toggleClass("top", !detect.elementVisibleBottom($popover[0]));
-            $popover.toggleClass("left", !detect.elementVisibleRight($popover[0]));
-
-            $document.on(triggerEvents, function hidePopover(e) {
-                if(!$.contains($section[0], e.target)) {
-                    $section.removeClass('active');
-                    $document.off(triggerEvents, hidePopover);
-                }
-            });
+function translate3d() {
+    var transforms = {
+            'webkitTransform': '-webkit-transform',
+            'OTransform': '-o-transform',
+            'msTransform': '-ms-transform',
+            'MozTransform': '-moz-transform',
+            'transform': 'transform'
+        },
+        body = document.body || document.documentElement,
+        has3d,
+        div = document.createElement('div'),
+        t;
+    body.insertBefore(div, null);
+    for (t in transforms) {
+        if (transforms.hasOwnProperty(t)) {
+            if (div.style[t] !== undefined) {
+                div.style[t] = "translate3d(1px,1px,1px)";
+                has3d = window.getComputedStyle(div).getPropertyValue(transforms[t]);
+            }
         }
     }
+    body.removeChild(div);
+    state.css.translate3d = (has3d !== undefined && has3d.length > 0 && has3d !== "none");
+    return state.css.translate3d;
+}
 
-    bindEvents();
+function supportsCSS(property) {
+    if (state.css[property]) {
+        return state.css[property];
+    }
+    if (property === 'translate3d') {
+        return translate3d(property);
+    }
+    var style = html.style;
+    if (typeof style[property] == 'string') {
+        state.css[property] = true;
+        return true;
+    }
+    property = property.charAt(0).toUpperCase() + property.substr(1);
+    for (var i = 0; i < vendorPrefix.length; i++) {
+        if (typeof style[vendorPrefix[i] + property] == 'string') {
+            state.css[property] = true;
+            return state.css[property];
+        }
+    }
+    state.css[property] = false;
+    return state.css[property];
+}
 
+function css(el, property) {
+    if (!property) {
+        return supportsCSS(el);
+    }
+    var strValue = "";
+    if (document.defaultView && document.defaultView.getComputedStyle) {
+        strValue = document.defaultView.getComputedStyle(el, "").getPropertyValue(property);
+    } else if (el.currentStyle) {
+        property = property.replace(/\-(\w)/g, function (strMatch, p1) {
+            return p1.toUpperCase();
+        });
+        strValue = el.currentStyle[property];
+    }
+    return strValue;
+}
+
+function touch() {
+    state.touch = (typeof window.ontouchstart !== "undefined");
+    return state.touch;
+}
+
+function getElementOffset(el) {
     return {
-        toggleSharePopover: toggleSharePopover
+        top: el.getBoundingClientRect().top + window.pageYOffset - document.documentElement.clientTop,
+        left: el.getBoundingClientRect().left + window.pageXOffset - document.documentElement.clientLeft
     };
-});
+}
+
+function elementVisibleBottom(el) {
+    if (el.length < 1)
+        return;
+    var elementOffset = getElementOffset(el);
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    return (elementOffset.top + el.offsetHeight <= scrollTop + document.documentElement.clientHeight);
+}
+
+function elementVisibleRight(el) {
+    if (el.length < 1)
+        return;
+    var elementOffset = getElementOffset(el);
+    return (elementOffset.left + el.offsetWidth <= document.documentElement.clientWidth);
+}
+
+attachClasses();
+
+module.exports = {
+    _attachClasses: attachClasses,
+    _state: state,
+    css: css,
+    touch: touch,
+    elementVisibleBottom: elementVisibleBottom,
+    elementVisibleRight: elementVisibleRight
+};
+
+if (typeof skyComponents === "undefined") window.skyComponents = {};
+skyComponents.detect = module.exports;
+},{}],2:[function(require,module,exports){
+var utils = require('../utils/event-helpers');
+var timeout = { resize: null };
+
+function bindEvents() {
+    on(window, 'resize', initResizeEnd);
+}
+
+function initResizeEnd() {
+    clearTimeout(timeout.resize);
+    timeout.resize = setTimeout(function triggerResizeEnd() {
+        trigger(window, 'resizeend');
+    }, 200);
+}
+
+
+function ready(exec) {
+    if (/in/.test(document.readyState)) {
+        setTimeout(function () {
+            ready(exec);
+        }, 9);
+    } else {
+        exec();
+    }
+}
+
+function trigger(el, eventName) {
+    utils.dispatchEvent(el, eventName);
+}
+
+function live(events, selector, eventHandler){
+    events.split(' ').forEach(function(eventName){
+        utils.attachEvent(eventName, selector, eventHandler);
+    });
+}
+
+function off(el, eventNames, eventHandler) {
+    eventNames.split(' ').forEach(function(eventName) {
+        if (el.isNodeList) {
+            Array.prototype.forEach.call(el, function (element, i) {
+                utils.removeEventListener(element, eventName, eventHandler);
+            });
+        } else {
+            utils.removeEventListener(el, eventName, eventHandler);
+        }
+    });
+}
+
+function on(el, eventNames, eventHandler, useCapture) {
+    eventNames.split(' ').forEach(function(eventName) {
+        if (el.isNodeList){
+            Array.prototype.forEach.call(el, function(element, i){
+                utils.addEventListener(element, eventName, eventHandler, useCapture);
+            });
+        } else {
+            utils.addEventListener(el, eventName, eventHandler, useCapture);
+        }
+    });
+}
+
+bindEvents();
+
+module.exports = {
+    live: live,
+    on: on,
+    off: off,
+    emit: trigger, //deprecate me
+    trigger: trigger,
+    ready: ready
+};
+
+if (typeof skyComponents === "undefined") window.skyComponents = {};
+skyComponents.event = module.exports;
+
+},{"../utils/event-helpers":4}],3:[function(require,module,exports){
+var version  = require('./utils/version');
+var event  = require('./api/event');
+var detect  = require('./api/detect');
+
+module.exports = {
+    version: version,
+    event: event,
+    detect: detect
+}
+
+if (typeof skyComponents === "undefined") window.skyComponents = {};
+skyComponents['version'] = version;
+skyComponents['event'] = event;
+skyComponents['detect'] = detect;
+},{"./api/detect":1,"./api/event":2,"./utils/version":5}],4:[function(require,module,exports){
+var eventRegistry = {};
+var state = {    };
+var browserSpecificEvents = {
+    'transitionend': 'transition',
+    'animationend': 'animation'
+};
+NodeList.prototype.isNodeList = HTMLCollection.prototype.isNodeList = true;
+
+function capitalise(str) {
+    return str.replace(/\b[a-z]/g, function () {
+        return arguments[0].toUpperCase();
+    });
+}
+
+function check(eventName) {
+    var type = '';
+    if (browserSpecificEvents[eventName]){
+        eventName =  browserSpecificEvents[eventName];
+        type = 'end';
+    }
+    var result = false,
+        eventType = eventName.toLowerCase() + type.toLowerCase(),
+        eventTypeCaps = capitalise(eventName.toLowerCase()) + capitalise(type.toLowerCase());
+    if (state[eventType]) {
+        return state[eventType];
+    }
+    ['ms', 'moz', 'webkit', 'o', ''].forEach(function(prefix){
+        if (('on' + prefix + eventType in window) ||
+            ('on' + prefix + eventType in document.documentElement)) {
+            result = (!!prefix) ? prefix + eventTypeCaps : eventType;
+        }
+    });
+    state[eventType] = result;
+    return result;
+}
+
+function dispatchEvent(el, eventName){
+    eventName = check(eventName) || eventName;
+    var event;
+    if (document.createEvent) {
+        event = document.createEvent('CustomEvent'); // MUST be 'CustomEvent'
+        event.initCustomEvent(eventName, false, false, null);
+        el.dispatchEvent(event);
+    } else {
+        event = document.createEventObject();
+        el.fireEvent('on' + eventName, event);
+    }
+}
+
+function addEventListener(el, eventName, eventHandler, useCapture){
+    eventName = check(eventName) || eventName;
+    if (el.addEventListener) {
+        el.addEventListener(eventName, eventHandler, !!useCapture);
+    } else {
+        el.attachEvent('on' + eventName, eventHandler);
+    }
+}
+
+function removeEventListener(el, eventName, eventHandler){
+    eventName = check(eventName) || eventName;
+    if (el.removeEventListener) {
+        el.removeEventListener(eventName, eventHandler, false);
+    } else {
+        el.detachEvent('on' + eventName, eventHandler);
+    }
+}
+
+function dispatchLiveEvent(event) {
+    var targetElement = event.target;
+
+    eventRegistry[event.type].forEach(function (entry) {
+        var potentialElements = document.querySelectorAll(entry.selector);
+        var hasMatch = false;
+        Array.prototype.forEach.call(potentialElements, function(el){
+            if (el.contains(targetElement) || el === targetElement){
+                hasMatch = true;
+                return;
+            }
+        });
+
+        if (hasMatch) {
+            entry.handler.call(targetElement, event);
+        }
+    });
+
+}
+
+function attachEvent(eventName, selector, eventHandler){
+    if (!eventRegistry[eventName]) {
+        eventRegistry[eventName] = [];
+        addEventListener(document.documentElement, eventName, dispatchLiveEvent, true);
+    }
+
+    eventRegistry[eventName].push({
+        selector: selector,
+        handler: eventHandler
+    });
+}
+
+
+module.exports = {
+    dispatchEvent: dispatchEvent,
+    attachEvent: attachEvent,
+    addEventListener: addEventListener,
+    removeEventListener: removeEventListener
+};
+},{}],5:[function(require,module,exports){
+module.exports = "0.3.1";
+},{}],6:[function(require,module,exports){
+var core = require('../../bower_components/bskyb-core/src/scripts/core');
+var event = core.event;
+
+function getElementOffset(el) {
+    return {
+        top: el.getBoundingClientRect().top + window.pageYOffset - document.documentElement.clientTop,
+        left: el.getBoundingClientRect().left + window.pageXOffset - document.documentElement.clientLeft
+    };
+}
+
+function elementVisibleBottom(el) {
+    var elementOffset = getElementOffset(el);
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    return (elementOffset.top + el.offsetHeight <= scrollTop + document.documentElement.clientHeight);
+}
+
+function elementVisibleRight(el) {
+    var elementOffset = getElementOffset(el);
+    return (elementOffset.left + el.offsetWidth <= document.documentElement.clientWidth);
+}
+
+function addClass(el, className){
+    if (el.classList) {
+        el.classList.add(className);
+    } else {
+        el.className += ' ' + className;
+    }
+}
+
+function removeClass(el, className){
+    if (el.classList) {
+        el.classList.remove(className);
+    } else {
+        el.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+    }
+}
+
+function toggleClass(el, className, force){
+    if (force === true){
+        return addClass(el, className);
+    } else if (force === false){
+        return removeClass(el, className);
+    } else if (el.classList) {
+        return el.classList.toggle(className);
+    }
+
+    var classes = el.className.split(' ');
+    var existingIndex = classes.indexOf(className);
+
+    if (existingIndex >= 0){
+        return removeClass(el, className);
+    } else if (existingIndex <0) {
+        return addClass(el, className);
+    }
+}
+
+function contains(el, child){
+    return el !== child && el.contains(child);
+}
+
+function matches(el, selector){
+    /* istanbul ignore next | browser specific code hard to test in phantom! */
+    var fn = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector;
+    if (!fn)  { //no 'matches' on document.documentElement
+        return;
+    }
+    return fn.call(el, selector);
+}
+
+function parent(el, selector) {
+    var p = el.parentNode;
+    while (!matches(p, selector) && p!==null) {
+        p = p.parentNode;
+    }
+    return p;
+}
+
+
+function toggleSharePopover(e) {
+    e.preventDefault();
+    var section = parent(this, '.share__popup'),
+        popover = section.getElementsByClassName('share__list'),
+        triggerEvents = 'keypress touchend click';
+    if(e.type === 'click' || e.type === 'touchend' || (e.type === 'keypress' && e.which === 13)) {
+        toggleClass(section, 'share__popup--active');
+        toggleClass(popover[0], "share__list--left", !elementVisibleRight(popover[0]));
+        toggleClass(popover[0], "share__list--top", !elementVisibleBottom(popover[0]));
+
+        event.on(document.documentElement, triggerEvents, function hidePopover(e) {
+            if(contains(section, e.target)) { return; }
+            removeClass(section, 'share__popup--active');
+            event.off(document, triggerEvents, hidePopover);
+        });
+    }
+}
+
+
+function popupLink(e) {
+    e.preventDefault();
+    var url = (this.tagName === 'A') ? this : parent(this, 'a').getAttribute('href');
+    var width = 626;
+    var height = 436;
+    var top = (screen.height/2)-(height/2);
+    var left = (screen.width/2)-(width/2);
+    var windowTitle = 'Sky';
+    return window.open(url, windowTitle, 'top=' + top + ',left=' + left + ',width=' + width + ',height='+ height);
+}
+
+function bindEvents() {
+    event.live('click', '.share__summary', toggleSharePopover);
+    event.live('click', '.share__social-link', popupLink);
+}
+
+bindEvents();
+
+module.exports = {
+    init: bindEvents,
+    _toggleSharePopover: toggleSharePopover,
+    _toggleClass: toggleClass,
+    _popupLink: popupLink
+};
+
+/* istanbul ignore if */
+if (typeof skyComponents === "undefined") window.skyComponents = {};
+skyComponents.share = module.exports;
+},{"../../bower_components/bskyb-core/src/scripts/core":3}],7:[function(require,module,exports){
+var share = require('./share');
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/share', ['bower_components/bskyb-detect/dist/js/detect.requirejs'], function(detect) {
-        return toolkit.share(detect);
+    define('bower_components/bskyb-share/dist/scripts/share.requirejs', [], function() {
+        'use strict';
+        return share;
     });
-} else {
-    toolkit.share = toolkit.share(skyComponents.detect);
 }
-;
+},{"./share":6}]},{},[7]);
+
 if (typeof toolkit === 'undefined') toolkit = {};
 toolkit.tooltip = (function (detect) {
 
@@ -1956,8 +3030,8 @@ toolkit.tooltip = (function (detect) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/tooltip', ['bower_components/bskyb-detect/dist/js/detect.requirejs'], function (detect) {
-        toolkit.tooltip = toolkit.tooltip(detect);
+    define('components/tooltip', ['bower_components/bskyb-core/dist/scripts/core.requirejs'], function (core) {
+        toolkit.tooltip = toolkit.tooltip(core.detect);
         return toolkit.tooltip;
     });
 } else {
@@ -1966,7 +3040,7 @@ if (typeof window.define === "function" && window.define.amd) {
 ;
 if (typeof toolkit === 'undefined') toolkit = {};
 toolkit.video = (function (window, $, event) {
-    
+    'use strict';
 
     function Video($container, options) {
         if (!$container.attr('data-video-id')){ return; }
@@ -2124,8 +3198,8 @@ toolkit.video = (function (window, $, event) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/video', ['bower_components/bskyb-event/dist/js/event.requirejs'], function (event) {
-        return toolkit.video(window, jQuery, event);
+    define('components/video', ['bower_components/bskyb-core/dist/scripts/core.requirejs'], function (core) {
+        return toolkit.video(window, jQuery, core.event);
     });
 } else {
     toolkit.video =  toolkit.video(window, jQuery, skyComponents.event);
@@ -2134,7 +3208,7 @@ if (typeof window.define === "function" && window.define.amd) {
 /*global toolit define*/
 if (typeof toolkit==='undefined') { toolkit={}; }
 toolkit.carousel = (function(video, detect) {
-    
+    'use strict';
 
     var has3d = detect.css('translate3d');
     var hasTransform = detect.css('transform');
@@ -2578,8 +3652,8 @@ toolkit.carousel = (function(video, detect) {
 });
 
 if (typeof window.define === "function" && window.define.amd) {
-    define('components/carousel', ['components/video', 'bower_components/bskyb-detect/dist/js/detect.requirejs'], function(video, detect) {
-        return toolkit.carousel(video, detect);
+    define('components/carousel', ['components/video', 'bower_components/bskyb-core/dist/scripts/core.requirejs'], function(video, core) {
+        return toolkit.carousel(video, core.detect);
     });
 } else {
     toolkit.carousel = toolkit.carousel(toolkit.video, skyComponents.detect);
@@ -2587,38 +3661,37 @@ if (typeof window.define === "function" && window.define.amd) {
 ;
 if (typeof window.define === "function" && window.define.amd) {
     define('toolkit',[
-        'bower_components/bskyb-polyfill/dist/js/polyfill.requirejs',
-        'bower_components/bskyb-detect/dist/js/detect.requirejs',
-        'utils/hash-manager',
-        'utils/popup',
+        'bower_components/bskyb-polyfill/dist/scripts/polyfill.requirejs',
+        'bower_components/bskyb-hash-manager/dist/scripts/hash-manager.requirejs',
         'utils/toggle',
         'utils/focus',
         'utils/validation',
-        'bower_components/bskyb-event/dist/js/event.requirejs',
+        'bower_components/bskyb-core/dist/scripts/core.requirejs',
         'components/in-page-nav',
         'components/accordion',
         'components/form',
         'components/lightbox',
-        'components/share',
+        'bower_components/bskyb-share/dist/scripts/share.requirejs',
         'components/tooltip',
         'components/video',
         'components/carousel'], function(
-            polyfill, detect, hashManager, popup,toggle, focus, validation, event,
+            polyfill, hashManager, toggle, focus, validation, core,
             inPageNav, accordion, datePicker, lightbox, share, tooltip, video, carousel){
 
-        toolkit.detect = detect;
-        toolkit.event = event;
+        toolkit.detect = core.detect;
+        toolkit.event = core.event;
         toolkit.polyfill = polyfill;
+        toolkit.hashManager = hashManager;
+        toolkit.share = share;
 
         return {
             polyfill: polyfill,
-            detect: detect,
+            detect: core.detect,
             hashManager: hashManager,
-            popup: popup,
             toggle: toggle,
             focus: focus,
             validation: validation,
-            event: event,
+            event: core.event,
             inPageNav: inPageNav,
             accordion: accordion,
             datePicker: datePicker,

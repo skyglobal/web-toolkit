@@ -90,11 +90,11 @@ demo.tests = (function(hashManager){
 });
 
 if (typeof window.define === "function" && window.define.amd){
-    define('tests',['utils/hash-manager'], function(hashManager) {
+    define('tests',['bower_components/bskyb-hash-manager/dist/scripts/hash-manager.requirejs'], function(hashManager) {
         demo.tests = demo.tests(hashManager);
         return demo.tests;
     });
 } else {
-    demo.tests = demo.tests(toolkit.hashManager);
+    demo.tests = demo.tests(skyComponents['hash-manager']);
 }
 ;

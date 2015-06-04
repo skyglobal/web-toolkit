@@ -48,7 +48,7 @@ function inPageNavSpec(hash, tabs) {
 }
 
 if (window.define) {
-    define('specs/in-page-nav-spec', ['utils/hash-manager', 'components/in-page-nav'],
+    define('specs/in-page-nav-spec', ['bower_components/bskyb-hash-manager/dist/scripts/hash-manager.requirejs', 'components/in-page-nav'],
         function (hash, tabs) {
             return inPageNavSpec(hash, tabs);
         }

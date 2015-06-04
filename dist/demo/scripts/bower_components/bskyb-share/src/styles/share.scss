@@ -1,0 +1,28 @@
+//Import any bower dependencies as so:
+//@import 'bower_components/bskyb-skycons/dist/scss/skycons';
+
+.share__list {
+  display: inline;
+  margin-left: 30px;
+
+  li {
+    display: inline-block;
+    margin: 0 10px;
+
+    .lt-ie8 & {
+      display: inline;
+    }
+  }
+}
+
+.share a {
+  color: #666;
+  text-decoration: none;
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
+
+@import 'bar';
+@import 'popup';

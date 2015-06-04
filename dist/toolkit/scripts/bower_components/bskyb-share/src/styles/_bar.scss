@@ -1,0 +1,50 @@
+.share__bar {
+  border-top: 1px solid #C0C0C0;
+  margin: 16px 0;
+  padding-top: 16px;
+}
+
+.share__name{
+  margin-left: 10px;
+}
+
+.share__title {
+  display: inline;
+}
+
+
+@media screen and (max-width: 767px) {
+  .share__title {
+    font-size: 1.1em;
+  }
+}
+@media screen and (max-width: 600px) {
+  .share__bar {
+    margin: 0;
+    padding: 0;
+
+    .share__list {
+      margin-left: 15px;
+      li {
+          margin: 1%;
+          padding: 10px 0;
+          width: 33px;
+          text-align: center;
+        }
+    }
+    a {
+      display: block;
+    }
+  }
+  .share__name {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip: rect(1px 1px 1px 1px);
+    padding: 0;
+    border: 0;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    display: block;
+  }
+}
