@@ -1,4 +1,4 @@
-/*! web-toolkit - v2.3.7 - 2015-06-04 */
+/*! web-toolkit - v2.3.7 - 2016-06-28 */
 (function e(t, n, r) {
     function s(o, u) {
         if (!n[o]) {

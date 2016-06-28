@@ -45,128 +45,146 @@
 .skycon-chevron-left:before, .skycon--chevron-left:before {
   content: "\E009"; }
 
-.skycon-chevron-up:before, .skycon--chevron-up:before {
+.skycon-chevron-medium-left:before, .skycon--chevron-medium-left:before {
   content: "\E00A"; }
 
-.skycon-chevron:before, .skycon--chevron:before {
+.skycon-chevron-medium-right:before, .skycon--chevron-medium-right:before {
   content: "\E00B"; }
 
-.skycon-close:before, .skycon--close:before {
+.skycon-chevron-thin-down:before, .skycon--chevron-thin-down:before {
   content: "\E00C"; }
 
-.skycon-cloud:before, .skycon--cloud:before {
+.skycon-chevron-thin-left:before, .skycon--chevron-thin-left:before {
   content: "\E00D"; }
 
-.skycon-download:before, .skycon--download:before {
+.skycon-chevron-thin-up:before, .skycon--chevron-thin-up:before {
   content: "\E00E"; }
 
-.skycon-edit:before, .skycon--edit:before {
+.skycon-chevron-thin:before, .skycon--chevron-thin:before {
   content: "\E00F"; }
 
-.skycon-expand:before, .skycon--expand:before {
+.skycon-chevron-up:before, .skycon--chevron-up:before {
   content: "\E010"; }
 
-.skycon-facebook:before, .skycon--facebook:before {
+.skycon-chevron:before, .skycon--chevron:before {
   content: "\E011"; }
 
-.skycon-gallery:before, .skycon--gallery:before {
+.skycon-close:before, .skycon--close:before {
   content: "\E012"; }
 
-.skycon-google-plus:before, .skycon--google-plus:before {
+.skycon-cloud:before, .skycon--cloud:before {
   content: "\E013"; }
 
-.skycon-home:before, .skycon--home:before {
+.skycon-download:before, .skycon--download:before {
   content: "\E014"; }
 
-.skycon-info:before, .skycon--info:before {
+.skycon-edit:before, .skycon--edit:before {
   content: "\E015"; }
 
-.skycon-mail:before, .skycon--mail:before {
+.skycon-expand:before, .skycon--expand:before {
   content: "\E016"; }
 
-.skycon-menu:before, .skycon--menu:before {
+.skycon-facebook:before, .skycon--facebook:before {
   content: "\E017"; }
 
-.skycon-minify:before, .skycon--minify:before {
+.skycon-gallery:before, .skycon--gallery:before {
   content: "\E018"; }
 
-.skycon-mouse:before, .skycon--mouse:before {
+.skycon-google-plus:before, .skycon--google-plus:before {
   content: "\E019"; }
 
-.skycon-never-miss:before, .skycon--never-miss:before {
+.skycon-home:before, .skycon--home:before {
   content: "\E01A"; }
 
-.skycon-on-demand:before, .skycon--on-demand:before {
+.skycon-info:before, .skycon--info:before {
   content: "\E01B"; }
 
-.skycon-pending:before, .skycon--pending:before {
+.skycon-mail:before, .skycon--mail:before {
   content: "\E01C"; }
 
-.skycon-phone:before, .skycon--phone:before {
+.skycon-menu:before, .skycon--menu:before {
   content: "\E01D"; }
 
-.skycon-plus-circle:before, .skycon--plus-circle:before {
+.skycon-minify:before, .skycon--minify:before {
   content: "\E01E"; }
 
-.skycon-remote-download:before, .skycon--remote-download:before {
+.skycon-mouse:before, .skycon--mouse:before {
   content: "\E01F"; }
 
-.skycon-remote-record:before, .skycon--remote-record:before {
+.skycon-never-miss:before, .skycon--never-miss:before {
   content: "\E020"; }
 
-.skycon-search:before, .skycon--search:before {
+.skycon-on-demand:before, .skycon--on-demand:before {
   content: "\E021"; }
 
-.skycon-share:before, .skycon--share:before {
+.skycon-pending:before, .skycon--pending:before {
   content: "\E022"; }
 
-.skycon-sky-go:before, .skycon--sky-go:before {
+.skycon-phone:before, .skycon--phone:before {
   content: "\E023"; }
 
-.skycon-sky-plus:before, .skycon--sky-plus:before {
+.skycon-plus-circle:before, .skycon--plus-circle:before {
   content: "\E024"; }
 
-.skycon-sky:before, .skycon--sky:before {
+.skycon-remote-download:before, .skycon--remote-download:before {
   content: "\E025"; }
 
-.skycon-speech-bubble:before, .skycon--speech-bubble:before {
+.skycon-remote-record:before, .skycon--remote-record:before {
   content: "\E026"; }
 
-.skycon-stopwatch:before, .skycon--stopwatch:before {
+.skycon-search:before, .skycon--search:before {
   content: "\E027"; }
 
-.skycon-tick:before, .skycon--tick:before {
+.skycon-share:before, .skycon--share:before {
   content: "\E028"; }
 
-.skycon-tv:before, .skycon--tv:before {
+.skycon-sky-go:before, .skycon--sky-go:before {
   content: "\E029"; }
 
-.skycon-twitter-favourite:before, .skycon--twitter-favourite:before {
+.skycon-sky-plus:before, .skycon--sky-plus:before {
   content: "\E02A"; }
 
-.skycon-twitter-follow:before, .skycon--twitter-follow:before {
+.skycon-sky:before, .skycon--sky:before {
   content: "\E02B"; }
 
-.skycon-twitter-reply:before, .skycon--twitter-reply:before {
+.skycon-speech-bubble:before, .skycon--speech-bubble:before {
   content: "\E02C"; }
 
-.skycon-twitter-retweet:before, .skycon--twitter-retweet:before {
+.skycon-stopwatch:before, .skycon--stopwatch:before {
   content: "\E02D"; }
 
-.skycon-twitter:before, .skycon--twitter:before {
+.skycon-tick:before, .skycon--tick:before {
   content: "\E02E"; }
 
-.skycon-user-profile:before, .skycon--user-profile:before {
+.skycon-tv:before, .skycon--tv:before {
   content: "\E02F"; }
 
-.skycon-video-play:before, .skycon--video-play:before {
+.skycon-twitter-favourite:before, .skycon--twitter-favourite:before {
   content: "\E030"; }
 
-.skycon-volume:before, .skycon--volume:before {
+.skycon-twitter-follow:before, .skycon--twitter-follow:before {
   content: "\E031"; }
 
-.skycon-warning:before, .skycon--warning:before {
+.skycon-twitter-reply:before, .skycon--twitter-reply:before {
   content: "\E032"; }
 
-.skycon-whatsapp:before, .skycon--whatsapp:before {
+.skycon-twitter-retweet:before, .skycon--twitter-retweet:before {
   content: "\E033"; }
+
+.skycon-twitter:before, .skycon--twitter:before {
+  content: "\E034"; }
+
+.skycon-user-profile:before, .skycon--user-profile:before {
+  content: "\E035"; }
+
+.skycon-video-play:before, .skycon--video-play:before {
+  content: "\E036"; }
+
+.skycon-volume:before, .skycon--volume:before {
+  content: "\E037"; }
+
+.skycon-warning:before, .skycon--warning:before {
+  content: "\E038"; }
+
+.skycon-whatsapp:before, .skycon--whatsapp:before {
+  content: "\E039"; }
