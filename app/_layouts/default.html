@@ -25,23 +25,31 @@
         <link rel="stylesheet" href="//player.sky.com/css/styles.min.css"/>
         <script src="//player.sky.com/plugin/jquery.omniture.js"></script>
         <script src="//player.sky.com/plugin/jquery.sky.htmlplayer.js"></script>
-	</head>
-	<body class="grid-1140" data-spy="scroll" data-target="#toolkit-menu-tabs">
-        <div class="skycom-container clearfix">
-            <div class="alpha skycom-12">
+  </head>
+  <body class="grid-1140" data-spy="scroll" data-target="#toolkit-menu-tabs">
+      <div style="background: #ff2744">
+          <div class="skycom-container clearfix">
+              <div class="alpha skycom-12">
+                  <p style="color: white; font-size: 1.5em;">
+                      <i style="color: white; font-size: 1.5em;  margin-top: -0.25em; margin-right: 0.5em;" class="skycon skycon--warning" aria-hidden="true"></i>
+                      <strong style="text-transform: uppercase;">Deprecated</strong>: Please use <a style="color: white; text-decoration: underline;" href="https://github.com/sky-uk/toolkit">sky-uk/toolkit</a>
+                  </p>
+              </div>
+          </div>
+      </div>
+      <div class="skycom-container clearfix">
+          <div class="alpha skycom-12">
+              <h1 class="demo-header section-title clearfix">
+                  <a href="."><img src="static/images/sky-logo.png" alt="" height="52" width="82"></a>
+                  <span>Toolkit</span>
+                  <a href="#!code/using-the-toolkit" class="code-download" data-diff="using-the-toolkit" data-diff-demos="getting-started">[ Getting Started &hellip; ]</a>
+              </h1>
+          </div>
+      </div>
 
-                <h1 class="demo-header section-title clearfix">
-                    <a href="."><img src="static/images/sky-logo.png" alt="" height="52" width="82"></a>
-                    <span>Toolkit</span>
-                    <a href="#!code/using-the-toolkit" class="code-download" data-diff="using-the-toolkit" data-diff-demos="getting-started">[ Getting Started &hellip; ]</a>
-                </h1>
+      {{ content }}
 
-            </div>
-        </div>
-
-        {{ content }}
-
-        {% include footer.html %}
+      {% include footer.html %}
 
 	</body>
 </html>
