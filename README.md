@@ -1,5 +1,9 @@
-[Web Toolkit](http://skyglobal.github.io/web-toolkit/) [![Build Status](https://circleci.com/gh/skyglobal/web-toolkit.png?circle-token=24eeba25d7352dec038ea9fa25b22671ba28be5e)](https://circleci.com/gh/skyglobal/web-toolkit) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![Code Climate](https://codeclimate.com/github/skyglobal/web-toolkit.png)](https://codeclimate.com/github/skyglobal/web-toolkit)
+[Web Toolkit [Deprecated]](http://skyglobal.github.io/web-toolkit/) [![Build Status](https://circleci.com/gh/skyglobal/web-toolkit.png?circle-token=24eeba25d7352dec038ea9fa25b22671ba28be5e)](https://circleci.com/gh/skyglobal/web-toolkit) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![Code Climate](https://codeclimate.com/github/skyglobal/web-toolkit.png)](https://codeclimate.com/github/skyglobal/web-toolkit)
 ========================
+
+**Deprecated: Please use [sky-uk/toolkit](https://github.com/sky-uk/toolkit).**
+
+--
 
 > Sky branded CSS, JavaScript utilities, and UI components.
 
